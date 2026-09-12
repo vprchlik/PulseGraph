@@ -35,3 +35,6 @@ models/
 .vscode/
 .DS_Store
 *.swp
+
+# Private working notes (advisor context, personal planning); never committed
+notes/

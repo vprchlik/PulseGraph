@@ -18,25 +18,76 @@ the fallback in section 2.2. No artifact backup has been made.
 The local `v1_reference/` copy retains the v1 documents, tables, metadata and
 four figures. The result parquets, summary CSV, saved review outputs and
 `data/raw/` files were not found in either local copy. WSL reports that it is
-not installed on this machine; the statement in AGENTS.md about a local WSL
-environment is outdated. The write-up must disclose reliance on the preserved
+not installed on this machine; the author has corrected AGENTS.md accordingly.
+The write-up must disclose reliance on the preserved
 documents and figures and that the original results have not been recomputed.
 If the artifacts become available, the author will provide their location;
 inventory and backup can then resume. Preserve `v1_reference/` while it is
 needed for this fallback, including after the code port.
 
-Git is already initialized locally on `main`, with origin
-`https://github.com/vprchlik/PulseGraph.git` and no commits at the time of this
-update. The initialization commands in section 7 do not need to be repeated.
+Git is initialized locally on `main`, with origin
+`https://github.com/vprchlik/PulseGraph.git`. The author committed and pushed
+step 2 as `79718fb` ("Set up PulseGraph v2 and record deferred v1 artifact
+recovery"). The initialization commands in section 7 do not need to be repeated.
 
-Step 2 now has a README and study-only `pyproject.toml`, pending the author's
-initial commit. A Python 3.12 environment was created in `.venv/`; the core
+During step 2, a Python 3.12 environment was created in `.venv/`; the core
 and development dependencies installed successfully. Dependency consistency,
 imports, in-memory parquet and figure checks, and source/wheel builds passed.
 The built packages contain no legacy code, data, secrets or model weights.
 The optional model runtimes were not installed or tested. Pytest ran and
 collected no tests (exit code 5), because the v2 code and tests have not yet
-been ported. This is not a green study test suite. No evaluation was run.
+been ported at that point. No real-target evaluation was run.
+
+### Study-code port, 2026-09-12
+
+Step 3 ports the data loader and supplemental REST ingestion, seven v1 baseline
+families, Chronos-2 and TimesFM-2.5 adapters, metrics, a common-calendar backtest,
+artifact storage and the seven review commands. The code and offline tests are
+under `pulsegraph/`, `scripts/` and `tests/`. The legacy application, database,
+graph, explanation and regime modules are not carried over. `v1_reference/`
+remains untouched for the deferred-artifact fallback.
+
+Observation bounds and complete coverage must be supplied explicitly; leading,
+trailing and all-zero series survive. Model and label inputs stop before the
+first forecasted date. Successive maximum-horizon target intervals cannot
+overlap. Missing windows and model errors stop the run instead of silently
+dropping observations. The forecast seed and model parameters are recorded.
+
+Model adapters require an exact revision hash and load an immutable snapshot;
+they have only been exercised with mocked pipelines, not real weights. No actual
+model revisions or final comparison set have been chosen. Native quantiles are
+retained. Full CRPS and randomized empirical PIT are available only for sampled
+forecasts; they are explicitly unavailable for the quantile-only adapters.
+The full-distribution CRPS convention must be resolved before the protocol is
+frozen. TimesFM-2.5's unsupported 95% interval stays NaN.
+
+Baseline algorithms retain the v1 family limitations described in the README.
+Properly seasonal AutoETS, a count-aware baseline with rolling calibration,
+additional model adapters, population selection and the real-data runner depend
+on the research and registered protocol. The supplied runner accepts synthetic
+data only. Its defaults are software-check settings, not pre-registration.
+
+Saved synthetic artifacts contain data, manifests, forecasts, metrics, seeds,
+source/package provenance and hashes. Integrity checks recompute the metrics
+and summary and require the complete declared model/window grid. Review commands
+read stored forecasts; they do not refit or add post-hoc baselines. Their outputs
+are explicitly post-hoc. Repository-clustered inference requires an explicit
+comparison family and count, and rejects missing pairs.
+
+While verifying the REST adapter API, the current GitHub documentation showed
+new stargazer access restrictions and a star-history endpoint. Check these in
+the planned research session; no data were requested from either endpoint.
+Source: [GitHub starring API documentation](https://docs.github.com/en/rest/activity/starring).
+
+Validation for this port: 93 offline tests pass on Python 3.12. Ruff checks and
+format checks pass. Tests include synthetic artifact round trips, all seven
+review commands, deliberate corruption/missing-key cases, seed checks and
+future-data perturbations. Editable installation and source/wheel builds pass;
+the wheel contains the 21 study modules and the source archive also contains
+all nine commands and nine test files. No legacy or data files are packaged.
+Test artifacts are under `.pytest_cache/` and are
+not study results. No v1 reference files were changed and no live data pull,
+model-weight download, GPU run or paid-resource request was made.
 
 ## 1. What PulseGraph is and why v2 exists
 

@@ -29,6 +29,7 @@ dependencies = [
 # Keep model runtimes separate from the data, baseline and test environment.
 models = [
     "torch>=2.2",
+    "huggingface-hub>=0.23",
     "chronos-forecasting>=2.0",
     "timesfm[torch]>=2.0.2",
 ]

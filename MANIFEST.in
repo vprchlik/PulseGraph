@@ -1,0 +1,3 @@
+include AGENTS.md HANDOFF.md .env.example
+recursive-include scripts *.py
+recursive-include tests *.py

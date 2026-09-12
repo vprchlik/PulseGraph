@@ -58,8 +58,9 @@ next; it carries the background, the state of the old repository, and the plan.
 - Ask before adding any paid or unusual dependency, before any cloud spend,
   and before any run that will take more than about an hour.
 - Windows 11 host, PowerShell primary; give the user Windows paths and
-  PowerShell syntax. A WSL Ubuntu environment exists on the same machine and
-  holds the old repository's data artifacts (see `HANDOFF.md`). Python venv is
+  PowerShell syntax. There is no WSL on this machine (checked 2026-09-12).
+  The old repository's data artifacts are on another computer the author no
+  longer uses; their recovery is deferred (see `HANDOFF.md`). Python venv is
   `.venv` in the repo root. Run the test suite after each stage.
 
 ## Writing
