@@ -1,0 +1,37 @@
+# PulseGraph v2
+
+# Local read-only copy of the v1 repository (vprchlik/Project-PulseGraph, main)
+# used while porting; never tracked here.
+v1_reference/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Raw data and model weights are not tracked. Aggregated datasets, results
+# tables, summary CSVs and figures ARE tracked (see AGENTS.md); do not add
+# blanket *.parquet or *.csv rules here.
+data/raw/
+data/cache/
+models/
+*.pt
+*.bin
+*.safetensors
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
