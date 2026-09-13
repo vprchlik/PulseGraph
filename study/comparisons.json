@@ -1,0 +1,122 @@
+{
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "metric": "qscore9",
+  "comparison_count": 18,
+  "alternative": "two-sided",
+  "adjustment": "BH",
+  "q": 0.05,
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20260914,
+  "regimes": "pooled",
+  "calendar_conditional": true,
+  "comparisons": [
+    {
+      "model": "chronos2",
+      "reference": "local_mean_28",
+      "horizon": 7,
+      "stratum": "all"
+    },
+    {
+      "model": "chronos2",
+      "reference": "local_mean_28",
+      "horizon": 30,
+      "stratum": "all"
+    },
+    {
+      "model": "chronos2",
+      "reference": "local_mean_28",
+      "horizon": 90,
+      "stratum": "all"
+    },
+    {
+      "model": "chronos2",
+      "reference": "autoets_weekly",
+      "horizon": 7,
+      "stratum": "all"
+    },
+    {
+      "model": "chronos2",
+      "reference": "autoets_weekly",
+      "horizon": 30,
+      "stratum": "all"
+    },
+    {
+      "model": "chronos2",
+      "reference": "autoets_weekly",
+      "horizon": 90,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm3",
+      "reference": "local_mean_28",
+      "horizon": 7,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm3",
+      "reference": "local_mean_28",
+      "horizon": 30,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm3",
+      "reference": "local_mean_28",
+      "horizon": 90,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm3",
+      "reference": "autoets_weekly",
+      "horizon": 7,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm3",
+      "reference": "autoets_weekly",
+      "horizon": 30,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm3",
+      "reference": "autoets_weekly",
+      "horizon": 90,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm2p5",
+      "reference": "local_mean_28",
+      "horizon": 7,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm2p5",
+      "reference": "local_mean_28",
+      "horizon": 30,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm2p5",
+      "reference": "local_mean_28",
+      "horizon": 90,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm2p5",
+      "reference": "autoets_weekly",
+      "horizon": 7,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm2p5",
+      "reference": "autoets_weekly",
+      "horizon": 30,
+      "stratum": "all"
+    },
+    {
+      "model": "timesfm2p5",
+      "reference": "autoets_weekly",
+      "horizon": 90,
+      "stratum": "all"
+    }
+  ]
+}

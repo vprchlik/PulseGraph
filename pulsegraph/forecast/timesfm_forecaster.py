@@ -41,6 +41,7 @@ class TimesFMForecaster:
                 timesfm.ForecastConfig(
                     max_context=self.max_context,
                     max_horizon=self.max_horizon,
+                    per_core_batch_size=1,
                     normalize_inputs=True,
                     use_continuous_quantile_head=True,
                     fix_quantile_crossing=True,
@@ -75,10 +76,17 @@ class TimesFMForecaster:
                 "threads": self.threads,
                 "max_context": self.max_context,
                 "max_horizon": self.max_horizon,
+                "batch_size": 1,
+                "native_quantile_levels": self.native_levels.tolist(),
+                "timesfm_version": "3.0.2",
                 "available_context": len(values),
                 "distribution": "native_quantiles",
                 "supported_interval_levels": [0.8],
                 "quantile_repair": "clip_then_cummax",
                 "quantile_values_changed": int(np.count_nonzero(repaired != deciles)),
+                "negative_quantile_values": int(np.count_nonzero(deciles < 0)),
+                "crossing_quantile_values": int(
+                    np.count_nonzero(repaired != np.maximum(0, deciles))
+                ),
             },
         )

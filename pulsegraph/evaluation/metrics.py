@@ -138,6 +138,11 @@ def evaluate_forecast(
         "crps_mean": crps,
         "crps_method": "fair_iid_samples" if forecast.samples is not None else "unavailable",
         "mean_pinball_loss": float(losses.mean()),
+        "qscore9": (
+            float(2 * losses.mean())
+            if np.array_equal(np.asarray(quantile_levels), np.arange(1, 10) / 10)
+            else float("nan")
+        ),
         "wql": weighted_quantile_loss(requested, quantile_levels, actuals),
         "mae": mae(forecast.median, actuals),
         "mase": mase,

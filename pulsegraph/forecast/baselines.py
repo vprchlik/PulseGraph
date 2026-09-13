@@ -46,7 +46,8 @@ class _ResidualForecaster:
         if not np.isfinite(residuals).all():
             raise ValueError("Nonfinite residuals; fitting must not silently fall back")
         noise = np.random.default_rng(seed).choice(residuals, size=(self.n_samples, horizon))
-        samples = np.maximum(0, point[None, :] + noise)
+        raw_samples = point[None, :] + noise
+        samples = np.maximum(0, raw_samples)
         return ForecastOutput.from_samples(
             repo_name=repo_name,
             model_name=self.name,
@@ -59,6 +60,8 @@ class _ResidualForecaster:
                 "parameters": self.parameters(),
                 "distribution": self.residual_method,
                 "nonnegative_clipping": True,
+                "sample_values_clipped": int(np.count_nonzero(raw_samples < 0)),
+                "quantile_crossings_repaired": 0,
             },
         )
 

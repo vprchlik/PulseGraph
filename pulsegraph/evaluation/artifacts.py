@@ -1,8 +1,4 @@
-"""Self-contained synthetic run artifacts and strict read-only validation.
-
-The real-data runner and its protocol gate will be specified after registration.
-This development writer intentionally accepts synthetic runs only.
-"""
+"""Synthetic artifact writer and shared strict validation for synthetic/registered runs."""
 
 import hashlib
 import json
@@ -133,6 +129,24 @@ def _matrix(values):
 
 def validate_results(results: pd.DataFrame, metadata: dict, dataset: dict[str, pd.Series]) -> None:
     """Check the declared model/window grid and recompute scores from saved predictions."""
+    real = metadata.get("data_kind") == "real"
+    if real:
+        from pulsegraph.data.regimes import context_regime
+        from pulsegraph.evaluation.registration import (
+            MODEL_PINS,
+            PROTOCOL_COMMIT,
+            PROTOCOL_SHA256,
+            validate_declarations,
+        )
+
+        validate_declarations(metadata["specification"], metadata["comparison_family"])
+        if (
+            metadata.get("protocol_commit") != PROTOCOL_COMMIT
+            or metadata.get("protocol_sha256") != PROTOCOL_SHA256
+            or metadata.get("comparison_count") != 18
+            or not metadata.get("implementation_commit")
+        ):
+            raise ValueError("Missing registered artifact provenance")
     config = BacktestConfig(**metadata["config"])
     keys = WINDOW_KEY + ["model_name"]
     if results.empty or results.duplicated(keys).any() or results[keys].isna().any().any():
@@ -190,6 +204,16 @@ def validate_results(results: pd.DataFrame, metadata: dict, dataset: dict[str, p
             samples=None if row.samples is None else _matrix(row.samples),
             metadata=json.loads(row.model_metadata),
         )
+        if real:
+            if row.stratum != context_regime(series.iloc[:idx]):
+                raise ValueError("Saved regime disagrees with context-only recomputation")
+            if output.metadata.get("seed") != config.seed:
+                raise ValueError("Missing or changed forecast seed")
+            if row.model_name in MODEL_PINS:
+                if (output.metadata.get("model_id"), output.metadata.get("revision")) != MODEL_PINS[
+                    row.model_name
+                ]:
+                    raise ValueError("Forecast model pin differs from registration")
         expected_seed = derived_seed(
             config.seed, "pit", row.repo_name, row.cutoff_date, row.horizon, row.model_name
         )

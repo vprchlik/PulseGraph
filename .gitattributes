@@ -1,0 +1,2 @@
+# Registration hashes refer to these exact LF bytes on every checkout.
+PROTOCOL.md text eol=lf

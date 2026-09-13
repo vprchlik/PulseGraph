@@ -1,3 +1,4 @@
-include AGENTS.md HANDOFF.md .env.example
+include AGENTS.md HANDOFF.md PROTOCOL.md .env.example .gitattributes
+recursive-include study *.json *.sql
 recursive-include scripts *.py
 recursive-include tests *.py

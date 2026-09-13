@@ -89,6 +89,50 @@ Test artifacts are under `.pytest_cache/` and are
 not study results. No v1 reference files were changed and no live data pull,
 model-weight download, GPU run or paid-resource request was made.
 
+### Registered implementation, 2026-09-12
+
+The author registered PROTOCOL.md at 5f01769
+(full commit 5f01769b6be4c32814befdd7cc3395b6dcc386ed). That file is unchanged.
+The registered protocol supersedes the provisional model/data choices below.
+Hardware is an RTX 4070 SUPER with 12 GB VRAM on Windows 11, CUDA through
+PyTorch; foundation models use GPU and baselines CPU.
+
+The implementation includes the paginated star-history client and response
+hashes; a fixed 20-repository pre-2023 validation selection; the 2024 comparison
+workflow; bounded GH Archive SQL and a combined dry-run-only cost command;
+context regimes and leakage tests; TimesFM 3, weekly StatsForecast 2.1.1 models
+and nb_local_level_28; QScore9 and the 18-comparison JSON; a registration gate;
+repository checkpoints/resume records; and saved-forecast confirmatory analysis.
+Commands and evidence schemas are in README.md. Runtime settings and exact
+model revisions are in study/run_spec.json; timesfm is pinned to 3.0.2.
+The optional ingest extra contains approved google-cloud-bigquery.
+
+Offline validation includes mocked foundation-model APIs and synthetic fits
+using the installed StatsForecast runtime. AutoTheta's native intervals use
+200 simulations with internal seed 0; finite-sample endpoints are not exactly
+symmetric. The wrapper preserves those intervals and uses the point forecast
+for its median, as registered. No weights or GPU forecasts have been exercised.
+Runtime/GPU smoke evidence is required by the real-run gate. Batch size is 1,
+with a 7 GB allocator budget and an 8 GB operational limit; actual free-memory
+budget, hardware versions and peaks are recorded by the runner.
+
+No target histories, evaluation or BigQuery jobs ran in this session. At STOP 1
+the author commits this implementation. Only after confirmation may the agent
+check credentials without displaying them, request the combined BigQuery dry
+run and fetch validation histories. At STOP 2, report each query's bytes/cost
+and a proposed cap, observed endpoint semantics, and runtime/batch estimates.
+Wait for written cost approval before either billable query and approval before
+any run exceeding about an hour. No billable-query command is supplied.
+Endpoint mapping/unstar interpretation, the 2024 comparison, frame coverage,
+achieved panel and synthetic GPU smoke remain required readiness evidence.
+
+Verification: 147 offline tests pass; Ruff lint and format checks pass. The
+source archive and wheel build successfully, and dependency consistency passes.
+The installed BigQuery 3.45.0 SDK's dry-run configuration was checked with a
+fake client only. StatsForecast 2.1.1's pandas<3 constraint selected pandas
+2.3.3; the current NumPy/pandas combination emits deprecation warnings during
+tests, without test failures. No real-run environment has been frozen yet.
+
 ## 1. What PulseGraph is and why v2 exists
 
 PulseGraph is an empirical forecasting study: do zero-shot time-series

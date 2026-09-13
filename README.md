@@ -1,210 +1,229 @@
 # PulseGraph v2
 
-PulseGraph studies whether zero-shot time-series foundation models improve
-probabilistic forecasts of daily new GitHub star counts relative to classical
-and count-aware baselines.
+PulseGraph studies whether zero-shot foundation models improve probabilistic
+forecasts of daily GitHub star-history counts relative to classical and
+count-aware baselines. The [v1 study and audit](https://github.com/vprchlik/Project-PulseGraph)
+found lower mean errors but identified outcome-selected cohorts and windows
+dominated by post-peak decay. Version 2 changes the sample, calendar and inference.
 
-The first study found lower mean forecasting error for foundation models. Its
-audit found that repository cohorts were selected using information unavailable
-at forecast time, and most evaluated windows measured post-peak decay. Version 2
-redesigns the population, windows, baselines and inference around those findings.
-The v1 findings remain subject to the limitations in the
-[original study and audit](https://github.com/vprchlik/Project-PulseGraph).
+## Registration and evidence
 
-## Status
+[PROTOCOL.md](PROTOCOL.md) was registered at **5f01769** on 2026-09-12:
+`5f01769b6be4c32814befdd7cc3395b6dcc386ed`. Its SHA-256 is
+`dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5`.
+The write-up must record this commit. `.gitattributes` preserves the protocol's
+LF bytes. The implementation does not edit the protocol.
 
-As of 2026-09-12, the study library, offline tests and seven review commands
-have been ported. Validation uses synthetic counts and mocked model outputs.
-No real v2 data have been collected, no model weights have been loaded, and
-no v2 experimental results exist.
-The experimental design in [HANDOFF.md](HANDOFF.md) is provisional.
-`PROTOCOL.md` has not been written or committed. Evaluation on real targets
-must wait for the approved, committed protocol with exact model revisions,
-seeds, population and window rules, baselines, metrics and comparisons.
+As of 2026-09-12, validation consists of offline tests, mocked foundation-model
+APIs and actual synthetic StatsForecast fits. No target histories, BigQuery
+jobs, foundation weights, GPU forecasts or v2 results have been obtained.
+Empirical endpoint validation and runtime smoke evidence remain required.
 
-Recovery and backup of the v1 data and result artifacts are **deferred**. The
-June and July 2026 work ran on another computer that the author no longer uses.
-The artifacts are unavailable now and may be retrieved later; they are not
-declared lost. For now, v1 is available through its documents, tables, metadata
-and four figures in the local `v1_reference/` copy and the original repository.
-The write-up will disclose that these results have not been recomputed from
-the original artifacts. If those artifacts arrive, their location, inventory
-and backup must be verified before claiming reproducibility.
+Recovery of the June/July v1 artifacts is deferred. They are on another computer
+the author no longer uses and may be retrieved later. The local, ignored
+`v1_reference/` retains documents, tables, metadata and four figures. The write-up
+must disclose reliance on those sources and that v1 numbers were not recomputed.
 
-## What is in the tree
+## Files and environment
 
-The tree contains the study package under `pulsegraph/`, commands under
-`scripts/`, tests under `tests/`, and `AGENTS.md`, `HANDOFF.md`, `README.md`,
-`pyproject.toml`, `MANIFEST.in`, `.env.example`, `.gitignore` and `LICENSE`.
+The tree contains study code (`pulsegraph/`), commands (`scripts/`), offline tests
+(`tests/`), the protocol and working instructions. `study/` contains the exact
+18 comparisons, runtime settings/model revisions, 20 validation repositories and
+selection rationale, both SQL queries and an unresolved readiness example.
+These files are declarations, not experimental results.
 
-- `v1_reference/` is a local, read-only copy of the old repository. It is
-  gitignored and is absent from a fresh clone of this repository.
-- The v1 results parquets, summary CSV, saved review outputs, raw per-star
-  timestamps, repository manifests and `data/raw/daily_signals.parquet` are
-  unavailable here. Neither repository's committed files reproduce the v1
-  numerical results from source data.
-- There is no v2 dataset, repository manifest, results table, figure,
-  `RESULTS.md` or `WRITEUP.md` yet.
-- `.venv/`, `.pytest_cache/`, `.env`, raw data under `data/raw/`, caches under
-  `data/cache/`, and model weights are local only and ignored. Tokens belong
-  in `.env` and must never be committed or printed. `.env.example` has names
-  with empty values only. Test artifacts remain under pytest's temporary path.
+A fresh clone has no v1 data/results, `v1_reference/`, achieved v2 manifest,
+aggregate dataset, results table, figures, `RESULTS.md` or `WRITEUP.md`.
+V2 manifests, results, summaries, figures and aggregate data will be deliberately
+tracked; oversized datasets require a durable location and checksum. There are
+no blanket CSV/parquet ignore rules. Raw captures belong under ignored
+`data/raw/`, caches under `data/cache/`, and weights under `models/`.
+`.env`, `.venv/`, `.pytest_cache/` and private `notes/` are ignored. The research
+note of 2026-09-12 is not in the tree. Tokens and credentials are never tracked.
 
-For v2, the repository manifest, aggregated daily-count dataset if its size
-allows, result tables, summary CSVs and figures will be tracked deliberately.
-The README will identify their paths and reproduction commands when they exist.
-There are no blanket ignore rules for parquet or CSV files. Raw per-star
-timestamps and model weights will remain outside the committed tree.
-
-## Development setup
-
-Use Python 3.12 on Windows with PowerShell; package metadata permits Python
-3.10 or later. From `C:\Users\piano\projects\PulseGraph`, create the environment
-if needed and install the study and development dependencies:
+Use Python 3.12 and PowerShell on Windows 11; there is no WSL. From
+`C:\Users\piano\projects\PulseGraph`, using the existing environment:
 
 ```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-.\.venv\Scripts\python.exe -m pytest -q
-```
-
-The tests cover observation bounds, all-zero repositories, deterministic
-baselines, metric formulas, model quantile shapes and revision loading,
-forecast-time information boundaries, artifact recomputation and repository
-inference. Tests block network requests. Model adapters are tested with fake
-pipelines; this does not validate a real checkpoint or GPU environment.
-Test collection, linting and package discovery exclude `v1_reference/`.
-
-```powershell
+.\.venv\Scripts\python.exe -m pip install -e ".[dev,classical,ingest]"
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.pytest_cache\tmp
 .\.venv\Scripts\python.exe -m ruff check pulsegraph scripts tests
 .\.venv\Scripts\python.exe -m ruff format --check pulsegraph scripts tests
 ```
 
-The default dependencies cover tables and parquet files, numerical methods,
-classical baselines, HTTP ingestion, local environment variables and figures.
-The optional `models` extra declares PyTorch,
-[Chronos](https://pypi.org/project/chronos-forecasting/) and
-[TimesFM with its PyTorch extra](https://pypi.org/project/timesfm/).
-These development requirements do not select the final comparison set or pin
-model weights. Exact package versions and model revision hashes must be
-recorded before evaluation. Model runtimes and checkpoints are not needed for
-the offline tests. Both adapters require an explicit 40-character revision hash,
-seed and context limit. Loading resolves that revision to a local Hugging Face
-snapshot under `models/`. No default revision such as `main` is accepted.
+Extras: `dev` supplies pytest/Ruff/builds; `classical` supplies the approved
+`statsforecast==2.1.1`; `ingest` supplies approved `google-cloud-bigquery>=3.25,<4`;
+`models` supplies PyTorch, Hugging Face Hub, Chronos and `timesfm[torch]==3.0.2`.
+Install a CUDA-capable PyTorch build for the RTX 4070 SUPER before `.[models]`.
+Record exact installed runtime versions before evaluation. StatsForecast requires
+pandas below 3. Foundation imports are lazy; tests mock them and block HTTP.
+Native StatsForecast tests run when the classical extra is installed.
 
-The repository is for study code. Cloud ingestion dependencies will be added
-when ingestion is implemented, with cost approval before any paid data pull.
-Agent working rules are in [AGENTS.md](AGENTS.md); the experiment background
-and design decisions are in [HANDOFF.md](HANDOFF.md).
+`.env.example` has empty names for `GITHUB_TOKEN`,
+`GOOGLE_APPLICATION_CREDENTIALS` and `BIGQUERY_PROJECT_ID`. Actual values belong
+only in ignored `.env`; credentials files may be outside the repository.
+Saved requests exclude authentication headers.
 
-## Data and forecast contracts
+## Validation and frame
 
-Daily counts use `repo_name`, `event_date` (a whole UTC date), and `stars`
-(a finite nonnegative integer). Duplicate repository/day rows are rejected.
-The manifest supplies `repo_name`, `observation_start` and a boolean
-`coverage_complete` for every repository. The caller must confirm complete
-coverage before zero filling; missing observation days must not be presented
-as zero activity. All repositories share an explicit observation endpoint.
-Leading and trailing zeros, including entirely zero series, are retained.
+GitHub star history supplies forecast counts. GH Archive supplies repository
+creation, day-90 eligibility and the 2024 validation comparison; its WatchEvent
+degradation after mid-2025 overlaps all evaluation windows. Sources are cited
+in the protocol. The fixed validation selection keeps 15 large projects and
+adds five small public repositories with 217–345 stars and no pushes since 2024:
+asciidoc-py, imapbox, pyeda, neighbourhood and SolidsPy. Dated metadata checks
+and sources are recorded in `study/validation_repositories.json`. Zero days,
+low counts and relative discrepancies must be exercised, not only large active
+histories. Sparse recent development is observed; star-day sparsity remains to
+be checked during retrieval. This is a purposive validation set.
+Each creation date must precede 2023-01-01, excluding it from the main sample.
 
-`BacktestConfig` requires a declared calendar of cutoff dates, horizons,
-minimum context length, common quantiles, scaling period and seed. A cutoff
-is the **first forecasted date**; models and context labelers receive only
-earlier observations. The longest target intervals at successive cutoffs
-cannot overlap. Missing history, incomplete targets and model failures stop
-the run. The default label is `all`; no future-selected v1 cohorts are carried.
-
-The seven baseline candidates retain the v1 families: `naive_seasonal`,
-`linear_30`, `ets`, `lightgbm`, `last_value`, `weekly_naive`, and
-`local_mean_28`. Other local-mean lookbacks receive distinct names.
-Every sample-producing call records its root seed, derived seed and parameters.
-LightGBM uses its native API with one thread and deterministic fitting.
-
-The legacy seasonal naive still depends on the horizon; `ets` is damped,
-nonseasonal Holt smoothing, not AutoETS. Linear, ETS and LightGBM retain
-in-sample residual uncertainty around a deterministic path. These limitations
-are explicit in the code. Seasonal AutoETS, a count-aware model with rolling
-calibration, and the final comparator list await the research and protocol.
-
-The two foundation-model adapters cover Chronos-2 and TimesFM-2.5. They retain
-native quantiles, clip negative predictions and repair crossing quantiles by
-cumulative maxima, recording how many values changed. Context truncation is
-explicit and recorded. TimesFM-2.5's 95% interval is unsupported and remains
-NaN. Additional models, including TimesFM 3, await the model review.
-
-## Metrics and artifacts
-
-| Output | Definition and limitation |
-|---|---|
-| `mean_pinball_loss` | Mean pinball loss over all target days and the declared common quantile grid. |
-| `wql` | Mean across quantiles of twice summed pinball loss divided by summed absolute targets. Undefined on an all-zero target window. |
-| `interval_score_80` | Central interval width plus the standard outside-interval penalty with alpha 0.2. |
-| `mae`, `mase`, `rmsse` | Median forecast errors; scaled denominators use context only and the declared seasonal period. Zero or unavailable scales give NaN. |
-| `crps_mean` | Fair finite-sample CRPS for IID marginal draws. Unavailable for native-quantile-only forecasts. |
-| `coverage_80`, `coverage_95` | Inclusive finite-bound coverage; unsupported intervals give NaN. |
-| `pit_values` | Seeded randomized empirical PIT for sampled forecasts; unavailable for native-quantile-only forecasts. Histograms are descriptive. |
-
-Finite quantiles do not identify the full predictive distribution. The port
-does not clamp unidentified tails into pseudo-samples or claim a full CRPS
-for those outputs. The protocol must resolve the cross-model CRPS definition
-before evaluation. Current common-quantile comparisons can use
-`mean_pinball_loss`; review functions reject metrics with missing values.
-Summaries report valid-score counts alongside window and repository counts,
-so undefined WQL, scaled errors or intervals cannot disappear from the record.
-
-The synthetic runner writes a new directory containing `signals.parquet`,
-`manifest.json`, `results.parquet`, `summary.csv` and `run.json`. The result
-rows retain contexts, actuals, samples where available, native quantiles,
-model metadata and metric seeds. `run.json` records the calendar, model and
-repository lists, package versions, source-file hashes, artifact hashes and
-command. Existing run directories are never overwritten. The integrity check
-verifies every declared model/window key, dates and input values, recomputes
-metrics from saved forecasts, and compares the summary including missingness.
-
-For a small synthetic check from the repository root, choose a new output path:
+After the implementation commit is confirmed:
 
 ```powershell
-$smokePath = Join-Path $PWD '.venv\smoke-check'
-.\.venv\Scripts\python.exe -m scripts.run_experiment --synthetic --seed 42 --out $smokePath
-.\.venv\Scripts\python.exe -m scripts.review_integrity --run $smokePath
-.\.venv\Scripts\python.exe -m scripts.review_scale --run $smokePath --reference local_mean_28 --metric mean_pinball_loss
+.\.venv\Scripts\python.exe -m scripts.validate_star_history fetch --out data\raw\validation-2026-09-12
+.\.venv\Scripts\python.exe -m scripts.dry_run_frame --out data\cache\bigquery-estimate.json
 ```
 
-These are software checks, not study results or a registered model/window
-selection. The experiment command requires `--synthetic`; it cannot load real
-targets. The real-data runner will require the registered protocol.
+The history client saves response bytes/hashes, sanitized headers, stable IDs,
+renames, creation/extraction times and pagination evidence. It follows all pages,
+detects malformed/overlapping/gapped weeks, bounds retries and rejects foreign
+redirects. Repeating validation verifies and reuses complete captures; every
+failed attempt retains its reason, including failures followed by a successful
+retry. All 20 must be attempted; comparison and readiness use the complete
+captures and retain attempted, complete, failed and historical-failure counts.
+Missing days are not silently filled.
+`daily_nominal.csv` is explicitly unverified, not a UTC evaluation dataset.
+Timezone and unstar interpretation require observations and author sign-off;
+a single capture cannot establish whether past counts change after unstars.
 
-The seven `scripts/review_*.py` commands cover integrity, window placement,
-scale, stored strong baselines, stored local-mean lookbacks, repository-clustered
-inference and censoring. Use `--help` for their required inputs. They read a
-saved run and never fit additional models. Review outputs are labeled
-`post_hoc` and retain whether the input is synthetic. `--out` writes a new CSV
-and a metadata sidecar without overwriting an existing file.
+The queries use bounded daily tables and deduplicated WatchEvent IDs, without
+a payload-action filter. Creation spans 2023-01-01 through 2025-02-21; eligibility
+ends at b+89, no later than 2025-05-21. `freeze_frame_order` sorts stable IDs
+then shuffles with seed 20260913. `walk_frame` logs every skip until 100 complete
+histories per stratum or exhaustion. `validate_sampling_log` replays that order.
+Unknown historical coverage is not treated as zero activity.
 
-Clustered inference requires a JSON list of comparisons, each specifying
-`model`, `reference`, `horizon` and `stratum`, plus an explicit comparison
-count, metric, seed, bootstrap size and confidence level. It averages windows
-within repository, bootstraps paired repository differences, and applies
-Benjamini-Hochberg adjustment to the complete declared family. Missing pairs
-or comparisons fail instead of reducing the family. No model or lookback is
-chosen by its observed score.
+The dry-run command only submits cache-disabled `dry_run=True` jobs. It has no
+billable mode. One report gives both query estimates, their combined bytes/cost
+and proposed caps with 10% headroom. Its default $6.25/TiB price assumes no free
+credit; verify current pricing before approval or supply `--usd-per-tib`.
+Written approval precedes either actual query. Preserve exact SQL, parameters,
+estimates, job IDs, actual costs and coverage evidence.
 
-## Supplemental v1 ingestion
+After the approved 2024 export supplies all 366 days for each complete capture
+(rows for repositories whose history failed are excluded from the comparison):
 
-`scripts/ingest_stars.py` converts previously saved JSON or JSON.gz timestamp
-lists into daily counts offline, using a supplied manifest and observation
-endpoint. The `GitHubAPIClient` library retains timestamp collection for
-explicitly named repositories. It fails on HTTP errors, malformed records or
-incomplete pagination; it neither searches for cohorts nor retries indefinitely.
-`GitHubAPIClient.from_env()` explicitly reads `.env` without changing the process
-environment. Imports never read tokens or create directories.
+```powershell
+.\.venv\Scripts\python.exe -m scripts.validate_star_history compare --validation data\raw\validation-2026-09-12 --archive-counts data\raw\archive-2024.csv --out data\validation-comparison
+```
 
-REST counts describe surviving stars and do not supply the proposed GH Archive
-population dataset. GitHub's documentation now describes restrictions on
-stargazer-list access; data-access details must be checked during the research
-session. [GitHub starring API documentation](https://docs.github.com/en/rest/activity/starring).
+This saves daily/repository comparisons and source hashes. It initially compares
+nominal API dates with archive UTC dates and labels that distinction. Resolve the
+bin-to-calendar mapping before constructing evaluation counts.
+
+## Models, calendar and scores
+
+The frozen models are Chronos-2, TimesFM 3 and TimesFM 2.5. Exact weight revisions
+and separate weight/package licences are in `study/run_spec.json`. All use
+univariate context, batch size 1 and a 2,048-day maximum context; TimesFM's
+configured maximum horizon is 128. Used and available context are recorded.
+TimesFM 3 uses the PyTorch `timesfm3.TimesFM3Evaluator` built from `ModelConfig`
+with the pinned local snapshot, batch size 1 and CUDA. Prediction requests only
+contexts, horizon, native quantiles and disabled symmetric averaging; the adapter
+verifies all nine decile levels and records its own clip-then-cummax repair.
+Neither TimesFM receives invented 95% tails; unsupported intervals remain NaN.
+
+The 15 baselines retain the seven v1 families, add local-mean lookbacks 7/14/56/90,
+and add weekly AutoETS/AutoARIMA/AutoTheta and `nb_local_level_28`. Primary
+references are `local_mean_28` and `autoets_weekly`. V1 horizon-dependent
+seasonality, nonseasonal Holt and in-sample residual uncertainty remain limitations.
+
+StatsForecast maps native 20/40/60/80% central intervals to eight outer deciles
+and uses the point forecast for the median. Each fit saves its specification
+and parameters. AutoETS excludes multiplicative error/seasonality when zeros
+occur. AutoTheta uses 200 native simulations with seed 0: finite-sample bounds
+are not exactly symmetric, and the method/seed are recorded. The NB mean uses
+28 days and dispersion uses unbiased full-context moments, with analytic deciles
+and exact Poisson/point-mass-zero limits. No fit failure activates a new fallback.
+
+Primary `qscore9` is twice decile mean pinball loss; it is unavailable for other
+scoring grids. MASE of the median is the write-up's point metric. MAE and RMSSE
+remain saved; RMSSE stays out of the write-up. WQL is undefined on zero targets.
+Fair CRPS and randomized empirical PIT require genuine IID draws and remain
+unavailable for native/analytic quantile forecasts. Undefined secondary scores
+retain NaN and valid counts. Clipping/crossing repairs are recorded.
+
+Cutoffs are 2025-12-05, 2026-03-05 and 2026-06-03, with horizons 7/30/90 and
+common endpoint 2026-08-31. Maximum-horizon targets do not overlap. The actual
+regime labeler only receives dates before cutoff; tests perturb, permute and
+extend future data and verify eligibility bounds. Regimes are descriptive and
+pooled for confirmatory inference.
+
+## Gate, runtime smoke and recovery
+
+`study/readiness.example.json` is unresolved and cannot authorize evaluation.
+Completed readiness records identify the author/date, approved calendar mapping,
+timezone evidence, unstar interpretation and later-information limitation,
+long-run approval, exact runtime versions, frozen input hashes and eight evidence
+files with SHA-256 hashes. Evidence paths are relative to the readiness document:
+
+- `validation`: `validation.json` accounting for all 20 attempts and every failure reason.
+- `comparison`: 2024 `comparison.json` for every complete capture, retaining counts and failures.
+- `frame_coverage`: JSON with `complete: true` and supporting coverage evidence.
+- `candidate_order`: full seeded candidate-order CSV.
+- `sampling_log`: accepted/skipped/strata JSON returned by `walk_frame`.
+- `cost_approval`: author's written query/cap approval saved as JSON.
+- `query_provenance`: JSON with SQL, parameters, bounds, job IDs and actual costs.
+- `smoke`: synthetic runtime/GPU report for this implementation and environment.
+
+The achieved manifest supplies stable ID, creation date, day-90 count, sampling
+stratum, fetched name, observation start and `coverage_complete: true`.
+Signals explicitly contain every repository/day's integer count through the
+endpoint. Preserve raw capture provenance with these data. The gate rejects
+missing daily bins instead of using the synthetic loader's zero-fill option.
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.smoke_registered --implementation-commit <full-implementation-hash> --out data\cache\runtime-smoke.json
+.\.venv\Scripts\python.exe -m scripts.run_registered --implementation-commit <full-implementation-hash> --readiness data\readiness.json --signals data\daily-counts.parquet --manifest data\manifest.json --out data\runs\registered-01
+```
+
+Replace the hash placeholders before running. The smoke command generates its
+own synthetic contexts and accepts no target data. The real gate verifies exact
+protocol commit/bytes, current clean implementation, model pins/seeds/settings,
+18 comparisons, readiness evidence and frozen inputs before GPU/model access.
+`run.json` records GPU model, driver, CUDA/PyTorch versions, package/source hashes
+and commands. The GPU allocator is capped at 7 GB, reduced when shared free memory
+is lower, reserving 1 GB below the 8 GB limit for CUDA/library overhead. Actual
+allocator peaks are saved and checked; GPU smoke must demonstrate the budget.
+Models run serially and are released between repositories/models.
+
+Each whole repository writes a hashed atomic checkpoint only after every
+model/window succeeds. Any failed window, including OOM, stops and records
+failure. Repeat the same command to resume: verified completed repositories
+are reused, the failed repository restarts and `run.json` records the resume.
+Changed inputs, code, runtime or declarations reject resume. Complete runs
+are immutable; deliberate reruns use new linked directories.
+
+Finished runs contain `run.json`, `results.parquet`, `summary.csv`,
+`signals.parquet`, `manifest.json` and checkpoints. Integrity checks verify
+hashes, the full grid, contexts/targets, labels, seeds and recomputed scores.
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.review_integrity --run data\runs\registered-01
+.\.venv\Scripts\python.exe -m scripts.registered_inference --run data\runs\registered-01 --out data\inference\registered-01
+```
+
+Confirmatory inference averages windows within repository, pools regimes,
+bootstraps repositories 20,000 times and applies BH once over 18 two-sided
+Wilcoxon tests. It saves paired tables, raw/adjusted p-values, pointwise intervals,
+seeds and provenance. Inference is conditional on the fixed calendar. The seven
+general review commands remain post-hoc and never refit models.
+`scripts.run_experiment --synthetic` remains available for software checks.
 
 ## Licence
 
-Code is licensed under the [MIT licence](LICENSE). The aggregated dataset and
-write-up will carry CC BY 4.0 when published; neither is present yet.
+PulseGraph code is [MIT](LICENSE). The eventual aggregate dataset and write-up
+carry CC BY 4.0. Chronos and TimesFM package/source code is Apache-2.0.
+Chronos-2 and TimesFM 2.5 weights are Apache-2.0; TimesFM 3 weights have the
+separate TimesFM Non-Commercial License v1.0.

@@ -16,6 +16,7 @@ from pulsegraph.validation import daily_series, positive_int, utc_day
 SCORE_COLUMNS = (
     "crps_mean",
     "mean_pinball_loss",
+    "qscore9",
     "wql",
     "mae",
     "mase",

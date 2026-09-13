@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "selected_on": "2026-09-12",
+  "required_created_before": "2023-01-01",
+  "observation_end": "2026-08-31",
+  "comparison_start": "2024-01-01",
+  "comparison_end": "2024-12-31",
+  "rationale": "A fixed, purposive validation set with 15 large established projects and five small public repositories created before 2023, chosen before history retrieval or model scoring. Zero days, low counts and relative discrepancies must be exercised, not only large active histories. The five replacements have a few hundred stars and no pushes since 2024; this is evidence of sparse recent development, while star-day sparsity remains to be checked in the history fetch. Not a representative study sample. Recheck creation dates and public availability at fetch time; none may enter the 2023–2025 study frame. Attempt all 20, record each failure and reason, and compare the complete captures without silently replacing failures.",
+  "repositories": [
+    {
+      "repo_name": "python/cpython",
+      "rationale": "Language runtime"
+    },
+    {
+      "repo_name": "numpy/numpy",
+      "rationale": "Numerical arrays"
+    },
+    {
+      "repo_name": "pandas-dev/pandas",
+      "rationale": "Data analysis"
+    },
+    {
+      "repo_name": "scipy/scipy",
+      "rationale": "Scientific computing"
+    },
+    {
+      "repo_name": "matplotlib/matplotlib",
+      "rationale": "Visualization"
+    },
+    {
+      "repo_name": "scikit-learn/scikit-learn",
+      "rationale": "Machine learning"
+    },
+    {
+      "repo_name": "psf/requests",
+      "rationale": "HTTP client"
+    },
+    {
+      "repo_name": "pallets/flask",
+      "rationale": "Python web framework"
+    },
+    {
+      "repo_name": "django/django",
+      "rationale": "Python web framework"
+    },
+    {
+      "repo_name": "pallets/click",
+      "rationale": "Command-line tools"
+    },
+    {
+      "repo_name": "nodejs/node",
+      "rationale": "JavaScript runtime"
+    },
+    {
+      "repo_name": "expressjs/express",
+      "rationale": "JavaScript web framework"
+    },
+    {
+      "repo_name": "vuejs/vue",
+      "rationale": "JavaScript UI framework"
+    },
+    {
+      "repo_name": "facebook/react",
+      "rationale": "JavaScript UI library"
+    },
+    {
+      "repo_name": "microsoft/vscode",
+      "rationale": "Editor"
+    },
+    {
+      "repo_name": "asciidoc-py/asciidoc-py",
+      "rationale": "Small document processor; exercise zero days, low counts and relative discrepancies.",
+      "metadata_checked_on": "2026-09-12",
+      "metadata_source": "https://api.github.com/repos/asciidoc-py/asciidoc-py",
+      "repo_id": 95337610,
+      "private": false,
+      "created_at": "2017-06-25T04:06:28Z",
+      "pushed_at": "2024-12-30T17:53:14Z",
+      "stargazers_count": 217
+    },
+    {
+      "repo_name": "polo2ro/imapbox",
+      "rationale": "Small mail-archive utility; exercise zero days, low counts and relative discrepancies.",
+      "metadata_checked_on": "2026-09-12",
+      "metadata_source": "https://api.github.com/repos/polo2ro/imapbox",
+      "repo_id": 30833778,
+      "private": false,
+      "created_at": "2015-02-15T16:48:29Z",
+      "pushed_at": "2024-12-30T16:00:16Z",
+      "stargazers_count": 242
+    },
+    {
+      "repo_name": "cjdrake/pyeda",
+      "rationale": "Small electronic-design library; exercise zero days, low counts and relative discrepancies.",
+      "metadata_checked_on": "2026-09-12",
+      "metadata_source": "https://api.github.com/repos/cjdrake/pyeda",
+      "repo_id": 4689577,
+      "private": false,
+      "created_at": "2012-06-17T04:18:44Z",
+      "pushed_at": "2024-12-30T14:49:56Z",
+      "stargazers_count": 345
+    },
+    {
+      "repo_name": "bwaldvogel/neighbourhood",
+      "rationale": "Small location utility; exercise zero days, low counts and relative discrepancies.",
+      "metadata_checked_on": "2026-09-12",
+      "metadata_source": "https://api.github.com/repos/bwaldvogel/neighbourhood",
+      "repo_id": 1563028,
+      "private": false,
+      "created_at": "2011-04-03T14:13:28Z",
+      "pushed_at": "2024-12-29T12:58:27Z",
+      "stargazers_count": 220
+    },
+    {
+      "repo_name": "AppliedMechanics-EAFIT/SolidsPy",
+      "rationale": "Small mechanics solver; exercise zero days, low counts and relative discrepancies.",
+      "metadata_checked_on": "2026-09-12",
+      "metadata_source": "https://api.github.com/repos/AppliedMechanics-EAFIT/SolidsPy",
+      "repo_id": 48294591,
+      "private": false,
+      "created_at": "2015-12-19T19:31:49Z",
+      "pushed_at": "2024-12-27T17:03:15Z",
+      "stargazers_count": 293
+    }
+  ]
+}

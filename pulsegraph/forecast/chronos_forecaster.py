@@ -91,9 +91,15 @@ class ChronosForecaster:
                 "device": self.device,
                 "threads": self.threads,
                 "max_context": self.max_context,
+                "batch_size": 1,
+                "native_quantile_levels": self.native_levels.tolist(),
                 "available_context": len(values),
                 "distribution": "native_quantiles",
                 "quantile_repair": "clip_then_cummax",
                 "quantile_values_changed": int(np.count_nonzero(repaired != quantiles)),
+                "negative_quantile_values": int(np.count_nonzero(quantiles < 0)),
+                "crossing_quantile_values": int(
+                    np.count_nonzero(repaired != np.maximum(0, quantiles))
+                ),
             },
         )

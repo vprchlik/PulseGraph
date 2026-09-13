@@ -1,0 +1,110 @@
+{
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "protocol_sha256": "dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5",
+  "observation_end": "2026-08-31",
+  "config": {
+    "horizons": [
+      7,
+      30,
+      90
+    ],
+    "cutoffs": [
+      "2025-12-05",
+      "2026-03-05",
+      "2026-06-03"
+    ],
+    "min_context_days": 90,
+    "quantile_levels": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "seasonal_period": 7,
+    "seed": 20260912
+  },
+  "seeds": {
+    "selection": 20260913,
+    "forecast": 20260912,
+    "bootstrap": 20260914
+  },
+  "foundation_models": [
+    {
+      "name": "chronos2",
+      "model_id": "amazon/chronos-2",
+      "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+      "weight_licence": "Apache-2.0",
+      "package_licence": "Apache-2.0"
+    },
+    {
+      "name": "timesfm3",
+      "model_id": "google/timesfm-3.0-pytorch",
+      "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+      "weight_licence": "TimesFM Non-Commercial License v1.0",
+      "package_licence": "Apache-2.0"
+    },
+    {
+      "name": "timesfm2p5",
+      "model_id": "google/timesfm-2.5-200m-pytorch",
+      "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+      "weight_licence": "Apache-2.0",
+      "package_licence": "Apache-2.0"
+    }
+  ],
+  "baselines": [
+    "naive_seasonal",
+    "linear_30",
+    "ets",
+    "lightgbm",
+    "last_value",
+    "weekly_naive",
+    "local_mean_28",
+    "local_mean_7",
+    "local_mean_14",
+    "local_mean_56",
+    "local_mean_90",
+    "autoets_weekly",
+    "autoarima_weekly",
+    "autotheta_weekly",
+    "nb_local_level_28"
+  ],
+  "inference": {
+    "max_context": 2048,
+    "max_horizon": 128,
+    "batch_size": 1,
+    "threads": 4,
+    "device": "cuda",
+    "n_samples": 200,
+    "peak_vram_limit_bytes": 8000000000,
+    "timesfm2p5": {
+      "normalize_inputs": true,
+      "use_continuous_quantile_head": true,
+      "fix_quantile_crossing": true
+    },
+    "timesfm3": {
+      "per_core_batch_size": 1,
+      "device": "cuda",
+      "return_quantiles": true,
+      "use_symmetric_averaging": false
+    }
+  },
+  "package_pins": {
+    "timesfm": "3.0.2",
+    "statsforecast": "2.1.1"
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+    "nominal_vram_gb": 12,
+    "host": "Windows 11",
+    "baselines": "CPU"
+  },
+  "sources": {
+    "timesfm": "https://pypi.org/project/timesfm/3.0.2/",
+    "statsforecast": "https://pypi.org/project/statsforecast/2.1.1/"
+  }
+}

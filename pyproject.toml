@@ -26,12 +26,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+ingest = ["google-cloud-bigquery>=3.25,<4"]
+classical = ["statsforecast==2.1.1"]
 # Keep model runtimes separate from the data, baseline and test environment.
 models = [
     "torch>=2.2",
     "huggingface-hub>=0.23",
     "chronos-forecasting>=2.0",
-    "timesfm[torch]>=2.0.2",
+    "timesfm[torch]==3.0.2",
 ]
 dev = [
     "pytest>=8.0",

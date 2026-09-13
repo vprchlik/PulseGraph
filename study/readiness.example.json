@@ -1,0 +1,50 @@
+{
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "protocol_sha256": "dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5",
+  "implementation_commit": null,
+  "approved_by": null,
+  "approved_at": null,
+  "main_study_resolved": false,
+  "bin_to_calendar_mapping": null,
+  "timezone_evidence": null,
+  "unstar_interpretation": null,
+  "later_information_limitation": null,
+  "long_run_approval": null,
+  "runtime_versions": {},
+  "signals_sha256": null,
+  "manifest_sha256": null,
+  "evidence": {
+    "validation": {
+      "path": null,
+      "sha256": null
+    },
+    "comparison": {
+      "path": null,
+      "sha256": null
+    },
+    "frame_coverage": {
+      "path": null,
+      "sha256": null
+    },
+    "candidate_order": {
+      "path": null,
+      "sha256": null
+    },
+    "sampling_log": {
+      "path": null,
+      "sha256": null
+    },
+    "cost_approval": {
+      "path": null,
+      "sha256": null
+    },
+    "query_provenance": {
+      "path": null,
+      "sha256": null
+    },
+    "smoke": {
+      "path": null,
+      "sha256": null
+    }
+  }
+}
