@@ -1,0 +1,6 @@
+count,reason,sampling_stratum
+3,id_resolver_http_403,100-999
+345,id_resolver_http_404,100-999
+1,id_resolver_http_403,1000+
+23,id_resolver_http_404,1000+
+98,id_resolver_http_404,20-99

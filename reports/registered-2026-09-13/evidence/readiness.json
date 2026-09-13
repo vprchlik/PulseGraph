@@ -1,0 +1,383 @@
+{
+  "approved_at": "2026-09-13T07:52:47.491478+00:00",
+  "approved_by": "Victor Prchlik",
+  "assembled_at": "2026-09-13T07:51:45.483487+00:00",
+  "bin_to_calendar_mapping": "Decode the UTC date label of each week timestamp and add the zero-based index in days[7]. Interpret the unchanged nominal label as an America/Los_Angeles calendar date with daylight saving. Do not convert the week timestamp to local time before labeling. The daily signal starts at created_at converted to the Los Angeles date and ends on 2026-08-31. Preserve the frame UTC creation_date and gross day-90 count separately. Build from complete raw weeks, retaining local birth-day counts before UTC creation midnight. Missing endpoint bins are never zero-filled.",
+  "calendar_convention": "America/Los_Angeles",
+  "comparison_declaration_sha256": "78016dc135e00cc84a1e96efbae9e624ed9bbc25588987d3ce78eb4e4bfbe0f1",
+  "evidence": {
+    "candidate_order": {
+      "path": "panel/candidate-order.csv",
+      "sha256": "9e985368c907090d5abd4ac97667b4f123c155ae7f1e5bd40a9347d0ba1bdf33"
+    },
+    "comparison": {
+      "path": "comparison/comparison-with-ratios.json",
+      "sha256": "dd22ac6d10d92cddec4a66637733d8060b778a5ae59640cd7eb2d250c15e0e5d"
+    },
+    "cost_approval": {
+      "path": "cost-approval.json",
+      "sha256": "987021d572e72e73894b0f3125b7d30848c89985be33b00cd77bea966421c02e"
+    },
+    "frame_coverage": {
+      "path": "frame-coverage.json",
+      "sha256": "b1819f8ad6bfa802abcfa09a497fd28a8898f46ac9992ff40b7762ae90a41677"
+    },
+    "query_provenance": {
+      "path": "query-provenance-final.json",
+      "sha256": "6bd9e56b5085c68de2fe34114cd4bcbad3eeb492b0518ae1dca1acf007690a4b"
+    },
+    "sampling_log": {
+      "path": "panel/sampling-log.json",
+      "sha256": "2f70b50f34e645d4d87e89026b7f4e7f1d4ff2f5f435992707b3d3b23541ec64"
+    },
+    "smoke": {
+      "path": "runtime-smoke-final-ca67dd2.json",
+      "sha256": "261c033443a5af5c132f15add34e3748346cefcf8f360b06d269f5eb743a3aea"
+    },
+    "validation": {
+      "path": "validation-capture/validation.json",
+      "sha256": "146bef3a3dec587428956fa244ad33f39b48649b81940972019cdaf7ae56949f"
+    }
+  },
+  "frame_sizes_and_skips": [
+    {
+      "frame_size": 100687,
+      "sample_size": 100,
+      "sampling_stratum": "20-99",
+      "skip_count": 98
+    },
+    {
+      "frame_size": 46811,
+      "sample_size": 100,
+      "sampling_stratum": "100-999",
+      "skip_count": 348
+    },
+    {
+      "frame_size": 1052,
+      "sample_size": 100,
+      "sampling_stratum": "1000+",
+      "skip_count": 24
+    }
+  ],
+  "hardware": {
+    "allocator_limit_bytes": 7000000000,
+    "baselines_device": "cpu",
+    "batch_size": 1,
+    "cuda_version": "12.8",
+    "foundation_device": "cuda:0",
+    "gpu_driver": "610.47",
+    "gpu_free_at_start_bytes": 11606687744,
+    "gpu_model": "NVIDIA GeForce RTX 4070 SUPER",
+    "gpu_total_bytes": 12878086144,
+    "memory_measurement": "PyTorch allocator; 1 GB reserved for CUDA/library overhead",
+    "peak_vram_limit_bytes": 8000000000,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytorch_version": "2.11.0+cu128"
+  },
+  "implementation_commit": "ca67dd22ea49377ee1fd074aed57b4b7460c84f1",
+  "implementation_working_tree_clean": true,
+  "incomplete_reasons": [],
+  "later_information_limitation": "The target is surviving-star daily history as retrieved in September 2026. Stars subsequently removed, account removals and retrospective revisions can change historical measurements. Context-only forecasts use prefixes of this saved survivor history; they do not reconstruct gross additions or the counts known at historical cutoffs. The leakage tests prevent access to later rows in the saved snapshot, while this measurement limitation remains. Frame eligibility uses gross GH Archive counts and is not recomputed from endpoint survivors.",
+  "long_run_approval": "The author approved a two-to-eight-hour run budget on 2026-09-13. Foundation models run on the RTX 4070 SUPER GPU, batch size 1, and remain resident until the run ends; baselines run on CPU. The allocator budget is 7 GB and the operational peak ceiling is 8 GB. The real run starts only after the author supplies both signature fields and the registered gate passes. Per-repository checkpoints support resume; any failed window stops the run and is never skipped.",
+  "main_study_resolved": true,
+  "manifest_sha256": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92",
+  "model_pins": {
+    "chronos2": [
+      "amazon/chronos-2",
+      "29ec3766d36d6f73f0696f85560a422f50e8498c"
+    ],
+    "timesfm2p5": [
+      "google/timesfm-2.5-200m-pytorch",
+      "1d952420fba87f3c6dee4f240de0f1a0fbc790e3"
+    ],
+    "timesfm3": [
+      "google/timesfm-3.0-pytorch",
+      "43046b85ec22d584a13f8098c2ed39c889e129c2"
+    ]
+  },
+  "panel_diagnostic": {
+    "analysis_status": "descriptive_not_selection",
+    "artifact_sha256": {
+      "repositories.csv": "c180a25f5945b450bfd007ff7ea5343c23d084cc836fec26410129942e9c357f",
+      "skip-reasons.csv": "0208ec365cce4d4b998e75a3a1c58845edff2a04d4ed83270ce20aeb1eacf959",
+      "strata.csv": "e3fd4f44bd8f4198030739c10145e667955117cfa49a9e64cc7896260d2b92ca"
+    },
+    "calendar_convention": "America/Los_Angeles",
+    "definition": "Descriptive diagnostic of the frozen achieved panel, not a selection criterion. The numerator sums the first 90 Los Angeles calendar days, beginning on local creation day; the denominator retains gross archive eligibility over the UTC creation date and next 89 UTC days. These are different calendar boundaries, so the ratio is not an exact unstar-retention probability. For boundary sensitivity, the per-repository table also sums survivor bins with nominal dates equal to the archive's 90 date labels; it does not reconstruct UTC-hour totals. The final 90 days are 2026-06-03 through 2026-08-31 inclusive in Los Angeles. Percentiles use linear interpolation across all 100 accepted repositories per stratum. No repository is removed, replaced or reweighted.",
+    "input_sha256": {
+      "manifest.json": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92",
+      "panel-summary.json": "2b267fbf450a7afdb2c2cb8bfe1210027cbb83adc306cd8235d088180a77175c",
+      "signals.parquet": "7e448d7254fb180f211cb46522f73aeabd2af259003a95be4edfc1901d4d56e1"
+    },
+    "n_repositories": 300,
+    "regeneration": ".\\.venv\\Scripts\\python.exe reports/registered-2026-09-13/panel_diagnostic.py --panel reports/registered-2026-09-13/evidence/panel --out reports/registered-2026-09-13/evidence/panel-diagnostic",
+    "script_sha256": "649e2bc480f4344a920182f448333dcf4c54e8c0ed34c39dec7f98bd2a0703b5",
+    "skip_reasons": [
+      {
+        "count": 3,
+        "reason": "id_resolver_http_403",
+        "sampling_stratum": "100-999"
+      },
+      {
+        "count": 345,
+        "reason": "id_resolver_http_404",
+        "sampling_stratum": "100-999"
+      },
+      {
+        "count": 1,
+        "reason": "id_resolver_http_403",
+        "sampling_stratum": "1000+"
+      },
+      {
+        "count": 23,
+        "reason": "id_resolver_http_404",
+        "sampling_stratum": "1000+"
+      },
+      {
+        "count": 98,
+        "reason": "id_resolver_http_404",
+        "sampling_stratum": "20-99"
+      }
+    ],
+    "strata": [
+      {
+        "frame_size": 100687,
+        "last90_stars_median": 0.0,
+        "last90_zero_repositories": 52,
+        "local_birth_precedes_utc_birth": 27,
+        "ratio_below_0_5": 3,
+        "ratio_median": 0.9677083333333334,
+        "ratio_p10": 0.723152709359606,
+        "ratio_p90": 1.0746771879483503,
+        "sample_size": 100,
+        "sampling_stratum": "20-99",
+        "skip_count": 98
+      },
+      {
+        "frame_size": 46811,
+        "last90_stars_median": 4.0,
+        "last90_zero_repositories": 22,
+        "local_birth_precedes_utc_birth": 29,
+        "ratio_below_0_5": 2,
+        "ratio_median": 1.0039938641529829,
+        "ratio_p10": 0.8853955951193309,
+        "ratio_p90": 1.0788522012578616,
+        "sample_size": 100,
+        "sampling_stratum": "100-999",
+        "skip_count": 348
+      },
+      {
+        "frame_size": 1052,
+        "last90_stars_median": 39.0,
+        "last90_zero_repositories": 1,
+        "local_birth_precedes_utc_birth": 34,
+        "ratio_below_0_5": 2,
+        "ratio_median": 1.0058969038266419,
+        "ratio_p10": 0.914374360088114,
+        "ratio_p90": 1.0491473934781546,
+        "sample_size": 100,
+        "sampling_stratum": "1000+",
+        "skip_count": 24
+      }
+    ]
+  },
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "protocol_sha256": "dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5",
+  "raw_capture_location": "Raw response bytes remain excluded under data/raw; the signed validation index and response hashes are retained. Aggregated inputs and query exports are included in this package.",
+  "run_spec_sha256": "3b4e49b7ae10b52f1a70e34dd371d533387848525e578a83e1cb70c68f02b2bb",
+  "runtime_versions": {
+    "accelerate": "1.15.0",
+    "adagio": "0.2.6",
+    "annotated-doc": "0.0.5",
+    "anyio": "4.15.1",
+    "build": "1.6.1",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.1",
+    "chronos-forecasting": "2.3.2",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "contourpy": "1.4.0",
+    "coreforecast": "0.0.18",
+    "cryptography": "50.0.1",
+    "cycler": "0.12.1",
+    "einops": "0.8.2",
+    "filelock": "3.32.3",
+    "fonttools": "4.65.0",
+    "formulaic": "1.2.2",
+    "fsspec": "2026.7.0",
+    "fugue": "0.9.7",
+    "google-api-core": "2.36.0",
+    "google-auth": "2.58.0",
+    "google-cloud-bigquery": "3.45.0",
+    "google-cloud-core": "2.7.0",
+    "google-crc32c": "1.8.0",
+    "google-resumable-media": "2.10.2",
+    "googleapis-common-protos": "1.75.3",
+    "grpcio": "1.83.1",
+    "grpcio-status": "1.83.1",
+    "h11": "0.16.0",
+    "hf-xet": "1.6.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface-hub": "1.31.0",
+    "idna": "3.19",
+    "iniconfig": "2.3.0",
+    "interface-meta": "2.0.1",
+    "jinja2": "3.1.6",
+    "kiwisolver": "1.5.1",
+    "lightgbm": "4.7.0",
+    "markdown-it-py": "4.2.0",
+    "markupsafe": "3.0.3",
+    "matplotlib": "3.11.2",
+    "mdurl": "0.1.2",
+    "mpmath": "1.3.0",
+    "narwhals": "2.26.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.3",
+    "opentelemetry-api": "1.44.0",
+    "packaging": "26.3",
+    "pandas": "2.3.3",
+    "patsy": "1.0.3",
+    "pillow": "12.3.0",
+    "pip": "25.0.1",
+    "pluggy": "1.6.0",
+    "proto-plus": "1.28.4",
+    "protobuf": "7.36.1",
+    "psutil": "7.2.2",
+    "pulsegraph": "0.2.0",
+    "pyarrow": "25.0.1",
+    "pyasn1": "0.6.4",
+    "pyasn1-modules": "0.4.2",
+    "pycparser": "3.0",
+    "pygments": "2.21.0",
+    "pyparsing": "3.3.2",
+    "pyproject-hooks": "1.2.0",
+    "pytest": "9.1.1",
+    "python-dateutil": "2.9.0.post0",
+    "python-dotenv": "1.2.3",
+    "pytz": "2026.3.post1",
+    "pyyaml": "6.0.3",
+    "regex": "2026.9.10",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "ruff": "0.16.7",
+    "safetensors": "0.8.0",
+    "scipy": "1.18.1",
+    "setuptools": "78.1.0",
+    "shellingham": "1.5.4",
+    "six": "1.17.0",
+    "statsforecast": "2.1.1",
+    "statsmodels": "0.15.0",
+    "sympy": "1.14.0",
+    "threadpoolctl": "3.6.0",
+    "timesfm": "3.0.2",
+    "tokenizers": "0.23.2",
+    "torch": "2.11.0+cu128",
+    "tqdm": "4.70.1",
+    "transformers": "5.17.0",
+    "triad": "1.0.2",
+    "typer": "0.27.2",
+    "typing-extensions": "4.16.0",
+    "tzdata": "2026.4",
+    "urllib3": "2.7.0",
+    "utilsforecast": "0.2.16",
+    "wrapt": "2.4.1"
+  },
+  "signal_rows": 289316,
+  "signals_sha256": "7e448d7254fb180f211cb46522f73aeabd2af259003a95be4edfc1901d4d56e1",
+  "signature_authorization": "Author's STOP 4 instruction: sign with Victor Prchlik and the UTC time of writing, then run the gate and registered evaluation if it passes.",
+  "skip_reasons": [
+    {
+      "count": 3,
+      "reason": "id_resolver_http_403",
+      "sampling_stratum": "100-999"
+    },
+    {
+      "count": 345,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "100-999"
+    },
+    {
+      "count": 1,
+      "reason": "id_resolver_http_403",
+      "sampling_stratum": "1000+"
+    },
+    {
+      "count": 23,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "1000+"
+    },
+    {
+      "count": 98,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "20-99"
+    }
+  ],
+  "status": "Signed by explicit author instruction before the registered real run",
+  "supplementary_evidence": {
+    "acquisition_audit": {
+      "path": "panel/acquisition-audit.json",
+      "sha256": "5ca0d8da033db838315d43d53641542c23496ae8198ad4de043d13b5de16b5de"
+    },
+    "author_interpretations": {
+      "path": "author-interpretations.json",
+      "sha256": "ac7150484ead277d5644f4ef9bcb08d43aec10d7d165b3e3259ae937ca2ca22a"
+    },
+    "collection_helper_tests": {
+      "path": "test_panel_helpers.py",
+      "sha256": "11a4471398c232071340885773775c7d09524d4faee45aadc454f3852489ced1"
+    },
+    "collection_script": {
+      "path": "collect_panel.py",
+      "sha256": "66271c03e91973f1e1cd3688370ea4253532bf2666a7629ecc09c9e89064f28b"
+    },
+    "decisions": {
+      "path": "panel/decisions.json",
+      "sha256": "4bc5fbc48d9dd6aa1d046c6bc663c2865adafbe210877f1147b8dec716103461"
+    },
+    "evidence_packaging_script": {
+      "path": "../prepare_evidence.py",
+      "sha256": "244844c039c01b25a55d578a86476a66e43418ca6453d05e9308223615b812b5"
+    },
+    "frame_freeze": {
+      "path": "panel/freeze.json",
+      "sha256": "ba6b97e05f887a30333863f372712347208b838449624df6010eb33a036dc63d"
+    },
+    "name_lookup_audit": {
+      "path": "panel/name-lookup-audit.json",
+      "sha256": "28cc7886e266837fcc0ab373fd718ede0f4a256781d8b27d885c15638a132049"
+    },
+    "panel_diagnostic": {
+      "path": "panel-diagnostic/diagnostic.json",
+      "sha256": "4a092b4ac6c55c815795f9b34300240d94aa61f80f61bf57e8c6559c77e63ffb"
+    },
+    "panel_diagnostic_script": {
+      "path": "../panel_diagnostic.py",
+      "sha256": "649e2bc480f4344a920182f448333dcf4c54e8c0ed34c39dec7f98bd2a0703b5"
+    },
+    "panel_summary": {
+      "path": "panel/panel-summary.json",
+      "sha256": "2b267fbf450a7afdb2c2cb8bfe1210027cbb83adc306cd8235d088180a77175c"
+    },
+    "plot_script": {
+      "path": "plot_monthly_ratios.py",
+      "sha256": "c79517ef73f118ba05f0615756e995c51bb7cadfa8a9d427b78cbe9aa05501ad"
+    },
+    "ratios_script": {
+      "path": "extend_ratios.py",
+      "sha256": "78c881eb9d865a586c4e236d98203282de8f32cff9e9acd5262b474e6b63be70"
+    },
+    "readiness_script": {
+      "path": "finalize_readiness.py",
+      "sha256": "947e1115833dfd1c7da63cec1cb782c721a7847c9fd7613f48ae1ee53b07728a"
+    },
+    "request_log": {
+      "path": "panel/request-log.jsonl",
+      "sha256": "d68491cb20162ee02a362d453e1e74fd9ef27e497ab1578759b5573b1be7c54d"
+    }
+  },
+  "timezone_evidence": "All 20 validation repositories were captured completely. Against hourly GH Archive WatchEvents for 2024, binned three ways, America/Los_Angeles with daylight saving has the lowest mean absolute daily difference for 20 of 20 repositories against UTC and 18 of 20 against fixed UTC-8. The five small repositories agree exactly on 98 to 99.7 percent of days under Los Angeles; the large repositories' lower exact agreement reflects their volume, not day boundaries. The four repositories created between 01:00 and 05:00 UTC show first-day stars on the prior nominal date, as Los Angeles binning predicts. Week timestamps are Sunday 00:00 UTC labels, not boundary evidence.",
+  "unstar_interpretation": "The endpoint reports stars that still exist at retrieval, dated by when they were given: full-history totals equal current star counts for 19 of 20 repositories. Over 2024 the endpoint is below the archive for 17 of 20 repositories, by 5 to 27 percent for the large ones and within a few counts for the small ones, consistent with later unstars and removed accounts. The monthly ratio across 2024 shows no trend with star age. The study target is therefore the surviving-star daily history as retrieved in September 2026, not gross additions. Frame eligibility uses gross archive counts; targets use survivors. No correction is applied."
+}

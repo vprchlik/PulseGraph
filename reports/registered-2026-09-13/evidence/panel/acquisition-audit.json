@@ -1,0 +1,18 @@
+{
+  "additional_name_audit_requests": 3,
+  "conservative_rolling_hour_bound_including_audit": 2643,
+  "duplicate_repository_days": 0,
+  "elapsed_seconds": 2773.412538,
+  "local_creation_before_utc_date_count": 90,
+  "main_collection_requests": 2640,
+  "manifest_bytes": 235871,
+  "max_main_collection_requests_in_rolling_hour": 2640,
+  "minimum_reported_remaining": 3430,
+  "n_repositories": 300,
+  "n_signal_rows": 289316,
+  "negative_counts": 0,
+  "rate_limit_responses": 0,
+  "renamed_repository_count": 79,
+  "request_log_sha256": "d68491cb20162ee02a362d453e1e74fd9ef27e497ab1578759b5573b1be7c54d",
+  "signals_bytes": 500201
+}

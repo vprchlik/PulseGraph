@@ -1,0 +1,46 @@
+{
+  "aggregation": "mean within repository/horizon/group, then equal repository mean",
+  "analysis_status": "declared_secondary",
+  "command": ".\\.venv\\Scripts\\python.exe reports/registered-2026-09-13/summarize_descriptives.py",
+  "confirmatory_tests_added": 0,
+  "inputs": {
+    "execution-summary.json": "74df744885961033c1149c553913a946778be6c8b29dd61fbed51b5923ee3140",
+    "inference/inference.csv": "dc60d031d1879adde48073fb1a4b614a676798cad1c13a4a55999a7338e712db",
+    "inference/paired_repositories.csv": "05e22d55a9a2f0b710c7fd123469f78c803e82cc59aa59f82efc5b5a993d56a4",
+    "run/manifest.json": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92",
+    "run/results.parquet": "53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6",
+    "run/run.json": "4782c7e0f97471d730c1a7f1cc07489005ddc605f446679295dda34e8c807135"
+  },
+  "outputs": {
+    "autoets-coverage.csv": "64099d8ed9d9d0649565c7a57a022029f9b13678214f639097f0e642255962f9",
+    "autoets-fits.csv": "7ef1a61ee84f7ebf7f9927d710f7e803dcf44fbd4c37fa6b5dbd56e6d1073b67",
+    "autoets-widths-90.csv": "66d6797327cb1ef56578096571a83b8d6f5e96a95a24c91574bc0c1485bdfb9c",
+    "calibration.csv": "b237e65c301352279982450be9ea6d297fb12635a9d9fd357bf801281dda46b7",
+    "local-mean-lookbacks.csv": "88379459fc0dff93cb3c52058da5a5a01b413def7c5d9b848b8083d618920529",
+    "qscore9-pooled.csv": "5d573eabe4689f79c1182c01faebc11f84a25a1110904fe1269cf6bc68dbcea8",
+    "qscore9-regime.csv": "69a8f23a4e0ea080e7e55a8bba6dd5b453cec059bac6a66a94e79f733902f2b5",
+    "qscore9-sampling_stratum.csv": "009113df39f105ad977f14b4ba51f0e123747641032740fb95199cbc13c97c2a",
+    "scale-autoets_weekly.csv": "5b646ab478d6eb6cd5e21eb6a3ba8058cbd3f98a6394113c7cf5c8bb553397c5",
+    "scale-local_mean_28.csv": "ea89f74c93a85a4e4b2b976ebc75697e1d13b1c4ad41de30c583c9afc2bc6b84"
+  },
+  "post_run_requested_details": [
+    "AutoETS interval widths",
+    "AutoETS specification counts"
+  ],
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "results_document_sha256": "15df09bc3e6e69224b68a3a258eef114c46e1c89d33f726ea26ad6927c7733ab",
+  "review_scale_source_sha256": "ee037b3ce866bef562443c3f63891ea497da6dbd9d08c1d899a0fe4cb7c66257",
+  "rows": {
+    "autoets-coverage.csv": 9,
+    "autoets-fits.csv": 2700,
+    "autoets-widths-90.csv": 3,
+    "calibration.csv": 54,
+    "local-mean-lookbacks.csv": 15,
+    "qscore9-pooled.csv": 54,
+    "qscore9-regime.csv": 162,
+    "qscore9-sampling_stratum.csv": 162,
+    "scale-autoets_weekly.csv": 51,
+    "scale-local_mean_28.csv": 51
+  },
+  "script_sha256": "5efe6f87de3fb24472c5546ea0440d91da39831e022b0e224e607c74a97be0da"
+}

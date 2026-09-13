@@ -1,0 +1,139 @@
+{
+  "analysis": "registered_confirmatory",
+  "artifact_sha256": {
+    "inference.csv": "dc60d031d1879adde48073fb1a4b614a676798cad1c13a4a55999a7338e712db",
+    "paired_repositories.csv": "05e22d55a9a2f0b710c7fd123469f78c803e82cc59aa59f82efc5b5a993d56a4"
+  },
+  "command": [
+    "C:\\Users\\piano\\projects\\PulseGraph\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\piano\\projects\\PulseGraph\\scripts\\registered_inference.py",
+    "--run",
+    "reports/registered-2026-09-13/run",
+    "--out",
+    "reports/registered-2026-09-13/inference"
+  ],
+  "comparison_family": {
+    "adjustment": "BH",
+    "alternative": "two-sided",
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20260914,
+    "calendar_conditional": true,
+    "comparison_count": 18,
+    "comparisons": [
+      {
+        "horizon": 7,
+        "model": "chronos2",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 30,
+        "model": "chronos2",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 90,
+        "model": "chronos2",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 7,
+        "model": "chronos2",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 30,
+        "model": "chronos2",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 90,
+        "model": "chronos2",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 7,
+        "model": "timesfm3",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 30,
+        "model": "timesfm3",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 90,
+        "model": "timesfm3",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 7,
+        "model": "timesfm3",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 30,
+        "model": "timesfm3",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 90,
+        "model": "timesfm3",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 7,
+        "model": "timesfm2p5",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 30,
+        "model": "timesfm2p5",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 90,
+        "model": "timesfm2p5",
+        "reference": "local_mean_28",
+        "stratum": "all"
+      },
+      {
+        "horizon": 7,
+        "model": "timesfm2p5",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 30,
+        "model": "timesfm2p5",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      },
+      {
+        "horizon": 90,
+        "model": "timesfm2p5",
+        "reference": "autoets_weekly",
+        "stratum": "all"
+      }
+    ],
+    "metric": "qscore9",
+    "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+    "q": 0.05,
+    "regimes": "pooled"
+  },
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "source_run_sha256": "4782c7e0f97471d730c1a7f1cc07489005ddc605f446679295dda34e8c807135"
+}

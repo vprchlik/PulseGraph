@@ -1,0 +1,335 @@
+{
+  "failures": [],
+  "n_attempted": 20,
+  "n_complete": 20,
+  "n_failed": 0,
+  "n_failures": 0,
+  "purpose": "endpoint_validation_not_evaluation",
+  "repositories": [
+    {
+      "capture": "python__cpython\\attempt_001",
+      "created_at": "2017-02-10T19:23:51+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 81598961,
+      "repo_name": "python/cpython",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "numpy__numpy\\attempt_001",
+      "created_at": "2010-09-13T23:02:39+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 908607,
+      "repo_name": "numpy/numpy",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "pandas-dev__pandas\\attempt_001",
+      "created_at": "2010-08-24T01:37:33+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 858127,
+      "repo_name": "pandas-dev/pandas",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "scipy__scipy\\attempt_001",
+      "created_at": "2011-03-09T18:52:03+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 1460385,
+      "repo_name": "scipy/scipy",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "matplotlib__matplotlib\\attempt_001",
+      "created_at": "2011-02-19T03:17:12+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 1385122,
+      "repo_name": "matplotlib/matplotlib",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "scikit-learn__scikit-learn\\attempt_001",
+      "created_at": "2010-08-17T09:43:38+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 843222,
+      "repo_name": "scikit-learn/scikit-learn",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "psf__requests\\attempt_001",
+      "created_at": "2011-02-13T18:38:17+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 1362490,
+      "repo_name": "psf/requests",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "pallets__flask\\attempt_001",
+      "created_at": "2010-04-06T11:11:59+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "django__django\\attempt_001",
+      "created_at": "2012-04-28T02:47:18+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 4164482,
+      "repo_name": "django/django",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "pallets__click\\attempt_001",
+      "created_at": "2014-04-24T09:52:19+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 19103692,
+      "repo_name": "pallets/click",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "nodejs__node\\attempt_001",
+      "created_at": "2014-11-26T19:57:11+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 27193779,
+      "repo_name": "nodejs/node",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "expressjs__express\\attempt_001",
+      "created_at": "2009-06-26T18:56:01+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 237159,
+      "repo_name": "expressjs/express",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "vuejs__vue\\attempt_001",
+      "created_at": "2013-07-29T03:24:51+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 11730342,
+      "repo_name": "vuejs/vue",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "facebook__react\\attempt_001",
+      "created_at": "2013-05-24T16:15:54+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 10270250,
+      "repo_name": "facebook/react",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "microsoft__vscode\\attempt_001",
+      "created_at": "2015-09-03T20:23:38+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 41881900,
+      "repo_name": "microsoft/vscode",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "asciidoc-py__asciidoc-py\\attempt_001",
+      "created_at": "2017-06-25T04:06:28+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 95337610,
+      "repo_name": "asciidoc-py/asciidoc-py",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "polo2ro__imapbox\\attempt_001",
+      "created_at": "2015-02-15T16:48:29+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 30833778,
+      "repo_name": "polo2ro/imapbox",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "cjdrake__pyeda\\attempt_001",
+      "created_at": "2012-06-17T04:18:44+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 4689577,
+      "repo_name": "cjdrake/pyeda",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "bwaldvogel__neighbourhood\\attempt_001",
+      "created_at": "2011-04-03T14:13:28+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 1563028,
+      "repo_name": "bwaldvogel/neighbourhood",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    },
+    {
+      "capture": "AppliedMechanics-EAFIT__SolidsPy\\attempt_001",
+      "created_at": "2015-12-19T19:31:49+00:00",
+      "duplicate_days": 0,
+      "missing_days": [],
+      "repo_id": 48294591,
+      "repo_name": "AppliedMechanics-EAFIT/SolidsPy",
+      "status": "complete",
+      "week_utc_seconds": [
+        0
+      ],
+      "week_utc_weekdays": [
+        "Sunday"
+      ]
+    }
+  ],
+  "selected_repositories": [
+    "python/cpython",
+    "numpy/numpy",
+    "pandas-dev/pandas",
+    "scipy/scipy",
+    "matplotlib/matplotlib",
+    "scikit-learn/scikit-learn",
+    "psf/requests",
+    "pallets/flask",
+    "django/django",
+    "pallets/click",
+    "nodejs/node",
+    "expressjs/express",
+    "vuejs/vue",
+    "facebook/react",
+    "microsoft/vscode",
+    "asciidoc-py/asciidoc-py",
+    "polo2ro/imapbox",
+    "cjdrake/pyeda",
+    "bwaldvogel/neighbourhood",
+    "AppliedMechanics-EAFIT/SolidsPy"
+  ],
+  "selection_sha256": "c05f85a3c77737f3b5c60d03a36280b7019d6296bcf4660ef474dda71f5f6434",
+  "timezone_conclusion": "unverified",
+  "unstar_conclusion": "unresolved"
+}

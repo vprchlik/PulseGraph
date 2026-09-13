@@ -1,0 +1,63 @@
+{
+  "alignment": "Three hourly-to-day hypotheses against unchanged API nominal day labels",
+  "archive_sha256": "d8dba238c8a076e215d5aafa3535698e0f01f63d6c97d41b08ad7812997ffcf7",
+  "common_score_end": "2024-12-30",
+  "common_score_start": "2024-01-01",
+  "compared_repo_ids": [
+    237159,
+    596892,
+    843222,
+    858127,
+    908607,
+    1362490,
+    1385122,
+    1460385,
+    1563028,
+    4164482,
+    4689577,
+    10270250,
+    11730342,
+    19103692,
+    27193779,
+    30833778,
+    41881900,
+    48294591,
+    81598961,
+    95337610
+  ],
+  "failures": [],
+  "hypotheses": [
+    "UTC",
+    "America/Los_Angeles",
+    "UTC-08:00"
+  ],
+  "n_archive_repositories_excluded": 0,
+  "n_attempted": 20,
+  "n_complete": 20,
+  "n_failed": 0,
+  "n_failures": 0,
+  "n_hourly_rows": 175680,
+  "n_rows": 21960,
+  "n_scored_days_per_repository_hypothesis": 365,
+  "original_comparison_sha256": "bf8eefa062a77dccbf55e4f377183bb54b241767c155fa9642fb5b8c2aaf5eb4",
+  "output_sha256": {
+    "daily_comparison.csv": "7bbc3ffee04c027df7a8883f581a0e393bf34920fa88b99caf0c69f13e34c8ea",
+    "dst_transition_comparison.csv": "e0c2a5b95e889d1883de81e869eee1f1c3cbc1ab6d45564113c6e9659f421dae",
+    "period_comparison.csv": "65762287692459b4d124f632491848604a9467ade3facdf77d909bacf092bf52",
+    "repository_comparison.csv": "a813b12451f916f84e8f05b62444aa54531b875db8c977cb2532fbbae0468f1c"
+  },
+  "partial_day_rule": "December 31 is partial for both UTC-8 calendars; retain but do not score it under any hypothesis",
+  "supplementary_outputs": {
+    "calendar-summary.json": "1359bd45cd3e51289801054cf59b9729581c27ee18e65bf53e56d8f0e0eb9576",
+    "monthly-ratios.png": "efc6a33fd36a2096ae6aa5af579ba02275163b1afd39643231786b6570ecd3ee",
+    "monthly-ratios.svg": "3a39a5c38fbd991ac4291a9311cb9fb32b902b7d4a1b0e6abece45abe3513432",
+    "monthly_ratios_largest_eight.csv": "e43f05334b8759e10a7d11250092ecdbca6266f0002521e0e829830dd05b6ef0",
+    "ratio-report.json": "58ac5ca8559d5aa88666a670cb318d50373f53648fbe9737a3246f1d6c93bafc",
+    "repository_2024_totals.csv": "43e59d259607e0d77bd8f4631e0fc7cc74c835118e8372ddffc6b5412aafbc30",
+    "totals-and-monthly-ratios.md": "3a048c28ab7bfc92d84a19706c4d266b4361ce5c3844af0d59eb288ec82c5541",
+    "validation-calendar-audit.json": "1f6b1be765e9267d32de7b5dd5e2c8973f9d157052f051bd1222926277171e27",
+    "validation-report.md": "c20c4ff1c904219ead4ab84db655cf8068eab551bd1b4b57d26134f11006b30d"
+  },
+  "unstar_conclusion": "Differences may reflect unstars, archive misses or revisions",
+  "validation_sha256": "146bef3a3dec587428956fa244ad33f39b48649b81940972019cdaf7ae56949f"
+}

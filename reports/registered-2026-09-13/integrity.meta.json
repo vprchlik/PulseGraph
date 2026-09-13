@@ -1,0 +1,10 @@
+{
+  "review": "integrity",
+  "analysis_status": "post_hoc",
+  "data_kind": "real",
+  "run_metadata_sha256": "4782c7e0f97471d730c1a7f1cc07489005ddc605f446679295dda34e8c807135",
+  "arguments": {
+    "run": "reports\\registered-2026-09-13\\run",
+    "out": "reports\\registered-2026-09-13\\integrity.csv"
+  }
+}

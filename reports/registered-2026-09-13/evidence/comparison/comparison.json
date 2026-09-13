@@ -1,0 +1,51 @@
+{
+  "alignment": "Three hourly-to-day hypotheses against unchanged API nominal day labels",
+  "archive_sha256": "d8dba238c8a076e215d5aafa3535698e0f01f63d6c97d41b08ad7812997ffcf7",
+  "common_score_end": "2024-12-30",
+  "common_score_start": "2024-01-01",
+  "compared_repo_ids": [
+    237159,
+    596892,
+    843222,
+    858127,
+    908607,
+    1362490,
+    1385122,
+    1460385,
+    1563028,
+    4164482,
+    4689577,
+    10270250,
+    11730342,
+    19103692,
+    27193779,
+    30833778,
+    41881900,
+    48294591,
+    81598961,
+    95337610
+  ],
+  "failures": [],
+  "hypotheses": [
+    "UTC",
+    "America/Los_Angeles",
+    "UTC-08:00"
+  ],
+  "n_archive_repositories_excluded": 0,
+  "n_attempted": 20,
+  "n_complete": 20,
+  "n_failed": 0,
+  "n_failures": 0,
+  "n_hourly_rows": 175680,
+  "n_rows": 21960,
+  "n_scored_days_per_repository_hypothesis": 365,
+  "output_sha256": {
+    "daily_comparison.csv": "7bbc3ffee04c027df7a8883f581a0e393bf34920fa88b99caf0c69f13e34c8ea",
+    "dst_transition_comparison.csv": "e0c2a5b95e889d1883de81e869eee1f1c3cbc1ab6d45564113c6e9659f421dae",
+    "period_comparison.csv": "65762287692459b4d124f632491848604a9467ade3facdf77d909bacf092bf52",
+    "repository_comparison.csv": "a813b12451f916f84e8f05b62444aa54531b875db8c977cb2532fbbae0468f1c"
+  },
+  "partial_day_rule": "December 31 is partial for both UTC-8 calendars; retain but do not score it under any hypothesis",
+  "unstar_conclusion": "Differences may reflect unstars, archive misses or revisions",
+  "validation_sha256": "146bef3a3dec587428956fa244ad33f39b48649b81940972019cdaf7ae56949f"
+}

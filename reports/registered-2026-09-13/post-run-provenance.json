@@ -1,0 +1,12 @@
+{
+  "implementation_commit": "ca67dd22ea49377ee1fd074aed57b4b7460c84f1",
+  "input_and_output_manifest_equal": true,
+  "input_and_output_observations_equal": true,
+  "input_signals_sha256": "7e448d7254fb180f211cb46522f73aeabd2af259003a95be4edfc1901d4d56e1",
+  "output_signals_sha256": "efb5620bd7c35be70678bde2241305b0ee5f9aaf9b2f7b2c38b04357a8fb358a",
+  "readiness_sha256": "2a4ecbf99cd8486620ece6613b836837fe2d8e460d067f85b7e14457d5321021",
+  "schema_note": "validate_signals projects repo_name, event_date and stars, sorts rows and normalizes dtypes. The output retains stable IDs in its identical manifest. Rejoining those IDs reproduces all four original input columns and every value exactly; Parquet bytes therefore differ without changing observations.",
+  "signal_rows": 289316,
+  "source_runtime_and_signed_evidence_unchanged": true,
+  "status": "pass"
+}

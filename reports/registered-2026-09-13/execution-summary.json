@@ -1,0 +1,27 @@
+{
+  "checkpoint_count": 300,
+  "checkpoint_integrity": "pass",
+  "comparison_count": 18,
+  "elapsed_seconds_including_resumes": 18662.063521,
+  "failures": [],
+  "finished_at": "2026-09-13T13:05:54.160841+00:00",
+  "gate": "pass",
+  "inference_sha256": "dc60d031d1879adde48073fb1a4b614a676798cad1c13a4a55999a7338e712db",
+  "integrity": [
+    {
+      "analysis_status": "post_hoc",
+      "data_kind": "real",
+      "n_models": 18,
+      "n_repos": 300,
+      "n_rows": 48600,
+      "status": "pass"
+    }
+  ],
+  "interval_definition": "pointwise 95% repository-cluster percentile bootstrap",
+  "mean_difference_definition": "model minus reference QScore9",
+  "repository_timings_sha256": "1f0671b7e467c35df5d45a7a68aaab1c009163a677770615e230adc6afb251ef",
+  "resumes": [],
+  "run_sha256": "4782c7e0f97471d730c1a7f1cc07489005ddc605f446679295dda34e8c807135",
+  "run_status": "complete",
+  "started_at": "2026-09-13T07:54:52.097320+00:00"
+}

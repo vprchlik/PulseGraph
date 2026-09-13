@@ -1,0 +1,26 @@
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|##########| 4/4 [00:00<00:00, 1332.90it/s]
+
+Loading weights:   0%|          | 0/170 [00:00<?, ?it/s]
+Loading weights:  61%|######    | 103/170 [00:00<00:00, 1008.22it/s]
+Loading weights: 100%|##########| 170/170 [00:00<00:00, 986.33it/s] 
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files: 100%|##########| 5/5 [00:00<00:00, 1990.84it/s]
+Loading weights from local directory
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|##########| 4/4 [00:00<00:00, 1333.32it/s]
+C:\Users\piano\projects\PulseGraph\.venv\Lib\site-packages\statsforecast\arima.py:2355: UserWarning: Stepwise search was stopped early due to reaching the model number limit: nmodels=94
+  warnings.warn(
+C:\Users\piano\projects\PulseGraph\.venv\Lib\site-packages\statsforecast\arima.py:2355: UserWarning: Stepwise search was stopped early due to reaching the model number limit: nmodels=94
+  warnings.warn(
+C:\Users\piano\projects\PulseGraph\.venv\Lib\site-packages\statsforecast\arima.py:2355: UserWarning: Stepwise search was stopped early due to reaching the model number limit: nmodels=94
+  warnings.warn(
+C:\Users\piano\projects\PulseGraph\.venv\Lib\site-packages\statsmodels\tsa\holtwinters\model.py:1065: ConvergenceWarning: Optimization failed to converge. Check mle_retvals.
+  res = self._optimize_parameters(res, use_brute, method, minimize_kwargs)
+C:\Users\piano\projects\PulseGraph\.venv\Lib\site-packages\statsmodels\tsa\holtwinters\model.py:1065: ConvergenceWarning: Optimization failed to converge. Check mle_retvals.
+  res = self._optimize_parameters(res, use_brute, method, minimize_kwargs)
+C:\Users\piano\projects\PulseGraph\.venv\Lib\site-packages\statsmodels\tsa\holtwinters\model.py:1065: ConvergenceWarning: Optimization failed to converge. Check mle_retvals.
+  res = self._optimize_parameters(res, use_brute, method, minimize_kwargs)

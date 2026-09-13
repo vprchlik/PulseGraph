@@ -1,0 +1,8 @@
+{
+  "author_statement": "Billing is linked. Continue with frame query under the approved cap.",
+  "maximum_bytes_billed": 13625742573438,
+  "prior_job": "pulsegraph_frame_eb7e97a985a72b1c4c5ee9c5",
+  "prior_reconciliation_sha256": "345a9c6de3222499b63cd7f8a50ff58589e716296111022454d2f71612322474",
+  "recorded_at": "2026-09-13T06:41:05.035628+00:00",
+  "validation_repeated": false
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\piano\\projects\\PulseGraph\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\piano\\projects\\PulseGraph\\data\\cache\\stop3-2026-09-13\\collect_panel.py"
+  ],
+  "ended_at": "2026-09-13T07:33:46.807063+00:00",
+  "lowest_remaining": 3430,
+  "prior_decisions": 0,
+  "requests": 2640,
+  "script_sha256": "66271c03e91973f1e1cd3688370ea4253532bf2666a7629ecc09c9e89064f28b",
+  "started_at": "2026-09-13T06:46:57.124401+00:00",
+  "status": "complete"
+}

@@ -1,0 +1,21 @@
+{
+  "approval_date": "2026-09-13",
+  "approval_text": "The byte caps in your STOP 2 report are approved for both queries, run the validation query first, then the frame query. The two-to-eight-hour run budget is approved. Neither starts before the steps below are done.",
+  "approved": true,
+  "approved_by": "author in this conversation",
+  "evaluation_budget_hours": [
+    2,
+    8
+  ],
+  "evaluation_signature_required": true,
+  "query_caps_bytes": {
+    "frame.sql": 13625742573438,
+    "validation_2024.sql": 135941596319
+  },
+  "recorded_at": "2026-09-13T06:09:51.116111+00:00",
+  "scope": "Hourly 2024 validation export after offline implementation/tests, followed by the unchanged registered frame query. No real evaluation before signed readiness.",
+  "sql_sha256": {
+    "frame.sql": "62007e512e9a2904ddecd90e46c6f7cad6d2fe3a37a894b24e24486730145701",
+    "validation_2024.sql": "264aef1c3ad6e16afd4c527be7d2cbf463fe62468e69558fa06bf5cbbaf6b116"
+  }
+}

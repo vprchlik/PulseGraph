@@ -14,10 +14,14 @@ dominated by post-peak decay. Version 2 changes the sample, calendar and inferen
 The write-up must record this commit. `.gitattributes` preserves the protocol's
 LF bytes. The implementation does not edit the protocol.
 
-As of 2026-09-12, validation consists of offline tests, mocked foundation-model
-APIs and actual synthetic StatsForecast fits. No target histories, BigQuery
-jobs, foundation weights, GPU forecasts or v2 results have been obtained.
-Empirical endpoint validation and runtime smoke evidence remain required.
+On 2026-09-13, all 20 validation repositories were captured completely and compared
+with hourly 2024 GH Archive counts. The author accepted America/Los_Angeles
+calendar days. The frame contains 148,550 eligible repositories; the seeded
+complete-history walk accepted 100 in each stratum and recorded 470 skips.
+The achieved dataset contains 289,316 daily observations. Synthetic GPU smoke
+passed against implementation ca67dd22ea49377ee1fd074aed57b4b7460c84f1.
+The signed readiness and descriptive diagnostics are in
+[the evidence package](reports/registered-2026-09-13/evidence/readiness-review.md).
 
 Recovery of the June/July v1 artifacts is deferred. They are on another computer
 the author no longer uses and may be retrieved later. The local, ignored
@@ -32,10 +36,19 @@ The tree contains study code (`pulsegraph/`), commands (`scripts/`), offline tes
 selection rationale, both SQL queries and an unresolved readiness example.
 These files are declarations, not experimental results.
 
-A fresh clone has no v1 data/results, `v1_reference/`, achieved v2 manifest,
-aggregate dataset, results table, figures, `RESULTS.md` or `WRITEUP.md`.
-V2 manifests, results, summaries, figures and aggregate data will be deliberately
-tracked; oversized datasets require a durable location and checksum. There are
+The artifact package under `reports/registered-2026-09-13/` contains the achieved
+v2 manifest and aggregate signals, full eligible frame and frozen order, skip logs,
+query exports and provenance, validation comparisons and figures, signed readiness,
+synthetic smoke evidence, registered run metadata and summaries, integrity checks,
+confirmatory inference and the declared descriptive tables. The 433,172,286-byte
+results.parquet is published as a release asset, URL to be filled after the push,
+SHA-256 as recorded in run.json. The parquet and local byte parts are excluded
+from the tree; results-parts.json and pack_results.py are retained.
+Duplicate recovery checkpoints remain local, with their hashes and completion
+times retained in the run metadata and repository timing table.
+Raw endpoint responses and weights remain excluded;
+their hashes and capture locations are retained. A fresh clone has no v1 data/results,
+`v1_reference/`, raw captures or `WRITEUP.md`. There are
 no blanket CSV/parquet ignore rules. Raw captures belong under ignored
 `data/raw/`, caches under `data/cache/`, and weights under `models/`.
 `.env`, `.venv/`, `.pytest_cache/` and private `notes/` are ignored. The research
@@ -74,8 +87,8 @@ adds five small public repositories with 217–345 stars and no pushes since 202
 asciidoc-py, imapbox, pyeda, neighbourhood and SolidsPy. Dated metadata checks
 and sources are recorded in `study/validation_repositories.json`. Zero days,
 low counts and relative discrepancies must be exercised, not only large active
-histories. Sparse recent development is observed; star-day sparsity remains to
-be checked during retrieval. This is a purposive validation set.
+histories. Sparse recent development and low-count star days were checked in the saved
+validation captures and calendar comparison. This is a purposive validation set.
 Each creation date must precede 2023-01-01, excluding it from the main sample.
 
 After the implementation commit is confirmed:
@@ -125,6 +138,26 @@ on January 1 through December 30, the common complete-day span. December 31
 is retained with explicit partial-coverage flags for the UTC-8 calendars: the
 2024-only export lacks their final eight hours. Partial counts are never scored
 as full days. Resolve the calendar mapping before constructing evaluation counts.
+
+## Descriptive panel diagnostic
+
+Descriptive diagnostic of the frozen achieved panel, not a selection criterion. The numerator sums the first 90 Los Angeles calendar days, beginning on local creation day; the denominator retains gross archive eligibility over the UTC creation date and next 89 UTC days. These are different calendar boundaries, so the ratio is not an exact unstar-retention probability. For boundary sensitivity, the per-repository table also sums survivor bins with nominal dates equal to the archive's 90 date labels; it does not reconstruct UTC-hour totals. The final 90 days are 2026-06-03 through 2026-08-31 inclusive in Los Angeles. Percentiles use linear interpolation across all 100 accepted repositories per stratum. No repository is removed, replaced or reweighted.
+
+| Stratum | Accepted | Ratio median | P10 | P90 | Ratio <0.5 | Last-90 total median | Zero last-90 | Skipped |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 20-99 | 100 | 0.9677 | 0.7232 | 1.0747 | 3 | 0.0 | 52 | 98 |
+| 100-999 | 100 | 1.0040 | 0.8854 | 1.0789 | 2 | 4.0 | 22 | 348 |
+| 1000+ | 100 | 1.0059 | 0.9144 | 1.0491 | 2 | 39.0 | 1 | 24 |
+
+| Stratum | Skip reason | Count |
+|---|---|---:|
+| 100-999 | id_resolver_http_403 | 3 |
+| 100-999 | id_resolver_http_404 | 345 |
+| 1000+ | id_resolver_http_403 | 1 |
+| 1000+ | id_resolver_http_404 | 23 |
+| 20-99 | id_resolver_http_404 | 98 |
+
+Per-repository values, exact summaries and hashes are in [the diagnostic evidence](reports/registered-2026-09-13/evidence/panel-diagnostic/diagnostic.json).
 
 ## Models, calendar and scores
 
@@ -231,6 +264,37 @@ Wilcoxon tests. It saves paired tables, raw/adjusted p-values, pointwise interva
 seeds and provenance. Inference is conditional on the fixed calendar. The seven
 general review commands remain post-hoc and never refit models.
 `scripts.run_experiment --synthetic` remains available for software checks.
+
+## Saved registered run
+
+The run at implementation `ca67dd22ea49377ee1fd074aed57b4b7460c84f1` completed
+on 2026-09-13 in 18,662.063521 seconds (5 hours, 11 minutes, 2 seconds), with
+300 repositories, 48,600 forecast rows, no failures and no resumes. The gate
+and saved-artifact integrity check passed. [RESULTS.md](RESULTS.md) contains
+the 18-row registered inference table and descriptive tables without interpretation.
+Full precision inference values, paired repository scores and provenance are under
+`reports/registered-2026-09-13/inference/`; descriptive CSVs and their provenance
+are under `reports/registered-2026-09-13/descriptive/`.
+
+`results.parquet` is published as a release asset, URL to be filled after the push,
+SHA-256 as recorded in `run.json`:
+`53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6`.
+Release asset URL: **to be filled after the push**. Place the downloaded file at
+`reports/registered-2026-09-13/run/results.parquet`, then verify it and regenerate
+inference from saved forecasts. Choose a new output directory for reproduction:
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.review_integrity --run reports/registered-2026-09-13/run
+.\.venv\Scripts\python.exe -m scripts.registered_inference --run reports/registered-2026-09-13/run --out data/cache/inference-reproduction
+.\.venv\Scripts\python.exe reports/registered-2026-09-13/summarize_descriptives.py
+```
+
+`run/results-parts.json` retains the local packaging checksums; its `.data` parts
+are ignored and are not required when obtaining the complete release asset.
+The package's `.gitattributes` preserves the bytes covered by evidence hashes.
+The final results retain every forecast, sample/quantile grid, context, target,
+seed and model metadata; duplicate per-repository recovery files are excluded
+from the commit. Raw capture locations and hashes remain in the achieved manifest.
 
 ## Licence
 

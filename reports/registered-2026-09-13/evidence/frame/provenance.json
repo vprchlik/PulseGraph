@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Users\\piano\\projects\\PulseGraph\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\piano\\projects\\PulseGraph\\data\\cache\\stop3-2026-09-13\\extract_approved.py",
+    "frame.sql"
+  ],
+  "cost_approval_sha256": "987021d572e72e73894b0f3125b7d30848c89985be33b00cd77bea966421c02e",
+  "created_at": "2026-09-13T06:14:09.211534+00:00",
+  "dry_run_bytes": 12387038703125,
+  "error": "403 GET https://bigquery.googleapis.com/bigquery/v2/projects/[configured value]/queries/pulsegraph_frame_eb7e97a985a72b1c4c5ee9c5?maxResults=10000&formatOptions.useInt64Timestamp=True&location=US&prettyPrint=false: Quota exceeded: Your project exceeded quota for free query bytes scanned. For more information, see https://cloud.google.com/bigquery/docs/troubleshoot-quotas\n\nLocation: US\nJob ID: pulsegraph_frame_eb7e97a985a72b1c4c5ee9c5\n",
+  "error_type": "Forbidden",
+  "free_credit_assumed": 0,
+  "implementation_head": "a67fa6247a3cf7f9dad52ce36036ab8f181a1aa6",
+  "job_id": "pulsegraph_frame_eb7e97a985a72b1c4c5ee9c5",
+  "location": "US",
+  "maximum_bytes_billed": 13625742573438,
+  "parameters": {},
+  "query": "frame.sql",
+  "script_sha256": "6145463f7b58a16f2984d7004811ce3d9c3e5a7ad15eebb3de1d4f7c4c846399",
+  "sql_file": "frame.sql",
+  "sql_sha256": "62007e512e9a2904ddecd90e46c6f7cad6d2fe3a37a894b24e24486730145701",
+  "status": "failed",
+  "submission_attempted": true,
+  "usd_per_tib": 6.25
+}

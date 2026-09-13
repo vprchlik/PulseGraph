@@ -1,0 +1,21 @@
+{
+  "before_first_history_request": true,
+  "calendar_convention": "America/Los_Angeles",
+  "candidate_order_sha256": "9e985368c907090d5abd4ac97667b4f123c155ae7f1e5bd40a9347d0ba1bdf33",
+  "command": [
+    "C:\\Users\\piano\\projects\\PulseGraph\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\piano\\projects\\PulseGraph\\data\\cache\\stop3-2026-09-13\\collect_panel.py"
+  ],
+  "frame_export_sha256": "e385db3245b011f285ac5ace5b5889201e2a9d4c7042120cdaca6c27a01c666a",
+  "frame_provenance_sha256": "4eb61f853775fd508cbb3111831befedfd8601988a35d442220bdffe26d9cf88",
+  "frame_sizes": {
+    "100-999": 46811,
+    "1000+": 1052,
+    "20-99": 100687
+  },
+  "frozen_at": "2026-09-13T06:46:57.109357+00:00",
+  "generator": "numpy.random.default_rng / PCG64",
+  "observation_end": "2026-08-31",
+  "script_sha256": "66271c03e91973f1e1cd3688370ea4253532bf2666a7629ecc09c9e89064f28b",
+  "selection_seed": 20260913
+}

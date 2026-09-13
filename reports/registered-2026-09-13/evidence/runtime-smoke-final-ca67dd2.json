@@ -1,0 +1,6234 @@
+{
+  "command": [
+    "C:\\Users\\piano\\projects\\PulseGraph\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\piano\\projects\\PulseGraph\\scripts\\smoke_registered.py",
+    "--implementation-commit",
+    "ca67dd22ea49377ee1fd074aed57b4b7460c84f1",
+    "--out",
+    "data/cache/stop3-2026-09-13/runtime-smoke-final-ca67dd2.json"
+  ],
+  "data_kind": "synthetic",
+  "fits": [
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 90,
+        "batch_size": 1,
+        "crossing_quantile_values": 24,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 62,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 85,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 3.8553021999978228
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 90,
+        "batch_size": 1,
+        "crossing_quantile_values": 65,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 328,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 373,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.018300699986866675
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 90,
+        "batch_size": 1,
+        "crossing_quantile_values": 109,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 840,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 943,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.019623000000137836
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 1350,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 7,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 7,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.018874399989726953
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 1350,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 30,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 30,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.019011500000488013
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 1350,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 90,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 90,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.018851599990739487
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 2048,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 23,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 23,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.02224700000078883
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 2048,
+        "batch_size": 1,
+        "crossing_quantile_values": 7,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 89,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 96,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.020029899998917244
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 2048,
+        "batch_size": 1,
+        "crossing_quantile_values": 29,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "model_id": "amazon/chronos-2",
+        "native_quantile_levels": [
+          0.01,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          0.99
+        ],
+        "negative_quantile_values": 309,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 338,
+        "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+        "seed": 20260912,
+        "threads": 4
+      },
+      "model": "chronos2",
+      "seconds": 0.017671199995675124
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 90,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 1.9152126999979373
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 90,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.09448800000245683
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 90,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.1282707000063965
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 1350,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.1651685999968322
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 1350,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.16992049998953007
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 1350,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.1692927999974927
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 2048,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.17013080000469927
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 2048,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.15804909999133088
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 2048,
+        "backend": "timesfm3.TimesFM3Evaluator",
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "device": "cuda",
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-3.0-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "return_quantiles": true,
+        "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2",
+        "use_symmetric_averaging": false
+      },
+      "model": "timesfm3",
+      "seconds": 0.1555071000038879
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 90,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 1.269325499990373
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 90,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10916390000784304
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 90,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10920909998822026
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 1350,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.11298330000136048
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 1350,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10967920000257436
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 1350,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10725259999162517
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "available_context": 2048,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10941140000068117
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "available_context": 2048,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10756709999986924
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "available_context": 2048,
+        "batch_size": 1,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "max_context": 2048,
+        "max_horizon": 128,
+        "model_id": "google/timesfm-2.5-200m-pytorch",
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+        "seed": 20260912,
+        "supported_interval_levels": [
+          0.8
+        ],
+        "threads": 4,
+        "timesfm_version": "3.0.2"
+      },
+      "model": "timesfm2p5",
+      "seconds": 0.10947650000161957
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 2454079417,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0007076000038068742
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 2233643081,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0006747000006726012
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 871673563,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0008975000091595575
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 5071304,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 150,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0005182000022614375
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 3087136090,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 438,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0010180000099353492
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 766339895,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 1548,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.001594500005012378
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 2170455383,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 362,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0006274000043049455
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 1575987328,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 1429,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0009226999973179772
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 3607160600,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 4342,
+        "seed": 20260912
+      },
+      "model": "naive_seasonal",
+      "seconds": 0.0009585000079823658
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 421736186,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.001581899996381253
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1770356680,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0011296000011498109
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1449396072,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0014370999997481704
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 26572789,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 93,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0007470999989891425
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2334698513,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 1259,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0012792999914381653
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1447077742,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 7204,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.001402800000505522
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2293349069,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 361,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0010098999919136986
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1616701808,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 1595,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0013083000085316598
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1307230150,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 30,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 4895,
+        "seed": 20260912
+      },
+      "model": "linear_30",
+      "seconds": 0.0015824000001884997
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2287940182,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.006541100010508671
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 3195517170,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.006074599994462915
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2242150067,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.006455700000515208
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1007596257,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.034184199990704656
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 298611864,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.03395299999101553
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2056626322,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.03388289999566041
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 3471881968,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.04882300000463147
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 3001078710,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.05095300001266878
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 3892243922,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "damped_trend": true,
+          "n_samples": 200,
+          "offset": 0.01,
+          "seasonal": null,
+          "trend": "add"
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "ets",
+      "seconds": 0.05146670000976883
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 837838530,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.029068000003462657
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 3199787617,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.01946910000697244
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 429073226,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.045112499996321276
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2246727365,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.06968529999721795
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 991080195,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.08072959999844898
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 762638261,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 401,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.10688060001120903
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 1041075444,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.08158739999635145
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 3321359945,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.089437699993141
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "in_sample_residual_bootstrap",
+        "forecast_seed": 2031598,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_data_in_leaf": 5,
+          "n_samples": 200,
+          "num_boost_round": 100,
+          "num_threads": 1
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "lightgbm",
+      "seconds": 0.11647670000093058
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 1032607847,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.000298099999781698
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 2814833972,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0004609000025084242
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 2026437281,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0010063000081572682
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 2607192846,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 124,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0004430999979376793
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 613190509,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 521,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0006461000011768192
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 3208003057,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 1567,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0010135999909834936
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 427485586,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0003527000080794096
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 440095458,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0007418000022880733
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_first_difference_bootstrap",
+        "forecast_seed": 1455505001,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "last_value",
+      "seconds": 0.0013427000085357577
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 3857860827,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.00029490000451914966
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 3929819710,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0005820999940624461
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 3444531937,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0009013000089908019
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 4143271338,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 126,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0005167999916011468
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 3552903228,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 591,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0007367999933194369
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 909776554,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 1752,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0015192999999271706
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 908321046,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.00048099999548867345
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 1576013589,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0007248999900184572
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_weekly_difference_bootstrap",
+        "forecast_seed": 305047894,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "weekly_naive",
+      "seconds": 0.0006135000003268942
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3688766737,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0005472999910125509
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3989172330,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0007088999991538003
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1000766120,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0011245999921811745
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3037892277,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0005126999894855544
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1893168452,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0005326999962562695
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 103386455,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0012138000020058826
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2576579774,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0003400000132387504
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3766283523,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.00072080000245478
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 26587400,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 28,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_28",
+      "seconds": 0.0012674000026891008
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 4123535163,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0002931000053649768
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2234774443,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.00039489999471697956
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 377522487,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0006529999955091625
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1759653334,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0005086000019218773
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 232715167,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0007113000028766692
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2034342174,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0012589999969350174
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1583910800,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0003262999962316826
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1262961647,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.0007173999911174178
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 942049641,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 7,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_7",
+      "seconds": 0.001370500001939945
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2746397551,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0005655999993905425
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 385848760,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0006133999995654449
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1692042620,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0007195000071078539
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3543511788,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0006103000050643459
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3554730136,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0007436999876517802
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 451458612,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0014682000037282705
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2213036225,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0005926000012550503
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 4211862151,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0007224000000860542
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1997841057,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 14,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_14",
+      "seconds": 0.0012624000082723796
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 169550516,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.00046019999717827886
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 444786360,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0005863999977009371
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2047433254,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0010540999937802553
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2468058573,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0005216999998083338
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2101771860,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0007486999966204166
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2729439353,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0016008999955374748
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 4184996279,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.00033230001281481236
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2981429804,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0008870000019669533
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2050367985,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 56,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_56",
+      "seconds": 0.0009849000052781776
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1748516901,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.00044999999227002263
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 850049245,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.0007569000008516014
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 363336197,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.0007615000067744404
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2147726142,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.0005183000030228868
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 758900183,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.0008980999991763383
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 2820241188,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.0014415999903576449
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 1994871365,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.00042720000783447176
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3348575504,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.0008885999995982274
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "distribution": "recent_empirical_distribution",
+        "forecast_seed": 3247370312,
+        "nonnegative_clipping": true,
+        "parameters": {
+          "lookback": 90,
+          "n_samples": 200
+        },
+        "quantile_crossings_repaired": 0,
+        "sample_values_clipped": 0,
+        "seed": 20260912
+      },
+      "model": "local_mean_90",
+      "seconds": 0.001633299994864501
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": -1651.5821971882713,
+          "components": "ANNN",
+          "distribution": "normal",
+          "m": 1,
+          "par": [
+            0.9999,
+            null,
+            null,
+            null,
+            0.0
+          ],
+          "sigma2": 0.0
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.0015832999924896285
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": -1651.5821971882713,
+          "components": "ANNN",
+          "distribution": "normal",
+          "m": 1,
+          "par": [
+            0.9999,
+            null,
+            null,
+            null,
+            0.0
+          ],
+          "sigma2": 0.0
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.0018065000040223822
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": -1651.5821971882713,
+          "components": "ANNN",
+          "distribution": "normal",
+          "m": 1,
+          "par": [
+            0.9999,
+            null,
+            null,
+            null,
+            0.0
+          ],
+          "sigma2": 0.0
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.0013048999971942976
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": 11210.274614729324,
+          "components": "ANNN",
+          "distribution": "normal",
+          "m": 1,
+          "method": "ETS(A,N,N)",
+          "par": [
+            0.00010000000000000002,
+            null,
+            null,
+            null,
+            2.9404274630546667
+          ],
+          "sigma2": 2.987858647766704
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.1829445999901509
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": 11210.274614729324,
+          "components": "ANNN",
+          "distribution": "normal",
+          "m": 1,
+          "method": "ETS(A,N,N)",
+          "par": [
+            0.00010000000000000002,
+            null,
+            null,
+            null,
+            2.9404274630546667
+          ],
+          "sigma2": 2.987858647766704
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.18468449999636505
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894,
+          2.940601402265894
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": 11210.274614729324,
+          "components": "ANNN",
+          "distribution": "normal",
+          "m": 1,
+          "method": "ETS(A,N,N)",
+          "par": [
+            0.00010000000000000002,
+            null,
+            null,
+            null,
+            2.9404274630546667
+          ],
+          "sigma2": 2.987858647766704
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.18165359999693464
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 9,
+        "point_forecast": [
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 9,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": -131265.4610570747,
+          "components": "AAAN",
+          "distribution": "normal",
+          "m": 7,
+          "method": "ETS(A,A,A)",
+          "par": [
+            0.030099000000000004,
+            0.0029565714285714286,
+            0.048661714285714294,
+            null,
+            2.285714285714286,
+            -1.466692060356315e-16,
+            -2.2857142857142856,
+            -1.2857142857142858,
+            0.7142857142857142,
+            5.714285714285714,
+            0.7142857142857142,
+            -1.2857142857142858,
+            -2.2857142857142865
+          ],
+          "sigma2": 7.086665073008168e-32
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.617806299997028
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 36,
+        "point_forecast": [
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 36,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": -131265.4610570747,
+          "components": "AAAN",
+          "distribution": "normal",
+          "m": 7,
+          "method": "ETS(A,A,A)",
+          "par": [
+            0.030099000000000004,
+            0.0029565714285714286,
+            0.048661714285714294,
+            null,
+            2.285714285714286,
+            -1.466692060356315e-16,
+            -2.2857142857142856,
+            -1.2857142857142858,
+            0.7142857142857142,
+            5.714285714285714,
+            0.7142857142857142,
+            -1.2857142857142858,
+            -2.2857142857142865
+          ],
+          "sigma2": 7.086665073008168e-32
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.6128469000104815
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 1,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 115,
+        "point_forecast": [
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0,
+          8.0,
+          3.0,
+          1.0000000000000002,
+          4.440892098500626e-16,
+          -4.440892098500626e-16,
+          1.0000000000000002,
+          3.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 115,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": -131265.4610570747,
+          "components": "AAAN",
+          "distribution": "normal",
+          "m": 7,
+          "method": "ETS(A,A,A)",
+          "par": [
+            0.030099000000000004,
+            0.0029565714285714286,
+            0.048661714285714294,
+            null,
+            2.285714285714286,
+            -1.466692060356315e-16,
+            -2.2857142857142856,
+            -1.2857142857142858,
+            0.7142857142857142,
+            5.714285714285714,
+            0.7142857142857142,
+            -1.2857142857142858,
+            -2.2857142857142865
+          ],
+          "sigma2": 7.086665073008168e-32
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoets_weekly",
+      "seconds": 0.6117513999924995
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": null,
+          "arma": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "code": 0,
+          "coef": {
+            "intercept": 0.0
+          },
+          "distribution": "normal",
+          "sigma2": 0.0
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.0020935999928042293
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": null,
+          "arma": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "code": 0,
+          "coef": {
+            "intercept": 0.0
+          },
+          "distribution": "normal",
+          "sigma2": 0.0
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.0019369999936316162
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": null,
+          "arma": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "code": 0,
+          "coef": {
+            "intercept": 0.0
+          },
+          "distribution": "normal",
+          "sigma2": 0.0
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.0016706000023987144
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.888212931325626,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": 5306.607694215322,
+          "arma": [
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "code": 2,
+          "coef": {
+            "intercept": 2.9407514035240325,
+            "ma1": 0.05530405116444847
+          },
+          "distribution": "normal",
+          "sigma2": 2.974173265492475
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.8109465000015916
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.888212931325626,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": 5306.607694215322,
+          "arma": [
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "code": 2,
+          "coef": {
+            "intercept": 2.9407514035240325,
+            "ma1": 0.05530405116444847
+          },
+          "distribution": "normal",
+          "sigma2": 2.974173265492475
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.808183300003293
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.888212931325626,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325,
+          2.9407514035240325
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": 5306.607694215322,
+          "arma": [
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "code": 2,
+          "coef": {
+            "intercept": 2.9407514035240325,
+            "ma1": 0.05530405116444847
+          },
+          "distribution": "normal",
+          "sigma2": 2.974173265492475
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.8073395999963395
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 8,
+        "point_forecast": [
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 8,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": null,
+          "arma": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            1
+          ],
+          "code": 0,
+          "coef": {
+            "drift": 0.0
+          },
+          "distribution": "normal",
+          "sigma2": 4.115625477711122e-08
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.015374100010376424
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 32,
+        "point_forecast": [
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 32,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": null,
+          "arma": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            1
+          ],
+          "code": 0,
+          "coef": {
+            "drift": 0.0
+          },
+          "distribution": "normal",
+          "sigma2": 4.115625477711122e-08
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.015408599996590056
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": null,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": null,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 104,
+        "point_forecast": [
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0,
+          8.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          3.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 104,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "aicc": null,
+          "arma": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            1
+          ],
+          "code": 0,
+          "coef": {
+            "drift": 0.0
+          },
+          "distribution": "normal",
+          "sigma2": 4.115625477711122e-08
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autoarima_weekly",
+      "seconds": 0.015431299994816072
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "STM",
+          "par": {
+            "alpha": 0.525,
+            "initial_smoothed": 0.0,
+            "theta": 2.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.005038799994508736
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "STM",
+          "par": {
+            "alpha": 0.525,
+            "initial_smoothed": 0.0,
+            "theta": 2.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.00463300000410527
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "STM",
+          "par": {
+            "alpha": 0.525,
+            "initial_smoothed": 0.0,
+            "theta": 2.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.005474699995829724
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "DOTM",
+          "par": {
+            "alpha": 0.10000000000000005,
+            "initial_smoothed": 3.868381887343228,
+            "theta": 1.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.24738790000264999
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 0,
+        "point_forecast": [
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 0,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "DOTM",
+          "par": {
+            "alpha": 0.10000000000000005,
+            "initial_smoothed": 3.868381887343228,
+            "theta": 1.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.24921180000819732
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 30,
+        "point_forecast": [
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078,
+          2.7748832194752078
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 30,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "DOTM",
+          "par": {
+            "alpha": 0.10000000000000005,
+            "initial_smoothed": 3.868381887343228,
+            "theta": 1.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.25068200001260266
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 19,
+        "point_forecast": [
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 19,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "decompose": true,
+          "decomposition_type": "additive",
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "DSTM",
+          "par": {
+            "alpha": 0.525,
+            "initial_smoothed": 1.1428571428571428,
+            "theta": 2.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.04516170000715647
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 94,
+        "point_forecast": [
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 94,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "decompose": true,
+          "decomposition_type": "additive",
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "DSTM",
+          "par": {
+            "alpha": 0.525,
+            "initial_smoothed": 1.1428571428571428,
+            "theta": 2.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.04588369998964481
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "contains_zero": true,
+        "crossing_quantile_values": 0,
+        "distribution": "native_quantiles",
+        "error_distribution": "normal",
+        "median_source": "point_forecast",
+        "native_interval_draws": 200,
+        "native_interval_levels": [
+          20,
+          40,
+          60,
+          80
+        ],
+        "native_interval_seed": 0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "negative_quantile_values": 302,
+        "point_forecast": [
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0,
+          8.0,
+          3.0,
+          0.9999999999999998,
+          0.0,
+          0.0,
+          0.9999999999999998,
+          3.0
+        ],
+        "quantile_repair": "clip_then_cummax",
+        "quantile_values_changed": 302,
+        "season_length": 7,
+        "seed": 20260912,
+        "selected_specification": {
+          "decompose": true,
+          "decomposition_type": "additive",
+          "distribution": "normal",
+          "m": 7,
+          "modeltype": "DSTM",
+          "par": {
+            "alpha": 0.525,
+            "initial_smoothed": 1.1428571428571428,
+            "theta": 2.0
+          }
+        },
+        "statsforecast_version": "2.1.1"
+      },
+      "model": "autotheta_weekly",
+      "seconds": 0.04857869999250397
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 7,
+      "metadata": {
+        "alpha": 0.0,
+        "context_mean": 0.0,
+        "context_unbiased_variance": 0.0,
+        "distribution": "point_mass_zero",
+        "lookback": 28,
+        "mu": 0.0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 0.0,
+        "probability": null,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": null
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.00015390000771731138
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 30,
+      "metadata": {
+        "alpha": 0.0,
+        "context_mean": 0.0,
+        "context_unbiased_variance": 0.0,
+        "distribution": "point_mass_zero",
+        "lookback": 28,
+        "mu": 0.0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 0.0,
+        "probability": null,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": null
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.00011250001261942089
+    },
+    {
+      "case": 0,
+      "context_length": 90,
+      "horizon": 90,
+      "metadata": {
+        "alpha": 0.0,
+        "context_mean": 0.0,
+        "context_unbiased_variance": 0.0,
+        "distribution": "point_mass_zero",
+        "lookback": 28,
+        "mu": 0.0,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 0.0,
+        "probability": null,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": null
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.00010720000136643648
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 7,
+      "metadata": {
+        "alpha": 0.004645942819122601,
+        "context_mean": 2.9407407407407407,
+        "context_unbiased_variance": 2.9809186503033795,
+        "distribution": "negative_binomial",
+        "lookback": 28,
+        "mu": 3.1785714285714284,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 3.2255108585079975,
+        "probability": 0.9854474432126756,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": 215.2415642921866
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.0002541000139899552
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 30,
+      "metadata": {
+        "alpha": 0.004645942819122601,
+        "context_mean": 2.9407407407407407,
+        "context_unbiased_variance": 2.9809186503033795,
+        "distribution": "negative_binomial",
+        "lookback": 28,
+        "mu": 3.1785714285714284,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 3.2255108585079975,
+        "probability": 0.9854474432126756,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": 215.2415642921866
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.000185800003237091
+    },
+    {
+      "case": 1,
+      "context_length": 1350,
+      "horizon": 90,
+      "metadata": {
+        "alpha": 0.004645942819122601,
+        "context_mean": 2.9407407407407407,
+        "context_unbiased_variance": 2.9809186503033795,
+        "distribution": "negative_binomial",
+        "lookback": 28,
+        "mu": 3.1785714285714284,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 3.2255108585079975,
+        "probability": 0.9854474432126756,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": 215.2415642921866
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.00018179998733103275
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 7,
+      "metadata": {
+        "alpha": 0.8599009931891338,
+        "context_mean": 2.287109375,
+        "context_unbiased_variance": 6.785139075476307,
+        "distribution": "negative_binomial",
+        "lookback": 28,
+        "mu": 2.2857142857142856,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 6.7782582501309845,
+        "probability": 0.33721262916916983,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": 1.162924578434638
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.0002505999873392284
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 30,
+      "metadata": {
+        "alpha": 0.8599009931891338,
+        "context_mean": 2.287109375,
+        "context_unbiased_variance": 6.785139075476307,
+        "distribution": "negative_binomial",
+        "lookback": 28,
+        "mu": 2.2857142857142856,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 6.7782582501309845,
+        "probability": 0.33721262916916983,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": 1.162924578434638
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.00017270000535063446
+    },
+    {
+      "case": 2,
+      "context_length": 2048,
+      "horizon": 90,
+      "metadata": {
+        "alpha": 0.8599009931891338,
+        "context_mean": 2.287109375,
+        "context_unbiased_variance": 6.785139075476307,
+        "distribution": "negative_binomial",
+        "lookback": 28,
+        "mu": 2.2857142857142856,
+        "native_quantile_levels": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9
+        ],
+        "predictive_variance": 6.7782582501309845,
+        "probability": 0.33721262916916983,
+        "quantile_method": "analytic_inverse_cdf",
+        "quantile_values_changed": 0,
+        "seed": 20260912,
+        "size": 1.162924578434638
+      },
+      "model": "nb_local_level_28",
+      "seconds": 0.00021489999198820442
+    }
+  ],
+  "hardware": {
+    "allocator_limit_bytes": 7000000000,
+    "baselines_device": "cpu",
+    "batch_size": 1,
+    "cuda_version": "12.8",
+    "foundation_device": "cuda:0",
+    "gpu_driver": "610.47",
+    "gpu_free_at_start_bytes": 11606687744,
+    "gpu_model": "NVIDIA GeForce RTX 4070 SUPER",
+    "gpu_total_bytes": 12878086144,
+    "memory_measurement": "PyTorch allocator; 1 GB reserved for CUDA/library overhead",
+    "peak_vram_limit_bytes": 8000000000,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytorch_version": "2.11.0+cu128"
+  },
+  "implementation_commit": "ca67dd22ea49377ee1fd074aed57b4b7460c84f1",
+  "median_checks": {
+    "autoarima_weekly": {
+      "method": "native Gaussian central intervals centered on point before clipping",
+      "passed": true
+    },
+    "autoets_weekly": {
+      "method": "native Gaussian central intervals centered on point before clipping",
+      "passed": true
+    },
+    "autotheta_weekly": {
+      "maximum_standard_errors": 1.899384706882525,
+      "method": "native normal simulation median within five MC standard errors",
+      "passed": true,
+      "simulation_paths": 20000,
+      "simulation_seed": 20260912
+    }
+  },
+  "memory": {
+    "peak_allocated_bytes": 2785613824,
+    "peak_reserved_bytes": 2948595712
+  },
+  "models": [
+    "chronos2",
+    "timesfm3",
+    "timesfm2p5",
+    "naive_seasonal",
+    "linear_30",
+    "ets",
+    "lightgbm",
+    "last_value",
+    "weekly_naive",
+    "local_mean_28",
+    "local_mean_7",
+    "local_mean_14",
+    "local_mean_56",
+    "local_mean_90",
+    "autoets_weekly",
+    "autoarima_weekly",
+    "autotheta_weekly",
+    "nb_local_level_28"
+  ],
+  "passed": true,
+  "peak_vram_bytes": 2948595712,
+  "protocol_commit": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "protocol_sha256": "dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5",
+  "runtime_versions": {
+    "accelerate": "1.15.0",
+    "adagio": "0.2.6",
+    "annotated-doc": "0.0.5",
+    "anyio": "4.15.1",
+    "build": "1.6.1",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.1",
+    "chronos-forecasting": "2.3.2",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "contourpy": "1.4.0",
+    "coreforecast": "0.0.18",
+    "cryptography": "50.0.1",
+    "cycler": "0.12.1",
+    "einops": "0.8.2",
+    "filelock": "3.32.3",
+    "fonttools": "4.65.0",
+    "formulaic": "1.2.2",
+    "fsspec": "2026.7.0",
+    "fugue": "0.9.7",
+    "google-api-core": "2.36.0",
+    "google-auth": "2.58.0",
+    "google-cloud-bigquery": "3.45.0",
+    "google-cloud-core": "2.7.0",
+    "google-crc32c": "1.8.0",
+    "google-resumable-media": "2.10.2",
+    "googleapis-common-protos": "1.75.3",
+    "grpcio": "1.83.1",
+    "grpcio-status": "1.83.1",
+    "h11": "0.16.0",
+    "hf-xet": "1.6.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface-hub": "1.31.0",
+    "idna": "3.19",
+    "iniconfig": "2.3.0",
+    "interface-meta": "2.0.1",
+    "jinja2": "3.1.6",
+    "kiwisolver": "1.5.1",
+    "lightgbm": "4.7.0",
+    "markdown-it-py": "4.2.0",
+    "markupsafe": "3.0.3",
+    "matplotlib": "3.11.2",
+    "mdurl": "0.1.2",
+    "mpmath": "1.3.0",
+    "narwhals": "2.26.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.3",
+    "opentelemetry-api": "1.44.0",
+    "packaging": "26.3",
+    "pandas": "2.3.3",
+    "patsy": "1.0.3",
+    "pillow": "12.3.0",
+    "pip": "25.0.1",
+    "pluggy": "1.6.0",
+    "proto-plus": "1.28.4",
+    "protobuf": "7.36.1",
+    "psutil": "7.2.2",
+    "pulsegraph": "0.2.0",
+    "pyarrow": "25.0.1",
+    "pyasn1": "0.6.4",
+    "pyasn1-modules": "0.4.2",
+    "pycparser": "3.0",
+    "pygments": "2.21.0",
+    "pyparsing": "3.3.2",
+    "pyproject-hooks": "1.2.0",
+    "pytest": "9.1.1",
+    "python-dateutil": "2.9.0.post0",
+    "python-dotenv": "1.2.3",
+    "pytz": "2026.3.post1",
+    "pyyaml": "6.0.3",
+    "regex": "2026.9.10",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "ruff": "0.16.7",
+    "safetensors": "0.8.0",
+    "scipy": "1.18.1",
+    "setuptools": "78.1.0",
+    "shellingham": "1.5.4",
+    "six": "1.17.0",
+    "statsforecast": "2.1.1",
+    "statsmodels": "0.15.0",
+    "sympy": "1.14.0",
+    "threadpoolctl": "3.6.0",
+    "timesfm": "3.0.2",
+    "tokenizers": "0.23.2",
+    "torch": "2.11.0+cu128",
+    "tqdm": "4.70.1",
+    "transformers": "5.17.0",
+    "triad": "1.0.2",
+    "typer": "0.27.2",
+    "typing-extensions": "4.16.0",
+    "tzdata": "2026.4",
+    "urllib3": "2.7.0",
+    "utilsforecast": "0.2.16",
+    "wrapt": "2.4.1"
+  },
+  "seed": 20260912,
+  "source_sha256": {
+    "PROTOCOL.md": "dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5",
+    "pulsegraph/__init__.py": "c5570768522bb2b5b2f222fa959a3e6d7f9902ad2f59b26e2a7cc534be8e06af",
+    "pulsegraph/cli.py": "8f6a82b931e126999ecfc8b7e31c5a5f3a50ee5ae99edcddbad5bdee27ebb675",
+    "pulsegraph/config.py": "561ea85627395077c1f7cd3b31baa681eecde4ad3fb69dd75e2da2520fa185ac",
+    "pulsegraph/data/__init__.py": "0c2ae7afcd42af41b767939344342c2b2750c1d1665123b660d704dc0b8aaed9",
+    "pulsegraph/data/bigquery_dry_run.py": "05620dd5236f0fa2e225eb834724a12b83e63b583299c5c713a9beb37d470aa6",
+    "pulsegraph/data/calendars.py": "355a48d96f59c65f2d24dc67d5cc64617897dc2a3cac2b191b31b81788b2bcfb",
+    "pulsegraph/data/frame.py": "7335c1ed18e733ea94a80e1330509cea76a050f6f45c96f1111bc57f81aff4da",
+    "pulsegraph/data/github_api.py": "b229cdbb3a47ad4027df4b9b6cd6fb25995c29aef756a1d007b08f22bb6004a3",
+    "pulsegraph/data/history_validation.py": "3b1982e460e38cd0381d1424cbdeb20e26de58dc60932a3ca736d5a30fb8b643",
+    "pulsegraph/data/ingest.py": "751e3b6b9a117f5d47aa919828bef3acff8f4c5f66d97b3f3f09ce9cd48d3b9b",
+    "pulsegraph/data/loader.py": "1935e6c90148445304901b47590ee622ab9942580397ca0f16abdd93b0ea4121",
+    "pulsegraph/data/regimes.py": "263dce8c30a4d51a5b401d7e1904a90ac695365bbc53d704beb47a625371d979",
+    "pulsegraph/data/star_history.py": "35cf2adebd0bba6c9de8057798d772849406dfeac61571f907f2b1b3cc62aa7a",
+    "pulsegraph/evaluation/__init__.py": "29a4899d848d82b12b5c00956b76071f57eb8dad8780880d362343b33b66516f",
+    "pulsegraph/evaluation/artifacts.py": "8829ac0d45c4a887dd2f8342f8627953e7008bea4ca2d0a65ee7d5a8912af832",
+    "pulsegraph/evaluation/backtest.py": "c4d3e376fafe588da0e361d0e0210ac8d84fbf58fbd48cb7d9d9dc1b590ae8ec",
+    "pulsegraph/evaluation/calibration.py": "e01311c4f9b062ba65b1fdbd75535a2832e154c079678465aaa0994fd0c48a59",
+    "pulsegraph/evaluation/confirmatory.py": "fff842654cf0be61d6b897e9a21eacf72963ae41f595450da23661f6fbfe3f37",
+    "pulsegraph/evaluation/metrics.py": "29f5e70518ea22b4763ea6eebae2f25154c25a9426628630e1a4ef009c57a788",
+    "pulsegraph/evaluation/registered_run.py": "b7dd93440990451f30f6804666bbbf4e08be55fe74aa25769cbc7ec7b2cc9855",
+    "pulsegraph/evaluation/registration.py": "0f6d7afd63e60331b0a2bb17a0f846ed9fc33c55c5d547c7cbe4aa1ec21c80cc",
+    "pulsegraph/evaluation/reviews.py": "ee037b3ce866bef562443c3f63891ea497da6dbd9d08c1d899a0fe4cb7c66257",
+    "pulsegraph/forecast/__init__.py": "25e3d9e63143862d2e7aa2cee3571291b4e4d6c065bc942f0cfded20b73dcd6f",
+    "pulsegraph/forecast/baselines.py": "62ab4f7b12514bcd6e334320f9f16c99931f3ed772c635f6e82cbb8b83b1a83a",
+    "pulsegraph/forecast/chronos_forecaster.py": "a0f6be70560471174b8bd5e9474cdc2346ea0b66c9191a9dd6b5d50237f39011",
+    "pulsegraph/forecast/hardware.py": "ff9cd67ba3f532995bf030633ecf3f58e6e580b9c85ec358b7f0120ea10ee781",
+    "pulsegraph/forecast/negative_binomial.py": "32ab84a2f62e27fcd9dd135f0a7465804e1036063b8d3165a4c3a0bfb0aecdc8",
+    "pulsegraph/forecast/output.py": "3cfcaf897a7adb6aed1d7e686b42e8b8f1909146e34789080e1d5cfb5b12e31c",
+    "pulsegraph/forecast/registered.py": "12b02a824699a9121a8b560b63bdf0ac30f2cf6585172f0ad5f33eb7144b7958",
+    "pulsegraph/forecast/runtime.py": "2f8f0bdf4d30d075a77a4b07e7c30084faa5c9adf4ddb636f483f2b227c092d3",
+    "pulsegraph/forecast/statsforecast_forecaster.py": "88844352cb4a9d12817a1cf830a27a618838f2a2d62f65c1652217232b419f0d",
+    "pulsegraph/forecast/timesfm3_forecaster.py": "a467380b0c074e3c2e226bb7bc1f1e8a770c38b75d9ef97ea66e60d64c5292d7",
+    "pulsegraph/forecast/timesfm_forecaster.py": "8fbf9da03eb02a16f84b504602ab52ca163fc90a374172866011347ed123992e",
+    "pulsegraph/provenance.py": "76b158c1853a240fae35bd8d85ca73ab5fff8f2d91a0c3025d9bca1c64047cee",
+    "pulsegraph/random.py": "53abab0a60ab53703411b41b0baff759fcda17f0d653d03b9aeb4e16c496565b",
+    "pulsegraph/validation.py": "e24a34f38e6940f31c09660a10b02a73fc2882b80e644f110c941832e788a527",
+    "pyproject.toml": "894d45b7db4cbbf94bab264b5ac84f070c3364f19099135f184a1713c680a172",
+    "scripts/dry_run_frame.py": "3b939da3756e60dc7344197ac34e5e44adac2a2ce9e691f3e70c6f33215f77da",
+    "scripts/ingest_stars.py": "579048d4dbee40b613f3d3aa34443cc48af7b345eb9a71302d8e7e3e867d7854",
+    "scripts/registered_inference.py": "d648690b6e439c50c34c2e8dc0fa0fec67109178014fd7ae8d0e0ebe71427240",
+    "scripts/review_censoring.py": "09e5680f4c1fa1fdbaa258bd767f93063a3b507944489e1b5c24c2cf6366c795",
+    "scripts/review_cluster_inference.py": "444a2049a4c7a31ca7d099f3bd941818b0290c25d4dc2f5b188133c820156614",
+    "scripts/review_integrity.py": "e3b5044aa939b6abb23ebb32d9156e7683ee9d0278854cc6564953c295300096",
+    "scripts/review_local_mean_lookbacks.py": "3d5eef393294359bee3c03174c11971267d9e3b5044dee0b2960984e231748d5",
+    "scripts/review_scale.py": "b570db8858d8209edbfdec655a47a817a5ca43fb182e263da6b95e8b5b2a6db8",
+    "scripts/review_strong_baselines.py": "e3d990523f44415e9c9d408673eb234d73bd9498efea0a218d70b8f313308697",
+    "scripts/review_windows.py": "2408561785b811201f7f41c3e1dda161a839d69c98e66ba2ddcb41cc3e461178",
+    "scripts/run_experiment.py": "a2e350963be9ae35391e81a639b174354a804f3bf631801214889fc280b0cdb2",
+    "scripts/run_registered.py": "548c0cbd3afbc725c5e0d0780c004d368f7ffb9a58c79a1b1bde6790d1d71d12",
+    "scripts/smoke_registered.py": "d23d2cd09d95bebe0baf3f842d8c498b95f947537e69bebcbe3ed2ee793da604",
+    "scripts/validate_star_history.py": "723eac7e738c4e0825b4efa2d942fa7558d4685154501e340e44d30dbf766841",
+    "study/comparisons.json": "78016dc135e00cc84a1e96efbae9e624ed9bbc25588987d3ce78eb4e4bfbe0f1",
+    "study/frame.sql": "62007e512e9a2904ddecd90e46c6f7cad6d2fe3a37a894b24e24486730145701",
+    "study/readiness.example.json": "c91707be7558595585a074fb662aa0b71d213b042f29ffd7207c8043595f0a65",
+    "study/run_spec.json": "3b4e49b7ae10b52f1a70e34dd371d533387848525e578a83e1cb70c68f02b2bb",
+    "study/validation_2024.sql": "264aef1c3ad6e16afd4c527be7d2cbf463fe62468e69558fa06bf5cbbaf6b116",
+    "study/validation_repositories.json": "c05f85a3c77737f3b5c60d03a36280b7019d6296bcf4660ef474dda71f5f6434",
+    "tests/conftest.py": "c422c0ec5a86687cdd316a32b1991f1576015472073c8e6878f472f586256914",
+    "tests/test_artifacts_and_cli.py": "12e37488cf4dc35e3c5fd29c7f0bf23b428d71ae21cf268dbf20a878f9440168",
+    "tests/test_backtest.py": "678fd3e012316a397f7691361ae8d42e725c049e8a76785538600fa8f6b9799b",
+    "tests/test_baselines.py": "910d8cb6b7ee614bffb4b306e34bed39a3045a9d87556328e5978c6e453dea6b",
+    "tests/test_calendars.py": "04d16b8f005dc9e596aec6a7f97dfcb2aa8173f0c98468b51c6d4ffb0a104ac3",
+    "tests/test_checkpoints.py": "0e8e5079ececb4bef6fc91221ed454c7e895c575a190c0baf5e54a79d07785a0",
+    "tests/test_frame.py": "ba2e5fe854c12a2e826d13f5f9fa06b90a240410edbee1c7516fdd24432e39a0",
+    "tests/test_github_api.py": "2cad3040efd1f384c5809cdff4820ca8c1a9b88aec15db82a2bc61cd2248e434",
+    "tests/test_hardware.py": "edd1424f75949a1ee924ab934f9f4a472474740ba3811fdde5a761028e07945d",
+    "tests/test_loader.py": "9a082b3cbe611e7a63ff91dad9052de42050dc69da440a83f783385478c9b86f",
+    "tests/test_metrics.py": "23c578a4286b12dbde3842b0159901ee947ef1cd93b48dcb944e75731299ea17",
+    "tests/test_model_adapters.py": "7b6660486c05613f594421c9b9ce740d34ac5aa5d14c11d8ca12f3c03e866afb",
+    "tests/test_negative_binomial.py": "c67a625deeed1235da54911ad3bd3088d83f61df171ce2fdcbe628be68365296",
+    "tests/test_regimes.py": "21ecd9fb7efaed9dec27fb869f959adc3593065cf3c1be9125aabba7ebf5f079",
+    "tests/test_registered_workflow.py": "cac79a4d35201dd0194000e8b867aa6c9561181f7387d5d057dee276a508da13",
+    "tests/test_registration.py": "5b4deeee6de576d1a90fd30612313c3a8c4fc0b45e289b7e8349091dd310f46e",
+    "tests/test_reviews.py": "5c169fed21ba319972300599601137fd5e17a84487ddc6fdbd07e0018b85a18a",
+    "tests/test_star_history.py": "5fa9389eb04fae00acb630574e6aaaf03d741adb7c0861210ba706afcc8aef3d",
+    "tests/test_statsforecast.py": "7c1743c3e458311ddf9ac19da62344e6f8912890f9fa3b3cef51f5eb83814c8f",
+    "tests/test_timesfm3.py": "fc5cac56b124928782ff370fc2cb1b6209d182e651968196c257d9759811e2c5"
+  }
+}

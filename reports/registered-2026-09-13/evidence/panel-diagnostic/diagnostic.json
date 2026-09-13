@@ -1,0 +1,86 @@
+{
+  "analysis_status": "descriptive_not_selection",
+  "artifact_sha256": {
+    "repositories.csv": "c180a25f5945b450bfd007ff7ea5343c23d084cc836fec26410129942e9c357f",
+    "skip-reasons.csv": "0208ec365cce4d4b998e75a3a1c58845edff2a04d4ed83270ce20aeb1eacf959",
+    "strata.csv": "e3fd4f44bd8f4198030739c10145e667955117cfa49a9e64cc7896260d2b92ca"
+  },
+  "calendar_convention": "America/Los_Angeles",
+  "definition": "Descriptive diagnostic of the frozen achieved panel, not a selection criterion. The numerator sums the first 90 Los Angeles calendar days, beginning on local creation day; the denominator retains gross archive eligibility over the UTC creation date and next 89 UTC days. These are different calendar boundaries, so the ratio is not an exact unstar-retention probability. For boundary sensitivity, the per-repository table also sums survivor bins with nominal dates equal to the archive's 90 date labels; it does not reconstruct UTC-hour totals. The final 90 days are 2026-06-03 through 2026-08-31 inclusive in Los Angeles. Percentiles use linear interpolation across all 100 accepted repositories per stratum. No repository is removed, replaced or reweighted.",
+  "input_sha256": {
+    "manifest.json": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92",
+    "panel-summary.json": "2b267fbf450a7afdb2c2cb8bfe1210027cbb83adc306cd8235d088180a77175c",
+    "signals.parquet": "7e448d7254fb180f211cb46522f73aeabd2af259003a95be4edfc1901d4d56e1"
+  },
+  "n_repositories": 300,
+  "regeneration": ".\\.venv\\Scripts\\python.exe reports/registered-2026-09-13/panel_diagnostic.py --panel reports/registered-2026-09-13/evidence/panel --out reports/registered-2026-09-13/evidence/panel-diagnostic",
+  "script_sha256": "649e2bc480f4344a920182f448333dcf4c54e8c0ed34c39dec7f98bd2a0703b5",
+  "skip_reasons": [
+    {
+      "count": 3,
+      "reason": "id_resolver_http_403",
+      "sampling_stratum": "100-999"
+    },
+    {
+      "count": 345,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "100-999"
+    },
+    {
+      "count": 1,
+      "reason": "id_resolver_http_403",
+      "sampling_stratum": "1000+"
+    },
+    {
+      "count": 23,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "1000+"
+    },
+    {
+      "count": 98,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "20-99"
+    }
+  ],
+  "strata": [
+    {
+      "frame_size": 100687,
+      "last90_stars_median": 0.0,
+      "last90_zero_repositories": 52,
+      "local_birth_precedes_utc_birth": 27,
+      "ratio_below_0_5": 3,
+      "ratio_median": 0.9677083333333334,
+      "ratio_p10": 0.723152709359606,
+      "ratio_p90": 1.0746771879483503,
+      "sample_size": 100,
+      "sampling_stratum": "20-99",
+      "skip_count": 98
+    },
+    {
+      "frame_size": 46811,
+      "last90_stars_median": 4.0,
+      "last90_zero_repositories": 22,
+      "local_birth_precedes_utc_birth": 29,
+      "ratio_below_0_5": 2,
+      "ratio_median": 1.0039938641529829,
+      "ratio_p10": 0.8853955951193309,
+      "ratio_p90": 1.0788522012578616,
+      "sample_size": 100,
+      "sampling_stratum": "100-999",
+      "skip_count": 348
+    },
+    {
+      "frame_size": 1052,
+      "last90_stars_median": 39.0,
+      "last90_zero_repositories": 1,
+      "local_birth_precedes_utc_birth": 34,
+      "ratio_below_0_5": 2,
+      "ratio_median": 1.0058969038266419,
+      "ratio_p10": 0.914374360088114,
+      "ratio_p90": 1.0491473934781546,
+      "sample_size": 100,
+      "sampling_stratum": "1000+",
+      "skip_count": 24
+    }
+  ]
+}

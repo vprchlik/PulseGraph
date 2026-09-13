@@ -1,0 +1,97 @@
+repo_id,repo_name,month,n_matched_days,api_total,archive_total,api_to_archive_ratio,period_note
+237159,expressjs/express,2024-01,31,291,352.0,0.8267045454545454,complete calendar month
+237159,expressjs/express,2024-02,29,458,513.0,0.8927875243664717,complete calendar month
+237159,expressjs/express,2024-03,31,360,391.0,0.9207161125319693,complete calendar month
+237159,expressjs/express,2024-04,30,322,358.0,0.8994413407821229,complete calendar month
+237159,expressjs/express,2024-05,31,308,334.0,0.9221556886227545,complete calendar month
+237159,expressjs/express,2024-06,30,258,319.0,0.8087774294670846,complete calendar month
+237159,expressjs/express,2024-07,31,260,335.0,0.7761194029850746,complete calendar month
+237159,expressjs/express,2024-08,31,259,308.0,0.8409090909090909,complete calendar month
+237159,expressjs/express,2024-09,30,618,682.0,0.906158357771261,complete calendar month
+237159,expressjs/express,2024-10,31,354,395.0,0.8962025316455696,complete calendar month
+237159,expressjs/express,2024-11,30,279,305.0,0.9147540983606557,complete calendar month
+237159,expressjs/express,2024-12,30,248,275.0,0.9018181818181819,December 1-30 only; equal exposure
+596892,pallets/flask,2024-01,31,335,389.0,0.8611825192802056,complete calendar month
+596892,pallets/flask,2024-02,29,296,328.0,0.9024390243902439,complete calendar month
+596892,pallets/flask,2024-03,31,342,372.0,0.9193548387096774,complete calendar month
+596892,pallets/flask,2024-04,30,330,368.0,0.8967391304347826,complete calendar month
+596892,pallets/flask,2024-05,31,306,331.0,0.9244712990936556,complete calendar month
+596892,pallets/flask,2024-06,30,305,352.0,0.8664772727272727,complete calendar month
+596892,pallets/flask,2024-07,31,320,355.0,0.9014084507042254,complete calendar month
+596892,pallets/flask,2024-08,31,273,320.0,0.853125,complete calendar month
+596892,pallets/flask,2024-09,30,308,344.0,0.8953488372093024,complete calendar month
+596892,pallets/flask,2024-10,31,332,369.0,0.8997289972899729,complete calendar month
+596892,pallets/flask,2024-11,30,271,292.0,0.928082191780822,complete calendar month
+596892,pallets/flask,2024-12,30,308,342.0,0.9005847953216374,December 1-30 only; equal exposure
+4164482,django/django,2024-01,31,537,614.0,0.8745928338762216,complete calendar month
+4164482,django/django,2024-02,29,608,648.0,0.9382716049382716,complete calendar month
+4164482,django/django,2024-03,31,606,691.0,0.8769898697539797,complete calendar month
+4164482,django/django,2024-04,30,555,584.0,0.9503424657534246,complete calendar month
+4164482,django/django,2024-05,31,526,588.0,0.8945578231292517,complete calendar month
+4164482,django/django,2024-06,30,476,540.0,0.8814814814814815,complete calendar month
+4164482,django/django,2024-07,31,572,663.0,0.8627450980392157,complete calendar month
+4164482,django/django,2024-08,31,672,836.0,0.8038277511961722,complete calendar month
+4164482,django/django,2024-09,30,522,620.0,0.8419354838709677,complete calendar month
+4164482,django/django,2024-10,31,535,607.0,0.8813838550247117,complete calendar month
+4164482,django/django,2024-11,30,1413,1418.0,0.9964739069111425,complete calendar month
+4164482,django/django,2024-12,30,482,562.0,0.8576512455516014,December 1-30 only; equal exposure
+10270250,react/react,2024-01,31,1480,1725.0,0.8579710144927536,complete calendar month
+10270250,react/react,2024-02,29,1470,1625.0,0.9046153846153846,complete calendar month
+10270250,react/react,2024-03,31,1613,1893.0,0.8520866349709456,complete calendar month
+10270250,react/react,2024-04,30,1433,1683.0,0.851455733808675,complete calendar month
+10270250,react/react,2024-05,31,1756,2014.0,0.871896722939424,complete calendar month
+10270250,react/react,2024-06,30,1196,1455.0,0.8219931271477663,complete calendar month
+10270250,react/react,2024-07,31,1225,1531.0,0.8001306335728282,complete calendar month
+10270250,react/react,2024-08,31,1184,1439.0,0.8227936066712995,complete calendar month
+10270250,react/react,2024-09,30,1196,1501.0,0.7968021319120586,complete calendar month
+10270250,react/react,2024-10,31,1151,1356.0,0.8488200589970502,complete calendar month
+10270250,react/react,2024-11,30,1122,1238.0,0.9063004846526656,complete calendar month
+10270250,react/react,2024-12,30,1254,1447.0,0.866620594333103,December 1-30 only; equal exposure
+11730342,vuejs/vue,2024-01,31,481,598.0,0.8043478260869565,complete calendar month
+11730342,vuejs/vue,2024-02,29,365,434.0,0.8410138248847926,complete calendar month
+11730342,vuejs/vue,2024-03,31,481,622.0,0.7733118971061094,complete calendar month
+11730342,vuejs/vue,2024-04,30,412,639.0,0.6447574334898278,complete calendar month
+11730342,vuejs/vue,2024-05,31,372,556.0,0.6690647482014388,complete calendar month
+11730342,vuejs/vue,2024-06,30,298,415.0,0.7180722891566265,complete calendar month
+11730342,vuejs/vue,2024-07,31,343,521.0,0.6583493282149712,complete calendar month
+11730342,vuejs/vue,2024-08,31,338,464.0,0.728448275862069,complete calendar month
+11730342,vuejs/vue,2024-09,30,275,455.0,0.6043956043956044,complete calendar month
+11730342,vuejs/vue,2024-10,31,321,441.0,0.7278911564625851,complete calendar month
+11730342,vuejs/vue,2024-11,30,301,354.0,0.8502824858757062,complete calendar month
+11730342,vuejs/vue,2024-12,30,293,378.0,0.7751322751322751,December 1-30 only; equal exposure
+27193779,nodejs/node,2024-01,31,609,708.0,0.8601694915254238,complete calendar month
+27193779,nodejs/node,2024-02,29,740,843.0,0.8778173190984578,complete calendar month
+27193779,nodejs/node,2024-03,31,1129,1285.0,0.8785992217898833,complete calendar month
+27193779,nodejs/node,2024-04,30,871,978.0,0.8905930470347648,complete calendar month
+27193779,nodejs/node,2024-05,31,717,807.0,0.8884758364312267,complete calendar month
+27193779,nodejs/node,2024-06,30,613,723.0,0.8478561549100968,complete calendar month
+27193779,nodejs/node,2024-07,31,795,922.0,0.8622559652928417,complete calendar month
+27193779,nodejs/node,2024-08,31,603,687.0,0.8777292576419214,complete calendar month
+27193779,nodejs/node,2024-09,30,669,807.0,0.828996282527881,complete calendar month
+27193779,nodejs/node,2024-10,31,689,796.0,0.8655778894472361,complete calendar month
+27193779,nodejs/node,2024-11,30,586,656.0,0.8932926829268293,complete calendar month
+27193779,nodejs/node,2024-12,30,651,763.0,0.8532110091743119,December 1-30 only; equal exposure
+41881900,microsoft/vscode,2024-01,31,1136,1299.0,0.8745188606620478,complete calendar month
+41881900,microsoft/vscode,2024-02,29,1279,1405.0,0.9103202846975089,complete calendar month
+41881900,microsoft/vscode,2024-03,31,1048,1224.0,0.8562091503267973,complete calendar month
+41881900,microsoft/vscode,2024-04,30,1048,1282.0,0.8174726989079563,complete calendar month
+41881900,microsoft/vscode,2024-05,31,996,1211.0,0.8224607762180016,complete calendar month
+41881900,microsoft/vscode,2024-06,30,1002,1187.0,0.8441449031171019,complete calendar month
+41881900,microsoft/vscode,2024-07,31,1098,1383.0,0.7939262472885033,complete calendar month
+41881900,microsoft/vscode,2024-08,31,1057,1261.0,0.838223632038065,complete calendar month
+41881900,microsoft/vscode,2024-09,30,1129,1371.0,0.8234865061998541,complete calendar month
+41881900,microsoft/vscode,2024-10,31,1058,1220.0,0.8672131147540983,complete calendar month
+41881900,microsoft/vscode,2024-11,30,1125,1261.0,0.8921490880253767,complete calendar month
+41881900,microsoft/vscode,2024-12,30,975,1128.0,0.8643617021276596,December 1-30 only; equal exposure
+81598961,python/cpython,2024-01,31,598,678.0,0.8820058997050148,complete calendar month
+81598961,python/cpython,2024-02,29,528,557.0,0.947935368043088,complete calendar month
+81598961,python/cpython,2024-03,31,612,659.0,0.928679817905918,complete calendar month
+81598961,python/cpython,2024-04,30,556,618.0,0.8996763754045307,complete calendar month
+81598961,python/cpython,2024-05,31,574,643.0,0.8926905132192846,complete calendar month
+81598961,python/cpython,2024-06,30,606,663.0,0.9140271493212669,complete calendar month
+81598961,python/cpython,2024-07,31,655,738.0,0.8875338753387534,complete calendar month
+81598961,python/cpython,2024-08,31,695,787.0,0.8831003811944091,complete calendar month
+81598961,python/cpython,2024-09,30,600,671.0,0.8941877794336811,complete calendar month
+81598961,python/cpython,2024-10,31,722,778.0,0.9280205655526992,complete calendar month
+81598961,python/cpython,2024-11,30,541,589.0,0.9185059422750425,complete calendar month
+81598961,python/cpython,2024-12,30,732,852.0,0.8591549295774648,December 1-30 only; equal exposure

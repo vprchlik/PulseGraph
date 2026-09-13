@@ -1,0 +1,39 @@
+{
+  "completed_jobs_cost_usd_before_credits": 71.1146593093872,
+  "completed_jobs_total_bytes_billed": 12510623170560,
+  "cost_approval": {
+    "path": "cost-approval.json",
+    "sha256": "987021d572e72e73894b0f3125b7d30848c89985be33b00cd77bea966421c02e"
+  },
+  "failed_frame_reconciliation": {
+    "path": "frame/job-reconciliation.json",
+    "sha256": "345a9c6de3222499b63cd7f8a50ff58589e716296111022454d2f71612322474"
+  },
+  "failed_job_billed_bytes": null,
+  "failed_job_billing_note": "BigQuery supplied no processed/billed bytes for the quota-rejected job; not inferred as zero",
+  "frame": {
+    "path": "frame-retry-001/frame/provenance.json",
+    "sha256": "4eb61f853775fd508cbb3111831befedfd8601988a35d442220bdffe26d9cf88"
+  },
+  "frame_export": {
+    "path": "frame-retry-001/frame/rows.csv",
+    "sha256": "e385db3245b011f285ac5ace5b5889201e2a9d4c7042120cdaca6c27a01c666a"
+  },
+  "frame_retry_authorization": {
+    "path": "frame-retry-001/retry-authorization.json",
+    "sha256": "14e6564bdffcd5d3f260aaad4ccca2e2e6171088aca85d926d04a6c3f588ce20"
+  },
+  "original_failed_frame": {
+    "path": "frame/provenance.json",
+    "sha256": "23dc0bc406c49d242ddc9a74c835666ac26fc81940e3f5200be7e9a60aeef465"
+  },
+  "status": "both_exports_complete",
+  "validation": {
+    "path": "validation_2024/provenance.json",
+    "sha256": "16a8773110aff7274c539f16528eebf1dfb2f63ed0ae8b489fa0425a85ac5342"
+  },
+  "validation_export": {
+    "path": "validation_2024/rows.csv",
+    "sha256": "d8dba238c8a076e215d5aafa3535698e0f01f63d6c97d41b08ad7812997ffcf7"
+  }
+}

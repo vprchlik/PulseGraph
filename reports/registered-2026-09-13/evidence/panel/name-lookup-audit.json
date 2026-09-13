@@ -1,0 +1,56 @@
+{
+  "purpose": "Check stable-ID 404 classification with three name lookups; does not alter frozen walk decisions",
+  "repositories": [
+    {
+      "checked_at": "2026-09-13T07:09:35.486788+00:00",
+      "diagnostic_only_sampling_decision_unchanged": true,
+      "frame_repo_name": "fabiancflorez/RobloxInjector-V2.4-BUILD",
+      "headers": {
+        "date": "Sun, 13 Sep 2026 07:09:35 GMT",
+        "x-github-request-id": "CFC1:2EB4D9:17EFE3D:4E76ED6:6AA64C2E",
+        "x-ratelimit-limit": "5000",
+        "x-ratelimit-remaining": "4459",
+        "x-ratelimit-reset": "1789285617"
+      },
+      "name_lookup_status": 404,
+      "original_reason": "id_resolver_http_404",
+      "repo_id": 617761097,
+      "response_sha256": "4f50e254a719a6b1b06b529bdaa08980e4acf0878aad0090cba7771f6ebdf0b9",
+      "selection_rank": 191
+    },
+    {
+      "checked_at": "2026-09-13T07:09:37.583581+00:00",
+      "diagnostic_only_sampling_decision_unchanged": true,
+      "frame_repo_name": "wasimmahamod/Exitlag-Crack-2023-free-Exitlag-Crack",
+      "headers": {
+        "date": "Sun, 13 Sep 2026 07:09:37 GMT",
+        "x-github-request-id": "CFC1:2EB4D9:17F057A:4E78674:6AA64C2F",
+        "x-ratelimit-limit": "5000",
+        "x-ratelimit-remaining": "4456",
+        "x-ratelimit-reset": "1789285617"
+      },
+      "name_lookup_status": 404,
+      "original_reason": "id_resolver_http_404",
+      "repo_id": 615392725,
+      "response_sha256": "4f50e254a719a6b1b06b529bdaa08980e4acf0878aad0090cba7771f6ebdf0b9",
+      "selection_rank": 192
+    },
+    {
+      "checked_at": "2026-09-13T07:09:39.671840+00:00",
+      "diagnostic_only_sampling_decision_unchanged": true,
+      "frame_repo_name": "ShangYi8/CRACK-HACK-for-SCUM-Magic-Aim-Silent-Aim-Visuals-Misc-UNDETECTED",
+      "headers": {
+        "date": "Sun, 13 Sep 2026 07:09:39 GMT",
+        "x-github-request-id": "CFC1:2EB4D9:17F0CA2:4E79DE7:6AA64C31",
+        "x-ratelimit-limit": "5000",
+        "x-ratelimit-remaining": "4455",
+        "x-ratelimit-reset": "1789285617"
+      },
+      "name_lookup_status": 404,
+      "original_reason": "id_resolver_http_404",
+      "repo_id": 602440730,
+      "response_sha256": "3a32eab6ffbfd1cf2684b1a409bf40db46e46c5eaff44de656e499df05d92730",
+      "selection_rank": 193
+    }
+  ]
+}

@@ -1,0 +1,334 @@
+{
+  "attempted": 20,
+  "calendar_summary": {
+    "all_scored": [
+      {
+        "api_total": 82645,
+        "archive_total": 95048.0,
+        "exact_agreement": 0.41356164383561644,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 1.9754794520547945,
+        "n_repository_days": 7300
+      },
+      {
+        "api_total": 82645,
+        "archive_total": 95010.0,
+        "exact_agreement": 0.33657534246575344,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 2.713013698630137,
+        "n_repository_days": 7300
+      },
+      {
+        "api_total": 82645,
+        "archive_total": 95048.0,
+        "exact_agreement": 0.39643835616438355,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 2.0645205479452056,
+        "n_repository_days": 7300
+      }
+    ],
+    "daylight_days": [
+      {
+        "api_total": 53217,
+        "archive_total": 62075.0,
+        "exact_agreement": 0.41134453781512603,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 2.092016806722689,
+        "n_repository_days": 4760
+      },
+      {
+        "api_total": 53217,
+        "archive_total": 62065.0,
+        "exact_agreement": 0.3388655462184874,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 2.7663865546218487,
+        "n_repository_days": 4760
+      },
+      {
+        "api_total": 53217,
+        "archive_total": 62083.0,
+        "exact_agreement": 0.3850840336134454,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 2.2298319327731093,
+        "n_repository_days": 4760
+      }
+    ],
+    "fall_15_days": [
+      {
+        "api_total": 3995,
+        "archive_total": 4378.0,
+        "exact_agreement": 0.39666666666666667,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 1.73,
+        "n_repository_days": 300
+      },
+      {
+        "api_total": 3995,
+        "archive_total": 4360.0,
+        "exact_agreement": 0.33666666666666667,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 2.79,
+        "n_repository_days": 300
+      },
+      {
+        "api_total": 3995,
+        "archive_total": 4371.0,
+        "exact_agreement": 0.41333333333333333,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 1.7933333333333332,
+        "n_repository_days": 300
+      }
+    ],
+    "fall_transition_day": [
+      {
+        "api_total": 199,
+        "archive_total": 243.0,
+        "exact_agreement": 0.4,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 2.2,
+        "n_repository_days": 20
+      },
+      {
+        "api_total": 199,
+        "archive_total": 222.0,
+        "exact_agreement": 0.3,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 1.95,
+        "n_repository_days": 20
+      },
+      {
+        "api_total": 199,
+        "archive_total": 235.0,
+        "exact_agreement": 0.4,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 1.9,
+        "n_repository_days": 20
+      }
+    ],
+    "spring_15_days": [
+      {
+        "api_total": 3620,
+        "archive_total": 4088.0,
+        "exact_agreement": 0.45,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 1.8333333333333333,
+        "n_repository_days": 300
+      },
+      {
+        "api_total": 3620,
+        "archive_total": 4119.0,
+        "exact_agreement": 0.34,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 2.71,
+        "n_repository_days": 300
+      },
+      {
+        "api_total": 3620,
+        "archive_total": 4103.0,
+        "exact_agreement": 0.42333333333333334,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 1.9366666666666668,
+        "n_repository_days": 300
+      }
+    ],
+    "spring_transition_day": [
+      {
+        "api_total": 230,
+        "archive_total": 276.0,
+        "exact_agreement": 0.5,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 2.5,
+        "n_repository_days": 20
+      },
+      {
+        "api_total": 230,
+        "archive_total": 225.0,
+        "exact_agreement": 0.4,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 1.95,
+        "n_repository_days": 20
+      },
+      {
+        "api_total": 230,
+        "archive_total": 293.0,
+        "exact_agreement": 0.45,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 3.25,
+        "n_repository_days": 20
+      }
+    ],
+    "standard_days_excluding_transition": [
+      {
+        "api_total": 29229,
+        "archive_total": 32730.0,
+        "exact_agreement": 0.41785714285714287,
+        "hypothesis": "America/Los_Angeles",
+        "mean_absolute_difference": 1.7535714285714286,
+        "n_repository_days": 2520
+      },
+      {
+        "api_total": 29229,
+        "archive_total": 32723.0,
+        "exact_agreement": 0.3325396825396825,
+        "hypothesis": "UTC",
+        "mean_absolute_difference": 2.6182539682539683,
+        "n_repository_days": 2520
+      },
+      {
+        "api_total": 29229,
+        "archive_total": 32730.0,
+        "exact_agreement": 0.41785714285714287,
+        "hypothesis": "UTC-08:00",
+        "mean_absolute_difference": 1.7535714285714286,
+        "n_repository_days": 2520
+      }
+    ]
+  },
+  "complete": 20,
+  "failed": 0,
+  "flask": [
+    {
+      "api_total": 3726,
+      "archive_total": 4162.0,
+      "fraction_equal": 0.1835616438356164,
+      "hypothesis": "America/Los_Angeles",
+      "mean_absolute_difference": 1.6767123287671233,
+      "n_days": 365,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask"
+    },
+    {
+      "api_total": 3726,
+      "archive_total": 4163.0,
+      "fraction_equal": 0.1287671232876712,
+      "hypothesis": "UTC",
+      "mean_absolute_difference": 2.5013698630136987,
+      "n_days": 365,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask"
+    },
+    {
+      "api_total": 3726,
+      "archive_total": 4162.0,
+      "fraction_equal": 0.1780821917808219,
+      "hypothesis": "UTC-08:00",
+      "mean_absolute_difference": 1.797260273972603,
+      "n_days": 365,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask"
+    }
+  ],
+  "flask_transition_days": [
+    {
+      "absolute_difference": 3.0,
+      "complete_archive_day": true,
+      "difference": 3.0,
+      "equal": false,
+      "event_date": "2024-03-10",
+      "expected_hours": 24,
+      "hypothesis": "UTC",
+      "observed_hours": 24,
+      "observed_watch_events": 5,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "scored": true,
+      "stars": 8,
+      "watch_events": 5.0
+    },
+    {
+      "absolute_difference": 1.0,
+      "complete_archive_day": true,
+      "difference": 1.0,
+      "equal": false,
+      "event_date": "2024-11-03",
+      "expected_hours": 24,
+      "hypothesis": "UTC",
+      "observed_hours": 24,
+      "observed_watch_events": 9,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "scored": true,
+      "stars": 10,
+      "watch_events": 9.0
+    },
+    {
+      "absolute_difference": 1.0,
+      "complete_archive_day": true,
+      "difference": -1.0,
+      "equal": false,
+      "event_date": "2024-03-10",
+      "expected_hours": 23,
+      "hypothesis": "America/Los_Angeles",
+      "observed_hours": 23,
+      "observed_watch_events": 9,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "scored": true,
+      "stars": 8,
+      "watch_events": 9.0
+    },
+    {
+      "absolute_difference": 0.0,
+      "complete_archive_day": true,
+      "difference": 0.0,
+      "equal": true,
+      "event_date": "2024-11-03",
+      "expected_hours": 25,
+      "hypothesis": "America/Los_Angeles",
+      "observed_hours": 25,
+      "observed_watch_events": 10,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "scored": true,
+      "stars": 10,
+      "watch_events": 10.0
+    },
+    {
+      "absolute_difference": 2.0,
+      "complete_archive_day": true,
+      "difference": -2.0,
+      "equal": false,
+      "event_date": "2024-03-10",
+      "expected_hours": 24,
+      "hypothesis": "UTC-08:00",
+      "observed_hours": 24,
+      "observed_watch_events": 10,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "scored": true,
+      "stars": 8,
+      "watch_events": 10.0
+    },
+    {
+      "absolute_difference": 0.0,
+      "complete_archive_day": true,
+      "difference": 0.0,
+      "equal": true,
+      "event_date": "2024-11-03",
+      "expected_hours": 24,
+      "hypothesis": "UTC-08:00",
+      "observed_hours": 24,
+      "observed_watch_events": 10,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask",
+      "scored": true,
+      "stars": 10,
+      "watch_events": 10.0
+    }
+  ],
+  "partial_end_day": "December 31 omitted from all scores because local calendars lack the last eight UTC hours of 2025; no zero fill",
+  "repository_wins_by_mad": {
+    "UTC": {
+      "LA_higher": 0,
+      "LA_lower": 20,
+      "tied": 0
+    },
+    "UTC-08:00": {
+      "LA_higher": 0,
+      "LA_lower": 18,
+      "tied": 2
+    }
+  },
+  "source_sha256": "bf8eefa062a77dccbf55e4f377183bb54b241767c155fa9642fb5b8c2aaf5eb4",
+  "status": "descriptive_pre_freeze_validation_not_forecast_inference"
+}

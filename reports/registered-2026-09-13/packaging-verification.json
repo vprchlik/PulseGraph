@@ -1,0 +1,10 @@
+{
+  "bytes": 433172286,
+  "command": ".\\.venv\\Scripts\\python.exe reports/registered-2026-09-13/verify_packaging.py --out data/cache/packaging-check-2026-09-13",
+  "method": "Run the published restore function with linked input parts in a new directory",
+  "parts": 11,
+  "script_sha256": "a5eacb7eeea24b4c5a1308d9b084a76fe0845e2682a782a4f604ae83b7449f6c",
+  "sha256": "53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6",
+  "status": "pass",
+  "verified_actual_restoration": true
+}

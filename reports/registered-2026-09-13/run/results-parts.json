@@ -1,0 +1,63 @@
+{
+  "bytes": 433172286,
+  "format": "ordered raw byte chunks; concatenate in listed order",
+  "parts": [
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-000.data",
+      "sha256": "a648694fc1e9bf6ae7b9b4d1f1b340bc262084ddfd0e6d6461c8df471dc5642c"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-001.data",
+      "sha256": "980cfd25924607654be7947de6f4cc3ba50aaf68b0e4439365bc408e7f4ba994"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-002.data",
+      "sha256": "4c50f713cc791e1cfe453e72302f75513a07def6ec121a9542bc2bee006fbfa6"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-003.data",
+      "sha256": "f69a7a937e379f0ea8a1e3ed97f3b761be4f5973aaec0d2978d54e1043849e40"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-004.data",
+      "sha256": "f17d1915f8ccd6a5eb7bdf6538ab76b9ff689b6402a15b3d1302b89f7b0c2e4d"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-005.data",
+      "sha256": "a160f6605da48722b0fcb04ebe11dc308a914068c8790ec794aff4beaa0202c5"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-006.data",
+      "sha256": "93d25fb0e93ba39a5efd357b29d08e1bdeb82e5fb20ea91f0f224c81a6641f3c"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-007.data",
+      "sha256": "16616f44756f32304cf91acc8555393d6279e13de4168bf4bda71931e7acc98c"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-008.data",
+      "sha256": "4247d341a7d2f7e33b32bdcf06c1f47a40f3d335889d07da8dd7179c6600c0fd"
+    },
+    {
+      "bytes": 41943040,
+      "path": "results-parts/part-009.data",
+      "sha256": "feb876774ab34001dc58d248189adb4ec06d1fc643ac8341c1148948fdd15e4e"
+    },
+    {
+      "bytes": 13741886,
+      "path": "results-parts/part-010.data",
+      "sha256": "28458ab9166c34cf593bc5bce92cd78bd7cfc9f8135c2fc1311056ace0ba6257"
+    }
+  ],
+  "restore_command": ".\\.venv\\Scripts\\python.exe reports/registered-2026-09-13/pack_results.py restore",
+  "sha256": "53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6"
+}

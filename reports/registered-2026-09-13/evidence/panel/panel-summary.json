@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "candidate-order.csv": "9e985368c907090d5abd4ac97667b4f123c155ae7f1e5bd40a9347d0ba1bdf33",
+    "decisions.json": "4bc5fbc48d9dd6aa1d046c6bc663c2865adafbe210877f1147b8dec716103461",
+    "freeze.json": "ba6b97e05f887a30333863f372712347208b838449624df6010eb33a036dc63d",
+    "manifest.json": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92",
+    "sampling-log.json": "2f70b50f34e645d4d87e89026b7f4e7f1d4ff2f5f435992707b3d3b23541ec64",
+    "signals.parquet": "7e448d7254fb180f211cb46522f73aeabd2af259003a95be4edfc1901d4d56e1"
+  },
+  "calendar_convention": "America/Los_Angeles",
+  "completed_at": "2026-09-13T07:33:46.765244+00:00",
+  "n_accepted": 300,
+  "n_signal_rows": 289316,
+  "n_skipped": 470,
+  "population": "still_public_at_fetch_time_with_complete_history",
+  "selection_seed": 20260913,
+  "skip_reasons": [
+    {
+      "count": 3,
+      "reason": "id_resolver_http_403",
+      "sampling_stratum": "100-999"
+    },
+    {
+      "count": 345,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "100-999"
+    },
+    {
+      "count": 1,
+      "reason": "id_resolver_http_403",
+      "sampling_stratum": "1000+"
+    },
+    {
+      "count": 23,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "1000+"
+    },
+    {
+      "count": 98,
+      "reason": "id_resolver_http_404",
+      "sampling_stratum": "20-99"
+    }
+  ],
+  "strata": [
+    {
+      "frame_size": 100687,
+      "sample_size": 100,
+      "sampling_stratum": "20-99",
+      "skip_count": 98
+    },
+    {
+      "frame_size": 46811,
+      "sample_size": 100,
+      "sampling_stratum": "100-999",
+      "skip_count": 348
+    },
+    {
+      "frame_size": 1052,
+      "sample_size": 100,
+      "sampling_stratum": "1000+",
+      "skip_count": 24
+    }
+  ]
+}

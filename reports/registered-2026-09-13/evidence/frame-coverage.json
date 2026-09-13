@@ -1,0 +1,6988 @@
+{
+  "complete": true,
+  "expected_end": "2025-05-21",
+  "expected_start": "2023-01-01",
+  "n_expected": 872,
+  "n_present": 872,
+  "operation": "list_tables and get_table only; zero query jobs submitted",
+  "queried_at": "2026-09-13T06:23:48.696569+00:00",
+  "scope": "Presence and nonempty physical UTC daily tables; not proof of complete GitHub event capture",
+  "tables": [
+    {
+      "date": "20230101",
+      "modified": "2023-01-02T00:09:39.733000+00:00",
+      "num_bytes": 22211691026,
+      "num_rows": 3161108,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230102",
+      "modified": "2023-01-03T00:09:34.557000+00:00",
+      "num_bytes": 15555753299,
+      "num_rows": 3519323,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230103",
+      "modified": "2023-01-04T00:10:32.315000+00:00",
+      "num_bytes": 16870118388,
+      "num_rows": 4013043,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230104",
+      "modified": "2023-01-05T00:10:45.313000+00:00",
+      "num_bytes": 23756260071,
+      "num_rows": 4423793,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230105",
+      "modified": "2023-01-06T00:11:08.791000+00:00",
+      "num_bytes": 25888249362,
+      "num_rows": 4562529,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230106",
+      "modified": "2023-01-07T00:09:32.677000+00:00",
+      "num_bytes": 23235589592,
+      "num_rows": 4375409,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230107",
+      "modified": "2023-01-08T00:09:18.323000+00:00",
+      "num_bytes": 17677195761,
+      "num_rows": 3825243,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230108",
+      "modified": "2023-01-09T00:09:07.970000+00:00",
+      "num_bytes": 9373771926,
+      "num_rows": 3166886,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230109",
+      "modified": "2023-01-10T00:10:18.188000+00:00",
+      "num_bytes": 21621888205,
+      "num_rows": 4393916,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230110",
+      "modified": "2023-01-11T00:10:13.559000+00:00",
+      "num_bytes": 17360755618,
+      "num_rows": 4260131,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230111",
+      "modified": "2023-01-12T00:09:49.864000+00:00",
+      "num_bytes": 19649844035,
+      "num_rows": 4351830,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230112",
+      "modified": "2023-01-13T00:09:35.721000+00:00",
+      "num_bytes": 16215089088,
+      "num_rows": 4076179,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230113",
+      "modified": "2023-01-14T00:09:31.783000+00:00",
+      "num_bytes": 15767026786,
+      "num_rows": 4021697,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230114",
+      "modified": "2023-01-15T00:08:55.022000+00:00",
+      "num_bytes": 8154601090,
+      "num_rows": 3100973,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230115",
+      "modified": "2023-01-16T00:08:59.691000+00:00",
+      "num_bytes": 8208046245,
+      "num_rows": 3155709,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230116",
+      "modified": "2023-01-17T00:09:52.837000+00:00",
+      "num_bytes": 19343071003,
+      "num_rows": 4238839,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230117",
+      "modified": "2023-01-18T00:09:42.594000+00:00",
+      "num_bytes": 16130716342,
+      "num_rows": 4196477,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230118",
+      "modified": "2023-01-19T00:09:52.698000+00:00",
+      "num_bytes": 18980933468,
+      "num_rows": 4396328,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230119",
+      "modified": "2023-01-20T00:09:45.427000+00:00",
+      "num_bytes": 18893965755,
+      "num_rows": 4363336,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230120",
+      "modified": "2023-01-21T00:09:31.642000+00:00",
+      "num_bytes": 15112142217,
+      "num_rows": 4015988,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230121",
+      "modified": "2023-01-22T00:08:57.657000+00:00",
+      "num_bytes": 7759359561,
+      "num_rows": 3004281,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230122",
+      "modified": "2023-01-23T00:09:13.238000+00:00",
+      "num_bytes": 7668012205,
+      "num_rows": 3042410,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230123",
+      "modified": "2023-01-24T00:10:12.352000+00:00",
+      "num_bytes": 18102607955,
+      "num_rows": 4190888,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230124",
+      "modified": "2023-01-25T00:10:00.043000+00:00",
+      "num_bytes": 18828163896,
+      "num_rows": 4417131,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230125",
+      "modified": "2023-01-26T00:09:44.242000+00:00",
+      "num_bytes": 16597519210,
+      "num_rows": 4137308,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230126",
+      "modified": "2023-01-27T00:10:09.611000+00:00",
+      "num_bytes": 17871772239,
+      "num_rows": 4071437,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230127",
+      "modified": "2023-01-28T00:09:27.381000+00:00",
+      "num_bytes": 16142496805,
+      "num_rows": 3922078,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230128",
+      "modified": "2023-01-29T00:08:57.627000+00:00",
+      "num_bytes": 8127408678,
+      "num_rows": 2963711,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230129",
+      "modified": "2023-01-30T00:09:05.859000+00:00",
+      "num_bytes": 8300013808,
+      "num_rows": 3087790,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230130",
+      "modified": "2023-01-31T00:10:34.267000+00:00",
+      "num_bytes": 21601826731,
+      "num_rows": 4466386,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230131",
+      "modified": "2023-02-01T00:10:21.687000+00:00",
+      "num_bytes": 18447927998,
+      "num_rows": 4429038,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230201",
+      "modified": "2023-02-02T00:10:10.349000+00:00",
+      "num_bytes": 20909966521,
+      "num_rows": 4551528,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230202",
+      "modified": "2023-02-03T00:10:03.379000+00:00",
+      "num_bytes": 19629483274,
+      "num_rows": 4392787,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230203",
+      "modified": "2023-02-04T00:09:44.455000+00:00",
+      "num_bytes": 16080363372,
+      "num_rows": 4042149,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230204",
+      "modified": "2023-02-05T00:09:02.174000+00:00",
+      "num_bytes": 9438280767,
+      "num_rows": 3093246,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230205",
+      "modified": "2023-02-06T00:09:01.512000+00:00",
+      "num_bytes": 8260036637,
+      "num_rows": 3033768,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230206",
+      "modified": "2023-02-07T00:10:06.153000+00:00",
+      "num_bytes": 19560513377,
+      "num_rows": 4355012,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230207",
+      "modified": "2023-02-08T00:09:55.906000+00:00",
+      "num_bytes": 17621904600,
+      "num_rows": 4370481,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230208",
+      "modified": "2023-02-09T00:09:51.933000+00:00",
+      "num_bytes": 17767246715,
+      "num_rows": 4434953,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230209",
+      "modified": "2023-02-10T00:09:40.383000+00:00",
+      "num_bytes": 16817238402,
+      "num_rows": 4378861,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230210",
+      "modified": "2023-02-11T00:09:55.479000+00:00",
+      "num_bytes": 16105748865,
+      "num_rows": 4111513,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230211",
+      "modified": "2023-02-12T00:08:59.096000+00:00",
+      "num_bytes": 9115440241,
+      "num_rows": 3111709,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230212",
+      "modified": "2023-02-13T00:09:05.888000+00:00",
+      "num_bytes": 8617513728,
+      "num_rows": 3046718,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230213",
+      "modified": "2023-02-14T00:09:58.349000+00:00",
+      "num_bytes": 20532966984,
+      "num_rows": 4528035,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230214",
+      "modified": "2023-02-15T00:09:47.657000+00:00",
+      "num_bytes": 18216185447,
+      "num_rows": 4450956,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230215",
+      "modified": "2023-02-16T00:09:46.650000+00:00",
+      "num_bytes": 17602601308,
+      "num_rows": 4357278,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230216",
+      "modified": "2023-02-17T00:09:56.702000+00:00",
+      "num_bytes": 17305217428,
+      "num_rows": 4373902,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230217",
+      "modified": "2023-02-18T00:09:40.937000+00:00",
+      "num_bytes": 15806140142,
+      "num_rows": 4155114,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230218",
+      "modified": "2023-02-19T00:08:58.215000+00:00",
+      "num_bytes": 8405876771,
+      "num_rows": 2976066,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230219",
+      "modified": "2023-02-20T00:08:58.616000+00:00",
+      "num_bytes": 8103279430,
+      "num_rows": 3029266,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230220",
+      "modified": "2023-02-21T00:09:44.698000+00:00",
+      "num_bytes": 18673660695,
+      "num_rows": 4300605,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230221",
+      "modified": "2023-02-22T00:09:41.575000+00:00",
+      "num_bytes": 17243138728,
+      "num_rows": 4344945,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230222",
+      "modified": "2023-02-23T00:09:47.707000+00:00",
+      "num_bytes": 16913188084,
+      "num_rows": 4326914,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230223",
+      "modified": "2023-02-24T00:09:41.127000+00:00",
+      "num_bytes": 16955947858,
+      "num_rows": 4343447,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230224",
+      "modified": "2023-02-25T00:09:39.567000+00:00",
+      "num_bytes": 15788249356,
+      "num_rows": 4097176,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230225",
+      "modified": "2023-02-26T00:08:53.091000+00:00",
+      "num_bytes": 9377819704,
+      "num_rows": 3166722,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230226",
+      "modified": "2023-02-27T00:09:00.735000+00:00",
+      "num_bytes": 8114627102,
+      "num_rows": 2926995,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230227",
+      "modified": "2023-02-28T00:10:13.790000+00:00",
+      "num_bytes": 18194556053,
+      "num_rows": 3818617,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230228",
+      "modified": "2023-03-01T00:09:52.829000+00:00",
+      "num_bytes": 18492096434,
+      "num_rows": 4451667,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230301",
+      "modified": "2023-03-02T00:10:01.116000+00:00",
+      "num_bytes": 20095620049,
+      "num_rows": 4595938,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230302",
+      "modified": "2023-03-03T00:09:50.625000+00:00",
+      "num_bytes": 17817547378,
+      "num_rows": 4390086,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230303",
+      "modified": "2023-03-04T00:09:57.016000+00:00",
+      "num_bytes": 15970905491,
+      "num_rows": 3897845,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230304",
+      "modified": "2023-03-05T00:09:05.662000+00:00",
+      "num_bytes": 11230194021,
+      "num_rows": 3679183,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230305",
+      "modified": "2023-03-06T00:09:07.431000+00:00",
+      "num_bytes": 9996951293,
+      "num_rows": 3578118,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230306",
+      "modified": "2023-03-07T00:10:11.512000+00:00",
+      "num_bytes": 20281868833,
+      "num_rows": 4529845,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230307",
+      "modified": "2023-03-08T00:09:58.291000+00:00",
+      "num_bytes": 18363700796,
+      "num_rows": 4817318,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230308",
+      "modified": "2023-03-09T00:09:58.031000+00:00",
+      "num_bytes": 16214330487,
+      "num_rows": 4525638,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230309",
+      "modified": "2023-03-10T00:09:41.644000+00:00",
+      "num_bytes": 25712641035,
+      "num_rows": 5035867,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230310",
+      "modified": "2023-03-11T00:09:28.467000+00:00",
+      "num_bytes": 14433956791,
+      "num_rows": 4013085,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230311",
+      "modified": "2023-03-12T00:08:57.286000+00:00",
+      "num_bytes": 8427690510,
+      "num_rows": 3263884,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230312",
+      "modified": "2023-03-13T00:09:00.351000+00:00",
+      "num_bytes": 7953487286,
+      "num_rows": 3035824,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230313",
+      "modified": "2023-03-14T00:09:58.791000+00:00",
+      "num_bytes": 18452447441,
+      "num_rows": 4450562,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230314",
+      "modified": "2023-03-15T00:09:51.287000+00:00",
+      "num_bytes": 17414882541,
+      "num_rows": 4594345,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230315",
+      "modified": "2023-03-16T00:09:41.167000+00:00",
+      "num_bytes": 16911634828,
+      "num_rows": 4349732,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230316",
+      "modified": "2023-03-17T00:09:49.140000+00:00",
+      "num_bytes": 16934172057,
+      "num_rows": 4370182,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230317",
+      "modified": "2023-03-18T00:09:25.885000+00:00",
+      "num_bytes": 14020193767,
+      "num_rows": 3846056,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230318",
+      "modified": "2023-03-19T00:08:55.686000+00:00",
+      "num_bytes": 8692646417,
+      "num_rows": 3185833,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230319",
+      "modified": "2023-03-20T00:08:56.902000+00:00",
+      "num_bytes": 8232877715,
+      "num_rows": 3204695,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230320",
+      "modified": "2023-03-21T00:10:01.364000+00:00",
+      "num_bytes": 16633103343,
+      "num_rows": 4109729,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230321",
+      "modified": "2023-03-22T00:09:40.289000+00:00",
+      "num_bytes": 15732667658,
+      "num_rows": 4206013,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230322",
+      "modified": "2023-03-23T00:09:30.400000+00:00",
+      "num_bytes": 14926475172,
+      "num_rows": 4080019,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230323",
+      "modified": "2023-03-24T00:09:52.803000+00:00",
+      "num_bytes": 15355893115,
+      "num_rows": 4038162,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230324",
+      "modified": "2023-03-25T00:11:15.307000+00:00",
+      "num_bytes": 17706567287,
+      "num_rows": 4137521,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230325",
+      "modified": "2023-03-26T00:09:01.136000+00:00",
+      "num_bytes": 9898045361,
+      "num_rows": 3292465,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230326",
+      "modified": "2023-03-27T00:09:05.346000+00:00",
+      "num_bytes": 8847692754,
+      "num_rows": 3280143,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230327",
+      "modified": "2023-03-28T00:10:04.158000+00:00",
+      "num_bytes": 16239747247,
+      "num_rows": 3966008,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230328",
+      "modified": "2023-03-29T00:09:43.175000+00:00",
+      "num_bytes": 15549635805,
+      "num_rows": 4032005,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230329",
+      "modified": "2023-03-30T00:09:41.494000+00:00",
+      "num_bytes": 15871124867,
+      "num_rows": 4052866,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230330",
+      "modified": "2023-03-31T00:09:39.520000+00:00",
+      "num_bytes": 14741945804,
+      "num_rows": 3911736,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230331",
+      "modified": "2023-04-01T00:09:17.205000+00:00",
+      "num_bytes": 15001033404,
+      "num_rows": 3979775,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230401",
+      "modified": "2023-04-02T00:09:01.066000+00:00",
+      "num_bytes": 9854380944,
+      "num_rows": 3162145,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230402",
+      "modified": "2023-04-03T00:08:58.967000+00:00",
+      "num_bytes": 8541111579,
+      "num_rows": 3179568,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230403",
+      "modified": "2023-04-04T00:10:46.192000+00:00",
+      "num_bytes": 17404967482,
+      "num_rows": 4155842,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230404",
+      "modified": "2023-04-05T00:09:26.941000+00:00",
+      "num_bytes": 17338005095,
+      "num_rows": 4233396,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230405",
+      "modified": "2023-04-06T00:09:26.829000+00:00",
+      "num_bytes": 15080260760,
+      "num_rows": 4030263,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230406",
+      "modified": "2023-04-07T00:09:18.259000+00:00",
+      "num_bytes": 14559794438,
+      "num_rows": 4019307,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230407",
+      "modified": "2023-04-08T00:09:15.260000+00:00",
+      "num_bytes": 12980913200,
+      "num_rows": 3798812,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230408",
+      "modified": "2023-04-09T00:08:53.660000+00:00",
+      "num_bytes": 8177106951,
+      "num_rows": 3066557,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230409",
+      "modified": "2023-04-10T00:08:54.713000+00:00",
+      "num_bytes": 7932201849,
+      "num_rows": 3066764,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230410",
+      "modified": "2023-04-11T00:09:35.885000+00:00",
+      "num_bytes": 15562433808,
+      "num_rows": 4041110,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230411",
+      "modified": "2023-04-12T00:12:05.907000+00:00",
+      "num_bytes": 15423675249,
+      "num_rows": 3850048,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230412",
+      "modified": "2023-04-13T00:09:34.148000+00:00",
+      "num_bytes": 24865091641,
+      "num_rows": 4674011,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230413",
+      "modified": "2023-04-14T00:09:19.666000+00:00",
+      "num_bytes": 14772301832,
+      "num_rows": 3988807,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230414",
+      "modified": "2023-04-15T00:09:10.190000+00:00",
+      "num_bytes": 14879701310,
+      "num_rows": 4047212,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230415",
+      "modified": "2023-04-16T00:08:47.401000+00:00",
+      "num_bytes": 8613480203,
+      "num_rows": 3122133,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230416",
+      "modified": "2023-04-17T00:08:54.145000+00:00",
+      "num_bytes": 8355374958,
+      "num_rows": 3123776,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230417",
+      "modified": "2023-04-18T00:09:34.838000+00:00",
+      "num_bytes": 16929647226,
+      "num_rows": 4203949,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230418",
+      "modified": "2023-04-19T00:09:00.325000+00:00",
+      "num_bytes": 15812619958,
+      "num_rows": 4168337,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230419",
+      "modified": "2023-04-20T00:09:29.077000+00:00",
+      "num_bytes": 15721275928,
+      "num_rows": 4161503,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230420",
+      "modified": "2023-04-21T00:09:22.200000+00:00",
+      "num_bytes": 15958517052,
+      "num_rows": 4118464,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230421",
+      "modified": "2023-04-22T00:09:16.571000+00:00",
+      "num_bytes": 17195862327,
+      "num_rows": 4105341,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230422",
+      "modified": "2023-04-23T00:08:52.375000+00:00",
+      "num_bytes": 8669644415,
+      "num_rows": 3009809,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230423",
+      "modified": "2023-04-24T00:09:00.311000+00:00",
+      "num_bytes": 8676532849,
+      "num_rows": 3141010,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230424",
+      "modified": "2023-04-25T00:09:44.966000+00:00",
+      "num_bytes": 16752401345,
+      "num_rows": 3987780,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230425",
+      "modified": "2023-04-26T00:09:33.342000+00:00",
+      "num_bytes": 15314264204,
+      "num_rows": 4007398,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230426",
+      "modified": "2023-04-27T00:09:23.069000+00:00",
+      "num_bytes": 15115146926,
+      "num_rows": 4017616,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230427",
+      "modified": "2023-04-28T00:09:14.811000+00:00",
+      "num_bytes": 14651415747,
+      "num_rows": 3966776,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230428",
+      "modified": "2023-04-29T00:09:09.431000+00:00",
+      "num_bytes": 13867294672,
+      "num_rows": 3837934,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230429",
+      "modified": "2023-04-30T00:08:55.393000+00:00",
+      "num_bytes": 8155002612,
+      "num_rows": 2977792,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230430",
+      "modified": "2023-05-01T00:08:57.539000+00:00",
+      "num_bytes": 8049748469,
+      "num_rows": 2937153,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230501",
+      "modified": "2023-05-02T00:09:53.767000+00:00",
+      "num_bytes": 17476337753,
+      "num_rows": 3980602,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230502",
+      "modified": "2023-05-03T00:09:32.266000+00:00",
+      "num_bytes": 14821323351,
+      "num_rows": 3885369,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230503",
+      "modified": "2023-05-04T00:09:28.676000+00:00",
+      "num_bytes": 14645671938,
+      "num_rows": 3988373,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230504",
+      "modified": "2023-05-05T00:09:22.893000+00:00",
+      "num_bytes": 14840064933,
+      "num_rows": 3996984,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230505",
+      "modified": "2023-05-06T00:09:17.278000+00:00",
+      "num_bytes": 14723624542,
+      "num_rows": 3968121,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230506",
+      "modified": "2023-05-08T00:09:17.423000+00:00",
+      "num_bytes": 10276294927,
+      "num_rows": 3233215,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230507",
+      "modified": "2023-05-09T00:09:24.831000+00:00",
+      "num_bytes": 10670685241,
+      "num_rows": 3213629,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230508",
+      "modified": "2023-05-09T00:09:55.955000+00:00",
+      "num_bytes": 16896097675,
+      "num_rows": 4011526,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230509",
+      "modified": "2023-05-10T00:09:44.734000+00:00",
+      "num_bytes": 16042017941,
+      "num_rows": 3816353,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230510",
+      "modified": "2023-05-12T00:09:40.250000+00:00",
+      "num_bytes": 14826924953,
+      "num_rows": 3802250,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230511",
+      "modified": "2023-05-12T00:09:36.040000+00:00",
+      "num_bytes": 14456679835,
+      "num_rows": 3818122,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230512",
+      "modified": "2023-05-13T00:09:21.508000+00:00",
+      "num_bytes": 13767493309,
+      "num_rows": 3728635,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230513",
+      "modified": "2023-05-15T00:09:00.674000+00:00",
+      "num_bytes": 7546730778,
+      "num_rows": 2940157,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230514",
+      "modified": "2023-05-15T00:09:00.813000+00:00",
+      "num_bytes": 7136043126,
+      "num_rows": 2937760,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230515",
+      "modified": "2023-05-16T00:09:36.205000+00:00",
+      "num_bytes": 15691854161,
+      "num_rows": 3956466,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230516",
+      "modified": "2023-05-17T00:09:35.113000+00:00",
+      "num_bytes": 15227338299,
+      "num_rows": 3959851,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230517",
+      "modified": "2023-05-18T00:09:33.624000+00:00",
+      "num_bytes": 14537501040,
+      "num_rows": 3813659,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230518",
+      "modified": "2023-05-20T00:09:31.439000+00:00",
+      "num_bytes": 13842644822,
+      "num_rows": 3828446,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230519",
+      "modified": "2023-05-20T00:09:29.853000+00:00",
+      "num_bytes": 13228612261,
+      "num_rows": 3601412,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230520",
+      "modified": "2023-05-21T00:08:49.657000+00:00",
+      "num_bytes": 7688460667,
+      "num_rows": 2905805,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230521",
+      "modified": "2023-05-22T00:08:58.859000+00:00",
+      "num_bytes": 7669441344,
+      "num_rows": 2916319,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230522",
+      "modified": "2023-05-23T00:09:48.234000+00:00",
+      "num_bytes": 16853113799,
+      "num_rows": 3992784,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230523",
+      "modified": "2023-05-24T00:09:25.036000+00:00",
+      "num_bytes": 15376051994,
+      "num_rows": 3876374,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230524",
+      "modified": "2023-05-25T00:09:28.029000+00:00",
+      "num_bytes": 14976172564,
+      "num_rows": 3882899,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230525",
+      "modified": "2023-05-26T00:09:30.043000+00:00",
+      "num_bytes": 14385082628,
+      "num_rows": 3789777,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230526",
+      "modified": "2023-05-27T00:09:04.200000+00:00",
+      "num_bytes": 14147697171,
+      "num_rows": 3815352,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230527",
+      "modified": "2023-05-28T00:08:53.698000+00:00",
+      "num_bytes": 7521561890,
+      "num_rows": 2882739,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230528",
+      "modified": "2023-05-29T00:08:54.181000+00:00",
+      "num_bytes": 7873444908,
+      "num_rows": 2950601,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230529",
+      "modified": "2023-05-30T00:09:27.329000+00:00",
+      "num_bytes": 14345600045,
+      "num_rows": 3842505,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230530",
+      "modified": "2023-05-31T00:09:25.788000+00:00",
+      "num_bytes": 14693740655,
+      "num_rows": 3783501,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230531",
+      "modified": "2023-06-01T00:09:28.632000+00:00",
+      "num_bytes": 15091997375,
+      "num_rows": 3882515,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230601",
+      "modified": "2023-06-02T00:09:26.199000+00:00",
+      "num_bytes": 16353385111,
+      "num_rows": 3932733,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230602",
+      "modified": "2023-06-03T00:09:12.117000+00:00",
+      "num_bytes": 14558333745,
+      "num_rows": 3770850,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230603",
+      "modified": "2023-06-04T00:08:47.067000+00:00",
+      "num_bytes": 7842634385,
+      "num_rows": 2875710,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230604",
+      "modified": "2023-06-05T00:08:57.990000+00:00",
+      "num_bytes": 7756005013,
+      "num_rows": 2959185,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230605",
+      "modified": "2023-06-06T00:09:35.247000+00:00",
+      "num_bytes": 16344746794,
+      "num_rows": 3931929,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230606",
+      "modified": "2023-06-07T00:09:20.750000+00:00",
+      "num_bytes": 14794261678,
+      "num_rows": 3801595,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230607",
+      "modified": "2023-06-08T00:09:36.399000+00:00",
+      "num_bytes": 14425587609,
+      "num_rows": 3836656,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230608",
+      "modified": "2023-06-09T00:09:23.586000+00:00",
+      "num_bytes": 14192110594,
+      "num_rows": 3880333,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230609",
+      "modified": "2023-06-10T00:09:21.389000+00:00",
+      "num_bytes": 13863773520,
+      "num_rows": 3759476,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230610",
+      "modified": "2023-06-11T00:08:53.075000+00:00",
+      "num_bytes": 8321542620,
+      "num_rows": 2970385,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230611",
+      "modified": "2023-06-12T00:08:54.865000+00:00",
+      "num_bytes": 7683666312,
+      "num_rows": 2943308,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230612",
+      "modified": "2023-06-13T00:09:37.328000+00:00",
+      "num_bytes": 16184870054,
+      "num_rows": 4031577,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230613",
+      "modified": "2023-06-14T00:09:26.634000+00:00",
+      "num_bytes": 15253700215,
+      "num_rows": 4071039,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230614",
+      "modified": "2023-06-15T00:09:25.436000+00:00",
+      "num_bytes": 15516612128,
+      "num_rows": 4091975,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230615",
+      "modified": "2023-06-16T00:09:18.807000+00:00",
+      "num_bytes": 14216009397,
+      "num_rows": 3828156,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230616",
+      "modified": "2023-06-17T00:09:18.029000+00:00",
+      "num_bytes": 13375379463,
+      "num_rows": 3642480,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230617",
+      "modified": "2023-06-18T00:08:47.184000+00:00",
+      "num_bytes": 7407112970,
+      "num_rows": 2773481,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230618",
+      "modified": "2023-06-18T23:08:53.112000+00:00",
+      "num_bytes": 7324540055,
+      "num_rows": 2833321,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230619",
+      "modified": "2023-06-20T00:09:31.136000+00:00",
+      "num_bytes": 15103912643,
+      "num_rows": 3679387,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230620",
+      "modified": "2023-06-21T00:09:34.153000+00:00",
+      "num_bytes": 15173938089,
+      "num_rows": 3976983,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230621",
+      "modified": "2023-06-22T00:09:35.310000+00:00",
+      "num_bytes": 15451966741,
+      "num_rows": 4054594,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230622",
+      "modified": "2023-06-23T00:09:23.941000+00:00",
+      "num_bytes": 14455998065,
+      "num_rows": 3862689,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230623",
+      "modified": "2023-06-24T00:09:11.466000+00:00",
+      "num_bytes": 13706670772,
+      "num_rows": 3746712,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230624",
+      "modified": "2023-06-25T00:08:41.846000+00:00",
+      "num_bytes": 7569642183,
+      "num_rows": 2802278,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230625",
+      "modified": "2023-06-26T00:08:52.615000+00:00",
+      "num_bytes": 7766617512,
+      "num_rows": 2925125,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230626",
+      "modified": "2023-06-27T00:09:34.326000+00:00",
+      "num_bytes": 16413771246,
+      "num_rows": 4004024,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230627",
+      "modified": "2023-06-28T00:09:30.550000+00:00",
+      "num_bytes": 15710434136,
+      "num_rows": 4054950,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230628",
+      "modified": "2023-06-29T00:11:30.402000+00:00",
+      "num_bytes": 15039545365,
+      "num_rows": 3891191,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230629",
+      "modified": "2023-06-30T00:09:21.463000+00:00",
+      "num_bytes": 13688475877,
+      "num_rows": 3603655,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230630",
+      "modified": "2023-07-01T00:09:16.717000+00:00",
+      "num_bytes": 13897916925,
+      "num_rows": 3716994,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230701",
+      "modified": "2023-07-02T00:08:50.491000+00:00",
+      "num_bytes": 9140285251,
+      "num_rows": 2881428,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230702",
+      "modified": "2023-07-03T00:08:53.196000+00:00",
+      "num_bytes": 6851264972,
+      "num_rows": 2576652,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230703",
+      "modified": "2023-07-04T00:09:20.599000+00:00",
+      "num_bytes": 16258910528,
+      "num_rows": 3915960,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230704",
+      "modified": "2023-07-05T00:09:02.790000+00:00",
+      "num_bytes": 13440630901,
+      "num_rows": 3727056,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230705",
+      "modified": "2023-07-06T00:09:43.835000+00:00",
+      "num_bytes": 15582903267,
+      "num_rows": 4044132,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230706",
+      "modified": "2023-07-07T00:09:38.639000+00:00",
+      "num_bytes": 16188879447,
+      "num_rows": 4121469,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230707",
+      "modified": "2023-07-08T00:09:40.072000+00:00",
+      "num_bytes": 15059142620,
+      "num_rows": 3908648,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230708",
+      "modified": "2023-07-09T00:08:52.124000+00:00",
+      "num_bytes": 8205942483,
+      "num_rows": 2954405,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230709",
+      "modified": "2023-07-10T00:08:56.606000+00:00",
+      "num_bytes": 8224966286,
+      "num_rows": 2934582,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230710",
+      "modified": "2023-07-11T00:09:49.590000+00:00",
+      "num_bytes": 17403821073,
+      "num_rows": 4097912,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230711",
+      "modified": "2023-07-12T00:09:39.478000+00:00",
+      "num_bytes": 17441472438,
+      "num_rows": 4172226,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230712",
+      "modified": "2023-07-13T00:09:33.177000+00:00",
+      "num_bytes": 16638978721,
+      "num_rows": 4082814,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230713",
+      "modified": "2023-07-14T00:09:30.928000+00:00",
+      "num_bytes": 16544556016,
+      "num_rows": 3982452,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230714",
+      "modified": "2023-07-15T00:09:26.090000+00:00",
+      "num_bytes": 15588278690,
+      "num_rows": 3933757,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230715",
+      "modified": "2023-07-16T00:08:47.980000+00:00",
+      "num_bytes": 8659986762,
+      "num_rows": 2876663,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230716",
+      "modified": "2023-07-17T00:08:56.223000+00:00",
+      "num_bytes": 7486201768,
+      "num_rows": 2843326,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230717",
+      "modified": "2023-07-18T00:09:31.084000+00:00",
+      "num_bytes": 16638310089,
+      "num_rows": 3972802,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230718",
+      "modified": "2023-07-19T00:09:36.616000+00:00",
+      "num_bytes": 15120695881,
+      "num_rows": 3843886,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230719",
+      "modified": "2023-07-20T00:09:32.888000+00:00",
+      "num_bytes": 15450245682,
+      "num_rows": 3977728,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230720",
+      "modified": "2023-07-21T00:09:21.240000+00:00",
+      "num_bytes": 16134269539,
+      "num_rows": 4095054,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230721",
+      "modified": "2023-07-22T00:09:10.524000+00:00",
+      "num_bytes": 13794214510,
+      "num_rows": 3848154,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230722",
+      "modified": "2023-07-23T00:08:50.990000+00:00",
+      "num_bytes": 8102227494,
+      "num_rows": 2980018,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230723",
+      "modified": "2023-07-24T00:08:53.951000+00:00",
+      "num_bytes": 7767486833,
+      "num_rows": 2939100,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230724",
+      "modified": "2023-07-25T00:09:32.984000+00:00",
+      "num_bytes": 16277501573,
+      "num_rows": 4070113,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230725",
+      "modified": "2023-07-26T00:09:28.172000+00:00",
+      "num_bytes": 14493657104,
+      "num_rows": 3761518,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230726",
+      "modified": "2023-07-27T00:09:39.018000+00:00",
+      "num_bytes": 14840591355,
+      "num_rows": 4029945,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230727",
+      "modified": "2023-07-28T00:09:21.513000+00:00",
+      "num_bytes": 14619276504,
+      "num_rows": 3983803,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230728",
+      "modified": "2023-07-29T00:09:09.143000+00:00",
+      "num_bytes": 14082142768,
+      "num_rows": 3765027,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230729",
+      "modified": "2023-07-30T00:08:56.182000+00:00",
+      "num_bytes": 8066986005,
+      "num_rows": 2817279,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230730",
+      "modified": "2023-07-31T00:08:54.041000+00:00",
+      "num_bytes": 8120504694,
+      "num_rows": 2876882,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230731",
+      "modified": "2023-08-01T00:09:47+00:00",
+      "num_bytes": 16837946529,
+      "num_rows": 3959377,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230801",
+      "modified": "2023-08-02T00:09:43.478000+00:00",
+      "num_bytes": 17037949396,
+      "num_rows": 4070295,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230802",
+      "modified": "2023-08-03T00:09:27.644000+00:00",
+      "num_bytes": 15081768384,
+      "num_rows": 3926921,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230803",
+      "modified": "2023-08-04T00:09:17.169000+00:00",
+      "num_bytes": 15567358559,
+      "num_rows": 4060486,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230804",
+      "modified": "2023-08-05T00:08:58.556000+00:00",
+      "num_bytes": 13575730380,
+      "num_rows": 3790703,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230805",
+      "modified": "2023-08-06T00:08:40.796000+00:00",
+      "num_bytes": 7479653390,
+      "num_rows": 2923581,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230806",
+      "modified": "2023-08-07T00:08:47.564000+00:00",
+      "num_bytes": 7137984271,
+      "num_rows": 2882250,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230807",
+      "modified": "2023-08-08T00:09:26.772000+00:00",
+      "num_bytes": 16137228208,
+      "num_rows": 4073005,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230808",
+      "modified": "2023-08-09T00:09:18.735000+00:00",
+      "num_bytes": 15118617476,
+      "num_rows": 4072879,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230809",
+      "modified": "2023-08-10T00:09:25.073000+00:00",
+      "num_bytes": 14854111089,
+      "num_rows": 3910436,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230810",
+      "modified": "2023-08-11T00:09:22.677000+00:00",
+      "num_bytes": 14704176287,
+      "num_rows": 3994879,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230811",
+      "modified": "2023-08-12T00:09:09.344000+00:00",
+      "num_bytes": 13845497267,
+      "num_rows": 3879235,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230812",
+      "modified": "2023-08-13T00:08:51.092000+00:00",
+      "num_bytes": 7441233262,
+      "num_rows": 2936703,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230813",
+      "modified": "2023-08-14T00:08:53.930000+00:00",
+      "num_bytes": 7519726475,
+      "num_rows": 2969872,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230814",
+      "modified": "2023-08-15T00:09:44.884000+00:00",
+      "num_bytes": 16061742601,
+      "num_rows": 3975493,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230815",
+      "modified": "2023-08-16T00:09:27.904000+00:00",
+      "num_bytes": 14125147433,
+      "num_rows": 3923292,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230816",
+      "modified": "2023-08-17T00:09:19.154000+00:00",
+      "num_bytes": 14568821707,
+      "num_rows": 4021403,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230817",
+      "modified": "2023-08-18T00:09:21.956000+00:00",
+      "num_bytes": 14537713480,
+      "num_rows": 4004944,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230818",
+      "modified": "2023-08-19T00:09:25.468000+00:00",
+      "num_bytes": 13507323045,
+      "num_rows": 3847847,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230819",
+      "modified": "2023-08-20T00:08:51.510000+00:00",
+      "num_bytes": 7412119847,
+      "num_rows": 2976903,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230820",
+      "modified": "2023-08-21T00:08:55.337000+00:00",
+      "num_bytes": 7138751987,
+      "num_rows": 2918223,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230821",
+      "modified": "2023-08-22T00:09:33.893000+00:00",
+      "num_bytes": 16733287352,
+      "num_rows": 4079142,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230822",
+      "modified": "2023-08-23T00:09:21.190000+00:00",
+      "num_bytes": 15405809141,
+      "num_rows": 4031953,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230823",
+      "modified": "2023-08-24T00:09:27.557000+00:00",
+      "num_bytes": 14631784685,
+      "num_rows": 3948190,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230824",
+      "modified": "2023-08-25T00:09:25.237000+00:00",
+      "num_bytes": 15101216778,
+      "num_rows": 4050068,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230825",
+      "modified": "2023-08-26T00:09:16.173000+00:00",
+      "num_bytes": 14700857163,
+      "num_rows": 3985827,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230826",
+      "modified": "2023-08-27T00:08:51.701000+00:00",
+      "num_bytes": 7691444076,
+      "num_rows": 2968946,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230827",
+      "modified": "2023-08-28T00:08:51.124000+00:00",
+      "num_bytes": 7591047616,
+      "num_rows": 2988689,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230828",
+      "modified": "2023-08-29T00:09:37.566000+00:00",
+      "num_bytes": 16802368581,
+      "num_rows": 4079832,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230829",
+      "modified": "2023-08-30T00:09:24.548000+00:00",
+      "num_bytes": 15142099795,
+      "num_rows": 4026451,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230830",
+      "modified": "2023-08-31T00:09:33.723000+00:00",
+      "num_bytes": 15113762756,
+      "num_rows": 4033132,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230831",
+      "modified": "2023-09-01T00:09:21.248000+00:00",
+      "num_bytes": 14641666315,
+      "num_rows": 3989424,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230901",
+      "modified": "2023-09-02T00:09:18.431000+00:00",
+      "num_bytes": 15184787627,
+      "num_rows": 3984891,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230902",
+      "modified": "2023-09-03T00:08:48.892000+00:00",
+      "num_bytes": 7549393116,
+      "num_rows": 2922053,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230903",
+      "modified": "2023-09-04T00:08:57.588000+00:00",
+      "num_bytes": 7374132489,
+      "num_rows": 2938619,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230904",
+      "modified": "2023-09-05T00:09:26.423000+00:00",
+      "num_bytes": 16498524771,
+      "num_rows": 4108792,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230905",
+      "modified": "2023-09-06T00:09:16.919000+00:00",
+      "num_bytes": 15976097212,
+      "num_rows": 4147458,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230906",
+      "modified": "2023-09-07T00:09:25.406000+00:00",
+      "num_bytes": 15488349303,
+      "num_rows": 4096031,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230907",
+      "modified": "2023-09-08T00:09:19.931000+00:00",
+      "num_bytes": 15049384334,
+      "num_rows": 4104609,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230908",
+      "modified": "2023-09-09T00:09:17.766000+00:00",
+      "num_bytes": 14629806009,
+      "num_rows": 4057551,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230909",
+      "modified": "2023-09-10T00:08:46.825000+00:00",
+      "num_bytes": 7852145537,
+      "num_rows": 3047457,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230910",
+      "modified": "2023-09-11T00:08:57.302000+00:00",
+      "num_bytes": 7778309427,
+      "num_rows": 3073053,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230911",
+      "modified": "2023-09-12T00:09:34.841000+00:00",
+      "num_bytes": 18239261254,
+      "num_rows": 4382980,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230912",
+      "modified": "2023-09-13T00:09:30.023000+00:00",
+      "num_bytes": 16562033510,
+      "num_rows": 4329911,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230913",
+      "modified": "2023-09-14T00:09:33.797000+00:00",
+      "num_bytes": 15781943791,
+      "num_rows": 4252758,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230914",
+      "modified": "2023-09-15T00:09:24.119000+00:00",
+      "num_bytes": 15582757041,
+      "num_rows": 4214268,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230915",
+      "modified": "2023-09-16T00:09:13.411000+00:00",
+      "num_bytes": 14704919765,
+      "num_rows": 4025811,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230916",
+      "modified": "2023-09-17T00:08:58.906000+00:00",
+      "num_bytes": 8073086073,
+      "num_rows": 3065217,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230917",
+      "modified": "2023-09-18T00:08:55.863000+00:00",
+      "num_bytes": 7599172637,
+      "num_rows": 3025454,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230918",
+      "modified": "2023-09-19T00:09:52.858000+00:00",
+      "num_bytes": 18236659794,
+      "num_rows": 4313706,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230919",
+      "modified": "2023-09-20T00:09:25.593000+00:00",
+      "num_bytes": 15704468686,
+      "num_rows": 4170466,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230920",
+      "modified": "2023-09-21T00:09:28.864000+00:00",
+      "num_bytes": 15618892992,
+      "num_rows": 4215179,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230921",
+      "modified": "2023-09-22T00:09:13.906000+00:00",
+      "num_bytes": 15535653343,
+      "num_rows": 4235073,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230922",
+      "modified": "2023-09-23T00:09:17.679000+00:00",
+      "num_bytes": 14587420784,
+      "num_rows": 4015535,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230923",
+      "modified": "2023-09-24T00:08:56.352000+00:00",
+      "num_bytes": 8416344466,
+      "num_rows": 3118757,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230924",
+      "modified": "2023-09-25T00:08:57.091000+00:00",
+      "num_bytes": 7889274469,
+      "num_rows": 3075326,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230925",
+      "modified": "2023-09-26T00:09:44.504000+00:00",
+      "num_bytes": 18119306749,
+      "num_rows": 4326743,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230926",
+      "modified": "2023-09-27T00:09:25.698000+00:00",
+      "num_bytes": 16236967096,
+      "num_rows": 4294210,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230927",
+      "modified": "2023-09-28T00:09:28.339000+00:00",
+      "num_bytes": 15355554648,
+      "num_rows": 4151597,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230928",
+      "modified": "2023-09-29T00:09:20.565000+00:00",
+      "num_bytes": 14959738919,
+      "num_rows": 4092435,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230929",
+      "modified": "2023-09-30T00:09:01.863000+00:00",
+      "num_bytes": 13725316262,
+      "num_rows": 3864214,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20230930",
+      "modified": "2023-10-01T00:08:48.400000+00:00",
+      "num_bytes": 7700486546,
+      "num_rows": 2977513,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231001",
+      "modified": "2023-10-02T00:09:09.219000+00:00",
+      "num_bytes": 11825876737,
+      "num_rows": 3367719,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231002",
+      "modified": "2023-10-03T00:09:41.475000+00:00",
+      "num_bytes": 17621215823,
+      "num_rows": 4288948,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231003",
+      "modified": "2023-10-04T00:09:38.017000+00:00",
+      "num_bytes": 17551535063,
+      "num_rows": 4341304,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231004",
+      "modified": "2023-10-05T00:09:25.553000+00:00",
+      "num_bytes": 16037813538,
+      "num_rows": 4264305,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231005",
+      "modified": "2023-10-06T00:09:19.109000+00:00",
+      "num_bytes": 15934395532,
+      "num_rows": 4203815,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231006",
+      "modified": "2023-10-07T00:09:15.187000+00:00",
+      "num_bytes": 14783007585,
+      "num_rows": 4039891,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231007",
+      "modified": "2023-10-08T00:08:53.135000+00:00",
+      "num_bytes": 9282518278,
+      "num_rows": 3203009,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231008",
+      "modified": "2023-10-09T00:08:55.049000+00:00",
+      "num_bytes": 8819030850,
+      "num_rows": 3235706,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231009",
+      "modified": "2023-10-10T00:09:25.517000+00:00",
+      "num_bytes": 17734451811,
+      "num_rows": 4300361,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231010",
+      "modified": "2023-10-11T00:09:36.137000+00:00",
+      "num_bytes": 16669767336,
+      "num_rows": 4311803,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231011",
+      "modified": "2023-10-12T00:09:57.379000+00:00",
+      "num_bytes": 18019728143,
+      "num_rows": 4402284,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231012",
+      "modified": "2023-10-13T00:09:23.188000+00:00",
+      "num_bytes": 15870230714,
+      "num_rows": 4231961,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231013",
+      "modified": "2023-10-14T00:09:10.816000+00:00",
+      "num_bytes": 15218204072,
+      "num_rows": 4072991,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231014",
+      "modified": "2023-10-15T00:08:50.850000+00:00",
+      "num_bytes": 8459579078,
+      "num_rows": 3086345,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231015",
+      "modified": "2023-10-16T00:08:54.820000+00:00",
+      "num_bytes": 8689307042,
+      "num_rows": 3147149,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231016",
+      "modified": "2023-10-17T00:09:39.262000+00:00",
+      "num_bytes": 18494638171,
+      "num_rows": 4320640,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231017",
+      "modified": "2023-10-18T00:09:33.925000+00:00",
+      "num_bytes": 17991000203,
+      "num_rows": 4356488,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231018",
+      "modified": "2023-10-19T00:09:44.822000+00:00",
+      "num_bytes": 18551422458,
+      "num_rows": 4411306,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231019",
+      "modified": "2023-10-20T00:09:42.397000+00:00",
+      "num_bytes": 17943818471,
+      "num_rows": 4358461,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231020",
+      "modified": "2023-10-21T00:09:25.322000+00:00",
+      "num_bytes": 15908556813,
+      "num_rows": 4141496,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231021",
+      "modified": "2023-10-22T00:08:53.464000+00:00",
+      "num_bytes": 8668282827,
+      "num_rows": 3087286,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231022",
+      "modified": "2023-10-23T00:09:03.643000+00:00",
+      "num_bytes": 8443574492,
+      "num_rows": 3113578,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231023",
+      "modified": "2023-10-24T00:09:48.539000+00:00",
+      "num_bytes": 19125643995,
+      "num_rows": 4377988,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231024",
+      "modified": "2023-10-25T00:09:37.227000+00:00",
+      "num_bytes": 17995037268,
+      "num_rows": 4428696,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231025",
+      "modified": "2023-10-26T00:09:40.782000+00:00",
+      "num_bytes": 17755755007,
+      "num_rows": 4439831,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231026",
+      "modified": "2023-10-27T00:09:39.074000+00:00",
+      "num_bytes": 17463818074,
+      "num_rows": 4456262,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231027",
+      "modified": "2023-10-28T00:09:11.425000+00:00",
+      "num_bytes": 16082541699,
+      "num_rows": 4192539,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231028",
+      "modified": "2023-10-29T00:08:58.739000+00:00",
+      "num_bytes": 8765246189,
+      "num_rows": 3142705,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231029",
+      "modified": "2023-10-30T00:09:02.125000+00:00",
+      "num_bytes": 8430920964,
+      "num_rows": 3151674,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231030",
+      "modified": "2023-10-31T00:09:48.302000+00:00",
+      "num_bytes": 19349052590,
+      "num_rows": 4553867,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231031",
+      "modified": "2023-11-01T00:09:31.318000+00:00",
+      "num_bytes": 17392679333,
+      "num_rows": 4456482,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231101",
+      "modified": "2023-11-02T00:09:43.096000+00:00",
+      "num_bytes": 17710433200,
+      "num_rows": 4372508,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231102",
+      "modified": "2023-11-03T00:09:22.866000+00:00",
+      "num_bytes": 16728156584,
+      "num_rows": 4331045,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231103",
+      "modified": "2023-11-04T00:09:15.897000+00:00",
+      "num_bytes": 15130303104,
+      "num_rows": 4093549,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231104",
+      "modified": "2023-11-05T00:08:49.678000+00:00",
+      "num_bytes": 8540656115,
+      "num_rows": 3139728,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231105",
+      "modified": "2023-11-06T00:09:03.019000+00:00",
+      "num_bytes": 8407825136,
+      "num_rows": 3181056,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231106",
+      "modified": "2023-11-07T00:10:02.056000+00:00",
+      "num_bytes": 19071435579,
+      "num_rows": 4492113,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231107",
+      "modified": "2023-11-08T00:09:38.339000+00:00",
+      "num_bytes": 17756669896,
+      "num_rows": 4513363,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231108",
+      "modified": "2023-11-09T00:09:35.719000+00:00",
+      "num_bytes": 16429518288,
+      "num_rows": 4221673,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231109",
+      "modified": "2023-11-10T00:09:34.355000+00:00",
+      "num_bytes": 17254188400,
+      "num_rows": 4397374,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231110",
+      "modified": "2023-11-11T00:09:11.185000+00:00",
+      "num_bytes": 15671649662,
+      "num_rows": 4127805,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231111",
+      "modified": "2023-11-12T00:08:50.644000+00:00",
+      "num_bytes": 9220767568,
+      "num_rows": 3115286,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231112",
+      "modified": "2023-11-13T00:08:59.274000+00:00",
+      "num_bytes": 9221163114,
+      "num_rows": 3183035,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231113",
+      "modified": "2023-11-14T00:09:40.555000+00:00",
+      "num_bytes": 19509263531,
+      "num_rows": 4482847,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231114",
+      "modified": "2023-11-15T00:09:40.595000+00:00",
+      "num_bytes": 16601622164,
+      "num_rows": 4219685,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231115",
+      "modified": "2023-11-16T00:09:31.062000+00:00",
+      "num_bytes": 17211190870,
+      "num_rows": 4510762,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231116",
+      "modified": "2023-11-17T00:09:42.464000+00:00",
+      "num_bytes": 17216724453,
+      "num_rows": 4555515,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231117",
+      "modified": "2023-11-18T00:09:22.920000+00:00",
+      "num_bytes": 15756636323,
+      "num_rows": 4374921,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231118",
+      "modified": "2023-11-19T00:08:55.871000+00:00",
+      "num_bytes": 8988486574,
+      "num_rows": 3384991,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231119",
+      "modified": "2023-11-20T00:09:00.168000+00:00",
+      "num_bytes": 8747973247,
+      "num_rows": 3452144,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231120",
+      "modified": "2023-11-21T00:10:03.045000+00:00",
+      "num_bytes": 19749434658,
+      "num_rows": 4717322,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231121",
+      "modified": "2023-11-22T00:09:36.575000+00:00",
+      "num_bytes": 17834534674,
+      "num_rows": 4688124,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231122",
+      "modified": "2023-11-23T00:09:26.720000+00:00",
+      "num_bytes": 16608844927,
+      "num_rows": 4534466,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231123",
+      "modified": "2023-11-24T00:09:11.631000+00:00",
+      "num_bytes": 14696497086,
+      "num_rows": 4373377,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231124",
+      "modified": "2023-11-25T00:08:58.735000+00:00",
+      "num_bytes": 13350998875,
+      "num_rows": 4140758,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231125",
+      "modified": "2023-11-26T00:08:58.825000+00:00",
+      "num_bytes": 8193785826,
+      "num_rows": 3396933,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231126",
+      "modified": "2023-11-27T00:09:22.930000+00:00",
+      "num_bytes": 9282264332,
+      "num_rows": 4987688,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231127",
+      "modified": "2023-11-28T00:09:59.144000+00:00",
+      "num_bytes": 17755131887,
+      "num_rows": 6145749,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231128",
+      "modified": "2023-11-29T00:09:45.404000+00:00",
+      "num_bytes": 18743759007,
+      "num_rows": 5909857,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231129",
+      "modified": "2023-11-30T00:09:46.369000+00:00",
+      "num_bytes": 18203192360,
+      "num_rows": 5635219,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231130",
+      "modified": "2023-12-01T00:09:47.131000+00:00",
+      "num_bytes": 16646255299,
+      "num_rows": 6717054,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231201",
+      "modified": "2023-12-02T00:09:58.663000+00:00",
+      "num_bytes": 17307963941,
+      "num_rows": 6945122,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231202",
+      "modified": "2023-12-03T00:09:32.639000+00:00",
+      "num_bytes": 10903954891,
+      "num_rows": 6844507,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231203",
+      "modified": "2023-12-04T00:09:39.805000+00:00",
+      "num_bytes": 10083607534,
+      "num_rows": 7679489,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231204",
+      "modified": "2023-12-05T00:10:14.970000+00:00",
+      "num_bytes": 17152758823,
+      "num_rows": 7219614,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231205",
+      "modified": "2023-12-06T00:09:54.330000+00:00",
+      "num_bytes": 18131849413,
+      "num_rows": 5267581,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231206",
+      "modified": "2023-12-07T00:10:05.088000+00:00",
+      "num_bytes": 16877661834,
+      "num_rows": 6562875,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231207",
+      "modified": "2023-12-08T00:10:04.757000+00:00",
+      "num_bytes": 15772983209,
+      "num_rows": 7022385,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231208",
+      "modified": "2023-12-09T00:09:27.926000+00:00",
+      "num_bytes": 14485819667,
+      "num_rows": 6866936,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231209",
+      "modified": "2023-12-10T00:08:52.953000+00:00",
+      "num_bytes": 9335144216,
+      "num_rows": 4155743,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231210",
+      "modified": "2023-12-11T00:09:08.938000+00:00",
+      "num_bytes": 8883163629,
+      "num_rows": 3589618,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231211",
+      "modified": "2023-12-12T00:09:53.487000+00:00",
+      "num_bytes": 19410559324,
+      "num_rows": 5610419,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231212",
+      "modified": "2023-12-13T00:09:31.063000+00:00",
+      "num_bytes": 17325280660,
+      "num_rows": 4814961,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231213",
+      "modified": "2023-12-14T00:09:38.789000+00:00",
+      "num_bytes": 16727936292,
+      "num_rows": 4391165,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231214",
+      "modified": "2023-12-15T00:09:30.931000+00:00",
+      "num_bytes": 16368359821,
+      "num_rows": 4378788,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231215",
+      "modified": "2023-12-16T00:09:13.664000+00:00",
+      "num_bytes": 14952926144,
+      "num_rows": 4104772,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231216",
+      "modified": "2023-12-17T00:08:55.670000+00:00",
+      "num_bytes": 8515931799,
+      "num_rows": 3487652,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231217",
+      "modified": "2023-12-18T00:08:54.110000+00:00",
+      "num_bytes": 8133624394,
+      "num_rows": 3264376,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231218",
+      "modified": "2023-12-19T00:10:01.867000+00:00",
+      "num_bytes": 19038444362,
+      "num_rows": 4476395,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231219",
+      "modified": "2023-12-20T00:09:28.837000+00:00",
+      "num_bytes": 17174649134,
+      "num_rows": 4369008,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231220",
+      "modified": "2023-12-21T00:09:17.473000+00:00",
+      "num_bytes": 15733474623,
+      "num_rows": 4245101,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231221",
+      "modified": "2023-12-22T00:09:14.282000+00:00",
+      "num_bytes": 14439696838,
+      "num_rows": 4140732,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231222",
+      "modified": "2023-12-23T00:08:56.681000+00:00",
+      "num_bytes": 12501435208,
+      "num_rows": 3887064,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231223",
+      "modified": "2023-12-24T00:08:46.314000+00:00",
+      "num_bytes": 7362037266,
+      "num_rows": 3091470,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231224",
+      "modified": "2023-12-25T00:08:42.417000+00:00",
+      "num_bytes": 6554200102,
+      "num_rows": 3023246,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231225",
+      "modified": "2023-12-26T00:08:51.429000+00:00",
+      "num_bytes": 10275035116,
+      "num_rows": 3334103,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231226",
+      "modified": "2023-12-27T00:08:53.522000+00:00",
+      "num_bytes": 9415736433,
+      "num_rows": 3642537,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231227",
+      "modified": "2023-12-28T00:09:06.796000+00:00",
+      "num_bytes": 10955563824,
+      "num_rows": 3969066,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231228",
+      "modified": "2023-12-29T00:09:01.778000+00:00",
+      "num_bytes": 11174761817,
+      "num_rows": 4106119,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231229",
+      "modified": "2023-12-30T00:09:00.537000+00:00",
+      "num_bytes": 11002698120,
+      "num_rows": 4234033,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231230",
+      "modified": "2023-12-31T00:08:45.442000+00:00",
+      "num_bytes": 7647124584,
+      "num_rows": 3670388,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20231231",
+      "modified": "2024-01-01T00:08:50.723000+00:00",
+      "num_bytes": 6912665196,
+      "num_rows": 3420769,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240101",
+      "modified": "2024-01-02T00:09:15.985000+00:00",
+      "num_bytes": 12363475776,
+      "num_rows": 3879843,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240102",
+      "modified": "2024-01-03T00:09:21.238000+00:00",
+      "num_bytes": 13730878628,
+      "num_rows": 4304466,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240103",
+      "modified": "2024-01-04T00:09:29.133000+00:00",
+      "num_bytes": 14590342585,
+      "num_rows": 4814699,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240104",
+      "modified": "2024-01-05T00:09:32.298000+00:00",
+      "num_bytes": 14751120355,
+      "num_rows": 4743665,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240105",
+      "modified": "2024-01-06T00:09:10.821000+00:00",
+      "num_bytes": 14718717838,
+      "num_rows": 4745538,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240106",
+      "modified": "2024-01-07T00:08:49.760000+00:00",
+      "num_bytes": 8324350935,
+      "num_rows": 3347529,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240107",
+      "modified": "2024-01-08T00:09:01.887000+00:00",
+      "num_bytes": 8562247451,
+      "num_rows": 3968603,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240108",
+      "modified": "2024-01-09T00:09:41.447000+00:00",
+      "num_bytes": 18189354446,
+      "num_rows": 4868562,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240109",
+      "modified": "2024-01-10T00:09:43.998000+00:00",
+      "num_bytes": 17410457022,
+      "num_rows": 5328809,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240110",
+      "modified": "2024-01-11T00:09:34.851000+00:00",
+      "num_bytes": 17106495425,
+      "num_rows": 5048176,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240111",
+      "modified": "2024-01-12T00:09:24.253000+00:00",
+      "num_bytes": 17064289878,
+      "num_rows": 4832067,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240112",
+      "modified": "2024-01-13T00:09:24.025000+00:00",
+      "num_bytes": 15679101841,
+      "num_rows": 4766247,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240113",
+      "modified": "2024-01-14T00:08:55.595000+00:00",
+      "num_bytes": 8922347844,
+      "num_rows": 3899437,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240114",
+      "modified": "2024-01-15T00:09:09.766000+00:00",
+      "num_bytes": 8971121158,
+      "num_rows": 4227700,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240115",
+      "modified": "2024-01-16T00:09:30.124000+00:00",
+      "num_bytes": 18188111740,
+      "num_rows": 5528301,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240116",
+      "modified": "2024-01-17T00:09:38.296000+00:00",
+      "num_bytes": 16723176234,
+      "num_rows": 5357221,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240117",
+      "modified": "2024-01-18T00:09:39.155000+00:00",
+      "num_bytes": 17270606634,
+      "num_rows": 5257143,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240118",
+      "modified": "2024-01-19T00:09:36.895000+00:00",
+      "num_bytes": 17030630323,
+      "num_rows": 5091142,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240119",
+      "modified": "2024-01-20T00:09:47.679000+00:00",
+      "num_bytes": 16306919986,
+      "num_rows": 4954670,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240120",
+      "modified": "2024-01-21T00:08:58.335000+00:00",
+      "num_bytes": 9760566480,
+      "num_rows": 4070841,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240121",
+      "modified": "2024-01-22T00:09:03.683000+00:00",
+      "num_bytes": 9298639218,
+      "num_rows": 4177815,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240122",
+      "modified": "2024-01-23T00:09:55.400000+00:00",
+      "num_bytes": 19450132418,
+      "num_rows": 5380038,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240123",
+      "modified": "2024-01-24T00:09:39.691000+00:00",
+      "num_bytes": 17425809913,
+      "num_rows": 5314663,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240124",
+      "modified": "2024-01-25T00:09:43.520000+00:00",
+      "num_bytes": 16987708269,
+      "num_rows": 5233470,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240125",
+      "modified": "2024-01-26T00:09:41.326000+00:00",
+      "num_bytes": 17082901191,
+      "num_rows": 5128269,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240126",
+      "modified": "2024-01-27T00:09:21.083000+00:00",
+      "num_bytes": 16174015557,
+      "num_rows": 4804065,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240127",
+      "modified": "2024-01-28T00:08:57.833000+00:00",
+      "num_bytes": 9637207841,
+      "num_rows": 3965609,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240128",
+      "modified": "2024-01-29T00:09:05.460000+00:00",
+      "num_bytes": 9655048814,
+      "num_rows": 4132486,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240129",
+      "modified": "2024-01-30T00:10:03.897000+00:00",
+      "num_bytes": 19805927881,
+      "num_rows": 5614810,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240130",
+      "modified": "2024-01-31T00:09:57.545000+00:00",
+      "num_bytes": 18354287035,
+      "num_rows": 5843296,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240131",
+      "modified": "2024-02-01T00:09:39.071000+00:00",
+      "num_bytes": 18016765922,
+      "num_rows": 5401948,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240201",
+      "modified": "2024-02-02T00:10:29.522000+00:00",
+      "num_bytes": 19894293317,
+      "num_rows": 5741252,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240202",
+      "modified": "2024-02-03T00:09:38.128000+00:00",
+      "num_bytes": 17429090427,
+      "num_rows": 5673054,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240203",
+      "modified": "2024-02-04T00:09:07.710000+00:00",
+      "num_bytes": 10549133946,
+      "num_rows": 4985481,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240204",
+      "modified": "2024-02-05T00:09:14.142000+00:00",
+      "num_bytes": 10250516385,
+      "num_rows": 4956032,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240205",
+      "modified": "2024-02-06T00:09:58.583000+00:00",
+      "num_bytes": 19785994729,
+      "num_rows": 5589778,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240206",
+      "modified": "2024-02-07T00:09:40.021000+00:00",
+      "num_bytes": 18756459809,
+      "num_rows": 5774385,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240207",
+      "modified": "2024-02-08T00:09:44.306000+00:00",
+      "num_bytes": 18097094236,
+      "num_rows": 5835239,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240208",
+      "modified": "2024-02-09T00:10:04.698000+00:00",
+      "num_bytes": 16882124497,
+      "num_rows": 5543162,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240209",
+      "modified": "2024-02-10T00:09:26.619000+00:00",
+      "num_bytes": 16018523216,
+      "num_rows": 5351481,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240210",
+      "modified": "2024-02-11T00:09:01.605000+00:00",
+      "num_bytes": 9625153830,
+      "num_rows": 4656029,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240211",
+      "modified": "2024-02-12T00:09:12.179000+00:00",
+      "num_bytes": 9759855601,
+      "num_rows": 4771744,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240212",
+      "modified": "2024-02-13T00:10:03.320000+00:00",
+      "num_bytes": 19324096722,
+      "num_rows": 5822690,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240213",
+      "modified": "2024-02-14T00:09:41.066000+00:00",
+      "num_bytes": 17795973468,
+      "num_rows": 5974100,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240214",
+      "modified": "2024-02-15T00:09:27.945000+00:00",
+      "num_bytes": 17562916600,
+      "num_rows": 5843580,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240215",
+      "modified": "2024-02-16T00:09:36.400000+00:00",
+      "num_bytes": 17013566400,
+      "num_rows": 5071383,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240216",
+      "modified": "2024-02-17T00:09:35.057000+00:00",
+      "num_bytes": 16497796146,
+      "num_rows": 5732345,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240217",
+      "modified": "2024-02-18T00:09:10.485000+00:00",
+      "num_bytes": 11071255324,
+      "num_rows": 5127664,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240218",
+      "modified": "2024-02-19T00:09:17.394000+00:00",
+      "num_bytes": 10514374624,
+      "num_rows": 5302233,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240219",
+      "modified": "2024-02-20T00:09:48.337000+00:00",
+      "num_bytes": 18947448779,
+      "num_rows": 6130702,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240220",
+      "modified": "2024-02-21T00:09:51.915000+00:00",
+      "num_bytes": 18643189000,
+      "num_rows": 6340470,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240221",
+      "modified": "2024-02-22T00:09:52.503000+00:00",
+      "num_bytes": 19137567187,
+      "num_rows": 6525937,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240222",
+      "modified": "2024-02-23T00:09:44.873000+00:00",
+      "num_bytes": 18269995482,
+      "num_rows": 6564284,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240223",
+      "modified": "2024-02-24T00:09:43.357000+00:00",
+      "num_bytes": 16970833327,
+      "num_rows": 6802272,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240224",
+      "modified": "2024-02-25T00:09:20.793000+00:00",
+      "num_bytes": 11057995784,
+      "num_rows": 6294264,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240225",
+      "modified": "2024-02-26T00:09:28.913000+00:00",
+      "num_bytes": 11448861896,
+      "num_rows": 6148274,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240226",
+      "modified": "2024-02-27T00:10:05.475000+00:00",
+      "num_bytes": 20284172252,
+      "num_rows": 6543772,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240227",
+      "modified": "2024-02-28T00:09:48.789000+00:00",
+      "num_bytes": 18743451969,
+      "num_rows": 5927866,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240228",
+      "modified": "2024-02-29T00:09:54.801000+00:00",
+      "num_bytes": 18154377914,
+      "num_rows": 5857615,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240229",
+      "modified": "2024-03-01T00:09:45.598000+00:00",
+      "num_bytes": 17540481775,
+      "num_rows": 5674617,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240301",
+      "modified": "2024-03-02T00:09:44.134000+00:00",
+      "num_bytes": 18015213361,
+      "num_rows": 5480635,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240302",
+      "modified": "2024-03-03T00:09:02.326000+00:00",
+      "num_bytes": 10171557279,
+      "num_rows": 4578572,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240303",
+      "modified": "2024-03-04T00:09:06.803000+00:00",
+      "num_bytes": 9857098119,
+      "num_rows": 4614084,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240304",
+      "modified": "2024-03-05T00:09:55.958000+00:00",
+      "num_bytes": 20459907584,
+      "num_rows": 5751958,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240305",
+      "modified": "2024-03-06T00:09:41.777000+00:00",
+      "num_bytes": 18253466976,
+      "num_rows": 5760002,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240306",
+      "modified": "2024-03-07T00:09:57.014000+00:00",
+      "num_bytes": 18391518039,
+      "num_rows": 5899775,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240307",
+      "modified": "2024-03-08T00:09:47.740000+00:00",
+      "num_bytes": 18225006396,
+      "num_rows": 6400002,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240308",
+      "modified": "2024-03-09T00:09:35.180000+00:00",
+      "num_bytes": 16340134755,
+      "num_rows": 6128552,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240309",
+      "modified": "2024-03-10T00:09:11.832000+00:00",
+      "num_bytes": 10225670171,
+      "num_rows": 5308746,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240310",
+      "modified": "2024-03-11T00:09:14.861000+00:00",
+      "num_bytes": 10193073789,
+      "num_rows": 5287580,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240311",
+      "modified": "2024-03-12T00:09:54.719000+00:00",
+      "num_bytes": 20133049495,
+      "num_rows": 6090334,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240312",
+      "modified": "2024-03-13T00:09:10+00:00",
+      "num_bytes": 18577941910,
+      "num_rows": 5452980,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240313",
+      "modified": "2024-03-14T00:10:15.991000+00:00",
+      "num_bytes": 18546228323,
+      "num_rows": 5908803,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240314",
+      "modified": "2024-03-15T00:09:35.759000+00:00",
+      "num_bytes": 18462123473,
+      "num_rows": 6247451,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240315",
+      "modified": "2024-03-16T00:09:20.990000+00:00",
+      "num_bytes": 17435825156,
+      "num_rows": 4940199,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240316",
+      "modified": "2024-03-17T00:09:38.744000+00:00",
+      "num_bytes": 10984074460,
+      "num_rows": 3910443,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240317",
+      "modified": "2024-03-18T00:09:00.369000+00:00",
+      "num_bytes": 9644174654,
+      "num_rows": 3838020,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240318",
+      "modified": "2024-03-19T00:09:57.568000+00:00",
+      "num_bytes": 20399163148,
+      "num_rows": 5262209,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240319",
+      "modified": "2024-03-20T00:09:39.604000+00:00",
+      "num_bytes": 19101066048,
+      "num_rows": 5327859,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240320",
+      "modified": "2024-03-21T00:09:49.486000+00:00",
+      "num_bytes": 18197665382,
+      "num_rows": 5103120,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240321",
+      "modified": "2024-03-22T00:09:32.245000+00:00",
+      "num_bytes": 17908578390,
+      "num_rows": 5046106,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240322",
+      "modified": "2024-03-23T00:09:33.408000+00:00",
+      "num_bytes": 16616401537,
+      "num_rows": 4767156,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240323",
+      "modified": "2024-03-24T00:08:58.464000+00:00",
+      "num_bytes": 9664297253,
+      "num_rows": 3790402,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240324",
+      "modified": "2024-03-25T00:09:11.037000+00:00",
+      "num_bytes": 9563699204,
+      "num_rows": 3818381,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240325",
+      "modified": "2024-03-26T00:09:57.140000+00:00",
+      "num_bytes": 20147934481,
+      "num_rows": 5205410,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240326",
+      "modified": "2024-03-27T00:09:44.697000+00:00",
+      "num_bytes": 18625254951,
+      "num_rows": 5393828,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240327",
+      "modified": "2024-03-28T00:09:49.608000+00:00",
+      "num_bytes": 18335572569,
+      "num_rows": 5396274,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240328",
+      "modified": "2024-03-29T00:09:45.115000+00:00",
+      "num_bytes": 17704874279,
+      "num_rows": 5349436,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240329",
+      "modified": "2024-03-30T00:09:23.851000+00:00",
+      "num_bytes": 14563429729,
+      "num_rows": 4899002,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240330",
+      "modified": "2024-03-31T00:09:06.023000+00:00",
+      "num_bytes": 9309936721,
+      "num_rows": 4287990,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240331",
+      "modified": "2024-04-01T00:09:11.826000+00:00",
+      "num_bytes": 9029447238,
+      "num_rows": 4254358,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240401",
+      "modified": "2024-04-02T00:10:07.436000+00:00",
+      "num_bytes": 19323063389,
+      "num_rows": 5614031,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240402",
+      "modified": "2024-04-03T00:09:56.720000+00:00",
+      "num_bytes": 18496815647,
+      "num_rows": 6117117,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240403",
+      "modified": "2024-04-04T00:09:57.393000+00:00",
+      "num_bytes": 19351390466,
+      "num_rows": 6260970,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240404",
+      "modified": "2024-04-05T00:09:54.101000+00:00",
+      "num_bytes": 19010133897,
+      "num_rows": 6037028,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240405",
+      "modified": "2024-04-06T00:09:52.660000+00:00",
+      "num_bytes": 16815986933,
+      "num_rows": 5722565,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240406",
+      "modified": "2024-04-07T00:09:11.537000+00:00",
+      "num_bytes": 10176666854,
+      "num_rows": 4883245,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240407",
+      "modified": "2024-04-08T00:09:26.240000+00:00",
+      "num_bytes": 10687650349,
+      "num_rows": 5157701,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240408",
+      "modified": "2024-04-09T00:09:54.641000+00:00",
+      "num_bytes": 20224084165,
+      "num_rows": 6160265,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240409",
+      "modified": "2024-04-10T00:09:58.213000+00:00",
+      "num_bytes": 18273419576,
+      "num_rows": 6006027,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240410",
+      "modified": "2024-04-11T00:09:44.448000+00:00",
+      "num_bytes": 18063218794,
+      "num_rows": 5845306,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240411",
+      "modified": "2024-04-12T00:09:49.864000+00:00",
+      "num_bytes": 18202395173,
+      "num_rows": 5687324,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240412",
+      "modified": "2024-04-13T00:09:31.212000+00:00",
+      "num_bytes": 17240908967,
+      "num_rows": 5155781,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240413",
+      "modified": "2024-04-14T00:08:58.670000+00:00",
+      "num_bytes": 9538791207,
+      "num_rows": 4125685,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240414",
+      "modified": "2024-04-15T00:09:13.338000+00:00",
+      "num_bytes": 9373883932,
+      "num_rows": 3685328,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240415",
+      "modified": "2024-04-16T00:10:05.844000+00:00",
+      "num_bytes": 20769992719,
+      "num_rows": 5450249,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240416",
+      "modified": "2024-04-17T00:09:52.498000+00:00",
+      "num_bytes": 18569411475,
+      "num_rows": 5415641,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240417",
+      "modified": "2024-04-18T00:09:47.310000+00:00",
+      "num_bytes": 19764978808,
+      "num_rows": 5719873,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240418",
+      "modified": "2024-04-19T00:09:47.720000+00:00",
+      "num_bytes": 19108867860,
+      "num_rows": 5712041,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240419",
+      "modified": "2024-04-20T00:09:29.355000+00:00",
+      "num_bytes": 18311523575,
+      "num_rows": 5434210,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240420",
+      "modified": "2024-04-21T00:09:00.795000+00:00",
+      "num_bytes": 10092595548,
+      "num_rows": 4118687,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240421",
+      "modified": "2024-04-22T00:09:14.579000+00:00",
+      "num_bytes": 10516240224,
+      "num_rows": 4205008,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240422",
+      "modified": "2024-04-23T00:10:03.218000+00:00",
+      "num_bytes": 22017250702,
+      "num_rows": 5694909,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240423",
+      "modified": "2024-04-24T00:09:45.785000+00:00",
+      "num_bytes": 19945272606,
+      "num_rows": 5489793,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240424",
+      "modified": "2024-04-25T00:09:40.181000+00:00",
+      "num_bytes": 19139819061,
+      "num_rows": 5489203,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240425",
+      "modified": "2024-04-26T00:09:42.660000+00:00",
+      "num_bytes": 19029890503,
+      "num_rows": 5398998,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240426",
+      "modified": "2024-04-27T00:09:29.040000+00:00",
+      "num_bytes": 17517969010,
+      "num_rows": 5188510,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240427",
+      "modified": "2024-04-28T00:09:00.713000+00:00",
+      "num_bytes": 10030466181,
+      "num_rows": 4074896,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240428",
+      "modified": "2024-04-29T00:09:10.154000+00:00",
+      "num_bytes": 10217206229,
+      "num_rows": 4123505,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240429",
+      "modified": "2024-04-30T00:10:13.091000+00:00",
+      "num_bytes": 21832140510,
+      "num_rows": 5617560,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240430",
+      "modified": "2024-05-01T00:09:45.838000+00:00",
+      "num_bytes": 18641197232,
+      "num_rows": 5329564,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240501",
+      "modified": "2024-05-02T00:09:56.007000+00:00",
+      "num_bytes": 18507020700,
+      "num_rows": 5133499,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240502",
+      "modified": "2024-05-03T00:09:40.773000+00:00",
+      "num_bytes": 18639688634,
+      "num_rows": 5352449,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240503",
+      "modified": "2024-05-04T00:09:28.429000+00:00",
+      "num_bytes": 17157688473,
+      "num_rows": 5055035,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240504",
+      "modified": "2024-05-05T00:08:59.512000+00:00",
+      "num_bytes": 9927600949,
+      "num_rows": 4013358,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240505",
+      "modified": "2024-05-06T00:09:10.439000+00:00",
+      "num_bytes": 10265921590,
+      "num_rows": 4144477,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240506",
+      "modified": "2024-05-07T00:09:52.238000+00:00",
+      "num_bytes": 21764539766,
+      "num_rows": 5520661,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240507",
+      "modified": "2024-05-08T00:09:25.897000+00:00",
+      "num_bytes": 18734374359,
+      "num_rows": 5211884,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240508",
+      "modified": "2024-05-09T00:09:32.334000+00:00",
+      "num_bytes": 17495172639,
+      "num_rows": 5153928,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240509",
+      "modified": "2024-05-10T00:09:31.929000+00:00",
+      "num_bytes": 16516742999,
+      "num_rows": 4890020,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240510",
+      "modified": "2024-05-11T00:09:16.301000+00:00",
+      "num_bytes": 15756122593,
+      "num_rows": 4831035,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240511",
+      "modified": "2024-05-12T00:08:55.844000+00:00",
+      "num_bytes": 9260423974,
+      "num_rows": 3917033,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240512",
+      "modified": "2024-05-13T00:09:01.007000+00:00",
+      "num_bytes": 8584398607,
+      "num_rows": 3873723,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240513",
+      "modified": "2024-05-14T00:09:59.845000+00:00",
+      "num_bytes": 20564256497,
+      "num_rows": 5273331,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240514",
+      "modified": "2024-05-15T00:09:31.670000+00:00",
+      "num_bytes": 17830398013,
+      "num_rows": 5206540,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240515",
+      "modified": "2024-05-16T00:09:53.881000+00:00",
+      "num_bytes": 17586199464,
+      "num_rows": 5155191,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240516",
+      "modified": "2024-05-17T00:09:41.354000+00:00",
+      "num_bytes": 17906206459,
+      "num_rows": 5190464,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240517",
+      "modified": "2024-05-18T00:09:26.143000+00:00",
+      "num_bytes": 16344182699,
+      "num_rows": 5019101,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240518",
+      "modified": "2024-05-19T00:09:01.626000+00:00",
+      "num_bytes": 9570165978,
+      "num_rows": 4162896,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240519",
+      "modified": "2024-05-20T00:09:04.143000+00:00",
+      "num_bytes": 9187637152,
+      "num_rows": 4188309,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240520",
+      "modified": "2024-05-21T00:09:52.600000+00:00",
+      "num_bytes": 18657074873,
+      "num_rows": 5374438,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240521",
+      "modified": "2024-05-22T00:09:30.941000+00:00",
+      "num_bytes": 18777899236,
+      "num_rows": 5446263,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240522",
+      "modified": "2024-05-23T00:09:36.152000+00:00",
+      "num_bytes": 18131298519,
+      "num_rows": 5248270,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240523",
+      "modified": "2024-05-24T00:09:44.586000+00:00",
+      "num_bytes": 17463805462,
+      "num_rows": 5132432,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240524",
+      "modified": "2024-05-25T00:09:16.600000+00:00",
+      "num_bytes": 14401202209,
+      "num_rows": 4585884,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240525",
+      "modified": "2024-05-26T00:08:50.264000+00:00",
+      "num_bytes": 9173368040,
+      "num_rows": 3806121,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240526",
+      "modified": "2024-05-27T00:08:56.415000+00:00",
+      "num_bytes": 9325365645,
+      "num_rows": 3877345,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240527",
+      "modified": "2024-05-28T00:09:24.742000+00:00",
+      "num_bytes": 18258413208,
+      "num_rows": 5094100,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240528",
+      "modified": "2024-05-29T00:09:30.729000+00:00",
+      "num_bytes": 16866884777,
+      "num_rows": 5089231,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240529",
+      "modified": "2024-05-30T00:09:24.814000+00:00",
+      "num_bytes": 17684349122,
+      "num_rows": 5208813,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240530",
+      "modified": "2024-05-31T00:09:24.715000+00:00",
+      "num_bytes": 16808685764,
+      "num_rows": 5041651,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240531",
+      "modified": "2024-06-01T00:09:29.208000+00:00",
+      "num_bytes": 16065274125,
+      "num_rows": 4920516,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240601",
+      "modified": "2024-06-02T00:09:13.187000+00:00",
+      "num_bytes": 11511554277,
+      "num_rows": 4041493,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240602",
+      "modified": "2024-06-03T00:09:09.338000+00:00",
+      "num_bytes": 9516478480,
+      "num_rows": 3953873,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240603",
+      "modified": "2024-06-04T00:10:02.491000+00:00",
+      "num_bytes": 20760780064,
+      "num_rows": 5233454,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240604",
+      "modified": "2024-06-05T00:09:38.325000+00:00",
+      "num_bytes": 18551337299,
+      "num_rows": 5273178,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240605",
+      "modified": "2024-06-06T00:09:39.391000+00:00",
+      "num_bytes": 18690065873,
+      "num_rows": 5328069,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240606",
+      "modified": "2024-06-07T00:09:55.260000+00:00",
+      "num_bytes": 17569611981,
+      "num_rows": 5079512,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240607",
+      "modified": "2024-06-08T00:09:20.285000+00:00",
+      "num_bytes": 15898178026,
+      "num_rows": 4828096,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240608",
+      "modified": "2024-06-09T00:09:03.779000+00:00",
+      "num_bytes": 9290201061,
+      "num_rows": 3968195,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240609",
+      "modified": "2024-06-10T00:09:15.530000+00:00",
+      "num_bytes": 9072055103,
+      "num_rows": 3929816,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240610",
+      "modified": "2024-06-11T00:10:04.407000+00:00",
+      "num_bytes": 20017332593,
+      "num_rows": 5201285,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240611",
+      "modified": "2024-06-12T00:09:47.580000+00:00",
+      "num_bytes": 18551713583,
+      "num_rows": 5041997,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240612",
+      "modified": "2024-06-13T00:09:42.050000+00:00",
+      "num_bytes": 18093538574,
+      "num_rows": 5092448,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240613",
+      "modified": "2024-06-14T00:09:33.123000+00:00",
+      "num_bytes": 17773968439,
+      "num_rows": 4980149,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240614",
+      "modified": "2024-06-15T00:09:30.595000+00:00",
+      "num_bytes": 16285470031,
+      "num_rows": 4736525,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240615",
+      "modified": "2024-06-16T00:08:56.021000+00:00",
+      "num_bytes": 9430400339,
+      "num_rows": 3734445,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240616",
+      "modified": "2024-06-17T00:09:07.452000+00:00",
+      "num_bytes": 9694744001,
+      "num_rows": 3800230,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240617",
+      "modified": "2024-06-18T00:10:34.791000+00:00",
+      "num_bytes": 21885806668,
+      "num_rows": 5093141,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240618",
+      "modified": "2024-06-19T00:09:48.884000+00:00",
+      "num_bytes": 20296758676,
+      "num_rows": 5080083,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240619",
+      "modified": "2024-06-20T00:09:22.016000+00:00",
+      "num_bytes": 17318312098,
+      "num_rows": 4903332,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240620",
+      "modified": "2024-06-21T00:09:41.709000+00:00",
+      "num_bytes": 17281344241,
+      "num_rows": 5011845,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240621",
+      "modified": "2024-06-22T00:09:33.876000+00:00",
+      "num_bytes": 16529725501,
+      "num_rows": 4751585,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240622",
+      "modified": "2024-06-23T00:09:11.540000+00:00",
+      "num_bytes": 9465433046,
+      "num_rows": 3792857,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240623",
+      "modified": "2024-06-24T00:09:16.950000+00:00",
+      "num_bytes": 9332932336,
+      "num_rows": 3865651,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240624",
+      "modified": "2024-06-25T00:10:00.484000+00:00",
+      "num_bytes": 19682285056,
+      "num_rows": 5040714,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240625",
+      "modified": "2024-06-26T00:09:47.556000+00:00",
+      "num_bytes": 17919767864,
+      "num_rows": 5037653,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240626",
+      "modified": "2024-06-27T00:09:39.844000+00:00",
+      "num_bytes": 17317886441,
+      "num_rows": 4988873,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240627",
+      "modified": "2024-06-28T00:09:28.807000+00:00",
+      "num_bytes": 16914911283,
+      "num_rows": 4881801,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240628",
+      "modified": "2024-06-29T00:09:26.379000+00:00",
+      "num_bytes": 15889885573,
+      "num_rows": 4662268,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240629",
+      "modified": "2024-06-30T00:09:01.684000+00:00",
+      "num_bytes": 8979958186,
+      "num_rows": 3639810,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240630",
+      "modified": "2024-07-01T00:09:11.397000+00:00",
+      "num_bytes": 8923518422,
+      "num_rows": 3668538,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240701",
+      "modified": "2024-07-02T00:10:00.819000+00:00",
+      "num_bytes": 21360067024,
+      "num_rows": 5093215,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240702",
+      "modified": "2024-07-03T00:09:33.317000+00:00",
+      "num_bytes": 18002269697,
+      "num_rows": 5054260,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240703",
+      "modified": "2024-07-04T00:09:32.328000+00:00",
+      "num_bytes": 17736991422,
+      "num_rows": 4991606,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240704",
+      "modified": "2024-07-05T00:09:15.925000+00:00",
+      "num_bytes": 14972244480,
+      "num_rows": 4685241,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240705",
+      "modified": "2024-07-06T00:09:18.552000+00:00",
+      "num_bytes": 14294796743,
+      "num_rows": 4463149,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240706",
+      "modified": "2024-07-07T00:09:16.992000+00:00",
+      "num_bytes": 9116663710,
+      "num_rows": 3748775,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240707",
+      "modified": "2024-07-08T00:09:06.962000+00:00",
+      "num_bytes": 9112602558,
+      "num_rows": 3780572,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240708",
+      "modified": "2024-07-09T00:09:50.697000+00:00",
+      "num_bytes": 20122880495,
+      "num_rows": 4991087,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240709",
+      "modified": "2024-07-10T00:09:46.866000+00:00",
+      "num_bytes": 18889091384,
+      "num_rows": 5073166,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240710",
+      "modified": "2024-07-11T00:09:39.556000+00:00",
+      "num_bytes": 18500895219,
+      "num_rows": 4991951,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240711",
+      "modified": "2024-07-12T00:09:36.529000+00:00",
+      "num_bytes": 17395764159,
+      "num_rows": 4901773,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240712",
+      "modified": "2024-07-13T00:09:20.739000+00:00",
+      "num_bytes": 15905812082,
+      "num_rows": 4601798,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240713",
+      "modified": "2024-07-14T00:08:57.339000+00:00",
+      "num_bytes": 8991119113,
+      "num_rows": 3673253,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240714",
+      "modified": "2024-07-15T00:09:08.672000+00:00",
+      "num_bytes": 8738860524,
+      "num_rows": 3547194,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240715",
+      "modified": "2024-07-16T00:09:54.600000+00:00",
+      "num_bytes": 19841916547,
+      "num_rows": 4914751,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240716",
+      "modified": "2024-07-17T00:09:37.222000+00:00",
+      "num_bytes": 17554160521,
+      "num_rows": 4870089,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240717",
+      "modified": "2024-07-18T00:09:30.936000+00:00",
+      "num_bytes": 17399161869,
+      "num_rows": 4836566,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240718",
+      "modified": "2024-07-19T00:09:25.016000+00:00",
+      "num_bytes": 16749232699,
+      "num_rows": 4724216,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240719",
+      "modified": "2024-07-20T00:09:27.119000+00:00",
+      "num_bytes": 15550591346,
+      "num_rows": 4499360,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240720",
+      "modified": "2024-07-21T00:09:05.308000+00:00",
+      "num_bytes": 9176073781,
+      "num_rows": 3616185,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240721",
+      "modified": "2024-07-22T00:09:06.090000+00:00",
+      "num_bytes": 9077145875,
+      "num_rows": 3615363,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240722",
+      "modified": "2024-07-23T00:09:48.439000+00:00",
+      "num_bytes": 20135615617,
+      "num_rows": 4911247,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240723",
+      "modified": "2024-07-24T00:09:30.509000+00:00",
+      "num_bytes": 18042785967,
+      "num_rows": 4915431,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240724",
+      "modified": "2024-07-25T00:09:30.190000+00:00",
+      "num_bytes": 17165264188,
+      "num_rows": 4802817,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240725",
+      "modified": "2024-07-26T00:09:33.315000+00:00",
+      "num_bytes": 17562911901,
+      "num_rows": 4813444,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240726",
+      "modified": "2024-07-27T00:09:23.640000+00:00",
+      "num_bytes": 15883136957,
+      "num_rows": 4585809,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240727",
+      "modified": "2024-07-28T00:08:57.022000+00:00",
+      "num_bytes": 9108782009,
+      "num_rows": 3679425,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240728",
+      "modified": "2024-07-29T00:09:14.198000+00:00",
+      "num_bytes": 8935460978,
+      "num_rows": 3668282,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240729",
+      "modified": "2024-07-30T00:10:00.202000+00:00",
+      "num_bytes": 20219406674,
+      "num_rows": 4905826,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240730",
+      "modified": "2024-07-31T00:09:44.128000+00:00",
+      "num_bytes": 17722503056,
+      "num_rows": 4867035,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240731",
+      "modified": "2024-08-01T00:09:45.088000+00:00",
+      "num_bytes": 17236040721,
+      "num_rows": 4829855,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240801",
+      "modified": "2024-08-02T00:10:11.104000+00:00",
+      "num_bytes": 20103110229,
+      "num_rows": 5003653,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240802",
+      "modified": "2024-08-03T00:09:12.833000+00:00",
+      "num_bytes": 16430348403,
+      "num_rows": 4659031,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240803",
+      "modified": "2024-08-04T00:08:54.672000+00:00",
+      "num_bytes": 9215433781,
+      "num_rows": 3704072,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240804",
+      "modified": "2024-08-05T00:09:11.716000+00:00",
+      "num_bytes": 8924101827,
+      "num_rows": 3665945,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240805",
+      "modified": "2024-08-06T00:09:51.832000+00:00",
+      "num_bytes": 19262584842,
+      "num_rows": 4818463,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240806",
+      "modified": "2024-08-07T00:09:31.957000+00:00",
+      "num_bytes": 18279318942,
+      "num_rows": 4948413,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240807",
+      "modified": "2024-08-08T00:09:30.398000+00:00",
+      "num_bytes": 17831614874,
+      "num_rows": 4875979,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240808",
+      "modified": "2024-08-09T00:09:27.319000+00:00",
+      "num_bytes": 16967762803,
+      "num_rows": 4803900,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240809",
+      "modified": "2024-08-10T00:09:17.524000+00:00",
+      "num_bytes": 15656977329,
+      "num_rows": 4542788,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240810",
+      "modified": "2024-08-11T00:08:57.142000+00:00",
+      "num_bytes": 8834828918,
+      "num_rows": 3612993,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240811",
+      "modified": "2024-08-12T00:09:03.046000+00:00",
+      "num_bytes": 8798049048,
+      "num_rows": 3644488,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240812",
+      "modified": "2024-08-13T00:09:58.883000+00:00",
+      "num_bytes": 19644232384,
+      "num_rows": 4921064,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240813",
+      "modified": "2024-08-14T00:09:35.013000+00:00",
+      "num_bytes": 17137218506,
+      "num_rows": 4783807,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240814",
+      "modified": "2024-08-15T00:08:05.686000+00:00",
+      "num_bytes": 16877508115,
+      "num_rows": 4679055,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240815",
+      "modified": "2024-08-16T00:09:31.888000+00:00",
+      "num_bytes": 15840833794,
+      "num_rows": 4643470,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240816",
+      "modified": "2024-08-17T00:09:17.478000+00:00",
+      "num_bytes": 15070230091,
+      "num_rows": 4615789,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240817",
+      "modified": "2024-08-18T00:08:57.816000+00:00",
+      "num_bytes": 9085004402,
+      "num_rows": 3904564,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240818",
+      "modified": "2024-08-19T00:09:04.964000+00:00",
+      "num_bytes": 9115859748,
+      "num_rows": 3912150,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240819",
+      "modified": "2024-08-20T00:09:51.488000+00:00",
+      "num_bytes": 19635373456,
+      "num_rows": 5034225,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240820",
+      "modified": "2024-08-21T00:09:40.426000+00:00",
+      "num_bytes": 17684097316,
+      "num_rows": 4943699,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240821",
+      "modified": "2024-08-22T00:09:36.201000+00:00",
+      "num_bytes": 17352796818,
+      "num_rows": 4948811,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240822",
+      "modified": "2024-08-23T00:09:34.419000+00:00",
+      "num_bytes": 17283679489,
+      "num_rows": 4915293,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240823",
+      "modified": "2024-08-24T00:09:23.200000+00:00",
+      "num_bytes": 15869808195,
+      "num_rows": 4717653,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240824",
+      "modified": "2024-08-25T00:08:57.425000+00:00",
+      "num_bytes": 9066047659,
+      "num_rows": 3831047,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240825",
+      "modified": "2024-08-26T00:09:08.068000+00:00",
+      "num_bytes": 8880627720,
+      "num_rows": 3844107,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240826",
+      "modified": "2024-08-27T00:09:48.881000+00:00",
+      "num_bytes": 20520180038,
+      "num_rows": 5108621,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240827",
+      "modified": "2024-08-28T00:09:27.142000+00:00",
+      "num_bytes": 16994183997,
+      "num_rows": 4891257,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240828",
+      "modified": "2024-08-29T00:09:30.903000+00:00",
+      "num_bytes": 17768315711,
+      "num_rows": 5082900,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240829",
+      "modified": "2024-08-30T00:09:34.473000+00:00",
+      "num_bytes": 16509356276,
+      "num_rows": 4862780,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240830",
+      "modified": "2024-08-31T00:09:22.623000+00:00",
+      "num_bytes": 16134623550,
+      "num_rows": 4709510,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240831",
+      "modified": "2024-09-01T00:09:00.904000+00:00",
+      "num_bytes": 9589828513,
+      "num_rows": 3864736,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240901",
+      "modified": "2024-09-02T00:09:10.847000+00:00",
+      "num_bytes": 11029647178,
+      "num_rows": 3964263,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240902",
+      "modified": "2024-09-03T00:09:22.354000+00:00",
+      "num_bytes": 17965984351,
+      "num_rows": 4884995,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240903",
+      "modified": "2024-09-04T00:09:36.750000+00:00",
+      "num_bytes": 18205498830,
+      "num_rows": 5036612,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240904",
+      "modified": "2024-09-05T00:09:38.591000+00:00",
+      "num_bytes": 18133787005,
+      "num_rows": 5036926,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240905",
+      "modified": "2024-09-06T00:09:34.654000+00:00",
+      "num_bytes": 18484505041,
+      "num_rows": 5024957,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240906",
+      "modified": "2024-09-07T00:09:10.931000+00:00",
+      "num_bytes": 17565844193,
+      "num_rows": 4847336,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240907",
+      "modified": "2024-09-08T00:08:56.291000+00:00",
+      "num_bytes": 9364015676,
+      "num_rows": 3879172,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240908",
+      "modified": "2024-09-09T00:09:01.835000+00:00",
+      "num_bytes": 9459250690,
+      "num_rows": 3925318,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240909",
+      "modified": "2024-09-10T00:09:55.343000+00:00",
+      "num_bytes": 20889856905,
+      "num_rows": 5251921,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240910",
+      "modified": "2024-09-11T00:09:40.961000+00:00",
+      "num_bytes": 17901799203,
+      "num_rows": 4913703,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240911",
+      "modified": "2024-09-12T00:09:49.223000+00:00",
+      "num_bytes": 18269701888,
+      "num_rows": 5012042,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240912",
+      "modified": "2024-09-13T00:09:37.650000+00:00",
+      "num_bytes": 18921424722,
+      "num_rows": 5164855,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240913",
+      "modified": "2024-09-14T00:09:13.622000+00:00",
+      "num_bytes": 16582498722,
+      "num_rows": 4831211,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240914",
+      "modified": "2024-09-15T00:08:54.370000+00:00",
+      "num_bytes": 9620759072,
+      "num_rows": 3896188,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240915",
+      "modified": "2024-09-16T00:09:03.822000+00:00",
+      "num_bytes": 9156913184,
+      "num_rows": 3805724,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240916",
+      "modified": "2024-09-17T00:09:59.650000+00:00",
+      "num_bytes": 20288063125,
+      "num_rows": 5031874,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240917",
+      "modified": "2024-09-18T00:09:44.807000+00:00",
+      "num_bytes": 18589839511,
+      "num_rows": 5003765,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240918",
+      "modified": "2024-09-19T00:09:53.208000+00:00",
+      "num_bytes": 18833816368,
+      "num_rows": 5142245,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240919",
+      "modified": "2024-09-20T00:09:34.372000+00:00",
+      "num_bytes": 17890921065,
+      "num_rows": 5094353,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240920",
+      "modified": "2024-09-21T00:09:22.585000+00:00",
+      "num_bytes": 16820928829,
+      "num_rows": 4897099,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240921",
+      "modified": "2024-09-22T00:09:07.132000+00:00",
+      "num_bytes": 10459219563,
+      "num_rows": 3992319,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240922",
+      "modified": "2024-09-23T00:09:11.865000+00:00",
+      "num_bytes": 9385683705,
+      "num_rows": 3950279,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240923",
+      "modified": "2024-09-24T00:09:43.448000+00:00",
+      "num_bytes": 20968260917,
+      "num_rows": 5292103,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240924",
+      "modified": "2024-09-25T00:09:26.108000+00:00",
+      "num_bytes": 13048360483,
+      "num_rows": 5314898,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240925",
+      "modified": "2024-09-26T00:09:19.538000+00:00",
+      "num_bytes": 12212204705,
+      "num_rows": 5178253,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240926",
+      "modified": "2024-09-27T00:09:16.867000+00:00",
+      "num_bytes": 12307460865,
+      "num_rows": 5175222,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240927",
+      "modified": "2024-09-28T00:09:03.540000+00:00",
+      "num_bytes": 11509292388,
+      "num_rows": 4948553,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240928",
+      "modified": "2024-09-29T00:08:49.042000+00:00",
+      "num_bytes": 6825801673,
+      "num_rows": 3981320,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240929",
+      "modified": "2024-09-30T00:08:55.857000+00:00",
+      "num_bytes": 7325080301,
+      "num_rows": 4164272,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20240930",
+      "modified": "2024-10-01T00:09:31.231000+00:00",
+      "num_bytes": 13700754474,
+      "num_rows": 5278149,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241001",
+      "modified": "2024-10-02T00:09:30.442000+00:00",
+      "num_bytes": 13480387191,
+      "num_rows": 5180762,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241002",
+      "modified": "2024-10-03T00:09:06.969000+00:00",
+      "num_bytes": 11884307754,
+      "num_rows": 4994066,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241003",
+      "modified": "2024-10-04T00:09:15.267000+00:00",
+      "num_bytes": 11665556701,
+      "num_rows": 4891785,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241004",
+      "modified": "2024-10-05T00:09:04.283000+00:00",
+      "num_bytes": 10954273476,
+      "num_rows": 4763137,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241005",
+      "modified": "2024-10-06T00:08:54.367000+00:00",
+      "num_bytes": 7021117957,
+      "num_rows": 4038294,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241006",
+      "modified": "2024-10-07T00:09:02.164000+00:00",
+      "num_bytes": 7690593749,
+      "num_rows": 4116307,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241007",
+      "modified": "2024-10-08T00:09:43.239000+00:00",
+      "num_bytes": 16181123278,
+      "num_rows": 5531508,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241008",
+      "modified": "2024-10-09T00:09:31.454000+00:00",
+      "num_bytes": 14894314284,
+      "num_rows": 5557408,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241009",
+      "modified": "2024-10-10T00:09:36.799000+00:00",
+      "num_bytes": 14650337648,
+      "num_rows": 5521552,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241010",
+      "modified": "2024-10-11T00:09:28.156000+00:00",
+      "num_bytes": 14192991550,
+      "num_rows": 5400881,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241011",
+      "modified": "2024-10-12T00:09:10.566000+00:00",
+      "num_bytes": 13475406012,
+      "num_rows": 5179154,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241012",
+      "modified": "2024-10-13T00:09:02.304000+00:00",
+      "num_bytes": 9539858822,
+      "num_rows": 4264296,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241013",
+      "modified": "2024-10-14T00:09:03.879000+00:00",
+      "num_bytes": 9320783872,
+      "num_rows": 4242321,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241014",
+      "modified": "2024-10-15T00:09:41.062000+00:00",
+      "num_bytes": 15707088910,
+      "num_rows": 5393683,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241015",
+      "modified": "2024-10-16T00:09:38.628000+00:00",
+      "num_bytes": 14442610540,
+      "num_rows": 5378686,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241016",
+      "modified": "2024-10-17T00:09:34.908000+00:00",
+      "num_bytes": 14357455898,
+      "num_rows": 5431405,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241017",
+      "modified": "2024-10-18T00:09:36.252000+00:00",
+      "num_bytes": 14070787954,
+      "num_rows": 5438323,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241018",
+      "modified": "2024-10-19T00:09:24.964000+00:00",
+      "num_bytes": 13648369344,
+      "num_rows": 5291082,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241019",
+      "modified": "2024-10-20T00:09:02.698000+00:00",
+      "num_bytes": 9888524191,
+      "num_rows": 4505129,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241020",
+      "modified": "2024-10-21T00:09:12.284000+00:00",
+      "num_bytes": 9526380037,
+      "num_rows": 4474282,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241021",
+      "modified": "2024-10-22T00:09:46.443000+00:00",
+      "num_bytes": 16386459809,
+      "num_rows": 5616080,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241022",
+      "modified": "2024-10-23T00:09:43.901000+00:00",
+      "num_bytes": 15043508893,
+      "num_rows": 5655454,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241023",
+      "modified": "2024-10-24T00:09:27.575000+00:00",
+      "num_bytes": 14433148615,
+      "num_rows": 5545307,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241024",
+      "modified": "2024-10-25T00:09:27.906000+00:00",
+      "num_bytes": 12949985854,
+      "num_rows": 5370355,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241025",
+      "modified": "2024-10-26T00:09:21.789000+00:00",
+      "num_bytes": 12999409328,
+      "num_rows": 5249762,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241026",
+      "modified": "2024-10-27T00:09:02.185000+00:00",
+      "num_bytes": 8775301094,
+      "num_rows": 4237222,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241027",
+      "modified": "2024-10-28T00:09:11.529000+00:00",
+      "num_bytes": 8763923959,
+      "num_rows": 4204034,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241028",
+      "modified": "2024-10-29T00:09:49.185000+00:00",
+      "num_bytes": 16071598203,
+      "num_rows": 5528045,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241029",
+      "modified": "2024-10-30T00:09:43.403000+00:00",
+      "num_bytes": 15029888236,
+      "num_rows": 5536454,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241030",
+      "modified": "2024-10-31T00:09:26.120000+00:00",
+      "num_bytes": 13807642937,
+      "num_rows": 5350644,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241031",
+      "modified": "2024-11-01T00:09:33.619000+00:00",
+      "num_bytes": 13471010081,
+      "num_rows": 5273133,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241101",
+      "modified": "2024-11-02T00:09:30.473000+00:00",
+      "num_bytes": 13511502364,
+      "num_rows": 5153751,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241102",
+      "modified": "2024-11-03T00:09:09.500000+00:00",
+      "num_bytes": 11143230646,
+      "num_rows": 4153883,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241103",
+      "modified": "2024-11-04T00:09:24.727000+00:00",
+      "num_bytes": 11398851643,
+      "num_rows": 4237313,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241104",
+      "modified": "2024-11-05T00:10:20.437000+00:00",
+      "num_bytes": 22916222890,
+      "num_rows": 5504481,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241105",
+      "modified": "2024-11-06T00:09:58.623000+00:00",
+      "num_bytes": 20955180479,
+      "num_rows": 5436624,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241106",
+      "modified": "2024-11-07T00:10:15.859000+00:00",
+      "num_bytes": 21981615366,
+      "num_rows": 5435286,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241107",
+      "modified": "2024-11-08T00:10:05.057000+00:00",
+      "num_bytes": 22901649405,
+      "num_rows": 5458468,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241108",
+      "modified": "2024-11-09T00:09:54.264000+00:00",
+      "num_bytes": 22352951180,
+      "num_rows": 5335550,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241109",
+      "modified": "2024-11-10T00:09:23.014000+00:00",
+      "num_bytes": 16006854296,
+      "num_rows": 4436456,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241110",
+      "modified": "2024-11-11T00:09:38.003000+00:00",
+      "num_bytes": 15976102213,
+      "num_rows": 4522332,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241111",
+      "modified": "2024-11-12T00:10:19.854000+00:00",
+      "num_bytes": 24824679183,
+      "num_rows": 5558780,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241112",
+      "modified": "2024-11-13T00:10:00.940000+00:00",
+      "num_bytes": 23695220353,
+      "num_rows": 5611025,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241113",
+      "modified": "2024-11-14T00:10:10.732000+00:00",
+      "num_bytes": 24313542259,
+      "num_rows": 5655514,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241114",
+      "modified": "2024-11-15T00:10:14.093000+00:00",
+      "num_bytes": 24452323202,
+      "num_rows": 5554486,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241115",
+      "modified": "2024-11-16T00:09:58.119000+00:00",
+      "num_bytes": 23648068833,
+      "num_rows": 5378008,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241116",
+      "modified": "2024-11-17T00:09:31.486000+00:00",
+      "num_bytes": 17419532866,
+      "num_rows": 4541054,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241117",
+      "modified": "2024-11-18T00:09:47.438000+00:00",
+      "num_bytes": 17530774172,
+      "num_rows": 4603240,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241118",
+      "modified": "2024-11-19T00:10:47.979000+00:00",
+      "num_bytes": 27750866300,
+      "num_rows": 5675505,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241119",
+      "modified": "2024-11-20T00:10:28.707000+00:00",
+      "num_bytes": 26342711619,
+      "num_rows": 5690623,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241120",
+      "modified": "2024-11-21T00:10:21.258000+00:00",
+      "num_bytes": 25489498551,
+      "num_rows": 5631505,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241121",
+      "modified": "2024-11-22T00:10:19.096000+00:00",
+      "num_bytes": 24889651328,
+      "num_rows": 5593455,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241122",
+      "modified": "2024-11-23T00:10:09.139000+00:00",
+      "num_bytes": 23767575729,
+      "num_rows": 5377675,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241123",
+      "modified": "2024-11-24T00:09:46.715000+00:00",
+      "num_bytes": 18700492633,
+      "num_rows": 4624973,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241124",
+      "modified": "2024-11-25T00:09:50.845000+00:00",
+      "num_bytes": 18393795464,
+      "num_rows": 4648290,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241125",
+      "modified": "2024-11-26T00:11:01.367000+00:00",
+      "num_bytes": 29151160005,
+      "num_rows": 5806523,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241126",
+      "modified": "2024-11-27T00:10:24.959000+00:00",
+      "num_bytes": 27148251182,
+      "num_rows": 5797325,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241127",
+      "modified": "2024-11-28T00:10:14.886000+00:00",
+      "num_bytes": 25787792159,
+      "num_rows": 5678482,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241128",
+      "modified": "2024-11-29T00:09:45.258000+00:00",
+      "num_bytes": 24073056974,
+      "num_rows": 5451403,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241129",
+      "modified": "2024-11-30T00:09:43.343000+00:00",
+      "num_bytes": 22294774410,
+      "num_rows": 5187972,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241130",
+      "modified": "2024-12-01T00:09:41.035000+00:00",
+      "num_bytes": 17637385835,
+      "num_rows": 4573060,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241201",
+      "modified": "2024-12-02T00:10:02.794000+00:00",
+      "num_bytes": 20548084590,
+      "num_rows": 4873196,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241202",
+      "modified": "2024-12-03T00:09:59.403000+00:00",
+      "num_bytes": 28039083087,
+      "num_rows": 5780046,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241203",
+      "modified": "2024-12-04T00:10:00.965000+00:00",
+      "num_bytes": 20593569677,
+      "num_rows": 5529609,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241204",
+      "modified": "2024-12-05T00:09:51.889000+00:00",
+      "num_bytes": 19836289746,
+      "num_rows": 5410308,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241205",
+      "modified": "2024-12-06T00:10:16.921000+00:00",
+      "num_bytes": 19367200627,
+      "num_rows": 5323768,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241206",
+      "modified": "2024-12-07T00:09:37.385000+00:00",
+      "num_bytes": 18423337533,
+      "num_rows": 5148142,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241207",
+      "modified": "2024-12-08T00:09:03.653000+00:00",
+      "num_bytes": 10709161024,
+      "num_rows": 4232318,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241208",
+      "modified": "2024-12-09T00:09:35.774000+00:00",
+      "num_bytes": 11998306620,
+      "num_rows": 4328028,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241209",
+      "modified": "2024-12-10T00:10:26.429000+00:00",
+      "num_bytes": 22682286475,
+      "num_rows": 5484054,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241210",
+      "modified": "2024-12-11T00:09:57.431000+00:00",
+      "num_bytes": 19166784477,
+      "num_rows": 5311826,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241211",
+      "modified": "2024-12-12T00:09:55.327000+00:00",
+      "num_bytes": 18682996873,
+      "num_rows": 5093430,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241212",
+      "modified": "2024-12-13T00:09:56.497000+00:00",
+      "num_bytes": 15359648434,
+      "num_rows": 4259217,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241213",
+      "modified": "2024-12-14T00:09:40.320000+00:00",
+      "num_bytes": 16371291189,
+      "num_rows": 4692971,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241214",
+      "modified": "2024-12-15T00:09:03.510000+00:00",
+      "num_bytes": 10353618991,
+      "num_rows": 4131848,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241215",
+      "modified": "2024-12-16T00:09:10.915000+00:00",
+      "num_bytes": 10193375999,
+      "num_rows": 4188473,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241216",
+      "modified": "2024-12-17T00:10:04.183000+00:00",
+      "num_bytes": 21140318660,
+      "num_rows": 5201094,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241217",
+      "modified": "2024-12-18T00:09:53.832000+00:00",
+      "num_bytes": 18098556427,
+      "num_rows": 5071704,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241218",
+      "modified": "2024-12-19T00:09:50.505000+00:00",
+      "num_bytes": 18785270565,
+      "num_rows": 5225133,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241219",
+      "modified": "2024-12-20T00:09:50.387000+00:00",
+      "num_bytes": 18463788596,
+      "num_rows": 5213031,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241220",
+      "modified": "2024-12-21T00:09:28.627000+00:00",
+      "num_bytes": 17008790794,
+      "num_rows": 4987518,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241221",
+      "modified": "2024-12-22T00:08:59.171000+00:00",
+      "num_bytes": 9744452488,
+      "num_rows": 3865230,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241222",
+      "modified": "2024-12-23T00:09:08.055000+00:00",
+      "num_bytes": 9671059607,
+      "num_rows": 3999392,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241223",
+      "modified": "2024-12-24T00:09:42.359000+00:00",
+      "num_bytes": 17699238221,
+      "num_rows": 4814450,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241224",
+      "modified": "2024-12-25T00:08:55.952000+00:00",
+      "num_bytes": 12203879990,
+      "num_rows": 4370174,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241225",
+      "modified": "2024-12-26T00:08:57.022000+00:00",
+      "num_bytes": 9105047395,
+      "num_rows": 3865232,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241226",
+      "modified": "2024-12-27T00:09:06.098000+00:00",
+      "num_bytes": 10861471115,
+      "num_rows": 4275598,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241227",
+      "modified": "2024-12-28T00:09:07.239000+00:00",
+      "num_bytes": 11666936251,
+      "num_rows": 4414832,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241228",
+      "modified": "2024-12-29T00:08:55.113000+00:00",
+      "num_bytes": 9180683963,
+      "num_rows": 3954203,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241229",
+      "modified": "2024-12-30T00:09:05.791000+00:00",
+      "num_bytes": 9067063887,
+      "num_rows": 3964314,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241230",
+      "modified": "2024-12-31T00:09:24.804000+00:00",
+      "num_bytes": 14443427046,
+      "num_rows": 4597917,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20241231",
+      "modified": "2025-01-01T00:08:58.551000+00:00",
+      "num_bytes": 11636603577,
+      "num_rows": 4135023,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250101",
+      "modified": "2025-01-02T00:09:07.507000+00:00",
+      "num_bytes": 11060529074,
+      "num_rows": 3909993,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250102",
+      "modified": "2025-01-03T00:09:26.562000+00:00",
+      "num_bytes": 14105679385,
+      "num_rows": 4677256,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250103",
+      "modified": "2025-01-04T00:09:25.800000+00:00",
+      "num_bytes": 14753734371,
+      "num_rows": 4740429,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250104",
+      "modified": "2025-01-05T00:09:03.673000+00:00",
+      "num_bytes": 10142857096,
+      "num_rows": 4185463,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250105",
+      "modified": "2025-01-06T00:09:10.623000+00:00",
+      "num_bytes": 9704915277,
+      "num_rows": 4135646,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250106",
+      "modified": "2025-01-07T00:09:47.264000+00:00",
+      "num_bytes": 18931698075,
+      "num_rows": 5213641,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250107",
+      "modified": "2025-01-08T00:09:40.339000+00:00",
+      "num_bytes": 16453636023,
+      "num_rows": 5216121,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250108",
+      "modified": "2025-01-09T00:09:40.283000+00:00",
+      "num_bytes": 18292630957,
+      "num_rows": 5611309,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250109",
+      "modified": "2025-01-10T00:09:43.802000+00:00",
+      "num_bytes": 17313791420,
+      "num_rows": 5238650,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250110",
+      "modified": "2025-01-11T00:09:42.237000+00:00",
+      "num_bytes": 18045115300,
+      "num_rows": 5755702,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250111",
+      "modified": "2025-01-12T00:09:07.968000+00:00",
+      "num_bytes": 11480600494,
+      "num_rows": 5762897,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250112",
+      "modified": "2025-01-13T00:09:03.390000+00:00",
+      "num_bytes": 10535174437,
+      "num_rows": 4703085,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250113",
+      "modified": "2025-01-14T00:09:28.765000+00:00",
+      "num_bytes": 21693044855,
+      "num_rows": 5329715,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250114",
+      "modified": "2025-01-15T00:09:48.693000+00:00",
+      "num_bytes": 18931841925,
+      "num_rows": 5580100,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250115",
+      "modified": "2025-01-16T00:09:47.510000+00:00",
+      "num_bytes": 18936683409,
+      "num_rows": 5307607,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250116",
+      "modified": "2025-01-17T00:09:54.240000+00:00",
+      "num_bytes": 18932306920,
+      "num_rows": 5360096,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250117",
+      "modified": "2025-01-18T00:09:35.282000+00:00",
+      "num_bytes": 17812835915,
+      "num_rows": 5192643,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250118",
+      "modified": "2025-01-19T00:09:07.690000+00:00",
+      "num_bytes": 10859290282,
+      "num_rows": 4318109,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250119",
+      "modified": "2025-01-20T00:09:07.783000+00:00",
+      "num_bytes": 10958841535,
+      "num_rows": 4332286,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250120",
+      "modified": "2025-01-21T00:09:51.026000+00:00",
+      "num_bytes": 20992724428,
+      "num_rows": 5497126,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250121",
+      "modified": "2025-01-22T00:09:53.181000+00:00",
+      "num_bytes": 19481660693,
+      "num_rows": 5483379,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250122",
+      "modified": "2025-01-23T00:09:45.652000+00:00",
+      "num_bytes": 19281820116,
+      "num_rows": 5484898,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250123",
+      "modified": "2025-01-24T00:10:05.722000+00:00",
+      "num_bytes": 19067942370,
+      "num_rows": 5413659,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250124",
+      "modified": "2025-01-25T00:09:48.251000+00:00",
+      "num_bytes": 18372038630,
+      "num_rows": 5315976,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250125",
+      "modified": "2025-01-26T00:09:13.624000+00:00",
+      "num_bytes": 10983978805,
+      "num_rows": 4463252,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250126",
+      "modified": "2025-01-27T00:09:13.603000+00:00",
+      "num_bytes": 11126786224,
+      "num_rows": 4491867,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250127",
+      "modified": "2025-01-28T00:10:18.107000+00:00",
+      "num_bytes": 22251609771,
+      "num_rows": 5471419,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250128",
+      "modified": "2025-01-29T00:09:44.205000+00:00",
+      "num_bytes": 18875840683,
+      "num_rows": 5376056,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250129",
+      "modified": "2025-01-30T00:09:45.111000+00:00",
+      "num_bytes": 18075718273,
+      "num_rows": 5312491,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250130",
+      "modified": "2025-01-31T00:09:49.555000+00:00",
+      "num_bytes": 17596096836,
+      "num_rows": 5233295,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250131",
+      "modified": "2025-02-01T00:09:49.427000+00:00",
+      "num_bytes": 16714380108,
+      "num_rows": 5088950,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250201",
+      "modified": "2025-02-02T00:09:18.910000+00:00",
+      "num_bytes": 12996782221,
+      "num_rows": 4494000,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250202",
+      "modified": "2025-02-03T00:09:13.347000+00:00",
+      "num_bytes": 10440181307,
+      "num_rows": 4382158,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250203",
+      "modified": "2025-02-04T00:10:10.914000+00:00",
+      "num_bytes": 21490033698,
+      "num_rows": 5497946,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250204",
+      "modified": "2025-02-05T00:09:50.501000+00:00",
+      "num_bytes": 19554013962,
+      "num_rows": 5537306,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250205",
+      "modified": "2025-02-06T00:09:48.218000+00:00",
+      "num_bytes": 19524373958,
+      "num_rows": 5565743,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250206",
+      "modified": "2025-02-07T00:09:53.939000+00:00",
+      "num_bytes": 19044067605,
+      "num_rows": 5454454,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250207",
+      "modified": "2025-02-08T00:09:45.706000+00:00",
+      "num_bytes": 18816497545,
+      "num_rows": 5479838,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250208",
+      "modified": "2025-02-09T00:09:10.496000+00:00",
+      "num_bytes": 11803233406,
+      "num_rows": 4786276,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250209",
+      "modified": "2025-02-10T00:09:17.190000+00:00",
+      "num_bytes": 11773282625,
+      "num_rows": 4790044,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250210",
+      "modified": "2025-02-11T00:10:10.846000+00:00",
+      "num_bytes": 22775835833,
+      "num_rows": 5815775,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250211",
+      "modified": "2025-02-12T00:10:11.389000+00:00",
+      "num_bytes": 20522454729,
+      "num_rows": 5969376,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250212",
+      "modified": "2025-02-13T00:09:49.547000+00:00",
+      "num_bytes": 20328285465,
+      "num_rows": 5980774,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250213",
+      "modified": "2025-02-14T00:09:58.174000+00:00",
+      "num_bytes": 19757030699,
+      "num_rows": 5911796,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250214",
+      "modified": "2025-02-15T00:09:45.282000+00:00",
+      "num_bytes": 18638635221,
+      "num_rows": 5641583,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250215",
+      "modified": "2025-02-16T00:09:09.099000+00:00",
+      "num_bytes": 11805031635,
+      "num_rows": 4669434,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250216",
+      "modified": "2025-02-17T00:09:12.065000+00:00",
+      "num_bytes": 11604011673,
+      "num_rows": 4735355,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250217",
+      "modified": "2025-02-18T00:09:57.145000+00:00",
+      "num_bytes": 21906816408,
+      "num_rows": 5845423,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250218",
+      "modified": "2025-02-19T00:09:55.361000+00:00",
+      "num_bytes": 19621099598,
+      "num_rows": 5788112,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250219",
+      "modified": "2025-02-20T00:09:51.111000+00:00",
+      "num_bytes": 19873924658,
+      "num_rows": 5799844,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250220",
+      "modified": "2025-02-21T00:09:58.295000+00:00",
+      "num_bytes": 20143697068,
+      "num_rows": 5808113,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250221",
+      "modified": "2025-02-22T00:09:54.185000+00:00",
+      "num_bytes": 18778462753,
+      "num_rows": 5650696,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250222",
+      "modified": "2025-02-23T00:09:20.872000+00:00",
+      "num_bytes": 13077049810,
+      "num_rows": 5078594,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250223",
+      "modified": "2025-02-24T00:09:22.939000+00:00",
+      "num_bytes": 11755391400,
+      "num_rows": 4865607,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250224",
+      "modified": "2025-02-25T00:10:40.689000+00:00",
+      "num_bytes": 23250792706,
+      "num_rows": 5904394,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250225",
+      "modified": "2025-02-26T00:09:55.779000+00:00",
+      "num_bytes": 20076440725,
+      "num_rows": 5816913,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250226",
+      "modified": "2025-02-27T00:09:55.929000+00:00",
+      "num_bytes": 19992951662,
+      "num_rows": 5923721,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250227",
+      "modified": "2025-02-28T00:09:57.896000+00:00",
+      "num_bytes": 20042467526,
+      "num_rows": 5851844,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250228",
+      "modified": "2025-03-01T00:09:41.297000+00:00",
+      "num_bytes": 18350619504,
+      "num_rows": 5634738,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250301",
+      "modified": "2025-03-02T00:09:20.226000+00:00",
+      "num_bytes": 14670978336,
+      "num_rows": 5034339,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250302",
+      "modified": "2025-03-03T00:09:16.870000+00:00",
+      "num_bytes": 12223359815,
+      "num_rows": 4917634,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250303",
+      "modified": "2025-03-04T00:10:26.381000+00:00",
+      "num_bytes": 23675318760,
+      "num_rows": 5869215,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250304",
+      "modified": "2025-03-05T00:10:05.525000+00:00",
+      "num_bytes": 20244090439,
+      "num_rows": 5813925,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250305",
+      "modified": "2025-03-06T00:09:52.306000+00:00",
+      "num_bytes": 19485278478,
+      "num_rows": 5874744,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250306",
+      "modified": "2025-03-07T00:10:00.377000+00:00",
+      "num_bytes": 19397964829,
+      "num_rows": 5839634,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250307",
+      "modified": "2025-03-08T00:09:44.703000+00:00",
+      "num_bytes": 19168794594,
+      "num_rows": 5777776,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250308",
+      "modified": "2025-03-09T00:09:12.819000+00:00",
+      "num_bytes": 12253876110,
+      "num_rows": 4933728,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250309",
+      "modified": "2025-03-10T00:09:22.097000+00:00",
+      "num_bytes": 11989672560,
+      "num_rows": 4990582,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250310",
+      "modified": "2025-03-11T00:15:10.705000+00:00",
+      "num_bytes": 23642869399,
+      "num_rows": 6011757,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250311",
+      "modified": "2025-03-12T00:10:04.315000+00:00",
+      "num_bytes": 21084956535,
+      "num_rows": 5896488,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250312",
+      "modified": "2025-03-13T00:09:40.371000+00:00",
+      "num_bytes": 20962363999,
+      "num_rows": 6005191,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250313",
+      "modified": "2025-03-14T00:09:35.529000+00:00",
+      "num_bytes": 20068472327,
+      "num_rows": 5991830,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250314",
+      "modified": "2025-03-15T00:09:30.015000+00:00",
+      "num_bytes": 18461584968,
+      "num_rows": 5825770,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250315",
+      "modified": "2025-03-16T00:09:12.390000+00:00",
+      "num_bytes": 12191548927,
+      "num_rows": 5029646,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250316",
+      "modified": "2025-03-17T00:09:27.446000+00:00",
+      "num_bytes": 12042129808,
+      "num_rows": 4970534,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250317",
+      "modified": "2025-03-18T00:10:06.401000+00:00",
+      "num_bytes": 22895848536,
+      "num_rows": 5962056,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250318",
+      "modified": "2025-03-19T00:09:55.356000+00:00",
+      "num_bytes": 20667071624,
+      "num_rows": 5925736,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250319",
+      "modified": "2025-03-20T00:10:01.920000+00:00",
+      "num_bytes": 19950986123,
+      "num_rows": 5878867,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250320",
+      "modified": "2025-03-21T00:10:09.392000+00:00",
+      "num_bytes": 20384710583,
+      "num_rows": 5830631,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250321",
+      "modified": "2025-03-22T00:10:08.143000+00:00",
+      "num_bytes": 19461192246,
+      "num_rows": 5671306,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250322",
+      "modified": "2025-03-23T00:09:19.597000+00:00",
+      "num_bytes": 11911875066,
+      "num_rows": 4806313,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250323",
+      "modified": "2025-03-24T00:09:33.031000+00:00",
+      "num_bytes": 12042196040,
+      "num_rows": 4820949,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250324",
+      "modified": "2025-03-25T00:10:18.332000+00:00",
+      "num_bytes": 23990008521,
+      "num_rows": 5910333,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250325",
+      "modified": "2025-03-26T00:10:13.732000+00:00",
+      "num_bytes": 21904188898,
+      "num_rows": 5897844,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250326",
+      "modified": "2025-03-27T00:10:01.212000+00:00",
+      "num_bytes": 20219504727,
+      "num_rows": 5794782,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250327",
+      "modified": "2025-03-28T00:10:03.073000+00:00",
+      "num_bytes": 20169967716,
+      "num_rows": 5830634,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250328",
+      "modified": "2025-03-29T00:10:13.188000+00:00",
+      "num_bytes": 18705777466,
+      "num_rows": 5596191,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250329",
+      "modified": "2025-03-30T00:09:28.542000+00:00",
+      "num_bytes": 12330086407,
+      "num_rows": 4842910,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250330",
+      "modified": "2025-03-31T00:09:23.956000+00:00",
+      "num_bytes": 11935634027,
+      "num_rows": 4780535,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250331",
+      "modified": "2025-04-01T00:10:15.289000+00:00",
+      "num_bytes": 23158809499,
+      "num_rows": 5822853,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250401",
+      "modified": "2025-04-02T00:10:09.155000+00:00",
+      "num_bytes": 23339325826,
+      "num_rows": 5853069,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250402",
+      "modified": "2025-04-03T00:09:59.548000+00:00",
+      "num_bytes": 20967889769,
+      "num_rows": 5798187,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250403",
+      "modified": "2025-04-04T00:09:53.593000+00:00",
+      "num_bytes": 20276152327,
+      "num_rows": 5754516,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250404",
+      "modified": "2025-04-05T00:09:46.839000+00:00",
+      "num_bytes": 19057059646,
+      "num_rows": 5460391,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250405",
+      "modified": "2025-04-06T00:09:11.813000+00:00",
+      "num_bytes": 12401736388,
+      "num_rows": 4795535,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250406",
+      "modified": "2025-04-07T00:09:25.937000+00:00",
+      "num_bytes": 12565416098,
+      "num_rows": 4864605,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250407",
+      "modified": "2025-04-08T00:10:20.656000+00:00",
+      "num_bytes": 24606712502,
+      "num_rows": 5884082,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250408",
+      "modified": "2025-04-09T00:09:57.955000+00:00",
+      "num_bytes": 21036585316,
+      "num_rows": 5885707,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250409",
+      "modified": "2025-04-10T00:09:59.191000+00:00",
+      "num_bytes": 20375826058,
+      "num_rows": 5754672,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250410",
+      "modified": "2025-04-11T00:09:53.658000+00:00",
+      "num_bytes": 19750493742,
+      "num_rows": 6365925,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250411",
+      "modified": "2025-04-12T00:09:33.691000+00:00",
+      "num_bytes": 18895579944,
+      "num_rows": 5500638,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250412",
+      "modified": "2025-04-13T00:09:06.884000+00:00",
+      "num_bytes": 11805231461,
+      "num_rows": 4560855,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250413",
+      "modified": "2025-04-14T00:10:02.994000+00:00",
+      "num_bytes": 11776511606,
+      "num_rows": 4567024,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250414",
+      "modified": "2025-04-15T00:10:17.276000+00:00",
+      "num_bytes": 22625703384,
+      "num_rows": 5699521,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250415",
+      "modified": "2025-04-16T00:09:49.262000+00:00",
+      "num_bytes": 19975077686,
+      "num_rows": 5634352,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250416",
+      "modified": "2025-04-17T00:10:19.813000+00:00",
+      "num_bytes": 18680758720,
+      "num_rows": 5400352,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250417",
+      "modified": "2025-04-18T00:09:53.023000+00:00",
+      "num_bytes": 18364576103,
+      "num_rows": 5382716,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250418",
+      "modified": "2025-04-19T00:09:43.128000+00:00",
+      "num_bytes": 16521027286,
+      "num_rows": 5240446,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250419",
+      "modified": "2025-04-20T00:09:10.038000+00:00",
+      "num_bytes": 11683402829,
+      "num_rows": 4656469,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250420",
+      "modified": "2025-04-21T00:09:13.069000+00:00",
+      "num_bytes": 11327230852,
+      "num_rows": 4604371,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250421",
+      "modified": "2025-04-22T00:10:10.450000+00:00",
+      "num_bytes": 20125186442,
+      "num_rows": 5543534,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250422",
+      "modified": "2025-04-23T00:09:59.326000+00:00",
+      "num_bytes": 20396436897,
+      "num_rows": 5791246,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250423",
+      "modified": "2025-04-24T00:10:02.781000+00:00",
+      "num_bytes": 19987965560,
+      "num_rows": 5714370,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250424",
+      "modified": "2025-04-25T00:10:24.253000+00:00",
+      "num_bytes": 21041699256,
+      "num_rows": 5751288,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250425",
+      "modified": "2025-04-26T00:09:40.734000+00:00",
+      "num_bytes": 19181359451,
+      "num_rows": 5518700,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250426",
+      "modified": "2025-04-27T00:09:20.557000+00:00",
+      "num_bytes": 12342390692,
+      "num_rows": 4677684,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250427",
+      "modified": "2025-04-28T00:09:23.985000+00:00",
+      "num_bytes": 12724495622,
+      "num_rows": 4781531,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250428",
+      "modified": "2025-04-29T00:10:10.959000+00:00",
+      "num_bytes": 22499401878,
+      "num_rows": 5682018,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250429",
+      "modified": "2025-04-30T00:09:55.787000+00:00",
+      "num_bytes": 20771020971,
+      "num_rows": 5715881,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250430",
+      "modified": "2025-05-01T00:09:59.870000+00:00",
+      "num_bytes": 20376219196,
+      "num_rows": 5597099,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250501",
+      "modified": "2025-05-02T00:09:46.263000+00:00",
+      "num_bytes": 19163714688,
+      "num_rows": 5284549,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250502",
+      "modified": "2025-05-03T00:09:39.847000+00:00",
+      "num_bytes": 16568354072,
+      "num_rows": 5050236,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250503",
+      "modified": "2025-05-04T00:09:19.306000+00:00",
+      "num_bytes": 12082602010,
+      "num_rows": 4529983,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250504",
+      "modified": "2025-05-05T00:09:26.173000+00:00",
+      "num_bytes": 12239689125,
+      "num_rows": 4599988,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250505",
+      "modified": "2025-05-06T00:10:21.157000+00:00",
+      "num_bytes": 23501219799,
+      "num_rows": 5731053,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250506",
+      "modified": "2025-05-07T00:10:07.962000+00:00",
+      "num_bytes": 21478200704,
+      "num_rows": 5757069,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250507",
+      "modified": "2025-05-08T00:10:12.279000+00:00",
+      "num_bytes": 20984590686,
+      "num_rows": 5675203,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250508",
+      "modified": "2025-05-09T00:10:07.040000+00:00",
+      "num_bytes": 20412128096,
+      "num_rows": 5608564,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250509",
+      "modified": "2025-05-10T00:09:43.517000+00:00",
+      "num_bytes": 19196013326,
+      "num_rows": 5490372,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250510",
+      "modified": "2025-05-11T00:09:15.028000+00:00",
+      "num_bytes": 12642912677,
+      "num_rows": 4706763,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250511",
+      "modified": "2025-05-12T00:09:22.168000+00:00",
+      "num_bytes": 12149982795,
+      "num_rows": 4662120,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250512",
+      "modified": "2025-05-13T00:10:03.532000+00:00",
+      "num_bytes": 23502793466,
+      "num_rows": 5818297,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250513",
+      "modified": "2025-05-14T00:09:52.251000+00:00",
+      "num_bytes": 21042021688,
+      "num_rows": 5731809,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250514",
+      "modified": "2025-05-15T00:10:03.357000+00:00",
+      "num_bytes": 20587282815,
+      "num_rows": 5713731,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250515",
+      "modified": "2025-05-16T00:09:55.516000+00:00",
+      "num_bytes": 20147468706,
+      "num_rows": 5547296,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250516",
+      "modified": "2025-05-17T00:09:50.379000+00:00",
+      "num_bytes": 19439900856,
+      "num_rows": 5408091,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250517",
+      "modified": "2025-05-18T00:09:17.355000+00:00",
+      "num_bytes": 13154636947,
+      "num_rows": 4670037,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250518",
+      "modified": "2025-05-19T00:09:26.316000+00:00",
+      "num_bytes": 12926486574,
+      "num_rows": 4727937,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250519",
+      "modified": "2025-05-20T00:10:03.736000+00:00",
+      "num_bytes": 23567836974,
+      "num_rows": 5821837,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250520",
+      "modified": "2025-05-21T00:09:56.125000+00:00",
+      "num_bytes": 21020105589,
+      "num_rows": 5759769,
+      "present": true,
+      "table_type": "TABLE"
+    },
+    {
+      "date": "20250521",
+      "modified": "2025-05-22T00:10:03.839000+00:00",
+      "num_bytes": 21078158207,
+      "num_rows": 5758579,
+      "present": true,
+      "table_type": "TABLE"
+    }
+  ]
+}

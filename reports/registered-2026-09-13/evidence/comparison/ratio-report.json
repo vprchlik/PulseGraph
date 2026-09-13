@@ -1,0 +1,121 @@
+{
+  "calendar": "America/Los_Angeles",
+  "comparison_sha256": "bf8eefa062a77dccbf55e4f377183bb54b241767c155fa9642fb5b8c2aaf5eb4",
+  "descriptive_monthly_slopes": [
+    {
+      "december_1_30_ratio": 0.8576512455516014,
+      "january_ratio": 0.8745928338762216,
+      "linear_ratio_slope_per_month_descriptive": -0.0016249663131946161,
+      "maximum_monthly_ratio": 0.9964739069111425,
+      "minimum_monthly_ratio": 0.8038277511961722,
+      "repo_name": "django/django"
+    },
+    {
+      "december_1_30_ratio": 0.9018181818181819,
+      "january_ratio": 0.8267045454545454,
+      "linear_ratio_slope_per_month_descriptive": 0.0021312635142151626,
+      "maximum_monthly_ratio": 0.9221556886227545,
+      "minimum_monthly_ratio": 0.7761194029850746,
+      "repo_name": "expressjs/express"
+    },
+    {
+      "december_1_30_ratio": 0.8643617021276596,
+      "january_ratio": 0.8745188606620478,
+      "linear_ratio_slope_per_month_descriptive": -0.0005982615903680925,
+      "maximum_monthly_ratio": 0.9103202846975089,
+      "minimum_monthly_ratio": 0.7939262472885033,
+      "repo_name": "microsoft/vscode"
+    },
+    {
+      "december_1_30_ratio": 0.8532110091743119,
+      "january_ratio": 0.8601694915254238,
+      "linear_ratio_slope_per_month_descriptive": -0.0012385947773602183,
+      "maximum_monthly_ratio": 0.8932926829268293,
+      "minimum_monthly_ratio": 0.828996282527881,
+      "repo_name": "nodejs/node"
+    },
+    {
+      "december_1_30_ratio": 0.9005847953216374,
+      "january_ratio": 0.8611825192802056,
+      "linear_ratio_slope_per_month_descriptive": 0.0011915156209845932,
+      "maximum_monthly_ratio": 0.928082191780822,
+      "minimum_monthly_ratio": 0.853125,
+      "repo_name": "pallets/flask"
+    },
+    {
+      "december_1_30_ratio": 0.8591549295774648,
+      "january_ratio": 0.8820058997050148,
+      "linear_ratio_slope_per_month_descriptive": -0.002110303915032853,
+      "maximum_monthly_ratio": 0.947935368043088,
+      "minimum_monthly_ratio": 0.8591549295774648,
+      "repo_name": "python/cpython"
+    },
+    {
+      "december_1_30_ratio": 0.866620594333103,
+      "january_ratio": 0.8579710144927536,
+      "linear_ratio_slope_per_month_descriptive": -0.0012412398779730754,
+      "maximum_monthly_ratio": 0.9063004846526656,
+      "minimum_monthly_ratio": 0.7968021319120586,
+      "repo_name": "react/react"
+    },
+    {
+      "december_1_30_ratio": 0.7751322751322751,
+      "january_ratio": 0.8043478260869565,
+      "linear_ratio_slope_per_month_descriptive": -0.002235244124191722,
+      "maximum_monthly_ratio": 0.8502824858757062,
+      "minimum_monthly_ratio": 0.6043956043956044,
+      "repo_name": "vuejs/vue"
+    }
+  ],
+  "largest_eight": [
+    {
+      "metadata_stars_at_capture": 250096,
+      "repo_id": 10270250,
+      "repo_name": "react/react"
+    },
+    {
+      "metadata_stars_at_capture": 212485,
+      "repo_id": 11730342,
+      "repo_name": "vuejs/vue"
+    },
+    {
+      "metadata_stars_at_capture": 192098,
+      "repo_id": 41881900,
+      "repo_name": "microsoft/vscode"
+    },
+    {
+      "metadata_stars_at_capture": 121605,
+      "repo_id": 27193779,
+      "repo_name": "nodejs/node"
+    },
+    {
+      "metadata_stars_at_capture": 90764,
+      "repo_id": 4164482,
+      "repo_name": "django/django"
+    },
+    {
+      "metadata_stars_at_capture": 76863,
+      "repo_id": 81598961,
+      "repo_name": "python/cpython"
+    },
+    {
+      "metadata_stars_at_capture": 74278,
+      "repo_id": 596892,
+      "repo_name": "pallets/flask"
+    },
+    {
+      "metadata_stars_at_capture": 69456,
+      "repo_id": 237159,
+      "repo_name": "expressjs/express"
+    }
+  ],
+  "largest_eight_rule": "Largest current stargazers_count in metadata saved with the original validation capture; stable repo ID breaks ties. No new API request or selection by ratio.",
+  "matching_rule": "Ratios use January 1-December 30: the export lacks the last eight hours of LA December 31. No boundary counts are imputed. Full 366-day API totals and observed partial archive totals are separately recorded, without a full-year matched ratio.",
+  "n_api_above_archive": 2,
+  "n_api_below_archive": 17,
+  "n_api_equal_archive": 1,
+  "outputs": {
+    "monthly_ratios_largest_eight.csv": "e43f05334b8759e10a7d11250092ecdbca6266f0002521e0e829830dd05b6ef0",
+    "repository_2024_totals.csv": "43e59d259607e0d77bd8f4631e0fc7cc74c835118e8372ddffc6b5412aafbc30"
+  }
+}
