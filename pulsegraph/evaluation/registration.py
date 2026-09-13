@@ -8,6 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 from pulsegraph.config import ROOT_DIR
+from pulsegraph.data.calendars import CALENDAR_HYPOTHESES, creation_day
 from pulsegraph.data.history_validation import validation_status_counts
 from pulsegraph.data.loader import build_dataset_for_forecasting, validate_signals
 from pulsegraph.data.regimes import assert_eligibility_precedes_cutoff
@@ -187,6 +188,8 @@ def verify_readiness(readiness, base, spec):
             raise ValueError(f"Unresolved main-study readiness: {key}")
     if readiness.get("main_study_resolved") is not True:
         raise ValueError("Main-study freeze requirements are unresolved")
+    if readiness.get("calendar_convention") not in CALENDAR_HYPOTHESES:
+        raise ValueError("The validated calendar convention is required")
     versions = installed_versions()
     pins = readiness.get("runtime_versions", {})
     if not RUNTIME_PACKAGES.issubset(pins) or any(versions.get(k) != v for k, v in pins.items()):
@@ -224,7 +227,10 @@ def verify_readiness(readiness, base, spec):
         r["repo_id"] for r in documents["validation"]["repositories"] if r["status"] == "complete"
     )
     if (
-        comparison.get("n_rows") != validation_counts["n_complete"] * 366
+        comparison.get("n_rows") != validation_counts["n_complete"] * 366 * 3
+        or comparison.get("hypotheses") != list(CALENDAR_HYPOTHESES)
+        or comparison.get("n_hourly_rows") != validation_counts["n_complete"] * 366 * 24
+        or comparison.get("n_scored_days_per_repository_hypothesis") != 365
         or any(comparison.get(k) != v for k, v in validation_counts.items())
         or comparison.get("compared_repo_ids") != complete_ids
         or comparison.get("failures") != documents["validation"]["failures"]
@@ -287,10 +293,13 @@ def real_run_gate(
     from pulsegraph.data.frame import validate_sampling_log
 
     validate_sampling_log(evidence["candidate_order"], evidence["sampling_log"], manifest)
-    if not pd.to_datetime(manifest.observation_start).equals(
-        pd.to_datetime(manifest.creation_date).rename("observation_start")
-    ):
-        raise ValueError("Every observation history must begin at creation")
+    if "repository_created_at" not in manifest:
+        raise ValueError("Manifest requires the endpoint repository creation timestamp")
+    for row in manifest.itertuples(index=False):
+        if creation_day(row.repository_created_at, "UTC") != str(row.creation_date) or creation_day(
+            row.repository_created_at, readiness["calendar_convention"]
+        ) != str(row.observation_start):
+            raise ValueError("Every observation history must begin at creation in its calendar")
     dataset = build_dataset_for_forecasting(
         signals, manifest, observation_end=spec["observation_end"]
     )

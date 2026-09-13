@@ -1,4 +1,4 @@
-"""Daily counts on explicitly observed UTC calendars.
+"""Daily counts on explicitly observed calendars; naive midnight values are date labels.
 
 Missing event rows mean zero only after the caller has confirmed complete
 coverage of the requested interval. Never infer that interval from star dates.
@@ -34,7 +34,7 @@ def validate_signals(signals: pd.DataFrame) -> pd.DataFrame:
         frame.event_date.isna().any()
         or not frame.event_date.eq(frame.event_date.dt.normalize()).all()
     ):
-        raise ValueError("Daily counts must use whole UTC dates")
+        raise ValueError("Daily counts must use whole calendar dates")
     values = counts(frame.stars, allow_empty=True)
     if not np.equal(values, np.floor(values)).all():
         raise ValueError("Daily star counts must be integers")

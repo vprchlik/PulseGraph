@@ -40,7 +40,7 @@ def test_sql_declares_date_bounds_without_watch_action_scan():
     assert "type = 'WatchEvent'" in star_section
     assert "INTERVAL 89 DAY" in frame
     validation = (study / "validation_2024.sql").read_text()
-    assert "GENERATE_DATE_ARRAY" in validation and "COALESCE" in validation
+    assert "GENERATE_TIMESTAMP_ARRAY" in validation and "COALESCE" in validation
     assert "JSON_VALUE" not in validation
 
     def table_days(section):

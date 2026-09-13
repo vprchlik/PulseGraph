@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from pulsegraph.data.calendars import CALENDAR_HYPOTHESES, bin_archive_hours
 from pulsegraph.data.star_history import HistoryError, read_capture
 from pulsegraph.provenance import atomic_json, read_json, sha256_bytes
 
@@ -146,7 +147,7 @@ def fetch_validation(client, selection_path, output_dir):
 
 
 def compare_validation(validation_dir, archive_csv, output_dir):
-    """Archive export must contain all 366 days per successful repository, including zeros."""
+    """Compare three day hypotheses from complete 2024 UTC hourly exports."""
     base = Path(validation_dir)
     report = read_json(base / "validation.json")
     counts = validation_status_counts(report)
@@ -154,26 +155,9 @@ def compare_validation(validation_dir, archive_csv, output_dir):
     if not complete:
         raise ValueError("No complete validation captures are available for comparison")
     archive = pd.read_csv(archive_csv)
-    required = {"repo_id", "event_date", "watch_events"}
-    if not required.issubset(archive) or archive[list(required)].isna().any().any():
-        raise ValueError("Archive comparison requires repo_id, event_date and watch_events")
-    archive["event_date"] = pd.to_datetime(archive.event_date, errors="raise").dt.strftime(
-        "%Y-%m-%d"
-    )
-    values = archive.watch_events
-    if (
-        (values < 0).any()
-        or (values % 1 != 0).any()
-        or archive.duplicated(["repo_id", "event_date"]).any()
-    ):
-        raise ValueError("Invalid or duplicate archive daily counts")
-    days = pd.date_range("2024-01-01", "2024-12-31").strftime("%Y-%m-%d")
     complete_ids = {r["repo_id"] for r in complete}
-    excluded_ids = set(archive.repo_id) - complete_ids
-    archive = archive[archive.repo_id.isin(complete_ids)]
-    expected = {(r["repo_id"], day) for r in complete for day in days}
-    if set(archive[["repo_id", "event_date"]].itertuples(index=False, name=None)) != expected:
-        raise ValueError("Archive export must cover the complete repository/2024-day grid")
+    binned, excluded_ids = bin_archive_hours(archive, complete_ids)
+    days = pd.date_range("2024-01-01", "2024-12-31").strftime("%Y-%m-%d")
     frames = []
     for entry in complete:
         _, daily = read_capture(base / entry["capture"])
@@ -183,28 +167,61 @@ def compare_validation(validation_dir, archive_csv, output_dir):
         if len(selected) != len(days) or selected.event_date.duplicated().any():
             raise ValueError("Endpoint nominal day mapping is incomplete; resolve timezone first")
         frames.append(selected[["repo_id", "repo_name", "event_date", "stars"]])
-    paired = pd.concat(frames).merge(
-        archive[list(required)], on=["repo_id", "event_date"], validate="one_to_one"
-    )
+    paired = binned.merge(pd.concat(frames), on=["repo_id", "event_date"], validate="many_to_one")
     paired["difference"] = paired.stars - paired.watch_events
     paired["absolute_difference"] = paired.difference.abs()
-    paired["equal"] = paired.difference.eq(0)
-    summary = paired.groupby(["repo_id", "repo_name"], as_index=False).agg(
+    paired["equal"] = paired.difference.eq(0).where(paired.complete_archive_day)
+    scored = paired[paired.scored].copy()
+    summary = scored.groupby(["repo_id", "repo_name", "hypothesis"], as_index=False).agg(
+        n_days=("stars", "size"),
         api_total=("stars", "sum"),
         archive_total=("watch_events", "sum"),
         mean_absolute_difference=("absolute_difference", "mean"),
         fraction_equal=("equal", "mean"),
     )
+    scored["period"] = "standard_time"
+    scored.loc[scored.event_date.between("2024-03-10", "2024-11-02"), "period"] = "daylight_time"
+    period_summary = scored.groupby(
+        ["repo_id", "repo_name", "hypothesis", "period"], as_index=False
+    ).agg(
+        n_days=("stars", "size"),
+        mean_absolute_difference=("absolute_difference", "mean"),
+        fraction_equal=("equal", "mean"),
+    )
+    transition = paired[
+        paired.event_date.between("2024-03-03", "2024-03-17")
+        | paired.event_date.between("2024-10-27", "2024-11-10")
+    ]
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=False)
     paired.to_csv(output / "daily_comparison.csv", index=False)
     summary.to_csv(output / "repository_comparison.csv", index=False)
+    period_summary.to_csv(output / "period_comparison.csv", index=False)
+    transition.to_csv(output / "dst_transition_comparison.csv", index=False)
     atomic_json(
         output / "comparison.json",
         {
             "archive_sha256": sha256_bytes(Path(archive_csv).read_bytes()),
             "validation_sha256": sha256_bytes((base / "validation.json").read_bytes()),
-            "alignment": "API nominal versus archive UTC dates; equivalence is unverified",
+            "alignment": "Three hourly-to-day hypotheses against unchanged API nominal day labels",
+            "hypotheses": list(CALENDAR_HYPOTHESES),
+            "common_score_start": "2024-01-01",
+            "common_score_end": "2024-12-30",
+            "n_scored_days_per_repository_hypothesis": 365,
+            "n_hourly_rows": len(archive[archive.repo_id.isin(complete_ids)]),
+            "partial_day_rule": (
+                "December 31 is partial for both UTC-8 calendars; "
+                "retain but do not score it under any hypothesis"
+            ),
+            "output_sha256": {
+                name: sha256_bytes((output / name).read_bytes())
+                for name in (
+                    "daily_comparison.csv",
+                    "repository_comparison.csv",
+                    "period_comparison.csv",
+                    "dst_transition_comparison.csv",
+                )
+            },
             "unstar_conclusion": "Differences may reflect unstars, archive misses or revisions",
             "n_rows": len(paired),
             **counts,

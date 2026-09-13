@@ -5,6 +5,7 @@
   "approved_by": null,
   "approved_at": null,
   "main_study_resolved": false,
+  "calendar_convention": null,
   "bin_to_calendar_mapping": null,
   "timezone_evidence": null,
   "unstar_interpretation": null,

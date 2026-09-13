@@ -59,7 +59,9 @@ def ready(tmp_path, monkeypatch):
     )
     atomic_json(root / "sampling.json", log)
     manifest = order.drop(columns=["selection_rank", "selection_seed"]).assign(
-        observation_start="2025-01-01", coverage_complete=True
+        observation_start="2025-01-01",
+        coverage_complete=True,
+        repository_created_at="2025-01-01T12:00:00Z",
     )
     atomic_json(root / "manifest.json", manifest.to_dict("records"))
     dates = pd.date_range("2025-01-01", "2026-08-31")
@@ -93,7 +95,10 @@ def ready(tmp_path, monkeypatch):
     atomic_json(root / "validation.json", validation)
     documents = {
         "comparison": {
-            "n_rows": 19 * 366,
+            "n_rows": 19 * 366 * 3,
+            "hypotheses": ["UTC", "America/Los_Angeles", "UTC-08:00"],
+            "n_hourly_rows": 19 * 366 * 24,
+            "n_scored_days_per_repository_hypothesis": 365,
             "validation_sha256": file_hash(root / "validation.json"),
             "n_attempted": 20,
             "n_complete": 19,
@@ -124,6 +129,7 @@ def ready(tmp_path, monkeypatch):
         if value is None:
             readiness[key] = "synthetic fixture only"
     readiness.update(
+        calendar_convention="UTC",
         implementation_commit=implementation,
         main_study_resolved=True,
         runtime_versions=versions,

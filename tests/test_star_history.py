@@ -201,16 +201,16 @@ def test_validation_resume_and_full_daily_comparison(tmp_path, fail_one):
     archive = tmp_path / "archive.csv"
     pd.DataFrame(
         [
-            {"repo_id": i, "event_date": str(d.date()), "watch_events": 1}
+            {"repo_id": i, "hour_start": d.isoformat(), "watch_events": int(d.hour == 12)}
             for i in range(20)
-            for d in pd.date_range("2024-01-01", "2024-12-31")
+            for d in pd.date_range("2024-01-01", "2025-01-01", freq="h", inclusive="left", tz="UTC")
         ]
     ).to_csv(archive, index=False)
     summary = compare_validation(capture, archive, tmp_path / "comparison")
-    assert summary.api_total.tolist() == [732] * n_complete
-    assert summary.mean_absolute_difference.tolist() == [1] * n_complete
+    assert summary.api_total.tolist() == [730] * (n_complete * 3)
+    assert summary.mean_absolute_difference.tolist() == [1] * (n_complete * 3)
     comparison = json.loads((tmp_path / "comparison/comparison.json").read_text())
-    assert comparison["n_rows"] == n_complete * 366
+    assert comparison["n_rows"] == n_complete * 366 * 3
     assert comparison["n_attempted"] == 20
     assert comparison["n_complete"] == n_complete
     assert comparison["n_failed"] == int(fail_one)

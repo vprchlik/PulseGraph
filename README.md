@@ -111,16 +111,20 @@ credit; verify current pricing before approval or supply `--usd-per-tib`.
 Written approval precedes either actual query. Preserve exact SQL, parameters,
 estimates, job IDs, actual costs and coverage evidence.
 
-After the approved 2024 export supplies all 366 days for each complete capture
-(rows for repositories whose history failed are excluded from the comparison):
+The approved 2024 export supplies every UTC hour for all 20 repositories,
+including zeros (8,784 hours each). Comparison uses complete captures and bins
+hours as UTC days, America/Los_Angeles days with DST, and fixed UTC-8 days.
 
 ```powershell
 .\.venv\Scripts\python.exe -m scripts.validate_star_history compare --validation data\raw\validation-2026-09-12 --archive-counts data\raw\archive-2024.csv --out data\validation-comparison
 ```
 
-This saves daily/repository comparisons and source hashes. It initially compares
-nominal API dates with archive UTC dates and labels that distinction. Resolve the
-bin-to-calendar mapping before constructing evaluation counts.
+This saves per-repository daily agreement/MAD under each hypothesis, seasonal
+summaries, transition-day details and source hashes. All hypotheses are scored
+on January 1 through December 30, the common complete-day span. December 31
+is retained with explicit partial-coverage flags for the UTC-8 calendars: the
+2024-only export lacks their final eight hours. Partial counts are never scored
+as full days. Resolve the calendar mapping before constructing evaluation counts.
 
 ## Models, calendar and scores
 
@@ -178,7 +182,12 @@ files with SHA-256 hashes. Evidence paths are relative to the readiness document
 - `smoke`: synthetic runtime/GPU report for this implementation and environment.
 
 The achieved manifest supplies stable ID, creation date, day-90 count, sampling
-stratum, fetched name, observation start and `coverage_complete: true`.
+stratum, fetched name, observation start, endpoint `repository_created_at` timestamp and
+`coverage_complete: true`. The manifest keeps the frame's UTC creation date;
+observation start is that creation instant's date in the validated convention.
+The readiness field `calendar_convention` identifies UTC, America/Los_Angeles,
+or fixed UTC-08:00. Stored daily timestamps are calendar labels, not a claim
+that non-UTC bins begin at UTC midnight.
 Signals explicitly contain every repository/day's integer count through the
 endpoint. Preserve raw capture provenance with these data. The gate rejects
 missing daily bins instead of using the synthetic loader's zero-fill option.
