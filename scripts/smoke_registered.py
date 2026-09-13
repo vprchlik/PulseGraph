@@ -2,6 +2,7 @@
 
 import argparse
 import sys
+from contextlib import ExitStack
 from pathlib import Path
 from time import perf_counter
 
@@ -55,9 +56,10 @@ def main():
     atomic_json(args.out, report)
     try:
         report["median_checks"] = verify_classical_medians()
-        for name in names:
-            model = make_registered_model(name, spec)
-            try:
+        with ExitStack() as lifecycle:
+            for name in names:
+                model = make_registered_model(name, spec)
+                lifecycle.callback(release_model, model)
                 for case, context in enumerate(contexts):
                     for horizon in (7, 30, 90):
                         start = perf_counter()
@@ -76,11 +78,9 @@ def main():
                             }
                         )
                         atomic_json(args.out, report)
-            finally:
-                release_model(model)
-        report["memory"] = memory_snapshot()
-        report["peak_vram_bytes"] = report["memory"]["peak_reserved_bytes"]
-        report["passed"] = True
+            report["memory"] = memory_snapshot()
+            report["peak_vram_bytes"] = report["memory"]["peak_reserved_bytes"]
+            report["passed"] = True
     except BaseException as error:
         report["error_type"] = type(error).__name__
         raise

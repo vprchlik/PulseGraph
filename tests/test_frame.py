@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -33,7 +34,7 @@ def test_dry_run_never_fetches_results_or_submits_billable_job():
 def test_sql_declares_date_bounds_without_watch_action_scan():
     study = Path(__file__).resolve().parents[1] / "study"
     frame = (study / "frame.sql").read_text()
-    assert "'20250221'" in frame and "'20250521'" in frame
+    assert "DATE '2025-02-21'" in frame and "DATE '2025-05-21'" in frame
     star_section = frame.split("), stars AS (")[1]
     assert "payload" not in star_section
     assert "type = 'WatchEvent'" in star_section
@@ -41,6 +42,22 @@ def test_sql_declares_date_bounds_without_watch_action_scan():
     validation = (study / "validation_2024.sql").read_text()
     assert "GENERATE_DATE_ARRAY" in validation and "COALESCE" in validation
     assert "JSON_VALUE" not in validation
+
+    def table_days(section):
+        assert "`githubarchive.day.*`" not in section  # Also matches day.yesterday view.
+        spans = re.findall(
+            r"`githubarchive.day.(\d{4})\*`\s+WHERE _TABLE_SUFFIX BETWEEN '(\d{4})' AND '(\d{4})'",
+            section,
+        )
+        return [
+            day for year, first, last in spans for day in pd.date_range(year + first, year + last)
+        ]
+
+    assert table_days(frame.split("), stars AS (")[0]) == list(
+        pd.date_range("2023-01-01", "2025-02-21")
+    )
+    assert table_days(star_section) == list(pd.date_range("2023-01-01", "2025-05-21"))
+    assert table_days(validation) == list(pd.date_range("2024-01-01", "2024-12-31")) * 2
 
 
 def test_seeded_frame_walk_records_all_skips_and_never_reorders():

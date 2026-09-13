@@ -196,7 +196,9 @@ protocol commit/bytes, current clean implementation, model pins/seeds/settings,
 and commands. The GPU allocator is capped at 7 GB, reduced when shared free memory
 is lower, reserving 1 GB below the 8 GB limit for CUDA/library overhead. Actual
 allocator peaks are saved and checked; GPU smoke must demonstrate the budget.
-Models run serially and are released between repositories/models.
+Each model is constructed once per run invocation. Foundation weights remain
+resident across repositories; forecasts run serially and all models are released
+at completion or failure. Synthetic GPU smoke uses the same resident-model lifecycle.
 
 Each whole repository writes a hashed atomic checkpoint only after every
 model/window succeeds. Any failed window, including OOM, stops and records

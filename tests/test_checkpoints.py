@@ -91,6 +91,49 @@ def test_checkpoint_corruption_and_incomplete_repository_fail(tmp_path):
         _checkpointed_run(tmp_path, **kwargs)
 
 
+@pytest.mark.parametrize("fail", [False, True])
+def test_factory_once_per_model_and_release_only_at_end(tmp_path, fail):
+    dataset, config, metadata = fixture()
+    metadata["models"] = ["chronos2", "timesfm3", "timesfm2p5"]
+    created, released, forecasts = [], [], []
+
+    class Model(LastValueForecaster):
+        def forecast(self, context, horizon, repo_name):
+            assert released == []
+            forecasts.append((self.name, repo_name))
+            if fail and repo_name == "b/two" and self.name == "timesfm3":
+                raise MemoryError("simulated OOM")
+            return super().forecast(context, horizon, repo_name)
+
+    def factory(name):
+        created.append(name)
+        model = Model(seed=123)
+        model.name = name
+        return model
+
+    def run():
+        return _checkpointed_run(
+            tmp_path,
+            metadata=metadata,
+            dataset=dataset,
+            config=config,
+            model_factory=factory,
+            release=lambda model: released.append(model.name),
+            measure=lambda _: {},
+        )
+
+    if fail:
+        with pytest.raises(MemoryError):
+            run()
+        assert len(forecasts) == 5
+        assert read_json(tmp_path / "run.json")["completed_repositories"] == ["a/one"]
+    else:
+        rows, _ = run()
+        assert len(rows) == len(forecasts) == 9
+    assert created == metadata["models"]
+    assert released == list(reversed(created))
+
+
 def test_public_runner_checks_gate_before_gpu_or_model_calls(monkeypatch, tmp_path):
     def rejected(**kwargs):
         raise ValueError("gate rejected")

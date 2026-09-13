@@ -2,6 +2,7 @@
 
 import json
 import os
+from contextlib import ExitStack
 from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
@@ -110,15 +111,19 @@ def _checkpointed_run(output_dir, *, metadata, dataset, config, model_factory, r
         state["resumes"][-1]["completed_repositories_reused"] = sorted(completed)
     state["completed_repositories"] = sorted(completed)
     atomic_json(state_path, state)
-    for name in metadata.get("repository_order", sorted(dataset)):
-        if name in completed:
-            continue
-        started = perf_counter()
-        try:
-            rows = []
-            for model_name in metadata["models"]:
-                model = model_factory(model_name)
-                try:
+    models = {}
+    with ExitStack() as lifecycle:
+        for name in metadata.get("repository_order", sorted(dataset)):
+            if name in completed:
+                continue
+            started = perf_counter()
+            try:
+                rows = []
+                for model_name in metadata["models"]:
+                    if model_name not in models:
+                        models[model_name] = model_factory(model_name)
+                        lifecycle.callback(release, models[model_name])
+                    model = models[model_name]
                     start_model = perf_counter()
                     result = rolling_backtest(
                         dataset[name], model, config, repo_name=name, labeler=context_regime
@@ -126,40 +131,40 @@ def _checkpointed_run(output_dir, *, metadata, dataset, config, model_factory, r
                     result["model_repository_seconds"] = perf_counter() - start_model
                     result["hardware_memory"] = json.dumps(measure(model_name), sort_keys=True)
                     rows.append(result)
-                finally:
-                    release(model)
-            results = pd.concat(rows, ignore_index=True)
-            validate_results(results, {**metadata, "repositories": [name]}, {name: dataset[name]})
-            basename = sha256_bytes(name.encode())
-            parquet = checkpoints / f"{basename}.parquet"
-            _atomic_parquet(results, parquet)
-            entry = {
-                "repo_name": name,
-                "run_identity": identity,
-                "sha256": file_hash(parquet),
-                "completed_at": _now(),
-                "seconds": perf_counter() - started,
-            }
-            atomic_json(checkpoints / f"{basename}.json", entry)
-            completed[name] = results
-            state["completed_repositories"] = sorted(completed)
-            state["checkpoint_sha256"][name] = entry["sha256"]
-            atomic_json(state_path, state)
-        except BaseException as error:
-            state["status"] = "failed"
-            state["failures"].append(
-                {
+                results = pd.concat(rows, ignore_index=True)
+                validate_results(
+                    results, {**metadata, "repositories": [name]}, {name: dataset[name]}
+                )
+                basename = sha256_bytes(name.encode())
+                parquet = checkpoints / f"{basename}.parquet"
+                _atomic_parquet(results, parquet)
+                entry = {
                     "repo_name": name,
-                    "at": _now(),
-                    "error_type": type(error).__name__,
-                    "completed_windows_are_not_skipped": True,
+                    "run_identity": identity,
+                    "sha256": file_hash(parquet),
+                    "completed_at": _now(),
+                    "seconds": perf_counter() - started,
                 }
-            )
-            atomic_json(state_path, state)
-            raise
-    results = pd.concat([completed[name] for name in sorted(completed)], ignore_index=True)
-    validate_results(results, metadata, dataset)
-    return results, state
+                atomic_json(checkpoints / f"{basename}.json", entry)
+                completed[name] = results
+                state["completed_repositories"] = sorted(completed)
+                state["checkpoint_sha256"][name] = entry["sha256"]
+                atomic_json(state_path, state)
+            except BaseException as error:
+                state["status"] = "failed"
+                state["failures"].append(
+                    {
+                        "repo_name": name,
+                        "at": _now(),
+                        "error_type": type(error).__name__,
+                        "completed_windows_are_not_skipped": True,
+                    }
+                )
+                atomic_json(state_path, state)
+                raise
+        results = pd.concat([completed[name] for name in sorted(completed)], ignore_index=True)
+        validate_results(results, metadata, dataset)
+        return results, state
 
 
 def run_registered(

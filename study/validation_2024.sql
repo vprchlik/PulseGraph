@@ -2,13 +2,13 @@
 -- Count by type, never payload.action. Duplicate event IDs count once per repository.
 WITH names AS (
   SELECT DISTINCT repo.id AS repo_id
-  FROM `githubarchive.day.*`
-  WHERE _TABLE_SUFFIX BETWEEN '20240101' AND '20241231'
+  FROM `githubarchive.day.2024*`
+  WHERE _TABLE_SUFFIX BETWEEN '0101' AND '1231'
     AND repo.name IN UNNEST(@validation_repositories)
 ), events AS (
   SELECT DISTINCT id AS event_id, repo.id AS repo_id, DATE(created_at) AS event_date
-  FROM `githubarchive.day.*`
-  WHERE _TABLE_SUFFIX BETWEEN '20240101' AND '20241231'
+  FROM `githubarchive.day.2024*`
+  WHERE _TABLE_SUFFIX BETWEEN '0101' AND '1231'
     AND type = 'WatchEvent'
     AND DATE(created_at) BETWEEN DATE '2024-01-01' AND DATE '2024-12-31'
 ), counts AS (
