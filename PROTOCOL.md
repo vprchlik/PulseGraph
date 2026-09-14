@@ -247,3 +247,515 @@ timestamps, weights and secrets remain excluded, and README states exactly what 
 results, protocol changes are dated, reasoned additions; extra analyses stay post-hoc. The write-up uses
 v1_reference documents, tables and figures, discloses unrecomputed v1 numbers, and records artifact recovery as
 deferred.
+
+## Study 2 — dated addition, 2026-09-14
+
+This addition registers a separate study of occurrence and positive size in daily count forecasts,
+signed off by the author on 2026-09-14. Its registration is the commit containing this addition;
+record that full commit and its protocol SHA-256 before any Study 2 evaluation. It adds the
+external, synthetic and prospective comparisons specified below following Study 1's results.
+It does not amend Study 1's sample, forecasts, scores, comparisons or conclusions. The preceding
+18,435 bytes remain the registered Study 1 text, SHA-256
+dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5. Study 1 is closed.
+The saved-run accounting under reports/registered-2026-09-13/posthoc/ is post-hoc throughout.
+
+Source of the specifications is the research extensions memo of 2026-09-13, not in the tree,
+SHA-256 430d0f8ea2d4eb0328c8458a21e5b4b1f45d802ab154f87196d74b9c9feacc5f.
+“Memo §1”, “Memo §3” and “Memo §5” identify its population/overlap, mechanism/model and
+estimand/reporting sections. Memo §4 additionally supplies the prospective and birth-cohort rationale.
+The author's decisions of 2026-09-14 fix the numerical design choices below; those choices are not
+attributed to the memo where it supplied no unique rule. Remaining OPEN items are identified
+explicitly and block their affected execution or publication until resolved in a dated addition.
+Changes after registration are dated additions stating what changed and why, never edits in place.
+
+The question is whether replacing occurrence probability while preserving a foundation model's
+positive conditional distribution improves overall QScore9, and whether that positive component
+improves on a fixed count hurdle. Lower zero-day loss may coexist with higher positive-day loss;
+the net sign, typical-series sign and null outcomes are all reportable. This hypothesis arose after
+Study 1 and is tested on separately declared data. Source: Memo §§3,5.
+
+### Domains, frame and selection
+
+The three domain slots are package downloads (npm, with PyPI via ClickPy as its sole operational
+fallback), NYC 311 and Wikipedia. Each aims at 300 series: 100 in each context-zero-fraction stratum
+[0,0.5), [0.5,0.9), [0.9,1]. All-zero contexts are eligible. This is a balanced stress-test panel,
+not an estimate of natural platform prevalence. Source: Memo §§1,5.
+
+| Domain | Series key and metadata frame | Counts and population qualification |
+|---|---|---|
+| npm, primary external domain | Package name including scope, from a frozen registry replication/metadata inventory; recorded creation must precede context start A. Never use popularity search or download leaders. | Official daily-range downloads, including scoped packages; downloads measure artifact requests, not human adoption. Current metadata conditions the frame on inventory-time survival. |
+| PyPI via ClickPy, fallback for npm only | Normalized project name from a frozen project index or distribution metadata, with first release before A; deduplicate normalization aliases before sampling. | Bounded ClickPy daily aggregate queries with source provenance and gap checks. Do not substitute PyPIStats' short history. Current-index and historical-metadata frames have different deletion coverage and must be distinguished. |
+| NYC 311, second external domain | Stable problem × community-board key enumerated from at least one request in a fixed pre-context year; freeze taxonomy and geography before sampling. | Created-date daily request counts, deduplicated by request identifier; count requests, not closures. Missing/changed geography or taxonomy is recorded, never silently reassigned. |
+| Wikipedia, known training overlap | Stable page ID from namespace-zero articles in a declared language edition, created before A; freeze title/move/redirect mappings. | Daily per-article user pageviews, all-access; current inventory is a surviving-article population. Source overlap is known; exact sampled-entity overlap remains to be matched. |
+
+These source choices follow Memo §1 and its inline references: [npm registry](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md),
+[npm download API](https://github.com/npm/registry/blob/main/docs/download-counts.md),
+[PyPA download analysis](https://packaging.python.org/en/latest/guides/analyzing-pypi-package-downloads/),
+[ClickPy](https://github.com/ClickHouse/clickpy),
+[NYC 311 schema](https://dev.socrata.com/foundry/data.cityofnewyork.us/erm2-nwe9), and
+[Wikimedia pageviews](https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/concepts/page-views.html).
+The memo's access claims are dated 2026-09-13; preflight verifies current schemas and quotas without
+opening evaluation values. Data redistribution evidence is required before publication.
+
+Freeze each metadata inventory at its saved UTC acquisition timestamp. Use selection seed 20260914.
+Hash UTF-8 canonical JSON [seed,domain,stage,stable_key] with SHA-256, compact separators and no
+ASCII escaping; sort ascending digest, then UTF-8 stable key to break ties. For npm, PyPI and
+Wikipedia, stage="candidate" selects the first min(10000,N) metadata-eligible keys as a fixed
+candidate pool. For NYC 311 use its entire pre-context cell frame. Inspect only A through the day
+before the first cutoff for completeness, and its final 90 days for strata. Within each stratum
+sort stage="selection" hashes and take the first 100 complete candidates, preserving the full order,
+candidate-pool inclusion probability, frame/stratum sizes and every exclusion reason. The cap,
+hash encoding and seed are accepted author choices instantiating Memo §1's nested hash sampling.
+
+Retain min(100,N_s) complete series in each stratum with no transfer of unused slots, no larger
+candidate pool and no alternative popularity filter. Report empty strata and reduced panels.
+Freeze acceptance using context and source-coverage metadata before exposing target values.
+A later incomplete target does not trigger replacement or deletion: stop the domain, preserve the
+failure and restore the same source snapshot if possible. If complete scoring cannot be recovered,
+report the component unavailable and do not silently shrink its family. No external confirmatory
+inference runs on a failed or missing domain or fewer than two series. The holdout's predeclared
+npm-unavailability rule is the sole permitted domain-based reduction of a comparison family.
+
+Completeness means every required calendar day has verified exposure. Explicit zero counts remain;
+missing API records are zero only when a documented and validated source contract or complete event
+enumeration establishes zero events. Failures, outages, unknown creation times, unresolved aliases,
+duplicate days and unverified exposure are not zero-filled. Keep leading, intermediate and trailing
+zeros. Acquisition retries cannot consult scores. Source: Memo §§1,5.
+
+OPEN source details proposed for review: npm and PyPI keep their complete reported download counts,
+with no new mirror/installer filtering; PyPI names use lowercase with each run of '-', '_' or '.'
+replaced by '-'. Verify the selected ClickPy table implements those count semantics. Use the
+2024 calendar year, preceding A=2025-09-01, to enumerate NYC 311 cells. Use the latest captured
+revision per request ID, the literal frozen problem label and recognized community-board code; exclude missing/unspecified
+board codes with counts of exclusions. Use English Wikipedia, exclude redirects at inventory
+freeze, and require a unique auditable title history without overlapping title aliases. Failed
+identity reconciliation excludes a candidate before target exposure. These details are not settled
+by the memo; exact schema fields, inventory versions and coverage/redistribution evidence remain OPEN.
+
+Use PyPI only if npm cannot provide the bounded metadata/context extraction and verified coverage
+under approved quotas within 14 calendar days from the signature date, 2026-09-14: the deadline is
+2026-09-28. Decide and record the operational failure before any npm target scoring; source failure,
+not unfavorable performance or an unfilled sparsity stratum, triggers substitution. PyPI occupies
+the same external package slot and comparison count. No RubyGems or other replacement is permitted.
+The October holdout does not substitute PyPI for npm. Source: Memo §1 and the author's choice.
+
+### Calendar and information boundary
+
+Use horizons 7 and 30 with one common observation endpoint E_d per domain. For K cutoffs, in
+chronological order c_j=E_d-(30j-1) days for j=K,...,1. Context stops at c_j-1; the target block is
+c_j through c_j+h-1. Maximum-horizon blocks do not overlap; seven-day blocks use the same origins.
+No model sees another series or future covariates, and no horizon is counted as an independent
+entity. Sources: Memo §§1,3,5 and Study 1's declared calendar construction.
+
+The retrospective calendar has A=2025-09-01, E_d=2026-08-31 for every domain, and K=3.
+Cutoffs are 2026-06-03, 2026-07-03 and 2026-08-02, with 275, 305 and 335 context days.
+Compute selection strata on c_1-90 through c_1-1: 2026-03-05 through 2026-06-02 inclusive.
+Freeze those strata for all origins; updated context-zero fractions are secondary descriptors
+without resampling. Package/Wikipedia day labels are UTC; NYC 311 creation times use
+America/New_York with DST. Validate these source conventions before target exposure. If a source
+cannot meet the calendar, report that domain unavailable or register a dated calendar amendment
+before accessing its targets. Never choose an endpoint after inspecting forecast performance.
+
+### Models, distributions and controls
+
+Use the same exact revisions, with their existing separate weight/package licences and batch-one
+GPU contract. Sources: Memo §3 and Study 1's pins.
+
+| Model | Frozen revision |
+|---|---|
+| amazon/chronos-2 | 29ec3766d36d6f73f0696f85560a422f50e8498c |
+| google/timesfm-3.0-pytorch | 43046b85ec22d584a13f8098c2ed39c889e129c2 |
+| google/timesfm-2.5-200m-pytorch | 1d952420fba87f3c6dee4f240de0f1a0fbc790e3 |
+
+For each FM save raw native-decile, completed-unwrapped and hurdle-wrapped forecasts as distinct
+variants. Raw outputs retain Study 1's clipping/cummax repair and no invented tails. All three
+variants use the same saved base forecast; no refitting selects a successful transformation.
+Completion below is a Study 2 assumption, never attributed retrospectively to Study 1. Source: Memo §3.
+
+| Baseline/control | Specification |
+|---|---|
+| local_mean_28 | Study 1 implementation and 200 genuine empirical marginal draws with recorded seeds. |
+| autoets_weekly | StatsForecast 2.1.1, season_length=7, native intervals and median point forecast; save selected specification and repairs per fit. |
+| nb_local_level_28 | Study 1's last-28 mean, full-context moment dispersion and analytic NB/Poisson/zero limits, unchanged. |
+| poisson_28 | Poisson with last-28-day mean, analytic integer quantiles and point mass at zero when the mean is zero. |
+| hurdle_count_28 | Occurrence p=(n_positive+1/2)/29 from the last 28 days, constant over the horizon; positive-size rule below. |
+| hurdle_empirical_28 | The same Jeffreys occurrence estimator with a positive empirical distribution, as the matched nonparametric control proposed in Memo §3; declared secondary. |
+| dynamic_count | In-repository discounted Beta-Bernoulli/Gamma-Poisson hurdle, discount 0.98; equations and fallback below. |
+
+The occurrence estimator adopts Memo §3's 28-day Jeffreys example. The main calendar has
+at least 275 days of context: contexts shorter than 28 days fail that gate, rather than silently
+changing the denominator. The separate birth-cohort draft must explicitly settle its shorter rule.
+
+For the fixed count hurdles, use only positive observations in the last 28 days. For the parametric
+hurdle let X=Y-1, lambda=mean(X), and G_+ be 1+Poisson(lambda); lambda=0 gives a point mass at one.
+The empirical hurdle assigns equal probability to those positive observations. When fewer than
+two positives exist, both count hurdles use G_+=delta_1; occurrence remains the Jeffreys estimate.
+No target-based fallback or estimated epsilon is allowed. Memo §3 supplies the matched
+empirical/shifted-count construction; the numerical rules are author-accepted design choices.
+
+Complete each FM CDF using only the nine repaired native deciles q_0.1,...,q_0.9. Define Q(u) by
+linear interpolation through (0,0) and those nine knots for 0<=u<=0.9. For 0.9<u<1 set
+Q(u)=q_0.9+s log(0.1/(1-u)), with s=max(1,q_0.9-q_0.8). This exponential upper-quantile tail
+has finite first moment. Set Y=max(0,floor(Q(U)+0.5)) for U uniform on (0,1), fixing half-up integer
+mapping; define the right-continuous count CDF F(k)=P(Y<=k), including atoms from flat segments.
+Compute its masses and inverse CDF analytically or by deterministic inversion, not pseudo-sampling
+native tails. The lower interpolation, unit scale floor, rounding and tail are the accepted
+completion choices; the memo establishes the need for completion but supplies no formula.
+
+The completed-unwrapped control is exactly this F. Whenever F(0)<1, the FM hurdle uses its own
+completed positive conditional distribution G_+(k)=[F(k)-F(0)]/[1-F(0)] for k>=1, H(0)=1-p and
+H(k)=1-p+pG_+(k), with the same last-28-day Jeffreys p. Its quantile is zero for tau<=1-p;
+otherwise invert G_+ at (tau-1+p)/p. Only when F(0)=1 use G_+=delta_1 and record that condition.
+The FM hurdle never uses the count hurdles' fewer-than-two-positives rule; ties are therefore
+not forced. Completion is shared by wrapped and completed-unwrapped variants: the wrapper changes
+occurrence while retaining the completed positive law whenever it exists. Source: Memo §3.
+
+The registered dynamic_count implementation is the in-repository discounted
+Beta-Bernoulli/Gamma-Poisson hurdle. Start a_B=b_B=a_P=b_P=0.5. Before each context observation
+multiply all four parameters by 0.98; update a_B+=1[y>0], b_B+=1[y=0], and on positive days
+a_P+=y-1, b_P+=1. At lead l use occurrence p=a_B/(a_B+b_B), and positive size
+1+NB(shape=0.98^(l-1)a_P, probability=(0.98^(l-1)b_P)/(1+0.98^(l-1)b_P)). This is the
+Gamma-Poisson predictive mixture. Use analytic CDFs and quantiles; no regressors, seasonal terms
+or target updates. Fewer than two positives in the last 28 context days falls back to
+hurdle_count_28. These are the accepted implementation and hyperparameters, not memo-specified
+constants. Per-fit numerical failures stop the run, with no opportunistic implementation switch.
+
+### Scores and the single external-domain confirmatory family
+
+QScore9 remains primary, with all target days and all nine deciles included. Average windows
+within series/horizon, then give each series equal weight within domain. Report domains separately;
+do not pool different count units into a new primary score. Secondary scaled QScore9 is
+QScore9/max(1,mean(context)), scaling each window from its full allowed context before the same
+averaging. This adopts Memo §5's proposed positive context scale; zero contexts remain defined.
+
+Occurrence Brier score is (p-1[y>0])^2. For an actual integer-supported full distribution with finite
+first moment, discrete CRPS=sum_{k>=0}(F(k)-1[y<=k])^2. The k=0 term equals occurrence Brier;
+the other terms also depend on occurrence probability. Raw quantile-only FM forecasts have neither
+an identified p nor full CDF: their Brier/CRPS/PIT fields are unavailable. Do not apply the integer
+sum to AutoETS's continuous native intervals or any continuous empirical forecast unchanged.
+Report availability and valid denominators. Sources: Memo §§3,5.
+
+OPEN numerical rule proposed for full count distributions: require a certified residual bound
+below 1e-8 for an infinite CRPS sum and stop on failure to achieve it by k=1000000. Do not silently
+truncate or substitute fair sample CRPS. Record the bound and work per forecast. For finite-support
+integer empirical laws sum through the larger of the observed count and maximum support. Randomized
+PIT uses independent recorded uniforms within CDF jumps; its histograms and occurrence/interval
+calibration are secondary, with no IID significance claims. Full-distribution numerical settings
+must be smoke-tested before freeze. Log score is not included.
+
+One external confirmatory family covers all three domain slots, all registered variants and both
+horizons on QScore9 together. For each domain, model and horizon it includes hurdle versus own
+completed, hurdle versus hurdle_count_28, and raw native deciles versus local_mean_28. There are
+3 domains × 3 models × 2 horizons × 3 contrasts = 54 tests: 36 hurdle contrasts plus 18 raw-model
+contrasts. packages denotes npm or its single predeclared PyPI replacement; it is never both.
+The full list follows. The suffix _raw always denotes the repaired native nine deciles.
+
+| ID | Domain | Model variant | Reference | Horizon |
+|---|---|---|---|---:|
+| E01 | packages | chronos2_hurdle | chronos2_completed | 7 |
+| E02 | packages | chronos2_hurdle | hurdle_count_28 | 7 |
+| E03 | packages | chronos2_raw | local_mean_28 | 7 |
+| E04 | packages | chronos2_hurdle | chronos2_completed | 30 |
+| E05 | packages | chronos2_hurdle | hurdle_count_28 | 30 |
+| E06 | packages | chronos2_raw | local_mean_28 | 30 |
+| E07 | packages | timesfm3_hurdle | timesfm3_completed | 7 |
+| E08 | packages | timesfm3_hurdle | hurdle_count_28 | 7 |
+| E09 | packages | timesfm3_raw | local_mean_28 | 7 |
+| E10 | packages | timesfm3_hurdle | timesfm3_completed | 30 |
+| E11 | packages | timesfm3_hurdle | hurdle_count_28 | 30 |
+| E12 | packages | timesfm3_raw | local_mean_28 | 30 |
+| E13 | packages | timesfm2p5_hurdle | timesfm2p5_completed | 7 |
+| E14 | packages | timesfm2p5_hurdle | hurdle_count_28 | 7 |
+| E15 | packages | timesfm2p5_raw | local_mean_28 | 7 |
+| E16 | packages | timesfm2p5_hurdle | timesfm2p5_completed | 30 |
+| E17 | packages | timesfm2p5_hurdle | hurdle_count_28 | 30 |
+| E18 | packages | timesfm2p5_raw | local_mean_28 | 30 |
+| E19 | nyc311 | chronos2_hurdle | chronos2_completed | 7 |
+| E20 | nyc311 | chronos2_hurdle | hurdle_count_28 | 7 |
+| E21 | nyc311 | chronos2_raw | local_mean_28 | 7 |
+| E22 | nyc311 | chronos2_hurdle | chronos2_completed | 30 |
+| E23 | nyc311 | chronos2_hurdle | hurdle_count_28 | 30 |
+| E24 | nyc311 | chronos2_raw | local_mean_28 | 30 |
+| E25 | nyc311 | timesfm3_hurdle | timesfm3_completed | 7 |
+| E26 | nyc311 | timesfm3_hurdle | hurdle_count_28 | 7 |
+| E27 | nyc311 | timesfm3_raw | local_mean_28 | 7 |
+| E28 | nyc311 | timesfm3_hurdle | timesfm3_completed | 30 |
+| E29 | nyc311 | timesfm3_hurdle | hurdle_count_28 | 30 |
+| E30 | nyc311 | timesfm3_raw | local_mean_28 | 30 |
+| E31 | nyc311 | timesfm2p5_hurdle | timesfm2p5_completed | 7 |
+| E32 | nyc311 | timesfm2p5_hurdle | hurdle_count_28 | 7 |
+| E33 | nyc311 | timesfm2p5_raw | local_mean_28 | 7 |
+| E34 | nyc311 | timesfm2p5_hurdle | timesfm2p5_completed | 30 |
+| E35 | nyc311 | timesfm2p5_hurdle | hurdle_count_28 | 30 |
+| E36 | nyc311 | timesfm2p5_raw | local_mean_28 | 30 |
+| E37 | wikipedia | chronos2_hurdle | chronos2_completed | 7 |
+| E38 | wikipedia | chronos2_hurdle | hurdle_count_28 | 7 |
+| E39 | wikipedia | chronos2_raw | local_mean_28 | 7 |
+| E40 | wikipedia | chronos2_hurdle | chronos2_completed | 30 |
+| E41 | wikipedia | chronos2_hurdle | hurdle_count_28 | 30 |
+| E42 | wikipedia | chronos2_raw | local_mean_28 | 30 |
+| E43 | wikipedia | timesfm3_hurdle | timesfm3_completed | 7 |
+| E44 | wikipedia | timesfm3_hurdle | hurdle_count_28 | 7 |
+| E45 | wikipedia | timesfm3_raw | local_mean_28 | 7 |
+| E46 | wikipedia | timesfm3_hurdle | timesfm3_completed | 30 |
+| E47 | wikipedia | timesfm3_hurdle | hurdle_count_28 | 30 |
+| E48 | wikipedia | timesfm3_raw | local_mean_28 | 30 |
+| E49 | wikipedia | timesfm2p5_hurdle | timesfm2p5_completed | 7 |
+| E50 | wikipedia | timesfm2p5_hurdle | hurdle_count_28 | 7 |
+| E51 | wikipedia | timesfm2p5_raw | local_mean_28 | 7 |
+| E52 | wikipedia | timesfm2p5_hurdle | timesfm2p5_completed | 30 |
+| E53 | wikipedia | timesfm2p5_hurdle | hurdle_count_28 | 30 |
+| E54 | wikipedia | timesfm2p5_raw | local_mean_28 | 30 |
+
+Commit these exact 54 tuples as the comparison JSON declaration before the gate. Apply BH once
+at q=0.05 over all 54 two-sided approximate Wilcoxon signed-rank tests on series averages, omitting
+zero differences and assigning p=1 if all are zero. Report mean differences with 20,000
+entity-cluster bootstrap 95% percentile intervals, medians, wins/ties/losses and complete
+denominators. Differences are model minus reference; signed-rank tests do not test mean improvement
+and need the usual symmetry interpretation. Inference is conditional on the fixed dates. These
+settings carry Study 1's discipline into Memo §5's entity-level reporting; the expanded comparison
+allocation is the author's decision, not the memo's illustrative count.
+
+Every contrast outside this list, context strata/regimes, scaled score, Brier, CRPS, PIT, skill,
+concentration and zero/positive over/under accounting are declared secondary. They do not replace
+the confirmatory endpoint. Report the three exact accounting parts with the full horizon
+denominator, as in Memo §3 and the post-hoc Study 1 analysis, retaining undefined conditional means
+when a partition is empty.
+
+### Synthetic intervention component
+
+Memo §3 motivates separating occurrence, positive size and persistence. The following generators,
+factor levels and replicate count are the author's accepted grid, fixed before any grid outcomes
+are generated or scored.
+
+Let pi=1-z and Z_t be a stationary Markov Bernoulli chain with
+P(Z_t=1|Z_(t-1)=a)=pi+rho(a-pi), initialized Z_0~Bernoulli(pi).
+Independently generate X_t~Poisson(mu_positive-1) and Y_t=Z_t(1+X_t).
+Use all 18 Cartesian cells z in {0.2,0.8,0.95}, mu_positive in {1,5,25}, rho in {0,0.8}.
+Thus zero frequency, mean positive size and occurrence-burst persistence vary independently in
+the generator; this does not identify causal mechanisms in real platforms.
+
+| Zero probability | Positive means | Persistence values | Cells |
+|---|---|---|---:|
+| 0.2 | 1,5,25 | 0,0.8 | 6 |
+| 0.8 | 1,5,25 | 0,0.8 | 6 |
+| 0.95 | 1,5,25 | 0,0.8 | 6 |
+| Total | | | 18 |
+
+Use 30 independent replicate IDs per cell, 270 observations per series,
+first context 180 days, origins at indices 180,210,240 (zero based), horizons 7,30. For each
+replicate share base uniforms across its factor cells as common random numbers, with streams
+separate for occurrence and size; replicates are independent. Store the full generator manifest
+before execution. Apply the same models, completion and metrics as the external study.
+
+The oracle uses known generator parameters and the last observed Z: at lead l its occurrence
+probability is pi+rho^l(Z_last-pi) and its positive law is 1+Poisson(mu_positive-1). Verify CDF mass,
+quantile inversion and expected pinball optimality against known distributions before model runs.
+An oracle need not win every finite realized sample; that alone is not a failing sanity check.
+Its score is a diagnostic and it is not a deployable competitor or an extra confirmatory contrast.
+
+The synthetic component has its own six-test family: at horizon 30, each FM hurdle versus its
+completed control and hurdle_count_28, pooling all 18 cells with equal cell weight, 3 × 2 = 6
+two-sided tests and BH once at q=0.05. The full comparison list is:
+
+| ID | Domain | Model variant | Reference | Horizon |
+|---|---|---|---|---:|
+| S01 | synthetic | chronos2_hurdle | chronos2_completed | 30 |
+| S02 | synthetic | chronos2_hurdle | hurdle_count_28 | 30 |
+| S03 | synthetic | timesfm3_hurdle | timesfm3_completed | 30 |
+| S04 | synthetic | timesfm3_hurdle | hurdle_count_28 | 30 |
+| S05 | synthetic | timesfm2p5_hurdle | timesfm2p5_completed | 30 |
+| S06 | synthetic | timesfm2p5_hurdle | hurdle_count_28 | 30 |
+
+Average origins within each replicate/cell, then cells within replicate; bootstrap and paired
+tests use the 30 independent replicate blocks, preserving all cells together, with the external
+family's test and interval settings. Seven-day scores and individual-cell results are secondary.
+Do not choose cells or generators because they reproduce Study 1. Source: Memo §§3,5.
+
+### October prospective calendar holdout
+
+Use the unchanged frozen 300-repository GitHub manifest and the accepted npm panel. Freeze weights,
+transformations, baselines, manifests, forecast arrays and hashes before the first target day.
+This is a new calendar test on possibly familiar entities, not unseen-entity transfer. It does not
+shorten or replace Study 1's separately registered post-2026-09-13 birth follow-up. Sources:
+Memo §§1,3,5 and §4's proposed October 1–30 calendar holdout; author instruction of 2026-09-14.
+
+Freeze at 2026-09-28 18:00 UTC. Use only data through the last fully observed calendar day
+preceding the freeze, verified by each source; incomplete reporting cannot count as a completed
+day. Preserve that exact context snapshot and its UTC retrieval time. Target blocks are
+October 1–7 and October 1–30, 2026, using America/Los_Angeles for GitHub and UTC labels for npm.
+
+If C_d is the last complete input day, the forecast begins at C_d+1, while scored blocks begin
+October 1. Let g_d be the number of unscored bridge days from C_d+1 through September 30. Generate
+g_d+30 leads once and score leads g_d+1 through g_d+7 or g_d+30. For C_d=September 27, g_d=3,
+so scored leads are 4–10 and 4–33. No bridge observations can update the frozen forecasts. Save
+bridge predictions and actual lead numbers; seven and thirty denote target-block length, not a
+claim of zero forecast gap. Freeze compatibility and maximum lead limits before producing files.
+
+Commit the complete prediction files and SHA-256 hashes, or an immutable artifact location plus
+their hashes, before either domain's first target day. Record the actual commit, timestamp evidence,
+context endpoints and forecast generation times; a late commit fails the prospective gate.
+No backdating or reconstruction from October observations is allowed. Fixed settlement retrievals
+start at 2026-10-15 18:00 UTC for the seven-day block and 2026-11-07 18:00 UTC for the thirty-day
+block, after at least seven complete post-target calendar days in both conventions. Fetch in
+frozen stable-ID order and save each response time; preserve both snapshots and revisions between
+them. Use the first verified complete capture, retry incomplete retrieval at 12-hour intervals
+for at most 72 hours, then report unavailable. Only the thirty-day block is confirmatory, using
+the November capture. Never choose the snapshot yielding better scores.
+
+The holdout family has 2 domains × 3 models × 3 contrasts at horizon 30 = 18 QScore9 tests:
+12 hurdle contrasts and 6 raw native-decile contrasts against local_mean_28, BH once at q=0.05.
+Its full comparison list is:
+
+| ID | Domain | Model variant | Reference | Horizon |
+|---|---|---|---|---:|
+| H01 | github | chronos2_hurdle | chronos2_completed | 30 |
+| H02 | github | chronos2_hurdle | hurdle_count_28 | 30 |
+| H03 | github | chronos2_raw | local_mean_28 | 30 |
+| H04 | github | timesfm3_hurdle | timesfm3_completed | 30 |
+| H05 | github | timesfm3_hurdle | hurdle_count_28 | 30 |
+| H06 | github | timesfm3_raw | local_mean_28 | 30 |
+| H07 | github | timesfm2p5_hurdle | timesfm2p5_completed | 30 |
+| H08 | github | timesfm2p5_hurdle | hurdle_count_28 | 30 |
+| H09 | github | timesfm2p5_raw | local_mean_28 | 30 |
+| H10 | npm | chronos2_hurdle | chronos2_completed | 30 |
+| H11 | npm | chronos2_hurdle | hurdle_count_28 | 30 |
+| H12 | npm | chronos2_raw | local_mean_28 | 30 |
+| H13 | npm | timesfm3_hurdle | timesfm3_completed | 30 |
+| H14 | npm | timesfm3_hurdle | hurdle_count_28 | 30 |
+| H15 | npm | timesfm3_raw | local_mean_28 | 30 |
+| H16 | npm | timesfm2p5_hurdle | timesfm2p5_completed | 30 |
+| H17 | npm | timesfm2p5_hurdle | hurdle_count_28 | 30 |
+| H18 | npm | timesfm2p5_raw | local_mean_28 | 30 |
+
+Use entity pairing/bootstrap and the external family's test and reporting rules, conditional on
+this single month. The seven-day endpoint and other contrasts are secondary. GitHub targets remain
+surviving-star history at the declared settled retrieval, not gross additions; later unstars
+remain a measurement limitation.
+
+If npm is unavailable, report GitHub alone: no PyPI or other substitution. Before any holdout
+scoring, record the operational reason and declare the reduced family as H01–H09, GitHub's nine
+tests, with BH applied once over those nine. This includes npm unavailability following the external
+study's switch to PyPI. It never depends on model scores or permits deletion of individual
+comparisons. Preserve the unavailable npm rows as status records, outside the declared nine-test
+family. If GitHub is unavailable, report the holdout unavailable; no alternative reduction is
+registered.
+
+### Contamination ledger
+
+Keep Memo §1's three distinct categories for every domain; source-specific cutoffs are not global
+training cutoffs. Exact IDs/date ranges require matching saved manifests to disclosed corpora.
+
+| Domain/component | Known source/entity overlap | Unknown overlap | Targets after frozen checkpoint availability |
+|---|---|---|---|
+| npm | None established by the reviewed disclosures; package-name familiarity is not numerical-series evidence. | Training overlap remains unknown. | Retrospective blocks are mixed by model availability; no all-model temporal-clean claim. The committed October targets qualify if the prospective gate passes. |
+| PyPI via ClickPy | None established by the reviewed disclosures. | Numerical training overlap remains unknown, including broader collection lineage. | No prospective PyPI substitution is registered; retrospective dates require model-specific ledger comparison. |
+| NYC 311 | No exact source/entity match established in the memo. | Civic data may occur in broadly described corpora; absence of disclosure is not absence from training. | The retrospective calendar does not certify availability after all three checkpoints. |
+| Wikipedia | Known source overlap for all three model families; TimesFM cards name Wikipedia through November 2023 and Chronos includes Wiki sources. | Exact sampled article/history overlap and other corpus lineage remain unresolved. | Later pageviews can be temporally new on known entities; the source-specific 2023 date is not an all-source training cutoff. |
+| GitHub October panel | No numerical source/entity overlap established; the same panel was already evaluated in Study 1. | Earlier entity histories and overall training overlap remain unknown. | October outcomes are after the frozen available checkpoints and committed predictions if the gate passes; this does not establish unseen entities or remove survivor measurement. |
+| Synthetic intervention | Generic generator families may be familiar; no natural-domain transfer claim. | Familiarity with these mathematical families is not measurable from the memo. | New seeded realizations are generated after frozen weights; preserve generation and registration evidence. |
+| Retrospective 2024 GitHub birth draft | Prior exposure to Study 1 prefixes must be disclosed where entities overlap. | Numerical pretraining and author exposure remain unresolved. | 2024 targets do not qualify as an all-model availability-bound holdout. |
+
+Sources retained from Memo §1: [TimesFM 2.5 card](https://huggingface.co/google/timesfm-2.5-200m-pytorch),
+[TimesFM 3 card](https://huggingface.co/google/timesfm-3.0-pytorch),
+[Chronos](https://arxiv.org/html/2403.07815v2), [Chronos-2](https://arxiv.org/html/2510.15821v1).
+No author-disclosed complete-corpus training cutoff has been established for any included model.
+
+### Seeds, provenance and execution gate
+
+Seeds: selection 20260914, forecasts 20260915, PIT 20260916, bootstrap 20260917,
+synthetic root 20260918, prospective root 20260919. Use canonical IDs and SHA-256-derived streams;
+do not use Python's process-randomized hash. Record each root and derived stream, including any
+internal library simulations. Generator/common-random-number construction must be tested for
+independence across replicate IDs. Sources: Memo §§3,5 and Study 1's seed/provenance discipline.
+
+Before each component runs, its gate requires the signed Study 2 registration commit and full
+protocol file SHA-256 at that commit, immutable Study 1 protocol identity, exact implementation
+commit/source hashes, package versions and model revisions, licenses, complete ordered manifest,
+seeds, calendar and source semantics, completed applicable OPEN resolutions, approved extraction
+costs and runtime budget, and current-implementation CPU/GPU smoke evidence. Validate the full
+comparison lists as 54 external, 6 synthetic and 18 prospective, or exactly H01–H09 for the
+predeclared npm-unavailable holdout. Each family has one BH correction; no result-dependent family
+deletion is permitted. An unresolved family, missing seed, unpinned model, unresolved fallback or
+missing registration commit blocks the relevant run.
+
+Study 1's gate verifies that the blob PROTOCOL.md at 5f01769 hashes to its original PROTOCOL_SHA256
+and that those exact bytes are a prefix of the current file. It still requires clean committed
+implementation files and records the full current source hashes. Appending this separately
+registered study does not invalidate or relabel saved Study 1 evidence, change its 18-comparison
+declaration or authorize Study 2 through the Study 1 gate. A separate Study 2 gate must enforce
+this addition's registration and comparison lists before any Study 2 real-target evaluation.
+
+Freeze context boundaries, identities and strata before targets are revealed; perturb, permute
+and extend data on/after every cutoff in leakage tests, asserting unchanged selection, labels,
+scales, fitted transformations and forecasts, with observed-date spies. Test score decomposition,
+CDF normalization/monotonicity, zero/Poisson limits, rounding/tail inversion, exact counterpart
+controls and failed-window handling offline. Models stay resident per invocation; checkpoint whole
+completed series, stop on any failed window, and record verified resumes without skipping failures.
+Keep the RTX 4070 SUPER batch-one/under-8-GB VRAM discipline, GPU/driver/CUDA/PyTorch evidence and
+CPU baseline timing. New paid queries, unusual dependencies and runs longer than an hour need
+their own author approvals; Study 1's budget is not reused automatically.
+
+Save lawful aggregate snapshots, source requests/versions, SQL and byte/job provenance, retrieval
+and settlement times, source corrections, frame and reserve orders, exclusions, data/forecast
+hashes, distribution-completion parameters, every score and undefined denominator, model failures,
+paired tables, comparison JSONs, bootstrap configuration and figure inputs. Every reported number
+has a regeneration command and file hash. Secrets, raw personal records and model weights stay out
+of the tree; release assets have durable locations and checksums. OPEN source-redistribution checks
+must precede publication. No hindsight rewriting of Study 1 or of a subsequently signed Study 2.
+
+## Retrospective GitHub birth cohort — 2026-09-14 — census approved; forecasting OPEN
+
+The context-only feasibility census is approved as a census. Its BigQuery query requires a
+dry-run estimate and the usual written cost approval before billable execution. The forecasting
+study remains separately unregistered; it is not a Study 1 reanalysis or an independent prospective
+confirmation. The census uses GH Archive repository CreateEvents
+from 2024-01-01 through 2024-12-31, with no WatchEvent eligibility filter. Enumerate stable IDs,
+unknown/missing creation coverage, current-public checks, successful histories and failures with
+reasons. Count how many births remain public with any endpoint history, distinguishing that from
+complete early-day coverage, and how many had fewer than 20 gross archive WatchEvents by day 90,
+including zeros. Preserve separate denominators for the full frame, checked subset, current-public
+subset and retrievable/complete-history subsets. A budget-limited sample is not called a census.
+
+Only metadata, source completeness and the specified early prefixes may inform feasibility; no
+forecast losses or later activity can select entities. The day-90 tally is a descriptive census
+quantity, available at day 90, not a label available at day 7 or 30. It must never filter or stratify
+the early-cutoff forecasting panel. A separate table may show surviving day-90 counts, explicitly
+distinguished from gross archive counts. This avoids recycling Study 1's future-dependent >=20
+eligibility at earlier origins. Sources: Memo §1's frame rules, §3's information boundary, §5's
+population reporting and §4's launch critique.
+
+Proposed meaning of the cutoffs is seven or thirty completed Los Angeles calendar days beginning
+on local creation day b: first forecasted dates b+7 and b+30. Forecast horizons are 7 and 30; the
+30-day targets at these two origins overlap, so no independent-window claim is allowed. OPEN:
+the precise early information/target snapshot exposure policy, short-context estimator denominator,
+sample size and seeds, census access/quota evidence and cost approval, incomplete-history rule,
+pairing/family, model minimum context support and the author's prior exposure to these trajectories. Endpoint counts
+are surviving stars measured later; prefix slicing cannot reconstruct gross information available
+at historical launch. Date conventions, survivor/public availability and unknown training overlap
+remain explicit. The approved census does not authorize forecasting; register the latter
+separately before model fitting or target scoring.
+
+## Bounded fine-tune — spring plan — OPEN, inactive
+
+The optional adaptation study is inactive and deferred to the spring plan. It has no October
+execution condition or authorization. Development and test splits are by stable entity, with every
+window of an entity in exactly one split and no development feedback from test scores. Choose one of the three pinned
+foundation models before opening its untouched test outcomes; compare adapted and original weights
+on identical windows. This is adaptation, not zero-shot forecasting. Sources: Memo §§3,5 on
+development separation and the memo's fine-tuning option; the spring deferral is the author's.
+
+OPEN: which model/domain, newly held-out entities not already scored by the external study, split
+fractions/hash seeds, context and target calendars, eligible adaptation layers, optimizer, learning
+rate, update/token/GPU-hour and VRAM caps, checkpoint-selection criterion restricted to development,
+number of attempted configurations, exact test family and failure policy. No test set can consist
+of entities whose Study 2 outcomes have already guided these choices. Save development decisions,
+training logs, source/weight hashes and the untouched test manifest before training.
+
+Activate this component only after a separate review, dated registration and runtime approval.
+Pending outcomes of other components cannot be treated as development evidence from an untouched
+test set.
+
+The write-up draft starts on 2026-10-20 regardless of experiment progress. Incomplete components
+are reported as incomplete; they do not postpone writing or the 2026-11-15 deadline. These dates
+do not authorize scheduled automation or execution beyond the stated gates and approvals.

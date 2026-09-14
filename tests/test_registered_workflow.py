@@ -12,9 +12,16 @@ from pulsegraph.data.frame import freeze_frame_order, walk_frame
 from pulsegraph.evaluation.artifacts import file_hash, read_run_artifact
 from pulsegraph.evaluation.confirmatory import confirmatory_tables
 from pulsegraph.evaluation.registered_run import run_registered
-from pulsegraph.evaluation.registration import MODEL_PINS, RUNTIME_PACKAGES, real_run_gate
+from pulsegraph.evaluation.registration import (
+    MODEL_PINS,
+    PROTOCOL_COMMIT,
+    PROTOCOL_SHA256,
+    RUNTIME_PACKAGES,
+    _git,
+    real_run_gate,
+)
 from pulsegraph.forecast.output import COMMON_QUANTILES, ForecastOutput
-from pulsegraph.provenance import atomic_json, read_json
+from pulsegraph.provenance import atomic_json, read_json, sha256_bytes
 
 
 @pytest.fixture
@@ -25,12 +32,16 @@ def ready(tmp_path, monkeypatch):
         (root / name).write_bytes((ROOT_DIR / name).read_bytes())
     spec = read_json(root / "study/run_spec.json")
     implementation = "a" * 40
+    registered_blob = _git(ROOT_DIR, "show", f"{PROTOCOL_COMMIT}:PROTOCOL.md")
+    assert sha256_bytes(registered_blob) == PROTOCOL_SHA256
+    assert (root / "PROTOCOL.md").read_bytes().startswith(registered_blob)
 
     def git(_, *args):
         if args[0] == "rev-parse":
             return implementation.encode()
         if args[0] == "show":
-            return (root / "PROTOCOL.md").read_bytes()
+            assert args == ("show", f"{PROTOCOL_COMMIT}:PROTOCOL.md")
+            return registered_blob
         if args[0] == "status":
             return b""
         if args[0] == "ls-files":

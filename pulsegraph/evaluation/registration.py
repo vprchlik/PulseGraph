@@ -152,7 +152,9 @@ def verify_source_registration(root, implementation_commit):
     if _git(root, "rev-parse", "HEAD").decode().strip() != implementation_commit:
         raise ValueError("Implementation commit must be the current HEAD")
     blob = _git(root, "show", f"{PROTOCOL_COMMIT}:PROTOCOL.md")
-    if sha256_bytes(blob) != PROTOCOL_SHA256 or file_hash(root / "PROTOCOL.md") != PROTOCOL_SHA256:
+    if sha256_bytes(blob) != PROTOCOL_SHA256 or not (root / "PROTOCOL.md").read_bytes().startswith(
+        blob
+    ):
         raise ValueError("Protocol bytes differ from the registration commit")
     # Include declarations/tests/entry points and packaging; .env stays ignored.
     paths = ["PROTOCOL.md", "pyproject.toml", "pulsegraph", "scripts", "tests", "study"]

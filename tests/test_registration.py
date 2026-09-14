@@ -8,6 +8,7 @@ from pulsegraph.evaluation.metrics import evaluate_forecast
 from pulsegraph.evaluation.registration import (
     PROTOCOL_COMMIT,
     PROTOCOL_SHA256,
+    _git,
     validate_declarations,
     verify_readiness,
     verify_source_registration,
@@ -21,9 +22,60 @@ def test_registered_protocol_and_full_comparison_declaration():
     family = read_json(ROOT_DIR / "study/comparisons.json")
     config = validate_declarations(spec, family)
     assert config.cutoffs == ("2025-12-05", "2026-03-05", "2026-06-03")
-    assert sha256_bytes((ROOT_DIR / "PROTOCOL.md").read_bytes()) == PROTOCOL_SHA256
+    blob = _git(ROOT_DIR, "show", f"{PROTOCOL_COMMIT}:PROTOCOL.md")
+    assert sha256_bytes(blob) == PROTOCOL_SHA256
+    assert (ROOT_DIR / "PROTOCOL.md").read_bytes().startswith(blob)
     assert len(spec["baselines"]) == 15
     assert len(family["comparisons"]) == 18
+
+
+@pytest.fixture
+def source_registration(tmp_path, monkeypatch):
+    blob = _git(ROOT_DIR, "show", f"{PROTOCOL_COMMIT}:PROTOCOL.md")
+    assert sha256_bytes(blob) == PROTOCOL_SHA256
+    implementation = "a" * 40
+    responses = {
+        "rev-parse": implementation.encode(),
+        "show": blob,
+        "status": b"",
+        "ls-files": b"PROTOCOL.md\nstudy/run_spec.json\nstudy/comparisons.json\n",
+    }
+
+    def git(_, *args):
+        if args[0] == "show":
+            assert args == ("show", f"{PROTOCOL_COMMIT}:PROTOCOL.md")
+        return responses[args[0]]
+
+    monkeypatch.setattr("pulsegraph.evaluation.registration._git", git)
+    return tmp_path, implementation, blob, responses
+
+
+@pytest.mark.parametrize("appendix", [b"", b"\n## Dated addition\nRegistered separately.\n"])
+def test_registered_prefix_accepts_appendices_and_hashes_entire_file(source_registration, appendix):
+    root, implementation, blob, _ = source_registration
+    current = blob + appendix
+    (root / "PROTOCOL.md").write_bytes(current)
+    hashes = verify_source_registration(root, implementation)
+    assert hashes["PROTOCOL.md"] == sha256_bytes(current)
+
+
+@pytest.mark.parametrize("location", ["first", "middle", "last"])
+def test_changed_byte_inside_registered_prefix_fails(source_registration, location):
+    root, implementation, blob, _ = source_registration
+    position = {"first": 0, "middle": len(blob) // 2, "last": -1}[location]
+    changed = bytearray(blob)
+    changed[position] ^= 1
+    (root / "PROTOCOL.md").write_bytes(changed + b"\n## Dated addition\n")
+    with pytest.raises(ValueError, match="Protocol bytes"):
+        verify_source_registration(root, implementation)
+
+
+def test_committed_blob_must_match_registered_sha_even_if_it_is_a_prefix(source_registration):
+    root, implementation, blob, responses = source_registration
+    responses["show"] = blob + b"changed commit blob"
+    (root / "PROTOCOL.md").write_bytes(responses["show"] + b"\n## Dated addition\n")
+    with pytest.raises(ValueError, match="Protocol bytes"):
+        verify_source_registration(root, implementation)
 
 
 @pytest.mark.parametrize(
