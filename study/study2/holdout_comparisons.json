@@ -1,0 +1,155 @@
+{
+  "adjustment": "BH",
+  "all_zero_p": 1.0,
+  "alternative": "two-sided",
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20260917,
+  "calendar_conditional": true,
+  "comparison_count": 18,
+  "comparisons": [
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H01",
+      "model": "chronos2_hurdle",
+      "reference": "chronos2_completed"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H02",
+      "model": "chronos2_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H03",
+      "model": "chronos2_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H04",
+      "model": "timesfm3_hurdle",
+      "reference": "timesfm3_completed"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H05",
+      "model": "timesfm3_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H06",
+      "model": "timesfm3_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H07",
+      "model": "timesfm2p5_hurdle",
+      "reference": "timesfm2p5_completed"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H08",
+      "model": "timesfm2p5_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "github",
+      "horizon": 30,
+      "id": "H09",
+      "model": "timesfm2p5_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H10",
+      "model": "chronos2_hurdle",
+      "reference": "chronos2_completed"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H11",
+      "model": "chronos2_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H12",
+      "model": "chronos2_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H13",
+      "model": "timesfm3_hurdle",
+      "reference": "timesfm3_completed"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H14",
+      "model": "timesfm3_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H15",
+      "model": "timesfm3_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H16",
+      "model": "timesfm2p5_hurdle",
+      "reference": "timesfm2p5_completed"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H17",
+      "model": "timesfm2p5_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "npm",
+      "horizon": 30,
+      "id": "H18",
+      "model": "timesfm2p5_raw",
+      "reference": "local_mean_28"
+    }
+  ],
+  "component": "holdout",
+  "holdout_npm_unavailable_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09"
+  ],
+  "method": "approx",
+  "metric": "qscore9",
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "q": 0.05,
+  "test": "wilcoxon",
+  "zero_method": "wilcox"
+}

@@ -1,0 +1,142 @@
+{
+  "aggregation": "windows_within_entity_then_equal_entities",
+  "baselines": [
+    "local_mean_28",
+    "autoets_weekly",
+    "nb_local_level_28",
+    "poisson_28",
+    "hurdle_count_28",
+    "hurdle_empirical_28",
+    "dynamic_count"
+  ],
+  "calendar": {
+    "context_start": "2025-09-01",
+    "cutoffs": [
+      "2026-06-03",
+      "2026-07-03",
+      "2026-08-02"
+    ],
+    "endpoint": "2026-08-31",
+    "freeze_at": "2026-09-28T18:00:00+00:00",
+    "horizons": [
+      7,
+      30
+    ],
+    "npm_ready_by": "2026-09-26T23:59:59+00:00",
+    "strata_start": "2026-03-05"
+  },
+  "comparison_count": 54,
+  "completion": {
+    "fm_fallback": "F0_equals_one_only",
+    "interpolation": "linear",
+    "lower_knot": [
+      0,
+      0
+    ],
+    "rounding": "floor(Q(U)+0.5)",
+    "tail": "exponential_quantile",
+    "tail_scale": "max(1,q0.9-q0.8)"
+  },
+  "component": "external",
+  "count_hurdles": {
+    "fallback": "delta_1",
+    "lookback": 28,
+    "minimum_positives": 2,
+    "occurrence": "(n_positive+0.5)/29"
+  },
+  "crps": {
+    "max_k": 1000000,
+    "resolution": "study/study2/crps_resolution.json",
+    "tolerance": 1e-08
+  },
+  "dynamic_count": {
+    "discount": 0.98,
+    "fallback": "hurdle_count_28_if_fewer_than_two_recent_positives",
+    "implementation": "discounted_beta_bernoulli_gamma_poisson",
+    "initial_parameters": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "external_package_fallback": {
+    "deadline": "2026-09-28",
+    "domain": "pypi",
+    "reason": "operational_npm_unavailability_only"
+  },
+  "foundation_models": [
+    {
+      "model_id": "amazon/chronos-2",
+      "name": "chronos2",
+      "package_licence": "Apache-2.0",
+      "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+      "weight_licence": "Apache-2.0"
+    },
+    {
+      "model_id": "google/timesfm-3.0-pytorch",
+      "name": "timesfm3",
+      "package_licence": "Apache-2.0",
+      "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+      "weight_licence": "TimesFM Non-Commercial License v1.0"
+    },
+    {
+      "model_id": "google/timesfm-2.5-200m-pytorch",
+      "name": "timesfm2p5",
+      "package_licence": "Apache-2.0",
+      "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+      "weight_licence": "Apache-2.0"
+    }
+  ],
+  "inference": {
+    "batch_size": 1,
+    "device": "cuda",
+    "max_context": 2048,
+    "max_horizon": 128,
+    "peak_vram_limit_bytes": 8000000000,
+    "threads": 4
+  },
+  "package_pins": {
+    "statsforecast": "2.1.1",
+    "timesfm": "3.0.2"
+  },
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "quantile_levels": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "seeds": {
+    "bootstrap": 20260917,
+    "forecast": 20260915,
+    "pit": 20260916,
+    "prospective": 20260919,
+    "selection": 20260914,
+    "synthetic": 20260918
+  },
+  "variants": [
+    "chronos2_raw",
+    "chronos2_completed",
+    "chronos2_hurdle",
+    "timesfm3_raw",
+    "timesfm3_completed",
+    "timesfm3_hurdle",
+    "timesfm2p5_raw",
+    "timesfm2p5_completed",
+    "timesfm2p5_hurdle",
+    "local_mean_28",
+    "autoets_weekly",
+    "nb_local_level_28",
+    "poisson_28",
+    "hurdle_count_28",
+    "hurdle_empirical_28",
+    "dynamic_count"
+  ]
+}

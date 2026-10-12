@@ -1,0 +1,17 @@
+{
+  "action": "synthetic",
+  "approved_at": null,
+  "approved_by": null,
+  "confirmed": false,
+  "estimated_seconds": 0,
+  "evidence": [],
+  "implementation_commit": null,
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "runtime_budget_seconds": 0,
+  "smoke": {
+    "path": null,
+    "sha256": null
+  },
+  "source_semantics_resolved": false
+}

@@ -1,0 +1,61 @@
+{
+  "adjustment": "BH",
+  "all_zero_p": 1.0,
+  "alternative": "two-sided",
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20260917,
+  "calendar_conditional": true,
+  "comparison_count": 6,
+  "comparisons": [
+    {
+      "domain": "synthetic",
+      "horizon": 30,
+      "id": "S01",
+      "model": "chronos2_hurdle",
+      "reference": "chronos2_completed"
+    },
+    {
+      "domain": "synthetic",
+      "horizon": 30,
+      "id": "S02",
+      "model": "chronos2_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "synthetic",
+      "horizon": 30,
+      "id": "S03",
+      "model": "timesfm3_hurdle",
+      "reference": "timesfm3_completed"
+    },
+    {
+      "domain": "synthetic",
+      "horizon": 30,
+      "id": "S04",
+      "model": "timesfm3_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "synthetic",
+      "horizon": 30,
+      "id": "S05",
+      "model": "timesfm2p5_hurdle",
+      "reference": "timesfm2p5_completed"
+    },
+    {
+      "domain": "synthetic",
+      "horizon": 30,
+      "id": "S06",
+      "model": "timesfm2p5_hurdle",
+      "reference": "hurdle_count_28"
+    }
+  ],
+  "component": "synthetic",
+  "holdout_npm_unavailable_ids": [],
+  "method": "approx",
+  "metric": "qscore9",
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "q": 0.05,
+  "test": "wilcoxon",
+  "zero_method": "wilcox"
+}

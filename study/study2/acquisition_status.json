@@ -1,0 +1,214 @@
+{
+  "acquisition_evidence": [
+    {
+      "metadata": {
+        "path": "data/raw/study2/preflight/captures/3646327c228c7dde4b9b352e270a4ba910c21399564a87fb8a437d0b7f785417.json",
+        "sha256": "dda7c123b4c79c166ba40d7897410845fe0aeec2b6deb3135dbab87ea4678f76"
+      },
+      "response": {
+        "path": "data/raw/study2/preflight/captures/3646327c228c7dde4b9b352e270a4ba910c21399564a87fb8a437d0b7f785417.response",
+        "sha256": "8ddd43e277b36fa14465c8eb144d3c94b6014ea680eb819faf98e35654ffbfc6"
+      }
+    },
+    {
+      "metadata": {
+        "path": "data/raw/study2/preflight/captures/4700f932c2a773dafc74a59c8ace80c9459e662a3d6f43644424a6bdfaf67dde.json",
+        "sha256": "2866002c19f28e0f8447ceb0617f21de5b5a920485e7d71650712a2bad29f394"
+      },
+      "response": {
+        "path": "data/raw/study2/preflight/captures/4700f932c2a773dafc74a59c8ace80c9459e662a3d6f43644424a6bdfaf67dde.response",
+        "sha256": "9cf247e73376290b4276f55ef077b5a7e4110f61e4f73be35e4663596c621c94"
+      }
+    },
+    {
+      "metadata": {
+        "path": "data/raw/study2/nyc311/captures/08beeeb1b70e3cf020d0e37ec324d391eca1f189088520546e325b0676522d26.json",
+        "sha256": "f1b3133870b3e68beacbfd9fe3410c02759cfd3dbefc16c2ceddfe7473bd2d55"
+      },
+      "response": {
+        "path": "data/raw/study2/nyc311/captures/08beeeb1b70e3cf020d0e37ec324d391eca1f189088520546e325b0676522d26.response",
+        "sha256": "38731028e2f26f0a000387b9d93a690ad52d5254be55c147f5f995b87e67400c"
+      }
+    },
+    {
+      "metadata": {
+        "path": "data/raw/study2/nyc311/captures/4700f932c2a773dafc74a59c8ace80c9459e662a3d6f43644424a6bdfaf67dde.json",
+        "sha256": "8c676b0f7c5d17cb6665583e86fe23ee2f50d3c2481a78c58dcc9378ff2cf33e"
+      },
+      "response": {
+        "path": "data/raw/study2/nyc311/captures/4700f932c2a773dafc74a59c8ace80c9459e662a3d6f43644424a6bdfaf67dde.response",
+        "sha256": "9cf247e73376290b4276f55ef077b5a7e4110f61e4f73be35e4663596c621c94"
+      }
+    },
+    {
+      "metadata": {
+        "path": "data/raw/study2/nyc311/captures/6448c2eb5b30043d17f6c16e39c4d68cbe7adcff039927d94d4a9b3109405d41.json",
+        "sha256": "e4bebe73497f3e84552c876dddeca51f1228fd3e3283cc44c66def7842930b4d"
+      },
+      "response": {
+        "path": "data/raw/study2/nyc311/captures/6448c2eb5b30043d17f6c16e39c4d68cbe7adcff039927d94d4a9b3109405d41.response",
+        "sha256": "e0502c547628813be57127c65798297a7ce13c6c858a54e6cc0e3e5fe4fe9861"
+      }
+    }
+  ],
+  "gate_limitations": [
+    "Implementation must be committed and smoke repeated at that HEAD",
+    "Fresh complete source context snapshots required",
+    "npm panel unresolved until its readiness deadline",
+    "Separate signed freeze plan approval required",
+    "External target access and evaluation require later separate readiness approval"
+  ],
+  "github_300_synthetic_projection_seconds": {
+    "autoets_weekly": 166.90010999736842,
+    "chronos2": 73.13128889683867,
+    "dynamic_count": 5.288940004538745,
+    "hurdle_count_28": 4.419029998825863,
+    "hurdle_empirical_28": 1.926509992335923,
+    "local_mean_28": 0.6702899961965159,
+    "nb_local_level_28": 4.735319997416809,
+    "poisson_28": 4.053059997386299,
+    "timesfm2p5": 52.78986979831825,
+    "timesfm3": 67.67310430156067
+  },
+  "github_300_synthetic_projection_total_seconds": 381.58752298078616,
+  "per_model_synthetic_timing": {
+    "autoets_weekly": {
+      "context_days": 1400,
+      "forecast_seconds": 0.5563336999912281,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "chronos2": {
+      "context_days": 1400,
+      "forecast_seconds": 0.23278359998948872,
+      "leads": 60,
+      "load_seconds": 3.2962088999920525
+    },
+    "dynamic_count": {
+      "context_days": 1400,
+      "forecast_seconds": 0.01762980001512915,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "hurdle_count_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.01473009999608621,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "hurdle_empirical_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.006421699974453077,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "local_mean_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.0022342999873217195,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "nb_local_level_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.015784399991389364,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "poisson_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.013510199991287664,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "timesfm2p5": {
+      "context_days": 1400,
+      "forecast_seconds": 0.17215709999436513,
+      "leads": 60,
+      "load_seconds": 1.1427398000087123
+    },
+    "timesfm3": {
+      "context_days": 1400,
+      "forecast_seconds": 0.21961450000526384,
+      "leads": 60,
+      "load_seconds": 1.7887542999815196
+    }
+  },
+  "preflight": {
+    "path": "data/raw/study2/preflight/report.json",
+    "sha256": "36fe82de980c97c65b4965f6f5c5ce8547d6d68dbf023692a4353a603bab9799"
+  },
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "real_forecasts_generated": false,
+  "regeneration_command": ".\\.venv\\Scripts\\python.exe scripts\\study2_evidence.py --smoke study\\study2\\smoke_2026-09-14.json --out data\\cache\\study2-acquisition-status-reproduced.json",
+  "runtime_limitation": "One synthetic series per model; excludes capture, JSON I/O and real-series fitting variability. Re-estimate from the final verified plan before author approval.",
+  "smoke": {
+    "path": "study/study2/smoke_2026-09-14.json",
+    "sha256": "a7bea7841680cf4fb17e81074bae5f22f2940faebaf331a4df6b2e1c52300e75"
+  },
+  "smoke_hardware": {
+    "allocator_limit_bytes": 7000000000,
+    "baselines_device": "cpu",
+    "batch_size": 1,
+    "cuda_version": "12.8",
+    "foundation_device": "cuda:0",
+    "gpu_driver": "610.47",
+    "gpu_free_at_start_bytes": 11606687744,
+    "gpu_model": "NVIDIA GeForce RTX 4070 SUPER",
+    "gpu_total_bytes": 12878086144,
+    "memory_measurement": "PyTorch allocator; 1 GB reserved for CUDA/library overhead",
+    "peak_vram_limit_bytes": 8000000000,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytorch_version": "2.11.0+cu128"
+  },
+  "smoke_memory": {
+    "peak_allocated_bytes": 2785613824,
+    "peak_reserved_bytes": 2948595712
+  },
+  "sources": {
+    "github": {
+      "bridge_if_using_saved_snapshot": 30,
+      "frozen_panel_size": 300,
+      "leads_if_using_saved_snapshot": 60,
+      "manifest": {
+        "path": "reports/registered-2026-09-13/run/manifest.json",
+        "sha256": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92"
+      },
+      "saved_snapshot_endpoint": "2026-08-31",
+      "status": "fresh_source_completeness_evidence_required",
+      "verified_freeze_source_day": null
+    },
+    "npm": {
+      "achieved_strata": null,
+      "eligible_frame_size": null,
+      "holdout_status": "pending_readiness_deadline",
+      "probed_registry_documents": 4389348,
+      "serial_spacing_days_lower_bound": 50.802638888888886,
+      "status": "complete_creation_metadata_inventory_not_acquired",
+      "unfilled_strata": null
+    },
+    "nyc311": {
+      "achieved_strata": null,
+      "failure": {
+        "achieved_panel_written": false,
+        "reason": "transport_failure",
+        "stage": "context_acquisition",
+        "target_values_opened": false
+      },
+      "inventory": {
+        "path": "data/raw/study2/nyc311/inventory.json",
+        "sha256": "30f8e4358354e610b10ffdcf64fcad21552811c86e5cf428ecfa0b5111b82fe5"
+      },
+      "inventory_cells": 9496,
+      "recognized_board_frame": 8469,
+      "status": "context_acquisition_incomplete",
+      "unfilled_strata": null
+    },
+    "wikipedia": {
+      "achieved_strata": null,
+      "status": "complete_inventory_not_acquired"
+    }
+  },
+  "status": "blocked_before_freeze",
+  "target_values_opened": false
+}

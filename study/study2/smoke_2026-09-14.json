@@ -1,0 +1,700 @@
+{
+  "at": "2026-09-14T17:31:52.961489+00:00",
+  "crps": {
+    "cases": [
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 1.0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 0,
+        "value": 0.004254590641196609
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 1.0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1,
+        "value": 0.8829484586986699
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 1.0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 17,
+        "value": 16.812351123452387
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 1.0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1000,
+        "value": 999.8123511155077
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            400.0,
+            800.0,
+            1200.0,
+            1600.0,
+            2000.0,
+            2400.0,
+            2800.0,
+            3200.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 400.0
+        },
+        "extended_sum_residual": 4.837567326297388e-09,
+        "last_k": 7167,
+        "residual_bound": 4.837567326297382e-09,
+        "target": 0,
+        "value": 972.6666479118308
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            400.0,
+            800.0,
+            1200.0,
+            1600.0,
+            2000.0,
+            2400.0,
+            2800.0,
+            3200.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 400.0
+        },
+        "extended_sum_residual": 4.837567326297388e-09,
+        "last_k": 7167,
+        "residual_bound": 4.837567326297382e-09,
+        "target": 1,
+        "value": 971.8668979118306
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            400.0,
+            800.0,
+            1200.0,
+            1600.0,
+            2000.0,
+            2400.0,
+            2800.0,
+            3200.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 400.0
+        },
+        "extended_sum_residual": 4.837567326297388e-09,
+        "last_k": 7167,
+        "residual_bound": 4.837567326297382e-09,
+        "target": 17,
+        "value": 959.1388979118306
+      },
+      {
+        "distribution": {
+          "deciles": [
+            0.0,
+            400.0,
+            800.0,
+            1200.0,
+            1600.0,
+            2000.0,
+            2400.0,
+            2800.0,
+            3200.0
+          ],
+          "integer_mapping": "floor(Q(U)+0.5)",
+          "kind": "completed",
+          "tail": "exponential_quantile",
+          "tail_scale": 400.0
+        },
+        "extended_sum_residual": 4.837567326297388e-09,
+        "last_k": 7167,
+        "residual_bound": 4.837567326297382e-09,
+        "target": 1000,
+        "value": 422.6666479118306
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 0,
+        "value": 0.0
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1,
+        "value": 1.0
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 17,
+        "value": 17.0
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 0
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1000,
+        "value": 1000.0
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 100
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 0,
+        "value": 94.36163366560552
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 100
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1,
+        "value": 93.36163366560552
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 100
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 17,
+        "value": 77.3616336656055
+      },
+      {
+        "distribution": {
+          "kind": "poisson",
+          "mu": 100
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1000,
+        "value": 894.3616336656055
+      },
+      {
+        "distribution": {
+          "kind": "nb",
+          "probability": 0.003,
+          "shape": 0.2
+        },
+        "extended_sum_residual": 2.442257851147672e-12,
+        "last_k": 4095,
+        "residual_bound": 6.87371447797847e-11,
+        "target": 0,
+        "value": 13.379443760915798
+      },
+      {
+        "distribution": {
+          "kind": "nb",
+          "probability": 0.003,
+          "shape": 0.2
+        },
+        "extended_sum_residual": 2.442257851147672e-12,
+        "last_k": 4095,
+        "residual_bound": 6.87371447797847e-11,
+        "target": 1,
+        "value": 13.00527068982218
+      },
+      {
+        "distribution": {
+          "kind": "nb",
+          "probability": 0.003,
+          "shape": 0.2
+        },
+        "extended_sum_residual": 2.442257851147672e-12,
+        "last_k": 4095,
+        "residual_bound": 6.87371447797847e-11,
+        "target": 17,
+        "value": 13.44144049033248
+      },
+      {
+        "distribution": {
+          "kind": "nb",
+          "probability": 0.003,
+          "shape": 0.2
+        },
+        "extended_sum_residual": 2.442257851147672e-12,
+        "last_k": 4095,
+        "residual_bound": 6.87371447797847e-11,
+        "target": 1000,
+        "value": 882.5250777281616
+      },
+      {
+        "distribution": {
+          "fallback": null,
+          "kind": "hurdle",
+          "p": 0.017241379310344827,
+          "positive": {
+            "base": {
+              "deciles": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "integer_mapping": "floor(Q(U)+0.5)",
+              "kind": "completed",
+              "tail": "exponential_quantile",
+              "tail_scale": 1.0
+            },
+            "kind": "positive"
+          }
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 0,
+        "value": 0.0003437924027198767
+      },
+      {
+        "distribution": {
+          "fallback": null,
+          "kind": "hurdle",
+          "p": 0.017241379310344827,
+          "positive": {
+            "base": {
+              "deciles": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "integer_mapping": "floor(Q(U)+0.5)",
+              "kind": "completed",
+              "tail": "exponential_quantile",
+              "tail_scale": 1.0
+            },
+            "kind": "positive"
+          }
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1,
+        "value": 0.9658610337820301
+      },
+      {
+        "distribution": {
+          "fallback": null,
+          "kind": "hurdle",
+          "p": 0.017241379310344827,
+          "positive": {
+            "base": {
+              "deciles": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "integer_mapping": "floor(Q(U)+0.5)",
+              "kind": "completed",
+              "tail": "exponential_quantile",
+              "tail_scale": 1.0
+            },
+            "kind": "positive"
+          }
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 17,
+        "value": 16.945792873734565
+      },
+      {
+        "distribution": {
+          "fallback": null,
+          "kind": "hurdle",
+          "p": 0.017241379310344827,
+          "positive": {
+            "base": {
+              "deciles": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "integer_mapping": "floor(Q(U)+0.5)",
+              "kind": "completed",
+              "tail": "exponential_quantile",
+              "tail_scale": 1.0
+            },
+            "kind": "positive"
+          }
+        },
+        "extended_sum_residual": 0.0,
+        "last_k": 1023,
+        "residual_bound": 0.0,
+        "target": 1000,
+        "value": 999.9457928714762
+      }
+    ],
+    "certification": "analytic upper bound; completed exponential tail summed geometrically",
+    "max_k": 1000000,
+    "maximum_residual_bound": 4.837567326297382e-09,
+    "status": "resolved_by_offline_smoke",
+    "tolerance": 1e-08
+  },
+  "data_kind": "synthetic",
+  "hardware": {
+    "allocator_limit_bytes": 7000000000,
+    "baselines_device": "cpu",
+    "batch_size": 1,
+    "cuda_version": "12.8",
+    "foundation_device": "cuda:0",
+    "gpu_driver": "610.47",
+    "gpu_free_at_start_bytes": 11606687744,
+    "gpu_model": "NVIDIA GeForce RTX 4070 SUPER",
+    "gpu_total_bytes": 12878086144,
+    "memory_measurement": "PyTorch allocator; 1 GB reserved for CUDA/library overhead",
+    "peak_vram_limit_bytes": 8000000000,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytorch_version": "2.11.0+cu128"
+  },
+  "implementation_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "memory": {
+    "peak_allocated_bytes": 2785613824,
+    "peak_reserved_bytes": 2948595712
+  },
+  "packages": {
+    "accelerate": "1.15.0",
+    "adagio": "0.2.6",
+    "annotated-doc": "0.0.5",
+    "anyio": "4.15.1",
+    "build": "1.6.1",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.1",
+    "chronos-forecasting": "2.3.2",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "contourpy": "1.4.0",
+    "coreforecast": "0.0.18",
+    "cryptography": "50.0.1",
+    "cycler": "0.12.1",
+    "einops": "0.8.2",
+    "filelock": "3.32.3",
+    "fonttools": "4.65.0",
+    "formulaic": "1.2.2",
+    "fsspec": "2026.7.0",
+    "fugue": "0.9.7",
+    "google-api-core": "2.36.0",
+    "google-auth": "2.58.0",
+    "google-cloud-bigquery": "3.45.0",
+    "google-cloud-core": "2.7.0",
+    "google-crc32c": "1.8.0",
+    "google-resumable-media": "2.10.2",
+    "googleapis-common-protos": "1.75.3",
+    "grpcio": "1.83.1",
+    "grpcio-status": "1.83.1",
+    "h11": "0.16.0",
+    "hf-xet": "1.6.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface-hub": "1.31.0",
+    "idna": "3.19",
+    "iniconfig": "2.3.0",
+    "interface-meta": "2.0.1",
+    "jinja2": "3.1.6",
+    "kiwisolver": "1.5.1",
+    "lightgbm": "4.7.0",
+    "markdown-it-py": "4.2.0",
+    "markupsafe": "3.0.3",
+    "matplotlib": "3.11.2",
+    "mdurl": "0.1.2",
+    "mpmath": "1.3.0",
+    "narwhals": "2.26.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.3",
+    "opentelemetry-api": "1.44.0",
+    "packaging": "26.3",
+    "pandas": "2.3.3",
+    "patsy": "1.0.3",
+    "pillow": "12.3.0",
+    "pip": "25.0.1",
+    "pluggy": "1.6.0",
+    "proto-plus": "1.28.4",
+    "protobuf": "7.36.1",
+    "psutil": "7.2.2",
+    "pulsegraph": "0.2.0",
+    "pyarrow": "25.0.1",
+    "pyasn1": "0.6.4",
+    "pyasn1-modules": "0.4.2",
+    "pycparser": "3.0",
+    "pygments": "2.21.0",
+    "pyparsing": "3.3.2",
+    "pyproject-hooks": "1.2.0",
+    "pytest": "9.1.1",
+    "python-dateutil": "2.9.0.post0",
+    "python-dotenv": "1.2.3",
+    "pytz": "2026.3.post1",
+    "pyyaml": "6.0.3",
+    "regex": "2026.9.10",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "ruff": "0.16.7",
+    "safetensors": "0.8.0",
+    "scipy": "1.18.1",
+    "setuptools": "78.1.0",
+    "shellingham": "1.5.4",
+    "six": "1.17.0",
+    "statsforecast": "2.1.1",
+    "statsmodels": "0.15.0",
+    "sympy": "1.14.0",
+    "threadpoolctl": "3.6.0",
+    "timesfm": "3.0.2",
+    "tokenizers": "0.23.2",
+    "torch": "2.11.0+cu128",
+    "tqdm": "4.70.1",
+    "transformers": "5.17.0",
+    "triad": "1.0.2",
+    "typer": "0.27.2",
+    "typing-extensions": "4.16.0",
+    "tzdata": "2026.4",
+    "urllib3": "2.7.0",
+    "utilsforecast": "0.2.16",
+    "wrapt": "2.4.1"
+  },
+  "passed": true,
+  "per_model": {
+    "autoets_weekly": {
+      "context_days": 1400,
+      "forecast_seconds": 0.5563336999912281,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "chronos2": {
+      "context_days": 1400,
+      "forecast_seconds": 0.23278359998948872,
+      "leads": 60,
+      "load_seconds": 3.2962088999920525
+    },
+    "dynamic_count": {
+      "context_days": 1400,
+      "forecast_seconds": 0.01762980001512915,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "hurdle_count_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.01473009999608621,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "hurdle_empirical_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.006421699974453077,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "local_mean_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.0022342999873217195,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "nb_local_level_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.015784399991389364,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "poisson_28": {
+      "context_days": 1400,
+      "forecast_seconds": 0.013510199991287664,
+      "leads": 60,
+      "load_seconds": 0.0
+    },
+    "timesfm2p5": {
+      "context_days": 1400,
+      "forecast_seconds": 0.17215709999436513,
+      "leads": 60,
+      "load_seconds": 1.1427398000087123
+    },
+    "timesfm3": {
+      "context_days": 1400,
+      "forecast_seconds": 0.21961450000526384,
+      "leads": 60,
+      "load_seconds": 1.7887542999815196
+    }
+  },
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "seeds": {
+    "bootstrap": 20260917,
+    "forecast": 20260915,
+    "pit": 20260916,
+    "prospective": 20260919,
+    "selection": 20260914,
+    "synthetic": 20260918
+  },
+  "source_sha256": {
+    "pulsegraph/study2/__init__.py": "2287fddfcfc5d5eeab27837633890fbec3e6ded4db92a52aa4eb583341cf8a08",
+    "pulsegraph/study2/constants.py": "c844e2004742d9f1a4bcd621343ea8fffe101d2bca8831395f4f96064db811d3",
+    "pulsegraph/study2/declarations.py": "e18a3e843ba9bffa8adc1e72238579a2b8905d992f4ace004bd156e875bc1ba8",
+    "pulsegraph/study2/distributions.py": "c8ebd976c9b232121a2954c7fe8515f5c03b80e0059b39c67993bdcdc599ee9e",
+    "pulsegraph/study2/gate.py": "2c34c64ad1721af251da8a98af2fd9763c7414dd5fb1dde777f1003bf7c9b822",
+    "pulsegraph/study2/holdout.py": "40118e99c170f1efc2c4a45b9ee250575167afc394fc2b7c98dbc6ea79b9df33",
+    "pulsegraph/study2/ingestion.py": "963d918d0261c73d77f68349b88179a99eba17abd4c1f9d71edbe39373cfeaf9",
+    "pulsegraph/study2/models.py": "b448099fa55b96998ba87987e7a4cd8b90b2dd6fc0d8c50adbea9f5eafc05e07",
+    "pulsegraph/study2/runner.py": "eefda9c983dc80144b033e6d4cfaf7315743e8d221c3178e302103b3fb42ca1e",
+    "pulsegraph/study2/scores.py": "d4e4f4426d83187cf4e9921f9871ee90abfa5db9e60b65baabd4955dd26b3e29",
+    "pulsegraph/study2/synthetic.py": "ca143ff9154eac0ebef8b9103add160b10ac86709b769315dd91f0abccb722e8",
+    "pulsegraph/study2/wikipedia.py": "a72d4e609041f22b85ada601c0ebc50b51da1e9251c84968ff3c8139e7be3813",
+    "scripts/study2_evidence.py": "d6575285a0cf9db05353ac00673f6d2a3cfbd2d5a4a73ef192f72a44f72a232f",
+    "scripts/study2_gate.py": "2e7ca0228da5ecd2675ecc9f4584097c0595ec1c2c055c3b55bd11e2250b3847",
+    "scripts/study2_holdout.py": "7d7cd149e0ac7b0dd81ab69e0c8896f15a4254f2ed06c0f92a06ef85a2860873",
+    "scripts/study2_ingest.py": "97339df5eda0b869fdd4701cafcfef77744bb8940d2250af9df98d203ef4db3a",
+    "scripts/study2_run.py": "2c7b6c64b9641601ad167b0dc45deaa0b96d9929f56688eda0836f8a1a82a391",
+    "scripts/study2_smoke.py": "212e789349dfcb464626774fa68d1c8cd9bb66b0bd5c1bfb87eee654a3aa3ef2"
+  },
+  "variants": [
+    "chronos2_raw",
+    "chronos2_completed",
+    "chronos2_hurdle",
+    "timesfm3_raw",
+    "timesfm3_completed",
+    "timesfm3_hurdle",
+    "timesfm2p5_raw",
+    "timesfm2p5_completed",
+    "timesfm2p5_hurdle",
+    "local_mean_28",
+    "autoets_weekly",
+    "nb_local_level_28",
+    "poisson_28",
+    "hurdle_count_28",
+    "hurdle_empirical_28",
+    "dynamic_count"
+  ]
+}
