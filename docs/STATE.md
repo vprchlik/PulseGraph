@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-12 04:10 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-12 21:30 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,42 +12,45 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `df55867` (2026-09-14 16:15 UTC), eight commits, pushed; `origin/main` is equal. The tree holds
-the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
+`main` is at `54f24db` (2026-10-12 04:18 UTC), ten commits, pushed. Since 2026-10-12 the root carries
+`CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
+holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
 frame, skips, validation, readiness, run metadata, inference, descriptive tables); `RESULTS.md` with the 18
 confirmatory rows and the declared descriptive tables. The 433,172,286-byte `results.parquet` is not in the
 tree; `README.md` says its release URL is to be filled, and no release exists yet.
 
-## Uncommitted, untouched since 2026-09-14 17:32 UTC (27 days)
+## Verified on 2026-10-12, awaiting the author's commit
 
-Two bodies of work, both verified on 2026-09-14 and never committed:
+Two bodies of work from 2026-09-14, re-verified on 2026-10-12 (every provenance and smoke hash matches; ruff
+clean; 241 of 241 tests pass once pytest's temporary directory is moved away from `.pytest_cache`, whose
+access list denies access on this machine; the post-hoc directory is 67 MB, 18 MB of it SVG figures):
 
 | Work | Paths | Companion edits |
 |---|---|---|
 | Post-hoc QScore9 accounting of the saved Study 1 run (zero-day, positive-over, positive-under parts; 102 cells; 36 figures; provenance with hashes) | `reports/registered-2026-09-13/posthoc/` (50 files) | `RESULTS.md` +10 lines |
 | Study 2 implementation: ingestion, CDF completion, hurdles, dynamic count, gate, holdout writer, synthetic grid, 71 offline tests, declarations and smoke evidence | `pulsegraph/study2/` (12), `scripts/study2_*.py` (6), `study/study2/` (13), `tests/test_study2_*.py` (7) | `README.md` +124 lines |
 
-The whole suite collects 241 tests; none has been run since 2026-09-14. On 2026-10-12 the three root files of
-September 2026 (the coding-agent rules, the agent notes and the setup handoff) leave the tree:
-`CONTRIBUTING.md` carries the research-integrity and repository rules for anyone who changes the repository,
-and `docs/HISTORY.md` the project history.
-`README.md` also carries a new section, "How this project was built", awaiting the author's approval before
-it is committed.
+Also awaiting the same commit, all written 2026-10-12: the dated protocol addition for the lapses (items 1 to
+3, appended 09:20 UTC on top of `54f24db`; the registered prefixes verified twice; 62,111 bytes); the
+literature re-check (`docs/research/2026-10-11-literature-recheck.md`); the Study 1 report under `paper/`
+(LaTeX source, three figures, the number sources, a checker that passes 181 checks; no PDF, since no TeX is
+installed).
 
 ## What the protocol allows, and what lapsed
 
 - Study 1 is closed. Anything computed from its saved run is post-hoc and labeled so.
 - Study 2 is registered: 54 external tests (three domains), 6 synthetic, 18 prospective; one BH per family;
   no run before a signed gate at the committed implementation with GPU smoke at that HEAD.
-- **Lapsed:** the October holdout's freeze (2026-09-28 18:00 UTC) passed with nothing frozen; no backdating is
-  allowed; it is reported as not run. The npm-or-PyPI decision date (2026-09-28) passed with npm never
-  attempted beyond a 2026-09-14 metadata probe; by the rule's own words this is not a source failure.
-- Nothing in the protocol lets the external family shrink to one domain except the holdout's npm rule, so
-  running npm alone for the paper needs a dated addition made before any Study 2 target is seen. No target
-  has been seen (`study/study2/acquisition_status.json`: targets opened false, forecasts generated false).
-- The implementation's external gate requires a completed holdout freeze and all three domain panels; the
-  protocol text requires neither. Both change in a commit that cites the additions.
+- **Lapsed, and recorded by the dated addition of 2026-10-12:** the October holdout (freeze 2026-09-28 passed
+  with nothing frozen) is reported as not run; the npm readiness clock is reset once, to 2026-10-20 23:59 UTC,
+  with the PyPI rule unchanged after that; the October paper's external family is E01 to E18 with one BH
+  correction, E19 to E54 kept whole for a later run. All three were decided before any Study 2 target was
+  seen (`study/study2/acquisition_status.json`: targets opened false, forecasts generated false).
+- The implementation's external gate still requires a completed holdout freeze and all three domain panels;
+  the addition says both change in a commit that cites it. That commit is still to be made.
+- The November prospective round was not taken on 2026-10-12; it can still be registered by a separate dated
+  addition before 2026-10-28 18:00 UTC.
 - The birth-cohort census is approved but needs a BigQuery dry run and cost approval; the fine-tune is
   inactive; the write-up may start before 2026-10-20.
 
@@ -72,10 +75,20 @@ of 9,496 cells captured, context pull failed on transport. npm: a probe counting
 no creation metadata, no download request. Wikipedia: nothing acquired. **Never exercised:** any real
 forecast, any target value, any achieved external panel, the gate at a committed HEAD.
 
+## What the literature re-check found (2026-10-12)
+
+No published evaluation of the registered construction (a context-only occurrence probability replacing a
+frozen model's zero mass, the completed positive law kept, judged by a proper quantile score against a
+completed-unwrapped control and matched count hurdles on sparse daily counts) was found. Six items since
+September must be cited and narrow the claim: a hurdle on frozen Chronos-2 output for monthly spare parts
+(2026-09-12), an event-ranking evaluation of twelve frozen models on sparse daily panels, a simulation with
+TimesFM 3 on intermittent demand, an aggregate-versus-per-series ranking study, a temporal-holdout familiarity
+study, and a live GitHub-activity benchmark. The paper may claim the registered combination on daily attention
+and adoption counts, and nothing broader.
+
 ## Next steps
 
-In order of start, all from 2026-10-12: commit the two uncommitted bodies after their tests run; append the
-dated protocol additions for the lapses with the author's sign-off; start the Study 1 report under `paper/`;
-repeat the literature search narrowly for work since 2026-09-13; build the npm panel under the registered
-rules (deadline 2026-10-20 by the addition); run the registered synthetic grid. Dates and gates are in
-`docs/PLAN.md`. The machine has no pandoc, TeX or GitHub CLI; Python 3.12 in `.venv`; 216 GB free.
+The author's commit of everything above; then, in parallel: the report reviewed by a different reader and
+revised with the six citations; the npm panel built under the registered rules (deadline 2026-10-20); the
+synthetic grid's smoke, gate and run. Dates and gates are in `docs/PLAN.md`. The machine has no pandoc, TeX
+or GitHub CLI; Python 3.12 in `.venv`; 216 GB free.

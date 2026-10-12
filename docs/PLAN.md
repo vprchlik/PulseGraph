@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-12 04:10 UTC. This page holds only what is current.
+Last rewritten 2026-10-12 21:30 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -21,20 +21,25 @@ day.
 
 | Step | Depends on | Needs from the author | Earliest finish |
 |---|---|---|---|
-| Verify and commit the uncommitted work of 2026-09-14 (hashes, the full test suite, two commits) | the root files replaced (`CONTRIBUTING.md`, `docs/HISTORY.md`) and the README paragraph approved | the commits | 2026-10-12 |
-| Dated protocol additions for the lapses: holdout not run; npm clock reset once to 2026-10-20; packages-only family E01 to E18 for the October paper; the November round optional | nothing | his sign-off in his own words, the commit | 2026-10-12 |
-| Literature re-check for work since 2026-09-13 | nothing | nothing | 2026-10-13 |
-| Study 1 report: summary with title and abstract first, then the full LaTeX draft, figures, number sources | nothing | reads `paper/SUMMARY.md` | summary 2026-10-13; full draft 2026-10-17 |
+| Verify and commit the uncommitted work of 2026-09-14 | done 2026-10-12: verified, awaiting the commit | the commit | 2026-10-12 |
+| Dated protocol addition for the lapses (items 1 to 3; the November round not taken) | done 2026-10-12: appended, awaiting the commit | the commit, which is the sign-off | 2026-10-12 |
+| Literature re-check for work since 2026-09-13 | done 2026-10-12 | the commit | 2026-10-12 |
+| Study 1 report: summary, LaTeX source, figures, number sources, checker | done 2026-10-12 (about ten pages; no PDF yet) | reads `paper/SUMMARY.md`; the commit | 2026-10-12 |
+| Report review by a different reader (numbers, the direction of every test, claims, the six citations, length) | the report | nothing | 2026-10-13 |
+| Report revision: the review's fixes, the citations, the length | the review | nothing | 2026-10-15 |
 | npm, stage 1: frozen name inventory plan, the candidate-hash walk, the request count stated | both commits above | nothing | 2026-10-13 |
 | npm, stage 2: the pull (about eight hours of serial requests) and the frozen achieved panel | stage 1 | approval of the stated request count | 2026-10-15 (deadline 2026-10-20) |
 | Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | the first commit | nothing | 2026-10-13 |
 | Synthetic grid, stage 2: the run (under an hour of GPU), inference over S01 to S06, results section | stage 1 | runtime approval | 2026-10-14 |
 | Study 2 external run on the npm panel: gate changes citing the additions, run, inference over E01 to E18 | npm stage 2, synthetic stage 1 | target-access and runtime approval | 2026-10-19 |
-| Report review by a different reader, the author's read, the PDF, posting | the draft | his read, the posting | review 2026-10-20; posted 2026-10-23 |
+| The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
 | Paper extension, review, posting, TMLR submission | npm run, synthetic, literature, report | his read, the posting, the submission | 2026-10-31 |
 
-Cut order if slipping: the November round, then the npm external run (reported as not run; the paper keeps
+The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
+separate dated addition before 2026-10-28 18:00 UTC.
+
+Cut order if slipping: the npm external run (reported as not run; the paper keeps
 the synthetic grid and the literature re-check), then the synthetic grid. Never the report.
 
 ## Spend
@@ -59,12 +64,12 @@ Every spend is approved by the author in his own words before it happens. Nothin
 3. **The v1 computer.** The write-up's first half leans on the preserved v1 documents; the v1 result artifacts
    exist only on the computer no longer in use. Is it reachable before 2026-10-24? If not, the report says the
    v1 numbers were not recomputed, as the protocol already requires.
-4. **Addition 4, the November prospective round.** The case both ways and the addition's text are in
-   `ideas/2026-10-11-november-prospective-round.md`. Recommendation: register it for GitHub, add npm only if
-   its panel is frozen by 2026-10-24.
-5. **The README paragraph** "How this project was built", added 2026-10-12 in the author's voice, is committed
-   only with his approval. It states the reasons the study exists (the question, the audit of version 1, the
-   registered redesign), who directed the work and how every number traces to the files.
+4. **The post-hoc SVG figures.** The post-hoc directory is 67 MB, of which 18 MB are 18 SVG figures that
+   `posthoc-report.md` regenerates from the release asset. Recommendation: commit all of it once, so the
+   provenance file lists nothing that is not in the tree.
+5. **The `.pytest_cache` folder** denies access on this machine, so the test command in
+   `README.md` fails at setup until the folder is deleted from the author's own shell (an elevated one if
+   needed); pytest recreates it. Until then the tests use another temporary directory.
 6. **The GitHub release** carrying `results.parquet` (the README has promised its URL since 2026-09-13).
 7. **The spring plan** lives in gitignored `notes/plan_spring_2027.md`; a fresh clone cannot read it. The
    deferred register carries its items; moving the plan itself to `docs/ideas/` would complete the record.
@@ -86,5 +91,7 @@ winget install --id MiKTeX.MiKTeX -e
 - A one-paragraph plain statement of the result and a two-page excerpt of the registered analysis code, for
   the author's own use (a draft paragraph is in `ideas/2026-10-11-report-link-title-abstract.md`).
 - A monthly audit of every claim on these pages against the files, first about 2026-11-11.
+- `*.py text eol=lf` in `.gitattributes`, so that the Study 2 gate's source hashes survive a checkout on a
+  machine that converts line endings (folded into the npm panel work).
 - Archiving the v1 repository on GitHub with one line at the top of its README pointing here, once the report
   is posted (`docs/HISTORY.md`).
