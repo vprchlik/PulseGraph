@@ -759,3 +759,52 @@ test set.
 The write-up draft starts on 2026-10-20 regardless of experiment progress. Incomplete components
 are reported as incomplete; they do not postpone writing or the 2026-11-15 deadline. These dates
 do not authorize scheduled automation or execution beyond the stated gates and approvals.
+
+## Lapses of September 2026 and the families of the October 2026 paper — dated addition, 2026-10-12
+
+Signed off by the author on 2026-10-12; the commit containing this addition is the author's approval. Appended
+at 2026-10-12 09:20 UTC on top of commit 54f24db30ebcea87a57b9d52306ae8c5d7152a04. At the time of this addition no Study 2 target value,
+forecast or score exists: study/study2/acquisition_status.json records target_values_opened false and
+real_forecasts_generated false, and no holdout forecast was produced. Nothing above this heading changes. The
+registered Study 1 bytes and the Study 2 registration bytes at df55867 remain prefixes of this file. The cause
+of every lapse below is the same: no work was done in this repository between 2026-09-14 and 2026-10-11. Each
+item states what changes and why; none depends on any outcome.
+
+### 1. The October prospective holdout was not frozen and is reported as not run
+
+The freeze deadline of 2026-09-28 18:00 UTC passed with no freeze plan prepared, no approval signed, no
+forecast generated and no prediction committed. Under the registered rule a late commit fails the prospective
+gate and no backdating or reconstruction is allowed, so the holdout family H01 to H18 has no result and the
+settlement retrievals declared for 2026-10-15 and 2026-11-07 are not performed. The write-up reports the
+holdout as registered and not run. The implementation's requirement that a completed holdout freeze and a
+prediction commit precede external evaluation was an implementation ordering, not a rule of this protocol;
+with the holdout not run, external evaluation proceeds without it, and the gate code is changed to that effect
+in a commit that cites this addition and keeps every other gate requirement.
+
+### 2. The npm readiness clock is reset once
+
+The registered rule substitutes PyPI only when npm cannot provide the bounded metadata and context extraction
+and verified coverage under approved quotas within 14 calendar days of 2026-09-14. That date passed with npm
+untested: the only npm access was the metadata probe of 2026-09-14, which counted 4,389,348 registry documents
+and acquired no creation metadata and no download count. Inactivity is not the source failure the rule names,
+so the lapse triggers no substitution. The clock is reset once: npm must have a verified achieved panel
+(manifest, selection and context files under the registered rules) by 2026-10-20 23:59 UTC. If it does not,
+the registered rule applies unchanged: record the operational failure before any target scoring and
+substitute PyPI via ClickPy in the packages slot; if PyPI also fails, report the packages domain unavailable.
+No further reset follows. The registered candidate-pool rule is read as written: sort the frozen name inventory
+by the candidate hash and walk it in that order, requesting creation metadata only until 10,000 eligible
+packages are found. This yields exactly the first min(10000, N) metadata-eligible keys and does not require
+creation metadata for every registry document.
+
+### 3. The external confirmatory family of the October 2026 paper is E01 to E18
+
+NYC 311 and Wikipedia are not run before the paper of October 2026 and are deferred to the spring plan, for
+calendar and resource reasons, decided before any Study 2 target value was accessed. For that paper the
+external confirmatory family is the eighteen packages-domain tests E01 to E18 exactly as registered, with BH
+applied once at q=0.05 over those eighteen. Tests E19 to E54 keep their registered definitions and, when NYC
+311 and Wikipedia are run, form one family of 36 with its own single BH correction; they are not merged back
+into a 54-test correction after the eighteen have been seen. The registered sentence that the holdout's
+npm-unavailability rule is the sole permitted domain-based reduction of a comparison family is amended by this
+item for this one case. The gate's requirement that all three domain panels be present is changed accordingly
+in a commit that cites this addition. The write-up states that the registered design had three domains and
+that two were not run.
