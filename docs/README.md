@@ -1,0 +1,24 @@
+# PulseGraph documents: the index
+
+One row per document, newest first. The row says what the document holds or found, not only its title. The
+standing documents at the root are listed at the end with their status. Read `docs/STATE.md` first, then
+`docs/PLAN.md`.
+
+| Date | Document | What it holds or found |
+|---|---|---|
+| 2026-10-12 | [`HISTORY.md`](HISTORY.md) | How version 2 came to be: the question, version 1 and its audit, why a new repository, the design that became the protocol, the timeline |
+| 2026-10-11 | [`ideas/2026-10-11-report-link-title-abstract.md`](ideas/2026-10-11-report-link-title-abstract.md) | Where the Study 1 report is posted (a Zenodo DOI the same day; arXiv for the paper only with an endorser), the proposed title and abstract, the posting steps, the README paragraph on how the project was built |
+| 2026-10-11 | [`ideas/2026-10-11-november-prospective-round.md`](ideas/2026-10-11-november-prospective-round.md) | The case for and against registering a November 2026 prospective round by a dated calendar addition, with the addition's text; recommendation: register it for GitHub, add npm only if its panel is frozen by 2026-10-24 |
+| 2026-10-11 | [`ideas/DEFERRED.md`](ideas/DEFERRED.md) | The deferred register: what is parked, where it was written, since when, and what revives it |
+| 2026-10-11 | [`PLAN.md`](PLAN.md) | The two deliverables and their dates, the path with earliest finish dates, every spend, the decisions open with the author |
+| 2026-10-11 | [`STATE.md`](STATE.md) | The current state in two screens: committed, uncommitted, what the protocol allows, what lapsed, what the report can say, what the Study 2 code has run on |
+
+## Standing documents at the root
+
+| Document | Status |
+|---|---|
+| `CONTRIBUTING.md` | The research-integrity, hygiene, writing and commit rules for anyone who changes this repository. From 2026-10-12; it carries the rules under which the protocol was registered and run. |
+| `PROTOCOL.md` | The registered protocol: Study 1 at `5f01769`, Study 2 appended at `df55867`. Edited only by dated additions at the end. |
+| `RESULTS.md` | The registered Study 1 results and declared descriptive tables; a post-hoc accounting section is appended and uncommitted as of 2026-10-12. |
+| `README.md` | The repository's own description: registration, evidence, commands, what a fresh clone holds, and how the project was built. Its first screen is written for the people who ran the study, not for a visitor (queued in `PLAN.md`). |
+| `notes/` (gitignored) | Private working notes of September 2026, including the research memo of 2026-09-13 that the protocol cites by SHA-256 and the spring plan of 2026-09-14. Not in the tree. |
