@@ -21,7 +21,7 @@ dist/
 .ruff_cache/
 
 # Raw data and model weights are not tracked. Aggregated datasets, results
-# tables, summary CSVs and figures ARE tracked (see AGENTS.md); do not add
+# tables, summary CSVs and figures ARE tracked (see CONTRIBUTING.md); do not add
 # blanket *.parquet or *.csv rules here.
 data/raw/
 data/cache/
@@ -36,5 +36,5 @@ models/
 .DS_Store
 *.swp
 
-# Private working notes (advisor context, personal planning); never committed
+# Private working notes; never committed
 notes/

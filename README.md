@@ -6,6 +6,17 @@ count-aware baselines. The [v1 study and audit](https://github.com/vprchlik/Proj
 found lower mean errors but identified outcome-selected cohorts and windows
 dominated by post-peak decay. Version 2 changes the sample, calendar and inference.
 
+## How this project was built
+
+This study exists for three reasons: the question, whether zero-shot time-series foundation models
+improve probabilistic forecasts of sparse daily counts; the audit of its first version, which found no
+invalidating code defect but two design flaws; and the registered redesign that answers the question
+without them. The code in this repository was written with AI coding agents under my direction. I set the
+question, registered the protocol before any target data was fetched, ran the studies on my own machine,
+and made the decisions that the protocol and the evidence package record as the author's. Every number in
+`RESULTS.md` traces to a saved file under `reports/` and to the command that regenerates it, named in this
+README and in `RESULTS.md`.
+
 ## Registration and evidence
 
 [PROTOCOL.md](PROTOCOL.md) was registered at **5f01769** on 2026-09-12:
@@ -31,7 +42,7 @@ must disclose reliance on those sources and that v1 numbers were not recomputed.
 ## Files and environment
 
 The tree contains study code (`pulsegraph/`), commands (`scripts/`), offline tests
-(`tests/`), the protocol and working instructions. `study/` contains the exact
+(`tests/`), the protocol and the contribution rules in `CONTRIBUTING.md`. `study/` contains the exact
 18 comparisons, runtime settings/model revisions, 20 validation repositories and
 selection rationale, both SQL queries and an unresolved readiness example.
 These files are declarations, not experimental results.
@@ -295,6 +306,130 @@ The package's `.gitattributes` preserves the bytes covered by evidence hashes.
 The final results retain every forecast, sample/quantile grid, context, target,
 seed and model metadata; duplicate per-repository recovery files are excluded
 from the commit. Raw capture locations and hashes remain in the achieved manifest.
+
+## Study 2 implementation and source readiness
+
+Study 2 is registered at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`.
+The full protocol SHA-256 at registration is
+`33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360`.
+`pulsegraph/study2/constants.py` keeps this identity separate from Study 1.
+Both gates verify their own registered Git blob and require those exact bytes
+to remain a prefix of the current protocol. Study 1's results remain closed.
+
+`pulsegraph/study2/` contains context-only ingestion, the prospective freeze
+writer, count distributions and baselines, a separate execution gate, whole-series
+checkpoints and the synthetic generators. `study/study2/` contains the component
+specifications, all 54 external, 6 synthetic and 18 holdout comparisons, the
+540-series grid manifest, unsigned approval examples and implementation evidence.
+Each family has one BH correction. The nine FM variants share three model fits:
+native deciles, completed-unwrapped and hurdle for each frozen foundation model.
+Seven baselines give 16 forecasts per origin. Models stay resident per invocation;
+failed windows stop the run, and verified completed series support resume.
+
+CDF completion, integer rounding and the exponential tail are explicit in saved
+distribution specifications. Discrete CRPS stops only with an analytic residual
+bound below 1e-8, failing if it cannot certify this by index 1,000,000.
+`study/study2/crps_resolution.json` resolves the numerical OPEN item with synthetic
+tests and an independent extended tail sum. Every score includes the exact
+zero-day/positive-day and positive over/under accounting. No protocol text was
+changed to record implementation resolutions.
+
+Selection uses only September 1, 2025 through June 2, 2026. The final 90 days,
+March 5 through June 2, define the frozen zero-fraction strata. Package and
+Wikipedia metadata frames use a 10,000-entity seeded hash candidate pool;
+NYC 311 uses its full eligible frame. Each stratum keeps at most 100 complete
+series, reports any shortage and does not transfer slots. Capture exhaustion
+is required before zero days can be inferred for NYC event counts. Missing
+package/pageview observations remain missing. Selection tests perturb, permute
+and extend future data; every origin also has a model-input date-spy test.
+
+Acquisition commands save request bounds, acquisition timestamps and response
+hashes. Commands are bounded to 500 requests and 55 minutes by default; a quota
+or time limit stops acquisition without declaring a partial inventory complete.
+Repeated commands reuse verified response captures. Raw captures and provisional
+manifests/signals are under ignored `data/raw/study2/`; no external-domain target
+snapshot is in the tree. A completed achieved panel writes `manifest.json`,
+`context.parquet` and `selection.json`, including reserve order and skip reasons.
+Aggregate publication requires the registered source-redistribution review.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\study2_ingest.py npm inventory --captures data\raw\study2\npm\captures --out data\raw\study2\npm\inventory.json
+.\.venv\Scripts\python.exe scripts\study2_ingest.py npm panel --captures data\raw\study2\npm\captures --inventory data\raw\study2\npm\inventory.json --out data\raw\study2\npm\panel
+.\.venv\Scripts\python.exe scripts\study2_ingest.py nyc311 inventory --captures data\raw\study2\nyc311\captures --out data\raw\study2\nyc311\inventory.json
+.\.venv\Scripts\python.exe scripts\study2_ingest.py nyc311 panel --captures data\raw\study2\nyc311\captures --inventory data\raw\study2\nyc311\inventory.json --out data\raw\study2\nyc311\panel
+.\.venv\Scripts\python.exe scripts\study2_ingest.py wikipedia inventory --captures data\raw\study2\wikipedia\captures --out data\raw\study2\wikipedia\inventory.json
+.\.venv\Scripts\python.exe scripts\study2_ingest.py wikipedia panel --captures data\raw\study2\wikipedia\captures --inventory data\raw\study2\wikipedia\inventory.json --out data\raw\study2\wikipedia\panel
+```
+
+The September 14 metadata probe returned 4,389,348 npm registry documents; this
+is not an eligible-frame count. npm's supported replication feed supplies names;
+the creation-time rule requires additional package metadata. The complete
+creation-metadata inventory has not been acquired. A serial request for each
+document at the client's one-second spacing would exceed 50 days, before retries.
+No such acquisition was started. See the
+[npm replication API changes](https://github.com/orgs/community/discussions/152515).
+The NYC 2024 inventory contains 9,496 problem/board cells, with 8,469 recognized
+community-board cells. Its bounded context pull ended with a transport failure;
+achieved strata and shortages remain unknown. Wikipedia's complete inventory has
+not been acquired. Its adapter checks namespace, redirect status, earliest
+revision, stable page ID and title-history ambiguity before requesting pageviews;
+unresolved moves/deletions are exclusions. Wikipedia retains the registered
+known-training-overlap label. Source status and hashes are in
+`study/study2/acquisition_status.json`; these incomplete acquisitions are not
+reported as empty achieved panels.
+
+The freeze requires a separate reviewed context snapshot for each source.
+The input JSON to `prepare` supplies `sources` and `timing_evidence`. Each source
+has `domain`, `manifest`, `signals` and `completeness`; every file reference is
+an object with `path` and `sha256`. Signals have exactly `series_id`, `date`,
+`count`, one explicit nonnegative integer observation per day. GitHub uses the
+unchanged 300-repository Study 1 manifest, with Los Angeles nominal dates.
+npm uses its verified achieved manifest and UTC dates.
+
+The completeness document records `calendar`, `verified: true`, `method`,
+`verified_at`, `last_complete_day`, `signals_sha256` and hashed `response_evidence`.
+Source availability evidence must establish the last complete day; an elapsed
+calendar day alone does not establish that the source has finished publishing it.
+The preparer checks these evidence files, calendar bounds, all panel IDs and
+every daily bin. It reports the bridge from the next context day through
+September 30, then forecasts `bridge_days + 30` leads. The writer copies context
+files, saves full distributions where available and hashes each prediction file.
+`verify_predictions` rechecks the complete panel, context hashes and forecast grid.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\study2_smoke.py --gpu --context-days 1400 --leads 60 --out data\raw\study2\smoke-new.json
+.\.venv\Scripts\python.exe scripts\study2_holdout.py prepare --input data\raw\study2\holdout-input.json --out data\raw\study2\holdout-plan.json
+```
+
+Stop after preparing the plan: report each last complete day, bridge, achieved
+panel and model runtime estimate for author confirmation. The unsigned
+`study/study2/freeze_approval.example.json` shows the required fields. Only a
+separate signed approval bound to the plan hash authorizes the following command.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\study2_holdout.py freeze --input data\raw\study2\holdout-plan.json --approval data\raw\study2\freeze-approval.json --out reports\study2-holdout
+```
+
+No freeze may begin or continue after September 28, 2026 at 18:00 UTC. npm must
+have a verified panel by September 26; until that deadline its status is pending.
+If unavailable then, record the reason and freeze GitHub alone, declaring H01-H09
+before scoring. No PyPI substitution is permitted in the holdout. Prediction
+hashes must be committed before October 1. Settlement attempts are October 15
+at 18:00 UTC for horizon 7 and November 7 at 18:00 UTC for horizon 30, with
+12-hour retries for at most 72 hours. These are declared retrieval windows,
+not scheduled jobs.
+
+The external run has a second approval boundary. Its unsigned example requires
+the committed holdout freeze, source evidence, separate target-access approval,
+three domain manifests and signals, their original selection contexts, current
+implementation smoke and an approved runtime budget. Targets cannot replace the
+frozen selection prefixes. `scripts/study2_gate.py` validates readiness;
+`scripts/study2_run.py` validates it before opening external target files or
+loading models. Synthetic evaluation also requires its own runtime approval.
+No Study 2 holdout forecast or external-domain evaluation has run. The current
+source evidence is incomplete; the existing GitHub dataset ends August 31 and
+is not a newly verified freeze-day snapshot. Repeat GPU smoke after committing
+the implementation so its HEAD and source hashes match the eventual gate.
 
 ## Licence
 
