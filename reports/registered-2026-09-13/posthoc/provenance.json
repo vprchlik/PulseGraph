@@ -1,0 +1,218 @@
+{
+  "aggregation": "three equal windows within repository/horizon, then 300 equal repositories",
+  "analysis_status": "post_hoc",
+  "command": ".\\.venv\\Scripts\\python.exe reports/registered-2026-09-13/posthoc/accounting.py --update-results",
+  "confirmatory_tests_added": 0,
+  "date": "2026-09-14",
+  "immutable_input_hashes_unchanged": true,
+  "immutable_inputs": {
+    "reports/registered-2026-09-13/inference/inference.csv": "dc60d031d1879adde48073fb1a4b614a676798cad1c13a4a55999a7338e712db",
+    "reports/registered-2026-09-13/inference/inference.json": "7f54ce4504a67e8198ec414fc38894739025904135132d8554e373bb532d9c4b",
+    "reports/registered-2026-09-13/inference/paired_repositories.csv": "05e22d55a9a2f0b710c7fd123469f78c803e82cc59aa59f82efc5b5a993d56a4",
+    "reports/registered-2026-09-13/run/manifest.json": "d33ffbd4a189c10a99679dcb3d2812c8bcc089b0b4c66bf927233e04d0e4fa92",
+    "reports/registered-2026-09-13/run/run.json": "4782c7e0f97471d730c1a7f1cc07489005ddc605f446679295dda34e8c807135"
+  },
+  "max_window_accounting_residual": 4.547473508864641e-13,
+  "memo": {
+    "description": "research extensions memo of 2026-09-13, not in the tree",
+    "sections": [
+      3,
+      5
+    ],
+    "sha256": "430d0f8ea2d4eb0328c8458a21e5b4b1f45d802ab154f87196d74b9c9feacc5f"
+  },
+  "original_18_mean_differences_match": true,
+  "outputs": {
+    "posthoc-context-mean-autoets_weekly-h30.png": {
+      "bytes": 786835,
+      "sha256": "666046341744168fda1d850dd2d146ba3e76ace74f307746904988e7cb3c4d82"
+    },
+    "posthoc-context-mean-autoets_weekly-h30.svg": {
+      "bytes": 1260312,
+      "sha256": "63d6d1d37f78d55be27761606e2c3dffa821fbbc0e43cc9ab88f044bc4c49373"
+    },
+    "posthoc-context-mean-autoets_weekly-h7.png": {
+      "bytes": 763687,
+      "sha256": "74ba258d54897b1f352e51d07d7c10be9c3af735653c68cb1e4b3fe55b68c417"
+    },
+    "posthoc-context-mean-autoets_weekly-h7.svg": {
+      "bytes": 1256911,
+      "sha256": "3dc03df21af728fb67e53431f6e0678692a7763e6380619ddc0116748e7722de"
+    },
+    "posthoc-context-mean-autoets_weekly-h90.png": {
+      "bytes": 801338,
+      "sha256": "2fb57480482f3482767eddaa2ea0547032cf1eb42430e78f1b9dedb240fd40fd"
+    },
+    "posthoc-context-mean-autoets_weekly-h90.svg": {
+      "bytes": 1281891,
+      "sha256": "48cfb4e7c0ff21210144f08b2b9b4f4881cfb0d2452466010bdc83601ef72ed5"
+    },
+    "posthoc-context-mean-local_mean_28-h30.png": {
+      "bytes": 750373,
+      "sha256": "53fe302c410030a5dcd2b064f565f534a6c609c497fa3412233938b02c5d04d0"
+    },
+    "posthoc-context-mean-local_mean_28-h30.svg": {
+      "bytes": 1237903,
+      "sha256": "d78cede9d63175c953f60efba32ef008d880589e7576496e2ee7ee3c81fffe36"
+    },
+    "posthoc-context-mean-local_mean_28-h7.png": {
+      "bytes": 755572,
+      "sha256": "d6c9a1e268b3154aa2de5a7eaab70e8e38d0654ff632d0c314107a3e1627c850"
+    },
+    "posthoc-context-mean-local_mean_28-h7.svg": {
+      "bytes": 1248438,
+      "sha256": "7a91f8829ffcba04acdf4c4b1291a0e689f43da4f165a89c98e69d28442708d3"
+    },
+    "posthoc-context-mean-local_mean_28-h90.png": {
+      "bytes": 757815,
+      "sha256": "2c7911d234a189308b36ef8aeca1d11c2fb6e8fd12cce18884a136915c1f144d"
+    },
+    "posthoc-context-mean-local_mean_28-h90.svg": {
+      "bytes": 1244342,
+      "sha256": "b603c84ffe388dfbe3060cb5a8bc82d6bf18ffa91b67c3ef988c48a61fcdaf3c"
+    },
+    "posthoc-context-zero-fraction-autoets_weekly-h30.png": {
+      "bytes": 781858,
+      "sha256": "570cd9b729743dfa881cc35a3152f45a4ffcf83fe4bcc3b2a7f42816649a65e7"
+    },
+    "posthoc-context-zero-fraction-autoets_weekly-h30.svg": {
+      "bytes": 1243895,
+      "sha256": "1e628a516068e9806d809bd1fe0732cbe2240ee4598c4a9501ba5cbed22da781"
+    },
+    "posthoc-context-zero-fraction-autoets_weekly-h7.png": {
+      "bytes": 770861,
+      "sha256": "4f6de3ee6f253c2aa55769f5236300131844b82b7f4da52b16654891833e10c9"
+    },
+    "posthoc-context-zero-fraction-autoets_weekly-h7.svg": {
+      "bytes": 1244565,
+      "sha256": "af93576cec4eafce131d65291dd00f066622f7019088c20f0287f93257fca24e"
+    },
+    "posthoc-context-zero-fraction-autoets_weekly-h90.png": {
+      "bytes": 788399,
+      "sha256": "3a393cbee481199206f90925290126d2dde1e4e7945b3c9dadb998193e01b9c5"
+    },
+    "posthoc-context-zero-fraction-autoets_weekly-h90.svg": {
+      "bytes": 1263445,
+      "sha256": "b42a69ac4302dc35dc4029576f5e7a9c817df3093cc8b3038f922240ff1f5d8b"
+    },
+    "posthoc-context-zero-fraction-local_mean_28-h30.png": {
+      "bytes": 734433,
+      "sha256": "26c6da916154698bf521e75db2ae26ef34100c33114b6ed16d5b643b2588bd6e"
+    },
+    "posthoc-context-zero-fraction-local_mean_28-h30.svg": {
+      "bytes": 1236830,
+      "sha256": "cb9b3d351e0bca40d4b41c7441ebc2c6f9bdd9c5fd75375c1469e3285f6044ab"
+    },
+    "posthoc-context-zero-fraction-local_mean_28-h7.png": {
+      "bytes": 741421,
+      "sha256": "b72a2691bd2dad513c9b68093bddb2c870dacc2096140778ff38454d49126fd9"
+    },
+    "posthoc-context-zero-fraction-local_mean_28-h7.svg": {
+      "bytes": 1237795,
+      "sha256": "bbd3fa528e0818ecc0c8689a68116451440d4018fb1c7394092f8b37efbf46bc"
+    },
+    "posthoc-context-zero-fraction-local_mean_28-h90.png": {
+      "bytes": 738424,
+      "sha256": "d8a52d53dd34c2c95ef4c5d967eb2913cf92fbe877e514d4948533cca94f1d9e"
+    },
+    "posthoc-context-zero-fraction-local_mean_28-h90.svg": {
+      "bytes": 1240662,
+      "sha256": "281ee009db0e2f85bc40c88a4c921be181a1e120d32e760abbede3e1f666bf65"
+    },
+    "posthoc-contribution-curves.csv": {
+      "bytes": 16618788,
+      "sha256": "c9a14feec70a6c2a58cd382b4c2f2a192cdd23422623b4cd698e87e2f53821df"
+    },
+    "posthoc-cumulative-autoets_weekly-h30.png": {
+      "bytes": 577102,
+      "sha256": "ecf8a390d94dbb33e24665c7196c6735c21cc5a8fef241b16c58c08e5ddedcd3"
+    },
+    "posthoc-cumulative-autoets_weekly-h30.svg": {
+      "bytes": 484414,
+      "sha256": "767760f2face11fc76a24624837b83c2065f3c9ea6da2f4169e1fb4f3662abfc"
+    },
+    "posthoc-cumulative-autoets_weekly-h7.png": {
+      "bytes": 591486,
+      "sha256": "79304cfc629d0accc806fdc43bbd604d3505c60bc9cf14d92a616f894292b60d"
+    },
+    "posthoc-cumulative-autoets_weekly-h7.svg": {
+      "bytes": 505270,
+      "sha256": "1bf2d0c912adb9e8892ad005c6df18bd8a0d1fd5fdd1a2bae66ccf73423925f2"
+    },
+    "posthoc-cumulative-autoets_weekly-h90.png": {
+      "bytes": 497871,
+      "sha256": "5f56de5295b2067727969486c922e564e615a9ee24c8c0d295c498df01d43e12"
+    },
+    "posthoc-cumulative-autoets_weekly-h90.svg": {
+      "bytes": 455910,
+      "sha256": "1dd024836f005aa6282275305a5c9a1eb4271d4c014dc5d2e3fcd960598531db"
+    },
+    "posthoc-cumulative-local_mean_28-h30.png": {
+      "bytes": 464923,
+      "sha256": "792c705af13d9cfa8c7ff62937d21a4ed6e0ff296f0a09a7708fd51630efa867"
+    },
+    "posthoc-cumulative-local_mean_28-h30.svg": {
+      "bytes": 448645,
+      "sha256": "3373e486f1a080abf02e3d4817269f7dee5785fba3e76b22a1b89e69d5c49cd2"
+    },
+    "posthoc-cumulative-local_mean_28-h7.png": {
+      "bytes": 483896,
+      "sha256": "90be44314023440b3c1f857b46dc82010e77689a116487263475b1eff9002bac"
+    },
+    "posthoc-cumulative-local_mean_28-h7.svg": {
+      "bytes": 462863,
+      "sha256": "1e8f089bcc58e81bd697967455ae85079e4b0eaeb9b64d4182d5d6998f2015e6"
+    },
+    "posthoc-cumulative-local_mean_28-h90.png": {
+      "bytes": 460801,
+      "sha256": "ebc93e7305120ee7959944d1943a7114b8c520697ef5f9f6183ba554bdd45b4e"
+    },
+    "posthoc-cumulative-local_mean_28-h90.svg": {
+      "bytes": 444623,
+      "sha256": "32ed0f4d56dc52bc94aa26feffd50dea0dc34bec7d48b4a5e7d2db09963428cf"
+    },
+    "posthoc-paired-deciles.csv": {
+      "bytes": 136101,
+      "sha256": "26c4326b29647704a74772d56dab9ff37bda7a251e044d8ac2c94d50a53ce64a"
+    },
+    "posthoc-paired-repositories.csv": {
+      "bytes": 11033031,
+      "sha256": "e60d733d1408f230a71f73e26fca79d5c0d8daa8c4009119cd2a166345f8115d"
+    },
+    "posthoc-paired-summary.csv": {
+      "bytes": 14926,
+      "sha256": "07d2a7f4d49ddec5114944fc5454ae2b4d2d9afc319b2ae99713d70acfa1de87"
+    },
+    "posthoc-report.md": {
+      "bytes": 4389,
+      "sha256": "492811986cc32ce11918f9bbbd3240d3829148963cc8d03886c7922e666aa5d4"
+    },
+    "posthoc-results-section.md": {
+      "bytes": 996,
+      "sha256": "40c6da1e6fe51d31bee218ac363d561c12186c46d17cafd4e9c3ab2035c13edd"
+    },
+    "posthoc-window-accounting.parquet": {
+      "bytes": 2290063,
+      "sha256": "9498d63450f0bafff2c64c8f93dcebc08adeac9526df6a327504997343c74f61"
+    },
+    "posthoc-window-deciles.parquet": {
+      "bytes": 7005500,
+      "sha256": "6d03f31a44d6e8c358388331535e747f5cf49fde8c897d2fb21adb992fbdac95"
+    }
+  },
+  "paired_repository_count": 30600,
+  "paired_summary_count": 102,
+  "protocol_commit_study1": "5f01769b6be4c32814befdd7cc3395b6dcc386ed",
+  "script_sha256": "5bf25ea5110d11ebc10bb6fe8538764b9fa3c7b4929780bdfd36e9f2e0c9e0a8",
+  "seed": null,
+  "seed_reason": "deterministic saved-forecast accounting; no random sampling",
+  "source_results_sha256": "53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6",
+  "versions": {
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.1"
+  },
+  "window_count": 48600,
+  "window_decile_count": 437400
+}
