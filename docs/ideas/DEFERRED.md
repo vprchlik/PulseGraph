@@ -3,7 +3,7 @@
 Every idea, plan or lead not being worked on, with where it was written, since when, and the trigger that
 revives it. A row is added the moment an idea is parked, marked closed with the evidence when later work
 closes it, and the whole page is re-read at every monthly audit (first about 2026-11-11). Seeded 2026-10-12
-from the spring plan of 2026-09-14 (`notes/plan_spring_2027.md`, gitignored) and the setup record of September
+from the spring plan of 2026-09-14 (`docs/ideas/2026-09-14-spring-2027-plan.md`) and the setup record of September
 2026, now summarized in `docs/HISTORY.md`. Nothing here
 is registered; each study needs its own dated addition to `PROTOCOL.md`, committed before its first target day
 or first data pull.

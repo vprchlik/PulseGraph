@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-12 21:30 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-13 05:30 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `54f24db` (2026-10-12 04:18 UTC), ten commits, pushed. Since 2026-10-12 the root carries
+`main` is at `f0c28a8` (2026-10-13 05:04 UTC), seventeen commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -20,22 +20,19 @@ frame, skips, validation, readiness, run metadata, inference, descriptive tables
 confirmatory rows and the declared descriptive tables. The 433,172,286-byte `results.parquet` is not in the
 tree; `README.md` says its release URL is to be filled, and no release exists yet.
 
-## Verified on 2026-10-12, awaiting the author's commit
+## Committed on 2026-10-12 and 2026-10-13
 
-Two bodies of work from 2026-09-14, re-verified on 2026-10-12 (every provenance and smoke hash matches; ruff
-clean; 241 of 241 tests pass once pytest's temporary directory is moved away from `.pytest_cache`, whose
-access list denies access on this machine; the post-hoc directory is 67 MB, 18 MB of it SVG figures):
+The post-hoc accounting of the Study 1 run (`a3b3098`); the Study 2 implementation and its 71 offline tests
+(`fab6f7a`); the dated protocol addition for the lapses (`8db0d73`, items 1 to 3; registered prefixes verified
+twice; 62,111 bytes); the literature re-check (`63c2d5f`); the Study 1 report under `paper/` (`c62d0c5`); its
+review (`f0c28a8`, 45 verdicts: 18 hold, 26 fixed, 1 did not hold).
 
-| Work | Paths | Companion edits |
-|---|---|---|
-| Post-hoc QScore9 accounting of the saved Study 1 run (zero-day, positive-over, positive-under parts; 102 cells; 36 figures; provenance with hashes) | `reports/registered-2026-09-13/posthoc/` (50 files) | `RESULTS.md` +10 lines |
-| Study 2 implementation: ingestion, CDF completion, hurdles, dynamic count, gate, holdout writer, synthetic grid, 71 offline tests, declarations and smoke evidence | `pulsegraph/study2/` (12), `scripts/study2_*.py` (6), `study/study2/` (13), `tests/test_study2_*.py` (7) | `README.md` +124 lines |
+## Awaiting the author's commit (2026-10-13)
 
-Also awaiting the same commit, all written 2026-10-12: the dated protocol addition for the lapses (items 1 to
-3, appended 09:20 UTC on top of `54f24db`; the registered prefixes verified twice; 62,111 bytes); the
-literature re-check (`docs/research/2026-10-11-literature-recheck.md`); the Study 1 report under `paper/`
-(LaTeX source, three figures, the number sources, a checker that passes 181 checks; no PDF, since no TeX is
-installed).
+The report revised after its review (every verdict applied; 212 number checks pass; body about seven pages
+plus a three-and-a-half-page appendix; still no PDF). The npm inventory code rewritten to the registered
+candidate-hash walk (249 tests pass), with the spend for the pull stated: about 29,000 requests, ceiling
+36,000, about 13 hours, no dollars. The spring plan moved into `docs/ideas/`.
 
 ## What the protocol allows, and what lapsed
 
@@ -89,7 +86,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of everything above; then, in parallel: the report reviewed by a different reader and
-revised with the six citations; the npm panel built under the registered rules (deadline 2026-10-20); the
-synthetic grid's smoke, gate and run. Dates and gates are in `docs/PLAN.md`. The machine has no pandoc, TeX
-or GitHub CLI; Python 3.12 in `.venv`; 216 GB free.
+Three small npm code fixes, then the commit of the npm code; the synthetic grid's smoke, gate and run; then
+the npm pull (ceiling 36,000 requests, 13 hours; deadline 2026-10-20) and its frozen panel; the author's read
+of the report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release. Dates and
+gates are in `docs/PLAN.md`.

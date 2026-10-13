@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-12 21:30 UTC. This page holds only what is current.
+Last rewritten 2026-10-13 05:30 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -25,11 +25,12 @@ day.
 | Dated protocol addition for the lapses (items 1 to 3; the November round not taken) | done 2026-10-12: appended, awaiting the commit | the commit, which is the sign-off | 2026-10-12 |
 | Literature re-check for work since 2026-09-13 | done 2026-10-12 | the commit | 2026-10-12 |
 | Study 1 report: summary, LaTeX source, figures, number sources, checker | done 2026-10-12 (about ten pages; no PDF yet) | reads `paper/SUMMARY.md`; the commit | 2026-10-12 |
-| Report review by a different reader (numbers, the direction of every test, claims, the six citations, length) | the report | nothing | 2026-10-13 |
-| Report revision: the review's fixes, the citations, the length | the review | nothing | 2026-10-15 |
-| npm, stage 1: frozen name inventory plan, the candidate-hash walk, the request count stated | both commits above | nothing | 2026-10-13 |
-| npm, stage 2: the pull (about eight hours of serial requests) and the frozen achieved panel | stage 1 | approval of the stated request count | 2026-10-15 (deadline 2026-10-20) |
-| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | npm stage 1's code committed (the gate needs a clean tree and hashes the sources) | the commit | 2026-10-13 |
+| Report review by a different reader | done 2026-10-12: 45 verdicts, one did not hold (the contamination sentence), committed | nothing | done |
+| Report revision: the 27 fixes, the six citations, the appendix | done 2026-10-12, awaiting the commit | the commit; his read of `paper/SUMMARY.md` | 2026-10-13 |
+| npm, stage 1: the candidate-hash walk in the code, the request count stated | done 2026-10-12, awaiting the commit | the commit | 2026-10-13 |
+| npm, stage 1b: scoped download URLs, stop on outages, relative capture paths, the README paragraph | stage 1 | the commit of both | 2026-10-13 |
+| npm, stage 2: the pull (ceiling 36,000 requests, 13 hours) and the frozen achieved panel | the npm commits and the synthetic run (its last step writes under `study/`, a gate path) | the words "36,000 requests and 13 hours" | 2026-10-15 (deadline 2026-10-20) |
+| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | the npm code committed (the gate needs a clean tree and hashes the sources) | nothing | 2026-10-13 |
 | Synthetic grid, stage 2: the run (under an hour of GPU), inference over S01 to S06, results section | stage 1 | runtime approval | 2026-10-14 |
 | Study 2 external run on the npm panel: gate changes citing the additions, run, inference over E01 to E18 | npm stage 2, synthetic stage 1 | target-access and runtime approval | 2026-10-19 |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
@@ -56,9 +57,8 @@ Every spend is approved by the author in his own words before it happens. Nothin
 
 ## Open with the author
 
-1. **Posting route.** Zenodo gives a DOI the same day and needs only an account (GitHub login works). Is an
-   arXiv endorser for cs.LG or stat.ML at hand? If not, the paper goes to Zenodo as a new version and to TMLR,
-   which does not require arXiv.
+1. **Posting route, decided 2026-10-13.** Zenodo for the report. The paper goes to Zenodo as version 2 and to
+   TMLR; arXiv as well only if an endorser is found (the author is asking this week).
 2. **PDF build.** This machine has no pandoc and no TeX. Either install them (one line each, below) or compile
    the LaTeX on Overleaf's free tier by uploading `paper/`.
 3. **The v1 computer.** The write-up's first half leans on the preserved v1 documents; the v1 result artifacts
@@ -71,8 +71,9 @@ Every spend is approved by the author in his own words before it happens. Nothin
    `README.md` fails at setup until the folder is deleted from the author's own shell (an elevated one if
    needed); pytest recreates it. Until then the tests use another temporary directory.
 6. **The GitHub release** carrying `results.parquet` (the README has promised its URL since 2026-09-13).
-7. **The spring plan** lives in gitignored `notes/plan_spring_2027.md`; a fresh clone cannot read it. The
-   deferred register carries its items; moving the plan itself to `docs/ideas/` would complete the record.
+7. **The spring plan** is in the tree since 2026-10-13 (`ideas/2026-09-14-spring-2027-plan.md`). Its one open
+   decision: the follow-up cohort's creation window, recommended to close 2026-10-31, needs a dated addition
+   before then or it slides.
 
 Install lines, if the PDF is built here (PowerShell, each on its own):
 
