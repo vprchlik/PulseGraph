@@ -11,7 +11,9 @@ Nothing is written. Run from the repository root:
 
 import json
 import re
+import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 
 import pandas as pd
@@ -21,6 +23,7 @@ REPORT = ROOT / "reports" / "registered-2026-09-13"
 PAPER = ROOT / "paper"
 MAIN = PAPER / "main.tex"
 SUMMARY = PAPER / "SUMMARY.md"
+RECHECK = ROOT / "docs" / "research" / "2026-10-11-literature-recheck.md"
 
 MODELS = ["chronos2", "timesfm3", "timesfm2p5"]
 LABEL = {"chronos2": "Chronos-2", "timesfm3": "TimesFM 3", "timesfm2p5": "TimesFM 2.5"}
@@ -56,6 +59,14 @@ def sci(p):
 
 def fmt(value, places):
     return f"{value:.{places}f}"
+
+
+def whole_months(start, end):
+    """Whole calendar months from `start` to `end` (both dates)."""
+    months = (end.year - start.year) * 12 + (end.month - start.month)
+    if end.day < start.day:
+        months -= 1
+    return months
 
 
 # --- inference.csv: the 18 declared comparisons -----------------------
@@ -94,7 +105,7 @@ expect(
 )
 excluding = int(((lm.mean_diff_ci_high < 0) | (lm.mean_diff_ci_low > 0)).sum())
 assert excluding == 5, excluding
-expect("intervals excluding zero", "excludes zero in five", ("main.tex", "SUMMARY.md"))
+expect("intervals excluding zero", "excludes zero in five of nine", ("main.tex", "SUMMARY.md"))
 assert (lm.mean_diff < 0).all() and (lm.median_diff > 0).all()
 assert (ae.mean_diff < 0).all() and (ae.median_diff < 0).all()
 assert (inference.reject_bh_005).all()
@@ -102,6 +113,11 @@ expect("largest BH p vs local mean", f"{lm.wilcoxon_p_bh.max():.4f}", ("main.tex
 expect("mean range vs local mean, low", f"{fmt(lm.mean_diff.max(), 3)}", ("main.tex", "SUMMARY.md"))
 expect(
     "mean range vs local mean, high", f"{fmt(lm.mean_diff.min(), 3)}", ("main.tex", "SUMMARY.md")
+)
+expect(
+    "median range vs local mean",
+    f"{fmt(lm.median_diff.min(), 4)} to {fmt(lm.median_diff.max(), 4)}",
+    ("main.tex", "SUMMARY.md"),
 )
 ae7 = ae[ae.horizon == 7].mean_diff
 ae90 = ae[ae.horizon == 90].mean_diff
@@ -139,7 +155,15 @@ for model in MODELS:
         )
 assert (fm_lm.zero_difference > 0).all() and (fm_lm.positive_over_difference < 0).all()
 expect("zero-day part max", f"{fmt(fm_lm.zero_difference.max(), 3)}", ("main.tex", "SUMMARY.md"))
-expect("zero-day part min", f"{fmt(fm_lm.zero_difference.min(), 3)}", ("SUMMARY.md",))
+expect(
+    "zero-day part range",
+    f"{fmt(fm_lm.zero_difference.min(), 3)} to {fmt(fm_lm.zero_difference.max(), 3)}",
+    ("main.tex", "SUMMARY.md"),
+)
+# The zero-day part is small beside the mean gain and, cell by cell, exceeds the median (review 32).
+cellwise = fm_lm.merge(lm, on=["model", "horizon"])
+assert (cellwise.zero_difference > cellwise.median_diff).all()
+assert (cellwise.zero_difference < cellwise.mean_diff.abs()).all()
 expect(
     "overprediction range",
     f"{fmt(fm_lm.positive_over_difference.max(), 3)} to "
@@ -171,6 +195,57 @@ assert (
 )
 assert provenance["date"] == "2026-09-14"
 expect("post-hoc date", "2026-09-14")
+
+# The post-hoc figures' descriptions (review 3): cumulative curves and the zero-fraction scatter.
+curves = pd.read_csv(REPORT / "posthoc" / "posthoc-contribution-curves.csv")
+paired = pd.read_csv(REPORT / "posthoc" / "posthoc-paired-repositories.csv")
+for model in MODELS:
+    rows = curves[
+        (curves.reference == "local_mean_28") & (curves.model == model) & (curves.horizon == 30)
+    ].sort_values("rank")
+    total = rows.cumulative_qscore9_difference.to_numpy()
+    fraction = rows.repository_fraction.to_numpy()
+    # The total is at its final level within the first few percent of repositories (at 3 percent it
+    # is already at or below its end value), bottoms out in the first half, then drifts upward.
+    assert total[fraction <= 0.03][-1] <= total[-1] < 0, (model, total[fraction <= 0.03][-1])
+    assert fraction[total.argmin()] < 0.5 and total[-1] > total.min()
+    rows = curves[
+        (curves.reference == "autoets_weekly") & (curves.model == model) & (curves.horizon == 30)
+    ].sort_values("rank")
+    # Against AutoETS the gain accrues across most of the panel: it still falls past 90 percent.
+    total = rows.cumulative_qscore9_difference.to_numpy()
+    fraction = rows.repository_fraction.to_numpy()
+    assert total[fraction <= 0.9].min() > total.min() and (
+        rows.cumulative_positive_over_difference.iloc[-1] < rows.cumulative_zero_difference.iloc[-1]
+    )
+    scatter = paired[
+        (paired.reference == "local_mean_28") & (paired.model == model) & (paired.horizon == 30)
+    ]
+    gains = scatter.nsmallest(10, "qscore9_difference")
+    losses = scatter[scatter.qscore9_difference > 0]
+    assert gains.context_zero_fraction.max() < scatter.context_zero_fraction.median()
+    assert losses.context_zero_fraction.median() > scatter.context_zero_fraction.median()
+    scatter_ae = paired[
+        (paired.reference == "autoets_weekly") & (paired.model == model) & (paired.horizon == 30)
+    ]
+    assert (scatter_ae.qscore9_difference < 0).mean() > 0.95
+checks += 1
+
+# The typical repository by stratum: a post-hoc reading of the per-repository file (review 31).
+assert paired.analysis_status.eq("post_hoc").all()
+by_stratum = paired[(paired.reference == "local_mean_28") & paired.model.isin(MODELS)]
+grouped = by_stratum.groupby(["sampling_stratum", "model", "horizon"]).qscore9_difference
+lower = grouped.apply(lambda s: int((s < 0).sum()))
+medians = grouped.median()
+assert (medians > 0).all() and grouped.size().eq(100).all()
+stratum_lower = {s: (lower.loc[s].min(), lower.loc[s].max()) for s in STRATA}
+expect(
+    "typical repository by stratum",
+    f"{stratum_lower['20-99'][0]} to {stratum_lower['20-99'][1]} of 100 repositories in the "
+    f"smallest stratum, {stratum_lower['100-999'][0]} to {stratum_lower['100-999'][1]} in the "
+    f"middle one and {stratum_lower['1000+'][0]} to {stratum_lower['1000+'][1]} in the top one",
+    ("main.tex", "SUMMARY.md"),
+)
 
 # --- the achieved panel -----------------------------------------------
 strata = pd.read_csv(REPORT / "evidence" / "panel-diagnostic" / "strata.csv")
@@ -210,8 +285,25 @@ expect(
     ("SUMMARY.md",),
 )
 
+# The creation dates and the mature-phase months, from the frozen manifest (review 3).
+manifest = pd.DataFrame(
+    json.loads((REPORT / "run" / "manifest.json").read_text(encoding="utf-8-sig"))
+)
+assert len(manifest) == 300 and manifest.coverage_complete.all()
+created = pd.to_datetime(manifest.creation_date).dt.date
+starts = pd.to_datetime(manifest.observation_start)
+assert int(((pd.Timestamp("2026-08-31") - starts).dt.days + 1).sum()) == panel["n_signal_rows"]
+expect("creation date range", f"{created.min()} to {created.max()}")
+months_min = whole_months(created.max(), date(2025, 12, 5))
+months_max = whole_months(created.min(), date(2026, 6, 3))
+assert (months_min, months_max) == (9, 41), (months_min, months_max)
+expect("mature phase, least", "at least nine months before the first cutoff")
+expect("mature phase, range", "between nine and 41 months after creation")
+
 regime = pd.read_csv(REPORT / "descriptive" / "qscore9-regime.csv")
 one = regime[regime.model_name == "chronos2"].drop_duplicates("regime").set_index("regime")
+assert int(one.n_windows.sum()) == 900
+expect("window count", "900 repository-cutoff windows")
 for name, phrase in [
     ("Inactive recently", "320 windows from 140 repositories"),
     ("Other active", "572 windows from 228 repositories"),
@@ -270,6 +362,17 @@ assert (
     == "53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6"
 )
 expect("results.parquet sha", run["artifact_sha256"]["results.parquet"])
+# The inference settings and the baseline count (review 3).
+spec = run["specification"]
+assert spec["inference"]["max_context"] == 2048 and spec["inference"]["n_samples"] == 200
+expect("maximum context", f"{spec['inference']['max_context']:,}-day maximum context")
+expect("context-level draws", f"{spec['inference']['n_samples']} empirical context-level draws")
+expect("empirical quantile draws", f"quantiles of {spec['inference']['n_samples']} draws")
+primary = {"local_mean_28", "autoets_weekly"}
+assert primary <= set(spec["baselines"]) and len(spec["baselines"]) == 15
+assert len(spec["baselines"]) - len(primary) == 13
+expect("secondary baseline count", "Thirteen secondary baselines")
+expect("secondary baseline count, body", "thirteen secondary baselines")
 
 # --- readiness, validation and cost -----------------------------------
 readiness = json.loads((REPORT / "evidence" / "readiness.json").read_text(encoding="utf-8"))
@@ -295,6 +398,18 @@ expect(
     "pooled MAD",
     f"{mad['America/Los_Angeles']:.3f} against {mad['UTC-08:00']:.3f} and {mad['UTC']:.3f}",
 )
+# The per-repository calendar table: LA MAD / agreement, fixed UTC-8, UTC (review 5).
+per_repo = re.findall(
+    r"^\| ([^|]+?) \| ([0-9.]+) / [0-9.]+% \| ([0-9.]+) / [0-9.]+% \| ([0-9.]+) / [0-9.]+% \|$",
+    validation,
+    flags=re.M,
+)
+assert len(per_repo) == 20, len(per_repo)
+la_vs_utc = sum(float(la) < float(utc) for _, la, _, utc in per_repo)
+la_vs_fixed = sum(float(la) < float(fixed) for _, la, fixed, _ in per_repo)
+ties = sum(float(la) == float(fixed) for _, la, fixed, _ in per_repo)
+assert (la_vs_utc, la_vs_fixed, ties) == (20, 18, 2), (la_vs_utc, la_vs_fixed, ties)
+expect("calendar ties", "two repositories tied between the Los Angeles and fixed-offset calendars")
 totals = pd.read_csv(REPORT / "evidence" / "comparison" / "repository_2024_totals.csv")
 assert len(totals) == 20 and totals.n_matched_days.eq(365).all()
 large = totals[totals.metadata_stars_at_capture >= 1000].api_to_archive_ratio
@@ -302,6 +417,12 @@ assert len(large) == 15 and (large < 1).all()
 expect("large ratio range", f"from {large.min():.3f} to {large.max():.3f}")
 below5 = int((large <= 0.95).sum())
 expect("13 of 15", f"{below5} of 15", ("main.tex", "SUMMARY.md"))
+percent_below = 100 * (1 - large[large <= 0.95])
+expect(
+    "summary survivor percent range",
+    f"{percent_below.min():.0f} to {percent_below.max():.0f} percent below",
+    ("SUMMARY.md",),
+)
 assert int((totals.api_to_archive_ratio < 1).sum()) == 17
 
 # --- descriptive tables -----------------------------------------------
@@ -346,7 +467,12 @@ for stratum in STRATA:
         + f"{int(w.multiplicative_seasonality_fits)} \\\\",
     )
 assert int(widths.multiplicative_seasonality_fits.sum()) == 6
-expect("multiplicative fits", "six fits that selected multiplicative seasonality")
+# The multiplicative fits, from the per-fit file: six per horizon, two repositories (review 28).
+fits = pd.read_csv(REPORT / "descriptive" / "autoets-fits.csv")
+mult = fits[fits.multiplicative_seasonality]
+assert len(mult) == 18 and mult.groupby("horizon").size().eq(6).all()
+assert mult.repo_name.nunique() == 2 and set(mult.sampling_stratum) == {"1000+"}
+expect("multiplicative fits", "Six fits at each horizon, from two repositories")
 daily = {s: widths[widths.sampling_stratum == s].median_daily_width_80.iloc[0] for s in STRATA}
 expect(
     "autoets widths in text",
@@ -355,8 +481,7 @@ expect(
 )
 expect(
     "summary autoets top width",
-    f"about {widths[widths.sampling_stratum == '1000+'].median_fit_mean_width_80.iloc[0]:.0f} "
-    "stars per day",
+    f"median 90-day daily interval width in the top stratum is {daily['1000+']:.2f} stars per day",
     ("SUMMARY.md",),
 )
 
@@ -401,6 +526,8 @@ expect(
     f"{ae_pct[0]:.1f} to {ae_pct[1]:.1f} percent",
     ("main.tex", "SUMMARY.md"),
 )
+assert round(ae_pct[0]) == 99 and round(ae_pct[1]) == 99
+expect("autoets coverage rounded", "about 99 percent", ("main.tex", "SUMMARY.md"))
 
 scale = pd.read_csv(REPORT / "descriptive" / "scale-local_mean_28.csv")
 fm_scale = scale[scale.model_name.isin(MODELS)]
@@ -427,7 +554,7 @@ assert all(
 )
 expect("defined skill counts", f"{defined[0]}, {defined[1]} and {defined[2]} of 300")
 
-# --- registration text: README.md and PROTOCOL.md ---------------------
+# --- registration text: README.md, PROTOCOL.md and the literature re-check -------------
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 protocol = re.sub(r"\s+", " ", (ROOT / "PROTOCOL.md").read_text(encoding="utf-8"))
 for needle in [
@@ -438,22 +565,61 @@ for needle in [
 ]:
     assert needle in readme, needle
     expect(f"README value {needle[:12]}", needle)
+assert "to be filled" in readme
+expect("release asset pending", "is to be published as a GitHub release asset")
 assert "Freeze at 2026-09-28 18:00 UTC" in protocol
 expect("holdout freeze", "2026-09-28 18:00 UTC")
 assert "54 external, 6 synthetic and 18 prospective" in protocol
 expect("study 2 families", "54 external tests")
 expect("study 2 synthetic", "6 synthetic tests")
 expect("study 2 prospective", "18 prospective tests")
+assert "repositories created on or after 2026-09-13" in protocol
+expect("study 1 follow-up", "repositories created on or after 2026-09-13")
 addition = "dated addition, 2026-10-12" in protocol
 if addition:
     assert "by 2026-10-20 23:59 UTC" in protocol and "E01 to E18" in protocol
     expect("dated addition cited", "dated addition of 2026-10-12")
+    expect("dated addition commit", "committed at \\texttt{8db0d73}")
+    try:
+        git = subprocess.run(
+            ["git", "-C", str(ROOT), "log", "--format=%h %s", "-n", "100"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError):
+        skipped.append(
+            "git log unavailable; the commit 8db0d73 of the dated addition not confirmed"
+        )
+    else:
+        checks += 1
+        if not any(line.startswith("8db0d73") for line in git.splitlines()):
+            failures.append("git log: commit 8db0d73 (the dated addition of 2026-10-12) not found")
 else:
     skipped.append(
         "PROTOCOL.md has no dated addition of 2026-10-12; the report's citation of it is pending"
     )
 registered_bytes = 18435
 assert f"preceding {registered_bytes:,} bytes remain the registered Study 1 text" in protocol
+expect("study 2 status date", "As of 2026-10-12")
+status = json.loads(
+    (ROOT / "study" / "study2" / "acquisition_status.json").read_text(encoding="utf-8")
+)
+assert not status["target_values_opened"] and not status["real_forecasts_generated"]
+
+# The pinned revision dates, from the literature re-check's model-card table (review 19).
+recheck = RECHECK.read_text(encoding="utf-8")
+cards = recheck[recheck.index("## Model cards and training data") :]
+for revision, dated in [
+    ("1d95242", "2025-10-02"),
+    ("43046b8", "2026-09-02"),
+    ("29ec376", "2026-06-05"),
+]:
+    line = next(line for line in cards.splitlines() if f"`{revision}`" in line)
+    assert dated in line, (revision, dated)
+    expect(f"revision date {revision}", f"dated {dated}")
+assert "weights uploaded 2026-08-24" in recheck
+expect("timesfm3 weights upload", "weights uploaded 2026-08-24")
 
 # --- version 1, quoted from the preserved documents -------------------
 v1 = ROOT / "v1_reference"
@@ -489,6 +655,8 @@ v1_facts = [
     "12.2",
     "2026-07-12",
 ]
+expect("v1 headline", "6.2 to 8.5 against 11.2 to 28.0")
+expect("v1 concentration", "roughly 30 to 77 percent")
 if v1.exists():
     v1_results = (v1 / "RESULTS.md").read_text(encoding="utf-8")
     v1_audit = (v1 / "STUDY_AUDIT.md").read_text(encoding="utf-8")
@@ -507,6 +675,20 @@ if v1.exists():
     checks += 1
     if "30–77%" not in v1_audit and "30-77%" not in v1_audit:
         failures.append("v1 audit: top-five share 30 to 77 percent not found")
+    # The headline range from the Section 4.1 table: breakout rows, four baselines and two models.
+    section = v1_results[v1_results.index("### 4.1") : v1_results.index("### 4.2")]
+    breakout = re.findall(r"^\| breakout \| \d+ +\| (.+) \|$", section, flags=re.M)
+    assert len(breakout) == 3, breakout
+    cells = [[float(c.strip().strip("*")) for c in row.split("|")] for row in breakout]
+    baselines = [v for row in cells for v in row[:4]]
+    models = [v for row in cells for v in row[4:6]]
+    checks += 1
+    headline = (
+        f"{min(models):.1f} to {max(models):.1f} against "
+        f"{min(baselines):.1f} to {max(baselines):.1f}"
+    )
+    if headline != "6.2 to 8.5 against 11.2 to 28.0":
+        failures.append(f"v1 RESULTS.md Section 4.1: headline range is {headline}")
 else:
     skipped.append(
         "v1_reference/ is not present (local, gitignored); version 1 numbers not checked against it"
