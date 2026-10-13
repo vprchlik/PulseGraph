@@ -62,8 +62,9 @@ America/Los_Angeles days, validated hourly against GH Archive 2024. Against `loc
 difference favors the models in all nine cells and its bootstrap interval excludes zero in five; the typical
 repository favors the reference (models lower on 46 to 89 of 300; the signed-rank test favors the reference in
 all nine cells at BH q=0.05). Against `autoets_weekly`: models lower on 293 to 298 of 300, with AutoETS's 80%
-intervals covering about 0.99. Post-hoc: the zero-day penalty is small; the mean gain against the local mean
-sits on positive days where the local mean overpredicts after bursts. v1 numbers are quoted from the preserved
+intervals covering about 0.99. Post-hoc: the zero-day part is small beside the mean gain (0.004 to 0.015, though larger than every
+median difference); the mean gain against the local mean sits on positive days where the local mean
+overpredicts. v1 numbers are quoted from the preserved
 documents, not recomputed; the v1 artifacts are on a computer the author no longer uses.
 
 ## What the Study 2 code has and has not been exercised on

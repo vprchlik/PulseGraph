@@ -29,7 +29,7 @@ day.
 | Report revision: the review's fixes, the citations, the length | the review | nothing | 2026-10-15 |
 | npm, stage 1: frozen name inventory plan, the candidate-hash walk, the request count stated | both commits above | nothing | 2026-10-13 |
 | npm, stage 2: the pull (about eight hours of serial requests) and the frozen achieved panel | stage 1 | approval of the stated request count | 2026-10-15 (deadline 2026-10-20) |
-| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | the first commit | nothing | 2026-10-13 |
+| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | npm stage 1's code committed (the gate needs a clean tree and hashes the sources) | the commit | 2026-10-13 |
 | Synthetic grid, stage 2: the run (under an hour of GPU), inference over S01 to S06, results section | stage 1 | runtime approval | 2026-10-14 |
 | Study 2 external run on the npm panel: gate changes citing the additions, run, inference over E01 to E18 | npm stage 2, synthetic stage 1 | target-access and runtime approval | 2026-10-19 |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |

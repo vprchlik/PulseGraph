@@ -28,8 +28,8 @@ model.
 Headline: both foundation models had lower mean CRPS than every original baseline in all nine cohort-by-horizon
 cells (for the "breakout" cohort, 6.2 to 8.5 against 11.2 to 28.0). After the audit added a 28-day local-mean
 baseline on identical windows, the foundation models still won every cell on the mean, but per-repository win
-rates fell to 40.6 to 80.5 percent, and the five largest positive contributors accounted for 30 to 77 percent
-of the positive gain depending on the cell. The honest headline was robustness against a minority of large
+rates fell to 40.6 to 80.5 percent, and the audit found that the five largest positive contributors accounted
+for roughly 30 to 77 percent of the positive gain depending on the cell. The honest headline was robustness against a minority of large
 misses, not uniform superiority.
 
 The data and results are not in that repository: its ignore rules excluded every parquet and CSV and the
