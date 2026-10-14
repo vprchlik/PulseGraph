@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-13 05:30 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-14 00:20 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -27,12 +27,12 @@ The post-hoc accounting of the Study 1 run (`a3b3098`); the Study 2 implementati
 twice; 62,111 bytes); the literature re-check (`63c2d5f`); the Study 1 report under `paper/` (`c62d0c5`); its
 review (`f0c28a8`, 45 verdicts: 18 hold, 26 fixed, 1 did not hold).
 
-## Awaiting the author's commit (2026-10-13)
+## Awaiting the author's commit (2026-10-14)
 
-The report revised after its review (every verdict applied; 212 number checks pass; body about seven pages
-plus a three-and-a-half-page appendix; still no PDF). The npm inventory code rewritten to the registered
-candidate-hash walk (249 tests pass), with the spend for the pull stated: about 29,000 requests, ceiling
-36,000, about 13 hours, no dollars. The spring plan moved into `docs/ideas/`.
+The npm inventory code rewritten to the registered candidate-hash walk, with three fixes made before any pull
+(scoped download URLs, outages stop the pull, repository-relative capture paths); 259 tests pass. The spend for
+the pull is stated: about 29,000 requests, ceiling 36,000, about 13 hours, no dollars. The report's revision
+and the spring plan were committed on 2026-10-13 (`f325a67`, `730cb5a`).
 
 ## What the protocol allows, and what lapsed
 

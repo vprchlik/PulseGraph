@@ -15,8 +15,11 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--inventory", type=Path)
     parser.add_argument("--max-requests", type=int, default=500)
+    parser.add_argument("--max-seconds", type=float, default=3300)
     args = parser.parse_args()
-    client = CaptureClient(args.captures, max_requests=args.max_requests)
+    client = CaptureClient(
+        args.captures, max_requests=args.max_requests, max_seconds=args.max_seconds
+    )
     if args.domain == "wikipedia":
         from pulsegraph.study2.wikipedia import WikipediaSource
 
@@ -25,9 +28,11 @@ def main():
         source = {"npm": NpmSource, "nyc311": NYCSource}[args.domain](client)
     if args.action == "inventory":
         result = source.inventory(args.out)
-        print(json.dumps({"domain": args.domain, "frame_size": len(result["entries"])}))
+        frame = result["names"] if "names" in result else result["entries"]
+        print(json.dumps({"domain": args.domain, "frame_size": len(frame)}))
     else:
-        result = build_panel(args.inventory, source.context, args.out)
+        metadata = getattr(source, "metadata", None)
+        result = build_panel(args.inventory, source.context, args.out, fetch_metadata=metadata)
         print(json.dumps(result["report"], indent=2))
 
 

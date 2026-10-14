@@ -362,12 +362,22 @@ Aggregate publication requires the registered source-redistribution review.
 ```
 
 The September 14 metadata probe returned 4,389,348 npm registry documents; this
-is not an eligible-frame count. npm's supported replication feed supplies names;
-the creation-time rule requires additional package metadata. The complete
-creation-metadata inventory has not been acquired. A serial request for each
-document at the client's one-second spacing would exceed 50 days, before retries.
-No such acquisition was started. See the
-[npm replication API changes](https://github.com/orgs/community/discussions/152515).
+is not an eligible-frame count. `npm inventory` freezes only the names in npm's
+supported replication feed (see the
+[replication API changes](https://github.com/orgs/community/discussions/152515)),
+scopes included; a stop before pagination is exhausted writes no inventory.
+`npm panel` then requests each name's registry document in seeded candidate-hash
+order until 10,000 packages created before September 1, 2025 (UTC) are found,
+and saves every visited name with its verdict and any exclusion reason beside
+the inventory as `inventory.walk.json`; an interrupted walk saves no pool and
+resumes from the verified captures, and a complete walk is reused without
+requests. Unless the walk exhausts the inventory, the eligible-frame size and
+the candidate inclusion probability are estimated from the visited prefix and
+reported with exact bounds. The context pull and strata then apply to those
+10,000 candidates as above; a transport failure, server error or exhausted
+retry stops the pull for a later resume instead of excluding a candidate.
+`--max-requests` and `--max-seconds` override a command's default bounds of 500
+requests and 55 minutes.
 The NYC 2024 inventory contains 9,496 problem/board cells, with 8,469 recognized
 community-board cells. Its bounded context pull ended with a transport failure;
 achieved strata and shortages remain unknown. Wikipedia's complete inventory has
