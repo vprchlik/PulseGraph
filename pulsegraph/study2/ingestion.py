@@ -684,7 +684,9 @@ def pull_targets(readiness_path, source, output, *, root=ROOT_DIR, now=None):
     source.target_series = frozenset(keys)
     client = source.client
     first, attempts = len(client.evidence), client.requests
-    invocation = dict(started_at=utc_now().isoformat(), readiness_sha256=file_hash(readiness_path))
+    invocation = dict(
+        started_at=utc_now().isoformat(), readiness_sha256=file_hash(Path(readiness_path))
+    )
     targets = {}
     try:
         for position, row in enumerate(manifest["series"]):

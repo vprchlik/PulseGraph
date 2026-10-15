@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from pulsegraph.evaluation.artifacts import file_hash
-from pulsegraph.forecast.hardware import configure_gpu
+from pulsegraph.forecast.hardware import configure_gpu, memory_snapshot
 from pulsegraph.study2.gate import authorize_component
 from pulsegraph.study2.models import ModelPool
 from pulsegraph.study2.runner import _evaluate, external_dataset
@@ -57,10 +57,17 @@ def main():
         dataset = grid_dataset()
     else:
         dataset = external_dataset(bundle["readiness"])
-    metadata = dict(**bundle, readiness_sha256=file_hash(args.readiness), hardware=configure_gpu())
+    metadata = dict(
+        **bundle, readiness_sha256=file_hash(Path(args.readiness)), hardware=configure_gpu()
+    )
     with ModelPool() as pool:
         _evaluate(
-            dataset, args.out, pool, metadata=metadata, synthetic=args.component == "synthetic"
+            dataset,
+            args.out,
+            pool,
+            metadata=metadata,
+            synthetic=args.component == "synthetic",
+            memory=memory_snapshot,
         )
 
 

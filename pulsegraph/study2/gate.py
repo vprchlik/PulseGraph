@@ -2,12 +2,23 @@
 
 import re
 import subprocess
+from datetime import date
+from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from pulsegraph.config import ROOT_DIR
 from pulsegraph.evaluation.artifacts import file_hash
 from pulsegraph.evaluation.registration import installed_versions
 from pulsegraph.provenance import read_json, sha256_bytes
-from pulsegraph.study2.constants import FREEZE_AT, PROTOCOL_COMMIT, PROTOCOL_SHA256, SEEDS, VARIANTS
+from pulsegraph.study2.constants import (
+    CALENDARS,
+    ENDPOINT,
+    FREEZE_AT,
+    PROTOCOL_COMMIT,
+    PROTOCOL_SHA256,
+    SEEDS,
+    VARIANTS,
+)
 from pulsegraph.study2.declarations import PACKAGES_AUTHORITY, validate
 from pulsegraph.study2.holdout import (
     evidence_file,
@@ -22,6 +33,10 @@ ADDITION_HEADING = (
     " — dated addition, 2026-10-12"
 )
 NPM_PANEL_STATUS = "study/study2/npm_panel_status.json"
+# A readiness panel names its frozen files; after the target pull it also names the signals
+# and the completeness document of that pull, always together.
+PANEL_ENTRIES = ("manifest", "selection", "context")
+TARGET_ENTRIES = ("signals", "completeness")
 
 
 def git(root, *args):
@@ -190,12 +205,60 @@ def packages_readiness(document, *, root=ROOT_DIR, now=None):
         raise ValueError("The packages component runs on the frozen npm panel")
     frozen = read_json(root / NPM_PANEL_STATUS)["panel"]
     panel = document["panels"]["packages"]
-    for name in ("manifest", "selection", "context"):
+    for name in PANEL_ENTRIES:
         entry = panel.get(name) or {}
         if entry.get("sha256") != frozen[name]["sha256"]:
             raise ValueError("Readiness names a panel other than the frozen npm panel")
         evidence_file(entry)
+    if set(panel) - set(PANEL_ENTRIES + TARGET_ENTRIES):
+        raise ValueError("The packages panel names an unregistered entry")
+    if set(panel) & set(TARGET_ENTRIES):
+        target_completeness(panel, CALENDARS["npm"], root=root)
     return panel
+
+
+def target_completeness(panel, calendar, *, root=ROOT_DIR):
+    """The target signals of one readiness panel, bound to the completeness document of their pull.
+
+    The signals a run scores must be the ones the pull verified: the document is verified on the
+    domain calendar, names these signals' hash and the panel's manifest and context, ends no
+    earlier than the registered endpoint, and every response capture it lists is present at its
+    hash (capture paths are relative to the repository root, as the capture client writes them).
+    """
+    if not panel.get("signals") or not panel.get("completeness"):
+        raise ValueError("Target signals require the completeness document of their pull")
+    signals = evidence_file(panel["signals"])
+    document = read_json(evidence_file(panel["completeness"]))
+    if not calendar or document.get("verified") is not True or document.get("calendar") != calendar:
+        raise ValueError("Target completeness is not verified on the domain calendar")
+    if document.get("signals_sha256") != file_hash(signals):
+        raise ValueError("Completeness evidence belongs to different signals")
+    if (
+        document.get("manifest_sha256") != panel["manifest"]["sha256"]
+        or document.get("context_sha256") != panel["context"]["sha256"]
+    ):
+        raise ValueError("Completeness evidence belongs to a different panel")
+    try:
+        last = date.fromisoformat(document["last_complete_day"])
+        verified = timestamp(document["verified_at"])
+    except (KeyError, TypeError, ValueError):
+        raise ValueError("Completeness evidence needs its last complete day and time") from None
+    if last < date.fromisoformat(ENDPOINT):
+        raise ValueError("Target signals end before the registered endpoint")
+    if last >= verified.astimezone(ZoneInfo(calendar)).date():
+        raise ValueError("Last complete day is not fully elapsed at verification")
+    captures = document.get("response_evidence")
+    if not isinstance(captures, list) or not captures:
+        raise ValueError("Completeness evidence lists no response captures")
+    for entry in captures:
+        try:
+            path = Path(root) / entry["path"]
+            present = path.is_file() and file_hash(path) == entry["sha256"]
+        except (KeyError, TypeError):
+            present = False
+        if not present:
+            raise ValueError("A response capture of the target pull is missing or changed")
+    return signals, document
 
 
 def authorize_holdout(plan_path, approval_path, *, root=ROOT_DIR, now=None):

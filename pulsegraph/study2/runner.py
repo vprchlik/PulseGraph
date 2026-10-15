@@ -2,23 +2,38 @@
 
 import json
 from pathlib import Path
+from time import perf_counter
 
 import pandas as pd
 
+from pulsegraph.config import ROOT_DIR
 from pulsegraph.evaluation.artifacts import file_hash
 from pulsegraph.provenance import atomic_json, read_json, sha256_bytes
-from pulsegraph.study2.constants import CONTEXT_START, CUTOFFS, ENDPOINT, VARIANTS
+from pulsegraph.study2.constants import CALENDARS, CONTEXT_START, CUTOFFS, ENDPOINT, VARIANTS
+from pulsegraph.study2.gate import target_completeness
 from pulsegraph.study2.holdout import evidence_file, identity, utc_now
 from pulsegraph.study2.ingestion import context_days
 from pulsegraph.study2.scores import score
 
+# The free GPU memory at start and the allocator budget derived from it differ between
+# invocations on one machine. Each invocation records them; the resume identity leaves them out.
+VOLATILE_HARDWARE = ("gpu_free_at_start_bytes", "allocator_limit_bytes")
 
-def external_dataset(readiness):
-    """Only the public run entry point calls this, after target-access authorization."""
+
+def external_dataset(readiness, *, root=ROOT_DIR):
+    """Only the public run entry point calls this, after target-access authorization.
+
+    Each panel's signals are read only through the verified completeness document of their
+    target pull, and their prefix must reproduce the frozen selection context.
+    """
     dataset = {}
     for domain, panel in readiness["panels"].items():
+        calendar = CALENDARS.get(
+            readiness.get("package_domain") if domain == "packages" else domain
+        )
+        signals_path, _ = target_completeness(panel, calendar, root=root)
         manifest = read_json(evidence_file(panel["manifest"]))
-        signals = pd.read_parquet(evidence_file(panel["signals"]))
+        signals = pd.read_parquet(signals_path)
         context_path = evidence_file(panel["context"])
         if file_hash(context_path) != manifest["context_sha256"]:
             raise ValueError("Selection context snapshot changed")
@@ -41,11 +56,45 @@ def external_dataset(readiness):
     return dataset
 
 
-def _evaluate(dataset, output, pool, *, metadata, synthetic=False):
+def resume_identity(metadata):
+    """The run's identity: every metadata field except the per-invocation GPU memory figures."""
+    hardware = metadata.get("hardware")
+    if isinstance(hardware, dict):
+        metadata = dict(
+            metadata,
+            hardware={k: v for k, v in hardware.items() if k not in VOLATILE_HARDWARE},
+        )
+    return identity(metadata)
+
+
+def _add_timings(totals, timings):
+    """Accumulate one completed pool call's per-model timings."""
+    for name, entry in timings.items():
+        total = totals.setdefault(
+            name, dict(calls=0, load_seconds=0.0, forecast_seconds=0.0, max_forecast_seconds=0.0)
+        )
+        total["calls"] += 1
+        total["load_seconds"] += float(entry["load_seconds"])
+        total["forecast_seconds"] += float(entry["forecast_seconds"])
+        total["max_forecast_seconds"] = max(
+            total["max_forecast_seconds"], float(entry["forecast_seconds"])
+        )
+
+
+def _final_memory(memory):
+    if memory is None:
+        return None
+    try:
+        return memory()
+    except Exception as error:  # A failed snapshot is recorded; it never masks the run's outcome.
+        return dict(unavailable=f"{type(error).__name__}: {error}")
+
+
+def _evaluate(dataset, output, pool, *, metadata, synthetic=False, memory=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     state_path = output / "run.json"
-    run_id = identity(metadata)
+    run_id = resume_identity(metadata)
     state = (
         read_json(state_path)
         if state_path.exists()
@@ -56,6 +105,7 @@ def _evaluate(dataset, output, pool, *, metadata, synthetic=False):
             completed={},
             resumes=[],
             failures=[],
+            invocations=[],
             started_at=utc_now().isoformat(),
         )
     )
@@ -63,8 +113,18 @@ def _evaluate(dataset, output, pool, *, metadata, synthetic=False):
         raise ValueError("Immutable completed run or changed resume identity")
     if state_path.exists():
         state["resumes"].append(utc_now().isoformat())
+    hardware = metadata.get("hardware") if isinstance(metadata.get("hardware"), dict) else {}
+    timings = {}
+    invocation = dict(
+        started_at=utc_now().isoformat(),
+        hardware={k: hardware[k] for k in VOLATILE_HARDWARE if k in hardware},
+        series_completed=0,
+        timings=timings,
+    )
+    state.setdefault("invocations", []).append(invocation)
     state["status"] = "running"
     atomic_json(state_path, state)
+    started = perf_counter()
     try:
         for (domain, key), series in dataset.items():
             label = json.dumps([domain, key], separators=(",", ":"))
@@ -88,6 +148,7 @@ def _evaluate(dataset, output, pool, *, metadata, synthetic=False):
                     raise ValueError("Incomplete target window")
                 for horizon in (7, 30):
                     forecasts = pool.forecast(context.to_numpy(), horizon, f"{label}:{cutoff}")
+                    _add_timings(timings, getattr(pool, "timings", {}))
                     if set(forecasts) != set(VARIANTS):
                         raise ValueError("Incomplete model family")
                     if synthetic:
@@ -112,12 +173,18 @@ def _evaluate(dataset, output, pool, *, metadata, synthetic=False):
                         )
             atomic_json(path, dict(rows=rows, identity=run_id))
             state["completed"][label] = file_hash(path)
+            invocation["series_completed"] += 1
             atomic_json(state_path, state)
         state.update(status="complete", completed_at=utc_now().isoformat())
-        atomic_json(state_path, state)
     except BaseException as error:
         state["status"] = "failed"
         state["failures"].append(dict(at=utc_now().isoformat(), reason=type(error).__name__))
-        atomic_json(state_path, state)
         raise
+    finally:
+        invocation.update(
+            ended_at=utc_now().isoformat(),
+            wall_seconds=perf_counter() - started,
+            memory=_final_memory(memory),
+        )
+        atomic_json(state_path, state)
     return state

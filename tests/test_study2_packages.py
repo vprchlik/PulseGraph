@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from urllib.parse import unquote
 
+import numpy as np
 import pandas as pd
 import pytest
 import requests
@@ -379,8 +380,13 @@ def test_target_pull_opens_only_the_window_for_the_manifest_and_joins_the_frozen
     panel = dict(
         repository.panel,
         signals=dict(path=str(output / "signals.parquet"), sha256=document["signals_sha256"]),
+        completeness=dict(
+            path=str(output / "completeness.json"), sha256=file_hash(output / "completeness.json")
+        ),
     )
-    dataset = external_dataset(dict(panels=dict(packages=panel)))
+    dataset = external_dataset(
+        dict(package_domain="npm", panels=dict(packages=panel)), root=repository.root
+    )
     assert sorted(dataset) == sorted(("packages", key) for key in SERIES)
     assert all(len(series) == 365 for series in dataset.values())
     with pytest.raises(FileExistsError):
@@ -501,3 +507,177 @@ def test_a_target_outage_stops_the_pull_and_resumes_from_captures(repository):
     assert [f["kind"] for f in document["ledger_failures"]] == ["outage"]
     statuses = [i["status"] for i in read_json(output / "pull.json")["invocations"]]
     assert statuses == ["SourceFailure", "complete"]
+
+
+def _pull(repository):
+    """The fixture pull with string paths, as the command line passes them."""
+    output = repository.root / "targets"
+    document = pull_targets(
+        str(repository.readiness()),
+        _source(repository, TargetSession()),
+        str(output),
+        root=repository.root,
+        now=NOW,
+    )
+    panel = dict(
+        repository.panel,
+        signals=dict(path=str(output / "signals.parquet"), sha256=document["signals_sha256"]),
+        completeness=dict(
+            path=str(output / "completeness.json"), sha256=file_hash(output / "completeness.json")
+        ),
+    )
+    return output, document, panel
+
+
+def _completeness(output, **changes):
+    document = dict(read_json(output / "completeness.json"), **changes)
+    path = output / f"completeness-{len(list(output.glob('completeness-*.json')))}.json"
+    return _entry(path, document)
+
+
+def test_target_pull_takes_the_readiness_and_output_as_strings(repository):
+    output, document, _ = _pull(repository)
+    ledger = read_json(output / "pull.json")
+    assert ledger["invocations"][0]["readiness_sha256"] == file_hash(
+        repository.root / "readiness.json"
+    )
+    assert document["signals_sha256"] == file_hash(output / "signals.parquet")
+
+
+def test_run_entry_point_takes_string_paths_and_records_timings_and_memory(repository, monkeypatch):
+    import functools
+    import sys
+
+    import scripts.study2_run as study2_run
+
+    _, _, panel = _pull(repository)
+    readiness = repository.readiness(panels=dict(packages=panel))
+    calls = []
+
+    class Pool:
+        timings = {}
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def forecast(self, context, horizon, key):
+            calls.append(key)
+            self.timings = {
+                name: dict(load_seconds=0.5 if not calls[:-1] else 0.0, forecast_seconds=0.25)
+                for name in ("chronos2", "poisson_28")
+            }
+            return {
+                n: dict(deciles=np.zeros((horizon, 9)).tolist(), distributions=None)
+                for n in VARIANTS
+            }
+
+    gate = functools.partial(authorize_component, root=repository.root, now=NOW)
+    monkeypatch.setattr(study2_run, "authorize_component", gate)
+    monkeypatch.setattr(
+        study2_run, "external_dataset", functools.partial(external_dataset, root=repository.root)
+    )
+    hardware = dict(
+        gpu_model="NVIDIA GeForce RTX 4070 SUPER",
+        gpu_free_at_start_bytes=11_000_000_000,
+        allocator_limit_bytes=7_000_000_000,
+    )
+    monkeypatch.setattr(study2_run, "configure_gpu", lambda: dict(hardware))
+    snapshot = dict(peak_allocated_bytes=2_000_000_000, peak_reserved_bytes=2_900_000_000)
+    monkeypatch.setattr(study2_run, "memory_snapshot", lambda: dict(snapshot))
+    monkeypatch.setattr(study2_run, "ModelPool", Pool)
+    run = repository.root / "run"
+    argv = ["study2_run.py", "external_packages", "--readiness", str(readiness), "--out", str(run)]
+    monkeypatch.setattr(sys, "argv", argv)
+    study2_run.main()
+    state = read_json(run / "run.json")
+    assert state["status"] == "complete" and len(state["completed"]) == len(SERIES)
+    assert state["metadata"]["readiness_sha256"] == file_hash(readiness)
+    assert len(calls) == len(SERIES) * 3 * 2
+    (invocation,) = state["invocations"]
+    assert invocation["memory"] == snapshot and invocation["series_completed"] == len(SERIES)
+    assert invocation["hardware"] == dict(
+        gpu_free_at_start_bytes=11_000_000_000, allocator_limit_bytes=7_000_000_000
+    )
+    assert invocation["timings"]["chronos2"] == dict(
+        calls=len(calls),
+        load_seconds=0.5,
+        forecast_seconds=0.25 * len(calls),
+        max_forecast_seconds=0.25,
+    )
+    assert invocation["wall_seconds"] >= 0 and invocation["ended_at"]
+
+
+def test_gate_admits_target_signals_only_with_their_completeness_document(repository):
+    output, _, panel = _pull(repository)
+    for changed in (
+        panel,
+        {k: v for k, v in panel.items() if k not in ("signals", "completeness")},
+    ):
+        result = authorize_component(
+            repository.readiness(panels=dict(packages=changed)),
+            "external_packages",
+            root=repository.root,
+            now=NOW,
+        )
+        assert result["family"]["comparison_count"] == 18
+    for changed, message in (
+        ({k: v for k, v in panel.items() if k != "completeness"}, "completeness document"),
+        ({k: v for k, v in panel.items() if k != "signals"}, "completeness document"),
+        (dict(panel, extra=panel["signals"]), "unregistered entry"),
+        (dict(panel, completeness=_completeness(output, verified=False)), "not verified"),
+        (dict(panel, completeness=_completeness(output, signals_sha256="0" * 64)), "signals"),
+    ):
+        readiness = repository.readiness(panels=dict(packages=changed))
+        with pytest.raises(ValueError, match=message):
+            authorize_component(readiness, "external_packages", root=repository.root, now=NOW)
+
+
+@pytest.mark.parametrize(
+    "changes,message",
+    [
+        (dict(verified=False), "not verified"),
+        (dict(calendar="America/New_York"), "not verified"),
+        (dict(signals_sha256="0" * 64), "different signals"),
+        (dict(manifest_sha256="0" * 64), "different panel"),
+        (dict(context_sha256="0" * 64), "different panel"),
+        (dict(last_complete_day="2026-08-30"), "before the registered endpoint"),
+        (dict(last_complete_day=None), "last complete day"),
+        (dict(verified_at="2026-08-31T12:00:00+00:00"), "not fully elapsed"),
+        (dict(response_evidence=[]), "no response captures"),
+    ],
+)
+def test_the_run_reads_target_signals_only_through_their_verified_completeness(
+    repository, changes, message
+):
+    output, _, panel = _pull(repository)
+    readiness = dict(package_domain="npm", panels=dict(packages=panel))
+    assert len(external_dataset(readiness, root=repository.root)) == len(SERIES)
+    later = _completeness(output, last_complete_day="2026-09-15")
+    assert len(external_dataset(_with(readiness, completeness=later), root=repository.root)) == 4
+    changed = _with(readiness, completeness=_completeness(output, **changes))
+    with pytest.raises(ValueError, match=message):
+        external_dataset(changed, root=repository.root)
+
+
+def _with(readiness, **entries):
+    return dict(readiness, panels=dict(packages=dict(readiness["panels"]["packages"], **entries)))
+
+
+def test_the_run_refuses_targets_without_their_document_or_captures(repository):
+    _, document, panel = _pull(repository)
+    readiness = dict(package_domain="npm", panels=dict(packages=panel))
+    without = {k: v for k, v in panel.items() if k != "completeness"}
+    with pytest.raises(ValueError, match="completeness document"):
+        external_dataset(dict(readiness, panels=dict(packages=without)), root=repository.root)
+    with pytest.raises(ValueError, match="not verified"):
+        external_dataset(dict(panels=dict(packages=panel)), root=repository.root)
+    capture = repository.root / document["response_evidence"][1]["path"]
+    capture.write_bytes(capture.read_bytes() + b" ")
+    with pytest.raises(ValueError, match="missing or changed"):
+        external_dataset(readiness, root=repository.root)
+    capture.unlink()
+    with pytest.raises(ValueError, match="missing or changed"):
+        external_dataset(readiness, root=repository.root)

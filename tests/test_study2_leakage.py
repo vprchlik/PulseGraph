@@ -55,21 +55,38 @@ def test_external_signals_cannot_rewrite_selection_context(tmp_path):
     atomic_json(manifest, dict(series=[dict(series_id="a")], context_sha256=file_hash(context)))
     signals = tmp_path / "signals.parquet"
     frame.to_parquet(signals, index=False)
+    capture = tmp_path / "capture.response"
+    capture.write_bytes(b"{}")
+    completeness = tmp_path / "completeness.json"
 
     def readiness():
+        # A verified pull of whatever signals are on disk: only the frozen prefix check can refuse.
+        atomic_json(
+            completeness,
+            dict(
+                calendar="UTC",
+                verified=True,
+                verified_at="2026-09-02T00:00:00+00:00",
+                last_complete_day="2026-08-31",
+                signals_sha256=file_hash(signals),
+                manifest_sha256=file_hash(manifest),
+                context_sha256=file_hash(context),
+                response_evidence=[dict(path=capture.name, sha256=file_hash(capture))],
+            ),
+        )
+        paths = dict(manifest=manifest, context=context, signals=signals, completeness=completeness)
         return dict(
+            package_domain="npm",
             panels=dict(
                 packages={
                     name: dict(path=str(path), sha256=file_hash(path))
-                    for name, path in dict(
-                        manifest=manifest, context=context, signals=signals
-                    ).items()
+                    for name, path in paths.items()
                 }
-            )
+            ),
         )
 
-    assert len(external_dataset(readiness())["packages", "a"]) == 365
+    assert len(external_dataset(readiness(), root=tmp_path)["packages", "a"]) == 365
     frame.loc[0, "count"] = 2
     frame.to_parquet(signals, index=False)
     with pytest.raises(ValueError, match="selection context"):
-        external_dataset(readiness())
+        external_dataset(readiness(), root=tmp_path)
