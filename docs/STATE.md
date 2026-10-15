@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-15 07:00 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-15 23:20 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -27,16 +27,24 @@ The post-hoc accounting of the Study 1 run (`a3b3098`); the Study 2 implementati
 twice; 62,111 bytes); the literature re-check (`63c2d5f`); the Study 1 report under `paper/` (`c62d0c5`); its
 review (`f0c28a8`, 45 verdicts: 18 hold, 26 fixed, 1 did not hold).
 
-## Awaiting the author's commit (2026-10-15)
+## The synthetic grid, run 2026-10-15 (awaiting the author's commit)
 
-The packages-only external component in the code, cited to the dated addition of 2026-10-12: a declared family
-of exactly E01 to E18, a gate that requires one npm panel bound to the frozen hashes and no holdout freeze, and
-a target fetch that refuses to run without a signed readiness; the registered 54-test component is untouched.
-With it, dated addition 5 of 2026-10-15 (63,728 bytes, SHA-256 `49988143...`; every registered prefix verified
-twice): a forecast whose discrete CRPS cannot be certified by k = 1,000,000 is recorded as unavailable with its
-reason and counted in the denominators, instead of stopping the run. The case: one npm series averages 7.6
-million downloads a day; a context-only probe found it before any target was opened. QScore9 and every
-confirmatory family are unaffected. 290 tests pass. The npm panel was committed on 2026-10-15 (`e5321cd`).
+The registered 540-series grid ran in one invocation at implementation `3fc3411` under the author's signed
+readiness (1,317 s against a budget of 2,400; no failures). All 55,080 scores were recomputed from the saved
+deciles and targets with zero difference; the oracle has the lowest score in 17 of 18 cells and a flat PIT;
+the hurdle's occurrence equals the count hurdle's and its positive law equals the completed control's. The
+family S01 to S06 is adverse to the registered mechanism: at horizon 30 the hurdle variants are worse than
+their completed controls (S01, S03, S05; mean differences +0.086 to +0.088, intervals excluding zero) and worse
+than `hurdle_count_28` for Chronos-2 and TimesFM 2.5 (S02, S06); for TimesFM 3 against the count hurdle
+(S04) the test does not reject. Five of six reject at BH q = 0.05, all against the hurdle. Descriptively, the
+hurdle lowers zero-day loss and raises positive-day underprediction by more; only the cells with zero
+probability 0.95 favor it, slightly. The results document is `reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md`;
+the 540 checkpoints (0.9 GB) stay out of the tree with their hashes recorded.
+
+Also awaiting the same commit: the paper's Study 2 question, design, panel and placeholder sections under
+`paper/sections/` (390 number checks pass); the per-row score recomputation command with its tests (352 tests
+pass). The inference command passed its review with every verdict holding; the run-path review held with four
+fixes, all landed in `3fc3411`.
 
 ## What the protocol allows, and what lapsed
 
@@ -90,7 +98,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The commit of the npm panel; the packages-only gate and family of 18 in the code, cited to the addition; the
-synthetic grid's smoke, gate and run when the GPU is free; the 209 npm target ranges under the author's
-target-access approval, the run and inference over E01 to E18; the author's read of the report's title, abstract
-and summary; the PDF (no TeX on this machine); the GitHub release. Dates and gates are in `docs/PLAN.md`.
+The commit above; the 209 npm target ranges under the author's target-access approval, the run and inference
+over E01 to E18, the recomputation on both runs; the paper's results sections; the author's read of the
+report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release. Dates and gates
+are in `docs/PLAN.md`.

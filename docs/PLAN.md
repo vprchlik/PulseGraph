@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-15 03:50 UTC. This page holds only what is current.
+Last rewritten 2026-10-15 23:20 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -29,10 +29,9 @@ day.
 | Report revision: the 27 fixes, the six citations, the appendix | done 2026-10-12, awaiting the commit | the commit; his read of `paper/SUMMARY.md` | 2026-10-13 |
 | npm, stages 1 and 1b: the candidate-hash walk and three fixes in the code | done 2026-10-13, committed (`26fa5e2`) | nothing | done |
 | npm, stage 2: the pull and the frozen achieved panel (209 series; the very-sparse stratum has 9) | done 2026-10-15 01:57 UTC, inside the deadline; awaiting the commit | the commit | 2026-10-15 |
-| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | the external stage 1 commit (so one smoke serves both components) and a free GPU | nothing | 2026-10-16 |
-| Synthetic grid, stage 2: the run (under an hour of GPU), inference over S01 to S06, results section | stage 1 | runtime approval | 2026-10-16 |
-| External run on npm, stage 1: the packages-only gate and the family of 18, cited to the addition; the target fetch; tests | the panel commit | the commit | 2026-10-15 |
-| External run on npm, stage 2: the 209 target ranges, the run, inference over E01 to E18, the results section | stage 1's commit, the smoke, approvals | target-access and runtime words | 2026-10-17 |
+| Synthetic grid: smoke, gate, the 540-series run, inference over S01 to S06 | done 2026-10-15: adverse to the hurdle (five of six reject against it); awaiting the commit | the commit | done |
+| External run on npm, stage 1: the packages-only gate and family of 18, the target fetch, the inference command, the run-path fixes | done 2026-10-15, committed (`3fc3411`) | nothing | done |
+| External run on npm, stage 2: the 209 target ranges, the run, inference over E01 to E18, the recomputation on both runs | the commit of the synthetic results and the recomputation command | target-access and runtime words | 2026-10-16 |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
 | Paper extension, review, posting, TMLR submission | npm run, synthetic, literature, report | his read, the posting, the submission | 2026-10-31 |
@@ -91,6 +90,8 @@ winget install --id MiKTeX.MiKTeX -e
   registration hashes, where the numbers come from, the release URL and the DOI.
 - A one-paragraph plain statement of the result and a two-page excerpt of the registered analysis code, for
   the author's own use (a draft paragraph is in `ideas/2026-10-11-report-link-title-abstract.md`).
+- Release assets beside `results.parquet`: the 540 synthetic checkpoints (0.9 GB) and, after the npm run, its
+  checkpoints, so a fresh clone can rerun the inference; hashes are in each `run.json`.
 - A monthly audit of every claim on these pages against the files, first about 2026-11-11.
 - `*.py text eol=lf` in `.gitattributes`, so that the Study 2 gate's source hashes survive a checkout on a
   machine that converts line endings (folded into the npm panel work).
