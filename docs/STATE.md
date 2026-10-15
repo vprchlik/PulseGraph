@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-14 00:20 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-15 03:50 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -27,12 +27,16 @@ The post-hoc accounting of the Study 1 run (`a3b3098`); the Study 2 implementati
 twice; 62,111 bytes); the literature re-check (`63c2d5f`); the Study 1 report under `paper/` (`c62d0c5`); its
 review (`f0c28a8`, 45 verdicts: 18 hold, 26 fixed, 1 did not hold).
 
-## Awaiting the author's commit (2026-10-14)
+## Awaiting the author's commit (2026-10-15)
 
-The npm inventory code rewritten to the registered candidate-hash walk, with three fixes made before any pull
-(scoped download URLs, outages stop the pull, repository-relative capture paths); 259 tests pass. The spend for
-the pull is stated: about 29,000 requests, ceiling 36,000, about 13 hours, no dollars. The report's revision
-and the spring plan were committed on 2026-10-13 (`f325a67`, `730cb5a`).
+The npm achieved panel, frozen 2026-10-15 01:57 UTC under the registered rules and inside the addition's
+deadline: a frozen inventory of 4,486,927 names; a candidate walk of 12,943 keys to 10,000 eligible packages;
+9,998 complete contexts; 209 series accepted (100 dense, 100 sparse, 9 very sparse: only 9 of 9,998 candidates
+reach a 0.9 zero fraction, so the third stratum is reported short, with no transfer of slots). No target day was
+requested. The pull used 30,198 request attempts and 12.6 hours of the approved 36,000 and 13; no dollars. The
+manifest, selection and status files go into the tree; the context counts stay out until the redistribution
+review. With them, one code change: an access refusal from the download API stops a pull instead of dropping a
+candidate.
 
 ## What the protocol allows, and what lapsed
 
@@ -86,7 +90,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-Three small npm code fixes, then the commit of the npm code; the synthetic grid's smoke, gate and run; then
-the npm pull (ceiling 36,000 requests, 13 hours; deadline 2026-10-20) and its frozen panel; the author's read
-of the report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release. Dates and
-gates are in `docs/PLAN.md`.
+The commit of the npm panel; the packages-only gate and family of 18 in the code, cited to the addition; the
+synthetic grid's smoke, gate and run when the GPU is free; the 209 npm target ranges under the author's
+target-access approval, the run and inference over E01 to E18; the author's read of the report's title, abstract
+and summary; the PDF (no TeX on this machine); the GitHub release. Dates and gates are in `docs/PLAN.md`.

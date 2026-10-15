@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-13 05:30 UTC. This page holds only what is current.
+Last rewritten 2026-10-15 03:50 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -27,12 +27,12 @@ day.
 | Study 1 report: summary, LaTeX source, figures, number sources, checker | done 2026-10-12 (about ten pages; no PDF yet) | reads `paper/SUMMARY.md`; the commit | 2026-10-12 |
 | Report review by a different reader | done 2026-10-12: 45 verdicts, one did not hold (the contamination sentence), committed | nothing | done |
 | Report revision: the 27 fixes, the six citations, the appendix | done 2026-10-12, awaiting the commit | the commit; his read of `paper/SUMMARY.md` | 2026-10-13 |
-| npm, stage 1: the candidate-hash walk in the code, the request count stated | done 2026-10-12, awaiting the commit | the commit | 2026-10-13 |
-| npm, stage 1b: scoped download URLs, stop on outages, relative capture paths, the README paragraph | stage 1 | the commit of both | 2026-10-13 |
-| npm, stage 2: the pull (ceiling 36,000 requests, 13 hours) and the frozen achieved panel | the npm commits and the synthetic run (its last step writes under `study/`, a gate path) | the words "36,000 requests and 13 hours" | 2026-10-15 (deadline 2026-10-20) |
-| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | the npm code committed (the gate needs a clean tree and hashes the sources) | nothing | 2026-10-13 |
-| Synthetic grid, stage 2: the run (under an hour of GPU), inference over S01 to S06, results section | stage 1 | runtime approval | 2026-10-14 |
-| Study 2 external run on the npm panel: gate changes citing the additions, run, inference over E01 to E18 | npm stage 2, synthetic stage 1 | target-access and runtime approval | 2026-10-19 |
+| npm, stages 1 and 1b: the candidate-hash walk and three fixes in the code | done 2026-10-13, committed (`26fa5e2`) | nothing | done |
+| npm, stage 2: the pull and the frozen achieved panel (209 series; the very-sparse stratum has 9) | done 2026-10-15 01:57 UTC, inside the deadline; awaiting the commit | the commit | 2026-10-15 |
+| Synthetic grid, stage 1: GPU smoke at the committed HEAD, gate dry run, runtime estimate | the external stage 1 commit (so one smoke serves both components) and a free GPU | nothing | 2026-10-16 |
+| Synthetic grid, stage 2: the run (under an hour of GPU), inference over S01 to S06, results section | stage 1 | runtime approval | 2026-10-16 |
+| External run on npm, stage 1: the packages-only gate and the family of 18, cited to the addition; the target fetch; tests | the panel commit | the commit | 2026-10-15 |
+| External run on npm, stage 2: the 209 target ranges, the run, inference over E01 to E18, the results section | stage 1's commit, the smoke, approvals | target-access and runtime words | 2026-10-17 |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
 | Paper extension, review, posting, TMLR submission | npm run, synthetic, literature, report | his read, the posting, the submission | 2026-10-31 |

@@ -111,7 +111,8 @@ class FlakySession(FakeSession):
         elif self.fault == "missing_context_day":
             body = dict(body, downloads=body["downloads"][1:])
         content = b"<html></html>" if self.fault == "invalid_json" else json.dumps(body).encode()
-        status = {"retry_exhausted": 503, "http_403": 403, "http_404": 404, "http_501": 501}
+        status = {"retry_exhausted": 503, "http_404": 404, "http_501": 501}
+        status.update({f"http_{code}": code for code in (401, 403, 407)})
         return SimpleNamespace(
             status_code=status.get(self.fault, 200), content=content, headers={"Retry-After": "0"}
         )
@@ -406,7 +407,10 @@ def test_capture_evidence_paths_are_relative_to_the_repository(tmp_path):
     assert set(first) == {"path", "sha256", "metadata_path", "acquired_at"}
 
 
-@pytest.mark.parametrize("fault", ["transport_failure", "retry_exhausted", "http_501"])
+@pytest.mark.parametrize(
+    "fault",
+    ["transport_failure", "retry_exhausted", "http_501", "http_401", "http_403", "http_407"],
+)
 def test_context_outage_stops_the_pull_and_resumes_from_captures(tmp_path, fault):
     inventory, pool = _walked(tmp_path)
     session = FlakySession(_small_frame(), pool[5], fault)
@@ -440,7 +444,6 @@ def test_context_outage_stops_the_pull_and_resumes_from_captures(tmp_path, fault
 @pytest.mark.parametrize(
     "fault",
     [
-        "http_403",
         "http_404",
         "download_identity_or_bounds_mismatch",
         "invalid_json",

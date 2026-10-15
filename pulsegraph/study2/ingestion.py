@@ -18,6 +18,7 @@ from pulsegraph.study2.holdout import timestamp, utc_now
 
 CANDIDATE_POOL = 10000
 NAME_INVENTORY = "registry_name_inventory"
+ACCESS_REFUSALS = ("http_401", "http_403", "http_407")
 
 
 class SourceFailure(RuntimeError):
@@ -190,7 +191,7 @@ def key_failure(reason):
     """A failure that describes the requested key; any other failure interrupts a walk."""
     if reason in ("invalid_json", "invalid_metadata_document"):
         return True
-    access = ("http_401", "http_403", "http_407", "http_429")
+    access = (*ACCESS_REFUSALS, "http_429")
     return reason.startswith("http_4") and reason not in access
 
 
@@ -198,6 +199,8 @@ def outage(reason):
     """A failure of the source or the capture store; a context pull stops on it, never excludes."""
     if reason in ("transport_failure", "retry_exhausted", "capture_hash_mismatch"):
         return True
+    if reason in ACCESS_REFUSALS:
+        return True  # A refusal of access describes the client, not the candidate.
     return reason.startswith("http_") and not reason.startswith("http_4")
 
 

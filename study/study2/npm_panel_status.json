@@ -1,0 +1,135 @@
+{
+  "achieved_strata": {
+    "dense": {
+      "achieved": 100,
+      "complete_candidates": 2431,
+      "unfilled": 0
+    },
+    "sparse": {
+      "achieved": 100,
+      "complete_candidates": 7558,
+      "unfilled": 0
+    },
+    "very_sparse": {
+      "achieved": 9,
+      "complete_candidates": 9,
+      "unfilled": 91
+    }
+  },
+  "acquisition": {
+    "first_attempt_at": "2026-10-14T00:23:08.619687+00:00",
+    "http_attempts": 30198,
+    "http_attempts_by_host": {
+      "api.npmjs.org": 12762,
+      "registry.npmjs.org": 12943,
+      "replicate.npmjs.com": 4493
+    },
+    "interruptions": [
+      "From 2026-10-14T08:44Z the download API timed out or answered 504 until at least 10:25Z; it answered again at 21:37Z. Each such stop wrote nothing and excluded no candidate; the pull resumed from the cached captures.",
+      "Three 429 answers in a row for one key stop an invocation (retry_exhausted); every such stop resumed from the cached captures with no exclusion."
+    ],
+    "invocation_seconds": 45508.1,
+    "invocations": 52,
+    "last_attempt_at": "2026-10-15T01:57:02.378781+00:00",
+    "request_spacing": "at least 1 s between attempts (the capture client); at least 3 s from 2026-10-14T22:51:36Z, when the download API answered about 20 requests a minute"
+  },
+  "approval": {
+    "http_attempt_ceiling": 36000,
+    "invocation_seconds_ceiling": 46800,
+    "scope": "cumulative over every invocation of the inventory, candidate walk and context pull",
+    "words": "the pull of 36,000 requests and 13 hours"
+  },
+  "candidate_pool_size": 10000,
+  "candidate_walk": {
+    "eligible": 10000,
+    "eligible_with_unpublished_time": 3,
+    "excluded": 25,
+    "excluded_reasons": {
+      "http_404": 25
+    },
+    "ineligible": 2918,
+    "path": "data/raw/study2/npm/inventory.walk.json",
+    "sha256": "a23121ac3b1e8a4107fd7a3bf06cdba8e6eb5b866aa651b5852f94dd2e9e6f8b",
+    "stop_reason": "pool_full",
+    "visited": 12943
+  },
+  "context": {
+    "complete_candidates": 9998,
+    "excluded_keys": [
+      "@zitterorg/modi-quaerat-voluptas",
+      "walk-logger"
+    ],
+    "exclusions": {
+      "http_404": 2
+    },
+    "http_attempts": 12762,
+    "http_attempts_by_status": {
+      "200": 9998,
+      "404": 40,
+      "429": 2708,
+      "504": 2,
+      "ReadTimeout": 14
+    },
+    "keys": 10000,
+    "strata_window_start": "2026-03-05",
+    "window": [
+      "2025-09-01",
+      "2026-06-02"
+    ]
+  },
+  "deadline_met": true,
+  "domain": "npm",
+  "frame": {
+    "candidate_inclusion_probability": null,
+    "candidate_inclusion_probability_basis": "estimated: eligible frame size = inventory_size * eligible / visited over the visited candidate-hash prefix; bounds from the visited verdicts",
+    "candidate_inclusion_probability_bounds": [
+      0.00223015960806283,
+      1.0
+    ],
+    "candidate_inclusion_probability_estimate": 0.0028846023124512615,
+    "eligible_frame_size": null,
+    "eligible_frame_size_bounds": [
+      10000,
+      4483984
+    ],
+    "eligible_frame_size_estimate": 3466682.37657421,
+    "inventory_size": 4486927
+  },
+  "inventory": {
+    "acquired_at": "2026-10-14T02:04:42.888120+00:00",
+    "design_documents_excluded": 0,
+    "first_page_acquired_at": "2026-10-14T00:23:09.031348+00:00",
+    "last_page_acquired_at": "2026-10-14T02:04:41.987352+00:00",
+    "names": 4486927,
+    "page_limit": 1000,
+    "pages": 4493,
+    "path": "data/raw/study2/npm/inventory.json",
+    "sha256": "97bed93ab0ba31eba01de63939d15df9c2e09c705950bed90439418aaa6b498e",
+    "source": "https://replicate.npmjs.com/registry/_all_docs",
+    "total_rows_first_page": 4486876,
+    "total_rows_last_page": 4487032
+  },
+  "panel": {
+    "context": {
+      "in_tree": false,
+      "path": "data/raw/study2/npm/panel/context.parquet",
+      "sha256": "9dbed9ffc6b45fac37472924f450a811a6f088a4757f9c3b0c7c695077324e1b"
+    },
+    "manifest": {
+      "path": "reports/study2-npm/panel/manifest.json",
+      "sha256": "5e05578854e7a85188362e8f492398e4636dea5410fe545e2a752428ee71ad54"
+    },
+    "selection": {
+      "path": "reports/study2-npm/panel/selection.json",
+      "sha256": "39fcc87cb941dca07b430b8e819bfe672302588304299148fb8ca7763cb4f20e"
+    }
+  },
+  "panel_verified_at": "2026-10-15T02:00:20+00:00",
+  "panel_written_at": "2026-10-15T01:57:03.033376+00:00",
+  "protocol_rule": "PROTOCOL.md, dated addition of 2026-10-12, item 2",
+  "readiness_deadline": "2026-10-20T23:59:00+00:00",
+  "selection_seed": 20260914,
+  "series": 209,
+  "status": "verified_achieved_panel",
+  "target_values_opened": false
+}

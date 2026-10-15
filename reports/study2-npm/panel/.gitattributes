@@ -1,0 +1,2 @@
+# Preserve the exact bytes covered by the manifest's and the panel status's SHA-256 values.
+* -text
