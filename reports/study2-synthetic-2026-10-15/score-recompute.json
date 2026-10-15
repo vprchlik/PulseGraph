@@ -1,0 +1,13 @@
+{
+  "check": "QScore9, its three parts and the context-scaled QScore9 recomputed from each saved forecast's deciles and target; saved targets and context means compared with the registered generator",
+  "max_abs_difference": {
+    "context_mean": 0.0,
+    "context_scaled_qscore9": 0.0,
+    "parts": 0.0,
+    "qscore9": 0.0,
+    "target": 0.0
+  },
+  "run_json_sha256": "6c4307090ad91be39bf24e777f36b43dbc5be2a2fe7bf8c2d4fcea3b1f4b195f",
+  "series": 540,
+  "windows": 55080
+}

@@ -1,0 +1,344 @@
+{
+  "analysis": "study2_registered_inference",
+  "comparison_family": {
+    "adjustment": "BH",
+    "all_zero_p": 1.0,
+    "alternative": "two-sided",
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20260917,
+    "calendar_conditional": true,
+    "comparison_count": 6,
+    "comparisons": [
+      {
+        "domain": "synthetic",
+        "horizon": 30,
+        "id": "S01",
+        "model": "chronos2_hurdle",
+        "reference": "chronos2_completed"
+      },
+      {
+        "domain": "synthetic",
+        "horizon": 30,
+        "id": "S02",
+        "model": "chronos2_hurdle",
+        "reference": "hurdle_count_28"
+      },
+      {
+        "domain": "synthetic",
+        "horizon": 30,
+        "id": "S03",
+        "model": "timesfm3_hurdle",
+        "reference": "timesfm3_completed"
+      },
+      {
+        "domain": "synthetic",
+        "horizon": 30,
+        "id": "S04",
+        "model": "timesfm3_hurdle",
+        "reference": "hurdle_count_28"
+      },
+      {
+        "domain": "synthetic",
+        "horizon": 30,
+        "id": "S05",
+        "model": "timesfm2p5_hurdle",
+        "reference": "timesfm2p5_completed"
+      },
+      {
+        "domain": "synthetic",
+        "horizon": 30,
+        "id": "S06",
+        "model": "timesfm2p5_hurdle",
+        "reference": "hurdle_count_28"
+      }
+    ],
+    "component": "synthetic",
+    "holdout_npm_unavailable_ids": [],
+    "method": "approx",
+    "metric": "qscore9",
+    "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+    "q": 0.05,
+    "test": "wilcoxon",
+    "zero_method": "wilcox"
+  },
+  "component": "synthetic",
+  "confirmatory": [
+    {
+      "bootstrap_root": 20260917,
+      "bootstrap_seed": 3742483908,
+      "calendar_conditional": true,
+      "confidence": 0.95,
+      "declared_count": 6,
+      "domain": "synthetic",
+      "entity": "replicate",
+      "horizon": 30,
+      "id": "S01",
+      "losses": 24,
+      "mean_diff": 0.08599314128943769,
+      "mean_diff_ci_high": 0.14014352994970286,
+      "mean_diff_ci_low": 0.0383618884316416,
+      "median_diff": 0.0555418381344307,
+      "metric": "qscore9",
+      "model": "chronos2_hurdle",
+      "model_mean": 1.8708550525834478,
+      "n_bootstrap": 20000,
+      "n_entities": 30,
+      "n_nonzero": 30,
+      "quantile_method": "linear",
+      "reference": "chronos2_completed",
+      "reference_mean": 1.78486191129401,
+      "reject_bh_005": true,
+      "ties": 0,
+      "wilcoxon_p": 0.0013820358574399946,
+      "wilcoxon_p_bh": 0.004146107572319984,
+      "wins": 6
+    },
+    {
+      "bootstrap_root": 20260917,
+      "bootstrap_seed": 1729028612,
+      "calendar_conditional": true,
+      "confidence": 0.95,
+      "declared_count": 6,
+      "domain": "synthetic",
+      "entity": "replicate",
+      "horizon": 30,
+      "id": "S02",
+      "losses": 21,
+      "mean_diff": 0.0521101966163695,
+      "mean_diff_ci_high": 0.09226890717878379,
+      "mean_diff_ci_low": 0.01686140832190218,
+      "median_diff": 0.04737311385459542,
+      "metric": "qscore9",
+      "model": "chronos2_hurdle",
+      "model_mean": 1.8708550525834478,
+      "n_bootstrap": 20000,
+      "n_entities": 30,
+      "n_nonzero": 30,
+      "quantile_method": "linear",
+      "reference": "hurdle_count_28",
+      "reference_mean": 1.8187448559670785,
+      "reject_bh_005": true,
+      "ties": 0,
+      "wilcoxon_p": 0.0092710251720259,
+      "wilcoxon_p_bh": 0.011125230206431079,
+      "wins": 9
+    },
+    {
+      "bootstrap_root": 20260917,
+      "bootstrap_seed": 2110598515,
+      "calendar_conditional": true,
+      "confidence": 0.95,
+      "declared_count": 6,
+      "domain": "synthetic",
+      "entity": "replicate",
+      "horizon": 30,
+      "id": "S03",
+      "losses": 24,
+      "mean_diff": 0.08662231367169637,
+      "mean_diff_ci_high": 0.14291817558299036,
+      "mean_diff_ci_low": 0.038368484224965686,
+      "median_diff": 0.061440329218106826,
+      "metric": "qscore9",
+      "model": "timesfm3_hurdle",
+      "model_mean": 1.8402441700960217,
+      "n_bootstrap": 20000,
+      "n_entities": 30,
+      "n_nonzero": 30,
+      "quantile_method": "linear",
+      "reference": "timesfm3_completed",
+      "reference_mean": 1.753621856424325,
+      "reject_bh_005": true,
+      "ties": 0,
+      "wilcoxon_p": 0.003378854437718857,
+      "wilcoxon_p_bh": 0.006757708875437714,
+      "wins": 6
+    },
+    {
+      "bootstrap_root": 20260917,
+      "bootstrap_seed": 258759989,
+      "calendar_conditional": true,
+      "confidence": 0.95,
+      "declared_count": 6,
+      "domain": "synthetic",
+      "entity": "replicate",
+      "horizon": 30,
+      "id": "S04",
+      "losses": 19,
+      "mean_diff": 0.021499314128943733,
+      "mean_diff_ci_high": 0.049474942844078613,
+      "mean_diff_ci_low": -0.006569010059442191,
+      "median_diff": 0.031193415637859934,
+      "metric": "qscore9",
+      "model": "timesfm3_hurdle",
+      "model_mean": 1.8402441700960217,
+      "n_bootstrap": 20000,
+      "n_entities": 30,
+      "n_nonzero": 30,
+      "quantile_method": "linear",
+      "reference": "hurdle_count_28",
+      "reference_mean": 1.8187448559670785,
+      "reject_bh_005": false,
+      "ties": 0,
+      "wilcoxon_p": 0.12044472790832522,
+      "wilcoxon_p_bh": 0.12044472790832522,
+      "wins": 11
+    },
+    {
+      "bootstrap_root": 20260917,
+      "bootstrap_seed": 991723218,
+      "calendar_conditional": true,
+      "confidence": 0.95,
+      "declared_count": 6,
+      "domain": "synthetic",
+      "entity": "replicate",
+      "horizon": 30,
+      "id": "S05",
+      "losses": 25,
+      "mean_diff": 0.08769364426154551,
+      "mean_diff_ci_high": 0.1382158893461363,
+      "mean_diff_ci_low": 0.043163625971650646,
+      "median_diff": 0.06743484224965712,
+      "metric": "qscore9",
+      "model": "timesfm2p5_hurdle",
+      "model_mean": 1.8798312757201645,
+      "n_bootstrap": 20000,
+      "n_entities": 30,
+      "n_nonzero": 30,
+      "quantile_method": "linear",
+      "reference": "timesfm2p5_completed",
+      "reference_mean": 1.7921376314586188,
+      "reject_bh_005": true,
+      "ties": 0,
+      "wilcoxon_p": 0.0008944300647461546,
+      "wilcoxon_p_bh": 0.004146107572319984,
+      "wins": 5
+    },
+    {
+      "bootstrap_root": 20260917,
+      "bootstrap_seed": 23674666,
+      "calendar_conditional": true,
+      "confidence": 0.95,
+      "declared_count": 6,
+      "domain": "synthetic",
+      "entity": "replicate",
+      "horizon": 30,
+      "id": "S06",
+      "losses": 21,
+      "mean_diff": 0.06108641975308646,
+      "mean_diff_ci_high": 0.09880917924096937,
+      "mean_diff_ci_low": 0.02298867169638773,
+      "median_diff": 0.060267489711934186,
+      "metric": "qscore9",
+      "model": "timesfm2p5_hurdle",
+      "model_mean": 1.8798312757201645,
+      "n_bootstrap": 20000,
+      "n_entities": 30,
+      "n_nonzero": 30,
+      "quantile_method": "linear",
+      "reference": "hurdle_count_28",
+      "reference_mean": 1.8187448559670785,
+      "reject_bh_005": true,
+      "ties": 0,
+      "wilcoxon_p": 0.005319684023981225,
+      "wilcoxon_p_bh": 0.007979526035971837,
+      "wins": 9
+    }
+  ],
+  "pit": {
+    "bins": [
+      [
+        0.0,
+        0.1
+      ],
+      [
+        0.1,
+        0.2
+      ],
+      [
+        0.2,
+        0.3
+      ],
+      [
+        0.3,
+        0.4
+      ],
+      [
+        0.4,
+        0.5
+      ],
+      [
+        0.5,
+        0.6
+      ],
+      [
+        0.6,
+        0.7
+      ],
+      [
+        0.7,
+        0.8
+      ],
+      [
+        0.8,
+        0.9
+      ],
+      [
+        0.9,
+        1.0
+      ]
+    ],
+    "derivation": "Each saved forecast with a count law per target day draws its uniforms from numpy.random.default_rng(pulsegraph.random.derived_seed(20260916, component, domain, series_id, cutoff, horizon, model)), the same SHA-256 derivation with the cutoff as the run's string label; V = rng.random(horizon), one uniform per target day in lead order. U = F(y-) + V (F(y) - F(y-)) with F(y-) = 1 - SF(y - 1) and F(y) = 1 - SF(y) of the saved law. Ten equal bins on [0, 1], the last closed. Raw native deciles, local_mean_28 and autoets_weekly have no full count law, and their PIT is unavailable.",
+    "root": 20260916
+  },
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "secondary": {
+    "availability": "a secondary score is defined for an entity only when every one of its windows has it; contrasts use the entities where both sides are defined and report how many are not",
+    "files": [
+      "pit_histograms.csv",
+      "secondary_accounting.csv",
+      "secondary_cells.csv",
+      "secondary_cells_contrasts.csv",
+      "secondary_contrasts.csv",
+      "secondary_scores.csv",
+      "series_scores.csv",
+      "pit_values.parquet"
+    ],
+    "status": "secondary; no multiplicity adjustment; never replaces the family"
+  },
+  "settings": {
+    "adjustment": {
+      "count": 6,
+      "method": "BH",
+      "q": 0.05,
+      "scope": "once over the whole family"
+    },
+    "aggregation": "origins within replicate and cell, then cells within replicate with equal cell weight; the replicate blocks are the pairing and bootstrap units",
+    "bootstrap": {
+      "derivation": "Each comparison's bootstrap seed is pulsegraph.random.derived_seed(20260917, component, comparison id, domain, model, reference, horizon, metric): the first four bytes, read as a little-endian unsigned 32-bit integer, of the SHA-256 of the UTF-8 bytes of json.dumps([20260917, component, comparison id, domain, model, reference, horizon, metric], sort_keys=True, allow_nan=False) with Python's default separators ', ' and ': ' and ASCII escaping; the root and the horizon are integers, every other field a string. The generator is numpy.random.default_rng(seed). A secondary contrast reuses a family row's model and reference with its own horizon and metric in the same derivation; its id is the family id, or the family id with '-h7' for a horizon outside the family.",
+      "draws": "rng.integers(0, n, size=(block, n)) in blocks of 256",
+      "entity_order": "ascending series_id (code point) or replicate number",
+      "replicates": 20000,
+      "root": 20260917,
+      "unit": "replicate"
+    },
+    "calendar_conditional": true,
+    "difference": "model minus reference; negative favors the model",
+    "entity": "replicate",
+    "interval": {
+      "confidence": 0.95,
+      "kind": "pointwise percentile",
+      "levels": "alpha / 2 and 1 - alpha / 2 with alpha = 1 - 0.95",
+      "numpy_quantile_method": "linear"
+    },
+    "metric": "qscore9",
+    "test": {
+      "all_zero_p": 1.0,
+      "alternative": "two-sided",
+      "method": "approx",
+      "name": "wilcoxon",
+      "zero_method": "wilcox"
+    },
+    "wins_ties_losses": "entities with difference < 0, == 0, > 0; denominator n_entities"
+  }
+}

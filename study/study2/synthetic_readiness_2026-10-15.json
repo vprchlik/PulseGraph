@@ -1,0 +1,30 @@
+{
+  "action": "synthetic",
+  "approved_at": "2026-10-15T20:13:56Z",
+  "approved_by": "Victor Prchlik",
+  "confirmed": true,
+  "estimated_seconds": 1539,
+  "evidence": [
+    {
+      "path": "data/raw/study2/smoke-3fc3411.json",
+      "sha256": "deddce7bc8ff0b8e544deafe01ada69fd3a163a0efd778a835eb206986939667"
+    },
+    {
+      "path": "study/study2/grid_manifest.json",
+      "sha256": "65814ced30702b8b6beb784ed555820fa6861a6ffd4370c0824efd59b182fbaa"
+    },
+    {
+      "path": "study/study2/crps_resolution.json",
+      "sha256": "a354e4be83cd8ab2b32a7dca30e0b0cbf54b506effe79c6976850787d229842f"
+    }
+  ],
+  "implementation_commit": "3fc3411f7c683aaf98e6fad28b26aa9c92ab00b9",
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "runtime_budget_seconds": 2400,
+  "smoke": {
+    "path": "data/raw/study2/smoke-3fc3411.json",
+    "sha256": "deddce7bc8ff0b8e544deafe01ada69fd3a163a0efd778a835eb206986939667"
+  },
+  "source_semantics_resolved": true
+}

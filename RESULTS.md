@@ -710,3 +710,38 @@ Windows are averaged within repository, then repositories receive equal weight. 
 
 [Post-hoc paired tables](reports/registered-2026-09-13/posthoc/posthoc-paired-summary.csv), [post-hoc figure index and regeneration](reports/registered-2026-09-13/posthoc/posthoc-report.md), [post-hoc provenance](reports/registered-2026-09-13/posthoc/provenance.json).
 <!-- END POST-HOC QSCORE9 ACCOUNTING -->
+
+## Study 2, synthetic component (registered family S01 to S06), 2026-10-15
+
+Protocol: Study 2 at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`, section "Synthetic intervention component".
+Implementation: `3fc3411f7c683aaf98e6fad28b26aa9c92ab00b9`. Gate: pass, with the author's signed readiness and
+the GPU smoke at the implementation commit. Run: complete. It covered 540 of 540 series (18 cells × 30
+replicates) and scored 55,080 forecasts, with no failures and no resumes, in 1,323 seconds against a budget of
+2,400.
+
+Differences are hurdle variant minus reference QScore9 at horizon 30, so a negative difference favors the
+hurdle variant. The entity is the replicate block: origins are averaged within replicate and cell, then the 18
+cells with equal weight, so n = 30. Intervals are pointwise 95% percentile intervals from 20,000
+replicate-block bootstrap replicates. Raw p is from two-sided approximate Wilcoxon signed-rank tests with zeros
+omitted; this is a location test under symmetry, not a test of the mean. BH is applied once over the six, at
+q = 0.05.
+
+| ID | Model variant | Reference | Model mean | Reference mean | Mean difference | 95% interval | Median difference | Lower / tied / higher (of 30) | Raw p | BH p | BH rejects at 0.05 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| S01 | `chronos2_hurdle` | `chronos2_completed` | 1.871 | 1.785 | 0.08599 | [0.03836, 0.1401] | 0.05554 | 6 / 0 / 24 | 0.00138 | 0.00415 | yes |
+| S02 | `chronos2_hurdle` | `hurdle_count_28` | 1.871 | 1.819 | 0.05211 | [0.01686, 0.09227] | 0.04737 | 9 / 0 / 21 | 0.00927 | 0.0111 | yes |
+| S03 | `timesfm3_hurdle` | `timesfm3_completed` | 1.84 | 1.754 | 0.08662 | [0.03837, 0.1429] | 0.06144 | 6 / 0 / 24 | 0.00338 | 0.00676 | yes |
+| S04 | `timesfm3_hurdle` | `hurdle_count_28` | 1.84 | 1.819 | 0.0215 | [-0.006569, 0.04947] | 0.03119 | 11 / 0 / 19 | 0.12 | 0.12 | no |
+| S05 | `timesfm2p5_hurdle` | `timesfm2p5_completed` | 1.88 | 1.792 | 0.08769 | [0.04316, 0.1382] | 0.06743 | 5 / 0 / 25 | 0.000894 | 0.00415 | yes |
+| S06 | `timesfm2p5_hurdle` | `hurdle_count_28` | 1.88 | 1.819 | 0.06109 | [0.02299, 0.09881] | 0.06027 | 9 / 0 / 21 | 0.00532 | 0.00798 | yes |
+
+No comparison favors the hurdle variant.
+
+- Each hurdle variant scores higher than its completed-unwrapped control (S01, S03, S05).
+- The Chronos-2 and TimesFM 2.5 hurdles score higher than `hurdle_count_28` (S02, S06).
+- The TimesFM 3 hurdle against `hurdle_count_28` (S04) is not rejected.
+
+The oracle, which uses the generator's known parameters, is a diagnostic only; it has the lowest mean score.
+The secondary tables (horizon 7, per cell, other scores, accounting, PIT), the integrity checks and the
+regeneration commands are in
+[reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md](reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md).
