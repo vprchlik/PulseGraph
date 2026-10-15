@@ -1,0 +1,104 @@
+% Study 2, the achieved npm panel, from the committed panel files and the status file. Input from main.tex
+% in the extension; every number traces to sources.md and is asserted by check_numbers.py. Macros are
+% provided in case the file is compiled before main.tex defines them.
+\providecommand{\qs}{QScore9}
+
+\section{Study 2: the achieved npm panel}
+\label{sec:s2panel}
+
+The packages domain is npm. Its panel was frozen on 2026-10-15 01:57 UTC and verified at 02:00 UTC, inside
+the reset readiness deadline of 2026-10-20 23:59 UTC, so the registered PyPI substitution was not invoked.
+Everything in this section is computed from the context window alone, 2025-09-01 to 2026-06-02; as of
+2026-10-15, a statement to be re-checked on the posting day against the same status file, no target value
+of 2026-06-03 to 2026-08-31 had been opened.
+
+\paragraph{Inventory and candidate walk.} The frozen inventory is the registry's replication feed read in
+4,493 pages of at most 1,000 names between 2026-10-14 00:23 and 02:04 UTC: 4,486,927 package names, scopes
+included. The walk visited the first 12,943 names in candidate-hash order and requested each one's registry
+document: 10,000 were eligible, created before 2025-09-01; 2,918 were ineligible on their creation time or
+frame; and 25 were excluded because the registry answered HTTP 404 for the name. The walk stopped when the
+pool was full. Because it did not exhaust the inventory, the size of the eligible frame is estimated from
+the visited prefix, as the inventory size times the eligible share of the visited names: about 3,466,682
+packages, with exact bounds of 10,000 and 4,483,984. The candidate-pool inclusion probability of an eligible
+package is correspondingly about 0.0029, with bounds 0.0022 and 1. These are estimates from a hash-ordered
+prefix, not counts.
+
+\paragraph{The context pull and the strata.} The 10,000 candidates' daily download counts from 2025-09-01 to
+2026-06-02 were requested from the download-counts API; 9,998 answered completely and 2 were excluded
+because the API answered HTTP 404 for the package (\texttt{@zitterorg/modi-quaerat-voluptas},
+\texttt{walk-logger}), the only context-stage exclusions. Of the 12,762 attempts to that host, 9,998 returned
+the range, 40 returned 404, 2,708 returned 429, 2 returned 504 and 14 timed out; every refusal was retried
+later from the saved captures without excluding a candidate. On the stratum window of 2026-03-05 to
+2026-06-02 the 9,998 complete candidates fell 2,431 in the dense stratum (zero fraction below 0.5), 7,558 in
+the sparse stratum (0.5 to below 0.9) and 9 in the very sparse stratum (0.9 and above). The achieved panel
+is therefore 209 series: 100 dense, 100 sparse and 9 very sparse, the first in selection-hash order within
+each stratum, with 91 very-sparse slots unfilled (Table~\ref{tab:s2panel}). The 209 names were created
+between 2011-08-26 and 2025-08-08; 80 of them are scoped names.
+
+\begin{table}[t]
+\centering\small
+\caption{The achieved npm panel by context-zero-fraction stratum, computed on 2026-03-05 to 2026-06-02:
+the complete candidates among the 9,998 of the frozen pool, the series taken and the unfilled slots. The
+stratum bounds are the registered $[0, 0.5)$, $[0.5, 0.9)$ and $[0.9, 1]$.}
+\label{tab:s2panel}
+\begin{tabular}{llrrr}
+\toprule
+Stratum & Zero fraction & Complete candidates & Taken & Unfilled \\
+\midrule
+dense & $[0, 0.5)$ & 2,431 & 100 & 0 \\
+sparse & $[0.5, 0.9)$ & 7,558 & 100 & 0 \\
+very sparse & $[0.9, 1]$ & 9 & 9 & 91 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Why the third stratum is short.} The registered rule fixes the candidate pool at the first
+10,000 eligible names in hash order and forbids a larger pool, a transfer of unused slots and any
+alternative filter, so the stratum holds every complete candidate that qualified and no more. Only 9 of
+9,998 complete candidates had zero downloads on at least 90 percent of the 90 stratum days. A reading, not a
+measured fact: npm counts every tarball request, including mirrors and automated clients, so a published
+package is rarely without a download for most of a quarter, and the very sparse stratum that is natural for
+GitHub stars is close to empty for npm downloads. The stratum is reported as achieved; the confirmatory
+family pools all 209 series as registered, strata being secondary descriptors, and any per-stratum table
+shows $n = 9$ for the very sparse stratum.
+
+\paragraph{The pull's budget and the API's limits.} The approval was 36,000 requests and 13 hours,
+cumulative over the inventory, the walk and the context pull. The pull used 30,198 HTTP attempts: 12,943 to
+the registry host, 12,762 to the download-counts host and 4,493 to the replication host, over 52
+invocations totalling 45,508 seconds (12 hours and 38 minutes), from 2026-10-14 00:23 UTC to 2026-10-15 01:57
+UTC. Attempts were spaced at least one second apart, and at least three seconds from 2026-10-14 22:51 UTC,
+when the download API was answering about 20 requests a minute. The download API returned 429 to 2,708
+attempts; three in a row for one key stopped the invocation, which resumed later from the saved captures.
+From 2026-10-14 08:44 UTC the download API timed out or answered 504 until at least 10:25 UTC and answered
+again at 21:37 UTC; each such stop wrote nothing and excluded no candidate. No documented request quota for
+the download-counts API was found in the governing documents, and 30,198 attempts in about 26 hours is far
+below the one stated line, five million requests a month; the redistribution review records the 429 answers
+as the pull repeatedly reaching npm's throttle and honouring it.
+
+\paragraph{One series at 7.6 million downloads a day.} The dense stratum holds the package
+\texttt{aggregate-error}, whose last 28 context days before the first cutoff average 7,637,136 downloads a
+day; the next largest last-28 mean in the panel is about 13,000. Equal series weights, as registered, mean
+that the mean paired difference of the unscaled \qs{} over 209 series is that one series' difference divided
+by 209 plus a remainder from the other 208, whose losses are of a different order; the series-bootstrap
+interval inherits the same dependence. The median difference, the win count and the signed-rank test are
+rank-based and unaffected; the scaled \qs{}, which divides each window's loss by the context mean, is
+secondary. The paper states this when it reports the mean, and this is a property of the registered design,
+not a defect found in it. The same series is the case behind the availability rule of 2026-10-15
+(Section~\ref{sec:s2design}): no discrete CRPS can be certified for it within the registered work limit, so
+its CRPS is recorded as unavailable and counted in the denominators.
+
+\paragraph{Data statement.} The daily counts of the 209 series were obtained from the npm download-counts
+API, \url{https://api.npmjs.org/downloads/range}, between 2026-10-14 and 2026-10-15 UTC, for 2025-09-01 to
+2026-06-02; the targets for 2026-06-03 to 2026-08-31 are to be obtained under a separate target-access
+approval. Package names and creation timestamps come from the npm public registry,
+\url{https://registry.npmjs.org}, and from its replication feed, \url{https://replicate.npmjs.com}. A
+download is a tarball request as npm counts it, including mirrors, build servers and automated clients, and
+is a directional indicator rather than a count of users. npm, Inc.\ states no licence for the download
+counts, and its Open-Source Terms of 2022-03-10, read as governing the public registry and its public APIs,
+contain no restriction on their redistribution; replication of registry data through the public
+APIs is expressly allowed. Names are as the registry served them at acquisition and may since have been
+removed. The pull reached npm's rate limit 2,708 times and honoured it. The project's compilation of the
+selection, the derived fields and the documentation is released under CC BY 4.0; no licence is asserted over
+the counts as such. Maintainer names, e-mail addresses, descriptions and raw registry documents are not
+published. The manifest and selection files are in the repository; the aggregated daily counts are
+published with the paper. npm is a registered trademark of npm, Inc.; no npm logo is used.

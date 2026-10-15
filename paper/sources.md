@@ -192,3 +192,76 @@ g = q.groupby(["sampling_stratum", "model", "horizon"]).qscore9_difference
 print(g.agg(lower=lambda s: int((s < 0).sum()), median="median").round(4).to_string())
 '@ | .\.venv\Scripts\python.exe -
 ```
+
+## The Study 2 sections under `paper/sections/` (added 2026-10-15)
+
+The four files `paper/sections/study2-question.tex`, `study2-design.tex`, `study2-panel.tex` and
+`study2-results-placeholder.tex` are written to be `\input` by `main.tex` in the paper's extension; until
+then `main.tex` does not read them. `check_numbers.py` reads them like `main.tex` (whitespace collapsed)
+and asserts every figure below. `S2` stands for `study/study2`, `N` for `reports/study2-npm/panel`. The
+results placeholder holds no number from a run: every cell is `tbd`, and the checker asserts that its
+table rows are the declared tuples with `tbd` cells and that no decimal figure appears in it.
+
+### The question (`study2-question.tex`)
+
+| Number or fact | File | Where |
+|---|---|---|
+| Registration 2026-09-14 at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`; full-protocol SHA-256 `33cefd8e...` | `S2/external_packages_spec.json` `protocol_commit`, `protocol_sha256`; `PROTOCOL.md` "Study 2 — dated addition, 2026-09-14"; `git log -- PROTOCOL.md` (`df55867` dated 2026-09-14) | as in `main.tex` Section 8 |
+| Zero-day part 0.004 to 0.015, against the models in every cell; medians 0.0003 to 0.0041; models lower on 46 to 89 of 300 | `R/posthoc/posthoc-paired-summary.csv`, `R/inference/inference.csv` | the same rows and columns as the Study 1 tables above |
+| "This hypothesis arose after Study 1 and is tested on separately declared data"; completion not attributed to Study 1 | `PROTOCOL.md` Study 2 addition, opening paragraphs and "Models, distributions and controls" | text |
+| The re-check run 2026-10-12; the six items, their arXiv identifiers and dates; the memo's items; fable.intermittent, Bai and Chu, EXAONE Demand; "not found" and the failed routes; what may and may not be claimed | `docs/research/2026-10-11-literature-recheck.md` | header; "Items"; the table of three items outside the window; "The cited items, re-checked"; "What the paper may claim"; "What the paper must cite"; "Where the record is thin" |
+| Citation keys `schoess2026`, `chin2026`, `ebrahim2026`, `islam2026`, `kim2026`, `moghadasi2026`, `garza2026`, `fevbench2026` (already in the bib); `tsantilis2025`, `zodiac2026`, `meyer2025`, `damato2026`, `bai2026`, `exaone2026` (added 2026-10-15 at the end of `references.bib`) | `paper/references.bib` | the checker asserts that every `\citep` key in the sections has an entry and that each item's identifier is in both the re-check and the bib |
+
+### The design (`study2-design.tex`)
+
+| Number or fact | File | Where |
+|---|---|---|
+| Dated addition of 2026-10-12 committed at `8db0d73`; of 2026-10-15 at `5be2ce9` | `git log -- PROTOCOL.md` | the two commits after `df55867`; the checker confirms both and their dates |
+| Three domains; 300 series, 100 per stratum; strata [0,0.5), [0.5,0.9), [0.9,1]; all-zero contexts eligible; "balanced stress-test panel" | `PROTOCOL.md` "Domains, frame and selection" | the first paragraph and the domain table |
+| Candidate pool min(10,000, N); selection seed 20260914; hash of [seed, domain, stage, key]; stages "candidate" and "selection"; no transfer, no larger pool, no popularity filter | `PROTOCOL.md` "Domains, frame and selection"; `S2/external_packages_spec.json` `seeds.selection` | the sampling paragraphs; the addition of 2026-10-12, item 2 (the walk reading) |
+| A = 2025-09-01; E = 2026-08-31; K = 3; cutoffs 2026-06-03, 2026-07-03, 2026-08-02; 275, 305, 335 context days; strata window 2026-03-05 to 2026-06-02; horizons 7 and 30; c_j = E - (30j - 1) | `S2/external_packages_spec.json` `calendar`; `PROTOCOL.md` "Calendar and information boundary" | the checker recomputes the cutoffs from the formula and the context days from the dates |
+| Model IDs and revisions | `S2/external_packages_spec.json` `foundation_models` (also `PROTOCOL.md`, `R/run/run.json`) | `model_id`, `revision` |
+| Completion: linear interpolation through (0,0); tail scale max(1, q0.9 - q0.8); floor(Q(U) + 0.5); F(0) = 1 fallback only | `S2/external_packages_spec.json` `completion`; `PROTOCOL.md` "Models, distributions and controls" | `interpolation`, `lower_knot`, `tail_scale`, `rounding`, `fm_fallback` |
+| Jeffreys occurrence (n+ + 1/2)/29; lookback 28; fewer than two positives gives delta_1 | `S2/external_packages_spec.json` `count_hurdles` | `occurrence`, `lookback`, `minimum_positives`, `fallback` |
+| Dynamic count: discount 0.98; four parameters start at 0.5; fallback to `hurdle_count_28` | `S2/external_packages_spec.json` `dynamic_count` | `discount`, `initial_parameters`, `fallback` |
+| Seven baselines | `S2/external_packages_spec.json` `baselines` | the list of seven |
+| CRPS tolerance 1e-8 by k = 1,000,000; the availability rule | `S2/external_packages_spec.json` `crps`; `PROTOCOL.md` "Discrete CRPS availability — dated addition, 2026-10-15" | `tolerance`, `max_k`; item 5 |
+| 54 = 3 x 3 x 2 x 3; E01 to E18 (Table `tab:s2family`); one BH at q = 0.05; 20,000 bootstrap replicates; bootstrap seed 20260917; two-sided Wilcoxon; E19 to E54 as a later family of 36 | `S2/external_comparisons.json` (54 rows); `S2/external_packages_comparisons.json` (18 rows, equal to the first 18, `authority` naming item 3 and `8db0d73`); `PROTOCOL.md` addition of 2026-10-12, item 3 | the checker builds each table row from the JSON |
+| The synthetic grid: z in {0.2, 0.8, 0.95}, mu+ in {1, 5, 25}, rho in {0, 0.8}; 18 cells; 30 replicates; 270 observations; first context 180; origins 180, 210, 240; horizons 7, 30; 540 series; seed 20260918; common random numbers with separate occurrence and size streams | `S2/grid_manifest.json` `cells`, `n_cells`, `replicates_per_cell`, `observations`, `origins`, `horizons`, `n_series`, `seed`, `common_random_numbers`, `streams`; `PROTOCOL.md` "Synthetic intervention component" | the checker reads the cell parameters and the 30 streams |
+| S01 to S06 at horizon 30 (Table `tab:s2synfamily`) | `S2/synthetic_comparisons.json` | the checker builds each table row from the JSON |
+| Six seeds 20260914 to 20260919 | `S2/external_packages_spec.json` `seeds` | all six |
+| Holdout freeze 2026-09-28 18:00 UTC; targets October 1 to 7 and 1 to 30; settlements 2026-10-15 and 2026-11-07 18:00 UTC; H01 to H18; not run; npm clock reset to 2026-10-20 23:59 UTC | `PROTOCOL.md` "October prospective calendar holdout"; the addition of 2026-10-12, items 1 and 2; `S2/holdout_comparisons.json` | text; `comparison_count` 18 |
+| The gate for the packages component: one npm panel bound by hash, no holdout freeze; the 54-test component unchanged | `docs/research/2026-10-15-study2-run-path-review.md` verdict 3; `S2/npm_panel_status.json` `panel` hashes | text |
+| Contamination ledger rows for npm and the synthetic component; pinned revision dates | `PROTOCOL.md` "Contamination ledger"; `docs/research/2026-10-11-literature-recheck.md` "Model cards and training data" | the two rows; the card table |
+
+### The achieved npm panel (`study2-panel.tex`)
+
+| Number | File | Key |
+|---|---|---|
+| Frozen 2026-10-15 01:57 UTC; verified 02:00 UTC; deadline 2026-10-20 23:59 UTC met; targets not opened; rule cited | `S2/npm_panel_status.json` | `panel_written_at`, `panel_verified_at`, `readiness_deadline`, `deadline_met`, `target_values_opened`, `protocol_rule`, `status` |
+| 4,486,927 names; 4,493 pages of at most 1,000; 2026-10-14 00:23 to 02:04 UTC; the replication feed | same | `inventory.names`, `pages`, `page_limit`, `first_page_acquired_at`, `last_page_acquired_at`, `source` |
+| Walk: 12,943 visited; 10,000 eligible; 2,918 ineligible; 25 excluded (HTTP 404); stopped on a full pool | same; `N/selection.json` `report.candidate_walk` | `candidate_walk.visited`, `eligible`, `ineligible`, `excluded`, `excluded_reasons`, `stop_reason` |
+| Eligible frame about 3,466,682, bounds 10,000 and 4,483,984; inclusion probability about 0.0029, bounds 0.0022 and 1 | same; `N/selection.json` `report` | `frame.eligible_frame_size_estimate` (rounded to a whole number), `eligible_frame_size_bounds`, `candidate_inclusion_probability_estimate` (4 decimals), `candidate_inclusion_probability_bounds` (4 decimals; 1.0 printed as 1); the checker recomputes the estimate as inventory size times eligible over visited |
+| Context pull: 10,000 keys; 9,998 complete; 2 excluded (HTTP 404) and their names; 12,762 attempts: 9,998 with 200, 40 with 404, 2,708 with 429, 2 with 504, 14 timeouts; window 2025-09-01 to 2026-06-02; strata from 2026-03-05 | same | `context.keys`, `complete_candidates`, `exclusions`, `excluded_keys`, `http_attempts`, `http_attempts_by_status`, `window`, `strata_window_start` |
+| Strata: 2,431, 7,558, 9 complete candidates; 100, 100, 9 taken; 0, 0, 91 unfilled (Table `tab:s2panel`); 209 series | same `achieved_strata`, `series`; `N/manifest.json` `series` (stratum counts); `N/selection.json` `report.strata` | the checker counts the manifest's strata and checks the first-in-hash-order property against `reserve_order` |
+| Creation dates 2011-08-26 to 2025-08-08; 80 scoped names | `N/manifest.json` | minimum and maximum of `created_at` over the 209 series; count of `series_id` beginning with `@` |
+| The approval: 36,000 requests and 13 hours; 30,198 attempts; 12,943, 12,762, 4,493 by host; 52 invocations; 45,508 seconds (12 hours 38 minutes); 2026-10-14 00:23 to 2026-10-15 01:57 UTC; spacing 1 s, then 3 s from 2026-10-14 22:51 UTC at about 20 requests a minute; 2,708 answers of 429; the outage of 08:44 to at least 10:25, answering again 21:37 | `S2/npm_panel_status.json` | `approval.words`, `http_attempt_ceiling`, `invocation_seconds_ceiling`; `acquisition.http_attempts`, `http_attempts_by_host`, `invocations`, `invocation_seconds`, `first_attempt_at`, `last_attempt_at`, `request_spacing`, `interruptions`; `context.http_attempts_by_status["429"]` |
+| "About 26 hours"; five million requests a month; no documented quota; 429 answers as reaching the throttle; the data statement and the trademark notice; the Open-Source Terms of 2022-03-10; what stays out | `docs/research/2026-10-15-npm-redistribution-review.md` | "What is to be published"; "What the documents say"; "The five questions"; "Recommendation" items 1 to 5 |
+| `aggregate-error`, dense stratum, zero fraction 0; last-28-day context mean 7,637,136 | `N/manifest.json` (the series entry); `PROTOCOL.md` addition of 2026-10-15, item 5 | `stratum`, `zero_fraction`; the closing sentence of item 5 |
+| The next largest last-28 mean about 13,000; losses of a different order | `docs/research/2026-10-15-study2-run-path-review.md` verdict 8 | the first paragraph and the first observation (from the frozen context parquet, which is not in the tree) |
+
+### The results placeholder (`study2-results-placeholder.tex`)
+
+Tables `tab:s2ext` and `tab:s2syn` list the tuples of `S2/external_packages_comparisons.json` and
+`S2/synthetic_comparisons.json` with every result cell `tbd`; the denominators 209 and 30 are `series` in
+`S2/npm_panel_status.json` and `replicates_per_cell` in `S2/grid_manifest.json`; "16 forecasts per origin"
+is the count of `variants` in `S2/external_packages_spec.json`; "540 series" is `n_series` in the grid
+manifest. No other figure appears; the checker asserts the absence of decimal numbers.
+
+### Regeneration commands for the Study 2 files
+
+| Command | Regenerates |
+|---|---|
+| `.\.venv\Scripts\python.exe scripts\study2_ingest.py npm inventory ...` and `npm panel ...` (README) | `data\raw\study2\npm\inventory.json`, `inventory.walk.json`, `N\manifest.json`, `N\selection.json`, `S2\npm_panel_status.json` and the ignored `context.parquet` (the frozen pull, not to be repeated; a complete walk and pull are reused from the saved captures without requests) |
+| `.\.venv\Scripts\python.exe scripts\study2_evidence.py ...` (README) | `S2\acquisition_status.json` |
+| `.\.venv\Scripts\python.exe paper/check_numbers.py` | nothing; asserts this table against the sections |

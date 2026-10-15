@@ -1,0 +1,72 @@
+% Study 2, the question. Input from main.tex in the extension; every number traces to sources.md and is
+% asserted by check_numbers.py. Macros are provided in case the file is compiled before main.tex defines them.
+\providecommand{\lm}{\texttt{local\_mean\_28}}
+\providecommand{\qs}{QScore9}
+
+\section{Study 2: the question}
+\label{sec:s2question}
+
+Study 2 was registered on 2026-09-14 as a dated addition to the protocol, at commit
+\texttt{df55867c982dfe2bb6e1152ec8ae93e3cd228c45} (full protocol SHA-256 at registration
+\texttt{33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360}), after Study 1's results were
+seen, to be tested on data declared separately from Study 1's. It asks two questions about a frozen foundation
+model's forecast of a daily count. First, whether replacing the model's own probability of a zero day with a
+context-only occurrence probability, while keeping the model's completed positive conditional distribution,
+lowers \qs{}. Second, whether that positive component, the model's own law for the size of a positive day,
+improves on a fixed count hurdle whose positive law is a shifted Poisson fitted to the last 28 context days.
+The registered text allows that a lower loss on zero days may coexist with a higher loss on positive days,
+and says that the net sign, the typical-series sign and a null outcome are all reportable. Nothing in Study
+2 amends Study 1's sample, forecasts, scores, comparisons or conclusions; the completion of a model's
+deciles into a count distribution is a Study 2 assumption and is not attributed to Study 1.
+
+The question follows from the Study 1 accounting of Section~\ref{sec:results} and the post-hoc parts of
+Table~\ref{tab:posthoc}. A daily count forecast has two parts, whether anything happens and how much
+happens when it does, and the foundation models supply neither part on its own terms: their native output
+is nine quantiles of a continuous forecast, clipped at zero, and a zero day enters the score only through
+whichever deciles the model placed at or below zero. In Study 1 the models' mean gain against \lm{} sat on
+positive days where the local mean overpredicts, while the zero-day part of the paired difference was
+positive, against the models, in every cell: small beside the mean gain, from 0.004 to 0.015, but in every
+cell larger than that cell's median difference, which ran from 0.0003 to 0.0041. The typical repository
+favored the local mean, with the models lower on only 46 to 89 of 300 repositories, and the model losses
+clustered at high context zero fractions (Figure~\ref{fig:zerofraction}). A reading made after those
+results, and registered as a separate study rather than tested on Study 1's run, is that the models' size
+forecasts carry the gain and their occurrence forecasts carry the loss, so that an occurrence probability
+estimated from the context alone, substituted for the model's zero mass, would lower the loss where the
+models lose and keep it where they win. Study 2 tests that reading on data declared for the purpose: the
+occurrence estimate is the 28-day Jeffreys rule, the positive law is the model's own completed law, the
+control is the same completed law with its own zero mass, and the matched comparators are count hurdles
+with the same occurrence rule (Section~\ref{sec:s2design}). Whether the substitution helps is the question,
+not the premise.
+
+A literature re-check for work since 2026-09-13, run on 2026-10-12 and recorded in the repository, sets
+what this paper may claim and what it may not. The construction is not new in its parts, and the paper
+does not claim that it is. Frozen foundation models have been evaluated on sparse daily counts: twelve of
+them, the three used here among them, on five sparse panels as an event-ranking task without a proper
+score, with the occurrence-size output head named as the next step \citep{schoess2026}. An
+occurrence-times-size hurdle has been applied to frozen Chronos-2 output, on monthly spare-parts demand,
+with the occurrence probability from the full history and the result judged by point accuracy and service
+measures, where it trailed plain re-centring \citep{chin2026}. TimesFM 3's nine-decile pinball loss on
+simulated intermittent counts has been reported as no better than the history's empirical deciles
+\citep{ebrahim2026}. That aggregate and per-series rankings of zero-shot models can disagree has been shown
+on a marketplace panel and on M5 \citep{islam2026} and on quick-commerce demand \citep{kim2026}. A later
+test window on familiar entities has been shown not to establish generalization to unseen ones
+\citep{moghadasi2026}, and a live benchmark scores daily new stargazers on the 400 most-starred
+repositories \citep{garza2026}. Earlier items in the protocol's lineage bear on the same ground: a
+large-language-model study of intermittent demand on an industrial dataset \citep{tsantilis2025}, a
+zero-inflated dual-head forecaster \citep{zodiac2026}, the fev-bench practice of reporting win rates beside
+relative errors \citep{fevbench2026}, and a further item on frozen-model forecasting \citep{meyer2025}.
+Hurdle-count forecasting without foundation models has current reference implementations
+\citep{damato2026, bai2026}, and one zero-shot foundation model built for frequent zeros was released in the
+window, with a quantile head and no count head; it was not evaluated here \citep{exaone2026}.
+
+What the re-check did not find, as of 2026-10-12, is a published evaluation in which a context-only
+occurrence probability replaces the zero mass of frozen Chronos-2 or TimesFM forecasts while their completed
+positive conditional distribution is kept, judged by a proper quantile score against a completed-unwrapped
+control, matched count hurdles and a dynamic count baseline on sparse daily counts. ``Not found'' means
+those searches did not find it, not that it does not exist; two of the routes failed and papers under
+review are not visible by any route used. The paper therefore claims the registered combination and nothing
+broader: the completed-unwrapped control, the short-window occurrence estimate, the matched hurdle
+comparators, the proper score, the probability sample and the side-by-side mean and typical-series
+summaries, on daily attention and adoption counts. It does not claim to be the first evaluation of frozen
+foundation models on sparse daily counts, the first hurdle applied to a frozen model's output, or the first
+to show that aggregate and per-series rankings disagree.
