@@ -1,9 +1,18 @@
 import numpy as np
 import pytest
+from scipy.stats import poisson
 
 from pulsegraph.config import ROOT_DIR
+from pulsegraph.forecast.output import COMMON_QUANTILES
 from pulsegraph.provenance import read_json
-from pulsegraph.study2.synthetic import cells, generate, grid_manifest, oracle_laws, streams
+from pulsegraph.study2.synthetic import (
+    cells,
+    generate,
+    grid_manifest,
+    oracle_forecast,
+    oracle_laws,
+    streams,
+)
 
 
 def test_full_grid_and_independent_replicate_streams():
@@ -56,3 +65,30 @@ def test_oracle_quantiles_minimize_expected_pinball(cell):
             error = support - q
             losses.append(np.dot(mass, np.maximum(tau * error, (tau - 1) * error)))
         assert losses[optimum] <= min(losses) + 1e-12
+
+
+@pytest.mark.parametrize("cell", cells())
+def test_oracle_matches_known_law_inverts_and_minimizes_known_expected_pinball(cell):
+    # The known law is built from the generator's parameters with scipy, not through CountLaw.
+    pi, rho, mu = 1 - cell["zero_probability"], cell["persistence"], cell["positive_mean"]
+    support = np.arange(301)
+    error = support[:, None] - support[None, :]
+    pinball = {tau: np.maximum(tau * error, (tau - 1) * error) for tau in COMMON_QUANTILES}
+    levels = np.linspace(0.005, 0.995, 199)
+    for context in ([1, 0], [0, 3]):
+        forecast = oracle_forecast(f"{cell['cell_id']}/rep00", context, 30)
+        for lead, law in enumerate(oracle_laws(cell, context, 30), start=1):
+            p = pi + rho**lead * (float(context[-1] > 0) - pi)
+            known = np.r_[1 - p, p * poisson.pmf(support[:-1], mu - 1)]
+            known_cdf = np.cumsum(known)
+            assert known.sum() == pytest.approx(1, abs=1e-12)
+            assert law.cdf(-1) == 0
+            assert np.allclose(law.cdf(support), known_cdf, rtol=0, atol=1e-12)
+            q = law.ppf(levels).astype(int)
+            assert np.all(known_cdf[q] >= levels - 1e-12)
+            assert np.all((q == 0) | (known_cdf[np.maximum(q - 1, 0)] < levels + 1e-12))
+            deciles = np.asarray(forecast["deciles"][lead - 1])
+            assert np.array_equal(deciles, law.ppf(COMMON_QUANTILES))
+            for tau, value in zip(COMMON_QUANTILES, deciles.astype(int)):
+                losses = known @ pinball[tau]
+                assert losses[value] <= losses.min() + 1e-12
