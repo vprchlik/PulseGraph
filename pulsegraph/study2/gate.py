@@ -8,7 +8,7 @@ from pulsegraph.evaluation.artifacts import file_hash
 from pulsegraph.evaluation.registration import installed_versions
 from pulsegraph.provenance import read_json, sha256_bytes
 from pulsegraph.study2.constants import FREEZE_AT, PROTOCOL_COMMIT, PROTOCOL_SHA256, SEEDS, VARIANTS
-from pulsegraph.study2.declarations import validate
+from pulsegraph.study2.declarations import PACKAGES_AUTHORITY, validate
 from pulsegraph.study2.holdout import (
     evidence_file,
     prepare_plan,
@@ -16,6 +16,12 @@ from pulsegraph.study2.holdout import (
     utc_now,
     verify_predictions,
 )
+
+ADDITION_HEADING = (
+    "## Lapses of September 2026 and the families of the October 2026 paper"
+    " — dated addition, 2026-10-12"
+)
+NPM_PANEL_STATUS = "study/study2/npm_panel_status.json"
 
 
 def git(root, *args):
@@ -143,6 +149,55 @@ def _declarations(component, root):
     return spec, family
 
 
+def verify_addition(*, root=ROOT_DIR):
+    """The dated addition of 2026-10-12 must be committed, unedited, in the protocol at HEAD."""
+    commit = PACKAGES_AUTHORITY["commit"]
+    added = git(root, "show", f"{commit}:PROTOCOL.md")
+    current = git(root, "show", "HEAD:PROTOCOL.md")
+    try:
+        git(root, "merge-base", "--is-ancestor", commit, "HEAD")
+    except subprocess.CalledProcessError:
+        raise ValueError("The dated addition of 2026-10-12 is not in the history of HEAD") from None
+    if (
+        ADDITION_HEADING.encode() not in added
+        or not current.startswith(added)
+        or (root / "PROTOCOL.md").read_bytes() != current
+    ):
+        raise ValueError("The protocol at HEAD does not carry the dated addition of 2026-10-12")
+    return dict(
+        addition="PROTOCOL.md, dated addition of 2026-10-12, items 1 and 3",
+        addition_commit=commit,
+        addition_protocol_sha256=sha256_bytes(added),
+        protocol_sha256_at_head=sha256_bytes(current),
+    )
+
+
+def packages_readiness(document, *, root=ROOT_DIR, now=None):
+    """The packages-only external readiness of the dated addition of 2026-10-12.
+
+    Item 1: with the holdout not run, no holdout freeze, prediction commit or prediction
+    verification precedes external evaluation. Item 3: the family is E01 to E18, so the
+    readiness names the one packages panel, npm's frozen achieved panel, and nothing else.
+    Target exposure stays separately approved.
+    """
+    now = utc_now() if now is None else now
+    _approval(document, "external_packages", now)
+    if document.get("target_access_approved") is not True:
+        raise ValueError("External target exposure must be approved separately")
+    if set(document.get("panels", {})) != {"packages"}:
+        raise ValueError("The packages component takes the packages panel alone")
+    if document.get("package_domain") != "npm":
+        raise ValueError("The packages component runs on the frozen npm panel")
+    frozen = read_json(root / NPM_PANEL_STATUS)["panel"]
+    panel = document["panels"]["packages"]
+    for name in ("manifest", "selection", "context"):
+        entry = panel.get(name) or {}
+        if entry.get("sha256") != frozen[name]["sha256"]:
+            raise ValueError("Readiness names a panel other than the frozen npm panel")
+        evidence_file(entry)
+    return panel
+
+
 def authorize_holdout(plan_path, approval_path, *, root=ROOT_DIR, now=None):
     now = utc_now() if now is None else now
     if now > FREEZE_AT:
@@ -184,7 +239,7 @@ def authorize_component(readiness_path, component, *, root=ROOT_DIR, now=None):
     now = utc_now() if now is None else now
     document = read_json(readiness_path)
     _approval(document, component, now)
-    if component not in ("external", "synthetic"):
+    if component not in ("external", "external_packages", "synthetic"):
         raise ValueError("Use the separate holdout freeze approval")
     spec, family = _declarations(component, root)
     if (
@@ -201,6 +256,8 @@ def authorize_component(readiness_path, component, *, root=ROOT_DIR, now=None):
 
         if read_json(root / "study/study2/grid_manifest.json") != grid_manifest():
             raise ValueError("Synthetic grid manifest differs from registration")
+    if component == "external_packages":
+        packages_readiness(document, root=root, now=now)
     if component == "external":
         if document.get("target_access_approved") is not True:
             raise ValueError("External target exposure must be approved separately")
@@ -228,4 +285,6 @@ def authorize_component(readiness_path, component, *, root=ROOT_DIR, now=None):
         ):
             raise ValueError("Predictions were committed after the first target day")
     metadata = _runtime(document, root=root)
+    if component == "external_packages":
+        metadata["authority"] = verify_addition(root=root)
     return dict(readiness=document, spec=spec, family=family, metadata=metadata)

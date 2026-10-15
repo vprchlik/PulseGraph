@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-15 03:50 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-15 07:00 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -29,14 +29,14 @@ review (`f0c28a8`, 45 verdicts: 18 hold, 26 fixed, 1 did not hold).
 
 ## Awaiting the author's commit (2026-10-15)
 
-The npm achieved panel, frozen 2026-10-15 01:57 UTC under the registered rules and inside the addition's
-deadline: a frozen inventory of 4,486,927 names; a candidate walk of 12,943 keys to 10,000 eligible packages;
-9,998 complete contexts; 209 series accepted (100 dense, 100 sparse, 9 very sparse: only 9 of 9,998 candidates
-reach a 0.9 zero fraction, so the third stratum is reported short, with no transfer of slots). No target day was
-requested. The pull used 30,198 request attempts and 12.6 hours of the approved 36,000 and 13; no dollars. The
-manifest, selection and status files go into the tree; the context counts stay out until the redistribution
-review. With them, one code change: an access refusal from the download API stops a pull instead of dropping a
-candidate.
+The packages-only external component in the code, cited to the dated addition of 2026-10-12: a declared family
+of exactly E01 to E18, a gate that requires one npm panel bound to the frozen hashes and no holdout freeze, and
+a target fetch that refuses to run without a signed readiness; the registered 54-test component is untouched.
+With it, dated addition 5 of 2026-10-15 (63,728 bytes, SHA-256 `49988143...`; every registered prefix verified
+twice): a forecast whose discrete CRPS cannot be certified by k = 1,000,000 is recorded as unavailable with its
+reason and counted in the denominators, instead of stopping the run. The case: one npm series averages 7.6
+million downloads a day; a context-only probe found it before any target was opened. QScore9 and every
+confirmatory family are unaffected. 290 tests pass. The npm panel was committed on 2026-10-15 (`e5321cd`).
 
 ## What the protocol allows, and what lapsed
 

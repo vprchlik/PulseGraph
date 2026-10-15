@@ -15,8 +15,25 @@ from pulsegraph.study2.constants import (
     VARIANTS,
 )
 
+# PROTOCOL.md, dated addition of 2026-10-12, item 3: the October 2026 paper's external family is
+# the packages tests E01 to E18 with one BH correction; E19 to E54 stay whole for a later run.
+PACKAGES_AUTHORITY = dict(
+    addition="PROTOCOL.md, dated addition of 2026-10-12, item 3",
+    commit="8db0d73381e89a61b0ea22e6a8cb2b6e569725c9",
+)
+
 
 def comparisons(component):
+    if component == "external_packages":
+        family = comparisons("external")
+        rows = [row for row in family["comparisons"] if row["domain"] == "packages"]
+        return dict(
+            family,
+            component=component,
+            comparison_count=len(rows),
+            comparisons=rows,
+            authority=PACKAGES_AUTHORITY,
+        )
     domains, horizons, prefix = {
         "external": (("packages", "nyc311", "wikipedia"), (7, 30), "E"),
         "synthetic": (("synthetic",), (30,), "S"),
@@ -125,13 +142,15 @@ def specification(component):
             domain="pypi", deadline="2026-09-28", reason="operational_npm_unavailability_only"
         ),
         aggregation="windows_within_entity_then_equal_entities",
-        comparison_count={"external": 54, "synthetic": 6, "holdout": 18}[component],
+        comparison_count={"external": 54, "external_packages": 18, "synthetic": 6, "holdout": 18}[
+            component
+        ],
     )
 
 
 def validate(spec, family):
     component = spec.get("component")
-    if component not in ("external", "synthetic", "holdout"):
+    if component not in ("external", "external_packages", "synthetic", "holdout"):
         raise ValueError("Unknown Study 2 component")
     if spec != specification(component) or family != comparisons(component):
         raise ValueError("Study 2 declaration differs from the registered specification")

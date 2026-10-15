@@ -808,3 +808,23 @@ npm-unavailability rule is the sole permitted domain-based reduction of a compar
 item for this one case. The gate's requirement that all three domain panels be present is changed accordingly
 in a commit that cites this addition. The write-up states that the registered design had three domains and
 that two were not run.
+
+## Discrete CRPS availability — dated addition, 2026-10-15
+
+Signed off by the author on 2026-10-15; the commit containing this addition is the author's approval.
+Appended at 2026-10-15 05:54 UTC on top of commit e5321cd12011d02bb77c6f8ae24b4830823ac43b. Nothing above this heading changes; the
+registered Study 1 bytes and the Study 2 registration bytes at df55867 remain prefixes of this file.
+
+### 5. Discrete CRPS when the certified bound is not attained
+
+The registered numerical rule for the discrete CRPS requires a certified residual bound below 1e-8 by
+k = 1,000,000 and says to stop on failure to achieve it. For a series whose counts run into the millions a
+day, no forecast can be certified within that work limit, and a stop would leave the confirmatory family
+E01 to E18, which uses QScore9 alone, unrun because of a secondary score. From this addition, a forecast
+whose bound is not certified by k = 1,000,000 has its discrete CRPS recorded as unavailable, with that
+reason, and is counted in the valid denominators the protocol already requires for secondary scores; the
+run continues. The work limit, the tolerance and the certification are unchanged, and nothing is truncated
+or substituted. QScore9, the occurrence Brier score, the randomized PIT and every confirmatory family are
+unaffected. Decided on 2026-10-15 from the frozen npm selection context alone, before any Study 2 target
+value was accessed: study/study2/npm_panel_status.json records target_values_opened false, and the series
+concerned (aggregate-error, last-28-day context mean 7,637,136) was identified by a context-only probe.

@@ -1,0 +1,149 @@
+{
+  "adjustment": "BH",
+  "all_zero_p": 1.0,
+  "alternative": "two-sided",
+  "authority": {
+    "addition": "PROTOCOL.md, dated addition of 2026-10-12, item 3",
+    "commit": "8db0d73381e89a61b0ea22e6a8cb2b6e569725c9"
+  },
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20260917,
+  "calendar_conditional": true,
+  "comparison_count": 18,
+  "comparisons": [
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E01",
+      "model": "chronos2_hurdle",
+      "reference": "chronos2_completed"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E02",
+      "model": "chronos2_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E03",
+      "model": "chronos2_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E04",
+      "model": "chronos2_hurdle",
+      "reference": "chronos2_completed"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E05",
+      "model": "chronos2_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E06",
+      "model": "chronos2_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E07",
+      "model": "timesfm3_hurdle",
+      "reference": "timesfm3_completed"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E08",
+      "model": "timesfm3_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E09",
+      "model": "timesfm3_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E10",
+      "model": "timesfm3_hurdle",
+      "reference": "timesfm3_completed"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E11",
+      "model": "timesfm3_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E12",
+      "model": "timesfm3_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E13",
+      "model": "timesfm2p5_hurdle",
+      "reference": "timesfm2p5_completed"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E14",
+      "model": "timesfm2p5_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 7,
+      "id": "E15",
+      "model": "timesfm2p5_raw",
+      "reference": "local_mean_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E16",
+      "model": "timesfm2p5_hurdle",
+      "reference": "timesfm2p5_completed"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E17",
+      "model": "timesfm2p5_hurdle",
+      "reference": "hurdle_count_28"
+    },
+    {
+      "domain": "packages",
+      "horizon": 30,
+      "id": "E18",
+      "model": "timesfm2p5_raw",
+      "reference": "local_mean_28"
+    }
+  ],
+  "component": "external_packages",
+  "holdout_npm_unavailable_ids": [],
+  "method": "approx",
+  "metric": "qscore9",
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "q": 0.05,
+  "test": "wilcoxon",
+  "zero_method": "wilcox"
+}

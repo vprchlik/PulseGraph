@@ -1,6 +1,11 @@
-"""Frozen metadata frames and context-only balanced panels. No target retrieval."""
+"""Frozen metadata frames and context-only balanced panels.
+
+Target days are retrieved only by `pull_targets`, for npm's frozen achieved panel, after the
+signed packages gate of the dated addition of 2026-10-12.
+"""
 
 import json
+import os
 import time
 from collections import Counter
 from pathlib import Path
@@ -13,12 +18,22 @@ import requests
 from pulsegraph.config import ROOT_DIR
 from pulsegraph.evaluation.artifacts import file_hash
 from pulsegraph.provenance import atomic_json, read_json, sha256_bytes
-from pulsegraph.study2.constants import CONTEXT_END, CONTEXT_START, SEEDS, STRATA_START
-from pulsegraph.study2.holdout import timestamp, utc_now
+from pulsegraph.study2.constants import (
+    CALENDARS,
+    CONTEXT_END,
+    CONTEXT_START,
+    CUTOFFS,
+    ENDPOINT,
+    SEEDS,
+    STRATA_START,
+)
+from pulsegraph.study2.gate import authorize_component, packages_readiness
+from pulsegraph.study2.holdout import evidence_file, timestamp, utc_now
 
 CANDIDATE_POOL = 10000
 NAME_INVENTORY = "registry_name_inventory"
 ACCESS_REFUSALS = ("http_401", "http_403", "http_407")
+TARGET_START, TARGET_END = CUTOFFS[0], ENDPOINT
 
 
 class SourceFailure(RuntimeError):
@@ -522,6 +537,7 @@ class NpmSource:
 
     def __init__(self, client):
         self.client = client
+        self.target_series = frozenset()  # Set only by pull_targets, after the signed gate.
 
     def inventory(self, output):
         """Freeze every replication-feed name, scopes included; complete only when exhausted.
@@ -592,10 +608,7 @@ class NpmSource:
             acquired_at=evidence["acquired_at"],
         )
 
-    def context(self, row, start, end):
-        if start != CONTEXT_START or end != CONTEXT_END:
-            raise ValueError("Selection endpoint cannot access target days")
-        key = row["series_id"]
+    def _downloads(self, key, start, end):
         result = self.client.get(
             # The download API's documented form for a scoped name: "@" as is, "/" encoded.
             f"https://api.npmjs.org/downloads/range/{start}:{end}/" + quote(key, safe="@")
@@ -603,6 +616,157 @@ class NpmSource:
         if result.get("package") != key or result.get("start") != start or result.get("end") != end:
             raise SourceFailure("download_identity_or_bounds_mismatch")
         return [{"date": r["day"], "count": r["downloads"]} for r in result["downloads"]]
+
+    def context(self, row, start, end):
+        if start != CONTEXT_START or end != CONTEXT_END:
+            raise ValueError("Selection endpoint cannot access target days")
+        return self._downloads(row["series_id"], start, end)
+
+    def targets(self, row, start, end):
+        """The run's target days of one series of the authorized frozen manifest, no others."""
+        if start != TARGET_START or end != TARGET_END:
+            raise ValueError("Target requests cover exactly 2026-06-03 to 2026-08-31")
+        if row["series_id"] not in self.target_series:
+            raise ValueError("Target days open only for the frozen npm manifest after the gate")
+        return self._downloads(row["series_id"], start, end)
+
+
+def target_days(rows):
+    """Every target day once, with an explicit nonnegative integer count; never zero-filled."""
+    try:
+        return context_days(rows, start=TARGET_START, end=TARGET_END)
+    except SourceFailure as error:
+        raise SourceFailure(str(error).replace("context", "target")) from None
+
+
+def pull_targets(readiness_path, source, output, *, root=ROOT_DIR, now=None):
+    """Open the target days of npm's frozen achieved panel, only under the signed packages gate.
+
+    One request per manifest series, in manifest order, for exactly TARGET_START through
+    TARGET_END. A failed, missing or incomplete range stops the domain: it is recorded in the
+    pull ledger, no series is replaced or deleted and no signals are written; a later
+    invocation resumes from the cached captures. The signals join the frozen selection
+    context, never re-requested, to the target days.
+    """
+    now = utc_now() if now is None else now
+    panel = packages_readiness(read_json(readiness_path), root=root, now=now)
+    authorize_component(readiness_path, "external_packages", root=root, now=now)
+    output = Path(output)
+    signals_path, completeness_path = output / "signals.parquet", output / "completeness.json"
+    if signals_path.exists() or completeness_path.exists():
+        raise FileExistsError("The target snapshot is immutable")
+    manifest = read_json(evidence_file(panel["manifest"]))
+    context = pd.read_parquet(evidence_file(panel["context"]))
+    keys = [row["series_id"] for row in manifest["series"]]
+    if not keys or len(keys) != len(set(keys)) or set(context.series_id) != set(keys):
+        raise ValueError("Frozen manifest and context differ")
+    frozen = {
+        key: context_days(
+            context.loc[context.series_id == key, ["date", "count"]].to_dict("records")
+        )
+        for key in keys
+    }
+    ledger_path = output / "pull.json"
+    ledger = (
+        read_json(ledger_path)
+        if ledger_path.exists()
+        else dict(
+            domain="npm",
+            manifest_sha256=panel["manifest"]["sha256"],
+            target_start=TARGET_START,
+            target_end=TARGET_END,
+            invocations=[],
+            failures=[],
+        )
+    )
+    if ledger["manifest_sha256"] != panel["manifest"]["sha256"]:
+        raise ValueError("The pull ledger belongs to a different manifest")
+    source.target_series = frozenset(keys)
+    client = source.client
+    first, attempts = len(client.evidence), client.requests
+    invocation = dict(started_at=utc_now().isoformat(), readiness_sha256=file_hash(readiness_path))
+    targets = {}
+    try:
+        for position, row in enumerate(manifest["series"]):
+            try:
+                targets[row["series_id"]] = target_days(
+                    source.targets(row, TARGET_START, TARGET_END)
+                )
+            except SourceFailure as error:
+                reason = str(error)
+                ledger["failures"].append(
+                    dict(
+                        at=utc_now().isoformat(),
+                        series_id=row["series_id"],
+                        position=position,
+                        reason=reason,
+                        # An outage resumes from the captures; a series failure stops the domain.
+                        kind="outage"
+                        if isinstance(error, RequestBudget) or outage(reason)
+                        else "series",
+                    )
+                )
+                raise
+        invocation["status"] = "complete"
+    except BaseException as error:
+        invocation["status"] = type(error).__name__
+        raise
+    finally:
+        invocation.update(
+            ended_at=utc_now().isoformat(),
+            attempts=client.requests - attempts,
+            answered=len(targets),
+        )
+        ledger["invocations"].append(invocation)
+        output.mkdir(parents=True, exist_ok=True)
+        atomic_json(ledger_path, ledger)
+    parts = [
+        pd.concat(
+            [frozen[key], targets[key].astype(frozen[key].dtypes.to_dict())], ignore_index=True
+        ).assign(series_id=key)
+        for key in keys
+    ]
+    temporary = output / "signals.parquet.tmp"
+    pd.concat(parts, ignore_index=True)[["series_id", "date", "count"]].to_parquet(
+        temporary, index=False
+    )
+    written = pd.read_parquet(temporary)
+    for key in keys:
+        # The run's own check: the written signals must reproduce the frozen context exactly.
+        rows = written.loc[written.series_id == key, ["date", "count"]].to_dict("records")
+        if not context_days(rows).equals(frozen[key]):
+            raise ValueError("Target snapshot would change the frozen selection context")
+    os.replace(temporary, signals_path)
+    evidence = client.evidence[first:]
+    if len(evidence) != len(keys):
+        raise ValueError("Every series needs exactly one target response")
+    if any(timestamp(entry["acquired_at"]).date().isoformat() <= TARGET_END for entry in evidence):
+        raise ValueError("A target answer was acquired before the last target day had ended")
+    document = dict(
+        domain="npm",
+        calendar=CALENDARS["npm"],
+        verified=True,
+        method=(
+            "One download-range request per frozen manifest series for "
+            f"{TARGET_START}:{TARGET_END}, UTC day labels. Each answer is checked for the "
+            "package name and the requested bounds and must list each of the 90 days exactly "
+            "once with a nonnegative integer count; nothing is zero-filled. The answers were "
+            f"acquired after {TARGET_END} and list it explicitly. Days {CONTEXT_START} to "
+            f"{CONTEXT_END} are the frozen selection context, unchanged and not re-requested."
+        ),
+        verified_at=utc_now().isoformat(),
+        first_target_day=TARGET_START,
+        last_complete_day=TARGET_END,
+        series=len(keys),
+        days_per_series=len(pd.date_range(CONTEXT_START, TARGET_END)),
+        signals_sha256=file_hash(signals_path),
+        manifest_sha256=panel["manifest"]["sha256"],
+        context_sha256=panel["context"]["sha256"],
+        ledger_failures=ledger["failures"],
+        response_evidence=evidence,
+    )
+    atomic_json(completeness_path, document)
+    return document
 
 
 class NYCSource:

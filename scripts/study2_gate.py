@@ -7,7 +7,7 @@ from pulsegraph.study2.gate import authorize_component
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("component", choices=("external", "synthetic"))
+    parser.add_argument("component", choices=("external", "external_packages", "synthetic"))
     parser.add_argument("--readiness", required=True)
     args = parser.parse_args()
     result = authorize_component(args.readiness, args.component)

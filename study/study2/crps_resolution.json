@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-14T16:45:07.356833+00:00",
+  "at": "2026-10-15T05:58:14.024028+00:00",
   "crps": {
     "cases": [
       {
@@ -466,7 +466,7 @@
     "tolerance": 1e-08
   },
   "data_kind": "synthetic",
-  "implementation_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "implementation_commit": "e5321cd12011d02bb77c6f8ae24b4830823ac43b",
   "packages": {
     "accelerate": "1.15.0",
     "adagio": "0.2.6",
@@ -581,14 +581,22 @@
   "source_sha256": {
     "pulsegraph/study2/__init__.py": "2287fddfcfc5d5eeab27837633890fbec3e6ded4db92a52aa4eb583341cf8a08",
     "pulsegraph/study2/constants.py": "c844e2004742d9f1a4bcd621343ea8fffe101d2bca8831395f4f96064db811d3",
+    "pulsegraph/study2/declarations.py": "e6b74780f1287557f2cfc2a69e79b3a7e369957ee12cfca62d225fb003b11b1a",
     "pulsegraph/study2/distributions.py": "c8ebd976c9b232121a2954c7fe8515f5c03b80e0059b39c67993bdcdc599ee9e",
-    "pulsegraph/study2/holdout.py": "8d1539cc71e1d30e48fe131cd32df4504badd2f93b47568ab86aab54d99e6c4b",
-    "pulsegraph/study2/ingestion.py": "80b5fbe898d49956e87d9f77729725c24a3877e3cf95ca3dee7bfc987bc0dda8",
-    "pulsegraph/study2/models.py": "92dfbe72ed08e8feb2f6025db12d2ad0bfa267956e9a2bb17c8348478aad87fe",
-    "pulsegraph/study2/scores.py": "d4e4f4426d83187cf4e9921f9871ee90abfa5db9e60b65baabd4955dd26b3e29",
+    "pulsegraph/study2/gate.py": "c3a72cc515fb2aa98fbebb8aab1fce76edb8791121d10e770c55b87a1e315412",
+    "pulsegraph/study2/holdout.py": "40118e99c170f1efc2c4a45b9ee250575167afc394fc2b7c98dbc6ea79b9df33",
+    "pulsegraph/study2/ingestion.py": "a54b885d95d9893fba2eaa8edc601e14a8ed250242881489f9eb8ecfd5abae38",
+    "pulsegraph/study2/models.py": "b448099fa55b96998ba87987e7a4cd8b90b2dd6fc0d8c50adbea9f5eafc05e07",
+    "pulsegraph/study2/runner.py": "eefda9c983dc80144b033e6d4cfaf7315743e8d221c3178e302103b3fb42ca1e",
+    "pulsegraph/study2/scores.py": "4d55d6e724a0a4da6e61984117f92d9b024619e48f6c9ef02f42ddc9324d6205",
+    "pulsegraph/study2/synthetic.py": "ca143ff9154eac0ebef8b9103add160b10ac86709b769315dd91f0abccb722e8",
+    "pulsegraph/study2/wikipedia.py": "a72d4e609041f22b85ada601c0ebc50b51da1e9251c84968ff3c8139e7be3813",
+    "scripts/study2_evidence.py": "d6575285a0cf9db05353ac00673f6d2a3cfbd2d5a4a73ef192f72a44f72a232f",
+    "scripts/study2_gate.py": "18d1c7ccb5f85646a262bcab173900b0b1e91e0a7d09f0ec642be371ad28568e",
     "scripts/study2_holdout.py": "7d7cd149e0ac7b0dd81ab69e0c8896f15a4254f2ed06c0f92a06ef85a2860873",
-    "scripts/study2_ingest.py": "97339df5eda0b869fdd4701cafcfef77744bb8940d2250af9df98d203ef4db3a",
-    "scripts/study2_smoke.py": "1e46d57801c5889a3cbd8b597b9e877a20e51796bc1b2c756d6f2586a1762785"
+    "scripts/study2_ingest.py": "06e89016e7865ee3513d39779a2aac2ad90c456582be1f5700e74ab16ad2b3df",
+    "scripts/study2_run.py": "af49bd3d7bb625b927955ea1338c61ae417e299c9b14da9d0197384aec3cc52c",
+    "scripts/study2_smoke.py": "212e789349dfcb464626774fa68d1c8cd9bb66b0bd5c1bfb87eee654a3aa3ef2"
   },
   "variants": [
     "chronos2_raw",

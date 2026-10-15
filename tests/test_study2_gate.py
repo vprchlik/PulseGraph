@@ -9,7 +9,10 @@ from pulsegraph.study2.declarations import comparisons, specification, validate
 from pulsegraph.study2.gate import authorize_holdout
 
 
-@pytest.mark.parametrize("component,count", [("external", 54), ("synthetic", 6), ("holdout", 18)])
+@pytest.mark.parametrize(
+    "component,count",
+    [("external", 54), ("external_packages", 18), ("synthetic", 6), ("holdout", 18)],
+)
 def test_full_families_match_protocol_tables_and_committed_json(component, count):
     family = comparisons(component)
     assert len(family["comparisons"]) == count
