@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-16 05:15 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-16 05:59 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -64,8 +64,15 @@ pages. Its title, abstract and the three sentences to read are in `paper/PAPER-S
 on this machine. Its review (45 verdicts: 17 hold, 26 with a fix, 2 do not hold) found every number traced
 and no table entry wrong, and sentences that overclaim: "no comparison favors the substitution" is false for
 E01, where the typical series favors the hurdle; the claim's scope is npm downloads and the grid, not
-"attention and adoption counts"; the dynamic count's occurrence rule is misdescribed; S04 is not a tie. A
-revision applies these with whatever the standing check and the post-hoc dynamic-occurrence analysis add.
+"attention and adoption counts"; the dynamic count's occurrence rule is misdescribed; S04 is not a tie. The
+standing check and referee's read (2026-10-16) found the tables right and the framing wrong: the confirmatory
+families speak for the dense regime, while the declared secondary strata show the substitution lower than its
+control on 81, 60 and 66 of the 100 sparse npm series at horizon 7; the positive law is a truncated marginal;
+the count-hurdle win is a win over a shifted Poisson; the dynamic count is the best non-oracle forecaster on
+the grid. Its verdict: post after named changes. The post-hoc dynamic-occurrence wrapper shrinks the loss,
+removes four of five rejections against the substitution, and still never beats the model's own zero mass.
+A revision applies all three; a third study that would make the regime reading confirmatory is proposed in
+`docs/ideas/2026-10-16-study3-regime-test.md`.
 
 ## What the protocol allows, and what lapsed
 

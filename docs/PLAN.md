@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-16 05:15 UTC. This page holds only what is current.
+Last rewritten 2026-10-16 05:59 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -37,7 +37,7 @@ day.
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
 | The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | done 2026-10-16; awaiting the commit | the commit | done |
 | Paper review by a different reader | done 2026-10-16: 45 verdicts, two do not hold (an overclaim in the abstract; a misdescribed baseline) | the commit | done |
-| The standing check and referee's read; the post-hoc dynamic-occurrence analysis | the paper | nothing | 2026-10-16 |
+| The standing check and referee's read; the post-hoc dynamic-occurrence analysis | done 2026-10-16; awaiting the commit | the commit | done |
 | Paper revision: the review's fixes, the referee's changes, the post-hoc table, the length | the three above | nothing | 2026-10-18 |
 | The author's read of both summaries, the PDF, posting (Zenodo version 2), TMLR submission | the revision | his read, the posting, the submission | 2026-10-31 |
 
@@ -75,6 +75,9 @@ Every spend is approved by the author in his own words before it happens. Nothin
    `README.md` fails at setup until the folder is deleted from the author's own shell (an elevated one if
    needed); pytest recreates it. Until then the tests use another temporary directory.
 6. **The GitHub release** carrying `results.parquet` (the README has promised its URL since 2026-09-13).
+8. **Study 3.** `ideas/2026-10-16-study3-regime-test.md`: route A (post the paper by 2026-10-31 and submit) or
+   route B (post, register the regime test on a second domain, submit with it about 2026-11-15).
+   Recommendation: route B.
 7. **The spring plan** is in the tree since 2026-10-13 (`ideas/2026-09-14-spring-2027-plan.md`). Its one open
    decision: the follow-up cohort's creation window, recommended to close 2026-10-31, needs a dated addition
    before then or it slides.
