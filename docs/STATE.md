@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-16 03:40 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-16 04:05 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -34,7 +34,7 @@ score recomputed with zero difference, the oracle lowest in 17 of 18 cells. The 
 to the hurdle: worse than its completed control for all three models (S01, S03, S05) and worse than the count
 hurdle for Chronos-2 and TimesFM 2.5 (S02, S06); five of six reject at BH q = 0.05, all against the hurdle.
 
-**npm external run** (awaiting the author's commit): the 209 target ranges were opened 2026-10-15 23:15 UTC
+**npm external run** (committed `26a8913`): the 209 target ranges were opened 2026-10-15 23:15 UTC
 under the signed gate (209 of 300 approved requests, no retry); the run took 699 s of a 3,600 s budget; the
 committed inference and the per-row recomputation (0 of 20,064 disagree) ran unchanged. The family E01 to E18:
 twelve of eighteen reject, ten for the model variant and two against the hurdle. Hurdle against its completed
@@ -44,14 +44,15 @@ series). Raw model against the local mean: four of six favor the model. Every me
 (`aggregate-error`, 7.6 million downloads a day); the medians, counts and rank tests describe the typical
 series. Results: `reports/study2-npm/run-2026-10-15/RESULTS-npm.md`; the 209 checkpoints stay out of the tree.
 
-**Open: two zero days.** The download API reports 0 for all 209 series on 2026-07-12 and 2026-08-14, and 0 for
-the largest series on 2026-06-25, between days of millions; no context day shows this. The registered
-completeness rule accepted them as explicit zeros and the run scored them so; each sits in one horizon-30
-window, none in a horizon-7 window. The recommendation is to keep the registered analysis as served, record
-the decision by a dated addition, and report a post-hoc sensitivity without the three days beside it.
+**The zero days, settled by dated addition 6 (2026-10-16).** The download API reports 0 for all 209 series
+on 2026-07-12 and 2026-08-14, and 0 for the largest series on 2026-06-25, between days of millions; npm's own
+records report nothing for those dates, though its forum records two earlier whole-day zeros later restored.
+The registered analysis of the data as served stands. A post-hoc sensitivity from the saved forecasts: with
+all three days removed none of the eighteen conclusions changes; with the two panel-wide days removed, E06
+(Chronos-2 raw against the local mean at horizon 30) no longer rejects (BH p 0.060) and the other seventeen
+are unchanged. The mechanism answer does not depend on the days.
 
-Also awaiting the same commit: the integrity outputs of both runs, the fresh smoke and the signed readiness
-copies. The paper's Study 2 design sections are committed (`3652a4a`).
+Awaiting the author's commit: the addition, the sensitivity files and the evidence document.
 
 ## What the protocol allows, and what lapsed
 
@@ -105,7 +106,6 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The commit above; the author's decision on the zero days with the source evidence and the post-hoc
-sensitivity; the paper's results sections and the extension of the report into the paper; the author's read
+The commit above; the paper (`paper/paper.tex`): the report extended with both Study 2 results; the author's read
 of the report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release and the
 release assets for the checkpoints. Dates and gates are in `docs/PLAN.md`.

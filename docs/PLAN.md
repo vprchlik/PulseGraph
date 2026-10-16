@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-16 03:40 UTC. This page holds only what is current.
+Last rewritten 2026-10-16 04:05 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -32,10 +32,11 @@ day.
 | Synthetic grid: smoke, gate, the 540-series run, inference over S01 to S06 | done 2026-10-15: adverse to the hurdle (five of six reject against it); awaiting the commit | the commit | done |
 | External run on npm, stage 1: the packages-only gate and family of 18, the target fetch, the inference command, the run-path fixes | done 2026-10-15, committed (`3fc3411`) | nothing | done |
 | External run on npm: targets, run, inference over E01 to E18, recomputation | done 2026-10-15 23:55 UTC; awaiting the commit | the commit | done |
-| The npm zero days: source evidence, post-hoc sensitivity from saved forecasts, dated addition 6 | the commit | his word on addition 6 | 2026-10-16 |
+| The npm zero days: source evidence, post-hoc sensitivity, dated addition 6 | done 2026-10-16 (no conclusion changes without the three days); awaiting the commit | the commit | done |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
-| Paper extension: the results sections from both runs, the report wired to the Study 2 sections, review, posting, TMLR submission | the zero-day decision; the report posted | his read, the posting, the submission | 2026-10-31 |
+| The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | the commit above | nothing | 2026-10-19 |
+| Paper review by a different reader, the author's read, posting (Zenodo version 2), TMLR submission | the paper | his read, the posting, the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
 separate dated addition before 2026-10-28 18:00 UTC.
