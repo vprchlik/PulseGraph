@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-16 05:59 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-16 07:34 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `4f7781a` (2026-10-16 04:44 UTC), thirty commits, pushed. Since 2026-10-12 the root carries
+`main` is at `04e92c1` (2026-10-16 06:03 UTC), forty commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -54,7 +54,7 @@ are unchanged. The mechanism answer does not depend on the days.
 
 Addition 6, the sensitivity and the evidence are committed (`1c09ac8`).
 
-## The paper (committed `c330315`; its review awaiting the author's commit)
+## The paper (committed `c330315`; its review `8250599`; the three reads `04e92c1`; its revision awaiting the author's commit)
 
 `paper/paper.tex`, written 2026-10-16: the report's text, now read from shared files that the report's own
 `main.tex` also reads (its expansion equals the committed report byte for byte), extended with the Study 2
@@ -71,8 +71,38 @@ control on 81, 60 and 66 of the 100 sparse npm series at horizon 7; the positive
 the count-hurdle win is a win over a shifted Poisson; the dynamic count is the best non-oracle forecaster on
 the grid. Its verdict: post after named changes. The post-hoc dynamic-occurrence wrapper shrinks the loss,
 removes four of five rejections against the substitution, and still never beats the model's own zero mass.
-A revision applies all three; a third study that would make the regime reading confirmatory is proposed in
-`docs/ideas/2026-10-16-study3-regime-test.md`.
+The decision to make the regime reading confirmatory by a third study is in `docs/ideas/2026-10-16-study3-regime-test.md`.
+
+The revision of 2026-10-16 (awaiting the author's commit) applies all three reads. The abstract and the results now
+say that no test favors the substitution at q = 0.05, that the typical series in E01 leans to it, and that the answer
+depends on the regime: the declared secondary stratum counts are the paper's central descriptive finding, labeled
+secondary, with a registered test on a second domain named as the next study. The claim is narrowed to daily npm
+download counts and the registered grid; the positive-law result names the shifted Poisson it beats and puts the
+empirical hurdle beside it, labeled post hoc; the fourth factorial cell is named as untested; the dynamic count is
+read as the best non-oracle forecaster on the grid; the post-hoc dynamic-occurrence analysis has a labeled subsection
+with one table. Nine citations were added from their abstract pages. The checker passes 780 checks (654 before) and
+reads its boundary vocabulary from a file outside the tree. The report's source still expands to its frozen commit
+`f325a67` apart from one dated sentence in Section 8, which now says that both Study 2 components ran on 2026-10-15.
+Still no PDF. By word count the body is about seventeen pages before the references against an aim of fourteen; the
+next cuts each remove a stated number and are the author's choice (`paper/PAPER-SUMMARY.md`).
+
+## Study 3 (dated addition 7 of 2026-10-16, awaiting the author's commit)
+
+The regime hypothesis H3 made confirmatory on a second domain: on series whose context zero fraction is at least 0.5,
+the substitution with a dynamic occurrence lowers QScore9 against the model's own completed forecast; below 0.5 it
+raises it; each stratum is tested on its own. The domain is NYC 311 as registered for Study 2 (problem type by
+community board; the frozen 2024 inventory of 9,496 cells, 8,469 eligible, is the whole frame), selection seed
+20261001, Study 2's calendar and strata, a verified panel by 2026-10-27 23:59 UTC with PyPI as the sole fallback.
+Four variants per model from the same base forecast: completed, hurdle_fixed, hurdle_dynamic (new) and
+occurrence_model_size_count (new, the fourth factorial cell). Thirty-six tests R01 to R36
+(`study/study3/regime_comparisons.json`): per stratum, model and horizon, hurdle_dynamic against the completed control
+and against hurdle_empirical_28; one BH correction at q = 0.05; a stratum with fewer than ten series has its twelve
+tests unavailable. A day with zero requests across the frame is a source gap and stops the domain before scoring. The
+addition is appended (`PROTOCOL.md` 71,635 bytes, SHA-256 `05c7617b…`; every registered prefix verified twice) beside
+`study/study3/spec.json`. The code holds the two variants, the study3 component and gate (bound to the addition's
+commit, the frozen panel and the deadline), the per-stratum inference, the integrity recomputation and a resumable
+one-query-per-day NYC 311 census that refuses any request naming a day on or after 2026-06-03; 459 tests pass. No
+request has been sent; the context pull needs about 275 requests and the author's ceiling.
 
 ## What the protocol allows, and what lapsed
 
@@ -84,6 +114,8 @@ A revision applies all three; a third study that would make the regime reading c
   with the PyPI rule unchanged after that; the October paper's external family is E01 to E18 with one BH
   correction, E19 to E54 kept whole for a later run. All three were decided before any Study 2 target was
   seen (`study/study2/acquisition_status.json`: targets opened false, forecasts generated false).
+- Study 3 is registered by dated addition 7 (2026-10-16), pending its commit: the 36-test family R01 to R36 on
+  NYC 311; no Study 3 target value has been accessed.
 - The implementation's external gate still requires a completed holdout freeze and all three domain panels;
   the addition says both change in a commit that cites it. That commit is still to be made.
 - The November prospective round was not taken on 2026-10-12; it can still be registered by a separate dated
@@ -126,6 +158,8 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The commit above; the paper's review by a different reader; the author's read of both summaries; the author's read
-of the report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release and the
-release assets for the checkpoints. Dates and gates are in `docs/PLAN.md`.
+The author's commits of the revision, the registration and the variants code; the NYC 311 context pull under the
+author's ceiling and the frozen panel (deadline 2026-10-27 23:59 UTC); the Study 3 run and its inference; the
+author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
+the GitHub release and the release assets for the checkpoints; the paper on Zenodo by 2026-10-31 and its version with
+Study 3 for TMLR about 2026-11-15. Dates and gates are in `docs/PLAN.md`.

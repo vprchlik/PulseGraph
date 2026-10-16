@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-16 05:59 UTC. This page holds only what is current.
+Last rewritten 2026-10-16 07:34 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -10,7 +10,7 @@ Last rewritten 2026-10-16 05:59 UTC. This page holds only what is current.
 | 2 | The paper: step 1 plus the Study 2 mechanism test (hurdle-wrapped and completed-unwrapped model variants against the count hurdles and the dynamic count baseline) on npm, the registered synthetic grid, and the literature re-check | **2026-10-31** | Zenodo (new version) or arXiv if an endorser is at hand; submitted to TMLR |
 
 The steps run in parallel; neither waits for the other. 2026-11-15 is the fallback date only if the npm
-source fails. NYC 311 and Wikipedia go to the spring plan. Anything not run by the paper's date is reported as
+source fails. Wikipedia goes to the spring plan; NYC 311 is Study 3's domain. Anything not run by the paper's date is reported as
 not run. The author reads the title, abstract and summary before anything is posted. The report and the
 paper are one LaTeX source under `paper/`, posted twice.
 
@@ -38,8 +38,12 @@ day.
 | The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | done 2026-10-16; awaiting the commit | the commit | done |
 | Paper review by a different reader | done 2026-10-16: 45 verdicts, two do not hold (an overclaim in the abstract; a misdescribed baseline) | the commit | done |
 | The standing check and referee's read; the post-hoc dynamic-occurrence analysis | done 2026-10-16; awaiting the commit | the commit | done |
-| Paper revision: the review's fixes, the referee's changes, the post-hoc table, the length | the three above | nothing | 2026-10-18 |
-| The author's read of both summaries, the PDF, posting (Zenodo version 2), TMLR submission | the revision | his read, the posting, the submission | 2026-10-31 |
+| Paper revision: the review's fixes, the referee's changes, the post-hoc table, the length | done 2026-10-16: all three reads applied, 780 checks pass, about seventeen pages by word count against an aim of fourteen; awaiting the commit | the commit; his choice of the next cuts | done |
+| The author's read of both summaries, the PDF, posting the paper on Zenodo as version 1 | the revision | his read, the posting | 2026-10-31 |
+| Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16: the addition appended with every prefix verified, 459 tests pass; awaiting the commit | the commit, which is the sign-off | done |
+| NYC 311 context pull (about 275 requests, one per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | the commit above | his ceiling in his own words (proposed: 330 request attempts and 3 hours) | 2026-10-18 |
+| Study 3 run on NYC 311: smoke, gate, target pull, run, per-stratum inference over R01 to R36, recomputation | the panel | target-access and runtime approvals | 2026-10-24 |
+| The paper's version 2 with Study 3, its review, the TMLR submission | Study 3 | his read, the submission | 2026-11-15 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
 separate dated addition before 2026-10-28 18:00 UTC.
@@ -56,6 +60,7 @@ Every spend is approved by the author in his own words before it happens. Nothin
 | npm registry and download API | name inventory; metadata walk to 10,000 eligible packages; context pull for the candidate pool; later 300 target pulls | about 26,000 serial requests at one per second, about eight hours; stage 1 states the exact figure | 0 | the author's words before stage 2 |
 | GPU (RTX 4070 SUPER) | synthetic grid run; npm external run; two smokes | under one hour each by the smoke timings; stage 1 of each states the figure | 0 | the author's budget, as the protocol requires for every component |
 | BigQuery | none before the paper (the birth-cohort census is deferred) | 0 | 0 | not asked |
+| NYC Open Data (SODA, anonymous) | the Study 3 context pull, one query per calendar day; later the 90 target days | about 275 plus 90 requests at one a second, 19 to 67 minutes by the code's estimate | 0 | the author's words before the pull |
 | Zenodo, TMLR | posting and submission | 0 | 0 | the author posts |
 | PDF build | pandoc and a TeX distribution on this machine, or Overleaf's free tier | 0 | 0 | the author's choice (below) |
 
@@ -75,9 +80,14 @@ Every spend is approved by the author in his own words before it happens. Nothin
    `README.md` fails at setup until the folder is deleted from the author's own shell (an elevated one if
    needed); pytest recreates it. Until then the tests use another temporary directory.
 6. **The GitHub release** carrying `results.parquet` (the README has promised its URL since 2026-09-13).
-8. **Study 3.** `ideas/2026-10-16-study3-regime-test.md`: route A (post the paper by 2026-10-31 and submit) or
-   route B (post, register the regime test on a second domain, submit with it about 2026-11-15).
-   Recommendation: route B.
+8. **Study 3, decided 2026-10-16: route B.** The regime test is registered as dated addition 7 on NYC 311 with
+   PyPI as fallback (panel deadline 2026-10-27); the paper posts on Zenodo by 2026-10-31 as version 1 and
+   goes to TMLR with Study 3 about 2026-11-15.
+9. **The paper's length and the daily counts, 2026-10-16.** By word count the revised body is about seventeen pages
+   against an aim of fourteen; each remaining cut removes a stated number (the literature paragraph, the Study 2
+   design section's calendar and families, the dynamic-occurrence prose, the limitation items) and is the author's
+   choice. The 209 series' aggregated daily counts are not in the tree; the paper says they are to be published, and
+   whether they are committed or released as an asset is his decision.
 7. **The spring plan** is in the tree since 2026-10-13 (`ideas/2026-09-14-spring-2027-plan.md`). Its one open
    decision: the follow-up cohort's creation window, recommended to close 2026-10-31, needs a dated addition
    before then or it slides.
