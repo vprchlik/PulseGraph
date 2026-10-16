@@ -828,3 +828,22 @@ or substituted. QScore9, the occurrence Brier score, the randomized PIT and ever
 unaffected. Decided on 2026-10-15 from the frozen npm selection context alone, before any Study 2 target
 value was accessed: study/study2/npm_panel_status.json records target_values_opened false, and the series
 concerned (aggregate-error, last-28-day context mean 7,637,136) was identified by a context-only probe.
+
+## npm zero days — dated addition, 2026-10-16
+
+Signed off by the author on 2026-10-16; the commit containing this addition is the author's approval.
+Appended at 2026-10-16 03:28 UTC on top of commit e41fdf276c13ea90011b7f4bf7fd30b4417ff200. Nothing above this heading changes; the
+registered prefixes remain prefixes of this file.
+
+### 6. Panel-wide zero days in the npm target period
+
+After the npm external run of 2026-10-15 was scored, the download API was found to report 0 downloads for
+all 209 panel series on 2026-07-12 and 2026-08-14, and 0 for the largest series on 2026-06-25, between days
+of several million; no context day shows this. The registered completeness rule, fixed before any target
+was seen, accepted these days as explicit zero counts served by the source, and the run scored them so.
+This addition records the decision, made after the scores were seen: the registered analysis of the data
+as served remains the confirmatory result for E01 to E18; the days are not reclassified, no series is
+replaced or deleted, and the domain is not stopped. A post-hoc sensitivity that removes the three days from
+the horizon-30 target blocks and re-scores the saved forecasts is reported beside the registered table,
+labeled post-hoc, with any change in direction or rejection stated. The horizon-7 blocks hold none of the
+days. Whether the days are gaps in the source is reported from npm's own records as far as they go.

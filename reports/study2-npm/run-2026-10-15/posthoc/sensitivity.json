@@ -1,0 +1,88 @@
+{
+  "analysis": "study2_npm_zero_days_sensitivity",
+  "checks": {
+    "day_labels": {
+      "daily_summary_sha256": "b7fc51bfb7e1e8adaeda67f1e36bd25fbca7b6461806cd257550bc6d268ec9c6",
+      "removed_days": {
+        "2026-06-25": {
+          "blocks": [
+            "2026-06-03+30"
+          ],
+          "largest_series_count": 0,
+          "series_zero": 92,
+          "total_downloads": 42139
+        },
+        "2026-07-12": {
+          "blocks": [
+            "2026-07-03+30"
+          ],
+          "largest_series_count": 0,
+          "series_zero": 209,
+          "total_downloads": 0
+        },
+        "2026-08-14": {
+          "blocks": [
+            "2026-08-02+30"
+          ],
+          "largest_series_count": 0,
+          "series_zero": 209,
+          "total_downloads": 0
+        }
+      },
+      "target_days_rebuilt": 90
+    },
+    "registered_family_reproduced_byte_for_byte": {
+      "inference.csv": true,
+      "paired_entities.csv": true
+    },
+    "saved_qscore9_rescored": {
+      "forecasts": 20064,
+      "max_abs_residual": 0.0
+    }
+  },
+  "command": [
+    "C:\\Users\\piano\\projects\\PulseGraph\\.venv\\Scripts\\python.exe",
+    "reports\\study2-npm\\run-2026-10-15\\posthoc\\sensitivity_zero_days.py",
+    "reports\\study2-npm\\run-2026-10-15"
+  ],
+  "head": "e41fdf276c13ea90011b7f4bf7fd30b4417ff200",
+  "inference": {
+    "adjustment": "Benjamini-Hochberg once over the eighteen of each scenario at q = 0.05",
+    "bootstrap_seeds": "the registered derived seeds, one per comparison id",
+    "direction": "the side with the larger signed-rank sum of the nonzero differences",
+    "functions": "scripts/study2_inference.py: series_scores, entity_scores, confirmatory"
+  },
+  "inference_script_sha256": "fd32d317ab7770e35a872bf343b7ea683a942109002a3e757d748fe2eea1414c",
+  "outputs": {
+    "sensitivity_inference.csv": "1a849c4fa36e301e9e1f2d72d680a2a212b9604067d0e04c1f9d96979e3b650b",
+    "sensitivity_paired_entities.csv": "a35dc542d0656580f5d248446714d0e84ef4118ad77a3041b9a4d05c1ef2de77"
+  },
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1"
+  },
+  "removal": "each listed day is dropped from every target block that holds it, for every series and variant; the block's QScore9 is the mean over its remaining days and the nine deciles; windows are then averaged within series and horizon as registered",
+  "run": {
+    "checkpoints_verified": 209,
+    "forecasts": 20064,
+    "identity": "356330dca32c5f8168958e8ff250a752db356a75bb8075cf8bcda32240e88d74",
+    "run_json_sha256": "e4831b68edd1e36d592be854b4be2e0931c6963952c91a3a3227b1b8a7257efe"
+  },
+  "scenarios": {
+    "three_days": [
+      "2026-06-25",
+      "2026-07-12",
+      "2026-08-14"
+    ],
+    "two_panel_wide_days": [
+      "2026-07-12",
+      "2026-08-14"
+    ]
+  },
+  "script_sha256": "518deaa45b9e75d04ca518feecc1165cba27c8f5f1d07b2bcd85303d2a3d00b0",
+  "started_at": "2026-10-16T03:21:52.302224+00:00",
+  "status": "post-hoc; computed after the registered scores were seen; never replaces inference/, the confirmatory result",
+  "uncommitted_changes": "",
+  "written_at": "2026-10-16T03:21:59.262974+00:00"
+}
