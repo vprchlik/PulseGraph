@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-15 23:20 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-16 03:40 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -27,24 +27,31 @@ The post-hoc accounting of the Study 1 run (`a3b3098`); the Study 2 implementati
 twice; 62,111 bytes); the literature re-check (`63c2d5f`); the Study 1 report under `paper/` (`c62d0c5`); its
 review (`f0c28a8`, 45 verdicts: 18 hold, 26 fixed, 1 did not hold).
 
-## The synthetic grid, run 2026-10-15 (awaiting the author's commit)
+## The two Study 2 runs of 2026-10-15
 
-The registered 540-series grid ran in one invocation at implementation `3fc3411` under the author's signed
-readiness (1,317 s against a budget of 2,400; no failures). All 55,080 scores were recomputed from the saved
-deciles and targets with zero difference; the oracle has the lowest score in 17 of 18 cells and a flat PIT;
-the hurdle's occurrence equals the count hurdle's and its positive law equals the completed control's. The
-family S01 to S06 is adverse to the registered mechanism: at horizon 30 the hurdle variants are worse than
-their completed controls (S01, S03, S05; mean differences +0.086 to +0.088, intervals excluding zero) and worse
-than `hurdle_count_28` for Chronos-2 and TimesFM 2.5 (S02, S06); for TimesFM 3 against the count hurdle
-(S04) the test does not reject. Five of six reject at BH q = 0.05, all against the hurdle. Descriptively, the
-hurdle lowers zero-day loss and raises positive-day underprediction by more; only the cells with zero
-probability 0.95 favor it, slightly. The results document is `reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md`;
-the 540 checkpoints (0.9 GB) stay out of the tree with their hashes recorded.
+**Synthetic grid** (committed `f950300`): the registered 540-series grid, one invocation at `3fc3411`, every
+score recomputed with zero difference, the oracle lowest in 17 of 18 cells. The family S01 to S06 is adverse
+to the hurdle: worse than its completed control for all three models (S01, S03, S05) and worse than the count
+hurdle for Chronos-2 and TimesFM 2.5 (S02, S06); five of six reject at BH q = 0.05, all against the hurdle.
 
-Also awaiting the same commit: the paper's Study 2 question, design, panel and placeholder sections under
-`paper/sections/` (390 number checks pass); the per-row score recomputation command with its tests (352 tests
-pass). The inference command passed its review with every verdict holding; the run-path review held with four
-fixes, all landed in `3fc3411`.
+**npm external run** (awaiting the author's commit): the 209 target ranges were opened 2026-10-15 23:15 UTC
+under the signed gate (209 of 300 approved requests, no retry); the run took 699 s of a 3,600 s budget; the
+committed inference and the per-row recomputation (0 of 20,064 disagree) ran unchanged. The family E01 to E18:
+twelve of eighteen reject, ten for the model variant and two against the hurdle. Hurdle against its completed
+control: no row favors the hurdle, two reject against it (TimesFM 3 and TimesFM 2.5 at horizon 30). Hurdle
+against the count hurdle: all six favor the foundation model's positive law (lower on 115 to 161 of 209
+series). Raw model against the local mean: four of six favor the model. Every mean is carried by one series
+(`aggregate-error`, 7.6 million downloads a day); the medians, counts and rank tests describe the typical
+series. Results: `reports/study2-npm/run-2026-10-15/RESULTS-npm.md`; the 209 checkpoints stay out of the tree.
+
+**Open: two zero days.** The download API reports 0 for all 209 series on 2026-07-12 and 2026-08-14, and 0 for
+the largest series on 2026-06-25, between days of millions; no context day shows this. The registered
+completeness rule accepted them as explicit zeros and the run scored them so; each sits in one horizon-30
+window, none in a horizon-7 window. The recommendation is to keep the registered analysis as served, record
+the decision by a dated addition, and report a post-hoc sensitivity without the three days beside it.
+
+Also awaiting the same commit: the integrity outputs of both runs, the fresh smoke and the signed readiness
+copies. The paper's Study 2 design sections are committed (`3652a4a`).
 
 ## What the protocol allows, and what lapsed
 
@@ -98,7 +105,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The commit above; the 209 npm target ranges under the author's target-access approval, the run and inference
-over E01 to E18, the recomputation on both runs; the paper's results sections; the author's read of the
-report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release. Dates and gates
-are in `docs/PLAN.md`.
+The commit above; the author's decision on the zero days with the source evidence and the post-hoc
+sensitivity; the paper's results sections and the extension of the report into the paper; the author's read
+of the report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release and the
+release assets for the checkpoints. Dates and gates are in `docs/PLAN.md`.

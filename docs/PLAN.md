@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-15 23:20 UTC. This page holds only what is current.
+Last rewritten 2026-10-16 03:40 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -31,10 +31,11 @@ day.
 | npm, stage 2: the pull and the frozen achieved panel (209 series; the very-sparse stratum has 9) | done 2026-10-15 01:57 UTC, inside the deadline; awaiting the commit | the commit | 2026-10-15 |
 | Synthetic grid: smoke, gate, the 540-series run, inference over S01 to S06 | done 2026-10-15: adverse to the hurdle (five of six reject against it); awaiting the commit | the commit | done |
 | External run on npm, stage 1: the packages-only gate and family of 18, the target fetch, the inference command, the run-path fixes | done 2026-10-15, committed (`3fc3411`) | nothing | done |
-| External run on npm, stage 2: the 209 target ranges, the run, inference over E01 to E18, the recomputation on both runs | the commit of the synthetic results and the recomputation command | target-access and runtime words | 2026-10-16 |
+| External run on npm: targets, run, inference over E01 to E18, recomputation | done 2026-10-15 23:55 UTC; awaiting the commit | the commit | done |
+| The npm zero days: source evidence, post-hoc sensitivity from saved forecasts, dated addition 6 | the commit | his word on addition 6 | 2026-10-16 |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
-| Paper extension, review, posting, TMLR submission | npm run, synthetic, literature, report | his read, the posting, the submission | 2026-10-31 |
+| Paper extension: the results sections from both runs, the report wired to the Study 2 sections, review, posting, TMLR submission | the zero-day decision; the report posted | his read, the posting, the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
 separate dated addition before 2026-10-28 18:00 UTC.
