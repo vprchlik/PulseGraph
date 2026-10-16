@@ -1,0 +1,391 @@
+{
+  "adjustment": "BH",
+  "adjustment_scope": "once over the 36; when a stratum is unavailable, once over the available tests",
+  "aggregation": "origins averaged within series and horizon; series weighted equally; series are the pairing and bootstrap units",
+  "all_zero_p": 1.0,
+  "alternative": "two-sided",
+  "authority": {
+    "addition": "PROTOCOL.md, dated addition of 2026-10-16, item 7 (Study 3)",
+    "appended_on_commit": "04e92c19c17211891a8307041de61d32ec45a834",
+    "commit": null,
+    "commit_note": "The commit containing the addition and this file is the registration; it did not exist when this file was written and is recorded by the signed readiness document before the gate.",
+    "protocol_sha256_with_addition": "05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29"
+  },
+  "bootstrap_interval": "pointwise 95 percent percentile",
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20261004,
+  "calendar_conditional": true,
+  "comparison_count": 36,
+  "comparisons": [
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R01",
+      "model": "chronos2",
+      "reference": "chronos2_completed",
+      "stratum": "dense",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R02",
+      "model": "chronos2",
+      "reference": "hurdle_empirical_28",
+      "stratum": "dense",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R03",
+      "model": "chronos2",
+      "reference": "chronos2_completed",
+      "stratum": "dense",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R04",
+      "model": "chronos2",
+      "reference": "hurdle_empirical_28",
+      "stratum": "dense",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R05",
+      "model": "timesfm3",
+      "reference": "timesfm3_completed",
+      "stratum": "dense",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R06",
+      "model": "timesfm3",
+      "reference": "hurdle_empirical_28",
+      "stratum": "dense",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R07",
+      "model": "timesfm3",
+      "reference": "timesfm3_completed",
+      "stratum": "dense",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R08",
+      "model": "timesfm3",
+      "reference": "hurdle_empirical_28",
+      "stratum": "dense",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R09",
+      "model": "timesfm2p5",
+      "reference": "timesfm2p5_completed",
+      "stratum": "dense",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R10",
+      "model": "timesfm2p5",
+      "reference": "hurdle_empirical_28",
+      "stratum": "dense",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R11",
+      "model": "timesfm2p5",
+      "reference": "timesfm2p5_completed",
+      "stratum": "dense",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R12",
+      "model": "timesfm2p5",
+      "reference": "hurdle_empirical_28",
+      "stratum": "dense",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R13",
+      "model": "chronos2",
+      "reference": "chronos2_completed",
+      "stratum": "sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R14",
+      "model": "chronos2",
+      "reference": "hurdle_empirical_28",
+      "stratum": "sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R15",
+      "model": "chronos2",
+      "reference": "chronos2_completed",
+      "stratum": "sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R16",
+      "model": "chronos2",
+      "reference": "hurdle_empirical_28",
+      "stratum": "sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R17",
+      "model": "timesfm3",
+      "reference": "timesfm3_completed",
+      "stratum": "sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R18",
+      "model": "timesfm3",
+      "reference": "hurdle_empirical_28",
+      "stratum": "sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R19",
+      "model": "timesfm3",
+      "reference": "timesfm3_completed",
+      "stratum": "sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R20",
+      "model": "timesfm3",
+      "reference": "hurdle_empirical_28",
+      "stratum": "sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R21",
+      "model": "timesfm2p5",
+      "reference": "timesfm2p5_completed",
+      "stratum": "sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R22",
+      "model": "timesfm2p5",
+      "reference": "hurdle_empirical_28",
+      "stratum": "sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R23",
+      "model": "timesfm2p5",
+      "reference": "timesfm2p5_completed",
+      "stratum": "sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R24",
+      "model": "timesfm2p5",
+      "reference": "hurdle_empirical_28",
+      "stratum": "sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R25",
+      "model": "chronos2",
+      "reference": "chronos2_completed",
+      "stratum": "very_sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R26",
+      "model": "chronos2",
+      "reference": "hurdle_empirical_28",
+      "stratum": "very_sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R27",
+      "model": "chronos2",
+      "reference": "chronos2_completed",
+      "stratum": "very_sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R28",
+      "model": "chronos2",
+      "reference": "hurdle_empirical_28",
+      "stratum": "very_sparse",
+      "variant": "chronos2_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R29",
+      "model": "timesfm3",
+      "reference": "timesfm3_completed",
+      "stratum": "very_sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R30",
+      "model": "timesfm3",
+      "reference": "hurdle_empirical_28",
+      "stratum": "very_sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R31",
+      "model": "timesfm3",
+      "reference": "timesfm3_completed",
+      "stratum": "very_sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R32",
+      "model": "timesfm3",
+      "reference": "hurdle_empirical_28",
+      "stratum": "very_sparse",
+      "variant": "timesfm3_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 7,
+      "id": "R33",
+      "model": "timesfm2p5",
+      "reference": "timesfm2p5_completed",
+      "stratum": "very_sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 7,
+      "id": "R34",
+      "model": "timesfm2p5",
+      "reference": "hurdle_empirical_28",
+      "stratum": "very_sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T1",
+      "horizon": 30,
+      "id": "R35",
+      "model": "timesfm2p5",
+      "reference": "timesfm2p5_completed",
+      "stratum": "very_sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    },
+    {
+      "contrast": "T2",
+      "horizon": 30,
+      "id": "R36",
+      "model": "timesfm2p5",
+      "reference": "hurdle_empirical_28",
+      "stratum": "very_sparse",
+      "variant": "timesfm2p5_hurdle_dynamic"
+    }
+  ],
+  "component": "study3",
+  "contrasts": {
+    "T1": "<model>_hurdle_dynamic versus <model>_completed",
+    "T2": "<model>_hurdle_dynamic versus hurdle_empirical_28"
+  },
+  "direction": "variant minus reference; negative favors the variant; the direction is read from the median and reported beside the mean",
+  "hypothesis": "H3: on series whose context zero fraction is at least 0.5 the substitution with a dynamic occurrence lowers QScore9 relative to the model's own completed forecast; below 0.5 it raises it. Each stratum is tested on its own; nothing is pooled across strata for confirmation.",
+  "method": "approx",
+  "metric": "qscore9",
+  "minimum_complete_series_per_stratum": 10,
+  "order": "stratum (dense, sparse, very sparse), model, horizon (7, 30), contrast (T1, T2)",
+  "predicted_t1_sign": {
+    "dense": "positive",
+    "sparse": "negative",
+    "very_sparse": "negative"
+  },
+  "protocol_commit": null,
+  "protocol_sha256": "05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29",
+  "q": 0.05,
+  "strata": [
+    {
+      "bounds": "[0, 0.5)",
+      "id": "dense",
+      "lower": 0.0,
+      "upper": 0.5,
+      "upper_inclusive": false
+    },
+    {
+      "bounds": "[0.5, 0.9)",
+      "id": "sparse",
+      "lower": 0.5,
+      "upper": 0.9,
+      "upper_inclusive": false
+    },
+    {
+      "bounds": "[0.9, 1]",
+      "id": "very_sparse",
+      "lower": 0.9,
+      "upper": 1.0,
+      "upper_inclusive": true
+    }
+  ],
+  "strata_rule": "sampling strata, computed on the context zero fraction of 2026-03-05 through 2026-06-02 only",
+  "test": "wilcoxon",
+  "unavailable_rule": "A stratum with fewer than ten complete series makes its twelve tests unavailable; they are reported as unavailable and the family is not shrunk by any outcome.",
+  "zero_method": "wilcox"
+}

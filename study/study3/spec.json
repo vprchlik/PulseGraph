@@ -1,0 +1,242 @@
+{
+  "aggregation": "windows_within_entity_then_equal_entities",
+  "authority": {
+    "addition": "PROTOCOL.md, dated addition of 2026-10-16, item 7 (Study 3)",
+    "appended_on_commit": "04e92c19c17211891a8307041de61d32ec45a834",
+    "commit": null,
+    "commit_note": "The commit containing the addition and this file is the registration; it did not exist when this file was written and is recorded by the signed readiness document before the gate.",
+    "protocol_sha256_with_addition": "05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29"
+  },
+  "base_forecast": "the saved raw native deciles of each model, repaired as in Study 1; no refitting",
+  "baselines": [
+    "local_mean_28",
+    "autoets_weekly",
+    "nb_local_level_28",
+    "poisson_28",
+    "hurdle_count_28",
+    "hurdle_empirical_28",
+    "dynamic_count"
+  ],
+  "calendar": {
+    "context_end": "2026-06-02",
+    "context_start": "2025-09-01",
+    "context_stops_at_cutoff": true,
+    "cutoffs": [
+      "2026-06-03",
+      "2026-07-03",
+      "2026-08-02"
+    ],
+    "endpoint": "2026-08-31",
+    "horizons": [
+      7,
+      30
+    ],
+    "panel_deadline": "2026-10-27T23:59:59+00:00",
+    "strata_start": "2026-03-05"
+  },
+  "comparison_count": 36,
+  "comparisons_file": "study/study3/regime_comparisons.json",
+  "completion": {
+    "fm_fallback": "F0_equals_one_only",
+    "interpolation": "linear",
+    "lower_knot": [
+      0,
+      0
+    ],
+    "rounding": "floor(Q(U)+0.5)",
+    "tail": "exponential_quantile",
+    "tail_scale": "max(1,q0.9-q0.8)"
+  },
+  "component": "study3",
+  "confirmatory_references": [
+    "<model>_completed",
+    "hurdle_empirical_28"
+  ],
+  "confirmatory_variant": "hurdle_dynamic",
+  "count_hurdles": {
+    "fallback": "delta_1",
+    "lookback": 28,
+    "minimum_positives": 2,
+    "occurrence": "(n_positive+0.5)/29"
+  },
+  "crps": {
+    "max_k": 1000000,
+    "resolution": "study/study2/crps_resolution.json",
+    "tolerance": 1e-08
+  },
+  "domain": {
+    "fallback": {
+      "deadline": "2026-10-27T23:59:59+00:00",
+      "if_both_fail": "Study 3 is reported unavailable",
+      "name": "pypi",
+      "reason": "operational_nyc311_unavailability_only; recorded before any target scoring; never performance or an unfilled stratum",
+      "source": "ClickPy, under Study 2's registered PyPI rules, same strata and seeds"
+    },
+    "primary": {
+      "calendar_timezone": "America/New_York",
+      "completeness": "a day is complete when the capture of that day's requests is exhausted; a calendar day with zero requests across the whole enumerated frame is a source gap, not a zero, and stops the domain before any scoring",
+      "counts": "requests by creation date, America/New_York with DST, deduplicated by request identifier, latest captured revision per identifier; requests, not closures",
+      "exclusions": "missing or unrecognized board codes excluded with counts",
+      "frame": "the whole eligible inventory of 2024 (no candidate pool)",
+      "inventory": {
+        "captured_at": "2026-09-14T17:08:16+00:00",
+        "cells": 9496,
+        "frame_year": 2024,
+        "holds_target_period_counts": false,
+        "path": "data/raw/study2/nyc311/inventory.json",
+        "recognized_board_frame": 8469,
+        "sha256": "30f8e4358354e610b10ffdcf64fcad21552811c86e5cf428ecfa0b5111b82fe5"
+      },
+      "name": "nyc311",
+      "series_key": "problem type by community board"
+    }
+  },
+  "dynamic_count": {
+    "discount": 0.98,
+    "fallback": "hurdle_count_28_if_fewer_than_two_recent_positives",
+    "implementation": "discounted_beta_bernoulli_gamma_poisson",
+    "initial_parameters": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "foundation_models": [
+    {
+      "model_id": "amazon/chronos-2",
+      "name": "chronos2",
+      "package_licence": "Apache-2.0",
+      "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+      "weight_licence": "Apache-2.0"
+    },
+    {
+      "model_id": "google/timesfm-3.0-pytorch",
+      "name": "timesfm3",
+      "package_licence": "Apache-2.0",
+      "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+      "weight_licence": "TimesFM Non-Commercial License v1.0"
+    },
+    {
+      "model_id": "google/timesfm-2.5-200m-pytorch",
+      "name": "timesfm2p5",
+      "package_licence": "Apache-2.0",
+      "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+      "weight_licence": "Apache-2.0"
+    }
+  ],
+  "gate": "Study 2's gate requirements unchanged: signed readiness bound to the addition's commit, smoke at HEAD, clean committed tree, separate target-access and runtime approvals, committed comparison file, checkpoints with hashes, committed inference command, per-row recomputation, capture ledger; NYC Open Data terms recorded before publication",
+  "hypothesis_strata": [
+    "dense",
+    "sparse",
+    "very_sparse"
+  ],
+  "inference": {
+    "batch_size": 1,
+    "device": "cuda",
+    "max_context": 2048,
+    "max_horizon": 128,
+    "peak_vram_limit_bytes": 8000000000,
+    "threads": 4
+  },
+  "package_pins": {
+    "statsforecast": "2.1.1",
+    "timesfm": "3.0.2"
+  },
+  "protocol_commit": null,
+  "protocol_sha256": "05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29",
+  "quantile_levels": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "secondary": [
+    "hurdle_fixed and occurrence_model_size_count against the completed control and the count hurdles per stratum",
+    "the pooled 300-series tables in Study 2's form",
+    "context-scaled QScore9",
+    "Brier, discrete CRPS with its availability rule, randomized PIT",
+    "the three-part accounting",
+    "leave-one-out and concentration descriptors per stratum"
+  ],
+  "seed_derivation": "SHA-256 of canonical JSON, as Study 2's inference command, with the component name study3",
+  "seeds": {
+    "bootstrap": 20261004,
+    "forecast": 20261002,
+    "pit": 20261003,
+    "selection": 20261001
+  },
+  "strata": {
+    "context_inspected": [
+      "2025-09-01",
+      "2026-06-02"
+    ],
+    "definitions": [
+      {
+        "bounds": "[0, 0.5)",
+        "id": "dense",
+        "lower": 0.0,
+        "upper": 0.5,
+        "upper_inclusive": false
+      },
+      {
+        "bounds": "[0.5, 0.9)",
+        "id": "sparse",
+        "lower": 0.5,
+        "upper": 0.9,
+        "upper_inclusive": false
+      },
+      {
+        "bounds": "[0.9, 1]",
+        "id": "very_sparse",
+        "lower": 0.9,
+        "upper": 1.0,
+        "upper_inclusive": true
+      }
+    ],
+    "minimum_complete_series_for_tests": 10,
+    "per_stratum": 100,
+    "selection": "first 100 complete series per stratum in selection-hash order; reduced strata reported; no transfer of slots",
+    "selection_seed": 20261001,
+    "zero_fraction_window": [
+      "2026-03-05",
+      "2026-06-02"
+    ]
+  },
+  "study2_registration": {
+    "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+    "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360"
+  },
+  "variant_definitions": {
+    "completed": "the control: the completed-unwrapped forecast, as registered for Study 2",
+    "hurdle_dynamic": "the occurrence probability of the registered dynamic_count law at each lead (discounted Beta-Bernoulli, discount 0.98, a_B = b_B = 0.5) with the completed positive law; delta_1 only when F(0) = 1",
+    "hurdle_fixed": "Study 2's hurdle: the 28-day Jeffreys occurrence with the completed positive law",
+    "occurrence_model_size_count": "the model's own completed occurrence 1 - F(0) with hurdle_count_28's positive law"
+  },
+  "variants": [
+    "chronos2_completed",
+    "chronos2_hurdle_fixed",
+    "chronos2_hurdle_dynamic",
+    "chronos2_occurrence_model_size_count",
+    "timesfm3_completed",
+    "timesfm3_hurdle_fixed",
+    "timesfm3_hurdle_dynamic",
+    "timesfm3_occurrence_model_size_count",
+    "timesfm2p5_completed",
+    "timesfm2p5_hurdle_fixed",
+    "timesfm2p5_hurdle_dynamic",
+    "timesfm2p5_occurrence_model_size_count",
+    "local_mean_28",
+    "autoets_weekly",
+    "nb_local_level_28",
+    "poisson_28",
+    "hurdle_count_28",
+    "hurdle_empirical_28",
+    "dynamic_count"
+  ]
+}

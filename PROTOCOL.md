@@ -847,3 +847,80 @@ replaced or deleted, and the domain is not stopped. A post-hoc sensitivity that 
 the horizon-30 target blocks and re-scores the saved forecasts is reported beside the registered table,
 labeled post-hoc, with any change in direction or rejection stated. The horizon-7 blocks hold none of the
 days. Whether the days are gaps in the source is reported from npm's own records as far as they go.
+
+## Study 3: the occurrence substitution by regime on a second domain — dated addition, 2026-10-16
+
+Signed off by the author on 2026-10-16; the commit containing this addition is the author's approval.
+Appended at 2026-10-16 06:16 UTC on top of commit 04e92c19c17211891a8307041de61d32ec45a834. Nothing above this heading changes; the
+registered prefixes remain prefixes of this file. No Study 3 target value has been accessed; the only
+Study 3 source material in hand is the NYC 311 cell inventory of 2024 captured on 2026-09-14, which holds
+no target period count.
+
+### 7. Study 3
+
+Question. Study 2 found, in its declared secondary stratum tables, that replacing a frozen model's own zero
+mass with a context-only occurrence probability lowered QScore9 on sparse npm series and raised it on dense
+ones, while the pooled confirmatory families, which weight every series equally, spoke for the dense
+regime; a post-hoc analysis found a dynamic occurrence estimate shrank the loss. Study 3 tests the regime
+hypothesis as a confirmatory family on a second domain. Hypothesis H3: on series whose context zero
+fraction is at least 0.5, the substitution with a dynamic occurrence lowers QScore9 relative to the model's
+own completed forecast; on series below 0.5 it raises it. Each stratum is tested on its own; nothing is
+pooled across strata for confirmation. Null, adverse, mixed and imprecise results receive the same reporting.
+
+Domain. NYC 311 service requests, as registered for Study 2: the series key is the problem type by community
+board, enumerated from the frozen 2024 inventory captured on 2026-09-14 (study/study2/acquisition_status.json),
+counts are requests by creation date in America/New_York with DST, deduplicated by request identifier,
+using the latest captured revision per identifier, counting requests and not closures; missing or
+unrecognized board codes are excluded with counts. The frame is the whole eligible inventory (no candidate
+pool). Selection, strata and completeness follow Study 2's registered rules with selection seed 20261001:
+context 2025-09-01 through 2026-06-02 inspected only, strata on the zero fraction of 2026-03-05 through
+2026-06-02 at [0, 0.5), [0.5, 0.9), [0.9, 1], the first 100 complete series per stratum in selection-hash
+order, reduced strata reported, no transfer of slots. Completeness for an event-enumerated source: a day is
+complete when the capture of that day's requests is exhausted; a calendar day with zero requests across the
+whole enumerated frame is a source gap, not a zero, and stops the domain before any scoring; this rule is
+added because npm's served zero days of 2026 were found only after scoring. PyPI via ClickPy, under Study
+2's registered PyPI rules and the same strata and seeds, is the sole fallback, used only if NYC 311 cannot
+provide a verified achieved panel by 2026-10-27 23:59 UTC; the operational reason is recorded before any
+target scoring, and never unfavorable performance or an unfilled stratum. If both fail, Study 3 is reported
+unavailable.
+
+Calendar. Study 2's retrospective calendar: A = 2025-09-01, cutoffs 2026-06-03, 2026-07-03 and 2026-08-02,
+endpoint E = 2026-08-31, horizons 7 and 30, context stops at the cutoff, blocks as registered.
+
+Models and variants. The three pinned revisions of Study 1, the Study 2 completion, scores and baselines
+unchanged. For each model, four variants from the same saved base forecast: completed (the control, as
+registered); hurdle_fixed (Study 2's hurdle: the 28-day Jeffreys occurrence with the completed positive
+law); hurdle_dynamic (new: the occurrence probability of the registered dynamic_count law at each lead,
+that is the discounted Beta-Bernoulli with discount 0.98 started at a_B = b_B = 0.5, with the completed
+positive law, delta_1 only when F(0) = 1); and occurrence_model_size_count (new, the fourth factorial
+cell: the model's own completed occurrence 1 - F(0) with hurdle_count_28's positive law). No variant is
+fitted or selected on targets.
+
+Confirmatory family. For each stratum s in {dense, sparse, very sparse}, each model m and each horizon h
+in {7, 30}: T1, m_hurdle_dynamic versus m_completed; T2, m_hurdle_dynamic versus hurdle_empirical_28. That
+is 3 × 3 × 2 × 2 = 36 QScore9 tests, R01 to R36, listed in study/study3/regime_comparisons.json in that
+order (stratum, model, horizon, contrast) and committed before the gate. Differences are variant minus
+reference; negative favors the variant. H3 predicts negative T1 differences in the sparse and very sparse
+strata and positive in the dense stratum; the tests are two-sided as registered, with the direction read
+from the median and reported beside the mean. Within each stratum, origins are averaged within series and
+horizon, series are weighted equally, series are the pairing and bootstrap units (20,000 replicates,
+pointwise 95 percent percentile intervals), the Wilcoxon signed-rank test omits zero differences with p = 1
+when all are zero, and BH is applied once at q = 0.05 over the 36. A stratum with fewer than ten complete
+series makes its twelve tests unavailable; they are reported as unavailable and the family is not shrunk
+by any outcome; the BH correction then covers the available tests, a rule fixed here. The regime strata are
+the sampling strata, computed on context only.
+
+Secondary, declared. hurdle_fixed and occurrence_model_size_count against the completed control and against
+the count hurdles per stratum; the pooled 300-series tables in Study 2's form; the context-scaled QScore9;
+Brier, discrete CRPS with its availability rule, randomized PIT; the three-part accounting; the leave-one-out
+and concentration descriptors per stratum. None is confirmatory.
+
+Seeds. selection 20261001, forecasts 20261002, PIT 20261003, bootstrap 20261004; derivations as in Study
+2's inference command (SHA-256 of canonical JSON with the component name study3).
+
+Gate, provenance and publication. Study 2's gate requirements apply unchanged: a signed readiness bound to
+this addition's commit, a smoke at HEAD, a clean committed tree, separate target-access and runtime
+approvals, the committed comparison file, checkpoints with hashes, the committed inference command and the
+per-row recomputation, the capture ledger; NYC Open Data's terms are recorded before publication. The
+contamination ledger's three categories are stated for NYC 311 as registered. Study 3 adds no test to any
+Study 2 family and changes nothing above this heading.
