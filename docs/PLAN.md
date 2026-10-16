@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-16 04:05 UTC. This page holds only what is current.
+Last rewritten 2026-10-16 05:00 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -35,7 +35,7 @@ day.
 | The npm zero days: source evidence, post-hoc sensitivity, dated addition 6 | done 2026-10-16 (no conclusion changes without the three days); awaiting the commit | the commit | done |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
-| The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | the commit above | nothing | 2026-10-19 |
+| The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | done 2026-10-16; awaiting the commit | the commit | done |
 | Paper review by a different reader, the author's read, posting (Zenodo version 2), TMLR submission | the paper | his read, the posting, the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a

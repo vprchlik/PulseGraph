@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-16 04:05 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-16 05:00 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -52,7 +52,16 @@ all three days removed none of the eighteen conclusions changes; with the two pa
 (Chronos-2 raw against the local mean at horizon 30) no longer rejects (BH p 0.060) and the other seventeen
 are unchanged. The mechanism answer does not depend on the days.
 
-Awaiting the author's commit: the addition, the sensitivity files and the evidence document.
+Addition 6, the sensitivity and the evidence are committed (`1c09ac8`).
+
+## The paper (awaiting the author's commit)
+
+`paper/paper.tex`, written 2026-10-16: the report's text, now read from shared files that the report's own
+`main.tex` also reads (its expansion equals the committed report byte for byte), extended with the Study 2
+question, design, panel, both results, a discussion, limitations and reproducibility; 654 number checks pass;
+two new figures from the saved tables; the ten arXiv citations' titles and authors filled from their abstract
+pages. Its title, abstract and the three sentences to read are in `paper/PAPER-SUMMARY.md`. No PDF yet: no TeX
+on this machine.
 
 ## What the protocol allows, and what lapsed
 
@@ -106,6 +115,6 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The commit above; the paper (`paper/paper.tex`): the report extended with both Study 2 results; the author's read
+The commit above; the paper's review by a different reader; the author's read of both summaries; the author's read
 of the report's title, abstract and summary; the PDF (no TeX on this machine); the GitHub release and the
 release assets for the checkpoints. Dates and gates are in `docs/PLAN.md`.
