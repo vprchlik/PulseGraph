@@ -1,0 +1,17 @@
+{
+  "domain": "npm",
+  "failures": [],
+  "invocations": [
+    {
+      "answered": 209,
+      "attempts": 209,
+      "ended_at": "2026-10-15T23:26:21.664457+00:00",
+      "readiness_sha256": "c8f6d6ba87f698c341ef74ab533ab2548618d01038d0765213ba18d1bed7c410",
+      "started_at": "2026-10-15T23:15:02.183148+00:00",
+      "status": "complete"
+    }
+  ],
+  "manifest_sha256": "5e05578854e7a85188362e8f492398e4636dea5410fe545e2a752428ee71ad54",
+  "target_end": "2026-08-31",
+  "target_start": "2026-06-03"
+}

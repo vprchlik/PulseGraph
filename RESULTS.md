@@ -745,3 +745,74 @@ The oracle, which uses the generator's known parameters, is a diagnostic only; i
 The secondary tables (horizon 7, per cell, other scores, accounting, PIT), the integrity checks and the
 regeneration commands are in
 [reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md](reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md).
+
+## Study 2, external component on npm (registered family E01 to E18 by the addition of 2026-10-12), 2026-10-15
+
+Protocol: Study 2 at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`, sections "Scores and the single
+external-domain confirmatory family" and "Calendar and information boundary". The family is E01 to E18 with
+one BH correction, by the dated addition of 2026-10-12, items 1 and 3 (`8db0d73`); E19 to E54 (NYC 311 and
+Wikipedia) are not run here. Implementation: `3057b16dbd2f9b218449352717ef4adabc2f72f7`. Gate: pass, with
+the author's signed readiness and the GPU smoke at the implementation commit, before any target request.
+Targets: the 2026-06-03 to 2026-08-31 download ranges of the 209 frozen panel series, one request each, with
+no retry and no failure. Run: complete. It scored 20,064 forecasts (209 series × 3 origins × 2 horizons ×
+16 variants), with no failures and no resumes, in 699 seconds against a budget of 3,600. Every saved score
+was recomputed from the saved forecasts, with no disagreement.
+
+The panel's strata are the context-zero fraction over 2026-03-05 to 2026-06-02. The very-sparse stratum is
+reduced: only 9 of the 9,998 complete candidates reach a zero fraction of 0.9.
+
+| Stratum | Complete candidates | Series in the panel |
+|---|---|---|
+| dense, [0, 0.5) | 2,431 | 100 |
+| sparse, [0.5, 0.9) | 7,558 | 100 |
+| very sparse, [0.9, 1] | 9 | 9 |
+| all | 9,998 | 209 |
+
+Differences are model minus reference QScore9, so a negative difference favors the model variant. The entity
+is the series: origins are averaged within series and horizon, and the 209 series weigh equally. Intervals
+are pointwise 95% percentile intervals from 20,000 series bootstrap replicates. Raw p is from two-sided
+approximate Wilcoxon signed-rank tests with zeros omitted; this is a location test under symmetry, not a test
+of the mean. BH is applied once over the eighteen, at q = 0.05. The series differ in scale by orders of
+magnitude, and the largest, `aggregate-error` (7.6 million downloads a day in its last 28 context days),
+carries every mean difference. The medians, the counts and the rank-based test describe the typical series.
+
+| ID | Model variant | Reference | Horizon | Model mean | Reference mean | Mean difference | 95% interval | Median difference | Lower / tied / higher (of 209) | Raw p | BH p | BH rejects at 0.05 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| E01 | `chronos2_hurdle` | `chronos2_completed` | 7 | 4652 | 4500 | 152 | [0.1846, 455.2] | -0.01376 | 121 / 2 / 86 | 0.146 | 0.203 | no |
+| E02 | `chronos2_hurdle` | `hurdle_count_28` | 7 | 4652 | 9742 | -5090 | [-15,175, -31.08] | -0.01587 | 129 / 12 / 68 | 8.26e-12 | 3.72e-11 | yes |
+| E03 | `chronos2_raw` | `local_mean_28` | 7 | 4500 | 7384 | -2884 | [-8601, -17.33] | 0.007856 | 92 / 0 / 117 | 0.529 | 0.596 | no |
+| E04 | `chronos2_hurdle` | `chronos2_completed` | 30 | 4316 | 4226 | 90.24 | [0.2273, 269.7] | -0.0002469 | 105 / 2 / 102 | 0.374 | 0.449 | no |
+| E05 | `chronos2_hurdle` | `hurdle_count_28` | 30 | 4316 | 10,878 | -6563 | [-19,596, -30.03] | -0.06173 | 150 / 9 / 50 | 1.18e-21 | 7.06e-21 | yes |
+| E06 | `chronos2_raw` | `local_mean_28` | 30 | 4226 | 8959 | -4734 | [-14,149, -15.84] | -0.002372 | 112 / 0 / 97 | 0.00663 | 0.0119 | yes |
+| E07 | `timesfm3_hurdle` | `timesfm3_completed` | 7 | 4326 | 4149 | 176.9 | [0.2669, 529.4] | 0.001058 | 94 / 8 / 107 | 0.183 | 0.236 | no |
+| E08 | `timesfm3_hurdle` | `hurdle_count_28` | 7 | 4326 | 9742 | -5416 | [-16,153, -31.67] | -0.007407 | 116 / 18 / 75 | 1e-08 | 3.61e-08 | yes |
+| E09 | `timesfm3_raw` | `local_mean_28` | 7 | 4149 | 7384 | -3235 | [-9650, -18.24] | -0.002297 | 112 / 1 / 96 | 0.0292 | 0.0438 | yes |
+| E10 | `timesfm3_hurdle` | `timesfm3_completed` | 30 | 4087 | 3958 | 128.5 | [0.5058, 383.8] | 0.00321 | 81 / 8 / 120 | 0.00108 | 0.00215 | yes |
+| E11 | `timesfm3_hurdle` | `hurdle_count_28` | 30 | 4087 | 10,878 | -6792 | [-20,280, -31.3] | -0.0716 | 161 / 17 / 31 | 1.77e-26 | 3.19e-25 | yes |
+| E12 | `timesfm3_raw` | `local_mean_28` | 30 | 3958 | 8959 | -5001 | [-14,947, -16.86] | -0.005016 | 125 / 1 / 83 | 1.48e-05 | 3.82e-05 | yes |
+| E13 | `timesfm2p5_hurdle` | `timesfm2p5_completed` | 7 | 3895 | 3641 | 253.9 | [0.5046, 759.9] | -0.002116 | 109 / 3 / 97 | 0.593 | 0.628 | no |
+| E14 | `timesfm2p5_hurdle` | `hurdle_count_28` | 7 | 3895 | 9742 | -5847 | [-17,446, -30.83] | -0.006349 | 115 / 7 / 87 | 8.87e-06 | 2.66e-05 | yes |
+| E15 | `timesfm2p5_raw` | `local_mean_28` | 7 | 3641 | 7384 | -3743 | [-11,179, -17.41] | 0.01696 | 84 / 1 / 124 | 0.746 | 0.746 | no |
+| E16 | `timesfm2p5_hurdle` | `timesfm2p5_completed` | 30 | 3960 | 3850 | 110.3 | [0.6883, 328.7] | 0.0009877 | 101 / 1 / 107 | 0.0169 | 0.0276 | yes |
+| E17 | `timesfm2p5_hurdle` | `hurdle_count_28` | 30 | 3960 | 10,878 | -6918 | [-20,665, -29.9] | -0.06938 | 160 / 9 / 40 | 1.97e-24 | 1.77e-23 | yes |
+| E18 | `timesfm2p5_raw` | `local_mean_28` | 30 | 3850 | 8959 | -5109 | [-15,279, -15.49] | -0.003695 | 113 / 1 / 95 | 0.000905 | 0.00204 | yes |
+
+- **Hurdle variant against its completed-unwrapped control** (E01, E04, E07, E10, E13, E16): no comparison
+  favors the hurdle variant. Two reject against it, TimesFM 3 and TimesFM 2.5 at horizon 30 (E10, E16), and
+  four are not rejected.
+- **Hurdle variant against `hurdle_count_28`** (E02, E05, E08, E11, E14, E17): all six reject in favor of the
+  hurdle variant. The occurrence probability is the same on both sides, so the difference lies in the
+  foundation model's positive law.
+- **Raw variant against `local_mean_28`** (E03, E06, E09, E12, E15, E18): four reject in favor of the raw
+  model; Chronos-2 and TimesFM 2.5 at horizon 7 (E03, E15) are not rejected.
+
+A note on the source data, made after the run: on 2026-07-12 and 2026-08-14 the download API reports 0 for
+every one of the 209 series, and on 2026-06-25 `aggregate-error` reads 0 between days of about 9.5 and 7.9
+million. These look like gaps in npm's own counts, not days without downloads; that was not verified. The
+registered completeness check confirms each day is present with a nonnegative integer, and does not test for a
+source-wide zero. Each of the three days falls in one horizon-30 window and in no horizon-7 window. Whether
+they meet the protocol's requirement of verified exposure on every day is not decided here; the table above is
+the registered analysis of the data as served. The secondary tables (concentration, other scores, per
+stratum with the very-sparse stratum at n = 9, accounting, PIT), the per-day source summary, the integrity
+checks and the regeneration commands are in
+[reports/study2-npm/run-2026-10-15/RESULTS-npm.md](reports/study2-npm/run-2026-10-15/RESULTS-npm.md).

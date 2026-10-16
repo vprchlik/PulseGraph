@@ -1,0 +1,68 @@
+{
+  "action": "external_packages",
+  "approved_at": "2026-10-15T23:09:06Z",
+  "approved_by": "Victor Prchlik",
+  "confirmed": true,
+  "estimated_seconds": 1741,
+  "evidence": [
+    {
+      "path": "data/raw/study2/smoke-3057b16.json",
+      "sha256": "ed56ed920bba9fd679d787e3958026a564bfa3af92397657f8ca99c5ead0c8b9"
+    },
+    {
+      "path": "study/study2/npm_panel_status.json",
+      "sha256": "ac52ec9c7ee895e44a9c7ad05cc4b8879620df007e78c3fb63dfcaef977efb0b"
+    },
+    {
+      "path": "data/raw/study2/npm/inventory.walk.json",
+      "sha256": "a23121ac3b1e8a4107fd7a3bf06cdba8e6eb5b866aa651b5852f94dd2e9e6f8b"
+    },
+    {
+      "path": "study/study2/crps_resolution.json",
+      "sha256": "a354e4be83cd8ab2b32a7dca30e0b0cbf54b506effe79c6976850787d229842f"
+    },
+    {
+      "path": "data/raw/study2/npm/targets/signals.parquet",
+      "sha256": "c3f4e5437a21587ad38f37cc5dc709424347e721fa228588db118ed07ea0245c"
+    },
+    {
+      "path": "data/raw/study2/npm/targets/completeness.json",
+      "sha256": "0adcb82d973349accbd2bcf5b3013d4159f50740b1b7abaa78dafbda13717a55"
+    }
+  ],
+  "implementation_commit": "3057b16dbd2f9b218449352717ef4adabc2f72f7",
+  "package_domain": "npm",
+  "panels": {
+    "packages": {
+      "completeness": {
+        "path": "data/raw/study2/npm/targets/completeness.json",
+        "sha256": "0adcb82d973349accbd2bcf5b3013d4159f50740b1b7abaa78dafbda13717a55"
+      },
+      "context": {
+        "path": "data/raw/study2/npm/panel/context.parquet",
+        "sha256": "9dbed9ffc6b45fac37472924f450a811a6f088a4757f9c3b0c7c695077324e1b"
+      },
+      "manifest": {
+        "path": "reports/study2-npm/panel/manifest.json",
+        "sha256": "5e05578854e7a85188362e8f492398e4636dea5410fe545e2a752428ee71ad54"
+      },
+      "selection": {
+        "path": "reports/study2-npm/panel/selection.json",
+        "sha256": "39fcc87cb941dca07b430b8e819bfe672302588304299148fb8ca7763cb4f20e"
+      },
+      "signals": {
+        "path": "data/raw/study2/npm/targets/signals.parquet",
+        "sha256": "c3f4e5437a21587ad38f37cc5dc709424347e721fa228588db118ed07ea0245c"
+      }
+    }
+  },
+  "protocol_commit": "df55867c982dfe2bb6e1152ec8ae93e3cd228c45",
+  "protocol_sha256": "33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360",
+  "runtime_budget_seconds": 3600,
+  "smoke": {
+    "path": "data/raw/study2/smoke-3057b16.json",
+    "sha256": "ed56ed920bba9fd679d787e3958026a564bfa3af92397657f8ca99c5ead0c8b9"
+  },
+  "source_semantics_resolved": true,
+  "target_access_approved": true
+}

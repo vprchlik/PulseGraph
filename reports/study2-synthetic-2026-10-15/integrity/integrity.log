@@ -1,0 +1,12 @@
+2026-10-15T23:16:02+00:00 start: component synthetic, run reports/study2-synthetic-2026-10-15
+2026-10-15T23:16:02+00:00 run.json: status complete, identity a2d2252327a398a1833e539add8be4705e56ac19725d651f1890a720f76f476d; registered grid 540 series x 3 origins x 2 horizons x 17 variants = 55080 forecasts
+2026-10-15T23:16:15+00:00 checkpoints: 540 of 540 hashes equal run.json; 55080 forecasts, every registered window exactly once
+2026-10-15T23:16:15+00:00 qscore9: 55080 compared, 0 disagree, max |residual| 0.0
+2026-10-15T23:16:15+00:00 zero: 55080 compared, 0 disagree, max |residual| 7.105427357601002e-15
+2026-10-15T23:16:15+00:00 positive_over: 55080 compared, 0 disagree, max |residual| 8.881784197001252e-16
+2026-10-15T23:16:15+00:00 positive_under: 55080 compared, 0 disagree, max |residual| 5.329070518200751e-15
+2026-10-15T23:16:15+00:00 context_scaled_qscore9: 55080 compared, 0 disagree, max |residual| 0.0
+2026-10-15T23:16:15+00:00 occurrence_brier: 38880 compared, 0 disagree, max |residual| 8.881784197001252e-16
+2026-10-15T23:16:15+00:00 CRPS availability from the saved reasons: {'crps_forecasts': 55080, 'crps_with_count_distribution': 38880, 'crps_certified': 38880, 'crps_unavailable_no_count_distribution': 16200, 'crps_unavailable_bound_not_certified': 0, 'crps_inconsistent': 0}
+2026-10-15T23:16:15+00:00 result: pass (0 of 55080 forecasts failed)
+2026-10-15T23:16:15+00:00 wrote integrity.csv, sha256 919d6252c14352b359ae70b1a63543853335cebb2673c6e57bb373f2791f6368
