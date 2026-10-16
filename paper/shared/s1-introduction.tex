@@ -1,0 +1,37 @@
+\section{Introduction}
+
+The question is whether zero-shot time-series foundation models improve probabilistic forecasts of the daily
+number of new stars a GitHub repository receives. These series are counts, most days are zero for most
+repositories, activity arrives in bursts tied to releases and external attention, and the panel one can
+observe is survivor-biased: a repository that was deleted or made private has no history to fetch. Public
+forecasting benchmarks are mostly smooth, seasonal, positive series, so this kind of data is a hard case for
+zero-shot forecasting. The practical question is whether such a model is worth running at all on a sparse
+count series, or whether a trailing mean does as well.
+
+The story of this report is in four parts. A first version of the study, built in June and July 2026, found
+two foundation models ahead of classical baselines on mean CRPS in every cell of its design. An adversarial
+audit on 2026-07-12 found no code defect that invalidated the aggregate comparison, but two design flaws that
+could not be fixed by rewriting prose: the cohorts had been selected on outcomes not available at forecast
+time, and the evaluation windows mostly tested post-peak decay. We registered a redesign on 2026-09-12, before
+any target was fetched, and ran it on 2026-09-13 without change. The revised result is less flattering and is
+reported with the same care: the models win on the mean against a 28-day local mean, lose on most individual
+repositories, and win on both summaries against a weekly AutoETS whose intervals are far too wide. A post-hoc
+accounting of the saved run, labeled as such, says where the mean gain comes from.
+
+This is not the first observation that an aggregate gain can coexist with a minority win rate. A July 2026
+quick-commerce study found TimesFM's pooled gains concentrated in high-turnover items while it won a minority
+of item-rounds on lumpy demand \citep{kim2026}, and a marketplace-panel study showed the aggregate and
+per-series rankings of five zero-shot foundation models reversing on M5 \citep{islam2026}. Frozen foundation
+models have also been evaluated on sparse daily counts before: twelve of them, the three used here among
+them, on five sparse panels as an event-ranking task without a proper score \citep{schoess2026}; and TimesFM 3
+on simulated intermittent demand, where its nine-decile pinball loss was no better than the history's
+empirical deciles \citep{ebrahim2026}, a finding consistent with the typical-repository result reported here.
+Earlier evaluations on cloud workloads found simple baselines ahead \citep{toner2025}, and the Chronos and
+TimesFM papers themselves report benchmark results that include count-like series without a zero-day
+diagnosis \citep{ansari2024, das2023}. Benchmark practice has moved toward reporting win rates alongside
+relative errors \citep{fevbench2026}, and the forecast-evaluation literature warns against ratio metrics that
+silently drop series \citep{hewamalage2023}. Star-count prediction on GitHub has been studied as a regression
+on popular repositories \citep{borges2016}, and a live benchmark scores daily new stargazers on the 400
+most-starred repositories \citep{garza2026}; the present design samples from a population rather than from
+the popular. What this report adds is a registered, population-sampled, repository-clustered probabilistic
+evaluation whose every number traces to a saved file.

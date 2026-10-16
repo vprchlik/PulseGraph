@@ -1,0 +1,266 @@
+% Study 2, the secondary tables of the appendix, from the inference and post-hoc files of the two runs.
+% Input from paper.tex; every number traces to sources.md and is asserted by check_numbers.py.
+\providecommand{\lm}{\texttt{local\_mean\_28}}
+\providecommand{\aets}{\texttt{autoets\_weekly}}
+\providecommand{\qs}{QScore9}
+\providecommand{\hc}{\texttt{hurdle\_count\_28}}
+
+\section{Study 2: the secondary tables}
+\label{app:s2tables}
+
+None of the tables in this appendix carries a multiplicity adjustment, and none replaces the two families of
+Section~\ref{sec:s2results}. Differences are model variant minus reference, so negative favors the variant.
+
+\paragraph{By stratum.} The strata are declared secondary descriptors and carry no interval and no test;
+the very sparse stratum holds $n = 9$ series, not 100. Against its completed control the hurdle variant
+scores lower on 32 to 43 of the 100 dense series across the six cells, on 45 to 81 of the 100 sparse
+series, and on 2 to 4 of the 9 very sparse series, where the median difference is exactly 0 in five of the
+six cells. Against \hc{} it scores lower on 80 to 94 of the 100 dense series, on 29 to 63 of the 100 sparse
+series and on 4 of the 9 very sparse series in every cell, with a median of exactly 0 there in all six. The
+raw deciles score lower than \lm{} on 61 to 70 dense, 19 to 51 sparse and 4 or 5 very sparse series. With
+nine series the very sparse stratum supports no reading beyond those counts (Appendix
+Table~\ref{tab:s2strata}).
+
+\paragraph{The context-scaled score.} The registered scale-free secondary, which divides each window's \qs{}
+by the context mean before the same averaging, reads differently from the unscaled mean on the hurdle
+contrast (Appendix Table~\ref{tab:s2scaled}). At horizon 7 the scaled difference against the completed
+control favors the hurdle for all three models, -0.02204 for Chronos-2, -0.006708 for TimesFM 3 and
+-0.006123 for TimesFM 2.5, with every interval below zero; at horizon 30 every interval includes zero
+(-0.002395, 0.001291 and 0.001687). Against \hc{} the scaled differences are -0.1182 to -0.1466 with every
+interval below zero, and against \lm{} they are below zero in the four cells that reject (E06, E09, E12,
+E18) and include zero in E03 and E15. On the grid every scaled interval includes zero at horizon 30; the
+largest unscaled cell differences are in the cells with $z = 0.2$ and $\mu_{+} = 25$, which scaling by the
+context mean weighs least. The occurrence Brier score, available where a count law exists, is lower for the
+hurdle than for its control with an interval below zero in E01, E04 and E13 and includes zero in E07, E10
+and E16. These are secondary readings and add no test.
+
+\paragraph{The oracle, as a diagnostic.} The oracle that knows the generator's parameters and the last
+observed state has the lowest mean \qs{} of the seventeen forecasters at both horizons (1.514 at horizon 7
+and 1.648 at horizon 30), the lowest occurrence Brier score (0.115) and the lowest discrete CRPS (1.504) at
+horizon 30, and the lowest cell mean in 17 of the 18 cells at horizon 30; in the cell with $z = 0.2$,
+$\mu_{+} = 1$ and $\rho = 0$, two forecasters score slightly below it (0.1759 and 0.1761 against 0.1767), as
+the protocol allows for a finite sample. Its randomized PIT histogram is flat, each tenth holding 0.099 to
+0.104 of its 48,600 target days, where the six foundation-model variants and \hc{} place 0.078 to 0.133 of
+theirs in a tenth. On npm each hurdle variant places 0.088 to 0.146 of its horizon-30 target days in a
+tenth, against 0.083 to 0.153 for its completed control. The oracle is neither a competitor nor a
+confirmatory contrast.
+
+\paragraph{Per cell.} Figure~\ref{fig:s2cells} and Appendix Table~\ref{tab:s2cells} give the six
+synthetic contrasts cell by cell at horizon 30, each over 30 replicates, with no interval and no test. The
+largest differences against the hurdle are in the cells with $z = 0.2$ and $\mu_{+} = 25$, where the hurdle
+scores 0.9342 to 0.9766 above its control at $\rho = 0.8$; in the four cells with $z = 0.95$ and $\mu_{+}$
+of 5 or 25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. In
+the cells with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is lower
+in none of the 30 replicates in any of those six cells.
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{The context-scaled \qs{}, the registered scale-free secondary: each window's \qs{} divided by
+$\max(1, \bar{y}_{\text{context}})$ before the registered averaging. Mean difference with its pointwise 95
+percent bootstrap interval, median difference, and the series (of 209) or blocks (of 30) where the variant
+is lower, tied or higher. The synthetic rows are at horizon 30; the suffix \texttt{-h7} marks the
+horizon-7 secondary rows.}
+\label{tab:s2scaled}
+\begin{tabular}{lllrrcrc}
+\toprule
+ID & Variant & Reference & $h$ & Mean & 95\% interval & Median & Lower / tied / higher \\
+\midrule
+E01 & chronos2\_hurdle & chronos2\_completed & 7 & -0.02204 & [-0.03098, -0.01407] & -0.005825 & 122 / 2 / 85 \\
+E04 & chronos2\_hurdle & chronos2\_completed & 30 & -0.002395 & [-0.006836, 0.00146] & 0.0002262 & 101 / 2 / 106 \\
+E02 & chronos2\_hurdle & hurdle\_count\_28 & 7 & -0.1311 & [-0.1809, -0.08701] & -0.01058 & 129 / 12 / 68 \\
+E05 & chronos2\_hurdle & hurdle\_count\_28 & 30 & -0.1456 & [-0.1909, -0.1055] & -0.02617 & 150 / 9 / 50 \\
+E03 & chronos2\_raw & local\_mean\_28 & 7 & -0.01511 & [-0.03735, 0.004919] & 0.003944 & 92 / 0 / 117 \\
+E06 & chronos2\_raw & local\_mean\_28 & 30 & -0.02913 & [-0.04976, -0.01305] & -0.00184 & 112 / 0 / 97 \\
+E07 & timesfm3\_hurdle & timesfm3\_completed & 7 & -0.006708 & [-0.01467, -0.0001148] & 0.0008949 & 95 / 8 / 106 \\
+E10 & timesfm3\_hurdle & timesfm3\_completed & 30 & 0.001291 & [-0.001255, 0.003757] & 0.001769 & 80 / 8 / 121 \\
+E08 & timesfm3\_hurdle & hurdle\_count\_28 & 7 & -0.1278 & [-0.1761, -0.08451] & -0.004233 & 116 / 18 / 75 \\
+E11 & timesfm3\_hurdle & hurdle\_count\_28 & 30 & -0.1466 & [-0.19, -0.1075] & -0.03038 & 161 / 17 / 31 \\
+E09 & timesfm3\_raw & local\_mean\_28 & 7 & -0.02463 & [-0.04487, -0.007124] & -0.001849 & 112 / 1 / 96 \\
+E12 & timesfm3\_raw & local\_mean\_28 & 30 & -0.03336 & [-0.05248, -0.01843] & -0.003988 & 124 / 1 / 84 \\
+E13 & timesfm2p5\_hurdle & timesfm2p5\_completed & 7 & -0.006123 & [-0.01111, -0.001495] & -0.001063 & 110 / 2 / 97 \\
+E16 & timesfm2p5\_hurdle & timesfm2p5\_completed & 30 & 0.001687 & [-0.0008144, 0.004384] & 0.0006744 & 101 / 1 / 107 \\
+E14 & timesfm2p5\_hurdle & hurdle\_count\_28 & 7 & -0.1182 & [-0.1673, -0.07431] & -0.004233 & 113 / 7 / 89 \\
+E17 & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 & -0.1402 & [-0.1839, -0.1025] & -0.02686 & 160 / 9 / 40 \\
+E15 & timesfm2p5\_raw & local\_mean\_28 & 7 & -0.01512 & [-0.03593, 0.001938] & 0.008833 & 82 / 1 / 126 \\
+E18 & timesfm2p5\_raw & local\_mean\_28 & 30 & -0.02597 & [-0.04489, -0.01163] & -0.00242 & 109 / 1 / 99 \\
+\midrule
+S01-h7 & chronos2\_hurdle & chronos2\_completed & 7 & 0.03751 & [0.01416, 0.06281] & 0.01705 & 8 / 0 / 22 \\
+S01 & chronos2\_hurdle & chronos2\_completed & 30 & 0.00139 & [-0.01216, 0.01501] & 0.004498 & 14 / 0 / 16 \\
+S02-h7 & chronos2\_hurdle & hurdle\_count\_28 & 7 & 0.001251 & [-0.01012, 0.01276] & 0.00345 & 13 / 0 / 17 \\
+S02 & chronos2\_hurdle & hurdle\_count\_28 & 30 & -0.0003784 & [-0.007165, 0.006157] & 0.002033 & 13 / 0 / 17 \\
+S03-h7 & timesfm3\_hurdle & timesfm3\_completed & 7 & 0.0397 & [0.01707, 0.06452] & 0.0193 & 8 / 0 / 22 \\
+S03 & timesfm3\_hurdle & timesfm3\_completed & 30 & 0.007152 & [-0.00766, 0.02042] & 0.006261 & 10 / 0 / 20 \\
+S04-h7 & timesfm3\_hurdle & hurdle\_count\_28 & 7 & -0.001183 & [-0.01205, 0.009608] & 0.0006988 & 15 / 0 / 15 \\
+S04 & timesfm3\_hurdle & hurdle\_count\_28 & 30 & -0.003914 & [-0.01056, 0.001931] & 0.001094 & 14 / 0 / 16 \\
+S05-h7 & timesfm2p5\_hurdle & timesfm2p5\_completed & 7 & 0.03654 & [0.01467, 0.06046] & 0.02256 & 7 / 0 / 23 \\
+S05 & timesfm2p5\_hurdle & timesfm2p5\_completed & 30 & 0.006541 & [-0.007033, 0.01877] & 0.006349 & 12 / 0 / 18 \\
+S06-h7 & timesfm2p5\_hurdle & hurdle\_count\_28 & 7 & 0.003006 & [-0.009649, 0.01578] & 0.002948 & 13 / 0 / 17 \\
+S06 & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 & 0.0004433 & [-0.008125, 0.008421] & 0.002583 & 12 / 0 / 18 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{The eighteen external comparisons by context-zero-fraction stratum, declared secondary, with no
+interval and no test: the mean difference, the median difference and the number of series where the variant
+is lower, for the dense ($n = 100$), sparse ($n = 100$) and very sparse ($n = 9$) strata. The dense means
+are unscaled and carried by \texttt{aggregate-error}.}
+\label{tab:s2strata}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{dense, $n = 100$} & \multicolumn{3}{c}{sparse, $n = 100$} & \multicolumn{3}{c}{very sparse, $n = 9$} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+ID & Mean & Median & Lower & Mean & Median & Lower & Mean & Median & Lower \\
+\midrule
+E01 & 317.7 & 0.0455 & 36 & -0.05531 & -0.03333 & 81 & -0.01752 & 0 & 4 \\
+E02 & -10,638 & -0.3217 & 85 & -0.3483 & 0.003175 & 40 & -1.312 & 0 & 4 \\
+E03 & -6,028 & -0.07942 & 62 & -0.001134 & 0.0266 & 26 & 0.0684 & 1.055e-09 & 4 \\
+E04 & 188.6 & 0.01543 & 43 & -0.01457 & -0.003086 & 58 & -0.01108 & 0 & 4 \\
+E05 & -13,715 & -0.6031 & 91 & -0.3834 & -0.001728 & 55 & -1.415 & 0 & 4 \\
+E06 & -9,893 & -0.03933 & 61 & -0.04493 & 0.00175 & 46 & -0.006479 & -0.006837 & 5 \\
+E07 & 369.7 & 0.03386 & 32 & -0.03119 & -0.009524 & 60 & 0.01129 & 0 & 2 \\
+E08 & -11,318 & -0.3767 & 80 & -0.3252 & 0.003175 & 32 & -1.307 & 0 & 4 \\
+E09 & -6,761 & -0.1083 & 70 & 0.002103 & 0.01057 & 38 & 0.04384 & 0 & 4 \\
+E10 & 268.6 & 0.02173 & 34 & -0.0003926 & 0.0004938 & 45 & 0.02148 & 0 & 2 \\
+E11 & -14,194 & -0.5769 & 94 & -0.3521 & -0.004444 & 63 & -1.39 & 0 & 4 \\
+E12 & -10,452 & -0.04297 & 70 & -0.02674 & -0.0006202 & 51 & -0.0149 & 0 & 4 \\
+E13 & 530.6 & 0.03386 & 40 & -0.01284 & -0.01058 & 66 & -0.003645 & 0.007407 & 3 \\
+E14 & -12,220 & -0.3709 & 82 & -0.3162 & 0.01323 & 29 & -1.31 & 0 & 4 \\
+E15 & -7,823 & -0.1053 & 61 & -0.005074 & 0.03205 & 19 & 0.05747 & 0 & 4 \\
+E16 & 230.6 & 0.02333 & 43 & 0.01899 & -0.0008642 & 54 & -0.003841 & 0 & 4 \\
+E17 & -14,458 & -0.5962 & 94 & -0.3428 & -0.003086 & 62 & -1.409 & 0 & 4 \\
+E18 & -10,678 & -0.05805 & 68 & -0.03236 & 0.004494 & 40 & -0.006367 & -0.003695 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Post-hoc. The eighteen external comparisons as registered and under the two removals of the npm
+zero days: the mean difference, the adjusted $p$ and whether the test rejects at $q = 0.05$ after one
+adjustment over the eighteen of each scenario; the last column is the side with the larger signed-rank sum,
+the same in all three analyses. The horizon-7 rows are unchanged except for their adjusted $p$.}
+\label{tab:s2sens}
+\begin{tabular}{lrllrllrlll}
+\toprule
+ & \multicolumn{3}{c}{Registered} & \multicolumn{3}{c}{Without the three days} & \multicolumn{3}{c}{Without the two panel-wide days} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+ID & Mean & Adj.\ $p$ & Rejects & Mean & Adj.\ $p$ & Rejects & Mean & Adj.\ $p$ & Rejects & Favors \\
+\midrule
+E01 & 152 & 0.203 & no & 152 & 0.188 & no & 152 & 0.203 & no & model \\
+E02 & -5,090 & $3.72 \times 10^{-11}$ & yes & -5,090 & $3.72 \times 10^{-11}$ & yes & -5,090 & $3.72 \times 10^{-11}$ & yes & model \\
+E03 & -2,884 & 0.596 & no & -2,884 & 0.596 & no & -2,884 & 0.596 & no & model \\
+E04 & 90.24 & 0.449 & no & 159.3 & 0.188 & no & 143.4 & 0.23 & no & reference \\
+E05 & -6,563 & $7.06 \times 10^{-21}$ & yes & -6,473 & $2.89 \times 10^{-20}$ & yes & -6,311 & $3.76 \times 10^{-20}$ & yes & model \\
+E06 & -4,734 & 0.0119 & yes & -4,834 & 0.0359 & yes & -4,646 & 0.0599 & no & model \\
+E07 & 176.9 & 0.236 & no & 176.9 & 0.22 & no & 176.9 & 0.23 & no & reference \\
+E08 & -5,416 & $3.61 \times 10^{-8}$ & yes & -5,416 & $3.61 \times 10^{-8}$ & yes & -5,416 & $3.61 \times 10^{-8}$ & yes & model \\
+E09 & -3,235 & 0.0438 & yes & -3,235 & 0.0438 & yes & -3,235 & 0.0478 & yes & model \\
+E10 & 128.5 & 0.00215 & yes & 201.2 & 0.00179 & yes & 184.9 & 0.00211 & yes & reference \\
+E11 & -6,792 & $3.19 \times 10^{-25}$ & yes & -6,744 & $2.33 \times 10^{-24}$ & yes & -6,563 & $1.16 \times 10^{-24}$ & yes & model \\
+E12 & -5,001 & $3.82 \times 10^{-5}$ & yes & -5,147 & $5.84 \times 10^{-5}$ & yes & -4,940 & $8.76 \times 10^{-5}$ & yes & model \\
+E13 & 253.9 & 0.628 & no & 253.9 & 0.628 & no & 253.9 & 0.628 & no & reference \\
+E14 & -5,847 & $2.66 \times 10^{-5}$ & yes & -5,847 & $2.66 \times 10^{-5}$ & yes & -5,847 & $2.66 \times 10^{-5}$ & yes & model \\
+E15 & -3,743 & 0.746 & no & -3,743 & 0.746 & no & -3,743 & 0.746 & no & model \\
+E16 & 110.3 & 0.0276 & yes & 183.4 & 0.0257 & yes & 167.1 & 0.0344 & yes & reference \\
+E17 & -6,918 & $1.77 \times 10^{-23}$ & yes & -6,857 & $4.79 \times 10^{-22}$ & yes & -6,709 & $2.46 \times 10^{-22}$ & yes & model \\
+E18 & -5,109 & 0.00204 & yes & -5,242 & 0.00988 & yes & -5,068 & 0.00638 & yes & model \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{The six synthetic comparisons cell by cell at horizon 30: the mean paired difference over the 30
+replicates of each cell and, in brackets, the replicates where the hurdle variant is lower; no interval and
+no test. Under the declared rule only an exact zero is a tie, and a difference of order $10^{-18}$ is
+floating-point residue. In the cells with $\mu_{+} = 1$ the positive law is degenerate at one.}
+\label{tab:s2cells}
+\begin{tabular}{lrrrcccccc}
+\toprule
+Cell & $z$ & $\mu_{+}$ & $\rho$ & S01 & S02 & S03 & S04 & S05 & S06 \\
+\midrule
+cell00 & 0.2 & 1 & 0.0 & 0.001276 (10) & 0 (0) & -0.0008477 (9) & 0 (0) & 1.85e-18 (16) & 0 (0) \\
+cell01 & 0.2 & 1 & 0.8 & 0.02091 (11) & 0.004074 (0) & 0.0309 (9) & 0.00177 (0) & 0.0307 (12) & 0.001786 (0) \\
+cell02 & 0.2 & 5 & 0.0 & 0.03719 (7) & 0.03202 (6) & 0.02129 (6) & 0.007078 (14) & 0.02285 (8) & 0.01269 (12) \\
+cell03 & 0.2 & 5 & 0.8 & 0.1172 (11) & 0.03621 (11) & 0.127 (9) & 0.02497 (9) & 0.166 (8) & 0.03737 (9) \\
+cell04 & 0.2 & 25 & 0.0 & 0.4659 (1) & 0.5156 (0) & 0.3406 (2) & 0.3273 (0) & 0.4349 (3) & 0.5687 (0) \\
+cell05 & 0.2 & 25 & 0.8 & 0.9766 (8) & 0.5322 (8) & 0.9342 (7) & 0.3082 (9) & 0.969 (7) & 0.5615 (7) \\
+cell06 & 0.8 & 1 & 0.0 & 0.003021 (9) & 0.002947 (0) & 0.001531 (6) & 0 (0) & -0.002148 (16) & 0.0002058 (0) \\
+cell07 & 0.8 & 1 & 0.8 & 0.01146 (12) & 0.003679 (0) & 0.02715 (13) & 0.002634 (0) & 0.02033 (11) & 0.004247 (0) \\
+cell08 & 0.8 & 5 & 0.0 & 0.005045 (11) & 0.0007407 (15) & -0.002477 (14) & 0.0001235 (11) & -0.005309 (16) & 0.01626 (8) \\
+cell09 & 0.8 & 5 & 0.8 & 0.01672 (17) & -0.01305 (17) & 0.05014 (14) & -0.01853 (18) & 0.02598 (15) & -0.0224 (17) \\
+cell10 & 0.8 & 25 & 0.0 & 0.08187 (6) & 0.09585 (8) & 0.04629 (10) & 0.05008 (10) & -0.02146 (15) & 0.1869 (6) \\
+cell11 & 0.8 & 25 & 0.8 & 0.1006 (20) & -0.1548 (17) & 0.2028 (18) & -0.2022 (18) & 0.1279 (15) & -0.1151 (17) \\
+cell12 & 0.95 & 1 & 0.0 & 0.001374 (1) & 0 (0) & -0.0002305 (12) & 0 (0) & 0.001481 (1) & 0 (0) \\
+cell13 & 0.95 & 1 & 0.8 & -0.006831 (8) & 0.0003951 (0) & 0.001753 (7) & 0.0005844 (0) & 0.004247 (3) & 0.0005514 (0) \\
+cell14 & 0.95 & 5 & 0.0 & 0.0002551 (5) & -0.004444 (9) & -0.006988 (23) & -0.003564 (9) & -0.0008971 (10) & -0.004444 (9) \\
+cell15 & 0.95 & 5 & 0.8 & -0.04295 (13) & -0.005226 (9) & -0.02037 (9) & -0.01003 (9) & -0.01931 (5) & -0.01541 (9) \\
+cell16 & 0.95 & 25 & 0.0 & -0.005218 (24) & -0.03199 (8) & -0.04486 (28) & -0.02057 (8) & -0.02882 (28) & -0.03235 (8) \\
+cell17 & 0.95 & 25 & 0.8 & -0.2365 (15) & -0.07619 (9) & -0.1487 (13) & -0.08094 (9) & -0.147 (12) & -0.101 (9) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Mean scores of the sixteen variants on the npm panel (209 series, equal weights): \qs{} at both
+horizons and, at horizon 30, the context-scaled \qs{}, the occurrence Brier score and the discrete CRPS
+where a count law exists. The CRPS is over 208 series, \texttt{aggregate-error} being unavailable. The
+horizon-30 mean of \aets{} comes from the dense stratum; it is in no family comparison.}
+\label{tab:s2scores}
+\begin{tabular}{lrrrrr}
+\toprule
+Variant & \qs{} $h = 7$ & \qs{} $h = 30$ & Scaled \qs{} $h = 30$ & Brier $h = 30$ & CRPS $h = 30$ \\
+\midrule
+chronos2\_raw & 4,500 & 4,226 & 0.9315 &  &  \\
+chronos2\_completed & 4,500 & 4,226 & 0.9283 & 0.1817 & 57.61 \\
+chronos2\_hurdle & 4,652 & 4,316 & 0.9259 & 0.1785 & 58.27 \\
+timesfm3\_raw & 4,149 & 3,958 & 0.9273 &  &  \\
+timesfm3\_completed & 4,149 & 3,958 & 0.9236 & 0.179 & 56.22 \\
+timesfm3\_hurdle & 4,326 & 4,087 & 0.9249 & 0.1785 & 57.15 \\
+timesfm2p5\_raw & 3,641 & 3,850 & 0.9347 &  &  \\
+timesfm2p5\_completed & 3,641 & 3,850 & 0.9296 & 0.1795 & 59.72 \\
+timesfm2p5\_hurdle & 3,895 & 3,960 & 0.9313 & 0.1785 & 61.02 \\
+local\_mean\_28 & 7,384 & 8,959 & 0.9607 &  &  \\
+autoets\_weekly & 4,756 & 74,699 & 291.8 &  &  \\
+nb\_local\_level\_28 & 7,741 & 8,739 & 0.9801 & 0.2117 & 99.49 \\
+poisson\_28 & 9,630 & 10,642 & 1.132 & 0.2291 & 123.6 \\
+hurdle\_count\_28 & 9,742 & 10,878 & 1.072 & 0.1785 & 118.5 \\
+hurdle\_empirical\_28 & 7,348 & 8,685 & 0.9565 & 0.1785 & 88.76 \\
+dynamic\_count & 10,948 & 11,471 & 1.026 & 0.1773 & 124.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Mean scores of the sixteen variants and the oracle on the synthetic grid (30 replicate blocks,
+18 cells with equal weight): \qs{} at both horizons and, at horizon 30, the occurrence Brier score and the
+discrete CRPS where a count law exists. The oracle is a diagnostic, not a competitor.}
+\label{tab:s2synscores}
+\begin{tabular}{lrrrr}
+\toprule
+Variant & \qs{} $h = 7$ & \qs{} $h = 30$ & Brier $h = 30$ & CRPS $h = 30$ \\
+\midrule
+chronos2\_raw & 1.613 & 1.791 &  &  \\
+chronos2\_completed & 1.607 & 1.785 & 0.1329 & 1.653 \\
+chronos2\_hurdle & 1.805 & 1.871 & 0.1325 & 1.728 \\
+timesfm3\_raw & 1.594 & 1.758 &  &  \\
+timesfm3\_completed & 1.589 & 1.754 & 0.1299 & 1.619 \\
+timesfm3\_hurdle & 1.783 & 1.84 & 0.1325 & 1.695 \\
+timesfm2p5\_raw & 1.638 & 1.8 &  &  \\
+timesfm2p5\_completed & 1.63 & 1.792 & 0.1366 & 1.656 \\
+timesfm2p5\_hurdle & 1.818 & 1.88 & 0.1325 & 1.74 \\
+local\_mean\_28 & 1.762 & 1.836 &  &  \\
+autoets\_weekly & 1.884 & 2.211 &  &  \\
+nb\_local\_level\_28 & 1.855 & 1.911 & 0.1475 & 1.773 \\
+poisson\_28 & 2.16 & 2.255 & 0.2417 & 2.14 \\
+hurdle\_count\_28 & 1.739 & 1.819 & 0.1325 & 1.677 \\
+hurdle\_empirical\_28 & 1.747 & 1.825 & 0.1325 & 1.685 \\
+dynamic\_count & 1.632 & 1.721 & 0.1236 & 1.588 \\
+oracle & 1.514 & 1.648 & 0.115 & 1.504 \\
+\bottomrule
+\end{tabular}
+\end{table}

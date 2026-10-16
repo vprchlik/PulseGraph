@@ -1,0 +1,35 @@
+\section{Version 1 and the audit}
+
+Version 1 ingested 208 repositories found by three GitHub Search API queries (recently created and already
+high-starred; old, moderate and recently maintained; not pushed in years), giving 414,271 daily rows from
+2008-11-13 to 2026-06-22, of which 179 repositories had at least 270 days of history (41, 69 and 69 in the
+three cohorts). The backtest used an expanding context starting 180 days after the first star, a 30-day step,
+at most eight windows per repository, horizons of 7, 30 and 90 days, and 200 predictive trajectories per
+model. Four classical baselines (horizon-dependent seasonal naive, linear trend, damped ETS, LightGBM) and two
+foundation models, Chronos-2 and TimesFM-2.5, were scored by empirical CRPS. Both foundation models had lower
+mean CRPS than every original baseline in all nine cohort-by-horizon cells; in the ``breakout'' cohort the
+foundation models scored 6.2 to 8.5 against 11.2 to 28.0 for the baselines.
+
+The audit of 2026-07-12 found no code defect that invalidated the aggregate six-model comparison; every
+summary field recomputed from the saved artifact. It found two design flaws that invalidated the original
+claims:
+\begin{enumerate}
+\item \emph{Outcome-conditioned cohorts.} ``Breakout'' was selected for already having many stars, ``dead''
+  for later inactivity, ``steady'' for later maintenance. None of these labels was available at forecast
+  time. The ``dead'' cohort's evaluation windows had a median of 5.02 stars per day and only 7.7 percent zero
+  days; it was not dead when evaluated.
+\item \emph{Post-peak windows.} The global peak preceded the evaluated span for 78.0 percent of breakout
+  repositories; only 12.2 percent peaked inside it. The study tested the forecasting of post-viral decay, not
+  of shocks.
+\end{enumerate}
+After the audit added a 28-day local mean on identical windows, the foundation models still had the lower
+mean in every cell (Appendix Table~\ref{tab:v1}), but the per-repository win rate against it fell to between
+40.6 and 80.5 percent, and the audit put the share of positive gain held by the five largest positive
+contributors at roughly 30 to 77 percent depending on the cell, a figure it tied to no named reference. The
+audit also listed what version 1 had to disclose (Appendix~\ref{app:v1}). Its prescription, freeze and
+pre-register, context-only labels, trailing non-overlapping windows with a common endpoint, strong
+pre-registered baselines, native quantile metrics, repository-clustered inference, and a prospective
+post-release cohort as the contamination control, became the specification of version 2; the cohort is
+registered and not yet run (Section~\ref{sec:notrun}). Every version 1 number in this report is quoted from
+the preserved version 1 documents, not recomputed; the version 1 artifacts are on a computer the author no
+longer uses.

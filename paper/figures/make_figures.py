@@ -1,8 +1,9 @@
-"""Figures for the Study 1 report, drawn from the saved CSVs only.
+"""Figures for the Study 1 report and the paper, drawn from the saved CSVs only.
 
-Reads three files under reports/registered-2026-09-13/ and writes PDF and PNG
-figures beside this script. No model is loaded, nothing is fitted, no test is
-run. Run from the repository root:
+Reads three files under reports/registered-2026-09-13/ for the report's three figures, and two
+files under reports/study2-npm/run-2026-10-15/ and reports/study2-synthetic-2026-10-15/ for the
+paper's two Study 2 figures, and writes PDF and PNG figures beside this script. No model is loaded,
+nothing is fitted, no test is run. Run from the repository root:
 
     .\\.venv\\Scripts\\python.exe paper/figures/make_figures.py
 """
@@ -18,11 +19,16 @@ import pandas as pd  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 REPORT = ROOT / "reports" / "registered-2026-09-13"
+NPM = ROOT / "reports" / "study2-npm" / "run-2026-10-15"
+SYNTHETIC = ROOT / "reports" / "study2-synthetic-2026-10-15"
 OUT = Path(__file__).resolve().parent
 
 INFERENCE = REPORT / "inference" / "inference.csv"
 CURVES = REPORT / "posthoc" / "posthoc-contribution-curves.csv"
 PAIRED = REPORT / "posthoc" / "posthoc-paired-repositories.csv"
+NPM_PAIRED = NPM / "inference" / "paired_entities.csv"
+NPM_INFERENCE = NPM / "inference" / "inference.csv"
+SYNTHETIC_CELLS = SYNTHETIC / "inference" / "secondary_cells_contrasts.csv"
 
 MODELS = ["chronos2", "timesfm3", "timesfm2p5"]
 MODEL_LABEL = {"chronos2": "Chronos-2", "timesfm3": "TimesFM 3", "timesfm2p5": "TimesFM 2.5"}
@@ -44,6 +50,13 @@ PART_LABEL = {
     "positive_over": "positive days, overprediction",
     "positive_under": "positive days, underprediction",
 }
+DOMINANT = "aggregate-error"
+CONTRAST_LABEL = {
+    "_completed": "hurdle vs its completed control",
+    "hurdle_count_28": "hurdle vs the count hurdle",
+    "local_mean_28": "raw deciles vs the local mean",
+}
+Z_COLOR = {0.2: "#0072B2", 0.8: "#D55E00", 0.95: "#009E73"}
 
 plt.rcParams.update({"font.size": 8, "axes.titlesize": 9, "legend.fontsize": 7})
 
@@ -187,6 +200,104 @@ def figure_zero_fraction(paired, horizon=30):
     save(fig, f"fig-posthoc-zero-fraction-h{horizon}")
 
 
+def contrast_kind(reference):
+    return "_completed" if reference.endswith("_completed") else reference
+
+
+def figure_npm_paired(paired, inference):
+    """Study 2 on npm: the 209 paired differences of each of the 18 rows, dominant series marked."""
+    fig, axes = plt.subplots(1, 3, figsize=(6.6, 3.2), constrained_layout=True)
+    kinds = list(CONTRAST_LABEL)
+    rng = np.random.default_rng(20260916)
+    for ax, kind in zip(axes, kinds):
+        rows = inference[inference["reference"].map(contrast_kind) == kind].sort_values("id")
+        positions, labels = [], []
+        for x, (_, row) in enumerate(rows.iterrows()):
+            series = paired[paired["id"] == row["id"]]
+            others = series[series["entity"] != DOMINANT]
+            dominant = series[series["entity"] == DOMINANT]
+            jitter = rng.uniform(-0.22, 0.22, size=len(others))
+            ax.scatter(
+                x + jitter,
+                others["difference"],
+                s=4,
+                color="#0072B2",
+                alpha=0.45,
+                linewidths=0,
+                label="one of the other 208 series" if (ax is axes[0] and x == 0) else None,
+            )
+            ax.scatter(
+                [x],
+                dominant["difference"],
+                s=22,
+                color="#D55E00",
+                marker="o",
+                zorder=3,
+                label=DOMINANT if (ax is axes[0] and x == 0) else None,
+            )
+            ax.hlines(
+                row["median_diff"],
+                x - 0.3,
+                x + 0.3,
+                color="black",
+                linewidth=1.1,
+                zorder=4,
+                label="median difference" if (ax is axes[0] and x == 0) else None,
+            )
+            positions.append(x)
+            model = row["model"].split("_")[0]
+            labels.append(f"{row['id']} {MODEL_LABEL[model]} h{row['horizon']}")
+        ax.axhline(0, color="#888888", linewidth=0.6)
+        ax.set_yscale("symlog", linthresh=0.01)
+        ax.set_xticks(positions)
+        ax.set_xticklabels(labels, rotation=70, ha="right", fontsize=5.5)
+        ax.set_title(CONTRAST_LABEL[kind])
+        ax.grid(axis="y", linewidth=0.3, alpha=0.6)
+        if ax is axes[0]:
+            ax.set_ylabel("QScore9, variant minus reference (symlog)")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
+    save(fig, "fig-s2-npm-paired-differences")
+
+
+def figure_synthetic_cells(cells, horizon=30):
+    """Study 2 on the grid: the mean paired difference of each contrast in each of the 18 cells."""
+    rows = cells[(cells["metric"] == "qscore9") & (cells["horizon"] == horizon)]
+    ids = ["S01", "S02", "S03", "S04", "S05", "S06"]
+    fig, axes = plt.subplots(2, 3, figsize=(6.6, 4.6), sharey=True, constrained_layout=True)
+    order = rows.drop_duplicates("cell_id").sort_values("cell_id")
+    cell_labels = [
+        f"z={r.zero_probability:g}, μ+={int(r.positive_mean)}, ρ={r.persistence:g}"
+        for r in order.itertuples()
+    ]
+    for ax, cid in zip(axes.ravel(), ids):
+        part = rows[rows["id"] == cid].set_index("cell_id").loc[order["cell_id"]]
+        colors = [Z_COLOR[z] for z in part["zero_probability"]]
+        y = np.arange(len(part))
+        ax.barh(y, part["mean_diff"], color=colors, height=0.7)
+        ax.axvline(0, color="#888888", linewidth=0.6)
+        ax.set_yticks(y)
+        ax.set_yticklabels(cell_labels, fontsize=5.5)
+        ax.invert_yaxis()
+        ax.set_xscale("symlog", linthresh=0.01)
+        first = part.iloc[0]
+        model = MODEL_LABEL[first["model"].split("_")[0]]
+        reference = "control" if first["reference"].endswith("_completed") else "count hurdle"
+        ax.set_title(f"{cid}: {model} hurdle vs {reference}", fontsize=7)
+        ax.grid(axis="x", linewidth=0.3, alpha=0.6)
+    for ax in axes[1]:
+        ax.set_xlabel("mean difference (symlog)", fontsize=7)
+    handles = [plt.Rectangle((0, 0), 1, 1, color=Z_COLOR[z]) for z in Z_COLOR]
+    fig.legend(
+        handles,
+        [f"zero probability z = {z:g}" for z in Z_COLOR],
+        loc="outside lower center",
+        ncol=3,
+        frameon=False,
+    )
+    save(fig, "fig-s2-synthetic-cells")
+
+
 def main():
     inference = pd.read_csv(INFERENCE)
     curves = pd.read_csv(CURVES)
@@ -194,6 +305,11 @@ def main():
     figure_paired_differences(inference)
     figure_cumulative(curves)
     figure_zero_fraction(paired)
+    npm_paired = pd.read_csv(NPM_PAIRED, float_precision="round_trip")
+    npm_inference = pd.read_csv(NPM_INFERENCE, float_precision="round_trip")
+    figure_npm_paired(npm_paired, npm_inference)
+    cells = pd.read_csv(SYNTHETIC_CELLS, float_precision="round_trip")
+    figure_synthetic_cells(cells)
     for name in sorted(OUT.glob("fig-*")):
         print(name.relative_to(ROOT), name.stat().st_size)
 

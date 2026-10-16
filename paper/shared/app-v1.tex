@@ -1,0 +1,36 @@
+\section{Version 1: the disclosure list and the local-mean table}
+\label{app:v1}
+
+The audit listed what version 1 had to disclose: a weak original baseline set; Wilcoxon tests on overlapping
+windows treated as independent; untested scale domination; a mislabeled 95 percent interval for TimesFM,
+whose API exposes only the 0.1 to 0.9 quantiles; ordinary PIT on discrete counts; unseeded baseline sampling;
+LightGBM's uncertainty from in-sample residuals; MAPE as a headline metric on zero-inflated series; implicit
+observation endpoints that censored trailing zeros and omitted later-removed stars; and unresolved
+pretraining contamination with no clean post-release holdout. Every version 1 number in this report is
+quoted from the preserved version 1 documents (its results document, its audit and its write-up, with four
+figures), not recomputed. The version 1 result artifacts (the results parquet, the summary CSV, the review
+outputs and the raw stargazer data) were excluded from that repository by its ignore rules and exist only on
+a computer the author no longer uses; their recovery is deferred.
+
+\begin{table}[h]
+\centering\small
+\caption{Version 1, quoted from the preserved documents: mean CRPS of the 28-day local mean added by the
+audit and of the two foundation models, by discovery cohort and horizon. These numbers were not recomputed;
+the version 1 artifacts are on a computer the author no longer uses.}
+\label{tab:v1}
+\begin{tabular}{llrrr}
+\toprule
+Cohort & Horizon (days) & Local mean & Chronos-2 & TimesFM-2.5 \\
+\midrule
+breakout-selected & 7 & 7.77 & 6.43 & 6.23 \\
+breakout-selected & 30 & 8.77 & 7.90 & 7.68 \\
+breakout-selected & 90 & 9.41 & 8.52 & 8.20 \\
+steady-selected & 7 & 1.66 & 1.46 & 1.44 \\
+steady-selected & 30 & 2.26 & 2.04 & 2.02 \\
+steady-selected & 90 & 2.42 & 2.21 & 2.22 \\
+dead-selected & 7 & 2.75 & 2.43 & 2.35 \\
+dead-selected & 30 & 2.64 & 2.47 & 2.39 \\
+dead-selected & 90 & 2.85 & 2.73 & 2.67 \\
+\bottomrule
+\end{tabular}
+\end{table}

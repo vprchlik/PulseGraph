@@ -1,0 +1,298 @@
+% The paper: the Study 1 report extended with Study 2's results. Compile with pdflatex + bibtex (plainnat)
+% on TeX Live or MiKTeX. Sections 1 to 6, the Study 1 limitations, the follow-up paragraph, the
+% reproducibility paragraph, the author's statement and Appendices A to D are the report's own text, read
+% from the shared files under shared/ that main.tex also reads; the Study 2 sections are under sections/.
+% Every number traces to a file and a command listed in sources.md and is asserted by check_numbers.py.
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+
+\graphicspath{{figures/}}
+\newcommand{\lm}{\texttt{local\_mean\_28}}
+\newcommand{\aets}{\texttt{autoets\_weekly}}
+\newcommand{\qs}{QScore9}
+\newcommand{\hc}{\texttt{hurdle\_count\_28}}
+% DOI: the author reserves the DOI on posting day and replaces the text below.
+\newcommand{\reportdoi}{DOI to be filled on posting day}
+
+\title{Zero-shot foundation models on sparse daily counts:\\a registered re-evaluation on GitHub stars and a
+registered occurrence test on npm downloads}
+\author{Victor Prchlik}
+\date{Paper version, October 2026 \\ \small \reportdoi}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We ask whether zero-shot time-series foundation models improve probabilistic forecasts of sparse daily
+counts, and test one mechanism behind the answer. Study 1 is a registered re-evaluation on daily GitHub
+star counts after an audit of a first version (protocol commit \texttt{5f01769}, 2026-09-12): 300
+repositories sampled from a frame of 148,550, three frozen models (Chronos-2, TimesFM 3, TimesFM 2.5)
+against a 28-day local mean and weekly AutoETS, a nine-decile quantile score, 18 declared comparisons.
+Against the local mean the mean difference favors the models in every cell and its bootstrap interval
+excludes zero in five of nine, but the typical repository favors the reference: the models score lower on
+46 to 89 of 300 repositories and the signed-rank test rejects in all nine cells on the reference's side.
+Against AutoETS both summaries favor the models, consistent with its 80 percent intervals covering about 99
+percent of target days. Study 2, registered after those results (commit \texttt{df55867}, 2026-09-14), asks
+whether replacing a frozen model's own zero mass with a context-only occurrence probability, keeping its
+completed positive law, lowers the score, and whether that positive law beats a fixed count hurdle. On a
+hash-sampled npm download panel of 209 series (100 dense, 100 sparse, 9 very sparse) no comparison favors
+the substitution and two of six reject against it; the model's positive law beats the count hurdle in all
+six cells. On a registered 540-series synthetic grid five of six tests reject, all
+against the substitution. One series at 7.6 million downloads a day carries every npm mean, so the medians
+and rank tests describe the typical series; a post-hoc sensitivity to three zero days served by the source
+changes no mechanism conclusion. A literature re-check allows the claim of this registered combination on
+daily attention and adoption counts, and nothing broader.
+\end{abstract}
+
+\input{shared/s1-introduction}
+
+This paper extends that report. Sections~1 to~6 are the report's text, unchanged in meaning: this
+introduction, the first version and its audit, the registered design, the achieved panel, the results and
+the post-hoc accounting.
+Sections~7 to~10 add Study 2, registered after Study 1's results were seen and run on data declared for the
+purpose: its question, its design, the achieved npm panel, and the results of its external and synthetic
+components. Section~11 reads the two studies together, Section~12 extends the limitations, Section~13 says
+what is registered and not run, and Section~14 extends the reproducibility statement. The Study 1 report
+stands on its own as a posted document; nothing here changes its numbers or its claims.
+
+\input{shared/s1-version1-audit}
+
+\input{shared/s1-design}
+
+\input{shared/s1-panel}
+
+\input{shared/s1-results}
+
+\input{shared/s1-posthoc}
+
+\input{sections/study2-question}
+
+\input{sections/study2-design}
+
+\input{sections/study2-panel}
+
+\input{sections/study2-results}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{What the two studies say together.} Study 1 found the models' mean gain against the local mean
+on positive days where the local mean overpredicts, and a zero-day part against the models in every cell,
+small beside the mean gain but larger than every median difference. Study 2 asked whether that zero-day loss
+can be taken out by a context-only occurrence estimate while the model's size forecast is kept. It cannot be
+taken out without paying more on positive days. In all nine hurdle-against-control cells of both studies the
+substitution lowers the zero-day loss and the positive-day overprediction loss and raises the positive-day
+underprediction loss by more than both (Table~\ref{tab:s2parts}); the net is the control's in every cell, two
+of six npm tests and all three synthetic tests reject against the substitution, and no test favors it. The
+occurrence Brier score, where it is lower for the hurdle (E01, E04, E13), does not carry over to the quantile
+score, which couples occurrence and size: with the positive law held fixed, mass moved onto zero pulls the
+lower deciles down, and on positive days those deciles underpredict. A context-only occurrence estimate does
+not improve a frozen model's own completed zero mass under this score, on either the npm panel or the grid.
+
+\paragraph{The positive law.} The second contrast isolates the model's size forecast, because both sides
+share the occurrence rule and their Brier difference is exactly zero. On npm the model's completed positive
+law beats the shifted Poisson fitted to the last 28 days in all six cells, on the mean, the median and the
+rank test, and on the context-scaled score. On the grid it loses for two models and ties for the third
+(Appendix Tables~\ref{tab:s2scores} and~\ref{tab:s2synscores} give every variant's mean score on both
+panels). What
+differs between the two settings is reported, not explained beyond what the accounting shows: the grid's
+generator draws its positive sizes from $1 + \text{Poisson}(\mu_{+} - 1)$, the count hurdle's own family,
+and the npm series do not; the npm panel spans scales from two downloads a day to millions, and the grid's
+cells hold $\mu_{+}$ at 1, 5 and 25. Which of these, if any, accounts for the reversal is not something these
+tests separate.
+
+\paragraph{The raw contrast on a second domain.} On npm the raw deciles beat the local mean on the mean in
+all six cells and on the rank test in four of six, with the typical series favoring the reference only at
+horizon 7 for two models; in Study 1 the rank test favored the reference in all nine cells. The two panels
+differ in what is counted, in scale, in sparsity (a dense stratum with few zeros against a star panel where
+most days are zero for most repositories), in horizon and in calendar; the paper reports the difference and
+does not attribute it. In both studies the mean is carried by few series, 88.5 to 94.3 percent of the
+positive gain by five repositories in Study 1 and 0.995 to 0.998 of it by five series on npm, and in both
+the mean and the typical series are shown together because they can disagree.
+
+\paragraph{What the paper claims, and what it does not.} The literature re-check of 2026-10-12
+(Section~\ref{sec:s2question}) sets the claim. The paper claims the registered combination and nothing
+broader: a context-only occurrence probability substituted for the zero mass of frozen Chronos-2 and
+TimesFM forecasts, their completed positive law kept, judged by a proper quantile score against a
+completed-unwrapped control, matched count hurdles and a dynamic count baseline, on a probability sample of
+daily attention and adoption counts, with the mean and the typical series reported side by side. It does not
+claim to be the first evaluation of frozen foundation models on sparse daily counts \citep{schoess2026,
+ebrahim2026}, the first hurdle applied to a frozen model's output \citep{chin2026}, or the first to show
+that aggregate and per-series rankings disagree \citep{islam2026, kim2026}; a later test window on familiar
+entities is not shown here to establish generalization to unseen ones \citep{moghadasi2026}, and the one
+live benchmark of GitHub stargazer forecasting selects its panel by popularity where Study 1 samples a
+population \citep{garza2026}. The paper does not show that the models forecast bursts, that the
+substitution would fare the same on NYC 311 requests or Wikipedia pageviews, which were registered and are
+not run, that any result transfers to launches or to the days after a release, or that an npm download is a
+human adoption. Study 2's answer is to the registered question as registered, on the panel it achieved,
+with the source's three zero days scored as served and a post-hoc sensitivity beside them.
+
+\section{Limitations}
+
+Study 1's limitations stand as the report gave them; Study 2 adds its own.
+
+\begin{itemize}
+\input{shared/s1-limitations-items}
+\item \emph{Three zero days in the npm targets.} The download API served 0 for all 209 series on
+  2026-07-12 and 2026-08-14 and 0 for the largest series on 2026-06-25, between days of millions, and no
+  context day does this. The registered completeness rule accepted them as explicit counts, the run scored
+  them so, and the dated addition of 2026-10-16 keeps that analysis as the confirmatory one. These are
+  properties of the source as served and of the registered rule, not of any model. The post-hoc sensitivity
+  removes the days: none of the eighteen conclusions changes without all three, and one row, E06, stops
+  rejecting without the two panel-wide days. Whether npm will restore the days is unknown, and nothing here
+  verifies that they are gaps.
+\item \emph{One series carries every npm mean.} With equal series weights on the unscaled score, as
+  registered, the mean paired difference over 209 series is the difference of \texttt{aggregate-error}, at
+  7.6 million downloads a day, divided by 209 plus a remainder of a different order, and the series
+  bootstrap interval inherits the same dependence. Every mean in Table~\ref{tab:s2ext} is a statement about
+  that series; the medians, counts, rank tests and per-stratum counts are rank-based, and the context-scaled
+  score is the registered scale-free secondary. This is a property of the registered weights, stated as such.
+\item \emph{The very sparse stratum holds nine series.} Only 9 of 9,998 complete candidates had zero
+  downloads on at least 90 percent of the stratum window, and the registered rule forbids a larger pool, a
+  transfer of slots or another filter. The family pools all 209 series as registered; every per-stratum table
+  states $n = 9$, and that stratum supports no reading beyond its counts.
+\item \emph{Training contamination, the npm categories.} No numerical source or entity overlap is
+  established for npm by the reviewed model-card disclosures, and package-name familiarity is not evidence
+  about a numerical series; training overlap remains unknown; and the target blocks of 2026-06-03 to
+  2026-08-31 postdate the pinned TimesFM 2.5 revision but are not shown to postdate the pinned Chronos-2 or
+  TimesFM 3 revisions, so no all-model temporal-clean claim is made. The controls that would separate
+  familiarity from skill, the follow-up cohort and the holdout, have not run.
+\item \emph{The synthetic grid's limits.} The generator's positive law is a shifted Poisson, the count
+  hurdle's own family, so the grid is a favorable setting for the count hurdle and an unfavorable one for a
+  foundation model's size forecast; its 18 cells and 30 replicates cover three zero probabilities, three
+  positive means and two persistences and nothing else; its families may be familiar in kind to the models,
+  which is not measurable; and no transfer to a natural domain follows from it. The oracle shows what the
+  score rewards on this generator, not what any model should have done.
+\item \emph{Two external domains, one horizon pair, three origins.} NYC 311 and Wikipedia are registered
+  and not run, so the external result is one domain; the horizons are 7 and 30 days, the 7-day blocks are
+  prefixes of the 30-day blocks, and inference is conditional on three fixed origins. The completion of a
+  model's deciles into a count law is a Study 2 assumption, and the discrete CRPS is unavailable for the one
+  series whose counts defeat the certified bound.
+\item \emph{What a download measures.} npm counts tarball requests, including mirrors and automated
+  clients; the series are a directional indicator of adoption, not a count of users, and a package that is
+  rarely without a request is why the very sparse stratum is short.
+\end{itemize}
+
+\section{What is registered and not run}
+\label{sec:notrun}
+
+\input{shared/s1-followup}
+
+\paragraph{The October holdout.} Study 2's prospective component registered an October 2026 calendar
+holdout on the frozen GitHub panel and the npm panel, with a freeze at 2026-09-28 18:00 UTC and a family of
+18 tests H01 to H18. The freeze deadline passed with no freeze plan prepared, no forecast generated and no
+prediction committed; under the registered rule a late commit fails the prospective gate and no backdating
+is allowed. The dated addition of 2026-10-12, item 1, records the holdout as registered and not run, with no
+result and no settlement retrieval. A holdout on possibly familiar entities would in any case not replace
+Study 1's follow-up cohort or show generalization to unseen ones \citep{moghadasi2026}.
+
+\paragraph{NYC 311 and Wikipedia.} The registered external component had three domains. The dated addition
+of 2026-10-12, item 3, decided before any Study 2 target value was accessed, fixes this paper's external
+family as the eighteen packages-domain tests E01 to E18 and defers NYC 311 requests and English Wikipedia
+pageviews to a later run, where tests E19 to E54 keep their registered definitions and form one family of 36
+with its own single adjustment; they are not merged back into a 54-test correction after the eighteen have
+been seen. Nothing is claimed about either domain.
+
+\paragraph{The November prospective round.} A November 2026 prospective round was considered and not
+registered; it would need its own dated addition before its freeze. Nothing is claimed about it.
+
+\section{Reproducibility}
+
+\input{shared/s1-reproducibility}
+
+Study 2's two runs are under \texttt{reports/study2-synthetic-2026-10-15/} and
+\texttt{reports/study2-npm/run-2026-10-15/}: each holds the run's state with the SHA-256 of every
+checkpoint, the readiness, the implementation commit and source hashes, the package versions and the
+hardware; the inference directory with the family table, the per-entity paired differences, the secondary
+tables, the PIT histograms and a provenance file; the results document and the script that prints its tables
+from the inference files; and a provenance file with the SHA-256 of every file in the directory and of the
+inputs. The synthetic directory adds the per-row score recomputation and its output; the npm directory adds
+the integrity check's outputs, the target pull's ledger and completeness document, the per-day summary of the
+targets with the script that writes it, the script that reproduces each test's direction and raw $p$ from
+the paired differences, and the post-hoc directory with the sensitivity command, its outputs and its
+provenance. The 540 synthetic checkpoints (about 0.9 GB) and the 209 npm checkpoints (338 MB), one JSON
+file per series with every forecast, are not in the tree; their SHA-256 values are in each run's state file,
+and they are to be published as release assets beside \texttt{results.parquet}, so that a fresh clone can
+rerun the inference, the integrity recomputation and the sensitivity. The npm context and target captures
+stay in the ignored raw directory with their hashes in the completeness document; the panel's manifest and
+selection files are in the tree, and the aggregated daily counts of the 209 series are published with the
+paper under the data statement of Appendix~\ref{app:s2panel}. Appendix~\ref{app:s2repro} lists the
+commands.
+
+\input{shared/author-statement}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+
+\input{shared/app-design}
+
+\input{shared/app-v1}
+
+\input{shared/app-repro}
+
+\input{shared/app-tables}
+
+\input{sections/study2-design-detail}
+
+\input{sections/study2-panel-detail}
+
+\section{Study 2 reproducibility, the detail}
+\label{app:s2repro}
+
+\paragraph{What was run, and when.} The synthetic gate passed at 2026-10-15 20:16 UTC against the signed
+readiness, the GPU smoke at the implementation commit and the committed grid manifest, whose generated copy
+equals it; the run and its inference followed, the inference at a HEAD that differs from the implementation
+commit only under the documentation directory, with no uncommitted change under the scripts or the package.
+The npm gate passed twice, at 23:14 UTC before any target request and at 23:26 UTC with the pulled signals
+and their completeness document; the run, the inference and the integrity check followed with HEAD at the
+implementation commit and no uncommitted change. The zero-day sensitivity ran on 2026-10-16 at HEAD
+\texttt{e41fdf2} with no uncommitted change under the inference script or the package. NumPy 2.5.3, SciPy
+1.18.1 and pandas 2.3.3 were used throughout; each provenance file records this.
+
+\paragraph{Commands.} Place the release assets, the checkpoints, in the two run directories, then from the
+repository root with the project's Python environment (PowerShell; a completed run directory is immutable,
+so the inference, integrity and sensitivity commands write to a new directory):
+{\footnotesize
+\begin{verbatim}
+.\.venv\Scripts\python.exe scripts\study2_inference.py synthetic `
+    --run reports\study2-synthetic-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe reports\study2-synthetic-2026-10-15\recompute_scores.py `
+    reports\study2-synthetic-2026-10-15 --out <new file>
+.\.venv\Scripts\python.exe reports\study2-synthetic-2026-10-15\make_tables.py `
+    reports\study2-synthetic-2026-10-15\inference
+.\.venv\Scripts\python.exe scripts\study2_inference.py external_packages `
+    --run reports\study2-npm\run-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe scripts\study2_integrity.py external_packages `
+    --run reports\study2-npm\run-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe reports\study2-npm\run-2026-10-15\make_tables.py `
+    reports\study2-npm\run-2026-10-15\inference
+.\.venv\Scripts\python.exe reports\study2-npm\run-2026-10-15\check_directions.py `
+    reports\study2-npm\run-2026-10-15\inference
+.\.venv\Scripts\python.exe reports\study2-npm\run-2026-10-15\posthoc\sensitivity_zero_days.py `
+    reports\study2-npm\run-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe paper\figures\make_figures.py
+.\.venv\Scripts\python.exe paper\check_numbers.py
+\end{verbatim}}
+The first regenerates the synthetic family and its secondary tables from the saved forecasts without
+refitting; the second recomputes every saved synthetic score; the third prints the synthetic results
+document's tables; the fourth to seventh do the same for the npm run, the integrity check recomputing every
+score and verifying every checkpoint hash; the eighth re-scores the saved npm forecasts without the three
+zero days; the ninth draws the five figures of this paper from the saved CSVs; the tenth asserts every
+number in this paper against the files that \texttt{paper/sources.md} names. The runs themselves, the gate,
+the target pull and the panel pull are not to be repeated: the gate and the pull pass only at the
+implementation commit with the readiness files in place, the pull refuses to write a second snapshot, and a
+new target request needs its own approval. A reader who recomputes a test from the CSVs should parse the
+floats exactly (pandas \texttt{float\_precision="round\_trip"}); the default parser can move a last digit
+and change a rank tie.
+
+\input{sections/study2-appendix}
+
+\end{document}

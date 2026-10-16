@@ -1,0 +1,36 @@
+% Study 2, the npm panel, the remaining detail: the paragraphs moved from study2-panel.tex so that the
+% body stays at the report's length. Input from paper.tex in the appendix; every number traces to
+% sources.md and is asserted by check_numbers.py.
+\providecommand{\qs}{QScore9}
+
+\section{The npm panel: the pull's budget and the data statement}
+\label{app:s2panel}
+
+\paragraph{The pull's budget and the API's limits.} The approval was 36,000 requests and 13 hours,
+cumulative over the inventory, the walk and the context pull. The pull used 30,198 HTTP attempts: 12,943 to
+the registry host, 12,762 to the download-counts host and 4,493 to the replication host, over 52
+invocations totalling 45,508 seconds (12 hours and 38 minutes), from 2026-10-14 00:23 UTC to 2026-10-15 01:57
+UTC. Attempts were spaced at least one second apart, and at least three seconds from 2026-10-14 22:51 UTC,
+when the download API was answering about 20 requests a minute. The download API returned 429 to 2,708
+attempts; three in a row for one key stopped the invocation, which resumed later from the saved captures.
+From 2026-10-14 08:44 UTC the download API timed out or answered 504 until at least 10:25 UTC and answered
+again at 21:37 UTC; each such stop wrote nothing and excluded no candidate. No documented request quota for
+the download-counts API was found in the governing documents, and 30,198 attempts in about 26 hours is far
+below the one stated line, five million requests a month; the redistribution review records the 429 answers
+as the pull repeatedly reaching npm's throttle and honouring it.
+
+\paragraph{Data statement.} The daily counts of the 209 series were obtained from the npm download-counts
+API, \url{https://api.npmjs.org/downloads/range}, between 2026-10-14 and 2026-10-15 UTC, for 2025-09-01 to
+2026-06-02; the targets for 2026-06-03 to 2026-08-31 were obtained from the same API on 2026-10-15 under a separate
+target-access approval (Section~\ref{sec:s2results}). Package names and creation timestamps come from the npm public registry,
+\url{https://registry.npmjs.org}, and from its replication feed, \url{https://replicate.npmjs.com}. A
+download is a tarball request as npm counts it, including mirrors, build servers and automated clients, and
+is a directional indicator rather than a count of users. npm, Inc.\ states no licence for the download
+counts, and its Open-Source Terms of 2022-03-10, read as governing the public registry and its public APIs,
+contain no restriction on their redistribution; replication of registry data through the public
+APIs is expressly allowed. Names are as the registry served them at acquisition and may since have been
+removed. The pull reached npm's rate limit 2,708 times and honoured it. The project's compilation of the
+selection, the derived fields and the documentation is released under CC BY 4.0; no licence is asserted over
+the counts as such. Maintainer names, e-mail addresses, descriptions and raw registry documents are not
+published. The manifest and selection files are in the repository; the aggregated daily counts are
+published with the paper. npm is a registered trademark of npm, Inc.; no npm logo is used.

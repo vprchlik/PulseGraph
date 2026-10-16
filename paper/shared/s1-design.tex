@@ -1,0 +1,32 @@
+\section{The registered design}
+
+The protocol was registered at commit \texttt{5f01769b6be4c32814befdd7cc3395b6dcc386ed} on 2026-09-12,
+before any target history was fetched; the registered file's SHA-256 is
+\texttt{dfe2f4adf5c3fdafaa6f2716ae7c19cd4d52577497041c13b763ba06540f65c5}. The run's gate verified those
+exact bytes. Nothing in the protocol changed after results were seen; later changes are dated additions at its
+end. What follows is the design in brief; Appendix~\ref{app:design} gives the count source and its
+validation, the calendar, the regime rules, the model pins, the score and the inference settings as
+registered.
+
+The question is whether zero-shot foundation models improve probabilistic forecasts of daily GitHub
+star-history counts relative to \lm{} and weekly AutoETS on a panel selected by day-90 activity and
+fetch-time availability; the hypothesis predicts lower repository-level \qs{} for the foundation models, and
+null, adverse, mixed and imprecise results receive the same reporting. The frame is every repository created
+from 2023-01-01 to 2025-02-21 (UTC) with at least 20 GH Archive WatchEvents over the creation day and the
+following 89 days, in three day-90 strata (20 to 99, 100 to 999, at least 1,000 events). Within each stratum
+the frame is placed in a seeded random order (selection seed 20260913), frozen before retrieval; the walk
+stops at 100 repositories with complete retrieved histories, with every skip and its reason logged, and
+acceptance depends on retrieval completeness only. Daily counts come from GitHub's star-history endpoint,
+from creation through the common endpoint 2026-08-31, binned to America/Los\_Angeles days after an hourly
+validation against GH Archive; the target is the surviving-star daily history as retrieved in September
+2026. Three cutoffs, 2025-12-05, 2026-03-05 and 2026-06-03, partition the trailing 270 days into
+non-overlapping 90-day windows; horizons of 7, 30 and 90 days share each cutoff. Three context-only regime
+labels are descriptive. Three frozen foundation models at pinned revisions (Chronos-2, TimesFM 3, TimesFM
+2.5) are compared with two primary references, \lm{}, the mean of the last 28 context days with empirical
+context-level draws, and \aets{}, AutoETS with season length 7 and native intervals; thirteen secondary
+baselines add no test. The score is \qs{}, twice the mean pinball loss over the nine deciles and the target
+days, a proper score for the nine quantiles. Window scores are averaged within repository and horizon,
+repositories are weighted equally, and each of the 18 declared comparisons (three models, two references,
+three horizons) reports the mean paired difference with a repository-bootstrap interval, the median
+difference and a two-sided Wilcoxon signed-rank test, with one Benjamini-Hochberg adjustment at $q = 0.05$
+over the 18 tests.

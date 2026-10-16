@@ -1,0 +1,42 @@
+\section{The achieved panel}
+
+The frame held 148,550 eligible repositories: 100,687 in the 20 to 99 stratum, 46,811 in 100 to 999, and
+1,052 in the 1,000-plus stratum (Table~\ref{tab:panel}). The seeded walk accepted 100 per stratum and skipped
+470 repositories, all because the stable ID no longer resolved to a public repository at fetch time (466 with
+HTTP 404) or was forbidden (4 with HTTP 403). The panel is therefore repositories still public in September
+2026 with complete retrievable histories; equal repository weighting describes this panel, not all of GitHub.
+The daily signal holds 289,316 repository-days with every Los Angeles calendar day from creation through
+2026-08-31 observed; no missing bin was imputed. The panel is evaluated in its mature phase: the creation
+dates run from 2023-01-02 to 2025-02-19, so every repository was created at least nine months before the
+first cutoff, and nothing here is a launch forecast.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{The achieved panel by day-90 stratum: the frame size, the accepted and skipped counts, the median
+and the 10th and 90th percentiles of the survivor ratio, the number of repositories with no star from
+2026-06-03 to 2026-08-31, and the median star count over those 90 days. The survivor ratio divides the
+endpoint's first 90 Los Angeles days by the gross archive count over the UTC creation day and the next 89
+days; the two calendars differ, so the ratio is a diagnostic, not an exact retention rate. Skips are
+repositories encountered before the stratum's stop.}
+\label{tab:panel}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Stratum & Frame & Accepted & Skipped & Ratio median & P10 & P90 & Zero, last 90 & Median, last 90 \\
+\midrule
+20--99 & 100,687 & 100 & 98 & 0.968 & 0.723 & 1.075 & 52 & 0 \\
+100--999 & 46,811 & 100 & 348 & 1.004 & 0.885 & 1.079 & 22 & 4 \\
+1000+ & 1,052 & 100 & 24 & 1.006 & 0.914 & 1.049 & 1 & 39 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Over the 900 repository-cutoff windows, the context-only regime labeler assigned 320 windows from 140
+repositories to ``inactive recently'', 572 windows from 228 repositories to ``other active'', and 8 windows
+from 7 repositories to ``recent surge''. The surge regime is too thin to say anything about bursts, and the
+report does not try.
+
+The registered run started 2026-09-13 07:54 UTC at implementation commit
+\texttt{ca67dd22ea49377ee1fd074aed57b4b7460c84f1} after the signed readiness review, and completed in
+18,662 seconds (5 hours and 11 minutes) with 48,600 forecast rows (300 repositories, 3 cutoffs, 3 horizons,
+18 models), no failed window and no resume. The integrity check recomputed every score and verified all 300
+checkpoint hashes.

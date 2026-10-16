@@ -97,26 +97,6 @@ hurdle with a positive law that owes nothing to a foundation model. Current refe
 hurdle-count smoothers and of a pooled hurdle with forgetting exist outside foundation models
 \citep{damato2026, bai2026}; neither is run here.
 
-\paragraph{Scores.} \qs{} is primary, as in Study 1: twice the mean pinball loss over the nine deciles and
-all target days, averaged over origins within series and horizon, with every series then weighted equally
-within its domain; domains are never pooled. Four secondary scores are declared. The scaled score divides
-each window's \qs{} by $\max(1, \bar{y}_{\text{context}})$, the mean of the full allowed context, before the
-same averaging. The occurrence Brier score is $(p - \mathbf{1}[y > 0])^2$. The discrete CRPS is
-$\sum_{k \ge 0} (F(k) - \mathbf{1}[y \le k])^2$ for a forecast with an integer-supported distribution of
-finite first moment; the registered numerical rule requires a certified residual bound below $10^{-8}$ by
-$k = 1{,}000{,}000$ and forbids truncation or a sampled substitute. The addition of 2026-10-15 fixes what
-happens when that bound is not attained: the forecast's CRPS is recorded as unavailable with that reason and
-counted in the valid denominators the protocol already requires, and the run continues; the limit, the
-tolerance and the certification are unchanged. The case that prompted it is one npm series whose context
-runs into the millions a day (Section~\ref{sec:s2panel}), identified from the frozen context alone before
-any target was opened. The randomized PIT draws one recorded uniform within each CDF jump and gives
-calibration histograms with no significance claim. Raw native deciles have no identified occurrence
-probability and no full CDF, so their Brier, CRPS and PIT fields are unavailable by construction; AutoETS's
-continuous intervals are not forced through the integer sum. Every secondary score reports its availability
-and its denominator. The three exact accounting parts of Study 1's post-hoc accounting (Table~
-ef{tab:posthoc}) are
-reported for every comparison with the full horizon denominator.
-
 \paragraph{The confirmatory family.} The registration declared one external family of 54 tests: for each of
 three domains, three models and two horizons, the hurdle against its own completed control, the hurdle
 against \hc{}, and the raw deciles against \lm{}, that is $3 \times 3 \times 2 \times 3 = 54$. The addition
@@ -133,7 +113,8 @@ two-sided approximate Wilcoxon signed-rank test on series averages omits zero di
 1$ when every difference is zero; medians, wins, ties and losses and complete denominators are reported;
 inference is conditional on the fixed dates. Every other contrast, the strata, the scaled score, the Brier
 score, the CRPS, the PIT, skill, concentration and the zero-day and positive-day accounting are secondary and
-add no test. The tuples of Table~\ref{tab:s2family} are committed as a declaration file that the execution
+add no test; the secondary scores, the seeds, the gate, the holdout and the contamination ledger are given
+in Appendix~\ref{app:s2design}. The tuples of Table~\ref{tab:s2family} are committed as a declaration file that the execution
 gate compares to the protocol before a run.
 
 \begin{table}[t]
@@ -208,42 +189,3 @@ S06 & synthetic & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\paragraph{Seeds, provenance and the gate.} Six root seeds are registered: selection 20260914, forecasts
-20260915, PIT 20260916, bootstrap 20260917, synthetic 20260918 and prospective 20260919; every stream is
-derived from its root through SHA-256 of canonical identifiers, never from a process-randomized hash, and
-each derived stream is recorded. Before a component runs, its gate requires the Study 2 registration commit
-and the full protocol hash at that commit, the unchanged Study 1 bytes, the exact implementation commit and
-source hashes, package versions and model revisions, the complete ordered manifest, the seeds, the calendar
-and source semantics, the approved extraction budget and runtime, and a GPU smoke of the current
-implementation; it validates the comparison lists as declared and refuses an unresolved family, a missing
-seed, an unpinned model or a missing registration. For this paper's external component the gate, changed in
-a commit that cites the addition of 2026-10-12, requires one npm panel bound by hash to the frozen panel
-files and no holdout freeze; the registered 54-test component and its three-panel requirement are unchanged.
-Leakage tests perturb, permute and extend every series on and after each cutoff and assert, with an
-observed-date spy, unchanged selection, strata, scales and forecasts. Models stay resident per invocation,
-whole series are checkpointed, a failed window stops the run, and a resume re-attempts the failure rather
-than skipping it, under Study 1's batch-one, under-8-GB discipline on the same GPU.
-
-\paragraph{The holdout, registered and not run.} The prospective component froze nothing. It registered an
-October 2026 calendar holdout on the unchanged Study 1 GitHub panel and the accepted npm panel: a freeze at
-2026-09-28 18:00 UTC of weights, transformations, baselines, manifests and forecast arrays with committed
-hashes before the first target day, target blocks of October 1 to 7 and October 1 to 30, settlement
-retrievals from 2026-10-15 and 2026-11-07, and a family of 18 tests H01 to H18 at horizon 30 with one
-correction. The freeze deadline passed with no freeze plan, no approval, no forecast and no committed
-prediction; under the registered rule a late commit fails the prospective gate and no backdating or
-reconstruction is allowed, so the addition of 2026-10-12 records the holdout as registered and not run, with
-no result and no settlement retrieval. The same addition resets the npm readiness clock once, to 2026-10-20
-23:59 UTC, because inactivity is not the source failure the PyPI rule names; the clock was met
-(Section~\ref{sec:s2panel}).
-
-\paragraph{Contamination.} The protocol keeps three categories for every domain and component: known
-source or entity overlap, unknown overlap, and whether the targets fall after the frozen checkpoints were
-available. For npm, no numerical source or entity overlap is established by the reviewed model-card
-disclosures, and package-name familiarity is not evidence about a numerical series; training overlap
-remains unknown; and the retrospective target blocks of 2026-06-03 to 2026-08-31 are mixed by model
-availability, since they postdate the pinned TimesFM 2.5 revision but are not shown to postdate the pinned
-Chronos-2 or TimesFM 3 revisions, so no all-model temporal-clean claim is made. For the synthetic component,
-the generator families may be familiar in kind and that familiarity is not measurable; the realizations are
-new, seeded and generated after the weights were frozen, and no transfer claim to a natural domain follows
-from them. No author-disclosed complete-corpus training cutoff exists for any of the three models.

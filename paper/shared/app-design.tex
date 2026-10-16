@@ -1,0 +1,62 @@
+\section{The registered design, the remaining detail}
+\label{app:design}
+
+\paragraph{Count source and validation.} Daily counts come from GitHub's star-history endpoint
+\citep{github-star-history-2026, github-api-star-history}, released 2026-09-04, from creation through the
+common endpoint 2026-08-31. GH Archive supplies the frame, not the counts, because its WatchEvent capture
+degraded from mid-2025 \citep{gharchive-issue-320}. Before the freeze, 20 validation repositories created
+before 2023 (and so outside the study frame) were fetched and compared hourly with deduplicated GH Archive
+WatchEvents over 2024. Over the 365 matched days, America/Los\_Angeles calendar days with daylight saving gave
+the lowest mean absolute daily difference for 20 of 20 repositories against UTC and 18 of 20 against fixed
+UTC$-$8, with two repositories tied between the Los Angeles and fixed-offset calendars (pooled mean absolute
+difference 1.975 against 2.065 and 2.713); the author accepted Los Angeles days as the calendar. The endpoint
+reports stars that still exist at retrieval, dated by when they were given: the 2024 endpoint total is below
+the archive total for 17 of 20 repositories. The target is therefore the surviving-star daily history as
+retrieved in September 2026, not gross additions.
+
+\paragraph{Calendar.} The common endpoint $E$ is 2026-08-31. Cutoffs are $c_j = E - (j \times 90 - 1)$
+days for $j = 3, 2, 1$: 2025-12-05, 2026-03-05 and 2026-06-03. Context ends the day before the cutoff;
+targets run from the cutoff for 7, 30 or 90 days. The three 90-day windows partition the trailing 270 days
+and do not overlap; shorter horizons use the same cutoffs, so horizons share targets and are not independent.
+Every model has at least 90 context days, uses only the repository's own history, and refits (for the
+baselines) on context only.
+
+\paragraph{Regimes.} Three context-only labels, descriptive and pooled for inference: ``inactive recently''
+when the 28 days before the cutoff sum to zero; ``recent surge'' when the last seven days hold at least seven
+stars and their daily rate is at least three times the larger of the preceding four weeks' daily rate and one;
+``other active'' otherwise. Tests perturb, permute and extend data on and after each cutoff and assert
+unchanged labels and strata.
+
+\paragraph{Models.} Three frozen foundation models with exact repository revisions:
+\texttt{amazon/chronos-2} at \texttt{29ec3766d36d6f73f0696f85560a422f50e8498c} (weights and package
+Apache-2.0) \citep{chronos2-weights, chronos2-2025};
+\texttt{google/timesfm-3.0-pytorch} at \texttt{43046b85ec22d584a13f8098c2ed39c889e129c2} (weights under the
+TimesFM Non-Commercial License v1.0, package Apache-2.0) \citep{timesfm3-card, timesfm-license};
+\texttt{google/timesfm-2.5-200m-pytorch} at \texttt{1d952420fba87f3c6dee4f240de0f1a0fbc790e3} (Apache-2.0)
+\citep{timesfm25-card}. All run univariate, batch size one, a 2,048-day maximum context, on one GPU. Two
+primary references: \lm{}, the mean of the last 28 context days with 200 empirical context-level draws, and
+\aets{}, StatsForecast AutoETS with season length 7 and native intervals \citep{statsforecast-2.1.1}. Thirteen
+secondary baselines: AutoARIMA and AutoTheta with weekly season, a negative-binomial local level with a 28-day
+mean and context-moment dispersion, local means with lookbacks 7, 14, 56 and 90, and the version 1 families
+(last value, weekly naive, horizon-dependent seasonal naive, 30-day linear trend, nonseasonal Holt, LightGBM).
+
+\paragraph{Score.} The primary score is \qs{}, twice the mean pinball loss over the nine deciles
+$\tau \in \{0.1, \dots, 0.9\}$ and the $h$ target days,
+\[
+\qs{} = \frac{2}{9h} \sum_{t=1}^{h} \sum_{\tau} \max\{\tau (y_t - q_{t,\tau}),\, (\tau - 1)(y_t - q_{t,\tau})\},
+\]
+defined for all-zero targets and equal to the weighted interval score at the matching levels
+\citep{bracher2021}; it is a proper score for the nine quantiles \citep{gneiting2007}. Deciles are native or
+analytic where a model supplies them and linear empirical quantiles of 200 draws otherwise; negative
+forecasts are clipped to zero and crossings repaired by cumulative maxima, with both repairs recorded. No
+tails beyond the supported deciles are invented for either TimesFM.
+
+\paragraph{Inference.} Window scores are averaged within repository and horizon, then repositories are
+weighted equally. For each of the 18 declared comparisons (three models, two references, three horizons)
+the paired difference $d$ is model minus reference, so negative favors the model. The mean of $d$ carries a
+pointwise 95 percent percentile interval from 20,000 bootstrap replicates of whole repositories (seed
+20260914). A two-sided approximate Wilcoxon signed-rank test across repository averages, omitting zero
+differences, tests a zero-centered symmetric null; its location interpretation requires symmetry and it is
+not a test of the mean. Benjamini-Hochberg adjustment is applied once at $q = 0.05$ over the 18 tests, with
+its usual dependence assumptions. Strata, regimes, other lookbacks, calibration and the scale review are
+declared secondary and add no test. Seeds: selection 20260913, forecast 20260912, bootstrap 20260914.

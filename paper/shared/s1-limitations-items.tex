@@ -1,0 +1,34 @@
+\item \emph{A fetch-time survivor panel.} The 470 skips were repositories that no longer resolved publicly in
+  September 2026. Equal weighting describes the panel of repositories still public with complete histories,
+  not all repositories created in the window.
+\item \emph{Surviving stars, not gross additions.} The endpoint reports stars that still exist at retrieval.
+  In the 2024 validation the endpoint total was below the archive total for 17 of 20 repositories; for the
+  15 large projects the ratio ran from 0.728 to 0.994, with 13 of 15 at least 5 percent below. The study
+  target is the surviving-star history; no correction is applied, and later unstars can change the apparent
+  past.
+\item \emph{Los Angeles day bins.} The endpoint's day boundary was resolved to America/Los\_Angeles days by
+  validation, not documented by GitHub; the validation also showed that the transition days around daylight
+  saving do not uniformly favor one calendar.
+\item \emph{Three windows per repository, and horizons sharing targets.} Inference is conditional on the
+  fixed calendar of three cutoffs; the 7- and 30-day targets are prefixes of the 90-day targets, so the
+  nine cells per reference are not independent.
+\item \emph{Pointwise intervals and BH.} The bootstrap intervals are pointwise, not simultaneous, and the
+  Benjamini-Hochberg adjustment carries its usual dependence assumptions.
+\item \emph{The signed-rank symmetry assumption.} The Wilcoxon test's location interpretation requires
+  symmetric differences, which these are not; it is reported as registered and is not a test of the mean.
+\item \emph{AutoETS as a weak uncertainty reference.} Its 80 percent intervals cover about 99 percent of
+  target days; a model can beat it on nearly every repository by being less wide. Read with the coverage
+  results, the comparison against the local mean is the more informative of the two; that is a reading made
+  after the results, and both comparisons stay reported as registered.
+\item \emph{Training contamination unresolved.} No author-disclosed complete-corpus training cutoff exists
+  for any of the three models; the model cards name specific sources with dates, which do not bound the
+  whole corpus. What can be said is bound by availability, per model. The targets, 2025-12-05 to 2026-08-31,
+  postdate the pinned TimesFM 2.5 revision, dated 2025-10-02, but are not shown to postdate the pinned
+  Chronos-2 revision, dated 2026-06-05, or the pinned TimesFM 3 revision, dated 2026-09-02 with weights
+  uploaded 2026-08-24; these are repository revision dates, not training cutoffs. Every repository's history
+  before the cutoffs may be familiar to all three models, and a later test window on familiar entities does
+  not establish generalization to unseen ones \citep{moghadasi2026}. The controls are Study 1's registered
+  follow-up cohort and the lapsed October holdout; neither has run (Section~\ref{sec:notrun}).
+\item \emph{The mature-phase calendar.} Every repository is forecast between nine and 41 months after
+  creation. Nothing here concerns launches or the days after a release.
+\item \emph{Version 1 not recomputed.} The version 1 numbers are quoted from preserved documents.
