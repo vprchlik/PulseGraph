@@ -1,6 +1,7 @@
-% Study 2, the registered design as it stands after the dated additions of 2026-10-12 and 2026-10-15.
-% Input from main.tex in the extension; every number traces to sources.md and is asserted by
-% check_numbers.py. Macros are provided in case the file is compiled before main.tex defines them.
+% Study 2, the registered design as it stands after the dated additions of 2026-10-12, 2026-10-15 and
+% 2026-10-16. Input from paper.tex; every number traces to sources.md and is asserted by check_numbers.py.
+% The frame, completion, baseline and family detail is in study2-design-detail.tex (Appendix E). Macros are
+% provided in case the file is compiled before paper.tex defines them.
 \providecommand{\lm}{\texttt{local\_mean\_28}}
 \providecommand{\aets}{\texttt{autoets\_weekly}}
 \providecommand{\qs}{QScore9}
@@ -9,42 +10,25 @@
 \section{Study 2: the registered design}
 \label{sec:s2design}
 
-What follows is the design as registered on 2026-09-14 at commit \texttt{df55867}, as it stands after two
-dated additions at the protocol's end: the addition of 2026-10-12, committed at \texttt{8db0d73}, which
-records the lapses of September 2026 and fixes the families of this paper, and the addition of 2026-10-15,
-committed at \texttt{5be2ce9}, which fixes the availability rule for one secondary score. Both additions
-were decided before any Study 2 target value was accessed; the status file each cites records that no
-target had been opened. Nothing above either addition's heading changed, and the registered bytes of Study 1
-and of the Study 2 addition remain byte prefixes of the protocol file.
+What follows is the design as registered on 2026-09-14 at commit \texttt{df55867}, as it stands after the three
+dated additions that bear on it: the addition of 2026-10-12, committed at \texttt{8db0d73}, which
+records the lapses of September 2026 and fixes the families of this paper; the addition of 2026-10-15,
+committed at \texttt{5be2ce9}, which fixes the availability rule for one secondary score, both decided
+before any Study 2 target value was accessed; and the addition of 2026-10-16, committed at \texttt{1c09ac8},
+made after the npm scores were seen, which changes nothing in the design and records how three zero days
+served by the source are handled (Section~\ref{sec:s2results}). Nothing above any addition's heading
+changed, and the registered bytes remain byte prefixes of the protocol file. The frame and sampling rule,
+the completion, the baselines, the family tables, the secondary scores, the seeds and the gate are in
+Appendix~\ref{app:s2design}.
 
-\paragraph{Domains.} The registration names three external domain slots: package downloads, with npm as
-the primary source and PyPI through ClickPy as its sole operational fallback; NYC 311 requests by problem
-type and community board; and English Wikipedia pageviews, a domain with known training-source overlap for
-all three model families. Each slot aims at 300 series, 100 in each of three context-zero-fraction strata,
-$[0, 0.5)$, $[0.5, 0.9)$ and $[0.9, 1]$, computed on the last 90 context days; all-zero contexts are
-eligible. The protocol calls this a balanced stress-test panel, not an estimate of a platform's natural
-prevalence of sparsity. The addition of 2026-10-12 defers NYC 311 and Wikipedia to a later run, for calendar
-and resource reasons decided before any target value was accessed, so this paper's external component is the
-packages domain alone (Section~\ref{sec:s2panel}). npm's download counts measure tarball requests as npm
-counts them, including mirrors and automated clients, not human adoption.
-
-\paragraph{Frame and sampling.} The npm frame is the frozen inventory of package names, scopes included,
-from the registry's replication feed, with a recorded creation time before the context start $A$; no
-popularity search, download leaderboard or other popularity filter is permitted. Sampling is by hash:
-with selection seed 20260914, each key's digest is the SHA-256 of the canonical JSON array of the seed, the
-domain, a stage label and the key, and keys are sorted by digest. With stage ``candidate'' the first
-$\min(10{,}000, N)$ metadata-eligible keys form a fixed candidate pool; the addition of 2026-10-12 reads
-this rule as a walk of the inventory in hash order that requests creation metadata only until 10,000
-eligible packages are found. The context of every candidate is inspected only from $A$ through the day
-before the first cutoff, for completeness, and its last 90 days for the stratum. Within each stratum, with
-stage ``selection'', the first 100 complete candidates in hash order are taken, keeping the full order, the
-candidate-pool inclusion probability, the frame and stratum sizes and every exclusion with its reason. A
-stratum with fewer than 100 complete candidates keeps what it has: no slot transfers between strata, no
-larger pool and no alternative filter, and a reduced panel is reported as such. Acceptance is frozen on
-context and source-coverage metadata before any target value is exposed; a later incomplete target stops
-the domain rather than replacing or deleting a series, and no external confirmatory inference runs on a
-failed domain. Completeness means that every required calendar day has verified exposure; missing records
-are never zero-filled.
+\paragraph{Domains and panels.} The registration names three external domain slots: package downloads,
+with npm as the primary source and PyPI through ClickPy as its sole operational fallback; NYC 311 requests;
+and English Wikipedia pageviews. Each slot aims at 300 series, 100 in each of three context-zero-fraction
+strata, $[0, 0.5)$, $[0.5, 0.9)$ and $[0.9, 1]$, computed on the last 90 context days, which the protocol
+calls a balanced stress-test panel, not an estimate of a platform's natural prevalence of sparsity. Series
+are drawn by hash from a frozen frame with no popularity filter; a stratum with fewer than 100 complete
+candidates keeps what it has, with no transfer of slots. The addition of 2026-10-12 defers NYC 311 and
+Wikipedia, so this paper's external component is the packages domain alone (Section~\ref{sec:s2panel}).
 
 \paragraph{Calendar.} The retrospective calendar has context start $A$ = 2025-09-01, common endpoint $E$ =
 2026-08-31 and $K = 3$ cutoffs at $c_j = E - (30j - 1)$ days for $j = 3, 2, 1$: 2026-06-03, 2026-07-03 and
@@ -57,135 +41,51 @@ sees another series or any covariate, and no horizon is counted as an independen
 \paragraph{Models and variants.} The three foundation models are the Study 1 pins: \texttt{amazon/chronos-2}
 at \texttt{29ec3766d36d6f73f0696f85560a422f50e8498c}, \texttt{google/timesfm-3.0-pytorch} at
 \texttt{43046b85ec22d584a13f8098c2ed39c889e129c2} and \texttt{google/timesfm-2.5-200m-pytorch} at
-\texttt{1d952420fba87f3c6dee4f240de0f1a0fbc790e3}, run univariate at batch size one on one GPU. For each
-model and origin one base forecast is saved and three variants are scored from it, with no refitting:
-\emph{raw}, the nine native deciles after Study 1's clipping and crossing repair, with no invented tails;
-\emph{completed}, the count distribution obtained from those deciles by the fixed completion below, which is
-the control; and \emph{hurdle}, the same completed law with its zero mass replaced by the context-only
-occurrence estimate.
+\texttt{1d952420fba87f3c6dee4f240de0f1a0fbc790e3}, pinned on 2026-09-12 and run univariate at batch size one
+on one GPU. For each model and origin one base forecast is saved and three variants are scored from it, with
+no refitting: \emph{raw}, the nine native deciles after Study 1's clipping and crossing repair; \emph{completed},
+the count distribution $F$ obtained from those deciles by a fixed completion (linear interpolation through
+the origin and the nine knots, an exponential upper tail with a finite first moment, half-up rounding to a
+count), which is the control; and \emph{hurdle}, the same completed law with its zero mass replaced by the
+28-day Jeffreys occurrence estimate $p$, so that $H(0) = 1 - p$ and $H(k) = 1 - p + p\, G_+(k)$ with $G_+$
+the model's own positive conditional law $[F(k) - F(0)] / [1 - F(0)]$. The hurdle and completed variants
+differ in nothing else. $G_+$ is the completed marginal law truncated at one, not a separately produced size
+forecast; Section~\ref{sec:discussion} returns to this.
 
-\paragraph{Completion.} From the nine repaired deciles $q_{0.1}, \dots, q_{0.9}$ the quantile function
-$Q(u)$ is the linear interpolation through $(0, 0)$ and the nine knots for $0 \le u \le 0.9$, and for
-$0.9 < u < 1$ an exponential upper tail $Q(u) = q_{0.9} + s \log(0.1 / (1 - u))$ with scale
-$s = \max(1, q_{0.9} - q_{0.8})$, which has a finite first moment. The count is
-$Y = \max(0, \lfloor Q(U) + 0.5 \rfloor)$ for $U$ uniform on $(0, 1)$, half-up rounding, and the
-right-continuous count CDF $F(k) = P(Y \le k)$ carries the atoms that flat segments produce. Masses and
-quantiles are computed by deterministic inversion, not by sampling the tails. The completed control is
-exactly $F$. Whenever $F(0) < 1$ the hurdle variant uses the model's own positive conditional law
-$G_+(k) = [F(k) - F(0)] / [1 - F(0)]$ for $k \ge 1$ and the forecast $H(0) = 1 - p$,
-$H(k) = 1 - p + p\, G_+(k)$, with $p$ the 28-day Jeffreys estimate below; its quantile is zero for
-$\tau \le 1 - p$ and otherwise the inverse of $G_+$ at $(\tau - 1 + p) / p$. Only when $F(0) = 1$ is
-$G_+$ a point mass at one, and that condition is recorded. The wrapper changes occurrence and keeps the
-completed positive law whenever one exists, so the hurdle and completed variants differ in nothing else.
+\paragraph{Baselines and comparators.} Seven baselines are scored at every origin: \lm{} and \aets{} from
+Study 1, a negative-binomial local level, a Poisson, the two count hurdles and the dynamic count. The two
+count hurdles share the foundation-model hurdle's occurrence rule and differ from it in the positive law
+alone: \hc{} fits $1 + \text{Poisson}(\lambda)$ to the positive days of the last 28, and
+\texttt{hurdle\_empirical\_28}, declared secondary, uses the empirical distribution of those values. The
+dynamic count, \texttt{dynamic\_count}, has its own discounted occurrence estimate and its own
+negative-binomial positive law. None of the three has a positive law from a foundation model.
 
-\paragraph{Baselines.} Seven baselines are scored at every origin. \lm{} and \aets{} are the Study 1
-implementations. \texttt{nb\_local\_level\_28} is Study 1's negative-binomial local level with the last-28
-mean and full-context moment dispersion. \texttt{poisson\_28} is a Poisson with the last-28-day mean.
-\hc{} is the fixed count hurdle: occurrence $p = (n_{+} + 1/2) / 29$ from the number of positive days
-$n_{+}$ among the last 28 context days, constant over the horizon, and positive law
-$1 + \text{Poisson}(\lambda)$ with $\lambda$ the mean of $y - 1$ over those positive days;
-\texttt{hurdle\_empirical\_28} uses
-the same occurrence estimate with the empirical distribution of the positive values, declared secondary.
-With fewer than two positive days in the last 28, both count hurdles use a point mass at one for the
-positive law while the occurrence estimate stands; the foundation-model hurdle never uses that rule.
-\texttt{dynamic\_count} is a discounted Beta-Bernoulli and Gamma-Poisson hurdle: four parameters start at
-$0.5$, are multiplied by $0.98$ before each context observation and updated by it, and at lead $l$ give
-occurrence $a_B / (a_B + b_B)$ and a shifted negative-binomial positive size with the discount compounded to
-$0.98^{\,l-1}$; it falls back to \hc{} with fewer than two recent positives. The count hurdles and the
-dynamic count are the registered matched comparators: the same occurrence rule as the foundation-model
-hurdle with a positive law that owes nothing to a foundation model. Current reference implementations of
-hurdle-count smoothers and of a pooled hurdle with forgetting exist outside foundation models
-\citep{damato2026, bai2026}; neither is run here.
-
-\paragraph{The confirmatory family.} The registration declared one external family of 54 tests: for each of
-three domains, three models and two horizons, the hurdle against its own completed control, the hurdle
+\paragraph{The confirmatory families.} The registration declared one external family of 54 tests, for each
+of three domains, three models and two horizons the hurdle against its own completed control, the hurdle
 against \hc{}, and the raw deciles against \lm{}, that is $3 \times 3 \times 2 \times 3 = 54$. The addition
 of 2026-10-12 fixes this paper's external family as the eighteen packages-domain tests E01 to E18, exactly as
-registered and listed in Table~\ref{tab:s2family}, with one Benjamini-Hochberg adjustment at $q = 0.05$ over
-those eighteen. The family is eighteen because the two deferred domains contribute no test before this
-paper, because the registered rule that only the holdout's npm-unavailability clause may reduce a family is
-amended for this one case by the addition, and because tests E19 to E54 keep their registered definitions
-and form, when NYC 311 and Wikipedia are run, one family of 36 with its own single correction; they are not
-merged back into a 54-test correction after the eighteen have been seen. The settings are Study 1's: the
-paired difference is model minus reference, so negative favors the model; the mean carries a pointwise 95
-percent percentile interval from 20,000 bootstrap replicates of whole series (bootstrap seed 20260917); a
-two-sided approximate Wilcoxon signed-rank test on series averages omits zero differences and reports $p =
-1$ when every difference is zero; medians, wins, ties and losses and complete denominators are reported;
-inference is conditional on the fixed dates. Every other contrast, the strata, the scaled score, the Brier
-score, the CRPS, the PIT, skill, concentration and the zero-day and positive-day accounting are secondary and
-add no test; the secondary scores, the seeds, the gate, the holdout and the contamination ledger are given
-in Appendix~\ref{app:s2design}. The tuples of Table~\ref{tab:s2family} are committed as a declaration file that the execution
-gate compares to the protocol before a run.
+registered and listed in Appendix Table~\ref{tab:s2family}, with one Benjamini-Hochberg adjustment at
+$q = 0.05$ over those eighteen; E19 to E54 form, when NYC 311 and Wikipedia are run, one family of 36 with
+its own single correction. The settings are Study 1's: the paired difference is model minus reference, so
+negative favors the model; the mean carries a pointwise 95 percent percentile interval from 20,000 bootstrap
+replicates of whole series (bootstrap seed 20260917); a two-sided approximate Wilcoxon signed-rank test on
+series averages omits zero differences; medians, wins, ties and losses are reported; inference is
+conditional on the fixed dates. The synthetic family is six tests at horizon 30, S01 to S06 (Appendix
+Table~\ref{tab:s2synfamily}): each model's hurdle against its own completed control and against \hc{},
+pooling all 18 cells with equal cell weight, one adjustment at $q = 0.05$. Every other contrast, the strata,
+the scaled score, the Brier score, the CRPS, the PIT and the accounting parts, is secondary and adds no
+test. Because both families pool their entities with equal weight, 209 series on an unscaled score and 18
+cells, each confirmatory answer speaks for whatever dominates its pool; Section~\ref{sec:s2results} reads
+the declared strata beside them.
 
-\begin{table}[t]
-\centering\small
-\caption{The external confirmatory family of this paper, E01 to E18, as registered for the packages domain.
-The suffix \texttt{\_raw} is the repaired native nine deciles, \texttt{\_completed} the fixed completion of
-those deciles, \texttt{\_hurdle} the completion with the 28-day Jeffreys occurrence probability in place of
-its zero mass.}
-\label{tab:s2family}
-\begin{tabular}{llllr}
-\toprule
-ID & Domain & Model variant & Reference & Horizon \\
-\midrule
-E01 & packages & chronos2\_hurdle & chronos2\_completed & 7 \\
-E02 & packages & chronos2\_hurdle & hurdle\_count\_28 & 7 \\
-E03 & packages & chronos2\_raw & local\_mean\_28 & 7 \\
-E04 & packages & chronos2\_hurdle & chronos2\_completed & 30 \\
-E05 & packages & chronos2\_hurdle & hurdle\_count\_28 & 30 \\
-E06 & packages & chronos2\_raw & local\_mean\_28 & 30 \\
-E07 & packages & timesfm3\_hurdle & timesfm3\_completed & 7 \\
-E08 & packages & timesfm3\_hurdle & hurdle\_count\_28 & 7 \\
-E09 & packages & timesfm3\_raw & local\_mean\_28 & 7 \\
-E10 & packages & timesfm3\_hurdle & timesfm3\_completed & 30 \\
-E11 & packages & timesfm3\_hurdle & hurdle\_count\_28 & 30 \\
-E12 & packages & timesfm3\_raw & local\_mean\_28 & 30 \\
-E13 & packages & timesfm2p5\_hurdle & timesfm2p5\_completed & 7 \\
-E14 & packages & timesfm2p5\_hurdle & hurdle\_count\_28 & 7 \\
-E15 & packages & timesfm2p5\_raw & local\_mean\_28 & 7 \\
-E16 & packages & timesfm2p5\_hurdle & timesfm2p5\_completed & 30 \\
-E17 & packages & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 \\
-E18 & packages & timesfm2p5\_raw & local\_mean\_28 & 30 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{The synthetic grid.} The synthetic component separates occurrence, positive size and persistence
-in a generator whose law is known. With $\pi = 1 - z$, the occurrence indicator $Z_t$ is a stationary
-Markov Bernoulli chain with $P(Z_t = 1 \mid Z_{t-1} = a) = \pi + \rho\,(a - \pi)$ and $Z_0 \sim
-\text{Bernoulli}(\pi)$; independently $X_t \sim \text{Poisson}(\mu_{+} - 1)$ and $Y_t = Z_t (1 + X_t)$. The
-grid is the full product of $z \in \{0.2, 0.8, 0.95\}$, $\mu_{+} \in \{1, 5, 25\}$ and $\rho \in \{0,
-0.8\}$: 18 cells, each with 30 independent replicates of 270 observations, the first context 180 days,
-origins at indices 180, 210 and 240, horizons 7 and 30, so 540 series in all. Within a replicate the same
-base uniforms serve every cell, as common random numbers, with separate streams for occurrence and size;
-replicates are independent of one another. The generator manifest, with the synthetic root seed 20260918
-and the per-replicate streams, is committed and must equal the generated grid before any series is
-produced. The same models, completion, baselines and scores as the external study apply. An oracle that
-knows the generator parameters and the last observed $Z$, with occurrence $\pi + \rho^{\,l} (Z_{\text{last}}
-- \pi)$ at lead $l$ and positive law $1 + \text{Poisson}(\mu_{+} - 1)$, is a diagnostic: its CDF mass,
-quantile inversion and expected pinball optimality were verified against the generator's known law before
-any model run, it need not win every finite sample, and it is neither a competitor nor a confirmatory
-contrast. The synthetic family is six tests at horizon 30, S01 to S06 (Table~\ref{tab:s2synfamily}): each
-model's hurdle against its own completed control and against \hc{}, pooling all 18 cells with equal cell
-weight, one Benjamini-Hochberg adjustment at $q = 0.05$. Origins are averaged within each replicate and
-cell, then cells within replicate; the paired test and the bootstrap use the 30 replicate blocks, each
-carrying all 18 cells, with the external family's settings. Seven-day scores and individual cells are
-secondary, and no cell or generator was chosen because it reproduces Study 1.
-
-\begin{table}[t]
-\centering\small
-\caption{The synthetic confirmatory family, S01 to S06, as registered.}
-\label{tab:s2synfamily}
-\begin{tabular}{llllr}
-\toprule
-ID & Domain & Model variant & Reference & Horizon \\
-\midrule
-S01 & synthetic & chronos2\_hurdle & chronos2\_completed & 30 \\
-S02 & synthetic & chronos2\_hurdle & hurdle\_count\_28 & 30 \\
-S03 & synthetic & timesfm3\_hurdle & timesfm3\_completed & 30 \\
-S04 & synthetic & timesfm3\_hurdle & hurdle\_count\_28 & 30 \\
-S05 & synthetic & timesfm2p5\_hurdle & timesfm2p5\_completed & 30 \\
-S06 & synthetic & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\paragraph{The synthetic grid.} With $\pi = 1 - z$, the occurrence indicator $Z_t$ is a stationary Markov
+Bernoulli chain with $P(Z_t = 1 \mid Z_{t-1} = a) = \pi + \rho\,(a - \pi)$; independently $X_t \sim
+\text{Poisson}(\mu_{+} - 1)$ and $Y_t = Z_t (1 + X_t)$, so the generator's positive law is the count
+hurdle's own family. The grid is the full product of $z \in \{0.2, 0.8, 0.95\}$, $\mu_{+} \in \{1, 5, 25\}$
+and $\rho \in \{0, 0.8\}$: 18 cells, each with 30 independent replicates of 270 observations, the first
+context 180 days, origins at indices 180, 210 and 240, horizons 7 and 30, so 540 series in all, with the
+synthetic root seed 20260918. The same models, completion, baselines and scores apply; an oracle that knows
+the generator parameters and the last observed state is a diagnostic, not a competitor. Origins are averaged
+within each replicate and cell, then cells within replicate; the paired test and the bootstrap use the 30
+replicate blocks. Seven-day scores and individual cells are secondary, and no cell or generator was chosen
+because it reproduces Study 1.

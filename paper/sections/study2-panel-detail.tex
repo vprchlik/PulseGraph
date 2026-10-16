@@ -1,10 +1,47 @@
-% Study 2, the npm panel, the remaining detail: the paragraphs moved from study2-panel.tex so that the
-% body stays at the report's length. Input from paper.tex in the appendix; every number traces to
-% sources.md and is asserted by check_numbers.py.
+% Study 2, the npm panel, the remaining detail: the inventory, the walk, the context pull, the strata
+% table, the budget and the data statement, moved from study2-panel.tex so that the body stays short.
+% Input from paper.tex in the appendix; every number traces to sources.md and is asserted by
+% check_numbers.py.
 \providecommand{\qs}{QScore9}
 
-\section{The npm panel: the pull's budget and the data statement}
+\section{The npm panel: the inventory, the pull and the data statement}
 \label{app:s2panel}
+
+\paragraph{Inventory and candidate walk.} The frozen inventory is the registry's replication feed read in
+4,493 pages of at most 1,000 names between 2026-10-14 00:23 and 02:04 UTC: 4,486,927 package names, scopes
+included. The walk visited the first 12,943 names in candidate-hash order and requested each one's registry
+document: 10,000 were eligible, created before 2025-09-01; 2,918 were ineligible on their creation time or
+frame; and 25 were excluded because the registry answered HTTP 404 for the name. The walk stopped when the
+pool was full. Because it did not exhaust the inventory, the size of the eligible frame is estimated from
+the visited prefix, as the inventory size times the eligible share of the visited names: about 3,466,682
+packages, with exact bounds of 10,000 and 4,483,984. The candidate-pool inclusion probability of an eligible
+package is correspondingly about 0.0029, with bounds 0.0022 and 1. These are estimates from a hash-ordered
+prefix, not counts.
+
+\paragraph{The context pull and the strata.} The 10,000 candidates' daily download counts from 2025-09-01 to
+2026-06-02 were requested from the download-counts API; 9,998 answered completely and 2 were excluded
+because the API answered HTTP 404 for the package (\texttt{@zitterorg/modi-quaerat-voluptas},
+\texttt{walk-logger}), the only context-stage exclusions. Of the 12,762 attempts to that host, 9,998 returned
+the range, 40 returned 404, 2,708 returned 429, 2 returned 504 and 14 timed out; every refusal was retried
+later from the saved captures without excluding a candidate. The strata of Table~\ref{tab:s2panel} were
+computed on the stratum window of 2026-03-05 to 2026-06-02 and frozen for all origins.
+
+\begin{table}[h]
+\centering\small
+\caption{The achieved npm panel by context-zero-fraction stratum, computed on 2026-03-05 to 2026-06-02:
+the complete candidates among the 9,998 of the frozen pool, the series taken and the unfilled slots. The
+stratum bounds are the registered $[0, 0.5)$, $[0.5, 0.9)$ and $[0.9, 1]$.}
+\label{tab:s2panel}
+\begin{tabular}{llrrr}
+\toprule
+Stratum & Zero fraction & Complete candidates & Taken & Unfilled \\
+\midrule
+dense & $[0, 0.5)$ & 2,431 & 100 & 0 \\
+sparse & $[0.5, 0.9)$ & 7,558 & 100 & 0 \\
+very sparse & $[0.9, 1]$ & 9 & 9 & 91 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \paragraph{The pull's budget and the API's limits.} The approval was 36,000 requests and 13 hours,
 cumulative over the inventory, the walk and the context pull. The pull used 30,198 HTTP attempts: 12,943 to
@@ -22,7 +59,7 @@ as the pull repeatedly reaching npm's throttle and honouring it.
 \paragraph{Data statement.} The daily counts of the 209 series were obtained from the npm download-counts
 API, \url{https://api.npmjs.org/downloads/range}, between 2026-10-14 and 2026-10-15 UTC, for 2025-09-01 to
 2026-06-02; the targets for 2026-06-03 to 2026-08-31 were obtained from the same API on 2026-10-15 under a separate
-target-access approval (Section~\ref{sec:s2results}). Package names and creation timestamps come from the npm public registry,
+target-access approval (Appendix~\ref{app:s2repro}). Package names and creation timestamps come from the npm public registry,
 \url{https://registry.npmjs.org}, and from its replication feed, \url{https://replicate.npmjs.com}. A
 download is a tarball request as npm counts it, including mirrors, build servers and automated clients, and
 is a directional indicator rather than a count of users. npm, Inc.\ states no licence for the download
@@ -32,5 +69,6 @@ APIs is expressly allowed. Names are as the registry served them at acquisition 
 removed. The pull reached npm's rate limit 2,708 times and honoured it. The project's compilation of the
 selection, the derived fields and the documentation is released under CC BY 4.0; no licence is asserted over
 the counts as such. Maintainer names, e-mail addresses, descriptions and raw registry documents are not
-published. The manifest and selection files are in the repository; the aggregated daily counts are
-published with the paper. npm is a registered trademark of npm, Inc.; no npm logo is used.
+published. The manifest and selection files are in the repository; the aggregated daily counts of the 209
+series, context and targets, are to be published with the paper. npm is a registered trademark of npm,
+Inc.; no npm logo is used.

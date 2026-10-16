@@ -14,6 +14,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.ticker  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
@@ -200,6 +201,13 @@ def figure_zero_fraction(paired, horizon=30):
     save(fig, f"fig-posthoc-zero-fraction-h{horizon}")
 
 
+def symlog_pad(value, direction, factor=2.5):
+    """Push an axis limit one step outward on a symmetric log scale (linear below 0.01)."""
+    if abs(value) < 0.01:
+        return direction * 0.02
+    return value * factor if (value > 0) == (direction > 0) else value / factor
+
+
 def contrast_kind(reference):
     return "_completed" if reference.endswith("_completed") else reference
 
@@ -230,8 +238,9 @@ def figure_npm_paired(paired, inference):
                 [x],
                 dominant["difference"],
                 s=22,
-                color="#D55E00",
+                color="#C00000",
                 marker="o",
+                clip_on=False,
                 zorder=3,
                 label=DOMINANT if (ax is axes[0] and x == 0) else None,
             )
@@ -249,6 +258,9 @@ def figure_npm_paired(paired, inference):
             labels.append(f"{row['id']} {MODEL_LABEL[model]} h{row['horizon']}")
         ax.axhline(0, color="#888888", linewidth=0.6)
         ax.set_yscale("symlog", linthresh=0.01)
+        low, high = ax.get_ylim()
+        ax.set_ylim(symlog_pad(low, -1), symlog_pad(high, 1))
+        ax.set_xlim(-0.6, len(positions) - 0.4)
         ax.set_xticks(positions)
         ax.set_xticklabels(labels, rotation=70, ha="right", fontsize=5.5)
         ax.set_title(CONTRAST_LABEL[kind])
@@ -280,6 +292,9 @@ def figure_synthetic_cells(cells, horizon=30):
         ax.set_yticklabels(cell_labels, fontsize=5.5)
         ax.invert_yaxis()
         ax.set_xscale("symlog", linthresh=0.01)
+        ax.set_xticks([-1, -0.1, 0, 0.1, 1])
+        ax.set_xticklabels(["-1", "-0.1", "0", "0.1", "1"], fontsize=6)
+        ax.xaxis.set_minor_locator(matplotlib.ticker.NullLocator())
         first = part.iloc[0]
         model = MODEL_LABEL[first["model"].split("_")[0]]
         reference = "control" if first["reference"].endswith("_completed") else "count hurdle"

@@ -741,16 +741,34 @@ def esc(name):
     return name.replace("_", "\\_")
 
 
-# The public boundary: no operating-layer vocabulary in a committed section.
-for name in SECTION_FILES:
-    checks += 1
-    hits = [
-        w
-        for w in ("Claude", "Opus", "Fable", "Anthropic", "OpenAI", "session", "chat")
-        if w in TEXT[name]
-    ]
-    if hits:
-        failures.append(f"{name}: operating-layer vocabulary {hits}")
+# The public boundary: no operating-layer vocabulary in a committed file. The words are read from
+# local/boundary-words.txt (one per line; the local folder is never committed); without the file the
+# check is skipped, so that this committed script never spells the words it forbids.
+BOUNDARY_WORDS_FILE = ROOT / "local" / "boundary-words.txt"
+BOUNDARY_WORDS = (
+    [w.strip() for w in BOUNDARY_WORDS_FILE.read_text(encoding="utf-8").splitlines() if w.strip()]
+    if BOUNDARY_WORDS_FILE.exists()
+    else None
+)
+
+
+def boundary(names):
+    global checks
+    if BOUNDARY_WORDS is None:
+        skipped.append(
+            "local/boundary-words.txt absent; the public-boundary word check was skipped"
+        )
+        return
+    for name in names:
+        checks += 1
+        hits = [w for w in BOUNDARY_WORDS if re.search(rf"\b{re.escape(w)}\b", TEXT[name])]
+        if hits:
+            failures.append(
+                f"{name}: operating-layer vocabulary, {len(hits)} word(s) from the local list"
+            )
+
+
+boundary(SECTION_FILES)
 
 # Registration identity, shared by the four files and the two declarations.
 pkg_spec = load(S2 / "external_packages_spec.json")
@@ -1299,9 +1317,7 @@ checks += 1
 if re.search(r"\btbd\b", TEXT[RESULTS]):
     failures.append("study2-results.tex: a 'tbd' remains")
 assert len(pkg_spec["variants"]) == 16
-expect("results: variants", f"2 horizons, {len(pkg_spec['variants'])} variants)", R)
 expect("results: replicates", f"blocks (of {grid['replicates_per_cell']})", R)
-expect("results: synthetic series", f"({grid['n_series']} series, 3 origins", R)
 expect("results: 18 tests", f"over the {family['comparison_count']} tests", R)
 expect("results: 6 tests", f"over the {synthetic['comparison_count']} tests", R)
 
@@ -1326,7 +1342,8 @@ def g(x, d=4):
         return f"{x:,.0f}"
     s = f"{x:.{d}g}"
     if "e" in s:
-        return s
+        m, e = s.split("e")
+        return f"${m} \\times 10^{{{int(e)}}}$"
     v = float(s)
     return f"{v:,.0f}" if abs(v) >= 1000 else s
 
@@ -1340,24 +1357,27 @@ def pval(x):
     return s
 
 
+def contrast(model, reference):
+    if reference.endswith("_completed"):
+        return "hurdle vs completed"
+    if reference == "hurdle_count_28":
+        return "hurdle vs count hurdle"
+    if reference == "local_mean_28":
+        return "raw vs local mean"
+    raise ValueError(reference)
+
+
 def family_line(r):
     return (
-        f"{r.id} & {esc(r.model)} & {esc(r.reference)} & {r.horizon} & {g(r.mean_diff)} & "
-        f"[{g(r.mean_diff_ci_low)}, {g(r.mean_diff_ci_high)}] & {g(r.median_diff)} & "
+        f"{r.id} & {LABEL[r.model.split('_')[0]]} & {contrast(r.model, r.reference)} & "
+        f"{r.horizon} & {g(r.mean_diff)} & [{g(r.mean_diff_ci_low)}, {g(r.mean_diff_ci_high)}] & "
+        f"{g(r.median_diff)} & "
         f"{int(r.wins)} / {int(r.ties)} / {int(r.losses)} & {pval(r.wilcoxon_p_bh)} \\\\"
     )
 
 
 # The public boundary, for the new files and the expanded paper.
-for name in (RESULTS, APPENDIX, DETAIL, PANEL_DETAIL, "paper.tex", "PAPER-SUMMARY.md"):
-    checks += 1
-    hits = [
-        w
-        for w in ("Claude", "Opus", "Fable", "Anthropic", "OpenAI", "session", "chat")
-        if re.search(rf"\b{w}\b", TEXT[name])
-    ]
-    if hits:
-        failures.append(f"{name}: operating-layer vocabulary {hits}")
+boundary((RESULTS, APPENDIX, DETAIL, PANEL_DETAIL, "paper.tex", "PAPER-SUMMARY.md"))
 
 # The report's text is reused unchanged: every shared file is in both main.tex and paper.tex.
 for shared in sorted((PAPER / "shared").glob("*.tex")):
@@ -1368,6 +1388,8 @@ checks += 1
 if re.search(r"\btbd\b", TEXT["paper.tex"]):
     failures.append("paper.tex: a 'tbd' remains")
 
+expect("results: variants", f"2 horizons, {len(pkg_spec['variants'])} variants)", PT)
+expect("results: synthetic series", f"({grid['n_series']} series, 3 origins", PT)
 # --- the two families ----------------------------------------------------
 npm_inf = pd.read_csv(NPM_RUN / "inference" / "inference.csv", **ROUND_TRIP)
 syn_inf = pd.read_csv(SYN_RUN / "inference" / "inference.csv", **ROUND_TRIP)
@@ -1397,8 +1419,15 @@ expect(
     RS,
 )
 expect("ten and two", "ten reject for the model variant and two against it", RS)
-expect("paper: two of six", "two of six reject against it", PT + PS)
-expect("paper: five of six", "five of six tests reject, all against the substitution", PT + PS)
+expect(
+    "paper: two of six and three",
+    "two of six npm tests and all three grid tests reject against it",
+    PT + PS,
+)
+expect("paper: no pooled test", "No pooled test favors the substitution at $q = 0.05$", PT)
+expect("summary: no pooled test", "No pooled test favors the substitution at q = 0.05", PS)
+expect("results: no test favors", "No test favors the substitution at $q = 0.05$", RS)
+expect("results: five against", "all five synthetic rejections are against the hurdle variant", RS)
 # Hurdle against its completed control.
 assert (hc.mean_diff > 0).all() and (hc.mean_diff_ci_low > 0).all()
 assert hc.median_diff.abs().max() < 0.014
@@ -1409,7 +1438,20 @@ assert (
 )
 expect(
     "hurdle means",
-    f"from {g(hc.mean_diff.min())} to {g(hc.mean_diff.max())}, with every interval above zero",
+    f"from {g(hc.mean_diff.min())} to {g(hc.mean_diff.max())} "
+    "(carried by \\texttt{aggregate-error}), "
+    "with every interval above zero",
+    RS,
+)
+e01, e04, e13 = (hc[hc.id == i].iloc[0] for i in ("E01", "E04", "E13"))
+assert e01.median_diff < 0 and e01.wins > e01.losses
+assert (
+    e04.wins > e04.losses and e04.median_diff < 0 and e13.wins > e13.losses and e13.median_diff < 0
+)
+expect(
+    "E01 typical series",
+    f"in E01 the typical series leans to the hurdle, lower on {int(e01.wins)} of 209 series with a "
+    f"median of {g(e01.median_diff)}",
     RS,
 )
 expect("hurdle medians", "the medians lie within 0.014 of zero, three below it and three above", RS)
@@ -1438,11 +1480,6 @@ expect(
     f"from {g(sc.mean_diff.min())} to {g(sc.mean_diff.max())}, with every interval above zero",
     RS,
 )
-expect(
-    "synthetic hurdle medians",
-    f"medians of {g(sc.median_diff.min())} to {g(sc.median_diff.max())}",
-    RS,
-)
 assert sorted(sc.wins.unique()) == [5, 6]
 expect("synthetic hurdle wins", "lower on 5 or 6 of the 30 replicate blocks", RS)
 expect(
@@ -1459,7 +1496,9 @@ expect(
 )
 expect(
     "count hurdle means",
-    f"from {g(hk.mean_diff.max())} to {g(hk.mean_diff.min())}, with every interval below zero",
+    f"from {g(hk.mean_diff.max())} to {g(hk.mean_diff.min())} "
+    "(carried by \\texttt{aggregate-error}), "
+    "with every interval below zero",
     RS,
 )
 expect("count hurdle medians", f"from {g(hk.median_diff.max())} to {g(hk.median_diff.min())}", RS)
@@ -1473,7 +1512,7 @@ assert (
 )
 expect(
     "S02 S06",
-    f"by {g(s02.mean_diff)} and {g(s06.mean_diff)} with intervals above zero (adjusted $p$ "
+    f"by {g(s02.mean_diff)} and {g(s06.mean_diff)} (adjusted $p$ "
     f"{pval(s02.wilcoxon_p_bh)} and {pval(s06.wilcoxon_p_bh)}, lower on {int(s02.wins)} of "
     "30 blocks each)",
     RS,
@@ -1495,7 +1534,9 @@ expect(
 )
 expect(
     "raw means",
-    f"from {g(rl.mean_diff.max())} to {g(rl.mean_diff.min())}, with every interval below zero",
+    f"from {g(rl.mean_diff.max())} to {g(rl.mean_diff.min())} "
+    "(carried by \\texttt{aggregate-error}), "
+    "with every interval below zero",
     RS,
 )
 expect("raw wins", f"lower on {rl.wins.min()} to {rl.wins.max()} of the 209 series", RS)
@@ -1532,10 +1573,7 @@ expect(
 )
 share = [top5[c] for c in list(hk.id) + list(rl.id)]
 expect("top-five share", f"hold {min(share):.3f} to {max(share):.3f} of all positive gain", RS)
-expect(
-    "paper: top-five share", f"{min(share):.3f} to {max(share):.3f} of it by five series on npm", PT
-)
-expect("dominant mean", "7,637,136 downloads a day", RS)
+expect("dominant mean", "7,637,136 downloads a day", P)
 expect("paper: 7.6 million", "7.6 million downloads a day", PT + PS)
 
 # --- the accounting parts (Table tab:s2parts) ---------------------------------
@@ -1567,20 +1605,28 @@ for study, acc, horizons in (("npm", npm_acc, (7, 30)), ("synthetic", syn_acc, (
                 f"{study} & {LABEL[m]} & {h} & " + " & ".join(g(v) for v in parts) + " \\\\",
                 RS,
             )
-syn_h = [syn_acc.loc[(30, f"{m}_hurdle")] for m in MODELS]
 syn_c = [syn_acc.loc[(30, f"{m}_completed")] for m in MODELS]
+# The typical npm series and the trade: the median series' zero-day difference (hurdle minus
+# completed) is positive in every cell, so the typical series does not follow the mean's trade.
+npm_series = pd.read_csv(NPM_RUN / "inference" / "series_scores.csv", **ROUND_TRIP)
+
+
+def series_paired(df, a, b, h, col="qscore9"):
+    x = df[(df.model == a) & (df.horizon == h)].set_index("series_id")[col]
+    y = df[(df.model == b) & (df.horizon == h)].set_index("series_id")[col]
+    return (x - y).dropna()
+
+
+zero_medians = [
+    float(series_paired(npm_series, f"{m}_hurdle", f"{m}_completed", h, "zero").median())
+    for h in (7, 30)
+    for m in MODELS
+]
+assert min(zero_medians) > 0
 expect(
-    "synthetic zero parts",
-    f"{g(min(r.zero for r in syn_h))} to {g(max(r.zero for r in syn_h))} "
-    f"against {g(min(r.zero for r in syn_c))} "
-    f"to {g(max(r.zero for r in syn_c))} for their controls",
-    RS,
-)
-expect(
-    "synthetic under parts",
-    f"{g(min(r.positive_under for r in syn_h))} to {g(max(r.positive_under for r in syn_h))} "
-    f"against {g(min(r.positive_under for r in syn_c))} "
-    f"to {g(max(r.positive_under for r in syn_c))}",
+    "typical series zero-day trade",
+    f"positive, against the hurdle, in all six cells ({min(zero_medians):.3f} to "
+    f"{max(zero_medians):.3f})",
     RS,
 )
 
@@ -1623,16 +1669,14 @@ expect(
 )
 sc_hk = sc_by.loc[list(hk.id)]
 assert (sc_hk.mean_diff_ci_high < 0).all()
-expect(
-    "scaled vs count hurdle", f"{g(sc_hk.mean_diff.max())} to {g(sc_hk.mean_diff.min())}", RS + AP
-)
+expect("scaled vs count hurdle", f"{g(sc_hk.mean_diff.max())} to {g(sc_hk.mean_diff.min())}", AP)
 for cid in ("E06", "E09", "E12", "E18"):
     assert sc_by.loc[cid].mean_diff_ci_high < 0
 for cid in ("E03", "E15"):
     assert sc_by.loc[cid].mean_diff_ci_low < 0 < sc_by.loc[cid].mean_diff_ci_high
 syn_sc30 = syn_sc[syn_sc.horizon == 30]
 assert ((syn_sc30.mean_diff_ci_low < 0) & (syn_sc30.mean_diff_ci_high > 0)).all()
-expect("synthetic scaled", "on the grid every scaled interval includes zero", RS)
+expect("synthetic scaled", "On the grid every scaled interval includes zero", AP)
 brier_hk = npm_con[
     (npm_con.metric == "occurrence_brier") & (npm_con.reference == "hurdle_count_28")
 ]
@@ -1669,7 +1713,7 @@ expect(
     "for 66 npm forecasts, all of them on \\texttt{aggregate-error} (11 variants with a count "
     "law, 3 origins, 2 horizons); the other 13,728 forecasts with a count law are certified, "
     "and the 6,270 without one",
-    RS,
+    PT,
 )
 syn_scores = pd.read_csv(SYN_RUN / "inference" / "secondary_scores.csv", **ROUND_TRIP)
 assert int(syn_scores.crps_unavailable_bound_not_certified.sum()) == 0
@@ -1726,9 +1770,24 @@ for cell, grp in c30.groupby("cell_id"):
         not_lowest[cell] = (sorted(others[others.qscore9 < o].qscore9.tolist()), o)
 assert lowest == 17 and list(not_lowest) == ["cell00"]
 below, o = not_lowest["cell00"]
-expect("oracle 17 of 18", "the lowest cell mean in 17 of the 18 cells at horizon 30", AP)
+tied_cells = sorted(
+    cell
+    for cell, grp in c30.groupby("cell_id")
+    if (
+        grp[grp.model == "dynamic_count"].qscore9.iloc[0]
+        == grp[grp.model == "oracle"].qscore9.iloc[0]
+    )
+)
+assert tied_cells == ["cell12", "cell14", "cell16"], tied_cells
+expect("oracle 17 of 18", "no forecaster scores below it in 17 of the 18 cells at horizon 30", AP)
+expect(
+    "oracle ties",
+    "(\\texttt{cell12}, \\texttt{cell14} and \\texttt{cell16}, with $z = 0.95$ and $\\rho = 0$) "
+    "\\texttt{dynamic\\_count} ties it exactly",
+    AP,
+)
 expect("oracle cell00", f"({g(below[0])} and {g(below[1])} against {g(o)})", AP)
-expect("paper: oracle 17 of 18", "the lowest cell mean in 17 of the 18 cells", RS)
+expect("paper: oracle 17 of 18", "which no forecaster scores below in 17 of the 18 cells", RS)
 # PIT.
 syn_pit = pd.read_csv(SYN_RUN / "inference" / "pit_histograms.csv", **ROUND_TRIP)
 p30 = syn_pit[(syn_pit.horizon == 30) & (syn_pit.status != "unavailable")]
@@ -1798,13 +1857,225 @@ expect(
     "very sparse series",
     AP,
 )
+# The regime reading (the referee's W1): the declared secondary strata, cell by cell.
+sparse_w = {
+    cid: int(strata_q[(strata_q.id == cid) & (strata_q.stratum == "sparse")].wins.iloc[0])
+    for cid in hc.id
+}
+assert [sparse_w[c] for c in ("E01", "E07", "E13")] == [81, 60, 66]
 expect(
-    "summary strata",
-    f"on {d_hc[0]} to {d_hc[1]} of the 100 dense series, on {s_hc[0]} to {s_hc[1]} of the "
-    f"100 sparse series and on {v_hc[0]} to {v_hc[1]} of the 9 very sparse series, and lower "
-    f"than \\hc{{}} on {d_hk[0]} to {d_hk[1]} dense, {s_hk[0]} to {s_hk[1]} sparse and 4 of "
-    "9 very sparse",
+    "regime: sparse h7",
+    f"lower on {sparse_w['E01']}, {sparse_w['E07']} and {sparse_w['E13']} of the 100 sparse "
+    "series at horizon 7, for Chronos-2, TimesFM 3 and TimesFM 2.5",
     RS,
+)
+expect(
+    "regime: sparse h30",
+    f"and on {sparse_w['E04']}, {sparse_w['E10']} and {sparse_w['E16']} of them at horizon 30",
+    RS,
+)
+expect("regime: dense", f"it scores lower on {d_hc[0]} to {d_hc[1]} of 100 in every cell", RS)
+expect(
+    "abstract: regime",
+    f"lower for {sparse_w['E01']}, {sparse_w['E07']} and {sparse_w['E13']} of the 100 sparse "
+    f"series at horizon 7 and for {d_hc[0]} to {d_hc[1]} of the 100 dense ones",
+    PT + PS,
+)
+expect(
+    "regime: dense vs count hurdle",
+    f"on {d_hk[0]} to {d_hk[1]} of the 100 dense series and on {s_hk[0]} to {s_hk[1]} of the "
+    "100 sparse ones",
+    RS,
+)
+# The post-hoc stratum tests, the empirical hurdle and the dynamic count, recomputed from the
+# saved per-series scores (series_scores.csv of each run).
+from scipy import stats  # noqa: E402
+
+strat_of = (
+    npm_series[(npm_series.horizon == 7) & (npm_series.model == "chronos2_raw")]
+    .set_index("series_id")
+    .stratum
+)
+
+
+def summ(d):
+    nz = d[d != 0]
+    return (
+        int((d < 0).sum()),
+        int((d == 0).sum()),
+        int((d > 0).sum()),
+        float(d.median()),
+        float(stats.wilcoxon(nz).pvalue),
+    )
+
+
+regime_rows, sparse_p7, sparse_p30, dense_p7 = [], [], [], []
+for h in (7, 30):
+    for m in MODELS:
+        d = series_paired(npm_series, f"{m}_hurdle", f"{m}_completed", h)
+        parts = []
+        for s in ("dense", "sparse", "very_sparse"):
+            w, ti, lo, med, pv = summ(d[strat_of.loc[d.index] == s])
+            parts.append(f"{w} / {ti} / {lo} & {g(med)} & {pval(pv)}")
+            if s == "sparse":
+                (sparse_p7 if h == 7 else sparse_p30).append(pv)
+                assert (
+                    w
+                    == sparse_w[
+                        {7: "E01", 30: "E04"}[h]
+                        if m == "chronos2"
+                        else {7: "E07", 30: "E10"}[h]
+                        if m == "timesfm3"
+                        else {7: "E13", 30: "E16"}[h]
+                    ]
+                )
+            if s == "dense" and h == 7:
+                dense_p7.append((w, lo, pv))
+        expect(f"regime row {m} {h}", f"{LABEL[m]} & {h} & " + " & ".join(parts) + " \\\\", AP)
+assert max(sparse_p7) < 0.002 and all(lo > w and pv < 0.05 for w, lo, pv in dense_p7)
+expect(
+    "regime: sparse p",
+    "raw $p$ below 0.002 for all three sparse-stratum contrasts at horizon 7",
+    RS,
+)
+expect(
+    "regime: sparse p h30",
+    f"from {g(min(sparse_p30), 2)} to {g(max(sparse_p30), 3)} at horizon 30",
+    RS,
+)
+assert abs(28.5 / 29 - 0.9828) < 5e-5 and abs(1 - 28.5 / 29 - 0.0172) < 5e-5
+expect(
+    "regime: jeffreys",
+    "gets $p = 28.5 / 29$, so the hurdle forces about 1.7 percent of mass onto zero",
+    RS,
+)
+emp_rows, emp_dense, emp_sparse, emp_vs = [], [], [], []
+comp_vs_emp = {}
+for h in (7, 30):
+    for m in MODELS:
+        d = series_paired(npm_series, f"{m}_hurdle", "hurdle_empirical_28", h)
+        parts = []
+        for s in ("dense", "sparse", "very_sparse"):
+            w, ti, lo, med, pv = summ(d[strat_of.loc[d.index] == s])
+            parts.append(f"{w} / {ti} / {lo}")
+            {"dense": emp_dense, "sparse": emp_sparse, "very_sparse": emp_vs}[s].append(w)
+        dc = series_paired(npm_series, f"{m}_completed", "hurdle_empirical_28", h)
+        w, ti, lo, med, pv = summ(dc)
+        comp_vs_emp[(m, h)] = w
+        expect(
+            f"empirical row {m} {h}",
+            f"{LABEL[m]} & {h} & "
+            + " & ".join(parts)
+            + f" & {w} / {ti} / {lo} & {g(med)} & {pval(pv)} \\\\",
+            AP,
+        )
+expect(
+    "empirical: hurdle by stratum",
+    f"lower on {min(emp_dense)} to {max(emp_dense)} of the 100 dense series and on "
+    f"{min(emp_sparse)} to {max(emp_sparse)} of the 100 sparse",
+    RS,
+)
+c30v = [comp_vs_emp[(m, 30)] for m in MODELS]
+expect(
+    "empirical: completed h30",
+    f"lower than the empirical hurdle on {min(c30v)} to {max(c30v)} of 209 series at horizon 30",
+    RS,
+)
+expect(
+    "empirical: completed h7",
+    f"on only {comp_vs_emp[('chronos2', 7)]} and {comp_vs_emp[('timesfm2p5', 7)]} of 209 for "
+    f"Chronos-2 and TimesFM 2.5 ({comp_vs_emp[('timesfm3', 7)]} for TimesFM 3)",
+    RS,
+)
+syn_series = pd.read_csv(SYN_RUN / "inference" / "series_scores.csv", **ROUND_TRIP)
+blk = syn_series[syn_series.horizon == 30].groupby(["model", "replicate"]).qscore9.mean().unstack(0)
+dyn_lower = [int((blk["dynamic_count"] < blk[f"{m}_completed"]).sum()) for m in MODELS]
+expect(
+    "dynamic count: blocks",
+    f"in {dyn_lower[0]}, {dyn_lower[1]} and {dyn_lower[2]} of 30 blocks",
+    RS,
+)
+expect(
+    "discussion: dynamic count blocks",
+    f"lower than each completed model in {min(dyn_lower)} to {max(dyn_lower)} of 30 blocks",
+    PT,
+)
+assert (
+    int((blk["dynamic_count"] < blk["hurdle_count_28"]).sum())
+    == int((blk["dynamic_count"] < blk["local_mean_28"]).sum())
+    == 26
+)
+expect("dynamic count: 26 of 30", "lower than \\hc{} and \\lm{} in 26 of 30", RS)
+comp_lower = [
+    summ(series_paired(npm_series, f"{m}_completed", "dynamic_count", h))[0]
+    for m in MODELS
+    for h in (7, 30)
+]
+expect(
+    "dynamic count: npm",
+    f"the completed models are lower on {min(comp_lower)} to {max(comp_lower)} of 209 series",
+    RS,
+)
+expect(
+    "discussion: dynamic count npm",
+    f"on {min(comp_lower)} to {max(comp_lower)} of 209 npm series",
+    PT,
+)
+dyn30 = s30.loc["dynamic_count"].qscore9
+comp30 = [s30.loc[f"{m}_completed"].qscore9 for m in MODELS]
+assert (
+    dyn30 < min(comp30)
+    and dyn30 < s30.loc["hurdle_count_28"].qscore9
+    and dyn30 > s30.loc["oracle"].qscore9
+)
+assert dyn30 == s30.drop("oracle").qscore9.min()
+expect(
+    "dynamic count: means",
+    f"is {g(dyn30)} against {g(min(comp30))} to {g(max(comp30))} for the three completed models, "
+    f"{g(s30.loc['hurdle_count_28'].qscore9)} for \\hc{{}} and {g(s30.loc['oracle'].qscore9)} "
+    "for the oracle",
+    RS,
+)
+expect(
+    "dynamic count: npm means",
+    f"its mean \\qs{{}} is {g(n7.loc['dynamic_count'].qscore9)} and "
+    f"{g(n30.loc['dynamic_count'].qscore9)} at the two horizons against "
+    f"{g(min(n7.loc[f'{m}_completed'].qscore9 for m in MODELS))} to "
+    f"{g(max(n7.loc[f'{m}_completed'].qscore9 for m in MODELS))} for the completed models",
+    RS,
+)
+cmeta = (
+    pd.read_csv(SYN_RUN / "inference" / "secondary_cells_contrasts.csv", **ROUND_TRIP)
+    .drop_duplicates("cell_id")
+    .set_index("cell_id")
+)
+c30s = syn_series[syn_series.horizon == 30].copy()
+c30s["z"] = c30s.cell_id.map(cmeta.zero_probability)
+by_z = {}
+for z in (0.2, 0.8, 0.95):
+    sub = c30s[c30s.z == z]
+    by_z[z] = [
+        int(
+            (
+                sub[sub.model == f"{m}_hurdle"].groupby("replicate").qscore9.mean()
+                - sub[sub.model == f"{m}_completed"].groupby("replicate").qscore9.mean()
+                < 0
+            ).sum()
+        )
+        for m in MODELS
+    ]
+expect(
+    "regime: grid by z",
+    f"in {min(by_z[0.2])} to {max(by_z[0.2])} of 30 replicate blocks at $z = 0.2$, in "
+    f"{min(by_z[0.8])} to {max(by_z[0.8])} at $z = 0.8$ and in {min(by_z[0.95])} to "
+    f"{max(by_z[0.95])} at $z = 0.95$",
+    RS,
+)
+expect(
+    "discussion: grid by z",
+    f"in {min(by_z[0.95])} to {max(by_z[0.95])} of 30 blocks at $z = 0.95$ against "
+    f"{min(by_z[0.2])} to {max(by_z[0.2])} at $z = 0.2$",
+    PT,
 )
 
 # --- per cell (Table tab:s2cells, Figure fig:s2cells) ----------------------
@@ -1866,8 +2137,8 @@ for run, commit, n_series, wall, est, budget in (
         and hw["batch_size"] == 1
     )
     assert run["invocations"][0]["memory"]["peak_reserved_bytes"] == 2948595712
-    expect(f"run commit {commit[:7]}", f"implementation commit \\texttt{{{commit}}}", RS)
-    expect(f"run estimate {est}", f"an estimate of {est:,}", RS)
+    expect(f"run commit {commit[:7]}", f"implementation commit \\texttt{{{commit}}}", PT)
+    expect(f"run estimate {est}", f"an estimate of {est:,}", PT)
 assert npm_run["metadata"]["readiness"]["approved_at"] == "2026-10-15T23:09:06Z"
 assert syn_run["metadata"]["readiness"]["approved_at"] == "2026-10-15T20:13:56Z"
 assert npm_run["started_at"].startswith("2026-10-15T23:27") and npm_run["completed_at"].startswith(
@@ -1876,19 +2147,19 @@ assert npm_run["started_at"].startswith("2026-10-15T23:27") and npm_run["complet
 assert syn_run["started_at"].startswith("2026-10-15T20:16") and syn_run["completed_at"].startswith(
     "2026-10-15T20:38"
 )
-expect("npm run start", "The npm run started 2026-10-15 23:27 UTC", RS)
-expect("synthetic run start", "The synthetic run started 2026-10-15 20:16 UTC", RS)
-expect("npm wall", "in 692 seconds (699 for the whole process)", RS)
-expect("synthetic wall", "in 1,317 seconds (1,323 for the whole process)", RS)
-expect("npm forecasts", "20,064 forecasts (209 series, 3 origins, 2 horizons, 16 variants)", RS)
+expect("npm run start", "The npm run started 2026-10-15 23:27 UTC", PT)
+expect("synthetic run start", "The synthetic run started 2026-10-15 20:16 UTC", PT)
+expect("npm wall", "in 692 seconds (699 for the whole process)", PT)
+expect("synthetic wall", "in 1,317 seconds (1,323 for the whole process)", PT)
+expect("npm forecasts", "20,064 forecasts (209 series, 3 origins, 2 horizons, 16 variants)", PT)
 expect(
     "synthetic forecasts",
     "55,080 forecasts (540 series, 3 origins, 2 horizons, the 16 variants and the oracle)",
-    RS,
+    PT,
 )
 assert 209 * 3 * 2 * 16 == 20064 and 540 * 3 * 2 * 17 == 55080
-expect("hardware", "NVIDIA GeForce RTX 4070 SUPER (driver 610.88, CUDA 12.8, PyTorch 2.11.0)", RS)
-expect("peak memory", "2,948,595,712 bytes", RS)
+expect("hardware", "NVIDIA GeForce RTX 4070 SUPER (driver 610.88, CUDA 12.8, PyTorch 2.11.0)", PT)
+expect("peak memory", "2,948,595,712 bytes", PT)
 results_npm = (NPM_RUN / "RESULTS-npm.md").read_text(encoding="utf-8")
 results_syn = (SYN_RUN / "RESULTS-synthetic.md").read_text(encoding="utf-8")
 assert "692 seconds inside the\nrun and 699 for the whole process" in results_npm
@@ -1897,11 +2168,15 @@ assert (
     "from 23:14:58 to 23:26:22 UTC, 3 seconds apart: 209 attempts and 209 answers, with no "
     "retry\nand no failure" in results_npm
 )
+pull = load(NPM_RUN / "target-pull" / "pull.json")
+first_request = min(inv["started_at"] for inv in pull["invocations"])
+assert first_request.startswith("2026-10-15T23:15"), first_request
 expect(
     "targets requested",
-    "between 23:14 and 23:26 UTC, 209 attempts and 209 answers, with no retry and no failure",
-    RS,
+    "between 23:15 and 23:26 UTC, 209 attempts and 209 answers, with no retry and no failure",
+    PT,
 )
+expect("panel: first target request", "first requested on 2026-10-15 at 23:15 UTC", P)
 npm_integrity = load(NPM_RUN / "integrity" / "integrity.json")
 assert npm_integrity["status"] == "pass" and npm_integrity["failed_forecasts"] == 0
 for key in (
@@ -1923,13 +2198,13 @@ assert (
 expect(
     "npm integrity",
     "for all 20,064 forecasts from the saved deciles, targets and laws, with 0 disagreements",
-    RS,
+    PT,
 )
 recompute = load(SYN_RUN / "score-recompute.json")
 assert recompute["series"] == 540 and recompute["windows"] == 55080
 assert all(v == 0.0 for v in recompute["max_abs_difference"].values())
 expect(
-    "synthetic recompute", "for all 55,080 forecasts with a largest absolute difference of 0.0", RS
+    "synthetic recompute", "for all 55,080 forecasts with a largest absolute difference of 0.0", PT
 )
 syn_prov = load(SYN_RUN / "inference" / "provenance.json")
 npm_prov = load(NPM_RUN / "inference" / "provenance.json")
@@ -1969,7 +2244,7 @@ expect(
     f"between neighbours of {tot('2026-07-11')} and {tot('2026-07-13')} "
     f"downloads, and {tot('2026-08-13')} "
     f"and {tot('2026-08-15')}",
-    RS,
+    AP,
 )
 expect(
     "june 25",
@@ -1978,7 +2253,7 @@ expect(
     f"when {int(daily.loc['2026-06-25'].series_zero)} of the 209 series "
     f"read 0 against {int(daily.loc['2026-06-24'].series_zero)} "
     f"and {int(daily.loc['2026-06-26'].series_zero)}",
-    RS,
+    AP,
 )
 context_days = daily.loc[:"2026-06-02"]
 assert len(context_days) == 275 and len(daily.loc["2026-06-03":]) == 90
@@ -1988,7 +2263,7 @@ expect(
     "of the 209 series, and the largest series "
     f"never reads below {int(context_days.largest_series_count.min()):,} "
     "there",
-    RS,
+    AP,
 )
 for day, block in (
     ("2026-06-25", "2026-06-03+30"),
@@ -2060,16 +2335,295 @@ expect("sensitivity head", "at HEAD \\texttt{e41fdf2}", PT)
 expect("sensitivity date", "computed on 2026-10-16", RS)
 expect(
     "paper: sensitivity",
-    "none of the eighteen conclusions changes without all three, and one row, E06, stops "
-    "rejecting without the two panel-wide days",
+    "changes no conclusion without all three days and one row, E06, without the two panel-wide "
+    "days",
     PT,
 )
+# The order of the sensitivity and addition 6 (review item 23).
+assert sens_json["started_at"].startswith("2026-10-16T03:21")
+assert "Appended at 2026-10-16 03:28 UTC" in protocol
+expect(
+    "sensitivity before addition",
+    "computed at 03:21 UTC on 2026-10-16 before the addition was written at 03:28 UTC",
+    RS,
+)
 expect("summary: sensitivity", "none of the eighteen conclusions changes", PS)
+
+# --- the post-hoc dynamic-occurrence analysis (reports/study2-posthoc-dynamic-occurrence/) -------
+DYN = ROOT / "reports" / "study2-posthoc-dynamic-occurrence"
+dn = pd.read_csv(DYN / "npm_inference.csv", **ROUND_TRIP)
+ds = pd.read_csv(DYN / "synthetic_inference.csv", **ROUND_TRIP)
+assert (
+    len(dn) == 24
+    and len(ds) == 12
+    and dn.declared_count.eq(24).all()
+    and ds.declared_count.eq(12).all()
+)
+assert (
+    dn.n_entities.eq(209).all() and ds.n_entities.eq(30).all() and (dn.status == "post-hoc").all()
+)
+assert dn.n_bootstrap.eq(20000).all() and dn.bootstrap_root.eq(20260917).all()
+
+
+def dyn_ref(reference):
+    if reference.endswith("_completed"):
+        return "completed"
+    if reference.endswith("_hurdle"):
+        return "fixed hurdle"
+    if reference == "dynamic_count":
+        return "dynamic count"
+    if reference == "hurdle_count_28":
+        return "count hurdle"
+    raise ValueError(reference)
+
+
+def dyn_line(r):
+    return (
+        f"{r.id} & {LABEL[r.model.split('_')[0]]} & {dyn_ref(r.reference)} & {r.horizon} & "
+        f"{g(r.mean_diff)} & "
+        f"[{g(r.mean_diff_ci_low)}, {g(r.mean_diff_ci_high)}] & {g(r.median_diff)} & "
+        f"{int(r.wins)} / {int(r.ties)} / {int(r.losses)} & {pval(r.wilcoxon_p_bh)} \\\\"
+    )
+
+
+for df in (dn, ds):
+    for r in df.itertuples():
+        main_table = r.reference.endswith("_completed") or r.reference.endswith("_hurdle")
+        expect(f"dynamic row {r.id}", dyn_line(r), RS if main_table else AP)
+d_comp = dn[dn.reference.str.endswith("_completed")]
+d_fix = dn[dn.reference.str.endswith("_hurdle")]
+d_dyn = dn[dn.reference == "dynamic_count"]
+d_hk = dn[dn.reference == "hurdle_count_28"]
+s_comp = ds[ds.reference.str.endswith("_completed")]
+s_fix = ds[ds.reference.str.endswith("_hurdle")]
+s_dyn = ds[ds.reference == "dynamic_count"]
+s_hk = ds[ds.reference == "hurdle_count_28"]
+# Four of the five registered rejections against the substitution are gone; the fifth (S05, now
+# DS09) stays.
+assert not d_comp.reject_bh_005.any() and (d_comp.mean_diff > 0).all()
+assert s_comp[s_comp.reject_bh_005].id.tolist() == ["DS09"] and (s_comp.mean_diff > 0).all()
+assert int(hc.reject_bh_005.sum()) + int(sc.reject_bh_005.sum()) == 5
+expect("dynamic: four of five", "removes four of the five rejections against the substitution", RS)
+expect(
+    "dynamic: npm vs completed p",
+    f"no npm row rejects, with adjusted $p$ from {g(d_comp.wilcoxon_p_bh.min(), 3)} to "
+    f"{g(d_comp.wilcoxon_p_bh.max(), 3)}",
+    RS,
+)
+expect(
+    "dynamic: npm vs completed means",
+    f"{g(d_comp.mean_diff.min())} to {g(d_comp.mean_diff.max())} against "
+    f"{g(hc.mean_diff.min())} to {g(hc.mean_diff.max())} for the registered hurdle",
+    RS,
+)
+de01, de05 = (d_comp[d_comp.id == i].iloc[0] for i in ("DE01", "DE05"))
+assert de01.larger_sum_favors == de05.larger_sum_favors == "model"
+assert (d_comp[~d_comp.id.isin(["DE01", "DE05"])].larger_sum_favors == "reference").all()
+expect(
+    "dynamic: chronos leans", f"lower on {int(de01.wins)} and {int(de05.wins)} of 209 series", RS
+)
+ds01, ds05, ds09 = (s_comp[s_comp.id == i].iloc[0] for i in ("DS01", "DS05", "DS09"))
+assert ds01.wilcoxon_p_bh == ds05.wilcoxon_p_bh and not ds01.reject_bh_005 and ds09.reject_bh_005
+assert ((s_comp.mean_diff_ci_low < 0) & (s_comp.mean_diff_ci_high > 0)).all()
+expect(
+    "dynamic: grid vs completed",
+    f"(DS01 and DS05, adjusted $p$ {g(ds01.wilcoxon_p_bh, 3)}) and the third, TimesFM 2.5 "
+    f"(DS09, adjusted $p$ {g(ds09.wilcoxon_p_bh, 3)})",
+    RS,
+)
+expect(
+    "dynamic: grid vs completed means",
+    f"the means are {g(s_comp.mean_diff.min())} to {g(s_comp.mean_diff.max())} against "
+    f"{g(sc.mean_diff.min())} to {g(sc.mean_diff.max())} registered",
+    RS,
+)
+d_fix30 = d_fix[d_fix.horizon == 30]
+d_fix7 = d_fix[d_fix.horizon == 7]
+assert (
+    d_fix30.reject_bh_005.all() and (d_fix30.mean_diff < 0).all() and not d_fix7.reject_bh_005.any()
+)
+expect(
+    "dynamic: vs fixed npm",
+    f"lower on {d_fix30.wins.min()} to {d_fix30.wins.max()} of 209 series",
+    RS,
+)
+assert (
+    s_fix.reject_bh_005.all()
+    and s_fix.wilcoxon_p_bh.nunique() == 1
+    and sorted(s_fix.wins.unique()) == [20, 21]
+)
+expect(
+    "dynamic: vs fixed grid",
+    f"lower in 20 or 21 of 30 blocks (adjusted $p$ {g(s_fix.wilcoxon_p_bh.iloc[0], 3)})",
+    RS,
+)
+assert d_dyn.reject_bh_005.all() and (d_dyn.mean_diff < 0).all()
+assert s_dyn.reject_bh_005.all() and (s_dyn.mean_diff > 0).all()
+expect(
+    "dynamic: vs dynamic count grid",
+    f"\\texttt{{dynamic\\_count}} being lower in {int(s_dyn.losses.min())} to "
+    f"{int(s_dyn.losses.max())} of 30 blocks",
+    RS,
+)
+assert d_hk.reject_bh_005.all() and (d_hk.mean_diff < 0).all() and not s_hk.reject_bh_005.any()
+expect(
+    "dynamic: vs count hurdle",
+    "against \\hc{} all six npm rows reject in the wrapper's favor and on the grid none of the "
+    "three rejects",
+    RS,
+)
+dyn_acc = pd.read_csv(DYN / "synthetic_accounting.csv", **ROUND_TRIP).set_index("model")
+for r in dyn_acc.reset_index().itertuples():
+    expect(
+        f"dynamic parts row {r.model}",
+        f"{esc(r.model)} & {g(r.qscore9)} & {g(r.zero)} & {g(r.positive_over)} & "
+        f"{g(r.positive_under)} \\\\",
+        AP,
+    )
+wrap = [dyn_acc.loc[f"{m}_dyn"] for m in MODELS]
+compl = [dyn_acc.loc[f"{m}_completed"] for m in MODELS]
+assert min(r.zero for r in wrap) == dyn_acc.zero.min()
+expect(
+    "dynamic: zero parts",
+    f"lowest zero-day part of every forecaster, {g(min(r.zero for r in wrap))} to "
+    f"{g(max(r.zero for r in wrap))}",
+    RS,
+)
+expect(
+    "dynamic: under parts",
+    f"stays at {g(min(r.positive_under for r in wrap))} to "
+    f"{g(max(r.positive_under for r in wrap))} against "
+    f"{g(min(r.positive_under for r in compl))} to {g(max(r.positive_under for r in compl))} "
+    f"for the completed controls and {g(dyn_acc.loc['dynamic_count'].positive_under)} for "
+    "\\texttt{dynamic\\_count}",
+    RS,
+)
+dyn_prov = load(DYN / "provenance.json")
+assert dyn_prov["head"].startswith("ff8c5e8") and dyn_prov["uncommitted_changes"] == ""
+assert dyn_prov["started_at"].startswith("2026-10-16T05:29") and dyn_prov["written_at"].startswith(
+    "2026-10-16T05:37"
+)
+expect("dynamic: head", "from 05:29 to 05:37 UTC at HEAD \\texttt{ff8c5e8}", PT)
+occ = pd.read_csv(DYN / "npm_occurrence.csv", **ROUND_TRIP)
+socc = pd.read_csv(DYN / "synthetic_occurrence.csv", **ROUND_TRIP)
+npm_all = occ[(occ.stratum == "all") & (occ.horizon == 7)].iloc[0]
+grid_all = socc[(socc.cell_id == "all") & (socc.horizon == 30)].iloc[0]
+assert int(npm_all.windows) == 627 and int(grid_all.windows) == 1620
+expect(
+    "dynamic: fallback windows",
+    f"in {int(npm_all.occurrence_fallback_windows)} of the {int(npm_all.windows):,} npm windows "
+    "at each horizon and "
+    f"{int(grid_all.occurrence_fallback_windows)} of the {int(grid_all.windows):,} grid windows",
+    RS,
+)
+
+# --- the new citations of 2026-10-16: keys cited, entries present, identifiers in the record ---
+referee = (ROOT / "docs" / "research" / "2026-10-16-standing-and-referee-read.md").read_text(
+    encoding="utf-8"
+)
+cited_paper = set()
+for group in re.findall(r"\\citep\{([^}]*)\}", TEXT["paper.tex"]):
+    cited_paper.update(k.strip() for k in group.split(","))
+checks += 1
+missing = sorted(cited_paper - bib_keys)
+if missing:
+    failures.append(f"paper.tex cites keys absent from references.bib: {missing}")
+checks += 1
+uncited = sorted(bib_keys - cited_paper - set(re.findall(r"\\citep\{([^}]*)\}", TEXT["main.tex"])))
+for key, marker in [
+    ("adler2025", "2510.16060"),
+    ("wen2026", "2608.17299"),
+    ("corani2026", "2606.24715"),
+    ("brini2026", "2607.05291"),
+    ("cherif2026", "2607.19383"),
+    ("li2026", "2605.26161"),
+    ("qiao2026", "2602.12147"),
+    ("ebrahim2026zenodo", "10.5281/zenodo.22681072"),
+    ("npm-community-150808", "discussions/150808"),
+]:
+    checks += 1
+    assert key in cited_paper, key
+    if marker not in referee or marker not in bib:
+        failures.append(
+            f"citation {key}: identifier {marker} not in both the referee's read and the bib"
+        )
+    checks += 1
+    if "read" not in bib.split(f"@misc{{{key},")[1].split("}\n\n")[0]:
+        failures.append(f"citation {key}: the entry does not record a read date")
+expect("design: pins date", "pinned on 2026-09-12", D + PT)
+assert "pinned 2026-09-12" in bib
+try:
+    git_all = subprocess.run(
+        ["git", "-C", str(ROOT), "log", "--format=%h %s", "-n", "200"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+except (OSError, subprocess.CalledProcessError):
+    skipped.append("git log unavailable; the commit 1c09ac8 of addition 6 not confirmed")
+else:
+    checks += 1
+    if not any(line.startswith("1c09ac8") for line in git_all.splitlines()):
+        failures.append("git log: commit 1c09ac8 (the dated addition of 2026-10-16) not found")
+expect("design: addition 6 commit", "committed at \\texttt{1c09ac8}", D)
+
+# --- the report still expands to its committed text, apart from the one dated sentence --------
+REPORT_SENTENCE_OLD = (
+    "Benjamini-Hochberg correction. As of 2026-10-12, a statement to be re-checked on the posting "
+    "day, no Study 2\ntarget value, forecast or score exists; nothing is claimed about its outcome."
+)
+REPORT_SENTENCE_NEW = (
+    "Benjamini-Hochberg correction. As of 2026-10-12 no Study 2 target value, forecast or score "
+    "existed; both\ncomponents fixed for the October 2026 paper, the synthetic grid and the npm "
+    "external run, ran on 2026-10-15\nand are reported in the paper that extends this report. "
+    "Nothing is claimed here about their outcome."
+)
+try:
+    committed_report = subprocess.run(
+        ["git", "-C", str(ROOT), "show", "f325a67:paper/main.tex"],
+        capture_output=True,
+        text=True,
+        check=True,
+        encoding="utf-8",
+    ).stdout
+except (OSError, subprocess.CalledProcessError):
+    skipped.append("git show unavailable; the report's expansion against f325a67 not checked")
+else:
+    checks += 1
+    assert committed_report.count(REPORT_SENTENCE_OLD) == 1
+    if expand(MAIN) != committed_report.replace(REPORT_SENTENCE_OLD, REPORT_SENTENCE_NEW):
+        failures.append(
+            "main.tex expanded differs from f325a67:paper/main.tex beyond the one dated sentence"
+        )
+expect(
+    "report: runs made", "ran on 2026-10-15 and are reported in the paper that extends this report"
+)
+for run_dir in (SYN_RUN, NPM_RUN):
+    assert load(run_dir / "run.json")["started_at"].startswith("2026-10-15")
+
+# --- the abstract: at most 300 words, identical in paper.tex and PAPER-SUMMARY.md --------------
+abstract_tex = re.search(
+    r"\\begin\{abstract\}(.*?)\\end\{abstract\}", expand(PAPER_TEX), re.S
+).group(1)
+plain_abstract = re.sub(r"\\texttt\{([^}]*)\}", r"\1", abstract_tex)
+plain_abstract = re.sub(r"\$q = 0\.05\$", "q = 0.05", plain_abstract)
+plain_abstract = re.sub(r"\s+", " ", plain_abstract).strip()
+summary_md = PAPER_SUMMARY.read_text(encoding="utf-8")
+summary_abstract = re.search(r"## Abstract\n\n(.*?)\n\n## ", summary_md, re.S).group(1)
+summary_abstract = re.sub(r"\s+", " ", summary_abstract).strip()
+checks += 1
+if plain_abstract != summary_abstract:
+    failures.append("the abstract in PAPER-SUMMARY.md differs from the paper's")
+checks += 1
+if len(plain_abstract.split()) > 300:
+    failures.append(f"the abstract has {len(plain_abstract.split())} words, more than 300")
 
 # --- the paper's summary page ------------------------------------------------
 expect("summary: npm panel", "209 series", PS + PT)
 expect("summary: 540", "540", PS + PT)
 expect("summary: twelve", "twelve of the eighteen", PS)
+expect("summary: removes four", "removes four of the five rejections", PS)
+expect("summary: never beats", "never beats the model's own zero mass", PS)
 assert "Study 2, synthetic component" in (ROOT / "RESULTS.md").read_text(encoding="utf-8")
 
 # --- report -----------------------------------------------------------

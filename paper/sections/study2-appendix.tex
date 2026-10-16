@@ -1,15 +1,19 @@
-% Study 2, the secondary tables of the appendix, from the inference and post-hoc files of the two runs.
-% Input from paper.tex; every number traces to sources.md and is asserted by check_numbers.py.
+% Study 2, the secondary tables of the appendix, from the inference and post-hoc files of the two runs and
+% the post-hoc dynamic-occurrence directory. Input from paper.tex; every number traces to sources.md and is
+% asserted by check_numbers.py.
 \providecommand{\lm}{\texttt{local\_mean\_28}}
 \providecommand{\aets}{\texttt{autoets\_weekly}}
 \providecommand{\qs}{QScore9}
 \providecommand{\hc}{\texttt{hurdle\_count\_28}}
 
-\section{Study 2: the secondary tables}
+\section{Study 2: the secondary tables and the post-hoc readings}
 \label{app:s2tables}
 
-None of the tables in this appendix carries a multiplicity adjustment, and none replaces the two families of
+None of the tables in this appendix carries a multiplicity adjustment except the two post-hoc
+dynamic-occurrence families, which carry their own, and none replaces the two families of
 Section~\ref{sec:s2results}. Differences are model variant minus reference, so negative favors the variant.
+A difference of order $10^{-9}$ or smaller in a median is floating-point residue; under the declared rule
+only an exact zero is a tie.
 
 \paragraph{By stratum.} The strata are declared secondary descriptors and carry no interval and no test;
 the very sparse stratum holds $n = 9$ series, not 100. Against its completed control the hurdle variant
@@ -18,12 +22,29 @@ series, and on 2 to 4 of the 9 very sparse series, where the median difference i
 six cells. Against \hc{} it scores lower on 80 to 94 of the 100 dense series, on 29 to 63 of the 100 sparse
 series and on 4 of the 9 very sparse series in every cell, with a median of exactly 0 there in all six. The
 raw deciles score lower than \lm{} on 61 to 70 dense, 19 to 51 sparse and 4 or 5 very sparse series. With
-nine series the very sparse stratum supports no reading beyond those counts (Appendix
-Table~\ref{tab:s2strata}).
+nine series the very sparse stratum supports no reading beyond those counts (Table~\ref{tab:s2strata}).
+Table~\ref{tab:s2regime} adds, post hoc and with no registered status, the lower-tied-higher counts, the
+median and a raw two-sided signed-rank $p$ for the hurdle against its control within each stratum, computed
+from the saved per-series scores; Table~\ref{tab:s2empirical} does the same for the hurdle against the
+registered secondary \texttt{hurdle\_empirical\_28} by stratum and for the completed control against it
+over all 209 series.
+
+\paragraph{The three zero days, the counts.} On 2026-07-12 and 2026-08-14 the panel's total is 0
+between neighbours of 4,059,870 and 10,123,968 downloads, and 7,480,108 and 2,560,140; on 2026-06-25
+\texttt{aggregate-error} reads 0 between 9,475,033 and 7,909,626, when 92 of the 209 series read 0 against
+98 and 121 on the days either side. No day of the 275-day context reads 0 for more than 153 of the 209
+series, and the largest series never reads below 1,109,682 there. npm's own status history, trackers and
+changelog report no outage, gap or backfill for the three days, and the status page does not track download
+counts. In the post-hoc sensitivity of Table~\ref{tab:s2sens} each removed day is dropped, for every series
+and variant, from the one horizon-30 block that holds it; the horizon-7 blocks hold none of the days and
+their rows are identical except for their adjusted $p$, which moves because the adjustment ranks all
+eighteen together; the same code reproduces the registered tables byte for byte on the saved scores. The day
+that touches only the largest series, 2026-06-25, differs in kind from the two panel-wide days only in its
+reach; the sensitivity treats all three alike.
 
 \paragraph{The context-scaled score.} The registered scale-free secondary, which divides each window's \qs{}
 by the context mean before the same averaging, reads differently from the unscaled mean on the hurdle
-contrast (Appendix Table~\ref{tab:s2scaled}). At horizon 7 the scaled difference against the completed
+contrast (Table~\ref{tab:s2scaled}). At horizon 7 the scaled difference against the completed
 control favors the hurdle for all three models, -0.02204 for Chronos-2, -0.006708 for TimesFM 3 and
 -0.006123 for TimesFM 2.5, with every interval below zero; at horizon 30 every interval includes zero
 (-0.002395, 0.001291 and 0.001687). Against \hc{} the scaled differences are -0.1182 to -0.1466 with every
@@ -32,29 +53,88 @@ E18) and include zero in E03 and E15. On the grid every scaled interval includes
 largest unscaled cell differences are in the cells with $z = 0.2$ and $\mu_{+} = 25$, which scaling by the
 context mean weighs least. The occurrence Brier score, available where a count law exists, is lower for the
 hurdle than for its control with an interval below zero in E01, E04 and E13 and includes zero in E07, E10
-and E16. These are secondary readings and add no test.
+and E16; on the mean the models' own zero mass is about as good as the Jeffreys estimate
+(Tables~\ref{tab:s2scores} and~\ref{tab:s2synscores}). These are secondary readings and add no test.
 
 \paragraph{The oracle, as a diagnostic.} The oracle that knows the generator's parameters and the last
 observed state has the lowest mean \qs{} of the seventeen forecasters at both horizons (1.514 at horizon 7
 and 1.648 at horizon 30), the lowest occurrence Brier score (0.115) and the lowest discrete CRPS (1.504) at
-horizon 30, and the lowest cell mean in 17 of the 18 cells at horizon 30; in the cell with $z = 0.2$,
-$\mu_{+} = 1$ and $\rho = 0$, two forecasters score slightly below it (0.1759 and 0.1761 against 0.1767), as
-the protocol allows for a finite sample. Its randomized PIT histogram is flat, each tenth holding 0.099 to
-0.104 of its 48,600 target days, where the six foundation-model variants and \hc{} place 0.078 to 0.133 of
-theirs in a tenth. On npm each hurdle variant places 0.088 to 0.146 of its horizon-30 target days in a
-tenth, against 0.083 to 0.153 for its completed control. The oracle is neither a competitor nor a
-confirmatory contrast.
+horizon 30, and no forecaster scores below it in 17 of the 18 cells at horizon 30; in three of them
+(\texttt{cell12}, \texttt{cell14} and \texttt{cell16}, with $z = 0.95$ and $\rho = 0$) \texttt{dynamic\_count}
+ties it exactly, and in the cell with $z = 0.2$, $\mu_{+} = 1$ and $\rho = 0$, two forecasters score slightly
+below it (0.1759 and 0.1761 against 0.1767), as the protocol allows for a finite sample. Its randomized PIT
+histogram is flat, each tenth holding 0.099 to 0.104 of its 48,600 target days, where the six
+foundation-model variants and \hc{} place 0.078 to 0.133 of theirs in a tenth. On npm each hurdle variant
+places 0.088 to 0.146 of its horizon-30 target days in a tenth, against 0.083 to 0.153 for its completed
+control. The oracle is neither a competitor nor a confirmatory contrast.
 
-\paragraph{Per cell.} Figure~\ref{fig:s2cells} and Appendix Table~\ref{tab:s2cells} give the six
-synthetic contrasts cell by cell at horizon 30, each over 30 replicates, with no interval and no test. The
-largest differences against the hurdle are in the cells with $z = 0.2$ and $\mu_{+} = 25$, where the hurdle
-scores 0.9342 to 0.9766 above its control at $\rho = 0.8$; in the four cells with $z = 0.95$ and $\mu_{+}$
-of 5 or 25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. In
-the cells with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is lower
-in none of the 30 replicates in any of those six cells.
+\paragraph{Per cell.} Figure~\ref{fig:s2cells} and Table~\ref{tab:s2cells} give the six synthetic
+contrasts cell by cell at horizon 30, each over 30 replicates, with no interval and no test. The largest
+differences against the hurdle are in the cells with $z = 0.2$ and $\mu_{+} = 25$, where the hurdle scores
+0.9342 to 0.9766 above its control at $\rho = 0.8$; in the four cells with $z = 0.95$ and $\mu_{+}$ of 5 or
+25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. In the cells
+with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is lower in none of
+the 30 replicates in any of those six cells.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig-s2-synthetic-cells}
+\caption{The six synthetic comparisons, cell by cell at horizon 30: the mean paired difference over 30
+replicates in each of the 18 generator cells, labeled by zero probability $z$, positive mean $\mu_{+}$ and
+persistence $\rho$. Negative favors the hurdle variant. The family tests pool the cells with equal weight
+(Table~\ref{tab:s2syn}); the cells carry no test.}
+\label{fig:s2cells}
+\end{figure}
 
 \begin{table}[h]
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Post-hoc. The hurdle variant against its completed control within each stratum: the series where
+the hurdle is lower, tied or higher, the median difference and the raw two-sided signed-rank $p$ with zero
+differences omitted, computed from the saved per-series scores; no adjustment, no registered status. The
+very sparse stratum holds $n = 9$.}
+\label{tab:s2regime}
+\begin{tabular}{llcrlcrlcrl}
+\toprule
+ & & \multicolumn{3}{c}{dense, $n = 100$} & \multicolumn{3}{c}{sparse, $n = 100$} & \multicolumn{3}{c}{very sparse, $n = 9$} \\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11}
+Model & $h$ & Lower / tied / higher & Median & Raw $p$ & Lower / tied / higher & Median & Raw $p$ & Lower / tied / higher & Median & Raw $p$ \\
+\midrule
+Chronos-2 & 7 & 36 / 0 / 64 & 0.0455 & 0.0055 & 81 / 1 / 18 & -0.03333 & $2.47 \times 10^{-11}$ & 4 / 1 / 4 & 0 & 0.297 \\
+TimesFM 3 & 7 & 32 / 0 / 68 & 0.03386 & 0.000363 & 60 / 3 / 37 & -0.009524 & 0.00158 & 2 / 5 / 2 & 0 & 0.625 \\
+TimesFM 2.5 & 7 & 40 / 0 / 60 & 0.03386 & 0.00241 & 66 / 2 / 32 & -0.01058 & $9.01 \times 10^{-5}$ & 3 / 1 / 5 & 0.007407 & 0.82 \\
+Chronos-2 & 30 & 43 / 0 / 57 & 0.01543 & 0.144 & 58 / 1 / 41 & -0.003086 & 0.47 & 4 / 1 / 4 & 0 & 0.312 \\
+TimesFM 3 & 30 & 34 / 0 / 66 & 0.02173 & 0.000636 & 45 / 4 / 51 & 0.0004938 & 0.65 & 2 / 4 / 3 & 0 & 0.438 \\
+TimesFM 2.5 & 30 & 43 / 0 / 57 & 0.02333 & 0.00106 & 54 / 0 / 46 & -0.0008642 & 0.892 & 4 / 1 / 4 & 0 & 0.312 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Post-hoc. The foundation-model hurdle against the registered secondary
+\texttt{hurdle\_empirical\_28}, which shares its occurrence rule and uses the empirical positive law, by
+stratum (series where the hurdle is lower, tied or higher); and the completed control against the same
+empirical hurdle over all 209 series, with the median difference and the raw two-sided signed-rank $p$.
+Computed from the saved per-series scores; no adjustment, no registered status.}
+\label{tab:s2empirical}
+\begin{tabular}{llcccccl}
+\toprule
+ & & \multicolumn{3}{c}{hurdle vs empirical hurdle, lower / tied / higher} & \multicolumn{3}{c}{completed vs empirical hurdle, $n = 209$} \\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+Model & $h$ & dense, $n = 100$ & sparse, $n = 100$ & very sparse, $n = 9$ & Lower / tied / higher & Median & Raw $p$ \\
+\midrule
+Chronos-2 & 7 & 65 / 0 / 35 & 50 / 8 / 42 & 4 / 4 / 1 & 88 / 2 / 119 & 0.01058 & 0.598 \\
+TimesFM 3 & 7 & 64 / 1 / 35 & 45 / 10 / 45 & 4 / 4 / 1 & 117 / 5 / 87 & -0.006349 & 0.00804 \\
+TimesFM 2.5 & 7 & 63 / 0 / 37 & 33 / 3 / 64 & 4 / 4 / 1 & 90 / 1 / 118 & 0.009524 & 0.478 \\
+Chronos-2 & 30 & 66 / 0 / 34 & 45 / 4 / 51 & 6 / 3 / 0 & 120 / 3 / 86 & -0.00716 & $4.94 \times 10^{-5}$ \\
+TimesFM 3 & 30 & 68 / 0 / 32 & 55 / 13 / 32 & 5 / 4 / 0 & 140 / 8 / 61 & -0.01037 & $1.22 \times 10^{-8}$ \\
+TimesFM 2.5 & 30 & 72 / 1 / 27 & 57 / 4 / 39 & 5 / 4 / 0 & 130 / 1 / 78 & -0.01012 & $5.1 \times 10^{-7}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The context-scaled \qs{}, the registered scale-free secondary: each window's \qs{} divided by
 $\max(1, \bar{y}_{\text{context}})$ before the registered averaging. Mean difference with its pointwise 95
 percent bootstrap interval, median difference, and the series (of 209) or blocks (of 30) where the variant
@@ -101,7 +181,7 @@ S06 & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 & 0.0004433 & [-0.008125, 0.00
 \end{table}
 
 \begin{table}[h]
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The eighteen external comparisons by context-zero-fraction stratum, declared secondary, with no
 interval and no test: the mean difference, the median difference and the number of series where the variant
 is lower, for the dense ($n = 100$), sparse ($n = 100$) and very sparse ($n = 9$) strata. The dense means
@@ -115,7 +195,7 @@ ID & Mean & Median & Lower & Mean & Median & Lower & Mean & Median & Lower \\
 \midrule
 E01 & 317.7 & 0.0455 & 36 & -0.05531 & -0.03333 & 81 & -0.01752 & 0 & 4 \\
 E02 & -10,638 & -0.3217 & 85 & -0.3483 & 0.003175 & 40 & -1.312 & 0 & 4 \\
-E03 & -6,028 & -0.07942 & 62 & -0.001134 & 0.0266 & 26 & 0.0684 & 1.055e-09 & 4 \\
+E03 & -6,028 & -0.07942 & 62 & -0.001134 & 0.0266 & 26 & 0.0684 & $1.055 \times 10^{-9}$ & 4 \\
 E04 & 188.6 & 0.01543 & 43 & -0.01457 & -0.003086 & 58 & -0.01108 & 0 & 4 \\
 E05 & -13,715 & -0.6031 & 91 & -0.3834 & -0.001728 & 55 & -1.415 & 0 & 4 \\
 E06 & -9,893 & -0.03933 & 61 & -0.04493 & 0.00175 & 46 & -0.006479 & -0.006837 & 5 \\
@@ -136,11 +216,12 @@ E18 & -10,678 & -0.05805 & 68 & -0.03236 & 0.004494 & 40 & -0.006367 & -0.003695
 \end{table}
 
 \begin{table}[h]
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Post-hoc. The eighteen external comparisons as registered and under the two removals of the npm
 zero days: the mean difference, the adjusted $p$ and whether the test rejects at $q = 0.05$ after one
 adjustment over the eighteen of each scenario; the last column is the side with the larger signed-rank sum,
-the same in all three analyses. The horizon-7 rows are unchanged except for their adjusted $p$.}
+the same in all three analyses. The horizon-7 rows are unchanged except for their adjusted $p$. The means
+are unscaled and carried by \texttt{aggregate-error}.}
 \label{tab:s2sens}
 \begin{tabular}{lrllrllrlll}
 \toprule
@@ -171,7 +252,7 @@ E18 & -5,109 & 0.00204 & yes & -5,242 & 0.00988 & yes & -5,068 & 0.00638 & yes &
 \end{table}
 
 \begin{table}[h]
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The six synthetic comparisons cell by cell at horizon 30: the mean paired difference over the 30
 replicates of each cell and, in brackets, the replicates where the hurdle variant is lower; no interval and
 no test. Under the declared rule only an exact zero is a tie, and a difference of order $10^{-18}$ is
@@ -181,7 +262,7 @@ floating-point residue. In the cells with $\mu_{+} = 1$ the positive law is dege
 \toprule
 Cell & $z$ & $\mu_{+}$ & $\rho$ & S01 & S02 & S03 & S04 & S05 & S06 \\
 \midrule
-cell00 & 0.2 & 1 & 0.0 & 0.001276 (10) & 0 (0) & -0.0008477 (9) & 0 (0) & 1.85e-18 (16) & 0 (0) \\
+cell00 & 0.2 & 1 & 0.0 & 0.001276 (10) & 0 (0) & -0.0008477 (9) & 0 (0) & $1.85 \times 10^{-18}$ (16) & 0 (0) \\
 cell01 & 0.2 & 1 & 0.8 & 0.02091 (11) & 0.004074 (0) & 0.0309 (9) & 0.00177 (0) & 0.0307 (12) & 0.001786 (0) \\
 cell02 & 0.2 & 5 & 0.0 & 0.03719 (7) & 0.03202 (6) & 0.02129 (6) & 0.007078 (14) & 0.02285 (8) & 0.01269 (12) \\
 cell03 & 0.2 & 5 & 0.8 & 0.1172 (11) & 0.03621 (11) & 0.127 (9) & 0.02497 (9) & 0.166 (8) & 0.03737 (9) \\
@@ -204,11 +285,12 @@ cell17 & 0.95 & 25 & 0.8 & -0.2365 (15) & -0.07619 (9) & -0.1487 (13) & -0.08094
 \end{table}
 
 \begin{table}[h]
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Mean scores of the sixteen variants on the npm panel (209 series, equal weights): \qs{} at both
 horizons and, at horizon 30, the context-scaled \qs{}, the occurrence Brier score and the discrete CRPS
 where a count law exists. The CRPS is over 208 series, \texttt{aggregate-error} being unavailable. The
-horizon-30 mean of \aets{} comes from the dense stratum; it is in no family comparison.}
+unscaled means are carried by \texttt{aggregate-error}, except the horizon-30 mean of \aets{}, which one
+other series, \texttt{composer-runtime-pouchdb}, carries; it is in no family comparison.}
 \label{tab:s2scores}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -235,10 +317,11 @@ dynamic\_count & 10,948 & 11,471 & 1.026 & 0.1773 & 124.2 \\
 \end{table}
 
 \begin{table}[h]
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Mean scores of the sixteen variants and the oracle on the synthetic grid (30 replicate blocks,
 18 cells with equal weight): \qs{} at both horizons and, at horizon 30, the occurrence Brier score and the
-discrete CRPS where a count law exists. The oracle is a diagnostic, not a competitor.}
+discrete CRPS where a count law exists. The oracle is a diagnostic, not a competitor;
+\texttt{dynamic\_count} has the lowest \qs{} of the sixteen variants at horizon 30.}
 \label{tab:s2synscores}
 \begin{tabular}{lrrrr}
 \toprule
@@ -261,6 +344,71 @@ hurdle\_count\_28 & 1.739 & 1.819 & 0.1325 & 1.677 \\
 hurdle\_empirical\_28 & 1.747 & 1.825 & 0.1325 & 1.685 \\
 dynamic\_count & 1.632 & 1.721 & 0.1236 & 1.588 \\
 oracle & 1.514 & 1.648 & 0.115 & 1.504 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The dynamic-occurrence post-hoc, the remaining rows.} Table~\ref{tab:s2dynrest} gives the rows
+of the two post-hoc families of Section~\ref{sec:s2results} that Table~\ref{tab:s2dyn} omits: each wrapper
+against \texttt{dynamic\_count}, whose occurrence it shares on every day, and against \hc{}.
+Table~\ref{tab:s2dynparts} gives the three accounting parts of the wrappers and their references on the
+grid at horizon 30, each an equal-block mean over the full horizon; the parts sum to \qs{}.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Post-hoc. The wrapper against \texttt{dynamic\_count} and against \hc{}, on npm (209 series) and
+the grid (30 blocks at horizon 30), with the columns and adjustment of Table~\ref{tab:s2dyn}. The npm means
+are unscaled and carried by \texttt{aggregate-error}.}
+\label{tab:s2dynrest}
+\begin{tabular}{lllrrcrcl}
+\toprule
+ID & Model & Reference & $h$ & Mean & 95\% interval & Median & Lower / tied / higher & Adjusted $p$ \\
+\midrule
+DE02 & Chronos-2 & count hurdle & 7 & -5,165 & [-15,402, -32.05] & -0.009524 & 122 / 3 / 84 & $2.69 \times 10^{-8}$ \\
+DE03 & Chronos-2 & dynamic count & 7 & -6,371 & [-19,017, -32.41] & -0.01376 & 123 / 26 / 60 & $3.1 \times 10^{-11}$ \\
+DE06 & Chronos-2 & count hurdle & 30 & -6,627 & [-19,794, -31.46] & -0.08272 & 176 / 2 / 31 & $6.44 \times 10^{-26}$ \\
+DE07 & Chronos-2 & dynamic count & 30 & -7,219 & [-21,554, -32.27] & -0.02988 & 143 / 18 / 48 & $1.07 \times 10^{-19}$ \\
+DE10 & TimesFM 3 & count hurdle & 7 & -5,499 & [-16,403, -32.2] & -0.008466 & 120 / 1 / 88 & $1.66 \times 10^{-6}$ \\
+DE11 & TimesFM 3 & dynamic count & 7 & -6,705 & [-20,020, -32.3] & -0.002116 & 107 / 41 / 61 & $6.81 \times 10^{-9}$ \\
+DE14 & TimesFM 3 & count hurdle & 30 & -6,866 & [-20,501, -31.93] & -0.09012 & 171 / 5 / 33 & $6.44 \times 10^{-26}$ \\
+DE15 & TimesFM 3 & dynamic count & 30 & -7,458 & [-22,272, -32.36] & -0.03556 & 142 / 36 / 31 & $8.61 \times 10^{-22}$ \\
+DE18 & TimesFM 2.5 & count hurdle & 7 & -6,018 & [-17,965, -32.15] & -0.008466 & 117 / 1 / 91 & $2.94 \times 10^{-5}$ \\
+DE19 & TimesFM 2.5 & dynamic count & 7 & -7,224 & [-21,578, -32.25] & 0 & 95 / 32 / 82 & $2.94 \times 10^{-5}$ \\
+DE22 & TimesFM 2.5 & count hurdle & 30 & -6,999 & [-20,911, -30.68] & -0.07654 & 168 / 4 / 37 & $5.15 \times 10^{-24}$ \\
+DE23 & TimesFM 2.5 & dynamic count & 30 & -7,592 & [-22,681, -31.8] & -0.0284 & 135 / 29 / 45 & $6.4 \times 10^{-18}$ \\
+\midrule
+DS02 & Chronos-2 & count hurdle & 30 & -0.006081 & [-0.06427, 0.05495] & $5.487 \times 10^{-5}$ & 15 / 0 / 15 & 0.734 \\
+DS03 & Chronos-2 & dynamic count & 30 & 0.09152 & [0.05951, 0.131] & 0.08335 & 3 / 0 / 27 & $9.84 \times 10^{-5}$ \\
+DS06 & TimesFM 3 & count hurdle & 30 & -0.03699 & [-0.08884, 0.01326] & -0.03181 & 20 / 0 / 10 & 0.128 \\
+DS07 & TimesFM 3 & dynamic count & 30 & 0.0606 & [0.03767, 0.08388] & 0.05156 & 4 / 0 / 26 & 0.000301 \\
+DS10 & TimesFM 2.5 & count hurdle & 30 & 0.008012 & [-0.04943, 0.06357] & 0.02626 & 14 / 0 / 16 & 0.734 \\
+DS11 & TimesFM 2.5 & dynamic count & 30 & 0.1056 & [0.07495, 0.1372] & 0.09752 & 2 / 0 / 28 & $9.84 \times 10^{-5}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\small
+\caption{Post-hoc. The three exact accounting parts on the synthetic grid at horizon 30, equal-block means
+over the full horizon, for each model's dynamic-occurrence wrapper, its registered hurdle and its completed
+control, and for \texttt{dynamic\_count}, \hc{} and the oracle. The parts sum to \qs{}.}
+\label{tab:s2dynparts}
+\begin{tabular}{lrrrr}
+\toprule
+Variant & \qs{} & Zero days & Positive, overprediction & Positive, underprediction \\
+\midrule
+chronos2\_dyn & 1.813 & 0.3682 & 0.0847 & 1.36 \\
+chronos2\_hurdle & 1.871 & 0.4046 & 0.08819 & 1.378 \\
+chronos2\_completed & 1.785 & 0.5798 & 0.1201 & 1.085 \\
+timesfm3\_dyn & 1.782 & 0.3879 & 0.09111 & 1.303 \\
+timesfm3\_hurdle & 1.84 & 0.4294 & 0.09493 & 1.316 \\
+timesfm3\_completed & 1.754 & 0.6014 & 0.1231 & 1.029 \\
+timesfm2p5\_dyn & 1.827 & 0.3653 & 0.09171 & 1.37 \\
+timesfm2p5\_hurdle & 1.88 & 0.3947 & 0.09467 & 1.39 \\
+timesfm2p5\_completed & 1.792 & 0.624 & 0.1334 & 1.035 \\
+dynamic\_count & 1.721 & 0.5214 & 0.1114 & 1.088 \\
+hurdle\_count\_28 & 1.819 & 0.5923 & 0.118 & 1.108 \\
+oracle & 1.648 & 0.4817 & 0.1102 & 1.056 \\
 \bottomrule
 \end{tabular}
 \end{table}

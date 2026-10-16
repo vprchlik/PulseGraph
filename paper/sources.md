@@ -208,7 +208,7 @@ table rows are the declared tuples with `tbd` cells and that no decimal figure a
 
 | Number or fact | File | Where |
 |---|---|---|
-| Registration 2026-09-14 at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`; full-protocol SHA-256 `33cefd8e...` | `S2/external_packages_spec.json` `protocol_commit`, `protocol_sha256`; `PROTOCOL.md` "Study 2 — dated addition, 2026-09-14"; `git log -- PROTOCOL.md` (`df55867` dated 2026-09-14) | as in `main.tex` Section 8 |
+| Registration 2026-09-14 at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`; full-protocol SHA-256 `33cefd8e...` | `S2/external_packages_spec.json` `protocol_commit`, `protocol_sha256`; `PROTOCOL.md` "Study 2, dated addition, 2026-09-14"; `git log -- PROTOCOL.md` (`df55867` dated 2026-09-14) | as in `main.tex` Section 8 |
 | Zero-day part 0.004 to 0.015, against the models in every cell; medians 0.0003 to 0.0041; models lower on 46 to 89 of 300 | `R/posthoc/posthoc-paired-summary.csv`, `R/inference/inference.csv` | the same rows and columns as the Study 1 tables above |
 | "This hypothesis arose after Study 1 and is tested on separately declared data"; completion not attributed to Study 1 | `PROTOCOL.md` Study 2 addition, opening paragraphs and "Models, distributions and controls" | text |
 | The re-check run 2026-10-12; the six items, their arXiv identifiers and dates; the memo's items; fable.intermittent, Bai and Chu, EXAONE Demand; "not found" and the failed routes; what may and may not be claimed | `docs/research/2026-10-11-literature-recheck.md` | header; "Items"; the table of three items outside the window; "The cited items, re-checked"; "What the paper may claim"; "What the paper must cite"; "Where the record is thin" |
@@ -227,7 +227,7 @@ table rows are the declared tuples with `tbd` cells and that no decimal figure a
 | Jeffreys occurrence (n+ + 1/2)/29; lookback 28; fewer than two positives gives delta_1 | `S2/external_packages_spec.json` `count_hurdles` | `occurrence`, `lookback`, `minimum_positives`, `fallback` |
 | Dynamic count: discount 0.98; four parameters start at 0.5; fallback to `hurdle_count_28` | `S2/external_packages_spec.json` `dynamic_count` | `discount`, `initial_parameters`, `fallback` |
 | Seven baselines | `S2/external_packages_spec.json` `baselines` | the list of seven |
-| CRPS tolerance 1e-8 by k = 1,000,000; the availability rule | `S2/external_packages_spec.json` `crps`; `PROTOCOL.md` "Discrete CRPS availability — dated addition, 2026-10-15" | `tolerance`, `max_k`; item 5 |
+| CRPS tolerance 1e-8 by k = 1,000,000; the availability rule | `S2/external_packages_spec.json` `crps`; `PROTOCOL.md` "Discrete CRPS availability, dated addition, 2026-10-15" | `tolerance`, `max_k`; item 5 |
 | 54 = 3 x 3 x 2 x 3; E01 to E18 (Table `tab:s2family`); one BH at q = 0.05; 20,000 bootstrap replicates; bootstrap seed 20260917; two-sided Wilcoxon; E19 to E54 as a later family of 36 | `S2/external_comparisons.json` (54 rows); `S2/external_packages_comparisons.json` (18 rows, equal to the first 18, `authority` naming item 3 and `8db0d73`); `PROTOCOL.md` addition of 2026-10-12, item 3 | the checker builds each table row from the JSON |
 | The synthetic grid: z in {0.2, 0.8, 0.95}, mu+ in {1, 5, 25}, rho in {0, 0.8}; 18 cells; 30 replicates; 270 observations; first context 180; origins 180, 210, 240; horizons 7, 30; 540 series; seed 20260918; common random numbers with separate occurrence and size streams | `S2/grid_manifest.json` `cells`, `n_cells`, `replicates_per_cell`, `observations`, `origins`, `horizons`, `n_series`, `seed`, `common_random_numbers`, `streams`; `PROTOCOL.md` "Synthetic intervention component" | the checker reads the cell parameters and the 30 streams |
 | S01 to S06 at horizon 30 (Table `tab:s2synfamily`) | `S2/synthetic_comparisons.json` | the checker builds each table row from the JSON |
@@ -268,133 +268,190 @@ the grid manifest. The checker asserts that no `tbd` remains and that the placeh
 | `.\.venv\Scripts\python.exe scripts\study2_evidence.py ...` (README) | `S2\acquisition_status.json` |
 | `.\.venv\Scripts\python.exe paper/check_numbers.py` | nothing; asserts this table against the sections |
 
-## The paper: `paper.tex` and the Study 2 results (added 2026-10-16)
+## The paper: `paper.tex` and the Study 2 results (added 2026-10-16, revised the same day)
 
 `paper/paper.tex` is the report extended with Study 2. Its Sections 1 to 6, the Study 1 limitation items,
 the follow-up paragraph, the reproducibility paragraph, the author's statement and Appendices A to D are
 read by `\input` from fourteen files under `paper/shared/`, split out of `main.tex` on 2026-10-16;
-`main.tex` reads the same files and expands to its committed text byte for byte (`check_numbers.py`
-asserts that every shared file's text is in both documents). The Study 2 sections are the four drafted
-files under `paper/sections/`, with `study2-results-placeholder.tex` replaced by `study2-results.tex`, and
-three files added: `study2-design-detail.tex` (the Scores, seeds and gate, holdout and contamination
-paragraphs moved verbatim from `study2-design.tex`, with one `\ref` whose backslash the draft had lost
-restored), `study2-panel-detail.tex` (the budget and data-statement paragraphs moved from
-`study2-panel.tex`, the data statement now saying the targets were obtained on 2026-10-15) and
-`study2-appendix.tex` (the secondary readings and tables). `check_numbers.py` reads `paper.tex` expanded,
-the new section files and `PAPER-SUMMARY.md` like `main.tex` and `SUMMARY.md`. `NR` stands for
-`reports/study2-npm/run-2026-10-15`, `SR` for `reports/study2-synthetic-2026-10-15`. Every CSV is read with
-`float_precision="round_trip"`, as `RESULTS-npm.md` asks. Values are printed as the two results documents
-print them: four significant figures, thousands separators from 1,000 up in the paper (from 10,000 up in
-the results documents), $p$-values to three significant figures with small values as powers of ten.
+`main.tex` reads the same files and expands to its committed text (`git show f325a67:paper/main.tex`) byte
+for byte apart from one dated sentence in `main.tex` itself, which now says that both Study 2 components
+ran on 2026-10-15 (`check_numbers.py` asserts the expansion against the committed file with that one
+sentence replaced). The Study 2 sections are the files under `paper/sections/`: `study2-question.tex`,
+`study2-design.tex`, `study2-panel.tex`, `study2-results.tex` (the body), `study2-design-detail.tex`,
+`study2-panel-detail.tex` and `study2-appendix.tex` (the appendix). After the revision of 2026-10-16 the
+design section keeps the calendar, the models and variants, the comparators, the families and the grid in
+the body and moves the frame-and-sampling rule, the completion, the baselines, the two family tables, the
+scores, the seeds, the gate, the holdout and the contamination ledger to Appendix E; the panel section
+keeps the strata, the short third stratum and the dominant series and moves the inventory, the walk, the
+context pull, the panel table, the budget and the data statement to Appendix F; the results section
+moves the runs to Appendix G and the zero-day counts, the secondary readings and the synthetic cell figure
+to Appendix H. `check_numbers.py` reads `paper.tex` expanded, the section files and `PAPER-SUMMARY.md` like
+`main.tex` and `SUMMARY.md`; the needles of the design and panel sections are asserted against the body
+file and its detail file concatenated. `NR` stands for `reports/study2-npm/run-2026-10-15`, `SR` for
+`reports/study2-synthetic-2026-10-15`, `DO` for `reports/study2-posthoc-dynamic-occurrence`. Every CSV is
+read with `float_precision="round_trip"`, as `RESULTS-npm.md` asks. Values are printed as the two results
+documents print them: four significant figures, thousands separators from 1,000 up in the paper (from
+10,000 up in the results documents), $p$-values to three significant figures, and any value whose four
+significant figures need an exponent as a power of ten (so `1.055e-09` of the strata file prints as
+$1.055 \times 10^{-9}$).
 
 Tables of the paper, in source order: Tables 1 to 4 and Figures 1 and 2 as in the report; Table 5 the
-external family E01 to E18 (`tab:s2family`), Table 6 the synthetic family (`tab:s2synfamily`), Table 7 the
-achieved npm panel (`tab:s2panel`), Tables 8 and 9 the two results families (`tab:s2ext`, `tab:s2syn`),
-Table 10 the accounting parts of the hurdle contrast (`tab:s2parts`), Figures 3 and 4 the Study 2 figures
-(`fig:s2npm`, `fig:s2cells`); in the appendix, Tables 11 to 15 as the report's Tables 5 to 9, then the
-scaled score (`tab:s2scaled`), the strata (`tab:s2strata`), the sensitivity (`tab:s2sens`), the cells
-(`tab:s2cells`), the npm model scores (`tab:s2scores`) and the synthetic model scores (`tab:s2synscores`);
-Figure 5 the zero-fraction scatter as in the report.
+external family's results (`tab:s2ext`), Table 6 the synthetic family's results (`tab:s2syn`), Table 7 the
+accounting parts of the hurdle contrast (`tab:s2parts`), Table 8 the post-hoc dynamic-occurrence rows
+against the completed control and the fixed hurdle (`tab:s2dyn`), Figure 3 the npm paired differences
+(`fig:s2npm`); in the appendix, Tables 9 to 13 as the report's Tables 5 to 9, Figure 4 the zero-fraction
+scatter as in the report, then the external family E01 to E18 (`tab:s2family`, Table 14), the synthetic
+family (`tab:s2synfamily`, 15), the achieved npm panel (`tab:s2panel`, 16), Figure 5 the synthetic cells
+(`fig:s2cells`), the post-hoc stratum tests (`tab:s2regime`, 17), the empirical-hurdle reading
+(`tab:s2empirical`, 18), the scaled score (`tab:s2scaled`, 19), the strata (`tab:s2strata`, 20), the
+sensitivity (`tab:s2sens`, 21), the cells (`tab:s2cells`, 22), the npm model scores (`tab:s2scores`, 23),
+the synthetic model scores (`tab:s2synscores`, 24), the remaining dynamic-occurrence rows
+(`tab:s2dynrest`, 25) and the dynamic-occurrence accounting parts (`tab:s2dynparts`, 26). Sections 1 to 6
+are the report's, 7 to 10 Study 2's question, design, npm panel and results (with the post-hoc
+dynamic-occurrence subsection at the end of 10), 11 the discussion, 12 the limitations, 13 what is not run,
+14 reproducibility, 15 the author's statement; Appendices A to D are the report's, E the Study 2 design
+detail, F the npm panel detail, G the runs and commands, H the secondary tables and post-hoc readings. In
+Tables 5 and 6 the variant and reference names are replaced by the model's name and the contrast
+(`hurdle vs completed`, `hurdle vs count hurdle`, `raw vs local mean`); the tuples are in Table 14.
 
-### The two families (Tables 8 and 9, Section 10, the abstract, the discussion, the summary)
+### The two families (Tables 5 and 6, Section 10, the abstract, the discussion, the summary)
 
 | Number | File | Row and column or key |
 |---|---|---|
 | The 18 npm rows and the 6 synthetic rows: mean, interval, median, lower / tied / higher, adjusted $p$ | `NR/inference/inference.csv`, `SR/inference/inference.csv` | `mean_diff`, `mean_diff_ci_low`, `mean_diff_ci_high`, `median_diff`, `wins`, `ties`, `losses`, `wilcoxon_p_bh`; `n_entities` 209 and 30; `n_bootstrap` 20,000; `bootstrap_root` 20260917; `declared_count` 18 and 6; the row order is the declaration's |
-| "Twelve of the eighteen ... five of the six"; "ten ... and two against it"; "all five ... against the hurdle" | same | `reject_bh_005` counts; the sign of `mean_diff` on the rejecting rows |
-| Hurdle against control: "from 90.24 to 253.9, with every interval above zero"; "within 0.014 of zero, three below it and three above"; "lower on 81 to 121 of the 209 series"; E10 and E16 (120 and 107 higher; adjusted $p$ 0.00215 and 0.0276); "from 0.203 to 0.628" | `NR/inference/inference.csv`, the six rows with a `_completed` reference | `mean_diff`, `mean_diff_ci_low`, `median_diff`, `wins`, `losses`, `wilcoxon_p_bh`, `reject_bh_005` |
-| Synthetic hurdle against control: "from 0.08599 to 0.08769"; "medians of 0.05554 to 0.06743"; "5 or 6 of the 30"; "from 0.00415 to 0.00676" | `SR/inference/inference.csv`, S01, S03, S05 | the same columns |
-| Hurdle against the count hurdle: adjusted $p$ from $2.66 \times 10^{-5}$ to $3.19 \times 10^{-25}$; "from -5,090 to -6,918"; "from -0.006349 to -0.0716"; "lower on 115 to 161" | `NR/inference/inference.csv`, the six `hurdle_count_28` rows | the same columns; `reject_bh_005` true on all six |
-| S02 and S06 "by 0.05211 and 0.06109 ... 0.0111 and 0.00798, lower on 9 of 30 blocks each"; S04 "0.0215 ... 0.12, lower on 11 of 30" | `SR/inference/inference.csv` | the same columns |
-| Raw against the local mean: rejects E06, E09, E12, E18; E03 and E15 adjusted $p$ 0.596 and 0.746; "from -2,884 to -5,109"; "lower on 84 to 125"; medians 0.007856 and 0.01696 (positive), -0.002297 to -0.005016 (negative) | `NR/inference/inference.csv`, the six `local_mean_28` rows | the same columns |
+| "Twelve of the eighteen ... five of the six"; "ten ... and two against it"; "all five synthetic rejections are against the hurdle variant"; "No test favors the substitution at $q = 0.05$"; the abstract's "No pooled test favors the substitution at q = 0.05, and two of six npm tests and all three grid tests reject against it" | same | `reject_bh_005` counts; the sign of `mean_diff` on the rejecting rows; no rejecting row of a hurdle-against-control contrast has `mean_diff < 0` |
+| Hurdle against control: "from 90.24 to 253.9 (carried by `aggregate-error`), with every interval above zero"; "within 0.014 of zero, three below it and three above"; "lower on 81 to 121 of the 209 series"; E10 and E16 (120 and 107 higher; adjusted $p$ 0.00215 and 0.0276); "from 0.203 to 0.628"; "in E01 the typical series leans to the hurdle, lower on 121 of 209 series with a median of -0.01376" and the lean of E04 and E13 | `NR/inference/inference.csv`, the six rows with a `_completed` reference | `mean_diff`, `mean_diff_ci_low`, `median_diff`, `wins`, `losses`, `wilcoxon_p_bh`, `reject_bh_005`; the rank sums behind "the larger signed-rank sum on its side" are `rank_sum_model_lower` and `rank_sum_reference_lower` in `NR/posthoc/sensitivity_inference.csv` (registered columns) and are reproduced by `NR/check_directions.py` |
+| Synthetic hurdle against control: "from 0.08599 to 0.08769, with every interval above zero"; "5 or 6 of the 30"; "from 0.00415 to 0.00676" | `SR/inference/inference.csv`, S01, S03, S05 | the same columns |
+| Hurdle against the count hurdle: adjusted $p$ from $2.66 \times 10^{-5}$ to $3.19 \times 10^{-25}$; "from -5,090 to -6,918 (carried by `aggregate-error`)"; "from -0.006349 to -0.0716"; "lower on 115 to 161" | `NR/inference/inference.csv`, the six `hurdle_count_28` rows | the same columns; `reject_bh_005` true on all six |
+| S02 and S06 "by 0.05211 and 0.06109 (adjusted $p$ 0.0111 and 0.00798, lower on 9 of 30 blocks each)"; S04 "0.0215 ... 0.12, lower on 11 of 30" | `SR/inference/inference.csv` | the same columns |
+| Raw against the local mean: rejects E06, E09, E12, E18; E03 and E15 adjusted $p$ 0.596 and 0.746; "from -2,884 to -5,109 (carried by `aggregate-error`)"; "lower on 84 to 125"; medians 0.007856 and 0.01696 (positive), -0.002297 to -0.005016 (negative); the rank sums on the model's side in all six rows | `NR/inference/inference.csv`, the six `local_mean_28` rows; `NR/posthoc/sensitivity_inference.csv` `registered_larger_sum_favors` | the same columns |
 
-### The one series behind every npm mean (Section 10, the limitations, the summary)
+### The regime reading (Section 10, the abstract, the discussion, Appendix Tables 17 and 20)
+
+| Number | File | Row and column |
+|---|---|---|
+| The hurdle lower than its control on 81, 60 and 66 of the 100 sparse series at horizon 7 (E01, E07, E13) and on 58, 45 and 54 at horizon 30 (E04, E10, E16); on 32 to 43 of the 100 dense series in every cell; the very sparse median exactly 0 in five of six cells; lower than `hurdle_count_28` on 80 to 94 dense and 29 to 63 sparse | `NR/inference/secondary_strata_contrasts.csv`, `metric == qscore9` | `wins`, `median_diff` by `stratum`, `id` (the declared secondary table, Table 20) |
+| Table 17: lower / tied / higher, median and raw two-sided signed-rank $p$ of the hurdle against its control within each stratum; "raw $p$ below 0.002 for all three sparse-stratum contrasts at horizon 7 and from 0.47 to 0.892 at horizon 30" | `NR/inference/series_scores.csv` (post-hoc; the checker recomputes every cell: `qscore9` of `<model>_hurdle` minus `<model>_completed` per `series_id`, grouped by `stratum`; `scipy.stats.wilcoxon` on the nonzero differences, two-sided) | the same reading is printed by the command in `docs/research/2026-10-16-standing-and-referee-read.md` |
+| On the grid the hurdle lower than its control in 4 to 6 of 30 blocks at $z = 0.2$, 12 to 15 at $z = 0.8$ and 21 to 26 at $z = 0.95$ | `SR/inference/series_scores.csv` (post-hoc; block means of `qscore9` at horizon 30 over the six cells with each zero probability, hurdle minus completed, per `replicate`) | the cell parameters from `SR/inference/secondary_cells_contrasts.csv` |
+| "$p = 28.5 / 29$ ... about 1.7 percent" | arithmetic from the registered Jeffreys rule $(n_+ + 1/2) / 29$ with $n_+ = 28$ | asserted by the checker |
+
+### The empirical hurdle and the dynamic count (Section 10, the discussion, Appendix Tables 18, 23 and 24)
+
+| Number | File | Row and column |
+|---|---|---|
+| Table 18: the foundation-model hurdle against `hurdle_empirical_28` by stratum (lower / tied / higher) and the completed control against it over 209 series (counts, median, raw $p$); "lower on 63 to 72 of the 100 dense series and on 33 to 57 of the 100 sparse"; "lower than the empirical hurdle on 120 to 140 of 209 series at horizon 30"; "on only 88 and 90 of 209 for Chronos-2 and TimesFM 2.5 (117 for TimesFM 3)" | `NR/inference/series_scores.csv` (post-hoc, recomputed by the checker as above) | `qscore9` by `model`, `horizon`, `series_id`, `stratum` |
+| The dynamic count's mean QScore9 1.721 at horizon 30 against 1.754 to 1.792 for the completed models, 1.819 for `hurdle_count_28`, 1.648 for the oracle; the lowest of the sixteen variants | `SR/inference/secondary_scores.csv` | `qscore9` by `horizon`, `model` (Table 24) |
+| Lower than the completed Chronos-2, TimesFM 3 and TimesFM 2.5 in 21, 18 and 24 of 30 blocks; lower than `hurdle_count_28` and `local_mean_28` in 26 of 30 | `SR/inference/series_scores.csv` (post-hoc; block means at horizon 30 per `replicate`) | `qscore9` |
+| On npm the completed models lower than `dynamic_count` on 108 to 146 of 209 series; its means 10,948 and 11,471 against 3,641 to 4,500 | `NR/inference/series_scores.csv` (post-hoc); `NR/inference/secondary_scores.csv` | `qscore9` (Table 23) |
+| The typical npm series and the trade: the median series' zero-day difference (hurdle minus completed) positive in all six cells, 0.003 to 0.036 | `NR/inference/series_scores.csv` (post-hoc) | `zero` by `model`, `horizon`, `series_id` |
+
+### The one series behind every npm mean (Sections 9 and 10, the limitations, the summary)
 
 From `NR/inference/paired_entities.csv` (209 rows per comparison id, column `difference`), recomputed by
-the checker with Study 1's definitions (`pulsegraph/evaluation/reviews.py`): the series whose omission
-moves the mean most is `aggregate-error` in all 18 rows, with its difference of the mean's sign; "fall
-from 90.24 to 253.9 to 0.6334 to 1.599" is the mean without it over the six hurdle-against-control rows;
-"0.995 to 0.998" is the share of the positive gains (reference minus model, where positive) held by the five
-largest, over the twelve rows against `hurdle_count_28` and `local_mean_28`. The same figures are in
-`NR/RESULTS-npm.md`, "Skill and concentration". "7,637,136 downloads a day" is in `PROTOCOL.md`, addition
-of 2026-10-15, and `study/study2/npm_panel_status.json` (as in the panel section).
+the checker with Study 1's definitions: the series whose omission moves the mean most is `aggregate-error`
+in all 18 rows, with its difference of the mean's sign; "fall from 90.24 to 253.9 to 0.6334 to 1.599" is
+the mean without it over the six hurdle-against-control rows; "0.995 to 0.998" is the share of the positive
+gains held by the five largest, over the twelve rows against `hurdle_count_28` and `local_mean_28`.
+"7,637,136 downloads a day" is in `PROTOCOL.md`, addition of 2026-10-15, and `study/study2/npm_panel_status.json`;
+"the next largest last-28 mean ... about 13,000" and "the median series averages two" are in
+`docs/research/2026-10-15-study2-run-path-review.md` (verdict 8) and `NR/RESULTS-npm.md` ("The series
+differ in scale"), both from the frozen context file, which is not in the tree.
 
-### The accounting parts (Table 10, Section 10, the discussion)
+### The accounting parts (Table 7, Section 10, the discussion)
 
 `NR/inference/secondary_accounting.csv` and `SR/inference/secondary_accounting.csv`, rows by `horizon` and
 `model`, columns `qscore9`, `zero`, `positive_over`, `positive_under` (equal-entity means over the full
 horizon); each table cell is the hurdle variant's part minus its completed control's. The checker asserts
-that the parts sum to the total (`parts_sum`, `max_abs_window_residual` below $10^{-8}$), that the zero and
-overprediction differences are negative and the underprediction difference positive and larger than both
-in all nine cells, and the synthetic ranges "0.3947 to 0.4294 against 0.5798 to 0.624" and "1.316 to 1.39
-against 1.029 to 1.085".
+that the parts sum to the total (`parts_sum`, `max_abs_window_residual` below $10^{-8}$) and that the zero
+and overprediction differences are negative and the underprediction difference positive and larger than
+both in all nine cells.
 
-### The secondary contrasts (Appendix Table `tab:s2scaled`, Section 10, the appendix text)
+### The secondary contrasts (Appendix Table 19, Section 10, the appendix text)
 
 | Number | File | Row and column |
 |---|---|---|
 | The 18 npm and 12 synthetic scaled rows | `NR/inference/secondary_contrasts.csv`, `SR/inference/secondary_contrasts.csv`, `metric == context_scaled_qscore9` | `mean_diff`, `mean_diff_ci_low`, `mean_diff_ci_high`, `median_diff`, `wins`, `ties`, `losses` |
 | Scaled at horizon 7: -0.02204, -0.006708, -0.006123 with intervals below zero; at horizon 30: -0.002395, 0.001291, 0.001687 with intervals including zero; against the count hurdle -0.1182 to -0.1466, every interval below zero; below zero in E06, E09, E12, E18 and including zero in E03, E15; every synthetic horizon-30 scaled interval includes zero | same | `mean_diff_ci_low`, `mean_diff_ci_high` |
 | The Brier difference exactly zero against `hurdle_count_28` (209 ties in each of six rows); lower for the hurdle with an interval below zero in E01, E04, E13 and including zero in E07, E10, E16 | `NR/inference/secondary_contrasts.csv`, `metric == occurrence_brier` | `mean_diff`, `ties`, `mean_diff_ci_high`, `mean_diff_ci_low` |
-| CRPS unavailable for 66 forecasts (11 x 3 x 2); 13,728 certified of 13,794 with a law; 6,270 without a law; none unavailable on the grid | `NR/inference/secondary_scores.csv`, `SR/inference/secondary_scores.csv` | sums of `crps_unavailable_bound_not_certified`, `crps_certified`, `crps_with_count_distribution`, `crps_unavailable_no_count_distribution` |
+| CRPS unavailable for 66 forecasts (11 x 3 x 2); 13,728 certified of 13,794 with a law; 6,270 without a law; none unavailable on the grid (Appendix G) | `NR/inference/secondary_scores.csv`, `SR/inference/secondary_scores.csv` | sums of `crps_unavailable_bound_not_certified`, `crps_certified`, `crps_with_count_distribution`, `crps_unavailable_no_count_distribution` |
 
-### Model scores, the oracle and the PIT (Appendix Tables `tab:s2scores`, `tab:s2synscores`; the appendix text; Section 10)
+### Model scores, the oracle and the PIT (Appendix Tables 23 and 24; the appendix text; Section 10)
 
 | Number | File | Row and column |
 |---|---|---|
 | The 16 npm rows: QScore9 at both horizons, scaled QScore9, Brier and CRPS at horizon 30; the 17 synthetic rows | `NR/inference/secondary_scores.csv`, `SR/inference/secondary_scores.csv` | `qscore9`, `context_scaled_qscore9`, `occurrence_brier`, `discrete_crps` by `horizon`, `model` |
 | The oracle lowest at both horizons (1.514, 1.648), lowest Brier (0.115) and CRPS (1.504) | `SR/inference/secondary_scores.csv` | the `oracle` rows; the checker takes the minimum over models |
-| "17 of the 18 cells"; cell00 "0.1759 and 0.1761 against 0.1767" | `SR/inference/secondary_cells.csv`, horizon 30 | `qscore9` by `cell_id`, `model`; the two models below the oracle in `cell00` |
+| "no forecaster scores below it in 17 of the 18 cells"; the three exact ties with `dynamic_count` in `cell12`, `cell14`, `cell16`; cell00 "0.1759 and 0.1761 against 0.1767" | `SR/inference/secondary_cells.csv`, horizon 30 | `qscore9` by `cell_id`, `model` |
+| The horizon-30 mean of `autoets_weekly` on npm carried by `composer-runtime-pouchdb`, the other unscaled means by `aggregate-error` (Table 23's caption) | `NR/inference/series_scores.csv` | `qscore9` by `model`, `series_id` at horizon 30 (the review of 2026-10-16, item 11: 0.715 and 0.975 to 0.989 of the summed series scores) |
 | Oracle PIT "0.099 to 0.104 of its 48,600 target days"; the shown models "0.078 to 0.133"; npm hurdle "0.088 to 0.146" against "0.083 to 0.153" | `SR/inference/pit_histograms.csv`, `NR/inference/pit_histograms.csv`, horizon 30 | `fraction01` to `fraction10`, `n_values` |
 
-### By stratum and per cell (Appendix Tables `tab:s2strata`, `tab:s2cells`; Figure 4; Section 10)
+### Per cell (Appendix Table 22, Figure 5, Section 10)
 
-| Number | File | Row and column |
-|---|---|---|
-| The 18 stratum rows (mean, median, lower for dense, sparse, very sparse); "32 to 43 ... 45 to 81 ... 2 to 4 ... exactly 0 in five of the six"; "80 to 94 ... 29 to 63 ... 4 of the 9 ... in every cell"; "61 to 70 ... 19 to 51 ... 4 or 5" | `NR/inference/secondary_strata_contrasts.csv`, `metric == qscore9` | `mean_diff`, `median_diff`, `wins`, `n_entities` (100, 100, 9) by `stratum`, `id` |
-| The 18 cell rows (mean and lower count for S01 to S06); "23 of the 24 differences are negative" at $z = 0.95$, $\mu_+ \ge 5$; "0.9342 to 0.9766 above its control at $\rho = 0.8$"; the count-hurdle contrast exactly 0 at $\mu_+ = 1$, $\rho = 0$ | `SR/inference/secondary_cells_contrasts.csv`, `metric == qscore9`, `horizon == 30` | `mean_diff`, `wins` by `cell_id`, `id`; `zero_probability`, `positive_mean`, `persistence` |
+`SR/inference/secondary_cells_contrasts.csv`, `metric == qscore9`, `horizon == 30`: `mean_diff`, `wins`
+by `cell_id`, `id`; `zero_probability`, `positive_mean`, `persistence`. "23 of the 24 differences are
+negative" at $z = 0.95$, $\mu_+ \ge 5$; "0.9342 to 0.9766 above its control at $\rho = 0.8$"; the
+count-hurdle contrast exactly 0 at $\mu_+ = 1$, $\rho = 0$.
 
-### The runs (Section 10 "The runs", Section 14, Appendix "Study 2 reproducibility")
+### The runs (Appendix G, Section 10, Section 14)
 
 | Number | File | Key |
 |---|---|---|
 | Synthetic: started 2026-10-15 20:16 UTC, completed 20:38; 540 series; 1,317 seconds; no failure, no resume; implementation `3fc3411f...`; readiness approved 20:13:56 UTC, estimate 1,539, budget 2,400 | `SR/run.json` | `started_at`, `completed_at`, `invocations[0].series_completed`, `invocations[0].wall_seconds`, `failures`, `resumes`, `metadata.metadata.implementation_commit`, `metadata.readiness.approved_at`, `estimated_seconds`, `runtime_budget_seconds` |
 | npm: started 23:27 UTC, completed 23:38; 209 series; 692 seconds; implementation `3057b16d...`; readiness approved 23:09:06 UTC, estimate 1,741, budget 3,600, at most 300 target requests | `NR/run.json` | the same keys |
-| 1,323 and 699 seconds "for the whole process"; the two gate times; the smoke | `SR/RESULTS-synthetic.md`, `NR/RESULTS-npm.md` | the "Run" and "Gate" paragraphs (quoted; the run files hold the in-run seconds) |
+| 1,323 and 699 seconds "for the whole process"; the two gate times | `SR/RESULTS-synthetic.md`, `NR/RESULTS-npm.md` | the "Run" and "Gate" paragraphs (quoted; the run files hold the in-run seconds) |
 | RTX 4070 SUPER, driver 610.88, CUDA 12.8, PyTorch 2.11.0, batch size 1, peak reserved 2,948,595,712 bytes | both `run.json` | `metadata.hardware`, `invocations[0].memory.peak_reserved_bytes` |
 | 55,080 = 540 x 3 x 2 x 17; 20,064 = 209 x 3 x 2 x 16 | `SR/score-recompute.json` `windows`; `NR/integrity/integrity.json` `checks.qscore9.compared` | arithmetic asserted by the checker |
-| Targets: 209 attempts, 209 answers, 23:14:58 to 23:26:22 UTC, no retry, no failure; 90 days each | `NR/target-pull/pull.json` `invocations`; `NR/target-pull/completeness.json` `series`, `verified`, `verified_at`; `NR/RESULTS-npm.md` "Targets" | text |
+| Targets: 209 attempts, 209 answers, requested between 23:15 and 23:26 UTC (the requesting invocation started 23:15:02 UTC in `pull.json` and the completeness document was verified at 23:26:22 UTC; the 23:14:58 of `NR/RESULTS-npm.md` is the start of the pull process, not of the requests), no retry, no failure; 90 days each | `NR/target-pull/pull.json` `invocations`; `NR/target-pull/completeness.json` `series`, `verified`, `verified_at` | text; the checker asserts the invocation start from `pull.json` |
 | Integrity: 0 disagreements for all 20,064 forecasts on QScore9, the parts, the scaled score and the Brier score; 209 checkpoints | `NR/integrity/integrity.json` | `status`, `failed_forecasts`, `checks.<score>.disagreements`, `run.checkpoint_sha256` |
 | Recomputation: largest absolute difference 0.0 over 55,080 windows; targets and context means equal to the generator | `SR/score-recompute.json` | `max_abs_difference`, `windows`, `series` |
-| NumPy 2.5.3, SciPy 1.18.1, pandas 2.3.3; no uncommitted change; 540 and 209 checkpoint hashes; the inference HEAD | `SR/inference/provenance.json`, `NR/inference/provenance.json` | `packages`, `uncommitted_changes_at_inference`, `run.checkpoint_sha256`, `implementation_commit_at_inference` |
+| NumPy 2.5.3, SciPy 1.18.1 and pandas 2.3.3; no uncommitted change; 540 and 209 checkpoint hashes; the inference HEAD | `SR/inference/provenance.json`, `NR/inference/provenance.json` | `packages`, `uncommitted_changes_at_inference`, `run.checkpoint_sha256`, `implementation_commit_at_inference` |
 | 338 MB and about 0.9 GB of checkpoints, not in the tree | `NR/RESULTS-npm.md`, `SR/RESULTS-synthetic.md` "Files" | text |
 
-### The three zero days and the post-hoc sensitivity (Section 10, the limitations, Appendix Table `tab:s2sens`, the summary)
+### The three zero days and the post-hoc sensitivity (Section 10, the limitations, Appendix H, Table 21, the summary)
 
 | Number | File | Key |
 |---|---|---|
 | 0 for all 209 series on 2026-07-12 and 2026-08-14; neighbours 4,059,870 and 10,123,968; 7,480,108 and 2,560,140; 2026-06-25: `aggregate-error` 0 between 9,475,033 and 7,909,626, 92 series at 0 against 98 and 121; no context day above 153 series at 0; the largest series never below 1,109,682; each day in one horizon-30 block | `NR/target-pull/daily_summary.csv` | `series_zero`, `total_downloads`, `largest_series_count`, `windows` by `date` (275 context days, 90 target days) |
-| npm's records, the two earlier episodes, the third-party page | `docs/research/2026-10-16-npm-zero-days.md` | "What npm's own records say"; "The two earlier episodes"; "One page outside npm's records" |
-| Addition 6 | `PROTOCOL.md` "npm zero days — dated addition, 2026-10-16" | item 6 |
-| The 18 sensitivity rows under both removals; "re-scores 10,032 forecasts, none of the eighteen conclusions changes"; "re-scores 6,688 forecasts, one conclusion changes"; E06 adjusted $p$ 0.0599 and raw $p$ 0.0399 against 0.0119 and 0.00663; "lower on 110 of 209"; E04, E10, E16 from 90.24, 128.5, 110.3 to 159.3, 201.2, 183.4; the horizon-7 rows unchanged except adjusted $p$; eleven and twelve rejecting | `NR/posthoc/sensitivity_inference.csv` | by `scenario` (`three_days`, `two_panel_wide_days`) and `id`: `mean_diff`, `wilcoxon_p`, `wilcoxon_p_bh`, `reject_bh_005`, `wins`, `larger_sum_favors`, `registered_*`, `mean_sign_changes`, `larger_sum_changes`, `rejection_changes`, `forecasts_rescored` |
+| npm's records, the two earlier episodes with the maintainer's confirmation (the thread cited as `npm-community-150808`) | `docs/research/2026-10-16-npm-zero-days.md`; `docs/research/2026-10-16-standing-and-referee-read.md`, Part A, claim 6(d) | "What npm's own records say"; "The two earlier episodes"; the thread's dates |
+| Addition 6; appended at 03:28 UTC; the sensitivity started at 03:21 UTC, before it | `PROTOCOL.md`, the heading of the dated addition of 2026-10-16 (npm zero days) and item 6; `NR/posthoc/sensitivity.json` `started_at` | the checker asserts both times |
+| The 18 sensitivity rows under both removals; "re-scores 10,032 forecasts, none of the eighteen conclusions changes"; "re-scores 6,688 forecasts, one conclusion changes"; E06 adjusted $p$ 0.0599 and raw $p$ 0.0399 against 0.0119 and 0.00663; "lower on 110 of 209"; E04, E10, E16 from 90.24, 128.5, 110.3 to 159.3, 201.2, 183.4; the horizon-7 rows unchanged except adjusted $p$ | `NR/posthoc/sensitivity_inference.csv` | by `scenario` (`three_days`, `two_panel_wide_days`) and `id`: `mean_diff`, `wilcoxon_p`, `wilcoxon_p_bh`, `reject_bh_005`, `wins`, `larger_sum_favors`, `registered_*`, `mean_sign_changes`, `larger_sum_changes`, `rejection_changes`, `forecasts_rescored` |
 | Computed 2026-10-16 at HEAD `e41fdf2`, no uncommitted change | `NR/posthoc/sensitivity.json` | `started_at`, `head`, `uncommitted_changes` |
 
-### The citations (Section 7, the discussion, `references.bib`)
+### The post-hoc dynamic-occurrence analysis (Section 10's subsection, Table 8, Appendix Tables 25 and 26, Appendix G)
+
+| Number | File | Key |
+|---|---|---|
+| The 24 npm rows DE01 to DE24 and the 12 grid rows DS01 to DS12: mean, interval, median, lower / tied / higher, adjusted $p$ (Table 8 holds the rows against the completed control and the model's registered hurdle; Table 25 the rows against `dynamic_count` and `hurdle_count_28`) | `DO/npm_inference.csv`, `DO/synthetic_inference.csv` | `mean_diff`, `mean_diff_ci_low`, `mean_diff_ci_high`, `median_diff`, `wins`, `ties`, `losses`, `wilcoxon_p_bh`, `reject_bh_005`, `larger_sum_favors`, `registered_id`; `declared_count` 24 and 12; `status` post-hoc |
+| "removes four of the five rejections against the substitution" (E10, E16, S01, S03 no longer reject; S05, now DS09, still does); "never beats the model's own zero mass at q = 0.05"; adjusted $p$ 0.0787 to 0.838; means 26.03 to 93.25; Chronos-2 wrapper lower on 116 and 126 of 209; DS01 and DS05 at 0.0959, DS09 at 0.0439; grid means 0.0278 to 0.03462; vs the fixed hurdle lower on 124 to 138 of 209 and in 20 or 21 of 30 blocks at adjusted $p$ 0.00823; `dynamic_count` lower in 26 to 28 of 30 blocks | same | the same columns; `larger_sum_favors` |
+| The fallback windows: 10 of 627 npm windows at each horizon, 501 of 1,620 grid windows | `DO/npm_occurrence.csv` (`stratum == all`), `DO/synthetic_occurrence.csv` (`cell_id == all`, horizon 30) | `windows`, `occurrence_fallback_windows` |
+| Table 26 and the prose: the wrapper's zero-day part 0.3653 to 0.3879, its underprediction part 1.303 to 1.37 against 1.029 to 1.085 for the completed controls and 1.088 for `dynamic_count` | `DO/synthetic_accounting.csv` | `qscore9`, `zero`, `positive_over`, `positive_under` by `model` |
+| Ran 2026-10-16 05:29 to 05:37 UTC at HEAD `ff8c5e8`, no uncommitted change; the checks (every checkpoint hash, both registered families rebuilt byte for byte, the Jeffreys wrapper reproducing the registered hurdle) | `DO/provenance.json`; `DO/RESULTS-dynamic-occurrence.md` "Checks" | `started_at`, `written_at`, `head`, `uncommitted_changes`; text |
+
+### The citations (Section 7, the discussion, the limitations, `references.bib`)
 
 The titles and full author lists of ten arXiv items were read from their abstract pages on 2026-10-16
-(each entry's `note` says so): `meyer2025` (2510.13654 v3, 2026-02-25, the title previously absent from the
-record), `schoess2026` (2609.39386 v1), `chin2026` (2609.13840 v1, accepted to IEEE ICDM 2026), `ebrahim2026`
-(2610.00589 v1), `islam2026` (2609.27867 v1), `moghadasi2026` (2609.10357 v1), `garza2026` (2603.08707 v2),
-`damato2026` (2609.28607 v3), `bai2026` (2511.12749 v3), `exaone2026` (2609.30880 v1). The versions and
-dates matched the literature re-check's table in every case. `tsantilis2025` and `zodiac2026` are not on
-arXiv and keep the surnames the record holds.
+by the paper's first writing (each entry's `note` says so): `meyer2025`, `schoess2026`, `chin2026`,
+`ebrahim2026`, `islam2026`, `moghadasi2026`, `garza2026`, `damato2026`, `bai2026`, `exaone2026`. The
+revision of 2026-10-16 added, from their abstract pages read the same day, `adler2025` (arXiv 2510.16060v2),
+`wen2026` (2608.17299v1), `corani2026` (2606.24715v2), `brini2026` (2607.05291v1), `cherif2026`
+(2607.19383v1), `li2026` (2605.26161v1), `qiao2026` (2602.12147v4, ICML 2026) and, from the Zenodo record
+page, `ebrahim2026zenodo` (10.5281/zenodo.22681072, version 1.2.2); the npm community thread
+`npm-community-150808` is cited as `docs/research/2026-10-16-standing-and-referee-read.md` records it
+(opened 2025-02-06; the maintainer's reply of 2025-02-07), and the full texts of `garza2026` and
+`islam2026` as the same document records them. `tsantilis2025` and `zodiac2026` are not on arXiv and keep
+the surnames the record holds. The checker asserts that every key cited in `paper.tex` has an entry, that
+each new identifier is in both the referee's read and the bib, and that each new entry records a read date.
 
 ### Numbers in `PAPER-SUMMARY.md`
 
 All of its numbers are in the tables above or in the report's tables; the checker asserts its key figures
-(209 series, 540, twelve of the eighteen, two of six, five of six, 7.6 million, the sensitivity sentence).
-Its word counts (the paper's body about 11,000 words beside the report's 4,900) come from `wc -w` over the
-expanded documents without the appendix and are estimates, not asserted.
+(209 series, 540, twelve of the eighteen, 7.6 million, the regime counts, the sensitivity sentence, the
+dynamic-occurrence sentences) and that its abstract is the paper's abstract word for word, at most 300
+words. The length figures in `PAPER-SUMMARY.md` and here are one pair by one method: running text with
+tables, figures and comments removed, counted as whitespace-separated tokens over the expanded document
+before `\appendix`: the paper's body 11,989 words with 748 words of captions, eight tables and three
+figures; the report's body 4,222 words with 294 words of captions, four tables and two figures. They are
+estimates, not asserted.
 
 ### Regeneration commands for the paper
 
@@ -406,6 +463,7 @@ expanded documents without the appendix and are estimates, not asserted.
 | `.\.venv\Scripts\python.exe scripts\study2_integrity.py external_packages --run NR --out <dir>` | `NR/integrity/` (needs the checkpoints) |
 | `.\.venv\Scripts\python.exe NR\target_days.py <signals.parquet> reports\study2-npm\panel\manifest.json --out <file>` | `NR/target-pull/daily_summary.csv` (needs the ignored target signals) |
 | `.\.venv\Scripts\python.exe NR\posthoc\sensitivity_zero_days.py NR --out <dir>` | `NR/posthoc/sensitivity_*.csv`, `sensitivity.json` (needs the checkpoints) |
+| `.\.venv\Scripts\python.exe DO\dynamic_occurrence.py --npm NR --synthetic SR --out <dir>` | the files under `DO/` (needs the 749 checkpoints) |
 | `.\.venv\Scripts\python.exe NR\make_tables.py NR\inference`; `SR\make_tables.py SR\inference` | the tables of the two results documents (read-only) |
 | `.\.venv\Scripts\python.exe paper/figures/make_figures.py` | the five figures under `paper/figures/` |
-| `.\.venv\Scripts\python.exe paper/check_numbers.py` | nothing; asserts this table against the report, the paper and both summaries |
+| `.\.venv\Scripts\python.exe paper/check_numbers.py` | nothing; asserts this table against the report, the paper and both summaries, recomputing the post-hoc stratum, empirical-hurdle and dynamic-count readings from the two `series_scores.csv` files |
