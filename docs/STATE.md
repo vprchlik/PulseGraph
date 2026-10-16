@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-16 05:00 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-16 05:15 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `f0c28a8` (2026-10-13 05:04 UTC), seventeen commits, pushed. Since 2026-10-12 the root carries
+`main` is at `4f7781a` (2026-10-16 04:44 UTC), thirty commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -54,14 +54,18 @@ are unchanged. The mechanism answer does not depend on the days.
 
 Addition 6, the sensitivity and the evidence are committed (`1c09ac8`).
 
-## The paper (awaiting the author's commit)
+## The paper (committed `c330315`; its review awaiting the author's commit)
 
 `paper/paper.tex`, written 2026-10-16: the report's text, now read from shared files that the report's own
 `main.tex` also reads (its expansion equals the committed report byte for byte), extended with the Study 2
 question, design, panel, both results, a discussion, limitations and reproducibility; 654 number checks pass;
 two new figures from the saved tables; the ten arXiv citations' titles and authors filled from their abstract
 pages. Its title, abstract and the three sentences to read are in `paper/PAPER-SUMMARY.md`. No PDF yet: no TeX
-on this machine.
+on this machine. Its review (45 verdicts: 17 hold, 26 with a fix, 2 do not hold) found every number traced
+and no table entry wrong, and sentences that overclaim: "no comparison favors the substitution" is false for
+E01, where the typical series favors the hurdle; the claim's scope is npm downloads and the grid, not
+"attention and adoption counts"; the dynamic count's occurrence rule is misdescribed; S04 is not a tie. A
+revision applies these with whatever the standing check and the post-hoc dynamic-occurrence analysis add.
 
 ## What the protocol allows, and what lapsed
 

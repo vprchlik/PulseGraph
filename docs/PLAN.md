@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-16 05:00 UTC. This page holds only what is current.
+Last rewritten 2026-10-16 05:15 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -36,7 +36,10 @@ day.
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
 | GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
 | The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | done 2026-10-16; awaiting the commit | the commit | done |
-| Paper review by a different reader, the author's read, posting (Zenodo version 2), TMLR submission | the paper | his read, the posting, the submission | 2026-10-31 |
+| Paper review by a different reader | done 2026-10-16: 45 verdicts, two do not hold (an overclaim in the abstract; a misdescribed baseline) | the commit | done |
+| The standing check and referee's read; the post-hoc dynamic-occurrence analysis | the paper | nothing | 2026-10-16 |
+| Paper revision: the review's fixes, the referee's changes, the post-hoc table, the length | the three above | nothing | 2026-10-18 |
+| The author's read of both summaries, the PDF, posting (Zenodo version 2), TMLR submission | the revision | his read, the posting, the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
 separate dated addition before 2026-10-28 18:00 UTC.
