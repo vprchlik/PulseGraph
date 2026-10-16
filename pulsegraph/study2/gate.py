@@ -17,9 +17,18 @@ from pulsegraph.study2.constants import (
     PROTOCOL_COMMIT,
     PROTOCOL_SHA256,
     SEEDS,
+    STUDY3_DOMAIN,
+    STUDY3_FALLBACK_DOMAIN,
+    STUDY3_FILES,
+    STUDY3_HEADING,
+    STUDY3_INVENTORY_SHA256,
+    STUDY3_PANEL_DEADLINE,
+    STUDY3_PROTOCOL_SHA256,
+    STUDY3_SEEDS,
+    STUDY3_VARIANTS,
     VARIANTS,
 )
-from pulsegraph.study2.declarations import PACKAGES_AUTHORITY, validate
+from pulsegraph.study2.declarations import PACKAGES_AUTHORITY, validate, validate_study3
 from pulsegraph.study2.holdout import (
     evidence_file,
     prepare_plan,
@@ -37,6 +46,13 @@ NPM_PANEL_STATUS = "study/study2/npm_panel_status.json"
 # and the completeness document of that pull, always together.
 PANEL_ENTRIES = ("manifest", "selection", "context")
 TARGET_ENTRIES = ("signals", "completeness")
+# Study 3's single domain panel. An event-enumerated NYC 311 panel also names the per-day census
+# its context was counted from; its status file is committed by the panel stage.
+STUDY3_PANEL_ENTRIES = {
+    STUDY3_DOMAIN: (*PANEL_ENTRIES, "census"),
+    STUDY3_FALLBACK_DOMAIN: PANEL_ENTRIES,
+}
+STUDY3_PANEL_STATUS = "study/study3/{domain}_panel_status.json"
 
 
 def git(root, *args):
@@ -93,6 +109,14 @@ def _approval(document, action, now):
         raise ValueError("Separate signed author approval is required")
     if timestamp(document["approved_at"]) > now:
         raise ValueError("Approval is dated in the future")
+    if action == "study3":
+        # Bound to the Study 3 addition: the commit that added it and the protocol it added.
+        if (
+            not re.fullmatch(r"[0-9a-f]{40}", str(document.get("addition_commit")))
+            or document.get("protocol_sha256") != STUDY3_PROTOCOL_SHA256
+        ):
+            raise ValueError("Approval is not bound to the Study 3 addition")
+        return
     if (
         document.get("protocol_commit") != PROTOCOL_COMMIT
         or document.get("protocol_sha256") != PROTOCOL_SHA256
@@ -100,22 +124,27 @@ def _approval(document, action, now):
         raise ValueError("Approval is not bound to Study 2")
 
 
-def _runtime(approval, *, root=ROOT_DIR):
+def _runtime(approval, *, root=ROOT_DIR, study3=False):
     sources = verify_registration(approval["implementation_commit"], root=root)
     smoke = read_json(evidence_file(approval["smoke"]))
+    registration = (
+        dict(component="study3", protocol_sha256=STUDY3_PROTOCOL_SHA256)
+        if study3
+        else dict(protocol_commit=PROTOCOL_COMMIT, protocol_sha256=PROTOCOL_SHA256)
+    )
     if (
         smoke.get("passed") is not True
         or smoke.get("data_kind") != "synthetic"
         or smoke.get("implementation_commit") != approval["implementation_commit"]
-        or smoke.get("protocol_commit") != PROTOCOL_COMMIT
-        or smoke.get("protocol_sha256") != PROTOCOL_SHA256
-        or smoke.get("seeds") != SEEDS
-        or smoke.get("variants") != list(VARIANTS)
+        or any(smoke.get(key) != value for key, value in registration.items())
+        or smoke.get("seeds") != (STUDY3_SEEDS if study3 else SEEDS)
+        or smoke.get("variants") != list(STUDY3_VARIANTS if study3 else VARIANTS)
     ):
         raise ValueError("Current implementation GPU smoke required")
+    scripts = ("study2_", "study3_") if study3 else ("study2_",)
     for name, digest in sources.items():
         if name.startswith("pulsegraph/study2/") or (
-            name.startswith("scripts/") and "study2_" in name
+            name.startswith("scripts/") and any(prefix in name for prefix in scripts)
         ):
             if smoke.get("source_sha256", {}).get(name) != digest:
                 raise ValueError("Smoke source hashes differ from the current implementation")
@@ -217,6 +246,136 @@ def packages_readiness(document, *, root=ROOT_DIR, now=None):
     return panel
 
 
+def verify_study3_addition(commit, *, root=ROOT_DIR):
+    """The dated addition of 2026-10-16 (item 7) and the two declarations committed with it.
+
+    `commit` is the one the signed readiness names. It must be in the history of HEAD and be the
+    commit that added the Study 3 heading (its parent's protocol does not carry it); its protocol
+    must be the one whose SHA-256 both declaration files record, extended by the protocol at HEAD;
+    and both declaration files must be at HEAD and on disk exactly as that commit holds them.
+    """
+    if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("The readiness must name the full commit of the Study 3 addition")
+    try:
+        git(root, "merge-base", "--is-ancestor", commit, "HEAD")
+    except subprocess.CalledProcessError:
+        raise ValueError("The Study 3 addition is not in the history of HEAD") from None
+    heading = STUDY3_HEADING.encode()
+    added = git(root, "show", f"{commit}:PROTOCOL.md")
+    current = git(root, "show", "HEAD:PROTOCOL.md")
+    if (
+        sha256_bytes(added) != STUDY3_PROTOCOL_SHA256
+        or added.count(heading) != 1
+        or not current.startswith(added)
+        or (root / "PROTOCOL.md").read_bytes() != current
+    ):
+        raise ValueError("The protocol at HEAD does not carry the Study 3 addition as registered")
+    try:
+        before = git(root, "show", f"{commit}^:PROTOCOL.md")
+    except subprocess.CalledProcessError:
+        before = b""
+    if heading in before:
+        raise ValueError("The named commit is not the commit that added Study 3")
+    declarations = {}
+    for name in STUDY3_FILES:
+        try:
+            committed = git(root, "show", f"{commit}:{name}")
+            at_head = git(root, "show", f"HEAD:{name}")
+        except subprocess.CalledProcessError:
+            raise ValueError(
+                "The Study 3 declarations were not committed with the addition"
+            ) from None
+        if committed != at_head or (root / name).read_bytes() != committed:
+            raise ValueError("The Study 3 declarations differ from those of the addition's commit")
+        declarations[name] = sha256_bytes(committed)
+    return dict(
+        addition="PROTOCOL.md, dated addition of 2026-10-16, item 7",
+        addition_commit=commit,
+        addition_protocol_sha256=sha256_bytes(added),
+        protocol_sha256_at_head=sha256_bytes(current),
+        declaration_sha256=declarations,
+    )
+
+
+def study3_readiness(document, *, root=ROOT_DIR, now=None):
+    """The single-domain readiness of Study 3 (PROTOCOL.md, dated addition of 2026-10-16, item 7).
+
+    One panel: NYC 311's frozen achieved panel, or PyPI only with the predeclared fallback record
+    (an operational reason with its evidence, declared before any target scoring). The panel's
+    files are those its committed status file names, its manifest was selected with Study 3's
+    selection seed, and an NYC 311 panel was verified by the panel deadline. Target exposure is
+    approved separately, and target signals enter only with the completeness document of their pull.
+    """
+    now = utc_now() if now is None else now
+    _approval(document, "study3", now)
+    if document.get("target_access_approved") is not True:
+        raise ValueError("Study 3 target exposure must be approved separately")
+    domain = document.get("domain")
+    if domain not in STUDY3_PANEL_ENTRIES or set(document.get("panels", {})) != {domain}:
+        raise ValueError("The study3 component takes one panel: nyc311, or pypi as its fallback")
+    if domain == STUDY3_FALLBACK_DOMAIN:
+        fallback = document.get("nyc311_fallback") or {}
+        try:
+            declared = timestamp(fallback["declared_at"])
+        except (AttributeError, KeyError, TypeError, ValueError):
+            declared = None
+        if (
+            not str(fallback.get("reason") or "").strip()
+            or fallback.get("declared_before_scoring") is not True
+            or not fallback.get("evidence")
+            or declared is None
+            or declared > now
+        ):
+            raise ValueError("Predeclared NYC 311 operational failure required")
+        for entry in fallback["evidence"]:
+            evidence_file(entry)
+    entries = STUDY3_PANEL_ENTRIES[domain]
+    frozen = read_json(root / STUDY3_PANEL_STATUS.format(domain=domain))["panel"]
+    panel = document["panels"][domain]
+    for name in entries:
+        entry = panel.get(name) or {}
+        if entry.get("sha256") != frozen[name]["sha256"]:
+            raise ValueError("Readiness names a panel other than the frozen Study 3 panel")
+        evidence_file(entry)
+    if set(panel) - set(entries + TARGET_ENTRIES):
+        raise ValueError("The Study 3 panel names an unregistered entry")
+    manifest = read_json(evidence_file(panel["manifest"]))
+    if (
+        manifest.get("domain") != domain
+        or manifest.get("report", {}).get("selection_seed") != STUDY3_SEEDS["selection"]
+    ):
+        raise ValueError("The panel was not selected with Study 3's selection seed")
+    if domain == STUDY3_DOMAIN:
+        if manifest.get("inventory_sha256") != STUDY3_INVENTORY_SHA256:
+            raise ValueError("The NYC 311 panel was not drawn from the registered 2024 inventory")
+        if timestamp(manifest["verified_at"]) > STUDY3_PANEL_DEADLINE:
+            raise ValueError("The NYC 311 panel was verified after the Study 3 panel deadline")
+    if set(panel) & set(TARGET_ENTRIES):
+        target_completeness(panel, CALENDARS[domain], root=root)
+    return panel
+
+
+def authorize_study3(readiness_path, *, root=ROOT_DIR, now=None):
+    """Study 3's gate: Study 2's requirements with Study 3's binding, seeds, variants and family."""
+    now = utc_now() if now is None else now
+    document = read_json(readiness_path)
+    study3_readiness(document, root=root, now=now)
+    spec, family = (read_json(root / name) for name in STUDY3_FILES)
+    validate_study3(spec, family)
+    if (
+        document.get("estimated_seconds", 0) <= 0
+        or document.get("runtime_budget_seconds", 0) < document["estimated_seconds"]
+    ):
+        raise ValueError("Runtime budget approval required")
+    if document.get("source_semantics_resolved") is not True or not document.get("evidence"):
+        raise ValueError("Source and implementation readiness evidence is incomplete")
+    for entry in document["evidence"]:
+        evidence_file(entry)
+    metadata = _runtime(document, root=root, study3=True)
+    metadata["authority"] = verify_study3_addition(document["addition_commit"], root=root)
+    return dict(readiness=document, spec=spec, family=family, metadata=metadata)
+
+
 def target_completeness(panel, calendar, *, root=ROOT_DIR):
     """The target signals of one readiness panel, bound to the completeness document of their pull.
 
@@ -299,6 +458,8 @@ def authorize_holdout(plan_path, approval_path, *, root=ROOT_DIR, now=None):
 
 
 def authorize_component(readiness_path, component, *, root=ROOT_DIR, now=None):
+    if component == "study3":
+        return authorize_study3(readiness_path, root=root, now=now)
     now = utc_now() if now is None else now
     document = read_json(readiness_path)
     _approval(document, component, now)

@@ -1,15 +1,18 @@
 """Frozen metadata frames and context-only balanced panels.
 
 Target days are retrieved only by `pull_targets`, for npm's frozen achieved panel, after the
-signed packages gate of the dated addition of 2026-10-12.
+signed packages gate of the dated addition of 2026-10-12, and by `pull_nyc_targets`, for NYC
+311's frozen Study 3 panel, after the signed Study 3 gate of the dated addition of 2026-10-16.
 """
 
 import json
 import os
+import re
 import time
 from collections import Counter
 from pathlib import Path
 from urllib.parse import quote, urlparse
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
@@ -26,8 +29,9 @@ from pulsegraph.study2.constants import (
     ENDPOINT,
     SEEDS,
     STRATA_START,
+    STUDY3_DOMAIN,
 )
-from pulsegraph.study2.gate import authorize_component, packages_readiness
+from pulsegraph.study2.gate import authorize_component, packages_readiness, study3_readiness
 from pulsegraph.study2.holdout import evidence_file, timestamp, utc_now
 
 CANDIDATE_POOL = 10000
@@ -67,6 +71,7 @@ class CaptureClient:
         sleep=time.sleep,
         monotonic=time.monotonic,
         root=ROOT_DIR,
+        timeout=45,
     ):
         # Evidence names captures relative to the repository, never by a local absolute path.
         self.directory, self.root = Path(directory), Path(root).resolve()
@@ -79,6 +84,7 @@ class CaptureClient:
         )
         self.max_requests, self.max_seconds = max_requests, max_seconds
         self.sleep, self.monotonic, self.interval = sleep, monotonic, interval
+        self.timeout = timeout
         self.started = monotonic()
         self.requests = 0
         self.evidence = []
@@ -104,9 +110,19 @@ class CaptureClient:
                 self.requests += 1
                 try:
                     response = self.session.get(
-                        url, params=params, timeout=45, allow_redirects=False
+                        url, params=params, timeout=self.timeout, allow_redirects=False
                     )
-                except requests.RequestException:
+                except requests.RequestException as error:
+                    # The kind of transport failure (a read timeout, a reset connection) is kept
+                    # beside the request; the reason stays the one the stop rules read.
+                    atomic_json(
+                        self.directory / f"{key}.failure.json",
+                        dict(
+                            request=request,
+                            at=utc_now().isoformat(),
+                            transport=type(error).__name__,
+                        ),
+                    )
                     raise SourceFailure("transport_failure") from None
                 if response.status_code in (429, 500, 502, 503, 504):
                     wait = response.headers.get("Retry-After", "10")
@@ -148,10 +164,11 @@ class CaptureClient:
             raise SourceFailure("invalid_json") from None
 
 
-def hash_key(domain, stage, stable_key):
+def hash_key(domain, stage, stable_key, seed=SEEDS["selection"]):
+    """The registered selection hash; Study 3 passes its own selection seed, 20261001."""
     return sha256_bytes(
         json.dumps(
-            [SEEDS["selection"], domain, stage, stable_key],
+            [seed, domain, stage, stable_key],
             ensure_ascii=False,
             separators=(",", ":"),
         ).encode("utf-8")
@@ -371,8 +388,15 @@ def candidate_walk(inventory, fetch_metadata, document=None):
     return save(True, "inventory_exhausted")
 
 
-def build_panel(inventory, fetch_context, output, fetch_metadata=None):
-    """All selection reads end at c1-1; strata use precisely its final 90 days."""
+def build_panel(inventory, fetch_context, output, fetch_metadata=None, *, seed=SEEDS["selection"]):
+    """All selection reads end at c1-1; strata use precisely its final 90 days.
+
+    `seed` is the registered selection seed: Study 2's by default, 20261001 for Study 3. An NYC
+    311 frame is counted from one census of every context day over the whole frame
+    (NYCSource.census), whose stop is a domain stop, never an entity exclusion.
+    """
+    if (Path(output) / "manifest.json").exists():
+        raise FileExistsError("Achieved panels are immutable")
     inventory_path = Path(inventory)
     document = read_json(inventory_path)
     timestamp(document["acquired_at"])
@@ -440,7 +464,10 @@ def build_panel(inventory, fetch_context, output, fetch_metadata=None):
                 )
         order = sorted(
             eligible,
-            key=lambda r: (hash_key(domain, "candidate", r["series_id"]), r["series_id"].encode()),
+            key=lambda r: (
+                hash_key(domain, "candidate", r["series_id"], seed),
+                r["series_id"].encode(),
+            ),
         )
         candidates = order if domain == "nyc311" else order[:CANDIDATE_POOL]
         sampling = dict(
@@ -454,9 +481,14 @@ def build_panel(inventory, fetch_context, output, fetch_metadata=None):
     owner = getattr(fetch_context, "__self__", None)
     client = getattr(owner, "client", None)
     first_evidence = len(client.evidence) if client is not None else 0
+    census = None
     if domain == "nyc311" and candidates:
+        if not hasattr(owner, "census"):
+            raise ValueError("NYC 311 context is counted from the census of the whole frame")
         # A failure of the shared event census is a domain failure, not an entity exclusion.
-        fetch_context(candidates[0], CONTEXT_START, CONTEXT_END)
+        census = owner.census(
+            CONTEXT_START, CONTEXT_END, candidates, ledger=Path(output) / "census_ledger.json"
+        )
     for row in candidates:
         key = row["series_id"]
         try:
@@ -475,7 +507,7 @@ def build_panel(inventory, fetch_context, output, fetch_metadata=None):
                 **row,
                 "zero_fraction": z,
                 "stratum": stratum,
-                "selection_hash": hash_key(domain, "selection", key),
+                "selection_hash": hash_key(domain, "selection", key, seed),
                 "context_start": CONTEXT_START,
             }
         )
@@ -510,9 +542,12 @@ def build_panel(inventory, fetch_context, output, fetch_metadata=None):
         context_start=CONTEXT_START,
         context_end=CONTEXT_END,
         strata_start=STRATA_START,
-        selection_seed=SEEDS["selection"],
+        selection_seed=seed,
         target_values_opened=False,
     )
+    if census is not None:
+        atomic_json(out / "census.json", census)
+        report["census"] = {k: v for k, v in census.items() if k in CENSUS_SUMMARY}
     atomic_json(out / "selection.json", dict(report=report, reserve_order=reserves))
     manifest = dict(
         domain=domain,
@@ -525,6 +560,8 @@ def build_panel(inventory, fetch_context, output, fetch_metadata=None):
     )
     if walk is not None:
         manifest["candidate_walk_sha256"] = sampling["candidate_walk"]["ledger_sha256"]
+    if census is not None:
+        manifest["census_sha256"] = file_hash(out / "census.json")
     manifest["context_evidence"] = (
         list(client.evidence[first_evidence:]) if client is not None else []
     )
@@ -771,23 +808,66 @@ def pull_targets(readiness_path, source, output, *, root=ROOT_DIR, now=None):
     return document
 
 
+NYC_PAGE = 50000
+NYC_FIELDS = "unique_key,created_date,complaint_type,community_board"
+NYC_BOARDS = {"BRONX": 12, "BROOKLYN": 18, "MANHATTAN": 12, "QUEENS": 14, "STATEN ISLAND": 3}
+NAMED_DAY = re.compile(r"\d{4}-\d{2}-\d{2}")
+CENSUS_SUMMARY = (
+    "start",
+    "end",
+    "days",
+    "frame_cells",
+    "frame_sha256",
+    "captured_rows",
+    "superseded_rows",
+    "requests",
+    "frame_requests",
+    "unrecognized_requests",
+    "outside_frame_requests",
+    "gap_days",
+)
+
+
+def recognized_board(board):
+    """A numbered community board of the five boroughs, '01 BRONX' to '03 STATEN ISLAND'."""
+    match = re.fullmatch(r"(\d{2}) (BRONX|BROOKLYN|MANHATTAN|QUEENS|STATEN ISLAND)", board or "")
+    return bool(match) and 1 <= int(match.group(1)) <= NYC_BOARDS[match.group(2)]
+
+
+def frame_digest(frame):
+    """SHA-256 of the frame's sorted series keys, as canonical JSON."""
+    keys = sorted(row["series_id"] for row in frame)
+    return sha256_bytes(json.dumps(keys, ensure_ascii=False, separators=(",", ":")).encode())
+
+
 class NYCSource:
+    """NYC 311 service requests through the city's Socrata (SODA) endpoint, anonymously.
+
+    Counts come from one census per window (`census`): one query per local calendar day for the
+    request identifier, creation time, problem and board of every request created that day,
+    ordered by identifier and paged only past NYC_PAGE rows. A day counts only when its capture
+    is exhausted (a page shorter than NYC_PAGE). No request names a day on or after the first
+    cutoff until `pull_nyc_targets` opens the target days after the signed Study 3 gate.
+    """
+
     URL = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
 
     def __init__(self, client):
         self.client = client
-        self._context = None
+        self.targets_open = False  # Set only by pull_nyc_targets, after the signed gate.
+        self.target_series = frozenset()
+        self._counts = {}
 
-    def _pages(self, params):
-        offset = 0
-        while True:
-            rows = self.client.get(self.URL, {**params, "$limit": 50000, "$offset": offset})
-            if not isinstance(rows, list):
-                raise SourceFailure("invalid_socrata_result")
-            yield from rows
-            if len(rows) < 50000:
-                return
-            offset += len(rows)
+    def _get(self, params):
+        named = NAMED_DAY.findall(json.dumps(params))
+        if not self.targets_open and any(day >= TARGET_START for day in named):
+            raise ValueError(
+                "No NYC 311 request names a day on or after 2026-06-03 before the target gate"
+            )
+        rows = self.client.get(self.URL, params)
+        if not isinstance(rows, list):
+            raise SourceFailure("invalid_socrata_result")
+        return rows
 
     def inventory(self, output):
         params = {
@@ -798,86 +878,348 @@ class NYCSource:
             "$group": "complaint_type,community_board",
             "$order": "complaint_type,community_board",
         }
-        entries = []
-        import re
-
-        for row in self._pages(params):
-            problem, board = row.get("complaint_type", ""), row.get("community_board", "")
-            valid = bool(
-                problem
-                and re.fullmatch(r"\d{2} (BRONX|BROOKLYN|MANHATTAN|QUEENS|STATEN ISLAND)", board)
-            )
-            if valid:
-                number, borough = board.split(" ", 1)
-                valid = (
-                    1
-                    <= int(number)
-                    <= {
-                        "BRONX": 12,
-                        "BROOKLYN": 18,
-                        "MANHATTAN": 12,
-                        "QUEENS": 14,
-                        "STATEN ISLAND": 3,
-                    }[borough]
+        entries, offset = [], 0
+        while True:
+            rows = self._get({**params, "$limit": NYC_PAGE, "$offset": offset})
+            for row in rows:
+                problem, board = row.get("complaint_type", ""), row.get("community_board", "")
+                entries.append(
+                    dict(
+                        series_id=json.dumps(
+                            [problem, board], ensure_ascii=False, separators=(",", ":")
+                        ),
+                        problem=problem,
+                        board=board,
+                        frame_year=2024,
+                        frame_count=int(row["n"]),
+                        excluded_reason=None
+                        if problem and recognized_board(board)
+                        else "unspecified_geography_or_problem",
+                    )
                 )
-            entries.append(
-                dict(
-                    series_id=json.dumps(
-                        [problem, board], ensure_ascii=False, separators=(",", ":")
-                    ),
-                    problem=problem,
-                    board=board,
-                    frame_year=2024,
-                    frame_count=int(row["n"]),
-                    excluded_reason=None if valid else "unspecified_geography_or_problem",
-                )
-            )
+            if len(rows) < NYC_PAGE:
+                break
+            offset += len(rows)
         return freeze_inventory("nyc311", entries, self.client.evidence, output)
 
-    def context(self, row, start, end):
-        if start != CONTEXT_START or end != CONTEXT_END:
-            raise ValueError("Selection endpoint cannot access target days")
-        if self._context is None:
-            where = f"created_date >= '{start}T00:00:00' AND created_date < '2026-06-03T00:00:00'"
-            counts = self.client.get(
-                self.URL,
-                {"$select": "count(*) as rows,count(distinct unique_key) as keys", "$where": where},
-            )
-            if len(counts) != 1 or counts[0]["rows"] != counts[0]["keys"]:
-                raise SourceFailure("source_has_duplicate_request_versions")
-            params = {
-                "$select": (
-                    "complaint_type,community_board,"
-                    "date_trunc_ymd(created_date) as day,count(*) as n"
-                ),
-                "$where": where,
-                "$group": "complaint_type,community_board,day",
-                "$order": "complaint_type,community_board,day",
-            }
-            captured, total = {}, 0
-            for month in pd.period_range(start, end, freq="M"):
-                lower = month.start_time.date().isoformat()
-                upper = (month + 1).start_time.date().isoformat()
-                monthly = {
-                    **params,
-                    "$where": where
-                    + f" AND created_date >= '{lower}T00:00:00'"
-                    + f" AND created_date < '{upper}T00:00:00'",
+    def day(self, day):
+        """Every request created on one New York calendar day, from an exhausted capture.
+
+        created_date is a floating timestamp in New York local time (DST included), so the day is
+        its local midnight through its last millisecond, and no bound names another day.
+        """
+        where = f"created_date between '{day}T00:00:00.000' and '{day}T23:59:59.999'"
+        rows, pages, offset = [], [], 0
+        while True:
+            page = self._get(
+                {
+                    "$select": NYC_FIELDS,
+                    "$where": where,
+                    "$order": "unique_key",
+                    "$limit": NYC_PAGE,
+                    "$offset": offset,
                 }
-                for item in self._pages(monthly):
-                    key = (item.get("complaint_type", ""), item.get("community_board", ""))
-                    day = pd.Timestamp(item["day"]).date().isoformat()
-                    group = captured.setdefault(key, {})
-                    if day in group or not start <= day <= end or not lower <= day < upper:
-                        raise SourceFailure("duplicate_or_out_of_bounds_aggregate_day")
-                    group[day] = int(item["n"])
-                    total += int(item["n"])
-            if total != int(counts[0]["rows"]):
-                raise SourceFailure("aggregate_enumeration_changed_or_incomplete")
-            self._context = captured
-        observed = self._context.get((row["problem"], row["board"]), {})
-        # Exhausted, bounded event enumeration establishes zero requests for absent groups.
+            )
+            pages.append(self.client.evidence[-1])
+            rows.extend(page)
+            if len(page) < NYC_PAGE:
+                break
+            offset += len(page)
+        keys = [row.get("unique_key") for row in rows]
+        if not all(isinstance(key, str) and key for key in keys):
+            raise SourceFailure("request_identifier_missing")
+        if len(set(keys)) != len(keys):
+            raise SourceFailure("duplicate_request_identifier")
+        if not all(str(row.get("created_date", "")).startswith(day + "T") for row in rows):
+            raise SourceFailure("request_outside_its_day")
+        return rows, pages
+
+    def census(self, start, end, frame, *, ledger=None):
+        """The per-day request census of start through end over the frame, from exhausted captures.
+
+        frame: the eligible rows of the frozen inventory (series_id, problem, board). Requests are
+        deduplicated by request identifier: an identifier captured on more than one day keeps the
+        revision of the latest capture, by acquisition time and then by day. Requests whose board
+        is missing or unrecognized, and recognized cells outside the frame, are counted apart.
+        A budget stop, an outage or a source failure writes the ledger and re-raises; nothing else
+        is written, and a later invocation resumes from the cached captures. A day with no request
+        in any frame cell is a source gap, not a zero: the ledger records it and the domain stops.
+        """
+        ledger = None if ledger is None else Path(ledger)
+        days = [d.date().isoformat() for d in pd.date_range(start, end)]
+        state = (
+            read_json(ledger)
+            if ledger is not None and ledger.exists()
+            else dict(
+                domain="nyc311",
+                start=start,
+                end=end,
+                frame_cells=len(frame),
+                frame_sha256=frame_digest(frame),
+                complete=False,
+                invocations=[],
+                failures=[],
+            )
+        )
+        if (state["start"], state["end"], state["frame_sha256"]) != (
+            start,
+            end,
+            frame_digest(frame),
+        ):
+            raise ValueError("The census ledger belongs to another window or frame")
+        attempts = getattr(self.client, "requests", None)
+        invocation = dict(started_at=utc_now().isoformat())
+
+        def save(**changes):
+            invocation.update(ended_at=utc_now().isoformat(), **changes)
+            if isinstance(attempts, int):
+                invocation["attempts"] = self.client.requests - attempts
+            state["invocations"].append(invocation)
+            if ledger is not None:
+                atomic_json(ledger, state)
+
+        cells, first = {}, len(self.client.evidence)
+        frame_codes = {cells.setdefault((r["problem"], r["board"]), len(cells)) for r in frame}
+        parts, exhausted, day = [], [], None
+        try:
+            for index, day in enumerate(days):
+                rows, pages = self.day(day)
+                codes = [
+                    cells.setdefault(
+                        (r.get("complaint_type") or "", r.get("community_board") or ""), len(cells)
+                    )
+                    for r in rows
+                ]
+                parts.append(
+                    pd.DataFrame(
+                        dict(
+                            key=[r["unique_key"] for r in rows],
+                            day=np.full(len(rows), index, dtype=np.int32),
+                            at=max(timestamp(p["acquired_at"]) for p in pages),
+                            cell=np.asarray(codes, dtype=np.int64),
+                        )
+                    )
+                )
+                exhausted.append(dict(day=day, captured_rows=len(rows), pages=len(pages)))
+        except SourceFailure as error:
+            reason = str(error)
+            budget = isinstance(error, RequestBudget)
+            kind = "budget" if budget else "outage" if outage(reason) else "source"
+            state["failures"].append(
+                dict(at=utc_now().isoformat(), day=day, reason=reason, kind=kind)
+            )
+            save(status=type(error).__name__, days_exhausted=len(exhausted))
+            raise
+        table = pd.concat(parts, ignore_index=True)
+        # The latest captured revision of each identifier: the latest capture, then the later day.
+        table = table.sort_values(["at", "day"], kind="stable")
+        superseded = table.key.duplicated(keep="last")
+        kept = table[~superseded]
+        names = sorted(cells, key=cells.get)
+        recognized = np.array([bool(p) and recognized_board(b) for p, b in names], dtype=bool)
+        in_frame = np.zeros(len(names), dtype=bool)
+        in_frame[list(frame_codes)] = True
+        flags = pd.DataFrame(
+            dict(
+                day=kept.day.to_numpy(),
+                frame=in_frame[kept.cell.to_numpy()],
+                unrecognized=~recognized[kept.cell.to_numpy()],
+            )
+        )
+        flags["outside"] = ~flags.frame & ~flags.unrecognized
+        totals = flags.groupby("day").agg(
+            requests=("frame", "size"),
+            frame_requests=("frame", "sum"),
+            unrecognized_requests=("unrecognized", "sum"),
+            outside_frame_requests=("outside", "sum"),
+        )
+        totals = totals.reindex(range(len(days)), fill_value=0)
+        lost = table[superseded].groupby("day").size().reindex(range(len(days)), fill_value=0)
+        per_day = [
+            dict(
+                exhausted[i],
+                superseded_rows=int(lost[i]),
+                **{name: int(totals.loc[i, name]) for name in totals.columns},
+            )
+            for i in range(len(days))
+        ]
+        gaps = [row["day"] for row in per_day if row["frame_requests"] == 0]
+        document = dict(
+            domain="nyc311",
+            calendar=CALENDARS["nyc311"],
+            source=self.URL,
+            method=(
+                "One SODA query per New York calendar day, created_date between the day's local "
+                f"midnight and its last millisecond, selecting {NYC_FIELDS}, ordered by "
+                f"unique_key and paged by {NYC_PAGE}; a day is complete when its last page holds "
+                "fewer rows. Requests are deduplicated by unique_key, keeping the latest captured "
+                "revision (the latest capture, then the later day), and counted by creation day, "
+                "never by closure. Requests with a missing or unrecognized board or problem, and "
+                "recognized cells outside the frozen 2024 frame, are counted apart. A cell-day "
+                "absent from the exhausted enumeration has zero requests; a day with no request "
+                "in any frame cell is a source gap and stops the domain."
+            ),
+            start=start,
+            end=end,
+            days=len(days),
+            frame_cells=len(frame_codes),
+            frame_sha256=frame_digest(frame),
+            captured_rows=int(len(table)),
+            superseded_rows=int(superseded.sum()),
+            requests=int(len(kept)),
+            frame_requests=int(flags.frame.sum()),
+            unrecognized_requests=int(flags.unrecognized.sum()),
+            outside_frame_requests=int(flags.outside.sum()),
+            gap_days=gaps,
+            per_day=per_day,
+            frame=[
+                dict(series_id=r["series_id"], problem=r["problem"], board=r["board"])
+                for r in frame
+            ],
+            response_evidence=list(self.client.evidence[first:]),
+        )
+        if gaps:
+            state["failures"].append(
+                dict(
+                    at=utc_now().isoformat(),
+                    day=gaps[0],
+                    reason="source_gap_day",
+                    kind="source_gap",
+                )
+            )
+            state["gap_days"] = gaps
+            save(status="source_gap", days_exhausted=len(exhausted))
+            raise SourceFailure("source_gap_day")
+        counts = {}
+        framed = kept[in_frame[kept.cell.to_numpy()]]
+        for (cell, index), n in framed.groupby(["cell", "day"]).size().items():
+            counts.setdefault(names[cell], {})[days[index]] = int(n)
+        self._counts[(start, end)] = counts
+        state["complete"] = True
+        save(status="complete", days_exhausted=len(exhausted))
+        return document
+
+    def _series(self, row, start, end):
+        if (start, end) not in self._counts:
+            raise ValueError(
+                "NYC 311 counts come from the census of the whole frame; take it first"
+            )
+        observed = self._counts[(start, end)].get((row["problem"], row["board"]), {})
+        # The exhausted enumeration of every day establishes zero requests for an absent cell-day.
         return [
             {"date": d.date().isoformat(), "count": observed.get(d.date().isoformat(), 0)}
             for d in pd.date_range(start, end)
         ]
+
+    def context(self, row, start, end):
+        if start != CONTEXT_START or end != CONTEXT_END:
+            raise ValueError("Selection endpoint cannot access target days")
+        return self._series(row, start, end)
+
+    def targets(self, row, start, end):
+        """The target days of one series of the authorized frozen manifest, no others."""
+        if start != TARGET_START or end != TARGET_END:
+            raise ValueError("Target requests cover exactly 2026-06-03 to 2026-08-31")
+        if not self.targets_open or row["series_id"] not in self.target_series:
+            raise ValueError("Target days open only for the frozen Study 3 manifest after the gate")
+        return self._series(row, start, end)
+
+
+def pull_nyc_targets(readiness_path, source, output, *, root=ROOT_DIR, now=None):
+    """Open the target days of NYC 311's frozen Study 3 panel, only under the signed Study 3 gate.
+
+    One census of the 90 target days over the frame the panel was selected from, by the same
+    exhausted daily captures: a budget stop or an outage writes the pull ledger and nothing else,
+    and a later invocation resumes from the cached captures; a source gap day stops the domain.
+    No series is replaced or deleted. The signals join the frozen selection context, never
+    re-requested, to the target days of the panel's series.
+    """
+    now = utc_now() if now is None else now
+    document = read_json(readiness_path)
+    panel = study3_readiness(document, root=root, now=now)
+    authorize_component(readiness_path, "study3", root=root, now=now)
+    if document.get("domain") != STUDY3_DOMAIN:
+        raise ValueError("The NYC 311 target pull takes the NYC 311 panel")
+    output = Path(output)
+    signals_path, completeness_path = output / "signals.parquet", output / "completeness.json"
+    if signals_path.exists() or completeness_path.exists():
+        raise FileExistsError("The target snapshot is immutable")
+    manifest = read_json(evidence_file(panel["manifest"]))
+    census = read_json(evidence_file(panel["census"]))
+    context = pd.read_parquet(evidence_file(panel["context"]))
+    keys = [row["series_id"] for row in manifest["series"]]
+    if not keys or len(keys) != len(set(keys)) or set(context.series_id) != set(keys):
+        raise ValueError("Frozen manifest and context differ")
+    if (
+        manifest.get("census_sha256") != panel["census"]["sha256"]
+        or census.get("frame_sha256") != frame_digest(census.get("frame", []))
+        or not set(keys) <= {row["series_id"] for row in census["frame"]}
+    ):
+        raise ValueError("The census does not hold the frame of the frozen manifest")
+    frozen = {
+        key: context_days(
+            context.loc[context.series_id == key, ["date", "count"]].to_dict("records")
+        )
+        for key in keys
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    ledger_path = output / "pull.json"
+    source.targets_open, source.target_series = True, frozenset(keys)
+    target_census = source.census(TARGET_START, TARGET_END, census["frame"], ledger=ledger_path)
+    targets = {
+        row["series_id"]: target_days(source.targets(row, TARGET_START, TARGET_END))
+        for row in manifest["series"]
+    }
+    parts = [
+        pd.concat(
+            [frozen[key], targets[key].astype(frozen[key].dtypes.to_dict())], ignore_index=True
+        ).assign(series_id=key)
+        for key in keys
+    ]
+    temporary = output / "signals.parquet.tmp"
+    pd.concat(parts, ignore_index=True)[["series_id", "date", "count"]].to_parquet(
+        temporary, index=False
+    )
+    written = pd.read_parquet(temporary)
+    for key in keys:
+        rows = written.loc[written.series_id == key, ["date", "count"]].to_dict("records")
+        if not context_days(rows).equals(frozen[key]):
+            raise ValueError("Target snapshot would change the frozen selection context")
+    os.replace(temporary, signals_path)
+    evidence = target_census["response_evidence"]
+    if len(evidence) < target_census["days"]:
+        raise ValueError("Every target day needs its exhausted capture")
+    calendar = ZoneInfo(CALENDARS["nyc311"])
+    if any(
+        timestamp(entry["acquired_at"]).astimezone(calendar).date().isoformat() <= TARGET_END
+        for entry in evidence
+    ):
+        raise ValueError("A target capture was acquired before the last target day had ended")
+    completeness = dict(
+        domain="nyc311",
+        calendar=CALENDARS["nyc311"],
+        verified=True,
+        method=(
+            f"{target_census['method']} The target census covers {TARGET_START} to {TARGET_END} "
+            "over the frame the panel was selected from; its captures were acquired after "
+            f"{TARGET_END} had ended in New York. Days {CONTEXT_START} to {CONTEXT_END} are the "
+            "frozen selection context, unchanged and not re-requested; identifiers are "
+            "deduplicated within each census."
+        ),
+        verified_at=utc_now().isoformat(),
+        first_target_day=TARGET_START,
+        last_complete_day=TARGET_END,
+        series=len(keys),
+        days_per_series=len(pd.date_range(CONTEXT_START, TARGET_END)),
+        signals_sha256=file_hash(signals_path),
+        manifest_sha256=panel["manifest"]["sha256"],
+        context_sha256=panel["context"]["sha256"],
+        census_sha256=panel["census"]["sha256"],
+        target_census={
+            k: v for k, v in target_census.items() if k not in ("frame", "response_evidence")
+        },
+        ledger_failures=read_json(ledger_path)["failures"],
+        response_evidence=evidence,
+    )
+    atomic_json(completeness_path, completeness)
+    return completeness

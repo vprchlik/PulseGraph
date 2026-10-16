@@ -471,27 +471,51 @@ def test_corrupt_capture_stops_the_context_pull(tmp_path):
     assert not (tmp_path / "panel").exists()
 
 
-def test_nyc_bulk_context_checks_exhaustion_and_zero_days():
+def test_nyc_context_comes_from_an_exhausted_daily_census_with_explicit_zero_days():
     from pulsegraph.study2.ingestion import NYCSource
 
     class Client:
+        """One request per day; a request on 2026-03-05 for Noise, one per day for Heat."""
+
+        def __init__(self):
+            self.evidence, self.params = [], []
+
         def get(self, url, params):
-            assert "2026-06-03" in params["$where"]
-            if "as keys" in params["$select"]:
-                return [{"rows": "2", "keys": "2"}]
-            if "created_date >= '2026-03-01" not in params["$where"]:
-                return []
-            return [
+            self.params.append(params)
+            day = re.search(r"(\d{4}-\d{2}-\d{2})T00:00:00\.000", params["$where"])[1]
+            assert params["$where"].count(day) == 2 and day < "2026-06-03"
+            self.evidence.append(dict(acquired_at="2026-10-16T00:00:00+00:00", sha256=day))
+            rows = [
                 dict(
-                    complaint_type="Noise",
-                    community_board="01 BRONX",
-                    day="2026-03-05T00:00:00.000",
-                    n="2",
+                    unique_key=f"h{day}",
+                    created_date=f"{day}T10:00:00.000",
+                    complaint_type="Heat",
+                    community_board="02 BRONX",
                 )
             ]
+            if day == "2026-03-05":
+                rows += [
+                    dict(
+                        unique_key=f"n{i}",
+                        created_date=f"{day}T0{i}:00:00.000",
+                        complaint_type="Noise",
+                        community_board="01 BRONX",
+                    )
+                    for i in range(2)
+                ]
+            return rows
 
-    source = NYCSource(Client())
-    rows = source.context(dict(problem="Noise", board="01 BRONX"), CONTEXT_START, CONTEXT_END)
+    client = Client()
+    source = NYCSource(client)
+    frame = [
+        dict(series_id=json.dumps([p, b]), problem=p, board=b)
+        for p, b in (("Noise", "01 BRONX"), ("Heat", "02 BRONX"), ("Other", "01 BRONX"))
+    ]
+    census = source.census(CONTEXT_START, CONTEXT_END, frame)
+    assert len(client.params) == 275 and census["gap_days"] == []
+    rows = source.context(frame[0], CONTEXT_START, CONTEXT_END)
     assert len(rows) == 275 and sum(r["count"] for r in rows) == 2
-    empty = source.context(dict(problem="Other", board="01 BRONX"), CONTEXT_START, CONTEXT_END)
+    assert [r["date"] for r in rows if r["count"]] == ["2026-03-05"]
+    empty = source.context(frame[2], CONTEXT_START, CONTEXT_END)
     assert sum(r["count"] for r in empty) == 0
+    assert all(r["count"] == 1 for r in source.context(frame[1], CONTEXT_START, CONTEXT_END))

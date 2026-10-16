@@ -11,7 +11,15 @@ from pulsegraph.config import ROOT_DIR
 from pulsegraph.evaluation.artifacts import file_hash
 from pulsegraph.evaluation.registration import installed_versions
 from pulsegraph.provenance import atomic_json
-from pulsegraph.study2.constants import PROTOCOL_COMMIT, PROTOCOL_SHA256, SEEDS, VARIANTS
+from pulsegraph.study2.constants import (
+    PROTOCOL_COMMIT,
+    PROTOCOL_SHA256,
+    SEEDS,
+    STUDY3_PROTOCOL_SHA256,
+    STUDY3_SEEDS,
+    STUDY3_VARIANTS,
+    VARIANTS,
+)
 from pulsegraph.study2.distributions import CountLaw, complete, discrete_crps, fm_hurdle
 from pulsegraph.study2.holdout import utc_now
 
@@ -52,6 +60,11 @@ def main():
     parser.add_argument("--gpu", action="store_true")
     parser.add_argument("--context-days", type=int, default=1400)
     parser.add_argument("--leads", type=int, default=60)
+    parser.add_argument(
+        "--study3",
+        action="store_true",
+        help="Study 3's smoke: its seeds, its 22 variants and the study3 scripts' hashes",
+    )
     args = parser.parse_args()
     if args.context_days < 28 or not 1 <= args.leads <= 128:
         parser.error("At least 28 context days and 1 to 128 leads are required")
@@ -60,13 +73,19 @@ def main():
     paths = [
         *sorted((ROOT_DIR / "pulsegraph/study2").glob("*.py")),
         *sorted((ROOT_DIR / "scripts").glob("study2_*.py")),
+        *(sorted((ROOT_DIR / "scripts").glob("study3_*.py")) if args.study3 else []),
     ]
+    seeds, variants = (STUDY3_SEEDS, STUDY3_VARIANTS) if args.study3 else (SEEDS, VARIANTS)
+    registration = (
+        dict(component="study3", protocol_sha256=STUDY3_PROTOCOL_SHA256)
+        if args.study3
+        else dict(protocol_commit=PROTOCOL_COMMIT, protocol_sha256=PROTOCOL_SHA256)
+    )
     report = dict(
         data_kind="synthetic",
         passed=False,
         at=utc_now().isoformat(),
-        protocol_commit=PROTOCOL_COMMIT,
-        protocol_sha256=PROTOCOL_SHA256,
+        **registration,
         implementation_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT_DIR)
         .decode()
         .strip(),
@@ -74,8 +93,8 @@ def main():
             str(p.relative_to(ROOT_DIR)).replace("\\", "/"): file_hash(p) for p in paths
         },
         packages=installed_versions(),
-        seeds=SEEDS,
-        variants=list(VARIANTS),
+        seeds=seeds,
+        variants=list(variants),
         crps=crps_smoke(),
     )
     if args.gpu:
@@ -85,10 +104,11 @@ def main():
         from pulsegraph.study2.models import ModelPool
 
         report["hardware"] = configure_gpu()
-        context = np.random.default_rng(SEEDS["forecast"]).poisson(2, args.context_days)
-        with ModelPool(prospective=True) as models:
+        context = np.random.default_rng(seeds["forecast"]).poisson(2, args.context_days)
+        pool = ModelPool(study3=True) if args.study3 else ModelPool(prospective=True)
+        with pool as models:
             forecasts = models.forecast(context, args.leads, "synthetic/holdout-smoke")
-            assert set(forecasts) == set(VARIANTS)
+            assert set(forecasts) == set(variants)
             report["per_model"] = models.timings
             report["memory"] = memory_snapshot()
     report["passed"] = True

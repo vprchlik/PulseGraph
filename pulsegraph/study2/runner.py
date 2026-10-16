@@ -90,7 +90,8 @@ def _final_memory(memory):
         return dict(unavailable=f"{type(error).__name__}: {error}")
 
 
-def _evaluate(dataset, output, pool, *, metadata, synthetic=False, memory=None):
+def _evaluate(dataset, output, pool, *, metadata, synthetic=False, memory=None, variants=VARIANTS):
+    """`variants` is the registered variant list of the component's study; Study 3 adds two."""
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     state_path = output / "run.json"
@@ -149,7 +150,7 @@ def _evaluate(dataset, output, pool, *, metadata, synthetic=False, memory=None):
                 for horizon in (7, 30):
                     forecasts = pool.forecast(context.to_numpy(), horizon, f"{label}:{cutoff}")
                     _add_timings(timings, getattr(pool, "timings", {}))
-                    if set(forecasts) != set(VARIANTS):
+                    if set(forecasts) != set(variants):
                         raise ValueError("Incomplete model family")
                     if synthetic:
                         from pulsegraph.study2.synthetic import oracle_forecast

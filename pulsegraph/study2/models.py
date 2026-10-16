@@ -11,7 +11,7 @@ from pulsegraph.forecast.output import COMMON_QUANTILES
 from pulsegraph.forecast.registered import make_registered_model, release_model
 from pulsegraph.provenance import read_json
 from pulsegraph.random import derived_seed
-from pulsegraph.study2.constants import BASELINES, MODEL_PINS, SEEDS
+from pulsegraph.study2.constants import BASELINES, MODEL_PINS, SEEDS, STUDY3_SEEDS
 from pulsegraph.study2.distributions import CountLaw, complete, fm_hurdle
 
 
@@ -104,7 +104,56 @@ def law_forecast(laws, metadata=None):
     )
 
 
-def fm_variants(output, context):
+def dynamic_occurrence(context, horizon):
+    """P(Y > 0) of the registered dynamic_count law at each lead, its registered fallback to
+    hurdle_count_28 included; the discounted Beta-Bernoulli occurrence is constant over leads."""
+    return [float(law.sf(0)) for law in count_laws("dynamic_count", context, horizon)]
+
+
+def model_size_count(base, count):
+    """The model's own completed occurrence 1 - F(0) with a count hurdle's positive law.
+
+    `count` is the saved spec of hurdle_count_28 for the same context: its positive law is
+    1 + Poisson(mean(y - 1)) over the last 28 days' positive values, or delta_1 with fewer than
+    two of them, and that fallback is recorded.
+    """
+    if count.get("kind") != "hurdle":
+        raise ValueError("The count positive law comes from hurdle_count_28's hurdle")
+    return CountLaw(
+        dict(
+            kind="hurdle",
+            p=float(base.sf(0)),
+            positive=count["positive"],
+            fallback=count["fallback"],
+        )
+    )
+
+
+def study3_variants(completed, context, metadata=None):
+    """Study 3's two new variants from a model's completed laws (PROTOCOL.md, dated addition of
+    2026-10-16, item 7), built from the same saved base forecast as the registered three.
+
+    hurdle_dynamic: the registered FM hurdle (fm_hurdle) with dynamic_count's occurrence at each
+    lead in place of the 28-day Jeffreys p; delta_1 only when F(0) = 1.
+    occurrence_model_size_count: the completed law's own 1 - F(0) with hurdle_count_28's
+    positive law. Neither is fitted or selected on targets.
+    """
+    horizon = len(completed)
+    p_dynamic = dynamic_occurrence(context, horizon)
+    count = count_laws("hurdle_count_28", context, 1)[0].spec
+    return dict(
+        hurdle_dynamic=law_forecast(
+            [fm_hurdle(law, p) for law, p in zip(completed, p_dynamic, strict=True)],
+            dict(base_metadata=metadata, occurrence=p_dynamic, occurrence_source="dynamic_count"),
+        ),
+        occurrence_model_size_count=law_forecast(
+            [model_size_count(law, count) for law in completed],
+            dict(base_metadata=metadata, positive_source="hurdle_count_28"),
+        ),
+    )
+
+
+def fm_variants(output, context, *, study3=False):
     q = np.column_stack([output.quantile(t) for t in COMMON_QUANTILES])
     if not all(
         np.any(np.isclose(output.quantile_levels, t, atol=1e-12, rtol=0)) for t in COMMON_QUANTILES
@@ -112,7 +161,7 @@ def fm_variants(output, context):
         raise ValueError("Native FM decile missing; no invented raw tails")
     completed = [complete(row) for row in q]
     p = occurrence(context)
-    return dict(
+    variants = dict(
         raw=dict(deciles=q.tolist(), distributions=None, metadata=output.metadata),
         completed=law_forecast(completed, dict(base_metadata=output.metadata)),
         hurdle=law_forecast(
@@ -120,12 +169,32 @@ def fm_variants(output, context):
             dict(base_metadata=output.metadata, occurrence=p),
         ),
     )
+    if study3:
+        variants.update(study3_variants(completed, context, output.metadata))
+    return variants
 
 
 class ModelPool:
-    def __init__(self, *, prospective=False, factory=make_registered_model, release=release_model):
+    def __init__(
+        self,
+        *,
+        prospective=False,
+        study3=False,
+        factory=make_registered_model,
+        release=release_model,
+    ):
+        if prospective and study3:
+            raise ValueError("Study 3 registers no prospective forecasts")
         self.spec = deepcopy(read_json(ROOT_DIR / "study/run_spec.json"))
-        self.spec["seeds"]["forecast"] = SEEDS["prospective"] if prospective else SEEDS["forecast"]
+        self.spec["seeds"]["forecast"] = (
+            STUDY3_SEEDS["forecast"]
+            if study3
+            else SEEDS["prospective"]
+            if prospective
+            else SEEDS["forecast"]
+        )
+        # The forecast seeds are derived with the component name of the study they belong to.
+        self.study3, self.component = study3, "study3" if study3 else "study2"
         self.factory, self.release = factory, release
         self.models = {}
         self.timings = {}
@@ -145,7 +214,7 @@ class ModelPool:
         for name in (*MODEL_PINS, *BASELINES):
             started = perf_counter()
             seed = derived_seed(
-                self.spec["seeds"]["forecast"], "study2", name, key, horizon, values=context
+                self.spec["seeds"]["forecast"], self.component, name, key, horizon, values=context
             )
             if name in BASELINES[3:]:
                 forecasts[name] = law_forecast(count_laws(name, context, horizon), dict(seed=seed))
@@ -178,7 +247,10 @@ class ModelPool:
                 memory_snapshot()
             if name in MODEL_PINS:
                 forecasts.update(
-                    {f"{name}_{v}": f for v, f in fm_variants(output, context).items()}
+                    {
+                        f"{name}_{v}": f
+                        for v, f in fm_variants(output, context, study3=self.study3).items()
+                    }
                 )
             elif name == "nb_local_level_28":
                 m = output.metadata
