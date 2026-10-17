@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-17 01:27 UTC. This page holds only what is current.
+Last rewritten 2026-10-17 01:46 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -41,8 +41,8 @@ day.
 | Paper revision: the review's fixes, the referee's changes, the post-hoc table, the length | done 2026-10-16: all three reads applied, 780 checks pass, about seventeen pages by word count against an aim of fourteen; awaiting the commit | the commit; his choice of the next cuts | done |
 | The author's read of both summaries, the PDF, posting the paper on Zenodo as version 1 | the revision | his read, the posting | 2026-10-31 |
 | Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16, committed (`3357d77`, `f7a8628`) | nothing | done |
-| NYC 311 context pull (one request per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | done 2026-10-16 08:04 UTC: 276 of 330 approved attempts, 300 series, every stratum full, verified from the raw captures; awaiting the commit | the commit | done |
-| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | the panel's commit | target-access, runtime and the one terms-page request, in his words | 2026-10-19 |
+| NYC 311 context pull (one request per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | done 2026-10-16 08:04 UTC: 276 of 330 approved attempts, 300 series, every stratum full, verified from the raw captures; committed 2026-10-17 (`0e70759`) | nothing | done |
+| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | the panel's commit (done 2026-10-17); a first stage without network (the smoke at HEAD, the readiness draft, the runtime estimate) before the run | nothing for the first stage; then target access, runtime and the one terms-page request, in his words | 2026-10-19 |
 | The paper's version 2 with Study 3, its review, the TMLR submission | Study 3 | his read, the submission | 2026-11-15 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a

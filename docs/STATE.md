@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-17 01:27 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 01:46 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `095d48c` (2026-10-16 07:38 UTC), 44 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `1aa1669` (2026-10-17 01:37 UTC), 46 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -103,7 +103,7 @@ addition is appended (`PROTOCOL.md` 71,635 bytes, SHA-256 `05c7617b…`; every r
 commit, the frozen panel and the deadline), the per-stratum inference, the integrity recomputation and a resumable
 one-query-per-day NYC 311 census that refuses any request naming a day on or after 2026-06-03; 459 tests pass.
 
-**The NYC 311 panel (frozen 2026-10-16 08:04 UTC, awaiting the author's commit).** One anonymous query per calendar
+**The NYC 311 panel (frozen 2026-10-16 08:04 UTC; committed `0e70759`).** One anonymous query per calendar
 day over the 275 context days, 276 request attempts in all against a ceiling of 330, 19 minutes, no retry, no error, no
 request naming a day on or after 2026-06-03. All 8,469 eligible cells have a complete context; the strata hold
 2,002 dense, 2,422 sparse and 4,045 very sparse complete series, and each takes its first 100 in selection-hash
@@ -170,8 +170,9 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of the frozen NYC 311 panel; the Study 3 run under its signed gate (smoke, readiness bound to
-`3357d77`, target access for the 90 target days, runtime) and its per-stratum inference; the
+The Study 3 run under its signed gate (first the smoke at HEAD, the readiness draft bound to `3357d77` and the runtime
+estimate, without network; then, with the author's words, the source's terms page, target access for the 90 target
+days and the run) and its per-stratum inference; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo by 2026-10-31 and its version with
 Study 3 for TMLR about 2026-11-15. Dates and gates are in `docs/PLAN.md`.
