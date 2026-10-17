@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-17 01:46 UTC. This page holds only what is current.
+Last rewritten 2026-10-17 05:00 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -42,7 +42,7 @@ day.
 | The author's read of both summaries, the PDF, posting the paper on Zenodo as version 1 | the revision | his read, the posting | 2026-10-31 |
 | Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16, committed (`3357d77`, `f7a8628`) | nothing | done |
 | NYC 311 context pull (one request per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | done 2026-10-16 08:04 UTC: 276 of 330 approved attempts, 300 series, every stratum full, verified from the raw captures; committed 2026-10-17 (`0e70759`) | nothing | done |
-| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | the panel's commit (done 2026-10-17); a first stage without network (the smoke at HEAD, the readiness draft, the runtime estimate) before the run | nothing for the first stage; then target access, runtime and the one terms-page request, in his words | 2026-10-19 |
+| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | done 2026-10-17 04:20 UTC: 106 of 120 approved attempts, 956 s of 3,600; 21 of 36 reject, H3 confirmed for dense series and not for sparse or very sparse; the source's terms recorded; awaiting the commit | the commit | done |
 | The paper's version 2 with Study 3, its review, the TMLR submission | Study 3 | his read, the submission | 2026-11-15 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
@@ -58,9 +58,9 @@ Every spend is approved by the author in his own words before it happens. Nothin
 | Resource | Planned use | Estimate | Dollars | Approval |
 |---|---|---|---|---|
 | npm registry and download API | name inventory; metadata walk to 10,000 eligible packages; context pull for the candidate pool; later 300 target pulls | about 26,000 serial requests at one per second, about eight hours; stage 1 states the exact figure | 0 | the author's words before stage 2 |
-| GPU (RTX 4070 SUPER) | synthetic grid run; npm external run; two smokes | under one hour each by the smoke timings; stage 1 of each states the figure | 0 | the author's budget, as the protocol requires for every component |
+| GPU (RTX 4070 SUPER) | synthetic grid run; npm external run; the Study 3 run; three smokes | under one hour each by the smoke timings; the Study 3 run 1,080 s estimated, 3,600 s proposed | 0 | the author's budget, as the protocol requires for every component |
 | BigQuery | none before the paper (the birth-cohort census is deferred) | 0 | 0 | not asked |
-| NYC Open Data (SODA, anonymous) | the Study 3 context pull, done (276 attempts, 19 minutes); the 90 target days and one read of the terms page | about 91 requests at one a second, under ten minutes | 0 | the context pull approved 2026-10-16 (330 attempts, 3 hours); the targets and the terms page need the author's words |
+| NYC Open Data (SODA, anonymous) | the Study 3 context pull, done (276 attempts, 19 minutes); the 90 target days, done (106 attempts in two invocations, 17 minutes: 16 throttled answers at one request a second, none at three); the terms, three scripted requests (a redirect, a refusal, one unsent) and two page reads in a browser | done | 0 | the context pull approved 2026-10-16 (330 attempts, 3 hours); the targets 2026-10-17 (100, then 120 attempts); the terms 2026-10-17 (three scripted requests, then three browser reads) |
 | Zenodo, TMLR | posting and submission | 0 | 0 | the author posts |
 | PDF build | pandoc and a TeX distribution on this machine, or Overleaf's free tier | 0 | 0 | the author's choice (below) |
 
@@ -111,6 +111,9 @@ winget install --id MiKTeX.MiKTeX -e
 - Release assets beside `results.parquet`: the 540 synthetic checkpoints (0.9 GB) and, after the npm run, its
   checkpoints, so a fresh clone can rerun the inference; hashes are in each `run.json`.
 - A monthly audit of every claim on these pages against the files, first about 2026-11-11.
+- A line-ending attribute for the smoke copies under `study/`: the committed copy of the npm smoke is stored with LF
+  while the readiness document of 2026-10-15 hashes the file as written on the run machine; Study 3's copies carry
+  the attribute from their first commit.
 - `*.py text eol=lf` in `.gitattributes`, so that the Study 2 gate's source hashes survive a checkout on a
   machine that converts line endings (folded into the npm panel work).
 - Archiving the v1 repository on GitHub with one line at the top of its README pointing here, once the report

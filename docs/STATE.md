@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-17 01:46 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 05:00 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `1aa1669` (2026-10-17 01:37 UTC), 46 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `00fd91d` (2026-10-17 01:50 UTC), 47 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -116,6 +116,34 @@ cells outside the 2024 frame. Of the very sparse stratum's 100 series, 39 have n
 record are copied under `reports/study3-nyc311/panel/`; `study/study3/nyc311_panel_status.json` binds them for the
 gate.
 
+**The run's first stage (2026-10-17 02:05 UTC; no network).** The GPU smoke at `00fd91d` passed in 39 s with a peak
+reserved VRAM of 2.95 GB and carries the study3 component, the protocol hash, the four seeds and the 22 variants. The
+runtime estimate, from the run's own loop on thirty synthetic series, is 1,080 s for 300 series at three origins
+(the 209 npm series took 699 s); the proposed budget is 3,600 s. The readiness draft binds addition 7, the panel's four
+entries and the smoke, and the gate refuses it at the unsigned approval and nowhere else. No variant fails on an
+all-zero context: with fewer than two request days in the last 28, the dynamic occurrence falls back to the fixed
+Jeffreys estimate, so the two hurdles coincide there. At the first origin that holds for 74 of the 100 very sparse
+series and 4 of the sparse ones, so the very sparse rows will carry many exact ties, and a median difference of
+exactly zero is reported as having no sign.
+
+**The run (2026-10-17 03:47 to 04:03 UTC; awaiting the author's commit).** Under the signed gate (passed before the
+target pull, before its resumption and before the run), the 90 target days were pulled in 106 request attempts of 120
+approved: the first invocation, one request a second, met 16 throttled answers and stopped at its ceiling of 100 after
+84 days; the second, three seconds apart, took the last six. Every day was exhausted on one page, no source gap, and an
+independent recomputation from the raw captures matched every count. The run took 956 s of the 3,600 s budget for 300
+of 300 series; the committed inference and integrity recomputation ran unchanged (0 of 39,600 forecasts disagree). The
+family R01 to R36: 21 of 36 reject at BH q = 0.05, none against H3's predicted direction. Dense, against the completed
+control: all six reject with the predicted sign (the dynamic hurdle is worse, higher on 55 to 72 of 100 series, medians
++0.004 to +0.013). Sparse: one of six rejects as predicted (TimesFM 2.5 at horizon 7, lower on 57 of 100); four medians
+are exactly zero. Very sparse: none rejects; all six medians are exactly zero, with 72 to 88 of 100 series tied exactly.
+Against the empirical hurdle, 14 of 18 reject, all for the dynamic hurdle. H3 is confirmed on NYC 311 for dense series
+and not confirmed for sparse and very sparse ones. Results: `reports/study3-nyc311/run-2026-10-17/RESULTS-nyc311.md`
+and the appended section of `RESULTS.md`; the 300 checkpoints (645 MB) stay out of the tree. The source's terms were
+recorded 2026-10-17 04:49 UTC (`reports/study3-nyc311/panel/source-terms.md`): the portal's overview page had moved to
+the city's main site, which refused the scripted request and answered a browser; the city site's terms of use state no
+license, attribution rule or restriction for the datasets, the dataset's metadata states no license, and the Open Data
+Law the page names was not read.
+
 ## What the protocol allows, and what lapsed
 
 - Study 1 is closed. Anything computed from its saved run is post-hoc and labeled so.
@@ -126,8 +154,8 @@ gate.
   with the PyPI rule unchanged after that; the October paper's external family is E01 to E18 with one BH
   correction, E19 to E54 kept whole for a later run. All three were decided before any Study 2 target was
   seen (`study/study2/acquisition_status.json`: targets opened false, forecasts generated false).
-- Study 3 is registered by dated addition 7 (2026-10-16, `3357d77`): the 36-test family R01 to R36 on NYC 311; no
-  Study 3 target value has been accessed.
+- Study 3 is registered by dated addition 7 (2026-10-16, `3357d77`): the 36-test family R01 to R36 on NYC 311; its
+  targets were opened 2026-10-17 under the signed gate and the family has run.
 - The implementation's external gate still requires a completed holdout freeze and all three domain panels;
   the addition says both change in a commit that cites it. That commit is still to be made.
 - The November prospective round was not taken on 2026-10-12; it can still be registered by a separate dated
@@ -170,9 +198,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The Study 3 run under its signed gate (first the smoke at HEAD, the readiness draft bound to `3357d77` and the runtime
-estimate, without network; then, with the author's words, the source's terms page, target access for the 90 target
-days and the run) and its per-stratum inference; the
+The author's commit of the Study 3 run; the paper's version with Study 3; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo by 2026-10-31 and its version with
 Study 3 for TMLR about 2026-11-15. Dates and gates are in `docs/PLAN.md`.
