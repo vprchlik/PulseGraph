@@ -1,0 +1,188 @@
+{
+  "achieved_strata": {
+    "dense": {
+      "achieved": 100,
+      "complete_candidates": 2002,
+      "unfilled": 0
+    },
+    "sparse": {
+      "achieved": 100,
+      "complete_candidates": 2422,
+      "unfilled": 0
+    },
+    "very_sparse": {
+      "achieved": 100,
+      "complete_candidates": 4045,
+      "unfilled": 0
+    }
+  },
+  "acquisition": {
+    "anonymous": true,
+    "census_answer_seconds": {
+      "max": 11.735,
+      "median": 1.968,
+      "min": 0.297,
+      "p90": 6.728
+    },
+    "census_attempts_by_status": {
+      "200": 275
+    },
+    "dollars": 0,
+    "first_attempt_at": "2026-10-16T07:44:21.038361+00:00",
+    "host": "data.cityofnewyork.us",
+    "http_attempts": 276,
+    "http_attempts_by_kind": {
+      "census": 275,
+      "metadata": 1
+    },
+    "interruptions": [],
+    "invocation_seconds": 1123.8,
+    "invocation_stops": {
+      "acquisition_budget_reached": 1,
+      "panel written": 1
+    },
+    "invocations": 2,
+    "last_attempt_at": "2026-10-16T08:03:55.729152+00:00",
+    "metadata_seconds": 0.287,
+    "request_spacing": "one request at a time, at least 1 s between attempts (the capture client's interval)",
+    "seconds_used": 1124.1,
+    "timing_run": {
+      "bytes": 1282189,
+      "day": "2025-09-01",
+      "invocation": 1,
+      "max_requests": 1,
+      "rows": 9398,
+      "seconds": 1.188,
+      "status": 200,
+      "stop": "acquisition_budget_reached"
+    }
+  },
+  "approval": {
+    "http_attempt_ceiling": 330,
+    "invocation_seconds_ceiling": 10800,
+    "scope": "cumulative over every invocation of the context pull and any resume, the metadata request included",
+    "words": "approved: NYC 311 context pull, 330 request attempts and 3 hours"
+  },
+  "census": {
+    "bytes": 1414463,
+    "captured_rows": 2959469,
+    "days": 275,
+    "days_with_more_than_one_page": 0,
+    "end": "2026-06-02",
+    "frame_cells": 8469,
+    "frame_requests": 2902433,
+    "frame_sha256": "783a5caf591e6a7c5987897f5769a54a3db6cc1da29e9743e6e7bda45709f9f3",
+    "gap_days": [],
+    "largest_day": [
+      "2026-02-24",
+      22805
+    ],
+    "ledger_failures": [
+      {
+        "at": "2026-10-16T07:45:08.956616+00:00",
+        "day": "2025-09-02",
+        "kind": "budget",
+        "reason": "acquisition_budget_reached"
+      }
+    ],
+    "ledger_invocations": 2,
+    "ledger_sha256": "c8d8839ea81cc43de956ccc1a02945471f462941a879180a01f7ee711a3748cc",
+    "outside_frame_requests": 7680,
+    "pages": 275,
+    "requests": 2959469,
+    "smallest_day": [
+      "2025-12-25",
+      6216
+    ],
+    "start": "2025-09-01",
+    "superseded_rows": 0,
+    "unrecognized_requests": 49356
+  },
+  "context_window": [
+    "2025-09-01",
+    "2026-06-02"
+  ],
+  "deadline": "2026-10-27T23:59:59+00:00",
+  "deadline_met": true,
+  "domain": "nyc311",
+  "exclusions": {
+    "frame_cells_with_no_context_request": 835,
+    "missing_board_requests": 0,
+    "missing_problem_requests": 0,
+    "other_board_code_requests": 13462,
+    "outside_frame_cells": 727,
+    "outside_frame_requests": 7680,
+    "unrecognized_board_or_problem_requests": 49356,
+    "unspecified_borough_board_requests": 35894
+  },
+  "frame": {
+    "candidate_inclusion_probability": 1.0,
+    "candidate_pool_size": 8469,
+    "eligible_frame_size": 8469,
+    "excluded_at_metadata": 1027,
+    "excluded_reasons": {
+      "unspecified_geography_or_problem": 1027
+    },
+    "inventory_acquired_at": "2026-09-14T17:08:16.611328+00:00",
+    "inventory_path": "data/raw/study2/nyc311/inventory.json",
+    "inventory_sha256": "30f8e4358354e610b10ffdcf64fcad21552811c86e5cf428ecfa0b5111b82fe5",
+    "inventory_size": 9496
+  },
+  "panel": {
+    "census": {
+      "path": "reports/study3-nyc311/panel/census.json",
+      "sha256": "eef80f85f7f5e3abbd6fc4ab4a6dbbf7cfbd43d39edf95115201098780005e9c"
+    },
+    "context": {
+      "bytes": 66227,
+      "in_tree": false,
+      "path": "data/raw/study3/nyc311/panel/context.parquet",
+      "sha256": "935a01a571d119fe12cd1f893ebbae13bb5f04ae01b2a50c0aa624a03738a64c"
+    },
+    "manifest": {
+      "path": "reports/study3-nyc311/panel/manifest.json",
+      "sha256": "a508b4d87c642c98a308247fa851e5618cfb95f8fdc255113a2a5b6cb8f8663b"
+    },
+    "selection": {
+      "path": "reports/study3-nyc311/panel/selection.json",
+      "sha256": "6ab7aa34fbf931595049b6e2c97e7bdb778e7980de97bd151d510404c9739512"
+    }
+  },
+  "panel_verified_at": "2026-10-16T08:04:59+00:00",
+  "panel_written_at": "2026-10-16T08:04:19.123093+00:00",
+  "protocol_rule": "PROTOCOL.md, dated addition of 2026-10-16, item 7",
+  "selected_context_descriptors": {
+    "dense": {
+      "context_total_zero": 0,
+      "zero_fraction_one": 0
+    },
+    "sparse": {
+      "context_total_zero": 0,
+      "zero_fraction_one": 0
+    },
+    "very_sparse": {
+      "context_total_zero": 19,
+      "zero_fraction_one": 39
+    }
+  },
+  "selection_seed": 20261001,
+  "series": 300,
+  "source": {
+    "attribution": "311",
+    "attribution_link": null,
+    "created_date_type": "calendar_date",
+    "endpoint": "https://data.cityofnewyork.us/resource/erm2-nwe9.json",
+    "license": null,
+    "metadata_read_at": "2026-10-16T07:44:21.038361+00:00",
+    "metadata_sha256": "b3a22b46e0919d3e945c7b15d7d203e9f43016bf3ef6aefa9a36d835edce93c5",
+    "metadata_url": "https://data.cityofnewyork.us/api/views/erm2-nwe9.json",
+    "terms_link": null,
+    "terms_record": "reports/study3-nyc311/panel/source-terms.md"
+  },
+  "status": "verified_achieved_panel",
+  "strata_window": [
+    "2026-03-05",
+    "2026-06-02"
+  ],
+  "target_values_opened": false
+}
