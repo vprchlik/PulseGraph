@@ -1,0 +1,45 @@
+% Study 3, the question. Input from paper.tex; every number traces to sources.md and is asserted by
+% check_numbers.py. Macros are provided in case the file is compiled before paper.tex defines them.
+\providecommand{\qs}{QScore9}
+\providecommand{\hc}{\texttt{hurdle\_count\_28}}
+
+\section{Study 3: the question}
+\label{sec:s3question}
+
+Study 3 was registered on 2026-10-16 as item 7 of the protocol's dated additions, at commit
+\texttt{3357d779db28cffa4048e7e333fd02b9434b4b6d} (full protocol SHA-256 with the addition
+\texttt{05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29}), appended on top of commit
+\texttt{04e92c1} after Study 2's results had been seen and before any Study 3 target value was accessed;
+the only Study 3 source material in hand was the NYC 311 cell inventory of 2024, captured on 2026-09-14,
+which holds no target-period count. Its hypothesis H3 is stated in the addition: on series whose context
+zero fraction is at least 0.5, the substitution with a dynamic occurrence lowers \qs{} relative to the
+model's own completed forecast; on series below 0.5 it raises it. Each stratum is tested on its own;
+nothing is pooled across strata for confirmation; null, adverse, mixed and imprecise results receive the
+same reporting. Where the addition says ``as registered'', Study 2's registration at \texttt{df55867}
+applies.
+
+The addition states why the study exists. Study 2 found, in its declared secondary stratum tables, that
+replacing a frozen model's own zero mass with a context-only occurrence probability lowered \qs{} on
+sparse npm series and raised it on dense ones, while the pooled confirmatory families spoke for the dense
+regime, and a post-hoc analysis found that a dynamic occurrence estimate shrank the loss
+(Section~\ref{sec:s2results}); that reading was descriptive. Study 3 tests it as a confirmatory family on
+a second domain, with four changes from Study 2's construction, each answering a question that the
+standing check of 2026-10-16, recorded in the repository as the referee's read, put to the paper. The tests
+are per stratum, so that the confirmatory answer speaks for the regime it is asked about and not for
+whatever dominates a pool (its item W1). The occurrence probability is the registered
+\texttt{dynamic\_count} law's discounted estimate rather than the fixed 28-day Jeffreys estimate, which
+ignores persistence (W9). The fourth cell of the occurrence-by-size factorial, the model's own occurrence
+with a count positive law, is run as a declared secondary, since without it the two readings of the
+accounting trade in Section~\ref{sec:discussion} cannot be separated (W2). And the primary count comparator
+is the empirical hurdle, whose positive law can fit a dense series, so that the second contrast asks
+whether the model's positive law keeps its value against a count law that can win, the question raised when
+the registered dynamic count beat every foundation model on the grid (W4). What Study 3 does not answer is
+fixed by the same registration: it tests no Markov occurrence estimate, adds no overdispersed cell to the
+grid, says nothing about Wikipedia pageviews, runs the fourth cell on NYC 311 alone, and leaves the npm very
+sparse stratum, with its nine series, as Study 2 left it.
+
+The domain is NYC 311 service requests, as registered for Study 2's deferred slot: requests by creation day
+for a problem type in a community board, a count of complaints about city services and so a third kind of
+daily count beside GitHub stars and npm downloads. The claim the paper makes, stated in full in
+Section~\ref{sec:discussion}, is the registered combination on the three settings it was run on, and
+nothing broader.

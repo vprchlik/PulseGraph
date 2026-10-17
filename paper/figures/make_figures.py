@@ -1,8 +1,9 @@
 """Figures for the Study 1 report and the paper, drawn from the saved CSVs only.
 
-Reads three files under reports/registered-2026-09-13/ for the report's three figures, and two
-files under reports/study2-npm/run-2026-10-15/ and reports/study2-synthetic-2026-10-15/ for the
-paper's two Study 2 figures, and writes PDF and PNG figures beside this script. No model is loaded,
+Reads three files under reports/registered-2026-09-13/ for the report's three figures, two files
+under reports/study2-npm/run-2026-10-15/ and reports/study2-synthetic-2026-10-15/ for the paper's
+two Study 2 figures, and the family table under reports/study3-nyc311/run-2026-10-17/ for the
+paper's Study 3 figure, and writes PDF and PNG figures beside this script. No model is loaded,
 nothing is fitted, no test is run. Run from the repository root:
 
     .\\.venv\\Scripts\\python.exe paper/figures/make_figures.py
@@ -22,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REPORT = ROOT / "reports" / "registered-2026-09-13"
 NPM = ROOT / "reports" / "study2-npm" / "run-2026-10-15"
 SYNTHETIC = ROOT / "reports" / "study2-synthetic-2026-10-15"
+NYC311 = ROOT / "reports" / "study3-nyc311" / "run-2026-10-17"
 OUT = Path(__file__).resolve().parent
 
 INFERENCE = REPORT / "inference" / "inference.csv"
@@ -30,6 +32,7 @@ PAIRED = REPORT / "posthoc" / "posthoc-paired-repositories.csv"
 NPM_PAIRED = NPM / "inference" / "paired_entities.csv"
 NPM_INFERENCE = NPM / "inference" / "inference.csv"
 SYNTHETIC_CELLS = SYNTHETIC / "inference" / "secondary_cells_contrasts.csv"
+NYC311_INFERENCE = NYC311 / "inference" / "inference.csv"
 
 MODELS = ["chronos2", "timesfm3", "timesfm2p5"]
 MODEL_LABEL = {"chronos2": "Chronos-2", "timesfm3": "TimesFM 3", "timesfm2p5": "TimesFM 2.5"}
@@ -313,6 +316,72 @@ def figure_synthetic_cells(cells, horizon=30):
     save(fig, "fig-s2-synthetic-cells")
 
 
+def figure_nyc311_family(inference):
+    """Study 3 on NYC 311: the 36 mean differences with intervals and medians, by stratum."""
+    strata = ["dense", "sparse", "very_sparse"]
+    stratum_label = {"dense": "dense", "sparse": "sparse", "very_sparse": "very sparse"}
+    predicted = {"dense": 1, "sparse": -1, "very_sparse": -1}
+    fig, axes = plt.subplots(1, 3, figsize=(6.6, 3.4), constrained_layout=True)
+    for ax, stratum in zip(axes, strata):
+        rows = inference[inference["stratum"] == stratum].sort_values("id")
+        positions, labels = [], []
+        for x, (_, row) in enumerate(rows.iterrows()):
+            is_t1 = row["contrast"] == "T1"
+            color = "#0072B2" if is_t1 else "#D55E00"
+            rejects = bool(row["reject_bh_005"])
+            low = row["mean_diff"] - row["mean_diff_ci_low"]
+            high = row["mean_diff_ci_high"] - row["mean_diff"]
+            ax.errorbar(
+                x,
+                row["mean_diff"],
+                yerr=[[low], [high]],
+                fmt="o",
+                color=color,
+                markerfacecolor=color if rejects else "white",
+                markersize=3.5,
+                capsize=1.5,
+                linewidth=0.8,
+                label=(
+                    "T1, mean with 95% interval (filled: rejects)"
+                    if (ax is axes[0] and row["id"] == "R01")
+                    else "T2, mean with 95% interval (filled: rejects)"
+                    if (ax is axes[0] and row["id"] == "R02")
+                    else None
+                ),
+            )
+            ax.plot(
+                x,
+                row["median_diff"],
+                marker="_",
+                color="black",
+                markersize=7,
+                markeredgewidth=1.2,
+                linestyle="none",
+                label="median difference" if (ax is axes[0] and row["id"] == "R01") else None,
+            )
+            positions.append(x)
+            labels.append(f"{row['id']} {MODEL_LABEL[row['model']]} h{row['horizon']}")
+        ax.axhline(0, color="#888888", linewidth=0.6)
+        ax.set_yscale("symlog", linthresh=0.001)
+        low, high = ax.get_ylim()
+        ax.set_ylim(symlog_pad(low, -1), symlog_pad(high, 1))
+        ax.set_xlim(-0.6, len(positions) - 0.4)
+        # The half-plane of H3's predicted T1 sign is shaded.
+        if predicted[stratum] > 0:
+            ax.axhspan(0, ax.get_ylim()[1], color="#0072B2", alpha=0.06, linewidth=0)
+        else:
+            ax.axhspan(ax.get_ylim()[0], 0, color="#0072B2", alpha=0.06, linewidth=0)
+        ax.set_xticks(positions)
+        ax.set_xticklabels(labels, rotation=70, ha="right", fontsize=5.5)
+        ax.set_title(f"{stratum_label[stratum]}, n = 100")
+        ax.grid(axis="y", linewidth=0.3, alpha=0.6)
+        if ax is axes[0]:
+            ax.set_ylabel("QScore9, hurdle_dynamic minus reference (symlog)")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
+    save(fig, "fig-s3-nyc311-family")
+
+
 def main():
     inference = pd.read_csv(INFERENCE)
     curves = pd.read_csv(CURVES)
@@ -325,6 +394,8 @@ def main():
     figure_npm_paired(npm_paired, npm_inference)
     cells = pd.read_csv(SYNTHETIC_CELLS, float_precision="round_trip")
     figure_synthetic_cells(cells)
+    nyc311_inference = pd.read_csv(NYC311_INFERENCE, float_precision="round_trip")
+    figure_nyc311_family(nyc311_inference)
     for name in sorted(OUT.glob("fig-*")):
         print(name.relative_to(ROOT), name.stat().st_size)
 

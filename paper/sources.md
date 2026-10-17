@@ -295,11 +295,12 @@ documents print them: four significant figures, thousands separators from 1,000 
 significant figures need an exponent as a power of ten (so `1.055e-09` of the strata file prints as
 $1.055 \times 10^{-9}$).
 
-Tables of the paper, in source order: Tables 1 to 4 and Figures 1 and 2 as in the report; Table 5 the
-external family's results (`tab:s2ext`), Table 6 the synthetic family's results (`tab:s2syn`), Table 7 the
-accounting parts of the hurdle contrast (`tab:s2parts`), Table 8 the post-hoc dynamic-occurrence rows
-against the completed control and the fixed hurdle (`tab:s2dyn`), Figure 3 the npm paired differences
-(`fig:s2npm`); in the appendix, Tables 9 to 13 as the report's Tables 5 to 9, Figure 4 the zero-fraction
+Tables of the paper as of the revision of 2026-10-16 (the extension of 2026-10-17 renumbers them; the
+numbering in force is in the Study 3 section at the end of this file), in source order: Tables 1 to 4 and
+Figures 1 and 2 as in the report; Table 5 the external family's results (`tab:s2ext`), Table 6 the
+synthetic family's results (`tab:s2syn`), Table 7 the accounting parts of the hurdle contrast
+(`tab:s2parts`), Table 8 the post-hoc dynamic-occurrence rows against the completed control and the fixed
+hurdle (`tab:s2dyn`), Figure 3 the npm paired differences (`fig:s2npm`); in the appendix, Tables 9 to 13 as the report's Tables 5 to 9, Figure 4 the zero-fraction
 scatter as in the report, then the external family E01 to E18 (`tab:s2family`, Table 14), the synthetic
 family (`tab:s2synfamily`, 15), the achieved npm panel (`tab:s2panel`, 16), Figure 5 the synthetic cells
 (`fig:s2cells`), the post-hoc stratum tests (`tab:s2regime`, 17), the empirical-hurdle reading
@@ -465,5 +466,123 @@ estimates, not asserted.
 | `.\.venv\Scripts\python.exe NR\posthoc\sensitivity_zero_days.py NR --out <dir>` | `NR/posthoc/sensitivity_*.csv`, `sensitivity.json` (needs the checkpoints) |
 | `.\.venv\Scripts\python.exe DO\dynamic_occurrence.py --npm NR --synthetic SR --out <dir>` | the files under `DO/` (needs the 749 checkpoints) |
 | `.\.venv\Scripts\python.exe NR\make_tables.py NR\inference`; `SR\make_tables.py SR\inference` | the tables of the two results documents (read-only) |
-| `.\.venv\Scripts\python.exe paper/figures/make_figures.py` | the five figures under `paper/figures/` |
+| `.\.venv\Scripts\python.exe paper/figures/make_figures.py` | the six figures under `paper/figures/` |
 | `.\.venv\Scripts\python.exe paper/check_numbers.py` | nothing; asserts this table against the report, the paper and both summaries, recomputing the post-hoc stratum, empirical-hurdle and dynamic-count readings from the two `series_scores.csv` files |
+
+## The paper extended with Study 3: the regime family on NYC 311 (added 2026-10-17)
+
+`paper/paper.tex` now reads six more files under `paper/sections/`: `study3-question.tex`,
+`study3-design.tex`, `study3-panel.tex` and `study3-results.tex` in the body, after `study2-results.tex`, and
+`study3-detail.tex` and `study3-appendix.tex` in the appendix, after `study2-appendix.tex`. The regime
+reading of `study2-results.tex` and its post-hoc dynamic-occurrence subsection are each one paragraph; their
+detail and the dynamic-occurrence table moved to `study2-appendix.tex`, which `check_numbers.py` now reads
+for those needles. `S3R` stands for `reports/study3-nyc311/run-2026-10-17`, `S3P` for
+`reports/study3-nyc311/panel`, `S3` for `study/study3`. Every CSV is read with
+`float_precision="round_trip"`, and values print as the results page prints them, by the same `g` and `pval`
+functions as the Study 2 numbers.
+
+Sections, in force: 1 to 6 the report's; 7 to 10 Study 2's question, design, npm panel and results; 11 to
+14 Study 3's question, design, NYC 311 panel and results; 15 the discussion; 16 the limitations; 17 what is
+registered and not run; 18 reproducibility; 19 the author's statement. Appendices A to D are the report's,
+E the Study 2 design detail, F the npm panel detail, G the Study 2 runs and commands, H the Study 2 secondary
+tables and post-hoc readings (now with the dynamic-occurrence table), I the Study 3 design and panel detail,
+J the Study 3 run, commands and secondary tables. Tables in the body, in source order: 1 to 4 the report's;
+5 `tab:s2ext`; 6 `tab:s2syn`; 7 `tab:s2parts`; 8 the family's structure (`tab:s3structure`); 9 the family's
+results (`tab:s3family`); 10 the T2 summary (`tab:s3t2`). Figures in the body: 1 and 2 the report's; 3
+`fig:s2npm`; 4 the family drawn (`fig:s3family`). In the appendix, Tables 11 to 15 as the report's 5 to 9,
+Figure 5 the zero-fraction scatter; 16 `tab:s2family`, 17 `tab:s2synfamily`, 18 `tab:s2panel`, Figure 6
+`fig:s2cells`, 19 `tab:s2regime`, 20 `tab:s2empirical`, 21 `tab:s2scaled`, 22 `tab:s2strata`, 23
+`tab:s2sens`, 24 `tab:s2cells`, 25 `tab:s2scores`, 26 `tab:s2synscores`, 27 `tab:s2dyn` (moved from the
+body), 28 `tab:s2dynrest`, 29 `tab:s2dynparts`; then Study 3: 30 the contexts at each origin
+(`tab:s3context`), 31 the panel (`tab:s3panel`), 32 the direction of each test (`tab:s3direction`), 33 the
+Brier pairs (`tab:s3brier`), 34 the fixed hurdle and the fourth cell per stratum (`tab:s3variants`), 35 the
+pooled rows (`tab:s3pooled`), 36 the accounting parts per stratum (`tab:s3parts`), 37 the PIT
+(`tab:s3pit`).
+
+### The registration (Section 11, Section 12, Appendix I, the abstract)
+
+| Number | File | Key |
+|---|---|---|
+| The addition's commit `3357d779...`, the protocol SHA-256 with the addition `05c7617b...`, "appended on top of commit `04e92c1`", Study 2's registration `df55867` | `S3R/results-provenance.json` `authority`; `S3/spec.json` `authority.appended_on_commit`, `study2_registration`; `S3/regime_comparisons.json` | the checker asserts the three files agree |
+| H3's wording; "registered on 2026-10-16 as item 7"; "Appended at 2026-10-16 06:16 UTC" | `PROTOCOL.md`, the dated addition of 2026-10-16, item 7 | the hypothesis sentence is asserted against the protocol's text |
+| The inventory of 9,496 cells captured 2026-09-14, 8,469 recognized | `S3/spec.json` `domain.primary.inventory` | `cells`, `recognized_board_frame`, `captured_at` |
+| The strata bounds and window, selection seed 20261001, the context inspected | `S3/spec.json` `strata` | `definitions[].bounds`, `zero_fraction_window`, `selection_seed`, `context_inspected` |
+| The calendar (cutoffs, 275, 305 and 335 context days, horizons, endpoint), the deadline 2026-10-27 23:59 UTC, the PyPI fallback | `S3/spec.json` `calendar`, `domain.fallback` | `cutoffs`, `horizons`, `endpoint`, `panel_deadline` |
+| The dynamic law (discount 0.98, $a_B = b_B = 0.5$), 22 variants, the fourth cell | `S3/spec.json` `dynamic_count`, `variants`, `variant_definitions`; `S3R/integrity/integrity.json` `grid.models` | 19 declared variants plus the three raw deciles make the 22 forecast |
+| The family: 36 tests, BH once at $q = 0.05$, 20,000 replicates, bootstrap seed 20261004, the fewer-than-ten rule, the predicted T1 signs, the zero rule | `S3/regime_comparisons.json` | `comparison_count`, `q`, `bootstrap_replicates`, `bootstrap_seed`, `minimum_complete_series_per_stratum`, `predicted_t1_sign`, `zero_method`, `all_zero_p`; Table 8's rows follow `comparisons[]` in order |
+| The seeds (selection 20261001, forecasts 20261002, PIT 20261003, bootstrap 20261004) | `S3/spec.json` `seeds` | |
+
+### The panel (Section 13, Appendix I)
+
+| Number | File | Key |
+|---|---|---|
+| 276 attempts (275 census, 1 metadata), two invocations, 1,124 seconds, anonymous, the approval of 330 attempts and 3 hours in the author's words | `S3/nyc311_panel_status.json` `acquisition`, `approval` | `http_attempts`, `http_attempts_by_kind`, `invocations`, `seconds_used`, `anonymous`, `http_attempt_ceiling`, `invocation_seconds_ceiling`, `words` |
+| 2,959,469 requests, 2,902,433 in frame cells, 49,356 unrecognized, 7,680 outside the frame; 275 days on 275 pages; the smallest day 6,216 on 2025-12-25 and the largest 22,805 on 2026-02-24; no gap | same, `census` | `requests`, `frame_requests`, `unrecognized_requests`, `outside_frame_requests`, `days`, `pages`, `smallest_day`, `largest_day`, `gap_days` |
+| Frozen and verified 2026-10-16 08:04 UTC, inside the deadline, no target opened; 9,496 cells, 1,027 excluded at metadata, 8,469 eligible | same, `panel_verified_at`, `deadline_met`, `target_values_opened`, `frame` | `inventory_size`, `excluded_at_metadata`, `eligible_frame_size` |
+| 2,002, 2,422 and 4,045 complete candidates, 100 taken each, 0 unfilled; 39 all-zero stratum windows and 19 all-zero contexts (Table 31) | same, `achieved_strata`, `selected_context_descriptors`; `S3P/manifest.json` `series[]` | `complete_candidates`, `achieved`, `unfilled`, `zero_fraction_one`, `context_total_zero`; the manifest's `stratum` and `zero_fraction` per series |
+| The contexts at each origin (Table 30: all-zero, no request day in the last 28, fewer than two in the last 28) and the sentences read from it (74 and 4 at the first origin; 4 to 8, 72 to 74, 54 to 58, 15 to 19) | `S3R/RESULTS-nyc311.md`, "The contexts at each origin" (printed by `S3R/make_tables.py` from the signals, which are not in the tree) | the checker asserts the page's rows as text and derives the ranges from them |
+| The target pull: 106 attempts of an approved 120, two invocations (100 attempts for 84 days from 03:16 to 03:32 UTC; 6 attempts for the last 6 days from 03:45:06 to 03:45:43 UTC), 16 repeats | `S3R/results-provenance.json` `pull`, `readiness.approval[1].words`; `S3R/target-pull/pull.json` `invocations` | `attempts`, `captures`, `days_exhausted`, `started_at`, `ended_at` |
+| 983,482 requests, 947,751 in frame, 18,660 unrecognized, 17,071 outside the frame, no gap, fewest 8,849 on 2026-08-16, the separate recomputation | `S3R/results-provenance.json` `pull.target_census`, `pull.verification`; `S3R/target-pull/completeness.json` `target_census`, `verified` | |
+| 47 days from 2026-08-31 to 2026-10-17 | arithmetic, asserted | |
+| The metadata (read 2026-10-16 07:44 UTC, no license, attribution "311", the title), the redirect and the refusal of 2026-10-17, the two browser reads at 04:48 and 04:49 UTC, the terms in brief, the DST evidence (1 against 197 and 225; 796 against 528 and 339; 251 of 275 days) | `S3P/source-terms.md`; `S3R/results-provenance.json` `terms`; `S3/nyc311_panel_status.json` `source` | the checker asserts the record's phrases as text |
+| The contamination ledger's three categories | `S3R/RESULTS-nyc311.md`, "The contamination ledger for NYC 311"; `PROTOCOL.md`, addition 7 | text |
+
+### The run, the integrity check and the approvals (Section 14, Appendix I, Appendix J, Section 18)
+
+| Number | File | Key |
+|---|---|---|
+| Started 2026-10-17 03:47 UTC, completed 04:03 UTC, 300 series, one invocation, 939 seconds inside the run, 956 for the whole process, budget 3,600, estimate 1,080, no failure, no resume, the implementation commit `00fd91d...` | `S3R/run.json` `started_at`, `completed_at`, `invocations[0]`, `failures`, `resumes`, `metadata.readiness`, `metadata.metadata.implementation_commit`; `S3R/results-provenance.json` `run.process_seconds`, `readiness.runtime_budget_seconds` | |
+| RTX 4070 SUPER, driver 610.88, CUDA 12.8, PyTorch 2.11.0, batch size 1, peak reserved 2,948,595,712 bytes (the run and the smoke) | `S3R/run.json` `metadata.hardware`, `invocations[0].memory`; `S3/smoke_2026-10-17_00fd91d.json` `memory`, `at` | |
+| 39,600 = 300 x 3 x 2 x 22; 0 disagreements on QScore9, the parts and the scaled score for all 39,600 and on the Brier score for 30,600; residuals 0.0, 7.1e-15, 2.8e-16; 300 checkpoint hashes; 10,800 windows of the two new variants; CRPS 30,600 certified, 9,000 without a law, 0 uncertified | `S3R/integrity/integrity.json` `grid`, `checks`, `run.checkpoint_sha256`, `status`, `failed_forecasts`; `S3R/inference/secondary_scores.csv` (`stratum == all`) `crps_*`; `S3R/RESULTS-nyc311.md` "Integrity" (the 10,800) | |
+| The gate at 03:15, 03:44 and 03:46 UTC; the smoke at 01:56 UTC; the readiness approved 03:12:50 UTC; the inference 04:03 to 04:04 UTC and the integrity check 04:04 to 04:05 UTC; NumPy 2.5.3, SciPy 1.18.1, pandas 2.3.3; no uncommitted change | `S3R/results-provenance.json` `gate`, `smoke`, `readiness`, `inference`, `integrity`; `S3R/inference/provenance.json` `packages`, `uncommitted_changes_at_inference` | |
+| The three approvals in the author's words, and the context pull's | `S3R/results-provenance.json` `readiness.approval[].words`; `S3/nyc311_panel_status.json` `approval.words` | quoted verbatim |
+| 645 MB of checkpoints, not in the tree | `S3R/RESULTS-nyc311.md` "Files" | text |
+
+### The family (Table 9, Figure 4, Table 10, Section 14, the abstract, the discussion, the summary)
+
+| Number | File | Row and column |
+|---|---|---|
+| The 36 rows: the two means, the difference, the interval, the median, lower / tied / higher, the adjusted $p$, the verdict, the sign as predicted | `S3R/inference/inference.csv` | `variant_mean`, `reference_mean`, `mean_diff`, `mean_diff_ci_low`, `mean_diff_ci_high`, `median_diff`, `wins`, `ties`, `losses`, `wilcoxon_p_bh`, `reject_bh_005`, `median_as_predicted`, `contrast`; `n_entities` 100, `declared_count` and `bh_count` 36, `n_bootstrap` 20,000, `bootstrap_root` 20261004; the row order is the declaration's |
+| 21 of 36 reject; 6 dense T1, 1 sparse T1, 0 very sparse T1, 14 T2; none against the prediction; no T1 median of the opposite sign | same | `reject_bh_005` by `stratum` and `contrast`; the sign of `median_diff` against `predicted_sign` |
+| Dense: higher on 55 to 72 of 100; medians 0.004074 to 0.0127; means 0.01511 to 0.02219; control means 1.703 to 1.833; ties 0 to 2; "about one percent" (the ratio of the mean difference to the control's mean lies between 0.5 and 1.5 percent in every row) | same, R01, R03, R05, R07, R09, R11 | `losses`, `median_diff`, `mean_diff`, `reference_mean`, `ties` |
+| Sparse: R21 (median -0.002116, 57 / 8 / 35, adjusted $p$ 0.00445), R23 (-0.0004938, 53 / 11 / 36, 0.0547), four medians exactly zero with 12 to 23 ties; means -0.004921 to 0.002242 against control means 0.3541 to 0.3668; 8 to 23 ties over the six rows | same, R13 to R23 odd | the same columns |
+| Very sparse: 72 to 88 ties, means 0.0005086 to 0.002911, every interval including zero, the smallest adjusted $p$ 0.0547 at R25; 12 to 28 nonzero series | same, R25 to R35 odd | `ties`, `mean_diff`, `mean_diff_ci_low`, `mean_diff_ci_high`, `wilcoxon_p_bh`, `n_nonzero` |
+| The one series, `["Sewer Maintenance","09 QUEENS"]`, most influential in all six very sparse T1 rows; its stratum | `S3R/inference/family_descriptors.csv` `most_influential_series`; `S3P/manifest.json` | |
+| T2: 14 of 18 reject; dense lower on 72 to 87 with medians -0.05608 to -0.06753; sparse five of six (R16, R18, R20, R22, R24) lower on 53 to 58 with medians -0.001852 to -0.002646, R14 median zero at 0.138; very sparse R28, R32, R36 with 22 / 77 / 1 and median zero, R26, R30, R34 at 0.138 to 0.235 (Table 10) | `S3R/inference/inference.csv`, the T2 rows | the same columns |
+| The direction of each test (Table 32): ties, nonzero, the two rank sums, the side favored, the raw $p$ recomputed; the rank sums 253 against 23 of R28, R32 and R36; the leans of R13, R15, R17, R19 and of the very sparse T1 rows | `S3R/inference/paired_entities.csv` `difference` by `id` (the checker ranks the absolute nonzero differences with average ranks and recomputes the two-sided approximate Wilcoxon $p$ with SciPy; every raw $p$ equals the saved one) | |
+| The ties: 71 to 87 of the tied very sparse series with every decile at zero under both forecasts in every window; the completed control's deciles all zero in every window for 71 to 95 of the 100 very sparse series, `hurdle_dynamic`'s for 89; 2 to 5 of the tied sparse series all zero | the 300 checkpoints under `S3R/` (not in the tree; `rows[].forecast.deciles` by `series_id`, `model`, `horizon`, `cutoff`); the checker recomputes them when the checkpoints are present and records a skip otherwise | |
+
+### The secondary tables (Section 14, the discussion, the limitations, Appendix J)
+
+| Number | File | Row and column |
+|---|---|---|
+| The 36 Brier pairs (Table 33); dense T1 higher by 0.00668 to 0.009347 with every interval above zero; very sparse T1 lower on 68 to 82 of 100 with medians -0.002363 to -0.001625, raw $p$ at most 0.00165, means within 0.0013 of zero with every interval including zero; no tie in any T1 row | `S3R/inference/secondary_strata_contrasts.csv`, `metric == occurrence_brier`, matched to the family by `stratum`, `horizon`, `variant`, `reference` | `mean_diff`, `mean_diff_ci_low`, `mean_diff_ci_high`, `median_diff`, `wins`, `ties`, `losses`, `wilcoxon_p` |
+| The fixed hurdle and the fourth cell against the control per stratum (Table 34): the fixed hurdle higher on 60 to 70 dense, 45 to 60 sparse, 20 to 23 very sparse against 5 to 9 lower with 69 to 73 tied and raw $p$ 0.00293 to 0.0254; the fourth cell 0.2944 to 0.325 above the control on dense series and higher on 70 to 91, within 0.004 of the control's mean elsewhere with 29 to 98 tied; the fourth cell against `hurdle_count_28` on dense series lower by 0.03591 to 0.0467 and on 62 to 73 of 100 | same, `metric == qscore9`, `variant` `<model>_hurdle` and `<model>_occurrence_model_size_count`, `reference` `<model>_completed` and `hurdle_count_28` | the same columns |
+| The pooled rows P01 to P18 (Table 35): the fixed hurdle's mean above its control's with more series higher than lower, below `hurdle_count_28`'s with more lower than higher, each raw model below `local_mean_28` with 128 to 161 lower against 124 to 157 higher; every within-table adjusted $p$ below 0.005 | `S3R/inference/secondary_pooled_study2_form.csv`, `metric == qscore9` | `variant_mean`, `reference_mean`, `mean_diff`, the interval, `median_diff`, `wins`, `ties`, `losses`, `wilcoxon_p_bh_within_table` |
+| The accounting of the T1 difference per stratum (Table 36): the dense zero-day part 0.009693 to 0.03213 in every row; the sparse zero-day part positive for Chronos-2 and negative for the TimesFM models with the underprediction part of the opposite sign; every very sparse part within 0.006 of zero | `S3R/inference/secondary_accounting.csv`, rows by `stratum`, `horizon`, `model`: `<model>_hurdle_dynamic` minus `<model>_completed` on `qscore9`, `zero`, `positive_over`, `positive_under` (`parts_sum` and `max_abs_window_residual` asserted) | |
+| The PIT at horizon 30 per stratum (Table 37): 0.064 to 0.117 in a tenth; the completed controls' last tenth 0.064 to 0.075 on the very sparse series against 0.097 to 0.099 for `hurdle_dynamic`; 9,000 target days per row | `S3R/inference/pit_histograms.csv`, `horizon == 30` | `fraction01` to `fraction10`, `n_values` |
+
+### Numbers in `PAPER-SUMMARY.md`
+
+Its abstract is the paper's word for word, at most 300 words, and the checker asserts its Study 3 figures
+(21 of 36, 72 to 88 ties, 14 of 18, 956 seconds, the per-stratum family of 36 tests, the dense and sparse
+sentences, the commit `3357d77`). The length figures there and here are by the revision's method, running
+text with tables, figures and comments removed, counted as whitespace-separated tokens over the expanded
+document before `\appendix`: the body 15,815 words with 970 words of captions, ten tables and four figures,
+against 11,938 words, 761 of captions, eight tables and three figures for the revision of 2026-10-16 by the
+same count (that revision reported 11,990 and 748 by its own run of the method); the appendix 8,446 words,
+1,434 of captions, 27 tables and two figures; the report's body 4,177 words. They are estimates, not
+asserted.
+
+### Regeneration commands for Study 3
+
+| Command | Regenerates |
+|---|---|
+| `.\.venv\Scripts\python.exe scripts\study3_inference.py --run S3R --out <dir>` | `S3R/inference/` (needs the 300 checkpoints) |
+| `.\.venv\Scripts\python.exe scripts\study3_integrity.py --run S3R --out <dir>` | `S3R/integrity/` (needs the checkpoints) |
+| `.\.venv\Scripts\python.exe S3R\make_tables.py S3R` | the tables of `S3R/RESULTS-nyc311.md`, the direction check and the zero-context tables (the last need the ignored signals) |
+| `.\.venv\Scripts\python.exe paper/figures/make_figures.py` | the six figures under `paper/figures/`, Figure 4 from `S3R/inference/inference.csv` |
+| `.\.venv\Scripts\python.exe paper/check_numbers.py` | nothing; asserts every number above against the files named, recomputing the direction table from the paired differences and the tie classification from the checkpoints when they are present |
+
+The pull, the run, the gate and the smoke are not to be repeated; their commands are in Appendix J and in
+`S3R/results-provenance.json`.

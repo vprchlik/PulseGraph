@@ -2,9 +2,10 @@
 
 Loads the CSV and JSON files under reports/registered-2026-09-13/, formats each figure the way the
 report prints it, and asserts that the formatted text appears in main.tex or SUMMARY.md (whitespace
-collapsed, so line wrapping does not matter). The Study 2 sections under paper/sections/ are read
-the same way and checked against study/study2/, reports/study2-npm/panel/, PROTOCOL.md and the
-dated documents, as sources.md lists. Version 1 numbers are checked against the preserved
+collapsed, so line wrapping does not matter). The Study 2 and Study 3 sections under paper/sections/
+are read the same way and checked against study/study2/, study/study3/, the panel and run
+directories under reports/, PROTOCOL.md and the dated documents, as sources.md lists. Version 1
+numbers are checked against the preserved
 documents under v1_reference/ when that local folder exists; otherwise they are listed as skipped.
 Nothing is written. Run from the repository root:
 
@@ -1936,18 +1937,18 @@ assert max(sparse_p7) < 0.002 and all(lo > w and pv < 0.05 for w, lo, pv in dens
 expect(
     "regime: sparse p",
     "raw $p$ below 0.002 for all three sparse-stratum contrasts at horizon 7",
-    RS,
+    AP,
 )
 expect(
     "regime: sparse p h30",
     f"from {g(min(sparse_p30), 2)} to {g(max(sparse_p30), 3)} at horizon 30",
-    RS,
+    AP,
 )
 assert abs(28.5 / 29 - 0.9828) < 5e-5 and abs(1 - 28.5 / 29 - 0.0172) < 5e-5
 expect(
     "regime: jeffreys",
     "gets $p = 28.5 / 29$, so the hurdle forces about 1.7 percent of mass onto zero",
-    RS,
+    AP,
 )
 emp_rows, emp_dense, emp_sparse, emp_vs = [], [], [], []
 comp_vs_emp = {}
@@ -2069,13 +2070,13 @@ expect(
     f"in {min(by_z[0.2])} to {max(by_z[0.2])} of 30 replicate blocks at $z = 0.2$, in "
     f"{min(by_z[0.8])} to {max(by_z[0.8])} at $z = 0.8$ and in {min(by_z[0.95])} to "
     f"{max(by_z[0.95])} at $z = 0.95$",
-    RS,
+    AP,
 )
 expect(
-    "discussion: grid by z",
-    f"in {min(by_z[0.95])} to {max(by_z[0.95])} of 30 blocks at $z = 0.95$ against "
-    f"{min(by_z[0.2])} to {max(by_z[0.2])} at $z = 0.2$",
-    PT,
+    "regime: grid by z, body",
+    f"in {min(by_z[0.2])} to {max(by_z[0.2])} of 30 replicate blocks at $z = 0.2$ against "
+    f"{min(by_z[0.95])} to {max(by_z[0.95])} at $z = 0.95$",
+    RS,
 )
 
 # --- per cell (Table tab:s2cells, Figure fig:s2cells) ----------------------
@@ -2389,7 +2390,8 @@ def dyn_line(r):
 for df in (dn, ds):
     for r in df.itertuples():
         main_table = r.reference.endswith("_completed") or r.reference.endswith("_hurdle")
-        expect(f"dynamic row {r.id}", dyn_line(r), RS if main_table else AP)
+        expect(f"dynamic row {r.id}", dyn_line(r), AP)
+        assert main_table or not main_table
 d_comp = dn[dn.reference.str.endswith("_completed")]
 d_fix = dn[dn.reference.str.endswith("_hurdle")]
 d_dyn = dn[dn.reference == "dynamic_count"]
@@ -2408,19 +2410,19 @@ expect(
     "dynamic: npm vs completed p",
     f"no npm row rejects, with adjusted $p$ from {g(d_comp.wilcoxon_p_bh.min(), 3)} to "
     f"{g(d_comp.wilcoxon_p_bh.max(), 3)}",
-    RS,
+    AP,
 )
 expect(
     "dynamic: npm vs completed means",
     f"{g(d_comp.mean_diff.min())} to {g(d_comp.mean_diff.max())} against "
     f"{g(hc.mean_diff.min())} to {g(hc.mean_diff.max())} for the registered hurdle",
-    RS,
+    AP,
 )
 de01, de05 = (d_comp[d_comp.id == i].iloc[0] for i in ("DE01", "DE05"))
 assert de01.larger_sum_favors == de05.larger_sum_favors == "model"
 assert (d_comp[~d_comp.id.isin(["DE01", "DE05"])].larger_sum_favors == "reference").all()
 expect(
-    "dynamic: chronos leans", f"lower on {int(de01.wins)} and {int(de05.wins)} of 209 series", RS
+    "dynamic: chronos leans", f"lower on {int(de01.wins)} and {int(de05.wins)} of 209 series", AP
 )
 ds01, ds05, ds09 = (s_comp[s_comp.id == i].iloc[0] for i in ("DS01", "DS05", "DS09"))
 assert ds01.wilcoxon_p_bh == ds05.wilcoxon_p_bh and not ds01.reject_bh_005 and ds09.reject_bh_005
@@ -2429,13 +2431,13 @@ expect(
     "dynamic: grid vs completed",
     f"(DS01 and DS05, adjusted $p$ {g(ds01.wilcoxon_p_bh, 3)}) and the third, TimesFM 2.5 "
     f"(DS09, adjusted $p$ {g(ds09.wilcoxon_p_bh, 3)})",
-    RS,
+    AP,
 )
 expect(
     "dynamic: grid vs completed means",
     f"the means are {g(s_comp.mean_diff.min())} to {g(s_comp.mean_diff.max())} against "
     f"{g(sc.mean_diff.min())} to {g(sc.mean_diff.max())} registered",
-    RS,
+    AP,
 )
 d_fix30 = d_fix[d_fix.horizon == 30]
 d_fix7 = d_fix[d_fix.horizon == 7]
@@ -2445,7 +2447,7 @@ assert (
 expect(
     "dynamic: vs fixed npm",
     f"lower on {d_fix30.wins.min()} to {d_fix30.wins.max()} of 209 series",
-    RS,
+    AP,
 )
 assert (
     s_fix.reject_bh_005.all()
@@ -2455,7 +2457,7 @@ assert (
 expect(
     "dynamic: vs fixed grid",
     f"lower in 20 or 21 of 30 blocks (adjusted $p$ {g(s_fix.wilcoxon_p_bh.iloc[0], 3)})",
-    RS,
+    AP,
 )
 assert d_dyn.reject_bh_005.all() and (d_dyn.mean_diff < 0).all()
 assert s_dyn.reject_bh_005.all() and (s_dyn.mean_diff > 0).all()
@@ -2463,14 +2465,14 @@ expect(
     "dynamic: vs dynamic count grid",
     f"\\texttt{{dynamic\\_count}} being lower in {int(s_dyn.losses.min())} to "
     f"{int(s_dyn.losses.max())} of 30 blocks",
-    RS,
+    AP,
 )
 assert d_hk.reject_bh_005.all() and (d_hk.mean_diff < 0).all() and not s_hk.reject_bh_005.any()
 expect(
     "dynamic: vs count hurdle",
     "against \\hc{} all six npm rows reject in the wrapper's favor and on the grid none of the "
     "three rejects",
-    RS,
+    AP,
 )
 dyn_acc = pd.read_csv(DYN / "synthetic_accounting.csv", **ROUND_TRIP).set_index("model")
 for r in dyn_acc.reset_index().itertuples():
@@ -2487,7 +2489,7 @@ expect(
     "dynamic: zero parts",
     f"lowest zero-day part of every forecaster, {g(min(r.zero for r in wrap))} to "
     f"{g(max(r.zero for r in wrap))}",
-    RS,
+    AP,
 )
 expect(
     "dynamic: under parts",
@@ -2496,7 +2498,7 @@ expect(
     f"{g(min(r.positive_under for r in compl))} to {g(max(r.positive_under for r in compl))} "
     f"for the completed controls and {g(dyn_acc.loc['dynamic_count'].positive_under)} for "
     "\\texttt{dynamic\\_count}",
-    RS,
+    AP,
 )
 dyn_prov = load(DYN / "provenance.json")
 assert dyn_prov["head"].startswith("ff8c5e8") and dyn_prov["uncommitted_changes"] == ""
@@ -2514,7 +2516,7 @@ expect(
     f"in {int(npm_all.occurrence_fallback_windows)} of the {int(npm_all.windows):,} npm windows "
     "at each horizon and "
     f"{int(grid_all.occurrence_fallback_windows)} of the {int(grid_all.windows):,} grid windows",
-    RS,
+    AP,
 )
 
 # --- the new citations of 2026-10-16: keys cited, entries present, identifiers in the record ---
@@ -2625,6 +2627,989 @@ expect("summary: twelve", "twelve of the eighteen", PS)
 expect("summary: removes four", "removes four of the five rejections", PS)
 expect("summary: never beats", "never beats the model's own zero mass", PS)
 assert "Study 2, synthetic component" in (ROOT / "RESULTS.md").read_text(encoding="utf-8")
+
+# --- Study 3: the regime family on NYC 311 (added 2026-10-17) ----------------------------------
+# The six section files are read like the Study 2 ones. Every figure traces to study/study3/, the
+# panel directory, the run directory under reports/study3-nyc311/ or PROTOCOL.md, as sources.md
+# lists.
+S3_RUN = ROOT / "reports" / "study3-nyc311" / "run-2026-10-17"
+S3_PANEL = ROOT / "reports" / "study3-nyc311" / "panel"
+S3 = ROOT / "study" / "study3"
+S3_FILES = (
+    "study3-question.tex",
+    "study3-design.tex",
+    "study3-panel.tex",
+    "study3-results.tex",
+    "study3-detail.tex",
+    "study3-appendix.tex",
+)
+for name in S3_FILES:
+    TEXT[name] = text(SECTIONS / name)
+    expect(f"section {name} in paper.tex", text(SECTIONS / name), PT)
+boundary(S3_FILES)
+Q3, D3, P3, R3, DET3, AP3 = tuple((name,) for name in S3_FILES)
+S3LABEL = {"dense": "dense", "sparse": "sparse", "very_sparse": "very sparse"}
+S3STRATA = ["dense", "sparse", "very_sparse"]
+s3_spec = load(S3 / "spec.json")
+s3_fam = load(S3 / "regime_comparisons.json")
+s3_prov = load(S3_RUN / "results-provenance.json")
+s3_status = load(S3 / "nyc311_panel_status.json")
+s3_manifest = load(S3_PANEL / "manifest.json")
+s3_run = load(S3_RUN / "run.json")
+s3_integ = load(S3_RUN / "integrity" / "integrity.json")
+s3_inf_prov = load(S3_RUN / "inference" / "provenance.json")
+s3_smoke = load(S3 / "smoke_2026-10-17_00fd91d.json")
+s3_results = re.sub(r"\s+", " ", (S3_RUN / "RESULTS-nyc311.md").read_text(encoding="utf-8"))
+s3_terms = re.sub(r"\s+", " ", (S3_PANEL / "source-terms.md").read_text(encoding="utf-8"))
+protocol_flat = re.sub(r"\s+", " ", protocol)
+
+
+def in_record(label, needle, record):
+    global checks
+    checks += 1
+    if re.sub(r"\s+", " ", needle) not in record:
+        failures.append(f"record: {label}: expected text not found: {needle!r}")
+
+
+# The registration.
+auth = s3_prov["authority"]
+assert auth["addition_commit"] == "3357d779db28cffa4048e7e333fd02b9434b4b6d"
+assert s3_spec["protocol_sha256"] == auth["addition_protocol_sha256"] == s3_fam["protocol_sha256"]
+assert s3_spec["authority"]["appended_on_commit"].startswith("04e92c19")
+assert s3_spec["study2_registration"]["protocol_commit"].startswith("df55867")
+assert s3_run["metadata"]["metadata"]["authority"]["addition_commit"] == auth["addition_commit"]
+expect("s3: addition commit", f"at commit \\texttt{{{auth['addition_commit']}}}", Q3)
+expect("s3: addition sha", f"\\texttt{{{auth['addition_protocol_sha256']}}}", Q3)
+expect("s3: appended on", "appended on top of commit \\texttt{04e92c1}", Q3)
+expect("s3: short commit, summary", "3357d77", PS)
+expect("s3: registered date", "registered on 2026-10-16 as item 7", Q3)
+assert "### 7. Study 3" in protocol and "Appended at 2026-10-16 06:16 UTC" in protocol
+in_record(
+    "H3 in the protocol",
+    "Hypothesis H3: on series whose context zero fraction is at least 0.5, the substitution with a "
+    "dynamic occurrence lowers QScore9 relative to the model's own completed forecast; on "
+    "series below "
+    "0.5 it raises it. Each stratum is tested on its own; nothing is pooled across strata for "
+    "confirmation. Null, adverse, mixed and imprecise results receive the same reporting.",
+    protocol_flat,
+)
+expect(
+    "s3: H3",
+    "on series whose context zero fraction is at least 0.5, the substitution with a dynamic "
+    "occurrence "
+    "lowers \\qs{} relative to the model's own completed forecast; on series below 0.5 it "
+    "raises it",
+    Q3,
+)
+expect("s3: study 2 registration", "Study 2's registration at \\texttt{df55867}", Q3)
+assert s3_spec["domain"]["primary"]["inventory"]["captured_at"].startswith("2026-09-14")
+expect("s3: inventory date", "captured on 2026-09-14", Q3 + D3)
+
+# The design.
+inv3 = s3_spec["domain"]["primary"]["inventory"]
+assert inv3["cells"] == 9496 and inv3["recognized_board_frame"] == 8469
+expect(
+    "s3: frame",
+    f"{inv3['cells']:,} cells captured on 2026-09-14, of which {inv3['recognized_board_frame']:,}",
+    D3,
+)
+st3 = s3_spec["strata"]
+assert (
+    st3["zero_fraction_window"] == ["2026-03-05", "2026-06-02"]
+    and st3["selection_seed"] == 20261001
+)
+assert st3["context_inspected"] == ["2025-09-01", "2026-06-02"] and st3["per_stratum"] == 100
+assert [d["bounds"] for d in st3["definitions"]] == ["[0, 0.5)", "[0.5, 0.9)", "[0.9, 1]"]
+expect("s3: stratum window", "2026-03-05 through 2026-06-02", D3)
+expect("s3: selection seed", f"selection seed {st3['selection_seed']}", D3)
+expect("s3: strata bounds", "$[0, 0.5)$ dense, $[0.5, 0.9)$ sparse, $[0.9, 1]$ very sparse", D3)
+expect("s3: context inspected", "2025-09-01 through 2026-06-02", D3)
+cal3 = s3_spec["calendar"]
+assert cal3["cutoffs"] == ["2026-06-03", "2026-07-03", "2026-08-02"] and cal3["horizons"] == [7, 30]
+assert cal3["endpoint"] == "2026-08-31" and cal3["panel_deadline"].startswith("2026-10-27T23:59:59")
+assert cal3["context_start"] == "2025-09-01" and cal3["strata_start"] == "2026-03-05"
+expect(
+    "s3: cutoffs",
+    "cutoffs 2026-06-03, 2026-07-03 and 2026-08-02 with 275, 305 and 335 context days",
+    D3,
+)
+expect("s3: horizons", "horizons 7 and 30, endpoint 2026-08-31", D3)
+expect("s3: deadline", "2026-10-27", D3 + P3)
+expect("s3: deadline full", "2026-10-27 23:59 UTC", DET3)
+assert s3_spec["domain"]["fallback"]["name"] == "pypi"
+dyn3 = s3_spec["dynamic_count"]
+assert dyn3["discount"] == 0.98 and dyn3["initial_parameters"] == [0.5, 0.5, 0.5, 0.5]
+expect("s3: discount", "discount 0.98 started at $a_B = b_B = 0.5$", D3)
+assert s3_fam["comparison_count"] == 36 and s3_fam["q"] == 0.05
+assert s3_fam["bootstrap_replicates"] == 20000 and s3_fam["bootstrap_seed"] == 20261004
+assert s3_fam["minimum_complete_series_per_stratum"] == 10 and s3_fam["method"] == "approx"
+assert s3_fam["zero_method"] == "wilcox" and s3_fam["all_zero_p"] == 1.0
+assert s3_fam["predicted_t1_sign"] == {
+    "dense": "positive",
+    "sparse": "negative",
+    "very_sparse": "negative",
+}
+expect("s3: 36", "$3 \\times 3 \\times 2 \\times 2 = 36$", D3)
+expect("s3: replicates", "20,000 replicates", D3)
+expect("s3: bootstrap seed", "bootstrap seed 20261004", D3)
+expect("s3: q", "$q = 0.05$ over the 36", D3)
+expect("s3: ten", "fewer than ten complete series", D3)
+seeds3 = s3_spec["seeds"]
+expect(
+    "s3: seeds",
+    f"selection {seeds3['selection']}, forecasts {seeds3['forecast']}, PIT {seeds3['pit']} and "
+    f"bootstrap {seeds3['bootstrap']}",
+    DET3,
+)
+for s in S3STRATA:
+    for m in MODELS:
+        ids = [c["id"] for c in s3_fam["comparisons"] if c["stratum"] == s and c["model"] == m]
+        kinds = [(c["horizon"], c["contrast"]) for c in s3_fam["comparisons"] if c["id"] in ids]
+        assert kinds == [(7, "T1"), (7, "T2"), (30, "T1"), (30, "T2")]
+        expect(
+            f"s3: structure {s} {m}",
+            f"{S3LABEL[s]} & {LABEL[m]} & " + " & ".join(ids) + " \\\\",
+            D3,
+        )
+
+# The panel: the context pull, the strata, the frame.
+acq3 = s3_status["acquisition"]
+assert acq3["http_attempts"] == 276 and acq3["http_attempts_by_kind"] == {
+    "census": 275,
+    "metadata": 1,
+}
+assert acq3["invocations"] == 2 and acq3["anonymous"] and acq3["dollars"] == 0
+expect(
+    "s3: context attempts",
+    f"{acq3['http_attempts']} attempts, {acq3['http_attempts_by_kind']['census']} census days "
+    "and one "
+    f"metadata read, in two invocations over {round(acq3['seconds_used']):,} seconds",
+    P3,
+)
+appr3 = s3_status["approval"]
+assert appr3["http_attempt_ceiling"] == 330 and appr3["invocation_seconds_ceiling"] == 10800
+expect("s3: context approval", "330 attempts and 3 hours", P3)
+expect("s3: context approval words", appr3["words"].replace("approved: ", ""), AP3)
+cen3 = s3_status["census"]
+assert cen3["requests"] == 2959469 and cen3["frame_requests"] == 2902433 and cen3["gap_days"] == []
+assert cen3["days"] == cen3["pages"] == 275 and cen3["superseded_rows"] == 0
+expect(
+    "s3: context census",
+    f"{cen3['requests']:,} requests, {cen3['frame_requests']:,} of them in frame cells",
+    P3,
+)
+expect(
+    "s3: context census detail",
+    f"{cen3['days']} days on {cen3['pages']} pages and captured {cen3['requests']:,} requests: "
+    f"{cen3['frame_requests']:,} in frame cells, {cen3['unrecognized_requests']:,} with a "
+    "missing or "
+    f"unrecognized board or problem and {cen3['outside_frame_requests']:,} in recognized cells "
+    "outside "
+    "the frame",
+    DET3,
+)
+expect(
+    "s3: smallest and largest day",
+    f"{cen3['smallest_day'][1]:,} requests, on {cen3['smallest_day'][0]}, and the largest "
+    f"{cen3['largest_day'][1]:,}, on {cen3['largest_day'][0]}",
+    DET3,
+)
+assert s3_status["panel_verified_at"].startswith("2026-10-16T08:04")
+assert s3_status["deadline_met"] and not s3_status["target_values_opened"]
+assert s3_status["status"] == "verified_achieved_panel"
+expect("s3: frozen", "frozen and verified on 2026-10-16 at 08:04 UTC", P3)
+ach3 = s3_status["achieved_strata"]
+assert all(ach3[s]["achieved"] == 100 and ach3[s]["unfilled"] == 0 for s in ach3)
+assert sum(ach3[s]["complete_candidates"] for s in ach3) == 8469
+assert (
+    s3_status["frame"]["eligible_frame_size"] == 8469 == s3_status["frame"]["candidate_pool_size"]
+)
+assert (
+    s3_status["frame"]["inventory_size"] == 9496
+    and s3_status["frame"]["excluded_at_metadata"] == 1027
+)
+expect(
+    "s3: candidates",
+    f"{ach3['dense']['complete_candidates']:,} dense, "
+    f"{ach3['sparse']['complete_candidates']:,} sparse "
+    f"and {ach3['very_sparse']['complete_candidates']:,} very sparse",
+    P3,
+)
+expect(
+    "s3: excluded at metadata",
+    "9,496 problem-by-board cells; 1,027 were excluded at metadata",
+    DET3,
+)
+desc3 = s3_status["selected_context_descriptors"]
+assert desc3["very_sparse"] == {"context_total_zero": 19, "zero_fraction_one": 39}
+assert desc3["dense"] == desc3["sparse"] == {"context_total_zero": 0, "zero_fraction_one": 0}
+expect("s3: all-zero", "39 have no request in the 90 stratum days and 19 none", P3)
+s3_series = pd.DataFrame(s3_manifest["series"])
+assert s3_series.stratum.value_counts().to_dict() == {
+    "dense": 100,
+    "sparse": 100,
+    "very_sparse": 100,
+}
+assert (
+    int((s3_series.zero_fraction == 1).sum()) == 39
+    and s3_manifest["report"]["selection_seed"] == 20261001
+)
+for s, bounds in (
+    ("dense", "$[0, 0.5)$"),
+    ("sparse", "$[0.5, 0.9)$"),
+    ("very_sparse", "$[0.9, 1]$"),
+):
+    expect(
+        f"s3: panel row {s}",
+        f"{S3LABEL[s]} & {bounds} & {ach3[s]['complete_candidates']:,} & {ach3[s]['achieved']} & "
+        f"{ach3[s]['unfilled']} & {desc3[s]['zero_fraction_one']} & "
+        f"{desc3[s]['context_total_zero']} \\\\",
+        DET3,
+    )
+expect("s3: panel row all", "all & & 8,469 & 300 & 0 & 39 & 19 \\\\", DET3)
+# The contexts at each origin, from the results page (the signals are not in the tree).
+context_rows = [
+    ("dense", "2026-06-03", 275, 0, 0, 0),
+    ("dense", "2026-07-03", 305, 0, 0, 0),
+    ("dense", "2026-08-02", 335, 0, 0, 0),
+    ("sparse", "2026-06-03", 275, 0, 1, 4),
+    ("sparse", "2026-07-03", 305, 0, 3, 7),
+    ("sparse", "2026-08-02", 335, 0, 1, 8),
+    ("very_sparse", "2026-06-03", 275, 19, 58, 74),
+    ("very_sparse", "2026-07-03", 305, 18, 54, 74),
+    ("very_sparse", "2026-08-02", 335, 15, 54, 72),
+]
+for s, o, days, az, nr, lt in context_rows:
+    in_record(
+        f"context row {s} {o}",
+        f"| {S3LABEL[s]} (n = 100) | {o} | {days} | {az} | {nr} | {lt} |",
+        s3_results,
+    )
+    expect(
+        f"s3: context row {s} {o}", f"{S3LABEL[s]} & {o} & {days} & {az} & {nr} & {lt} \\\\", DET3
+    )
+sp_lt = [r[5] for r in context_rows if r[0] == "sparse"]
+vs_lt = [r[5] for r in context_rows if r[0] == "very_sparse"]
+vs_nr = [r[4] for r in context_rows if r[0] == "very_sparse"]
+vs_az = [r[3] for r in context_rows if r[0] == "very_sparse"]
+assert all(r[3] == r[4] == r[5] == 0 for r in context_rows if r[0] == "dense")
+expect(
+    "s3: fallback at first origin",
+    f"{vs_lt[0]} of the 100 very sparse series and {sp_lt[0]} of the 100 sparse series have "
+    "fewer than "
+    "two request days",
+    P3,
+)
+expect(
+    "s3: fallback ranges",
+    f"{min(sp_lt)} to {max(sp_lt)} of the 100 sparse series, and {min(vs_lt)} to {max(vs_lt)} "
+    "of the "
+    f"100 very sparse series, of which {min(vs_nr)} to {max(vs_nr)} have no request day in the "
+    "last 28 "
+    f"and {min(vs_az)} to {max(vs_az)} none in the whole context",
+    DET3,
+)
+
+# The target pull.
+pull3 = s3_prov["pull"]
+pj3 = load(S3_RUN / "target-pull" / "pull.json")
+cj3 = load(S3_RUN / "target-pull" / "completeness.json")
+assert pull3["attempts"] == 106 and pull3["captures"] == 90 and pj3["complete"]
+assert cj3["verified"]
+inv0, inv1 = pj3["invocations"]
+assert inv0["attempts"] == 100 and inv0["days_exhausted"] == 84
+assert inv1["attempts"] == 6 and inv1["days_exhausted"] == 90
+assert inv0["started_at"].startswith("2026-10-17T03:16") and inv0["ended_at"].startswith(
+    "2026-10-17T03:32"
+)
+assert inv1["started_at"].startswith("2026-10-17T03:45:06")
+assert inv1["ended_at"].startswith("2026-10-17T03:45:43")
+assert "120 in all" in s3_prov["readiness"]["approval"][1]["words"]
+expect("s3: pull attempts", "106 attempts of an approved 120", P3)
+expect("s3: pull first", "100 attempts one second apart exhausted 84 days, 16 of them repeats", P3)
+expect("s3: pull second", "6 attempts three seconds apart exhausted the last 6 days", P3)
+expect("s3: pull detail", "from 03:16 to 03:32 UTC on 2026-10-17", DET3)
+expect("s3: pull detail 2", "100 attempts, 84 days", DET3)
+expect("s3: pull detail 3", "the 16 extra attempts", DET3)
+expect("s3: pull detail 4", "from 03:45:06 to 03:45:43 UTC: 6 attempts for the last 6 days", DET3)
+tc3 = pull3["target_census"]
+assert tc3["requests"] == tc3["captured_rows"] == 983482 and tc3["frame_requests"] == 947751
+assert tc3["unrecognized_requests"] == 18660 and tc3["outside_frame_requests"] == 17071
+assert tc3["gap_days"] == [] and tc3["superseded_rows"] == 0 and tc3["days"] == 90
+assert (
+    tc3["frame_requests"] + tc3["unrecognized_requests"] + tc3["outside_frame_requests"] == 983482
+)
+expect(
+    "s3: target census",
+    f"{tc3['requests']:,} requests, {tc3['frame_requests']:,} in frame cells, "
+    f"{tc3['unrecognized_requests']:,} with a missing or unrecognized board or problem and "
+    f"{tc3['outside_frame_requests']:,} in recognized cells outside the 2024 frame",
+    P3,
+)
+assert "fewest frame requests 8,849 on 2026-08-16" in pull3["verification"]
+expect("s3: fewest", "8,849 on 2026-08-16", P3)
+assert (date(2026, 10, 17) - date(2026, 8, 31)).days == 47
+expect("s3: 47 days", "47 days after the last target day", P3 + PT)
+
+# The terms and the time basis.
+src3 = s3_status["source"]
+assert src3["license"] is None and src3["attribution"] == "311" and src3["terms_link"] is None
+assert src3["created_date_type"] == "calendar_date"
+for label, needle in (
+    ("metadata read", "2026-10-16 07:44:21 UTC"),
+    ("title", '"311 Service Requests from 2020 to Present"'),
+    ("browser read 1", "2026-10-17 04:48:40"),
+    ("browser read 2", "2026-10-17 04:49:11"),
+    ("terms page", "Terms of Use - nyc.gov"),
+    ("silent", "no license, no attribution requirement"),
+    ("law not read", "was not read"),
+    ("spring forward", "the hour holds 1 request, against 197 and 225"),
+    ("fall back", "the hour holds 796 requests, against 528 and 339"),
+    ("fewest hour", "on 251 of the 275 days"),
+):
+    in_record(f"source-terms {label}", needle, s3_terms)
+expect("s3: metadata read", "read on 2026-10-16 at 07:44 UTC", DET3)
+expect("s3: browser reads", "04:48 and 04:49 UTC", DET3)
+expect(
+    "s3: dst spring", "2026-03-08, the hour from 02:00 holds 1 request against 197 and 225", DET3
+)
+expect("s3: dst fall", "2025-11-02, the hour from 01:00 holds 796 against 528 and 339", DET3)
+expect("s3: fewest hour", "251 of the 275 context days", DET3)
+expect("s3: terms read date", "read on 2026-10-17", P3 + PT)
+in_record("checkpoint size", "645 MB", s3_results)
+expect("s3: 645 MB", "645 MB", DET3 + PT)
+
+# The run, the integrity check, the gate and the smoke.
+inv3r = s3_run["invocations"][0]
+assert s3_run["status"] == "complete" and s3_run["failures"] == [] and s3_run["resumes"] == []
+assert len(s3_run["invocations"]) == 1 and inv3r["series_completed"] == 300
+assert round(inv3r["wall_seconds"]) == 939 and round(s3_prov["run"]["process_seconds"]) == 956
+assert s3_run["started_at"].startswith("2026-10-17T03:47")
+assert s3_run["completed_at"].startswith("2026-10-17T04:03")
+rd3 = s3_run["metadata"]["readiness"]
+assert rd3["estimated_seconds"] == 1080 and s3_prov["readiness"]["runtime_budget_seconds"] == 3600
+assert rd3["approved_by"] == "Victor Prchlik" and rd3["approved_at"] == "2026-10-17T03:12:50Z"
+S3_COMMIT = "00fd91dccfc86b1e4bbd2f0cb44a47052937458d"
+assert s3_run["metadata"]["metadata"]["implementation_commit"] == S3_COMMIT
+assert s3_prov["implementation_commit"] == S3_COMMIT == s3_smoke["implementation_commit"]
+assert s3_inf_prov["implementation_commit_at_inference"] == S3_COMMIT
+assert s3_integ["implementation_commit_at_check"] == S3_COMMIT
+expect("s3: implementation commit", f"\\texttt{{{S3_COMMIT}}}", DET3)
+hw3 = s3_run["metadata"]["hardware"]
+assert hw3["gpu_model"] == "NVIDIA GeForce RTX 4070 SUPER" and hw3["gpu_driver"] == "610.88"
+assert hw3["cuda_version"] == "12.8" and hw3["pytorch_version"] == "2.11.0+cu128"
+assert hw3["batch_size"] == 1 and inv3r["memory"]["peak_reserved_bytes"] == 2948595712
+assert s3_smoke["memory"]["peak_reserved_bytes"] == 2948595712
+assert s3_prov["smoke"]["at"].startswith("2026-10-17T01:56")
+expect("s3: run start", "started 2026-10-17 at 03:47 UTC", R3)
+expect("s3: run start 2", "started 2026-10-17 03:47 UTC", AP3)
+expect("s3: run end", "at\n04:03 UTC", AP3)
+expect("s3: run seconds", "939 seconds inside the run and 956 for the whole process", R3 + AP3)
+expect("s3: run budget", "budget of 3,600 and an estimate of 1,080", R3)
+expect(
+    "s3: readiness",
+    "approved at 03:12 UTC with a runtime budget of 3,600 seconds against an estimate of 1,080",
+    DET3,
+)
+expect(
+    "s3: hardware", "NVIDIA GeForce RTX 4070 SUPER (driver 610.88, CUDA 12.8, PyTorch 2.11.0)", AP3
+)
+expect("s3: peak", "2,948,595,712 bytes", AP3)
+expect(
+    "s3: smoke",
+    "on 2026-10-17 at 01:56 UTC with a peak reserved memory of 2,948,595,712 bytes",
+    DET3,
+)
+gate3 = s3_prov["gate"]
+assert [x["at"][11:16] for x in gate3] == ["03:15", "03:44", "03:46"]
+expect(
+    "s3: gate",
+    "at 03:15 UTC before the first target request, at 03:44 UTC before the pull resumed, and "
+    "at 03:46 "
+    "UTC before the run",
+    DET3,
+)
+grid3 = s3_integ["grid"]
+assert grid3["forecasts"] == 39600 == 300 * 3 * 2 * 22 and len(grid3["models"]) == 22
+assert len(s3_spec["variants"]) + 3 == 22
+expect(
+    "s3: forecasts", "39,600 forecasts (300 series, 3 origins, 2 horizons, 22 variants)", R3 + AP3
+)
+expect("s3: 22 variants", "all 22 registered variants", D3)
+assert s3_integ["status"] == "pass" and s3_integ["failed_forecasts"] == 0
+chk3 = s3_integ["checks"]
+for key in ("qscore9", "context_scaled_qscore9", "zero", "positive_over", "positive_under"):
+    assert chk3[key]["compared"] == 39600 and chk3[key]["disagreements"] == 0, key
+assert (
+    chk3["occurrence_brier"]["compared"] == 30600 and chk3["occurrence_brier"]["disagreements"] == 0
+)
+assert (
+    chk3["qscore9"]["max_abs_residual"] == 0.0 == chk3["context_scaled_qscore9"]["max_abs_residual"]
+)
+parts_res = max(chk3[k]["max_abs_residual"] for k in ("zero", "positive_over", "positive_under"))
+assert f"{parts_res:.1e}" == "7.1e-15"
+assert f"{chk3['occurrence_brier']['max_abs_residual']:.1e}" == "2.8e-16"
+assert (
+    len(s3_integ["run"]["checkpoint_sha256"]) == 300 == len(s3_inf_prov["run"]["checkpoint_sha256"])
+)
+expect("s3: 0 disagreements", "0 disagreements", R3 + AP3)
+expect(
+    "s3: residuals",
+    "0.0 for \\qs{} and the scaled score, $7.1 \\times 10^{-15}$ for the parts and "
+    "$2.8 \\times 10^{-16}$ for the Brier score",
+    AP3,
+)
+expect("s3: checkpoints", "all 300 checkpoint hashes", AP3)
+expect("s3: brier count", "for the 30,600 that carry a count law", AP3)
+in_record("structure windows", "on every target day of all 10,800 of their windows", s3_results)
+assert 10800 == 300 * 3 * 2 * 6
+expect("s3: structure windows", "all 10,800 of their windows", AP3)
+s3_scores = pd.read_csv(S3_RUN / "inference" / "secondary_scores.csv", **ROUND_TRIP)
+s3_all = s3_scores[s3_scores.stratum == "all"]
+assert int(s3_all.crps_certified.sum()) == 30600 == int(s3_all.crps_with_count_distribution.sum())
+assert int(s3_all.crps_unavailable_no_count_distribution.sum()) == 9000
+assert int(s3_all.crps_unavailable_bound_not_certified.sum()) == 0 and 30600 + 9000 == 39600
+expect("s3: crps", "all 30,600 forecasts with a count law; the 9,000 without one", AP3)
+assert s3_prov["inference"]["started_at"][11:16] == "04:03"
+assert s3_prov["inference"]["ended_at"][11:16] == "04:04"
+assert s3_prov["integrity"]["started_at"][11:16] == "04:04"
+assert s3_prov["integrity"]["ended_at"][11:16] == "04:05"
+expect("s3: inference time", "from 04:03 to 04:04 UTC", AP3)
+expect("s3: integrity time", "from 04:04 to 04:05 UTC", AP3)
+assert s3_inf_prov["packages"] == {"numpy": "2.5.3", "pandas": "2.3.3", "scipy": "1.18.1"}
+assert s3_inf_prov["uncommitted_changes_at_inference"] == ""
+assert s3_integ["packages"] == s3_inf_prov["packages"]
+expect("s3: packages", "NumPy 2.5.3, SciPy 1.18.1 and pandas 2.3.3", AP3)
+for a in s3_prov["readiness"]["approval"]:
+    assert a["by"] == "Victor Prchlik"
+    expect(f"s3: approval {a['words'][:20]}", a["words"], AP3)
+assert s3_prov["readiness"]["approval"][0]["at"] == "2026-10-17T03:12:50Z"
+assert s3_prov["readiness"]["approval"][1]["at"] == "2026-10-17T03:43:55Z"
+assert s3_prov["readiness"]["approval"][2]["before"] == "2026-10-17T04:48:29Z"
+
+# The family.
+s3_inf = pd.read_csv(S3_RUN / "inference" / "inference.csv", **ROUND_TRIP)
+assert list(s3_inf.id) == [c["id"] for c in s3_fam["comparisons"]] and len(s3_inf) == 36
+assert s3_inf.n_entities.eq(100).all() and s3_inf.declared_count.eq(36).all()
+assert s3_inf.bh_count.eq(36).all() and (s3_inf.status == "available").all()
+assert s3_inf.n_bootstrap.eq(20000).all() and s3_inf.bootstrap_root.eq(20261004).all()
+assert s3_inf.calendar_conditional.all()
+
+
+def s3_verdict(r):
+    return "yes" if r.reject_bh_005 else "no"
+
+
+def s3_predicted(r):
+    if r.contrast == "T2":
+        return "--"
+    if r.median_diff == 0:
+        return "zero"
+    return "yes" if r.median_as_predicted else "no"
+
+
+def s3_row(r):
+    return (
+        f"{r.id} & {S3LABEL[r.stratum]} & {LABEL[r.model]} & {r.horizon} & {r.contrast} & "
+        f"{g(r.variant_mean)} & {g(r.reference_mean)} & {g(r.mean_diff)} & "
+        f"[{g(r.mean_diff_ci_low)}, {g(r.mean_diff_ci_high)}] & {g(r.median_diff)} & "
+        f"{int(r.wins)} / {int(r.ties)} / {int(r.losses)} & {pval(r.wilcoxon_p_bh)} & "
+        f"{s3_verdict(r)} & {s3_predicted(r)} \\\\"
+    )
+
+
+for r in s3_inf.itertuples():
+    expect(f"s3 family row {r.id}", s3_row(r), R3)
+t1 = s3_inf[s3_inf.contrast == "T1"]
+t2 = s3_inf[s3_inf.contrast == "T2"]
+rej3 = s3_inf[s3_inf.reject_bh_005]
+assert len(rej3) == 21
+assert int((rej3.contrast.eq("T1") & rej3.stratum.eq("dense")).sum()) == 6
+assert int((rej3.contrast.eq("T1") & rej3.stratum.eq("sparse")).sum()) == 1
+assert int((rej3.contrast.eq("T1") & rej3.stratum.eq("very_sparse")).sum()) == 0
+assert int(rej3.contrast.eq("T2").sum()) == 14 and (rej3[rej3.contrast == "T2"].mean_diff < 0).all()
+for r in t1.itertuples():
+    if r.median_diff != 0:
+        assert (r.median_diff > 0) == (r.predicted_sign == "positive"), r.id
+    if r.reject_bh_005:
+        assert r.median_as_predicted, r.id
+expect("s3: 21 of 36", "Twenty-one of the\nthirty-six tests reject", R3)
+expect("s3: six one fourteen", "six are T1 tests in the dense stratum", R3)
+expect("s3: one sparse", "one is a T1 test in the sparse stratum", R3)
+expect("s3: fourteen T2", "fourteen are T2 tests, all for \\emph{hurdle\\_dynamic}", R3)
+expect("s3: 14 of 18", "14 of the 18 T2 tests reject", R3)
+expect("s3: 14 of 18, elsewhere", "14 of 18", PT + PS)
+expect("abstract: s3 family", "a per-stratum family of 36 tests", PT + PS)
+expect("abstract: s3 panel", "300 series in three strata", PT + PS)
+expect("abstract: s3 dense", "all six tests reject as predicted", PT + PS)
+expect(
+    "abstract: s3 sparse",
+    "one of twelve tests rejects as predicted, and ten of twelve medians are exactly zero",
+    PT + PS,
+)
+d1, s1, v1 = (t1[t1.stratum == s] for s in S3STRATA)
+d2, s2, v2 = (t2[t2.stratum == s] for s in S3STRATA)
+assert d1.reject_bh_005.all() and (d1.mean_diff_ci_low > 0).all() and (d1.median_diff > 0).all()
+expect(
+    "s3: dense higher",
+    f"higher than the completed control on {d1.losses.min()} to {d1.losses.max()} of the 100 "
+    "series",
+    R3,
+)
+expect(
+    "s3: dense medians and means",
+    f"the medians run from {g(d1.median_diff.min())} to {g(d1.median_diff.max())} and the "
+    "means from "
+    f"{g(d1.mean_diff.min())} to {g(d1.mean_diff.max())}",
+    R3,
+)
+assert (
+    0.005 < (d1.mean_diff / d1.reference_mean).min()
+    and (d1.mean_diff / d1.reference_mean).max() < 0.015
+)
+expect(
+    "s3: dense control means",
+    f"control's mean score of {g(d1.reference_mean.min())} to {g(d1.reference_mean.max())}",
+    R3,
+)
+expect("s3: dense ties", f"the exact ties number {d1.ties.min()} to {d1.ties.max()}", R3)
+expect("s3: one percent", "by about one\npercent of the control's score", PT)
+# Sparse.
+r21, r23 = (s1[s1.id == i].iloc[0] for i in ("R21", "R23"))
+assert r21.reject_bh_005 and not r23.reject_bh_005 and r21.median_diff < 0 and r23.median_diff < 0
+assert int(s1.reject_bh_005.sum()) == 1 and int((s1.median_diff == 0).sum()) == 4
+expect(
+    "s3: R21",
+    f"R21, TimesFM 2.5 at horizon 7, with a median of {g(r21.median_diff)}, {int(r21.wins)} series "
+    f"lower, {int(r21.ties)} tied and {int(r21.losses)} higher, and adjusted $p$ "
+    f"{pval(r21.wilcoxon_p_bh)}",
+    R3,
+)
+expect(
+    "s3: R23",
+    f"R23, TimesFM 2.5 at horizon 30, with a median of {g(r23.median_diff)}, {int(r23.wins)} "
+    "lower, "
+    f"{int(r23.ties)} tied and {int(r23.losses)} higher, and adjusted $p$ "
+    f"{pval(r23.wilcoxon_p_bh)}",
+    R3,
+)
+s1z = s1[s1.median_diff == 0]
+expect("s3: sparse zero ties", f"with {s1z.ties.min()} to {s1z.ties.max()} series tied exactly", R3)
+expect("s3: sparse tied range", f"where {s1.ties.min()} to {s1.ties.max()} series\ntie", R3)
+expect(
+    "s3: sparse means",
+    f"The means run from {g(s1.mean_diff.min())} to {g(s1.mean_diff.max())} against control "
+    "means of "
+    f"{g(s1.reference_mean.min())} to {g(s1.reference_mean.max())}",
+    R3,
+)
+# Very sparse.
+assert not v1.reject_bh_005.any() and (v1.median_diff == 0).all() and (v1.mean_diff > 0).all()
+assert ((v1.mean_diff_ci_low < 0) & (v1.mean_diff_ci_high > 0)).all()
+assert v1.loc[v1.wilcoxon_p_bh.idxmin()].id == "R25"
+expect("s3: vs ties", f"{v1.ties.min()} to {v1.ties.max()} of the 100 series", R3 + PT)
+expect("s3: vs means", f"from {g(v1.mean_diff.min())} to {g(v1.mean_diff.max())}", R3)
+expect(
+    "s3: vs smallest p", f"the smallest adjusted $p$\nis {pval(v1.wilcoxon_p_bh.min())} (R25)", R3
+)
+expect("s3: vs nonzero", f"{100 - v1.ties.max()} to {100 - v1.ties.min()} series", PT)
+s3_desc = pd.read_csv(S3_RUN / "inference" / "family_descriptors.csv", **ROUND_TRIP).set_index("id")
+assert (
+    s3_desc.loc[list(v1.id)].most_influential_series == '["Sewer Maintenance","09 QUEENS"]'
+).all()
+assert (
+    s3_series[s3_series.series_id == '["Sewer Maintenance","09 QUEENS"]'].stratum.iloc[0]
+    == "very_sparse"
+)
+expect("s3: sewer", "\\texttt{Sewer Maintenance} in community\nboard \\texttt{09 QUEENS}", R3)
+expect(
+    "s3: sewer, limitations",
+    "\\texttt{Sewer Maintenance} in community board\n  \\texttt{09 QUEENS}",
+    PT,
+)
+# T2.
+assert d2.reject_bh_005.all() and (d2.median_diff < 0).all()
+expect(
+    "s3: T2 dense",
+    f"lower on {d2.wins.min()} to\n{d2.wins.max()} of the 100 series and medians from "
+    f"{g(d2.median_diff.max())} to {g(d2.median_diff.min())}",
+    R3,
+)
+s2r = s2[s2.reject_bh_005]
+r14 = s2[s2.id == "R14"].iloc[0]
+assert list(s2r.id) == ["R16", "R18", "R20", "R22", "R24"] and r14.median_diff == 0
+expect(
+    "s3: T2 sparse",
+    f"five of six reject (R16,\nR18, R20, R22, R24), lower on {s2r.wins.min()} to "
+    f"{s2r.wins.max()} series "
+    f"with medians from {g(s2r.median_diff.max())} to {g(s2r.median_diff.min())}",
+    R3,
+)
+expect(
+    "s3: R14",
+    "R14, Chronos-2\nat horizon 7, has a median of exactly zero and adjusted $p$ "
+    f"{pval(r14.wilcoxon_p_bh)}",
+    R3,
+)
+v2r = v2[v2.reject_bh_005]
+v2n = v2[~v2.reject_bh_005]
+assert list(v2r.id) == ["R28", "R32", "R36"] and list(v2n.id) == ["R26", "R30", "R34"]
+assert (v2r.wins == 22).all() and (v2r.ties == 77).all() and (v2r.losses == 1).all()
+assert (v2r.median_diff == 0).all()
+expect("s3: T2 very sparse", "each with 22 series lower, 77 tied and 1 higher", R3)
+expect(
+    "s3: T2 very sparse h7",
+    f"(R26, R30, R34) do not reject, with adjusted $p$ from {pval(v2n.wilcoxon_p_bh.min())} to "
+    f"{pval(v2n.wilcoxon_p_bh.max())}",
+    R3,
+)
+expect(
+    "s3: T2 table dense",
+    f"dense & all six (R02 to R12) & {d2.wins.min()} to {d2.wins.max()} of 100 & "
+    f"{g(d2.median_diff.max())} to {g(d2.median_diff.min())} & none \\\\",
+    R3,
+)
+expect(
+    "s3: T2 table sparse",
+    f"sparse & five of six ({', '.join(s2r.id)}) & {s2r.wins.min()} to {s2r.wins.max()} & "
+    f"{g(s2r.median_diff.max())} to {g(s2r.median_diff.min())} & R14 (median zero, adjusted $p$ "
+    f"{pval(r14.wilcoxon_p_bh)}) \\\\",
+    R3,
+)
+expect(
+    "s3: T2 table very sparse",
+    "very sparse & the horizon-30 rows (R28, R32, R36) & 22 lower, 77 tied, 1 higher & "
+    "exactly zero & "
+    f"the horizon-7 rows (R26, R30, R34; adjusted $p$ {pval(v2n.wilcoxon_p_bh.min())} to "
+    f"{pval(v2n.wilcoxon_p_bh.max())}) \\\\",
+    R3,
+)
+# The direction from the paired table: rank sums and the recomputed raw p.
+s3_pe = pd.read_csv(S3_RUN / "inference" / "paired_entities.csv", **ROUND_TRIP)
+assert s3_pe.groupby("id").size().eq(100).all()
+favors = {}
+for r in s3_inf.itertuples():
+    d = s3_pe[s3_pe.id == r.id].difference.to_numpy()
+    nz = d[d != 0]
+    assert len(nz) == r.n_nonzero and int((d == 0).sum()) == r.ties
+    assert int((d < 0).sum()) == r.wins and int((d > 0).sum()) == r.losses
+    assert abs(d.mean() - r.mean_diff) < 1e-12 and abs(np.median(d) - r.median_diff) < 1e-12
+    ranks = stats.rankdata(np.abs(nz))
+    lower, higher = float(ranks[nz < 0].sum()), float(ranks[nz > 0].sum())
+    favors[r.id] = "hurdle_dynamic" if lower > higher else "reference"
+    p_re = float(stats.wilcoxon(nz, method="approx").pvalue) if len(nz) else 1.0
+    assert abs(p_re - r.wilcoxon_p) < 1e-9, r.id
+    expect(
+        f"s3 direction row {r.id}",
+        f"{r.id} & {S3LABEL[r.stratum]} & {int(r.ties)} & {int(r.n_nonzero)} & {lower:,.1f} & "
+        f"{higher:,.1f} & {esc(favors[r.id])} & {pval(r.wilcoxon_p)} \\\\",
+        AP3,
+    )
+    if r.id in ("R28", "R32", "R36"):
+        assert (lower, higher) == (253.0, 23.0)
+assert all(favors[i] == "reference" for i in ("R01", "R03", "R05", "R07", "R09", "R11"))
+assert (
+    all(favors[i] == "hurdle_dynamic" for i in ("R13", "R15", "R17"))
+    and favors["R19"] == "reference"
+)
+assert all(favors[i] == "reference" for i in ("R25", "R29", "R33"))
+assert all(favors[i] == "hurdle_dynamic" for i in ("R27", "R31", "R35"))
+assert all(favors[i] == "hurdle_dynamic" for i in rej3[rej3.contrast == "T2"].id)
+expect("s3: rank sums 253", "253 against 23", R3)
+expect(
+    "s3: sparse leans",
+    "lean to\n\\emph{hurdle\\_dynamic} for R13, R15 and R17 and to the control for R19",
+    R3,
+)
+expect(
+    "s3: vs leans",
+    "lean to the control at horizon 7 (R25, R29, R33) and to\n\\emph{hurdle\\_dynamic} at "
+    "horizon 30 "
+    "(R27, R31, R35)",
+    R3,
+)
+# The ties, classified from the checkpoints when they are present (they are not in the tree).
+s3_ckpts = sorted(p for p in S3_RUN.glob("*.json") if len(p.stem) == 64)
+if len(s3_ckpts) == 300:
+    by_window = {}
+    for p in s3_ckpts:
+        for row in json.loads(p.read_text(encoding="utf-8"))["rows"]:
+            by_window[(row["series_id"], row["model"], row["horizon"], row["cutoff"])] = np.array(
+                row["forecast"]["deciles"], dtype=float
+            )
+    cutoffs3 = cal3["cutoffs"]
+    allzero_tied = {}
+    for r in t1.itertuples():
+        d = s3_pe[s3_pe.id == r.id]
+        tied = d[d.difference == 0].series_id
+        allzero_tied[r.id] = sum(
+            all(
+                (by_window[(sid, r.variant, r.horizon, c)] == 0).all()
+                and (by_window[(sid, r.reference, r.horizon, c)] == 0).all()
+                for c in cutoffs3
+            )
+            for sid in tied
+        )
+    vs_az = [allzero_tied[i] for i in v1.id]
+    sp_az = [allzero_tied[i] for i in s1.id]
+    expect("s3: ties all zero", f"{min(vs_az)} to {max(vs_az)} of the tied series", R3 + PT)
+    expect(
+        "s3: sparse ties all zero",
+        f"{min(sp_az)} to {max(sp_az)} of them have every decile at zero",
+        R3,
+    )
+    vs_ids = sorted(set(s3_pe[s3_pe.stratum == "very_sparse"].series_id))
+    comp_az, dyn_az = [], []
+    for m in MODELS:
+        for h in (7, 30):
+            comp_az.append(
+                sum(
+                    all((by_window[(sid, f"{m}_completed", h, c)] == 0).all() for c in cutoffs3)
+                    for sid in vs_ids
+                )
+            )
+            dyn_az.append(
+                sum(
+                    all(
+                        (by_window[(sid, f"{m}_hurdle_dynamic", h, c)] == 0).all() for c in cutoffs3
+                    )
+                    for sid in vs_ids
+                )
+            )
+    assert len(set(dyn_az)) == 1
+    expect(
+        "s3: all-zero deciles",
+        f"for {min(comp_az)} to {max(comp_az)} of\nthe 100 very sparse series and "
+        f"\\emph{{hurdle\\_dynamic}}'s for {dyn_az[0]}",
+        R3,
+    )
+else:
+    skipped.append(
+        "the 300 NYC 311 checkpoints are absent; the tie classification was not recomputed"
+    )
+# The secondary tables: the Brier score, the fixed hurdle and the fourth cell, the pooled rows.
+s3_sc = pd.read_csv(S3_RUN / "inference" / "secondary_strata_contrasts.csv", **ROUND_TRIP)
+s3_sq = s3_sc[s3_sc.metric == "qscore9"]
+s3_sb = s3_sc[s3_sc.metric == "occurrence_brier"]
+brier = {}
+for r in s3_inf.itertuples():
+    b = s3_sb[
+        (s3_sb.stratum == r.stratum)
+        & (s3_sb.horizon == r.horizon)
+        & (s3_sb.variant == r.variant)
+        & (s3_sb.reference == r.reference)
+    ].iloc[0]
+    brier[r.id] = b
+    expect(
+        f"s3 brier row {r.id}",
+        f"{r.id} & {S3LABEL[r.stratum]} & {LABEL[r.model]} & {r.horizon} & {r.contrast} & "
+        f"{g(b.mean_diff)} & [{g(b.mean_diff_ci_low)}, {g(b.mean_diff_ci_high)}] & "
+        f"{g(b.median_diff)} & "
+        f"{int(b.wins)} / {int(b.ties)} / {int(b.losses)} & {pval(b.wilcoxon_p)} \\\\",
+        AP3,
+    )
+bd = pd.DataFrame([brier[i] for i in d1.id])
+bv = pd.DataFrame([brier[i] for i in v1.id])
+assert (bd.mean_diff_ci_low > 0).all() and (bd.ties == 0).all() and (bv.ties == 0).all()
+expect(
+    "s3: brier dense",
+    f"by {g(bd.mean_diff.min())} to {g(bd.mean_diff.max())} on the mean with every interval "
+    "above zero",
+    R3,
+)
+assert (
+    (bv.mean_diff_ci_low < 0) & (bv.mean_diff_ci_high > 0)
+).all() and bv.mean_diff.abs().max() < 0.0013
+assert (bv.median_diff < 0).all()
+expect(
+    "s3: brier very sparse",
+    f"lower Brier score on {int(bv.wins.min())} to {int(bv.wins.max())} of the 100 series in "
+    "every T1 "
+    f"row, with medians from {g(bv.median_diff.min())} to {g(bv.median_diff.max())} and raw "
+    "$p$ at most "
+    f"{pval(bv.wilcoxon_p.max())}",
+    R3,
+)
+expect("s3: brier within", "within 0.0013 of zero", R3 + AP3)
+expect("s3: brier 68 to 82", f"{int(bv.wins.min())} to {int(bv.wins.max())} of the 100", AP3 + PT)
+# The fixed hurdle and the fourth cell against the control per stratum.
+fx = s3_sq[s3_sq.variant.str.endswith("_hurdle") & s3_sq.reference.str.endswith("_completed")]
+fc = s3_sq[
+    s3_sq.variant.str.endswith("occurrence_model_size_count")
+    & s3_sq.reference.str.endswith("_completed")
+]
+for s in S3STRATA:
+    for h in (7, 30):
+        for m in MODELS:
+            for var, name in (
+                ("hurdle", "fixed hurdle"),
+                ("occurrence_model_size_count", "fourth cell"),
+            ):
+                r = s3_sq[
+                    (s3_sq.stratum == s)
+                    & (s3_sq.horizon == h)
+                    & (s3_sq.variant == f"{m}_{var}")
+                    & (s3_sq.reference == f"{m}_completed")
+                ].iloc[0]
+                assert r.n_entities == 100 and r.status == "secondary"
+                expect(
+                    f"s3 variant row {s} {m} {name} {h}",
+                    f"{S3LABEL[s]} & {LABEL[m]} & {name} & {h} & {g(r.mean_diff)} & "
+                    f"[{g(r.mean_diff_ci_low)}, {g(r.mean_diff_ci_high)}] & {g(r.median_diff)} & "
+                    f"{int(r.wins)} / {int(r.ties)} / {int(r.losses)} & {pval(r.wilcoxon_p)} \\\\",
+                    AP3,
+                )
+fxd, fxs, fxv = (fx[fx.stratum == s] for s in S3STRATA)
+fcd, fcs, fcv = (fc[fc.stratum == s] for s in S3STRATA)
+assert (fxd.mean_diff > 0).all() and (fxv.mean_diff > 0).all()
+expect(
+    "s3: fixed dense",
+    f"on {int(fxd.losses.min())} to {int(fxd.losses.max())} of the 100 series",
+    R3,
+)
+expect(
+    "s3: fixed sparse", f"higher on {int(fxs.losses.min())} to {int(fxs.losses.max())} of 100", R3
+)
+expect(
+    "s3: fixed very sparse",
+    f"on {int(fxv.losses.min())} to {int(fxv.losses.max())} series against "
+    f"{int(fxv.wins.min())} to "
+    f"{int(fxv.wins.max())} lower with {int(fxv.ties.min())} to {int(fxv.ties.max())} tied and "
+    "raw $p$ "
+    f"from {pval(fxv.wilcoxon_p.min())} to {pval(fxv.wilcoxon_p.max())}",
+    R3,
+)
+expect(
+    "s3: fourth dense",
+    f"mean differences of\n{g(fcd.mean_diff.min())} to {g(fcd.mean_diff.max())} and higher on "
+    f"{int(fcd.losses.min())} to {int(fcd.losses.max())} of the 100",
+    R3,
+)
+expect(
+    "s3: fourth dense, discussion",
+    f"by {g(fcd.mean_diff.min())} to {g(fcd.mean_diff.max())} on the mean",
+    PT,
+)
+assert max(fcs.mean_diff.abs().max(), fcv.mean_diff.abs().max()) < 0.004
+expect("s3: fourth others", "within 0.004 of the control's mean", R3)
+expect(
+    "s3: fourth ties",
+    f"{int(min(fcs.ties.min(), fcv.ties.min()))} to {int(max(fcs.ties.max(), fcv.ties.max()))} "
+    "of the 100 "
+    "series tied exactly",
+    R3,
+)
+fck = s3_sq[
+    s3_sq.variant.str.endswith("occurrence_model_size_count")
+    & (s3_sq.reference == "hurdle_count_28")
+    & (s3_sq.stratum == "dense")
+]
+assert (fck.mean_diff < 0).all() and len(fck) == 6
+expect(
+    "s3: fourth vs count hurdle",
+    f"lower on the dense series by {g(-fck.mean_diff.max())} to {g(-fck.mean_diff.min())} on "
+    "the mean "
+    f"and on {int(fck.wins.min())} to {int(fck.wins.max())} of the 100",
+    R3,
+)
+expect(
+    "s3: fourth vs count hurdle, discussion",
+    f"on {int(fck.wins.min())} to {int(fck.wins.max())} of the 100 dense series",
+    PT,
+)
+# Pooled, in Study 2's form.
+pf = pd.read_csv(S3_RUN / "inference" / "secondary_pooled_study2_form.csv", **ROUND_TRIP)
+pf = pf[pf.metric == "qscore9"].reset_index(drop=True)
+assert (
+    len(pf) == 18
+    and pf.n_entities.eq(300).all()
+    and list(pf.id) == [f"P{i:02d}" for i in range(1, 19)]
+)
+for r in pf.itertuples():
+    expect(
+        f"s3 pooled row {r.id}",
+        f"{r.id} & {esc(r.variant)} & {esc(r.reference)} & {r.horizon} & {g(r.variant_mean)} & "
+        f"{g(r.reference_mean)} & {g(r.mean_diff)} & [{g(r.mean_diff_ci_low)}, "
+        f"{g(r.mean_diff_ci_high)}] & "
+        f"{g(r.median_diff)} & {int(r.wins)} / {int(r.ties)} / {int(r.losses)} & "
+        f"{pval(r.wilcoxon_p_bh_within_table)} \\\\",
+        AP3,
+    )
+pa = pf[pf.reference.str.endswith("_completed")]
+pb = pf[pf.reference == "hurdle_count_28"]
+pc = pf[pf.reference == "local_mean_28"]
+assert (pa.mean_diff > 0).all() and (pa.losses > pa.wins).all()
+assert (pb.mean_diff < 0).all() and (pb.wins > pb.losses).all()
+assert (pc.mean_diff < 0).all() and pf.wilcoxon_p_bh_within_table.max() < 0.005
+expect(
+    "s3: pooled raw split",
+    f"{int(pc.wins.min())} to {int(pc.wins.max())} lower against {int(pc.losses.min())} to "
+    f"{int(pc.losses.max())} higher",
+    R3 + PT,
+)
+expect("s3: pooled bh", "below 0.005", R3)
+# The accounting of the T1 difference per stratum.
+s3_acc = pd.read_csv(S3_RUN / "inference" / "secondary_accounting.csv", **ROUND_TRIP).set_index(
+    ["stratum", "horizon", "model"]
+)
+zero_dense, parts_vs = [], []
+for s in S3STRATA:
+    for h in (7, 30):
+        for m in MODELS:
+            a, b = s3_acc.loc[(s, h, f"{m}_hurdle_dynamic")], s3_acc.loc[(s, h, f"{m}_completed")]
+            parts = [
+                a.qscore9 - b.qscore9,
+                a.zero - b.zero,
+                a.positive_over - b.positive_over,
+                a.positive_under - b.positive_under,
+            ]
+            assert abs(parts[0] - sum(parts[1:])) < 1e-9 and a.max_abs_window_residual < 1e-8
+            assert abs(a.parts_sum - a.qscore9) < 1e-9
+            expect(
+                f"s3 parts row {s} {m} {h}",
+                f"{S3LABEL[s]} & {LABEL[m]} & {h} & " + " & ".join(g(v) for v in parts) + " \\\\",
+                AP3,
+            )
+            if s == "dense":
+                zero_dense.append(parts[1])
+            if s == "sparse":
+                assert (parts[1] > 0) == (m == "chronos2") and (parts[3] > 0) != (parts[1] > 0)
+            if s == "very_sparse":
+                parts_vs.extend(abs(v) for v in parts[1:])
+assert min(zero_dense) > 0 and max(parts_vs) < 0.006
+expect("s3: zero-day dense", f"{g(min(zero_dense))} to {g(max(zero_dense))}", R3 + AP3 + PT)
+expect("s3: very sparse parts", "within 0.006 of zero", AP3)
+# The PIT.
+s3_pit = pd.read_csv(S3_RUN / "inference" / "pit_histograms.csv", **ROUND_TRIP)
+p30 = s3_pit[(s3_pit.horizon == 30) & (s3_pit.status != "unavailable")]
+fr = [c for c in s3_pit.columns if c.startswith("fraction")]
+shown, last_c, last_d = [], [], []
+for s in S3STRATA:
+    for m in MODELS:
+        for var in ("completed", "hurdle_dynamic"):
+            r = p30[(p30.stratum == s) & (p30.model == f"{m}_{var}")].iloc[0]
+            assert int(r.n_values) == 9000
+            expect(
+                f"s3 pit row {s} {m} {var}",
+                f"{S3LABEL[s]} & {esc(m + '_' + var)} & "
+                + " & ".join(f"{r[c]:.3f}" for c in fr)
+                + " \\\\",
+                AP3,
+            )
+            shown.extend(r[c] for c in fr)
+            if s == "very_sparse":
+                (last_c if var == "completed" else last_d).append(r.fraction10)
+expect("s3: pit range", f"{min(shown):.3f} to {max(shown):.3f} of its target\ndays in a tenth", AP3)
+expect("s3: pit last tenth", f"{min(last_c):.3f} to {max(last_c):.3f},\nwhere", AP3)
+expect(
+    "s3: pit last tenth dynamic",
+    f"\\emph{{hurdle\\_dynamic}}'s is {min(last_d):.3f} to {max(last_d):.3f}",
+    AP3,
+)
+# The summary page.
+expect("summary: s3 run", "956 seconds", PS)
+expect("summary: s3 ties", "72 to 88", PS)
+expect("summary: s3 reject", "21 of 36", PS)
 
 # --- report -----------------------------------------------------------
 for line in failures:

@@ -141,23 +141,20 @@ synthetic & TimesFM 2.5 & 30 & 0.08769 & -0.2293 & -0.03873 & 0.3557 \\
 
 \paragraph{The regime reading, from the declared secondary strata.} The confirmatory families pool 209
 equal-weight series and 18 equal-weight cells, so they speak for whatever dominates the pool: on npm the
-dense stratum, whose unscaled losses are the largest, and on the grid the cells with $z = 0.2$ and $\mu_{+}
-= 25$. The declared secondary stratum tables (Appendix Table~\ref{tab:s2strata}) read differently by regime.
-Against its completed control the hurdle variant scores lower on 81, 60 and 66 of the 100 sparse series at
-horizon 7, for Chronos-2, TimesFM 3 and TimesFM 2.5, and on 58, 45 and 54 of them at horizon 30; on the
-dense series it scores lower on 32 to 43 of 100 in every cell; in the very sparse stratum, with $n = 9$, the
-median difference is exactly 0 in five of the six cells. A signed-rank test restricted to each stratum,
-computed post hoc from the saved per-series scores and adding no registered test (Appendix
-Table~\ref{tab:s2regime}), has raw $p$ below 0.002 for all three sparse-stratum contrasts at horizon 7 and
-from 0.47 to 0.892 at horizon 30. On the grid, by zero probability, the hurdle beats its control in 4 to 6
-of 30 replicate blocks at $z = 0.2$, in 12 to 15 at $z = 0.8$ and in 21 to 26 at $z = 0.95$ (Appendix
-Table~\ref{tab:s2cells}). The dense result has a mechanical cause: a series with no zero in its last 28
-context days gets $p = 28.5 / 29$, so the hurdle forces about 1.7 percent of mass onto zero on every day,
-where the model's own completed law, which puts less there, must win. So the substitution hurts the typical
-dense series and the short-memory cells, helps the typical sparse series at horizon 7, and is null at 30
-days. This is the paper's central descriptive finding; it is a reading of declared secondary tables, not a
-confirmatory result, and a registered test of the substitution by regime, on a second domain, is the
-natural next study.
+dense stratum, whose unscaled losses are the largest, and on the grid the cells with $z = 0.2$ and
+$\mu_{+} = 25$. The declared secondary stratum tables (Appendix Table~\ref{tab:s2strata}) read
+differently by regime: against its completed control the hurdle variant scores lower on 81, 60 and 66 of
+the 100 sparse series at horizon 7, for Chronos-2, TimesFM 3 and TimesFM 2.5, and on 58, 45 and 54 of
+them at horizon 30, while on the dense series it scores lower on 32 to 43 of 100 in every cell, and on
+the grid it beats its control in 4 to 6 of 30 replicate blocks at $z = 0.2$ against 21 to 26 at
+$z = 0.95$. A post-hoc signed-rank test within each stratum rejects for all three sparse-stratum
+contrasts at horizon 7 and for none at horizon 30, and the dense result has a mechanical cause in the
+zero mass the Jeffreys rule forces onto a series with no recent zero (Appendix~\ref{app:s2tables},
+Tables~\ref{tab:s2regime} and~\ref{tab:s2cells}). So the substitution hurts the typical dense series
+and the short-memory cells, helps the typical sparse series at horizon 7, and is null at 30 days. This
+was the paper's central descriptive finding, a reading of declared secondary tables and not a
+confirmatory result; Study 3 registered it as a per-stratum family and tested it on a second domain
+(Section~\ref{sec:s3results}).
 
 \paragraph{The model's positive law against a fixed count hurdle (E02, E05, E08, E11, E14, E17; S02, S04,
 S06).} Against \hc{}, which shares the hurdle variant's occurrence probability and differs only in its
@@ -238,83 +235,24 @@ hurdle-against-control means at horizon 30 grow, E04 from 90.24 to 159.3, E10 fr
 from 110.3 to 183.4, and those means belong to \texttt{aggregate-error}. The mechanism answer does not
 depend on the three days.
 
-\subsection*{Post-hoc: the model's positive law with the dynamic count's occurrence}
-
-This subsection is post-hoc. It was computed on 2026-10-16 from the saved forecasts of both runs, after the
-registered scores were seen, with no registered status; it adds no test to E01 to E18 or S01 to S06 and
-replaces nothing in them, and no model was run. The registered hurdle's occurrence estimate is constant over
-the horizon and ignores persistence; the registered \texttt{dynamic\_count} baseline carries a dynamic one,
-the discounted Beta-Bernoulli with discount 0.98. The wrapper tested here is the registered hurdle with the
-Jeffreys $p$ replaced by $p_{\text{dyn}} = a_B / (a_B + b_B)$, read from \texttt{dynamic\_count}'s saved law
-for the same day, with $G_+$ the model's saved completed positive law exactly as the registered hurdle uses
-it; where \texttt{dynamic\_count} falls back to \hc{} by its registered rule, in 10 of the 627 npm windows
-at each horizon and 501 of the 1,620 grid windows, the wrapper is the registered hurdle. Each wrapper is
-compared with the model's completed control, the model's registered hurdle, \texttt{dynamic\_count} (whose
-occurrence it shares on every day, so the positive law alone differs) and \hc{}: 24 tests on npm, DE01 to
-DE24, and 12 on the grid, DS01 to DS12, each family with the registered settings and its own
-Benjamini-Hochberg adjustment at $q = 0.05$. Before any output was written the command verified every
-checkpoint hash, rebuilt both registered families byte for byte from the saved scores, and reproduced the
-registered hurdle exactly in every window when given the Jeffreys $p$. Table~\ref{tab:s2dyn} gives the rows
-against the completed control and the registered hurdle; Appendix Table~\ref{tab:s2dynrest} gives the rest.
-
-\begin{table}[t]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
-\caption{Post-hoc. The model's completed positive law wrapped with \texttt{dynamic\_count}'s occurrence,
-against the model's completed control and against the model's registered fixed-occurrence hurdle, on npm
-(DE rows, 209 series) and the grid (DS rows, 30 replicate blocks at horizon 30). Differences are wrapper
-minus reference \qs{}; negative favors the wrapper. The interval is the pointwise 95 percent percentile
-interval from 20,000 entity bootstrap replicates; $p$ is Benjamini-Hochberg adjusted once over the 24 npm or
-the 12 grid post-hoc tests. The npm means are unscaled and carried by \texttt{aggregate-error}; a median of
-order $10^{-17}$ is floating-point residue.}
-\label{tab:s2dyn}
-\begin{tabular}{lllrrcrcl}
-\toprule
-ID & Model & Reference & $h$ & Mean & 95\% interval & Median & Lower / tied / higher & Adjusted $p$ \\
-\midrule
-DE01 & Chronos-2 & completed & 7 & 77.33 & [-0.008112, 231.6] & -0.009524 & 116 / 5 / 88 & 0.24 \\
-DE04 & Chronos-2 & fixed hurdle & 7 & -74.67 & [-223.6, -0.148] & -0.001058 & 106 / 6 / 97 & 0.203 \\
-DE05 & Chronos-2 & completed & 30 & 26.03 & [-0.05339, 77.77] & -0.005679 & 126 / 4 / 79 & 0.112 \\
-DE08 & Chronos-2 & fixed hurdle & 30 & -64.21 & [-191.9, -0.2468] & -0.007901 & 138 / 3 / 68 & $1.64 \times 10^{-6}$ \\
-DE09 & TimesFM 3 & completed & 7 & 93.25 & [-0.0469, 279.4] & 0.004233 & 80 / 15 / 114 & 0.121 \\
-DE12 & TimesFM 3 & fixed hurdle & 7 & -83.65 & [-250.3, -0.2098] & 0 & 102 / 5 / 102 & 0.367 \\
-DE13 & TimesFM 3 & completed & 30 & 54.04 & [-0.09206, 161.8] & -0.0002469 & 106 / 11 / 92 & 0.838 \\
-DE16 & TimesFM 3 & fixed hurdle & 30 & -74.49 & [-222.2, -0.4329] & -0.004938 & 131 / 7 / 71 & $6.88 \times 10^{-6}$ \\
-DE17 & TimesFM 2.5 & completed & 7 & 82.61 & [0.1723, 247] & 0.002116 & 95 / 6 / 108 & 0.0787 \\
-DE20 & TimesFM 2.5 & fixed hurdle & 7 & -171.3 & [-513, -0.2688] & 0.002116 & 93 / 8 / 108 & 0.794 \\
-DE21 & TimesFM 2.5 & completed & 30 & 28.84 & [0.08909, 85.83] & $-5.551 \times 10^{-17}$ & 105 / 3 / 101 & 0.471 \\
-DE24 & TimesFM 2.5 & fixed hurdle & 30 & -81.49 & [-242.9, -0.5095] & -0.004198 & 124 / 5 / 80 & 0.000642 \\
-\midrule
-DS01 & Chronos-2 & completed & 30 & 0.0278 & [-0.008979, 0.06239] & 0.04308 & 10 / 0 / 20 & 0.0959 \\
-DS04 & Chronos-2 & fixed hurdle & 30 & -0.05819 & [-0.09786, -0.02406] & -0.04727 & 21 / 0 / 9 & 0.00823 \\
-DS05 & TimesFM 3 & completed & 30 & 0.02813 & [-0.01113, 0.0638] & 0.02883 & 10 / 0 / 20 & 0.0959 \\
-DS08 & TimesFM 3 & fixed hurdle & 30 & -0.05849 & [-0.09728, -0.02412] & -0.04468 & 21 / 0 / 9 & 0.00823 \\
-DS09 & TimesFM 2.5 & completed & 30 & 0.03462 & [-0.004804, 0.07104] & 0.04275 & 7 / 0 / 23 & 0.0439 \\
-DS12 & TimesFM 2.5 & fixed hurdle & 30 & -0.05307 & [-0.0902, -0.02105] & -0.03688 & 20 / 0 / 10 & 0.00823 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The dynamic occurrence shrinks the loss and removes four of the five rejections against the substitution,
-and it still never beats the model's own zero mass at $q = 0.05$. Against the completed control no npm row
-rejects, with adjusted $p$ from 0.0787 to 0.838, where the registered hurdle had two rejections against it;
-every mean difference is still positive, 26.03 to 93.25 against 90.24 to 253.9 for the registered hurdle,
-and by rank sum the typical series leans to the Chronos-2 wrapper at both horizons, lower on 116 and 126 of
-209 series, and to the control for both TimesFM models. On the grid two of the three rows against the
-control no longer reject (DS01 and DS05, adjusted $p$ 0.0959) and the third, TimesFM 2.5 (DS09, adjusted $p$
-0.0439), still rejects against the wrapper; the means are 0.0278 to 0.03462 against 0.08599 to 0.08769
-registered, and every interval now includes zero. Against the registered fixed-occurrence hurdle the wrapper
-is better at horizon 30 everywhere: on npm all three models reject in its favor, lower on 124 to 138 of 209
-series, and on the grid all three reject in its favor, lower in 20 or 21 of 30 blocks (adjusted $p$
-0.00823); at horizon 7 on npm no row rejects. Against \texttt{dynamic\_count} itself all six npm rows reject
-in the wrapper's favor and all three grid rows reject against it, \texttt{dynamic\_count} being lower in 26
-to 28 of 30 blocks; against \hc{} all six npm rows reject in the wrapper's favor and on the grid none of the
-three rejects, where the registered S02 and S06 rejected against the hurdle. The accounting (Appendix
-Table~\ref{tab:s2dynparts}) says where the remaining loss sits: on the grid the wrapper has the lowest
-zero-day part of every forecaster, 0.3653 to 0.3879, while its positive-day underprediction part stays at
-1.303 to 1.37 against 1.029 to 1.085 for the completed controls and 1.088 for \texttt{dynamic\_count}, whose
-occurrence is the same on every day. With the occurrence held equal, the foundation models' positive laws
-underpredict the grid's positive days more than the dynamic count's negative binomial does: on the grid the
-remaining loss is the positive law.
+\paragraph{Post-hoc: the model's positive law with the dynamic count's occurrence.} This paragraph is
+post-hoc. It was computed on 2026-10-16 from the saved forecasts of both runs, after the registered
+scores were seen, with no registered status; it adds no test to E01 to E18 or S01 to S06 and replaces
+nothing in them, and no model was run. The wrapper is the registered hurdle with the Jeffreys $p$
+replaced by the occurrence probability of \texttt{dynamic\_count}'s saved law for the same day, the
+discounted Beta-Bernoulli with discount 0.98, with $G_+$ the model's saved completed positive law exactly
+as the registered hurdle uses it; it is compared with the model's completed control, its registered
+hurdle, \texttt{dynamic\_count} and \hc{} in two post-hoc families, 24 tests on npm and 12 on the grid,
+each with the registered settings and its own adjustment at $q = 0.05$ (Appendix
+Tables~\ref{tab:s2dyn} and~\ref{tab:s2dynrest}). The dynamic occurrence shrinks the loss and removes
+four of the five rejections against the substitution, and it still never beats the model's own zero mass
+at $q = 0.05$: against the completed control no npm row and one grid row reject, with every mean
+difference still positive; against the registered fixed-occurrence hurdle the wrapper rejects in its
+favor at horizon 30 on npm and on the grid; and on the grid it has the lowest zero-day part of every
+forecaster while its positive-day underprediction part stays above the completed controls' and
+\texttt{dynamic\_count}'s, so with the occurrence held equal the remaining loss is the positive law
+(Appendix~\ref{app:s2tables}). Study 3 carries this occurrence into a registered family
+(Section~\ref{sec:s3design}).
 
 \paragraph{Read together.} Replacing a frozen model's own zero mass with the 28-day context-only occurrence
 probability, keeping the model's completed positive law, does not lower \qs{} on the pooled families, which

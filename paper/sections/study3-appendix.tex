@@ -1,0 +1,354 @@
+% Study 3, the run, the commands and the secondary tables, from the run's state file, the provenance file,
+% the integrity outputs and the inference directory under reports/study3-nyc311/run-2026-10-17/. Input
+% from paper.tex in the appendix; every number traces to sources.md and is asserted by check_numbers.py.
+\providecommand{\lm}{\texttt{local\_mean\_28}}
+\providecommand{\qs}{QScore9}
+\providecommand{\hc}{\texttt{hurdle\_count\_28}}
+
+\section{Study 3: the run, the commands and the secondary tables}
+\label{app:s3tables}
+
+\paragraph{The run.} The run started 2026-10-17 03:47 UTC at the implementation commit, after the signed
+readiness and the gate (Appendix~\ref{app:s3detail}), and completed its 300 series in one invocation at
+04:03 UTC, in 939 seconds inside the run and 956 for the whole process, with 39,600 forecasts (300 series, 3
+origins, 2 horizons, 22 variants), no failed window and no resume, on the same NVIDIA GeForce RTX 4070
+SUPER (driver 610.88, CUDA 12.8, PyTorch 2.11.0) at batch size one, with a peak reserved memory of
+2,948,595,712 bytes, from the locally cached weights with the offline variables set. The integrity check
+verified all 300 checkpoint hashes, found every registered window exactly once, and recomputed \qs{}, its
+three accounting parts and the context-scaled \qs{} for all 39,600 forecasts and the occurrence Brier score
+for the 30,600 that carry a count law, from the saved deciles, targets and laws, with 0 disagreements; the
+largest absolute residuals are 0.0 for \qs{} and the scaled score, $7.1 \times 10^{-15}$ for the parts and
+$2.8 \times 10^{-16}$ for the Brier score. The structure the addition registers for the two new variants holds
+on every target day of all 10,800 of their windows: \emph{hurdle\_dynamic}'s occurrence equals
+\texttt{dynamic\_count}'s and its positive law is the completed law conditioned on $Y \ge 1$, and the fourth
+cell's occurrence equals the completed law's with \hc{}'s positive law. The discrete CRPS is certified for
+all 30,600 forecasts with a count law; the 9,000 without one have none by construction, and none is
+uncertified. The inference ran from 04:03 to 04:04 UTC and the integrity check from 04:04 to 04:05 UTC,
+both with HEAD at the implementation commit and no uncommitted change under the scripts or the package,
+with NumPy 2.5.3, SciPy 1.18.1 and pandas 2.3.3.
+
+\paragraph{The approvals.} The evidence package records the author's approvals in his own words: at
+03:12 UTC, ``approved: NYC 311 target access, 100 requests; the terms page, 1 request; Study 3 run, budget
+3600 seconds''; at 03:43 UTC, ``Approved: 20 more NYC 311 target requests, 120 in all, paced 3 seconds
+apart; the terms page, 2 more requests, following the redirect within www.nyc.gov; the Study 3 run budget
+stays 3600 seconds.''; and before 04:48 UTC, ``read NYC Open Data terms of use in a desktop browser, up to
+3 page reads within www.nyc.gov, following its links to the terms-of-use page; save each page text with its
+hash and record them in source-terms.md''. The context pull of 2026-10-16 ran under the approval ``NYC 311
+context pull, 330 request attempts and 3 hours''.
+
+\paragraph{Commands.} From the repository root with the project's Python environment (PowerShell). The pull
+and the run pass the gate only at the implementation commit with the smoke and the readiness files at the
+paths the readiness names; the pull refuses to write a second snapshot and a completed run directory is
+immutable, so a rerun takes new output paths, and a new pull opens the targets again and needs its own
+approval. With the release asset, the 300 checkpoints, placed in the run directory, the last four commands
+regenerate the inference, the integrity check, the results page's tables and this paper's checks.
+{\footnotesize
+\begin{verbatim}
+.\.venv\Scripts\python.exe scripts\study2_smoke.py --study3 --gpu `
+    --out data\raw\study3\smoke-00fd91d.json
+.\.venv\Scripts\python.exe scripts\study2_run.py study3 `
+    --readiness data\raw\study3\study3-readiness-00fd91d.json `
+    --out data\raw\study3\nyc311\targets --fetch-targets --max-requests 100 --timeout 120
+.\.venv\Scripts\python.exe scripts\study2_run.py study3 `
+    --readiness data\raw\study3\study3-readiness-00fd91d.json `
+    --out data\raw\study3\nyc311\targets --fetch-targets --max-requests 20 --interval 3 --timeout 120
+$env:HF_HUB_OFFLINE = "1"; $env:TRANSFORMERS_OFFLINE = "1"; `
+    .\.venv\Scripts\python.exe scripts\study2_run.py study3 `
+    --readiness data\raw\study3\study3-readiness-00fd91d-run.json `
+    --out reports\study3-nyc311\run-2026-10-17
+.\.venv\Scripts\python.exe scripts\study3_inference.py `
+    --run reports\study3-nyc311\run-2026-10-17 --out <new directory>
+.\.venv\Scripts\python.exe scripts\study3_integrity.py `
+    --run reports\study3-nyc311\run-2026-10-17 --out <new directory>
+.\.venv\Scripts\python.exe reports\study3-nyc311\run-2026-10-17\make_tables.py `
+    reports\study3-nyc311\run-2026-10-17
+.\.venv\Scripts\python.exe paper\check_numbers.py
+\end{verbatim}}
+The gate is \texttt{pulsegraph.study2.gate.authorize\_study3}, which the pull and the run call before any
+access; the table script recomputes every family test's raw $p$-value from the paired table and reproduces
+all 36 exactly. A reader who recomputes a test from the CSVs should parse the floats exactly (pandas
+\texttt{float\_precision="round\_trip"}); the default parser can move a last digit and change a rank tie.
+
+\paragraph{The direction of each test.} Table~\ref{tab:s3direction} gives, for each of the 36 tests, the
+exact ties, the nonzero differences, and the rank sums of the absolute nonzero series differences with
+average ranks for ties, split by sign; the larger sum names the side the signed-rank test leans to. The raw
+$p$-value recomputed from these differences, two-sided and approximate with the zeros omitted, equals the
+saved one in every row.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{The direction of each family test, from the paired table: exact ties, nonzero differences, the
+rank sum of the series where \emph{hurdle\_dynamic} is lower and of those where the reference is lower, the
+side the larger sum favors, and the raw two-sided signed-rank $p$ recomputed from the differences.}
+\label{tab:s3direction}
+\begin{tabular}{llrrrrll}
+\toprule
+ID & Stratum & Ties & Nonzero & Rank sum, variant lower & Rank sum, reference lower & Larger sum favors & Raw $p$ \\
+\midrule
+R01 & dense & 1 & 99 & 1,713.5 & 3,236.5 & reference & 0.00786 \\
+R02 & dense & 1 & 99 & 4,144.0 & 806.0 & hurdle\_dynamic & $5.7 \times 10^{-9}$ \\
+R03 & dense & 2 & 98 & 1,737.0 & 3,114.0 & reference & 0.0147 \\
+R04 & dense & 0 & 100 & 4,744.0 & 306.0 & hurdle\_dynamic & $2.35 \times 10^{-14}$ \\
+R05 & dense & 2 & 98 & 1,204.0 & 3,647.0 & reference & $1.5 \times 10^{-5}$ \\
+R06 & dense & 0 & 100 & 4,173.5 & 876.5 & hurdle\_dynamic & $1.44 \times 10^{-8}$ \\
+R07 & dense & 0 & 100 & 1,217.0 & 3,833.0 & reference & $6.88 \times 10^{-6}$ \\
+R08 & dense & 0 & 100 & 4,665.0 & 385.0 & hurdle\_dynamic & $1.87 \times 10^{-13}$ \\
+R09 & dense & 2 & 98 & 1,200.0 & 3,651.0 & reference & $1.41 \times 10^{-5}$ \\
+R10 & dense & 0 & 100 & 4,303.5 & 746.5 & hurdle\_dynamic & $9.65 \times 10^{-10}$ \\
+R11 & dense & 0 & 100 & 942.5 & 4,107.5 & reference & $5.29 \times 10^{-8}$ \\
+R12 & dense & 0 & 100 & 4,666.5 & 383.5 & hurdle\_dynamic & $1.8 \times 10^{-13}$ \\
+R13 & sparse & 13 & 87 & 2,064.0 & 1,764.0 & hurdle\_dynamic & 0.526 \\
+R14 & sparse & 15 & 85 & 2,200.5 & 1,454.5 & hurdle\_dynamic & 0.102 \\
+R15 & sparse & 12 & 88 & 2,179.5 & 1,736.5 & hurdle\_dynamic & 0.357 \\
+R16 & sparse & 15 & 85 & 2,331.0 & 1,324.0 & hurdle\_dynamic & 0.0274 \\
+R17 & sparse & 23 & 77 & 1,658.5 & 1,344.5 & hurdle\_dynamic & 0.425 \\
+R18 & sparse & 16 & 84 & 2,303.5 & 1,266.5 & hurdle\_dynamic & 0.0208 \\
+R19 & sparse & 20 & 80 & 1,349.5 & 1,890.5 & reference & 0.194 \\
+R20 & sparse & 18 & 82 & 2,423.0 & 980.0 & hurdle\_dynamic & 0.00085 \\
+R21 & sparse & 8 & 92 & 2,933.5 & 1,344.5 & hurdle\_dynamic & 0.00198 \\
+R22 & sparse & 17 & 83 & 2,228.5 & 1,257.5 & hurdle\_dynamic & 0.0275 \\
+R23 & sparse & 11 & 89 & 2,518.0 & 1,487.0 & hurdle\_dynamic & 0.0349 \\
+R24 & sparse & 17 & 83 & 2,457.5 & 1,028.5 & hurdle\_dynamic & 0.00118 \\
+R25 & very sparse & 88 & 12 & 12.0 & 66.0 & reference & 0.0342 \\
+R26 & very sparse & 75 & 25 & 223.0 & 102.0 & hurdle\_dynamic & 0.103 \\
+R27 & very sparse & 82 & 18 & 101.0 & 70.0 & hurdle\_dynamic & 0.5 \\
+R28 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
+R29 & very sparse & 84 & 16 & 61.0 & 75.0 & reference & 0.717 \\
+R30 & very sparse & 75 & 25 & 212.0 & 113.0 & hurdle\_dynamic & 0.182 \\
+R31 & very sparse & 72 & 28 & 252.0 & 154.0 & hurdle\_dynamic & 0.264 \\
+R32 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
+R33 & very sparse & 87 & 13 & 17.0 & 74.0 & reference & 0.0463 \\
+R34 & very sparse & 75 & 25 & 223.0 & 102.0 & hurdle\_dynamic & 0.103 \\
+R35 & very sparse & 86 & 14 & 56.0 & 49.0 & hurdle\_dynamic & 0.826 \\
+R36 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The family's pairs on the occurrence Brier score.} Table~\ref{tab:s3brier} gives the 36 pairs
+on the occurrence Brier score, declared secondary and unadjusted, with the same aggregation; where
+\emph{hurdle\_dynamic} shares the reference's occurrence rule there is no difference to read, and in the T2
+rows the two occurrence estimates differ, the dynamic one against the fixed Jeffreys one. On the dense
+series the dynamic occurrence is worse than the model's own in every T1 row, with every interval above
+zero; on the very sparse series it is better for 68 to 82 of the 100 series in every T1 row while the means
+stay within 0.0013 of zero; on the sparse series the rows split.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{The 36 family pairs on the occurrence Brier score, \emph{hurdle\_dynamic} minus reference, declared
+secondary and unadjusted; negative favors \emph{hurdle\_dynamic}. Columns as in Table~\ref{tab:s3family},
+with the raw two-sided signed-rank $p$.}
+\label{tab:s3brier}
+\begin{tabular}{llllcrcrcl}
+\toprule
+ID & Stratum & Model & $h$ & Contrast & Mean difference & 95\% interval & Median & Lower / tied / higher & Raw $p$ \\
+\midrule
+R01 & dense & Chronos-2 & 7 & T1 & 0.009347 & [0.00366, 0.01535] & 0.001222 & 42 / 0 / 58 & 0.00281 \\
+R02 & dense & Chronos-2 & 7 & T2 & -0.0009351 & [-0.003534, 0.00169] & -0.0002973 & 57 / 0 / 43 & 0.413 \\
+R03 & dense & Chronos-2 & 30 & T1 & 0.007339 & [0.0031, 0.01212] & 0.0004494 & 46 / 0 / 54 & 0.0126 \\
+R04 & dense & Chronos-2 & 30 & T2 & -0.0002877 & [-0.002394, 0.001957] & -0.0007675 & 69 / 0 / 31 & 0.00819 \\
+R05 & dense & TimesFM 3 & 7 & T1 & 0.008161 & [0.005026, 0.01149] & 0.003557 & 34 / 0 / 66 & $6.04 \times 10^{-6}$ \\
+R06 & dense & TimesFM 3 & 7 & T2 & -0.0009351 & [-0.003528, 0.001654] & -0.0002973 & 57 / 0 / 43 & 0.413 \\
+R07 & dense & TimesFM 3 & 30 & T1 & 0.00668 & [0.004291, 0.009265] & 0.001928 & 31 / 0 / 69 & $6 \times 10^{-8}$ \\
+R08 & dense & TimesFM 3 & 30 & T2 & -0.0002877 & [-0.00244, 0.001987] & -0.0007675 & 69 / 0 / 31 & 0.00819 \\
+R09 & dense & TimesFM 2.5 & 7 & T1 & 0.008898 & [0.005258, 0.01285] & 0.002921 & 42 / 0 / 58 & 0.000123 \\
+R10 & dense & TimesFM 2.5 & 7 & T2 & -0.0009351 & [-0.003544, 0.001678] & -0.0002973 & 57 / 0 / 43 & 0.413 \\
+R11 & dense & TimesFM 2.5 & 30 & T1 & 0.007193 & [0.00457, 0.01013] & 0.001605 & 38 / 0 / 62 & $4.73 \times 10^{-6}$ \\
+R12 & dense & TimesFM 2.5 & 30 & T2 & -0.0002877 & [-0.002371, 0.001994] & -0.0007675 & 69 / 0 / 31 & 0.00819 \\
+R13 & sparse & Chronos-2 & 7 & T1 & -0.0004426 & [-0.003601, 0.002659] & -0.0002044 & 51 / 0 / 49 & 0.826 \\
+R14 & sparse & Chronos-2 & 7 & T2 & -0.002326 & [-0.005655, 0.000959] & -0.001192 & 59 / 1 / 40 & 0.0952 \\
+R15 & sparse & Chronos-2 & 30 & T1 & 0.0002249 & [-0.001732, 0.002244] & $-5.1 \times 10^{-6}$ & 50 / 0 / 50 & 0.823 \\
+R16 & sparse & Chronos-2 & 30 & T2 & -0.001293 & [-0.003594, 0.001094] & -0.0009633 & 62 / 1 / 37 & 0.0222 \\
+R17 & sparse & TimesFM 3 & 7 & T1 & 0.001134 & [-0.001429, 0.003961] & -0.0009403 & 56 / 0 / 44 & 0.698 \\
+R18 & sparse & TimesFM 3 & 7 & T2 & -0.002326 & [-0.005674, 0.0009332] & -0.001192 & 59 / 1 / 40 & 0.0952 \\
+R19 & sparse & TimesFM 3 & 30 & T1 & 0.002409 & [0.0006328, 0.004341] & 0.0006039 & 45 / 0 / 55 & 0.0934 \\
+R20 & sparse & TimesFM 3 & 30 & T2 & -0.001293 & [-0.003566, 0.001067] & -0.0009633 & 62 / 1 / 37 & 0.0222 \\
+R21 & sparse & TimesFM 2.5 & 7 & T1 & -0.002092 & [-0.005028, 0.0009558] & -0.002082 & 60 / 0 / 40 & 0.0259 \\
+R22 & sparse & TimesFM 2.5 & 7 & T2 & -0.002326 & [-0.005634, 0.0009471] & -0.001192 & 59 / 1 / 40 & 0.0952 \\
+R23 & sparse & TimesFM 2.5 & 30 & T1 & 0.0004917 & [-0.001208, 0.002362] & $1.279 \times 10^{-5}$ & 50 / 0 / 50 & 0.511 \\
+R24 & sparse & TimesFM 2.5 & 30 & T2 & -0.001293 & [-0.003604, 0.001109] & -0.0009633 & 62 / 1 / 37 & 0.0222 \\
+R25 & very sparse & Chronos-2 & 7 & T1 & $-5.043 \times 10^{-5}$ & [-0.001732, 0.002215] & -0.001841 & 68 / 0 / 32 & 0.00165 \\
+R26 & very sparse & Chronos-2 & 7 & T2 & $-3.603 \times 10^{-5}$ & [-0.001177, 0.001488] & 0 & 33 / 56 / 11 & 0.0208 \\
+R27 & very sparse & Chronos-2 & 30 & T1 & -0.001279 & [-0.002628, 0.0002187] & -0.00163 & 73 / 0 / 27 & $1.59 \times 10^{-7}$ \\
+R28 & very sparse & Chronos-2 & 30 & T2 & $-9.498 \times 10^{-5}$ & [-0.001282, 0.001876] & 0 & 39 / 56 / 5 & $1.92 \times 10^{-6}$ \\
+R29 & very sparse & TimesFM 3 & 7 & T1 & 0.0001979 & [-0.001451, 0.002717] & -0.002363 & 70 / 0 / 30 & 0.000371 \\
+R30 & very sparse & TimesFM 3 & 7 & T2 & $-3.603 \times 10^{-5}$ & [-0.001171, 0.001472] & 0 & 33 / 56 / 11 & 0.0208 \\
+R31 & very sparse & TimesFM 3 & 30 & T1 & -0.0002181 & [-0.001874, 0.002734] & -0.001629 & 82 / 0 / 18 & $1.01 \times 10^{-9}$ \\
+R32 & very sparse & TimesFM 3 & 30 & T2 & $-9.498 \times 10^{-5}$ & [-0.001271, 0.001876] & 0 & 39 / 56 / 5 & $1.92 \times 10^{-6}$ \\
+R33 & very sparse & TimesFM 2.5 & 7 & T1 & -0.0001822 & [-0.001953, 0.002385] & -0.001928 & 68 / 0 / 32 & 0.00108 \\
+R34 & very sparse & TimesFM 2.5 & 7 & T2 & $-3.603 \times 10^{-5}$ & [-0.001171, 0.001495] & 0 & 33 / 56 / 11 & 0.0208 \\
+R35 & very sparse & TimesFM 2.5 & 30 & T1 & -0.0005896 & [-0.002743, 0.002484] & -0.001625 & 75 / 0 / 25 & $1.88 \times 10^{-7}$ \\
+R36 & very sparse & TimesFM 2.5 & 30 & T2 & $-9.498 \times 10^{-5}$ & [-0.001288, 0.001866] & 0 & 39 / 56 / 5 & $1.92 \times 10^{-6}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The fixed hurdle and the fourth cell per stratum.} Table~\ref{tab:s3variants} gives the two
+other variants against the completed control within each stratum, declared secondary and unadjusted. The
+fourth cell's rows against the two count hurdles, and every variant's rows on the scaled score and the
+discrete CRPS, are in the results document of the run.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Study 2's fixed-occurrence hurdle (\emph{hurdle\_fixed}) and the fourth cell
+(\emph{occurrence\_model\_size\_count}, the model's own occurrence with \hc{}'s positive law) against the
+model's completed control within each stratum of 100 series: \qs{} differences, variant minus control,
+declared secondary and unadjusted; negative favors the variant.}
+\label{tab:s3variants}
+\begin{tabular}{llllrcrcl}
+\toprule
+Stratum & Model & Variant & $h$ & Mean difference & 95\% interval & Median & Lower / tied / higher & Raw $p$ \\
+\midrule
+dense & Chronos-2 & fixed hurdle & 7 & 0.02145 & [0.006423, 0.03832] & 0.01058 & 39 / 1 / 60 & 0.00867 \\
+dense & Chronos-2 & fourth cell & 7 & 0.2944 & [0.1243, 0.5658] & 0.04127 & 30 / 0 / 70 & $5.19 \times 10^{-8}$ \\
+dense & TimesFM 3 & fixed hurdle & 7 & 0.0246 & [0.01013, 0.04178] & 0.0127 & 37 / 0 / 63 & 0.000406 \\
+dense & TimesFM 3 & fourth cell & 7 & 0.3094 & [0.1334, 0.5841] & 0.0672 & 20 / 2 / 78 & $1.83 \times 10^{-10}$ \\
+dense & TimesFM 2.5 & fixed hurdle & 7 & 0.02487 & [0.01025, 0.04186] & 0.01958 & 37 / 1 / 62 & 0.000246 \\
+dense & TimesFM 2.5 & fourth cell & 7 & 0.3059 & [0.1337, 0.5786] & 0.05503 & 19 / 0 / 81 & $1.24 \times 10^{-10}$ \\
+dense & Chronos-2 & fixed hurdle & 30 & 0.02404 & [0.0118, 0.04064] & 0.008519 & 30 / 0 / 70 & $8.87 \times 10^{-5}$ \\
+dense & Chronos-2 & fourth cell & 30 & 0.3083 & [0.1507, 0.551] & 0.05938 & 11 / 0 / 89 & $3.35 \times 10^{-15}$ \\
+dense & TimesFM 3 & fixed hurdle & 30 & 0.02287 & [0.01218, 0.03763] & 0.009877 & 27 / 3 / 70 & $1.54 \times 10^{-6}$ \\
+dense & TimesFM 3 & fourth cell & 30 & 0.325 & [0.1639, 0.5717] & 0.08185 & 10 / 0 / 90 & $3.01 \times 10^{-16}$ \\
+dense & TimesFM 2.5 & fixed hurdle & 30 & 0.0242 & [0.01379, 0.03789] & 0.01284 & 30 / 0 / 70 & $1.36 \times 10^{-6}$ \\
+dense & TimesFM 2.5 & fourth cell & 30 & 0.3136 & [0.1599, 0.5483] & 0.07852 & 9 / 0 / 91 & $1.75 \times 10^{-16}$ \\
+sparse & Chronos-2 & fixed hurdle & 7 & 0.003947 & [-0.001926, 0.009884] & 0.001587 & 41 / 7 / 52 & 0.282 \\
+sparse & Chronos-2 & fourth cell & 7 & 0.0002646 & [-0.001884, 0.002582] & 0 & 37 / 40 / 23 & 0.561 \\
+sparse & TimesFM 3 & fixed hurdle & 7 & 0.00419 & [-0.0004868, 0.009006] & 0 & 39 / 16 / 45 & 0.194 \\
+sparse & TimesFM 3 & fourth cell & 7 & 0.001778 & [-0.001926, 0.005048] & 0 & 17 / 53 / 30 & 0.064 \\
+sparse & TimesFM 2.5 & fixed hurdle & 7 & -0.002624 & [-0.007789, 0.002286] & 0.001058 & 43 / 6 / 51 & 0.587 \\
+sparse & TimesFM 2.5 & fourth cell & 7 & 0.002455 & [-0.0003598, 0.00528] & 0 & 16 / 55 / 29 & 0.0515 \\
+sparse & Chronos-2 & fixed hurdle & 30 & 0.002637 & [-0.002126, 0.00682] & 0.002469 & 39 / 4 / 57 & 0.0384 \\
+sparse & Chronos-2 & fourth cell & 30 & 0.0002444 & [-0.0016, 0.001983] & 0 & 41 / 29 / 30 & 0.634 \\
+sparse & TimesFM 3 & fixed hurdle & 30 & 0.005412 & [0.002622, 0.00822] & 0.00284 & 26 / 14 / 60 & $8 \times 10^{-5}$ \\
+sparse & TimesFM 3 & fourth cell & 30 & 0.003217 & [0.001284, 0.005247] & 0 & 14 / 51 / 35 & 0.00083 \\
+sparse & TimesFM 2.5 & fixed hurdle & 30 & 0.001286 & [-0.001778, 0.004353] & 0 & 44 / 7 / 49 & 0.362 \\
+sparse & TimesFM 2.5 & fourth cell & 30 & 0.003146 & [0.0008222, 0.00581] & 0 & 18 / 51 / 31 & 0.0272 \\
+very sparse & Chronos-2 & fixed hurdle & 7 & 0.002646 & [0.000381, 0.005757] & 0 & 7 / 71 / 22 & 0.00293 \\
+very sparse & Chronos-2 & fourth cell & 7 & 0.0004762 & [-0.0002116, 0.001608] & 0 & 2 / 96 / 2 & 0.465 \\
+very sparse & TimesFM 3 & fixed hurdle & 7 & 0.002053 & [0.000381, 0.004688] & 0 & 7 / 73 / 20 & 0.0116 \\
+very sparse & TimesFM 3 & fourth cell & 7 & 0.0007407 & [$1.058 \times 10^{-5}$, 0.001862] & 0 & 0 / 96 / 4 & 0.0679 \\
+very sparse & TimesFM 2.5 & fixed hurdle & 7 & 0.001884 & [-0.0003598, 0.004899] & 0 & 8 / 72 / 20 & 0.0157 \\
+very sparse & TimesFM 2.5 & fourth cell & 7 & $-8.466 \times 10^{-5}$ & [-0.0004127, 0.0001587] & 0 & 1 / 98 / 1 & 0.655 \\
+very sparse & Chronos-2 & fixed hurdle & 30 & 0.0002741 & [-0.00101, 0.001341] & 0 & 8 / 69 / 23 & 0.0254 \\
+very sparse & Chronos-2 & fourth cell & 30 & 0.0009556 & [$-5.926 \times 10^{-5}$, 0.002743] & 0 & 3 / 94 / 3 & 0.6 \\
+very sparse & TimesFM 3 & fixed hurdle & 30 & 0.002464 & [0.0004296, 0.006044] & 0 & 9 / 70 / 21 & 0.00531 \\
+very sparse & TimesFM 3 & fourth cell & 30 & 0.001667 & [$4.938 \times 10^{-5}$, 0.004723] & 0 & 0 / 96 / 4 & 0.0679 \\
+very sparse & TimesFM 2.5 & fixed hurdle & 30 & 0.001462 & [-0.0007481, 0.004358] & 0 & 5 / 72 / 23 & 0.00456 \\
+very sparse & TimesFM 2.5 & fourth cell & 30 & 0.0004938 & [$-5.926 \times 10^{-5}$, 0.001506] & 0 & 1 / 96 / 3 & 0.465 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Pooled over the 300 series, in Study 2's form.} Table~\ref{tab:s3pooled} gives Study 2's
+eighteen contrasts on the whole panel with every series weighted equally across strata, declared secondary;
+its adjustment is within the table only and confirms nothing.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Study 2's eighteen contrasts pooled over all 300 NYC 311 series with equal weights, P01 to P18,
+declared secondary: \qs{} differences, variant minus reference; negative favors the variant. The adjusted
+$p$ is a Benjamini-Hochberg adjustment within this table only.}
+\label{tab:s3pooled}
+\begin{tabular}{lllrrrrcrcl}
+\toprule
+ID & Variant & Reference & $h$ & Variant mean & Reference mean & Mean difference & 95\% interval & Median & Lower / tied / higher & Adjusted $p$ \\
+\midrule
+P01 & chronos2\_hurdle & chronos2\_completed & 7 & 0.7589 & 0.7496 & 0.009347 & [0.003757, 0.01565] & 0 & 87 / 79 / 134 & 0.00177 \\
+P02 & chronos2\_hurdle & hurdle\_count\_28 & 7 & 0.7589 & 0.8644 & -0.1055 & [-0.1971, -0.04603] & 0 & 109 / 128 / 63 & $2.12 \times 10^{-7}$ \\
+P03 & chronos2\_raw & local\_mean\_28 & 7 & 0.7568 & 0.8331 & -0.07629 & [-0.1377, -0.03296] & $1.055 \times 10^{-9}$ & 144 / 0 / 156 & 0.000684 \\
+P04 & chronos2\_hurdle & chronos2\_completed & 30 & 0.7183 & 0.7094 & 0.008984 & [0.004368, 0.01474] & 0.0001235 & 77 / 73 / 150 & $8.76 \times 10^{-6}$ \\
+P05 & chronos2\_hurdle & hurdle\_count\_28 & 30 & 0.7183 & 0.8291 & -0.1107 & [-0.1922, -0.0559] & 0 & 115 / 124 / 61 & $4.22 \times 10^{-13}$ \\
+P06 & chronos2\_raw & local\_mean\_28 & 30 & 0.7162 & 0.7906 & -0.07444 & [-0.1358, -0.03425] & -0.0001298 & 151 / 0 / 149 & $1.42 \times 10^{-5}$ \\
+P07 & timesfm3\_hurdle & timesfm3\_completed & 7 & 0.757 & 0.7467 & 0.01028 & [0.00497, 0.01625] & 0 & 83 / 89 / 128 & $6.57 \times 10^{-5}$ \\
+P08 & timesfm3\_hurdle & hurdle\_count\_28 & 7 & 0.757 & 0.8644 & -0.1074 & [-0.2, -0.04803] & 0 & 112 / 145 / 43 & $3.22 \times 10^{-11}$ \\
+P09 & timesfm3\_raw & local\_mean\_28 & 7 & 0.7524 & 0.8331 & -0.0807 & [-0.1461, -0.03596] & -0.000948 & 155 / 15 / 130 & $1.9 \times 10^{-7}$ \\
+P10 & timesfm3\_hurdle & timesfm3\_completed & 30 & 0.7152 & 0.705 & 0.01025 & [0.00623, 0.01537] & 0.0002469 & 62 / 87 / 151 & $8.01 \times 10^{-11}$ \\
+P11 & timesfm3\_hurdle & hurdle\_count\_28 & 30 & 0.7152 & 0.8291 & -0.1138 & [-0.1966, -0.05842] & 0 & 123 / 145 / 32 & $2.69 \times 10^{-17}$ \\
+P12 & timesfm3\_raw & local\_mean\_28 & 30 & 0.7104 & 0.7906 & -0.08027 & [-0.1427, -0.03882] & -0.0005049 & 161 / 15 / 124 & $1.6 \times 10^{-10}$ \\
+P13 & timesfm2p5\_hurdle & timesfm2p5\_completed & 7 & 0.7559 & 0.7478 & 0.008042 & [0.002649, 0.01434] & 0 & 88 / 79 / 133 & 0.00379 \\
+P14 & timesfm2p5\_hurdle & hurdle\_count\_28 & 7 & 0.7559 & 0.8644 & -0.1085 & [-0.1989, -0.04924] & 0 & 118 / 143 / 39 & $6.15 \times 10^{-12}$ \\
+P15 & timesfm2p5\_raw & local\_mean\_28 & 7 & 0.7548 & 0.8331 & -0.07836 & [-0.1403, -0.03456] & 0 & 137 / 15 / 148 & 0.00101 \\
+P16 & timesfm2p5\_hurdle & timesfm2p5\_completed & 30 & 0.7173 & 0.7083 & 0.008983 & [0.005159, 0.01377] & 0 & 79 / 79 / 142 & $3.79 \times 10^{-6}$ \\
+P17 & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 & 0.7173 & 0.8291 & -0.1118 & [-0.191, -0.05765] & 0 & 133 / 136 / 31 & $1.64 \times 10^{-18}$ \\
+P18 & timesfm2p5\_raw & local\_mean\_28 & 30 & 0.7163 & 0.7906 & -0.0743 & [-0.1328, -0.03515] & $7.001 \times 10^{-5}$ & 128 / 15 / 157 & 0.0046 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The accounting of the T1 difference by stratum.} Table~\ref{tab:s3parts} splits each
+\emph{hurdle\_dynamic}-minus-control difference into the three exact accounting parts of Section~6 within
+each stratum. On the dense series the zero-day part is positive, against the dynamic occurrence, in all six
+rows, from 0.009693 to 0.03213; on the sparse series it is positive for Chronos-2 and negative for the two
+TimesFM models at both horizons, with the positive-day underprediction part of the opposite sign; on the very
+sparse series every part is within 0.006 of zero.
+
+\begin{table}[h]
+\centering\small
+\caption{The \emph{hurdle\_dynamic}-minus-control \qs{} difference within each stratum and its three exact
+accounting parts, each divided by the full horizon: the loss on zero target days, the loss on positive days
+from quantiles above the target (overprediction) and from quantiles below it (underprediction). Equal-series
+means over the stratum's 100 series; the parts sum to the total. Negative favors \emph{hurdle\_dynamic}.}
+\label{tab:s3parts}
+\begin{tabular}{llrrrrr}
+\toprule
+Stratum & Model & $h$ & Total & Zero days & Positive, overprediction & Positive, underprediction \\
+\midrule
+dense & Chronos-2 & 7 & 0.01775 & 0.02853 & -0.007873 & -0.00291 \\
+dense & TimesFM 3 & 7 & 0.02098 & 0.009693 & -0.007407 & 0.0187 \\
+dense & TimesFM 2.5 & 7 & 0.02219 & 0.01036 & -0.002222 & 0.01405 \\
+dense & Chronos-2 & 30 & 0.01511 & 0.03213 & -0.004526 & -0.01249 \\
+dense & TimesFM 3 & 30 & 0.01637 & 0.009862 & -0.002909 & 0.009417 \\
+dense & TimesFM 2.5 & 30 & 0.01862 & 0.01118 & 0.001844 & 0.005593 \\
+sparse & Chronos-2 & 7 & -0.002138 & 0.009291 & -0.0009841 & -0.01044 \\
+sparse & TimesFM 3 & 7 & 0.0003069 & -0.01846 & -0.00163 & 0.02039 \\
+sparse & TimesFM 2.5 & 7 & -0.004921 & -0.006011 & -0.00128 & 0.00237 \\
+sparse & Chronos-2 & 30 & -0.001654 & 0.01075 & -0.0008889 & -0.01151 \\
+sparse & TimesFM 3 & 30 & 0.002242 & -0.01902 & -0.002025 & 0.02329 \\
+sparse & TimesFM 2.5 & 30 & -0.0009852 & -0.008563 & -0.001588 & 0.009165 \\
+very sparse & Chronos-2 & 7 & 0.00254 & $-3.175 \times 10^{-5}$ & -0.000254 & 0.002825 \\
+very sparse & TimesFM 3 & 7 & 0.002254 & -0.001598 & -0.0003598 & 0.004212 \\
+very sparse & TimesFM 2.5 & 7 & 0.001958 & 0.000254 & -0.0003175 & 0.002021 \\
+very sparse & Chronos-2 & 30 & 0.0005086 & -0.0002716 & -0.0001704 & 0.0009506 \\
+very sparse & TimesFM 3 & 30 & 0.002911 & -0.001936 & -0.0004321 & 0.005279 \\
+very sparse & TimesFM 2.5 & 30 & 0.001632 & -0.0001358 & -0.0002519 & 0.00202 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The randomized PIT.} Table~\ref{tab:s3pit} gives the randomized probability integral transform
+at horizon 30 for each model's completed control and its \emph{hurdle\_dynamic} within each stratum, the
+fraction of the 9,000 target days in each tenth. Every shown forecaster places 0.064 to 0.117 of its target
+days in a tenth; the completed controls' last tenth is thinnest on the very sparse series, 0.064 to 0.075,
+where \emph{hurdle\_dynamic}'s is 0.097 to 0.099.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Randomized PIT at horizon 30 by stratum: the fraction of each forecaster's 9,000 target days (100
+series, 3 origins, 30 days) in each tenth of the unit interval, for the completed control and
+\emph{hurdle\_dynamic} of each model.}
+\label{tab:s3pit}
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+Stratum & Forecaster & 0.0--0.1 & 0.1--0.2 & 0.2--0.3 & 0.3--0.4 & 0.4--0.5 & 0.5--0.6 & 0.6--0.7 & 0.7--0.8 & 0.8--0.9 & 0.9--1.0 \\
+\midrule
+dense & chronos2\_completed & 0.097 & 0.098 & 0.099 & 0.104 & 0.104 & 0.108 & 0.105 & 0.101 & 0.087 & 0.098 \\
+dense & chronos2\_hurdle\_dynamic & 0.112 & 0.101 & 0.105 & 0.100 & 0.103 & 0.112 & 0.101 & 0.092 & 0.083 & 0.093 \\
+dense & timesfm3\_completed & 0.101 & 0.106 & 0.104 & 0.101 & 0.107 & 0.103 & 0.097 & 0.101 & 0.089 & 0.092 \\
+dense & timesfm3\_hurdle\_dynamic & 0.107 & 0.107 & 0.101 & 0.104 & 0.097 & 0.102 & 0.103 & 0.096 & 0.090 & 0.092 \\
+dense & timesfm2p5\_completed & 0.095 & 0.103 & 0.110 & 0.101 & 0.101 & 0.103 & 0.096 & 0.097 & 0.090 & 0.103 \\
+dense & timesfm2p5\_hurdle\_dynamic & 0.110 & 0.106 & 0.098 & 0.094 & 0.102 & 0.102 & 0.100 & 0.095 & 0.087 & 0.105 \\
+sparse & chronos2\_completed & 0.093 & 0.098 & 0.094 & 0.093 & 0.092 & 0.099 & 0.099 & 0.111 & 0.117 & 0.102 \\
+sparse & chronos2\_hurdle\_dynamic & 0.096 & 0.101 & 0.096 & 0.100 & 0.095 & 0.102 & 0.096 & 0.110 & 0.117 & 0.087 \\
+sparse & timesfm3\_completed & 0.109 & 0.103 & 0.098 & 0.101 & 0.099 & 0.107 & 0.096 & 0.099 & 0.104 & 0.085 \\
+sparse & timesfm3\_hurdle\_dynamic & 0.097 & 0.101 & 0.096 & 0.092 & 0.098 & 0.097 & 0.105 & 0.098 & 0.114 & 0.102 \\
+sparse & timesfm2p5\_completed & 0.094 & 0.101 & 0.105 & 0.098 & 0.099 & 0.096 & 0.094 & 0.097 & 0.098 & 0.117 \\
+sparse & timesfm2p5\_hurdle\_dynamic & 0.096 & 0.096 & 0.094 & 0.096 & 0.095 & 0.097 & 0.106 & 0.101 & 0.109 & 0.111 \\
+very sparse & chronos2\_completed & 0.106 & 0.107 & 0.100 & 0.104 & 0.098 & 0.104 & 0.103 & 0.104 & 0.100 & 0.075 \\
+very sparse & chronos2\_hurdle\_dynamic & 0.101 & 0.096 & 0.100 & 0.100 & 0.099 & 0.103 & 0.098 & 0.103 & 0.102 & 0.097 \\
+very sparse & timesfm3\_completed & 0.102 & 0.103 & 0.100 & 0.110 & 0.105 & 0.106 & 0.099 & 0.107 & 0.104 & 0.064 \\
+very sparse & timesfm3\_hurdle\_dynamic & 0.105 & 0.096 & 0.100 & 0.097 & 0.105 & 0.100 & 0.098 & 0.101 & 0.098 & 0.098 \\
+very sparse & timesfm2p5\_completed & 0.105 & 0.103 & 0.107 & 0.104 & 0.101 & 0.101 & 0.103 & 0.101 & 0.102 & 0.073 \\
+very sparse & timesfm2p5\_hurdle\_dynamic & 0.104 & 0.101 & 0.109 & 0.100 & 0.096 & 0.097 & 0.100 & 0.095 & 0.101 & 0.099 \\
+\bottomrule
+\end{tabular}
+\end{table}

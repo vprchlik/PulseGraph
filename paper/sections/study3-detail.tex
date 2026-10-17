@@ -1,0 +1,131 @@
+% Study 3, the design and the panel, the remaining detail: the dynamic law and the fallback, the
+% completeness and source-gap rules, the fallback domain, the seeds, the gate and the smoke, the
+% contamination ledger, the frame and the census, the strata, the target pull, the terms and the time
+% basis, the data statement. Input from paper.tex in the appendix; every number traces to sources.md and
+% is asserted by check_numbers.py.
+\providecommand{\qs}{QScore9}
+\providecommand{\hc}{\texttt{hurdle\_count\_28}}
+
+\section{Study 3: the design and the panel, the remaining detail}
+\label{app:s3detail}
+
+\paragraph{The dynamic occurrence and its fallback.} The registered \texttt{dynamic\_count} law keeps four
+parameters that start at $0.5$, are multiplied by $0.98$ before each context observation and updated by it;
+its occurrence probability at a lead is $a_B / (a_B + b_B)$ from the Beta-Bernoulli pair. \emph{hurdle\_dynamic}
+takes that probability as its zero mass, $H(0) = 1 - p_{\text{dyn}}$, with the model's completed positive
+conditional law $G_+$ above it, exactly as Study 2's hurdle uses the Jeffreys $p$; the two differ in the
+occurrence alone. With fewer than two request days in the last 28 days of a context, \texttt{dynamic\_count}
+takes \hc{}'s law by its registered rule, and \emph{hurdle\_dynamic} then equals \emph{hurdle\_fixed} for that
+window. Table~\ref{tab:s3context} counts the series concerned at each origin, from the signals, before and
+apart from any score: no dense series at any origin, 4 to 8 of the 100 sparse series, and 72 to 74 of the
+100 very sparse series, of which 54 to 58 have no request day in the last 28 and 15 to 19 none in the whole
+context.
+
+\begin{table}[h]
+\centering\small
+\caption{The contexts at each origin: the series with an all-zero context, with no request day in the last
+28 context days, and with fewer than two request days in the last 28, where \emph{hurdle\_dynamic} equals
+the fixed hurdle by the registered fallback. Counted from the signals.}
+\label{tab:s3context}
+\begin{tabular}{llrrrr}
+\toprule
+Stratum & Origin & Context days & All-zero context & No request day in the last 28 & Fewer than two in the last 28 \\
+\midrule
+dense & 2026-06-03 & 275 & 0 & 0 & 0 \\
+dense & 2026-07-03 & 305 & 0 & 0 & 0 \\
+dense & 2026-08-02 & 335 & 0 & 0 & 0 \\
+sparse & 2026-06-03 & 275 & 0 & 1 & 4 \\
+sparse & 2026-07-03 & 305 & 0 & 3 & 7 \\
+sparse & 2026-08-02 & 335 & 0 & 1 & 8 \\
+very sparse & 2026-06-03 & 275 & 19 & 58 & 74 \\
+very sparse & 2026-07-03 & 305 & 18 & 54 & 74 \\
+very sparse & 2026-08-02 & 335 & 15 & 54 & 72 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Completeness, the source gap and the fallback domain.} For an event-enumerated source a day is
+complete when the capture of that day's requests is exhausted; a cell-day absent from an exhausted
+enumeration has zero requests; a calendar day with zero requests across the whole enumerated frame is a
+source gap, not a zero, and stops the domain before any scoring. PyPI through ClickPy, under Study 2's
+registered PyPI rules with the same strata and seeds, was the sole fallback, to be used only if NYC 311
+could not provide a verified achieved panel by 2026-10-27 23:59 UTC, with the operational reason recorded
+before any target scoring and never unfavorable performance or an unfilled stratum; had both failed, Study 3
+would have been reported unavailable. Neither clause was reached.
+
+\paragraph{Seeds, gate and smoke.} The seeds are selection 20261001, forecasts 20261002, PIT 20261003 and
+bootstrap 20261004, derived as in Study 2's inference command with the component name \texttt{study3}.
+Study 2's gate requirements apply unchanged: a signed readiness bound to the addition's commit, a GPU smoke
+at the implementation commit, a clean committed tree, separate target-access and runtime approvals, the
+committed comparison file, checkpoints with hashes, the committed inference command with its per-row
+recomputation, the capture ledger, and the source's terms recorded before publication. The implementation
+commit is \texttt{00fd91dccfc86b1e4bbd2f0cb44a47052937458d}; the smoke passed there on 2026-10-17 at 01:56
+UTC with a peak reserved memory of 2,948,595,712 bytes; the readiness was approved at 03:12 UTC with a
+runtime budget of 3,600 seconds against an estimate of 1,080; and the gate passed three times, at 03:15 UTC
+before the first target request, at 03:44 UTC before the pull resumed, and at 03:46 UTC before the run, with
+the pull's signals admitted only together with their completeness document. The pull and run commands run
+the gate again themselves before any access. Study 3 adds no test to any Study 2 family and changes nothing
+above its heading in the protocol.
+
+\paragraph{The frame and the context census.} The 2024 inventory holds 9,496 problem-by-board cells;
+1,027 were excluded at metadata for an unspecified geography or problem, leaving the eligible frame of
+8,469, every cell of which is a candidate. The context census of 2026-10-16, one anonymous query per New
+York calendar day from 2025-09-01 to 2026-06-02 to the dataset's SODA endpoint, read 275 days on 275 pages
+and captured 2,959,469 requests: 2,902,433 in frame cells, 49,356 with a missing or unrecognized board or
+problem and 7,680 in recognized cells outside the frame; the smallest day held 6,216 requests, on
+2025-12-25, and the largest 22,805, on 2026-02-24. Table~\ref{tab:s3panel} gives the strata.
+
+\begin{table}[h]
+\centering\small
+\caption{The achieved NYC 311 panel by context-zero-fraction stratum, computed on 2026-03-05 to 2026-06-02
+over the 8,469 cells of the frame: the complete candidates, the series taken, the unfilled slots, and the
+series with no request in the 90 stratum days and none in the 275-day context at the first origin.}
+\label{tab:s3panel}
+\begin{tabular}{llrrrrr}
+\toprule
+Stratum & Zero fraction & Complete candidates & Taken & Unfilled & All-zero stratum window & All-zero context \\
+\midrule
+dense & $[0, 0.5)$ & 2,002 & 100 & 0 & 0 & 0 \\
+sparse & $[0.5, 0.9)$ & 2,422 & 100 & 0 & 0 & 0 \\
+very sparse & $[0.9, 1]$ & 4,045 & 100 & 0 & 39 & 19 \\
+all & & 8,469 & 300 & 0 & 39 & 19 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The target pull.} The first invocation ran from 03:16 to 03:32 UTC on 2026-10-17, one second
+between attempts: 100 attempts, 84 days, stopping at the approved ceiling as the client is built to; since
+every day was answered on one page, the 16 extra attempts were repeats after the server answered 429 or a
+5xx status and the client waited, and the client does not record which. The second invocation, approved
+with 20 more attempts and a three-second spacing, ran from 03:45:06 to 03:45:43 UTC: 6 attempts for the
+last 6 days, each answered at the first attempt. Every capture was acquired after 2026-08-31 had ended in
+New York. The signals join the 90 target days to the frozen 275-day context, which was unchanged and not
+re-requested; the completeness document lists each day's census.
+
+\paragraph{The terms and the time basis.} The dataset's metadata, read on 2026-10-16 at 07:44 UTC, names
+\texttt{erm2-nwe9}, ``311 Service Requests from 2020 to Present'', owned by NYC OpenData, with empty license
+fields, the attribution ``311'' and no terms link. NYC Open Data's overview page answered a scripted request
+on 2026-10-17 with a redirect to the city's main website, which refused the scripted request at its new
+address; two pages were then read in a desktop browser on 2026-10-17 at 04:48 and 04:49 UTC and their text
+saved with its hash: the program's page, which names New York City's Open Data Law as its basis and links the
+city website's terms of use, and the terms themselves, as Section~\ref{sec:s3panel} summarizes them. The
+field \texttt{created\_date} is a floating timestamp with no zone and no stated local time; the captures
+settle it: on the spring-forward Sunday, 2026-03-08, the hour from 02:00 holds 1 request against 197 and 225
+on the Sundays either side, on the fall-back Sunday, 2025-11-02, the hour from 01:00 holds 796 against 528
+and 339, and the hour with the fewest requests falls between 03:00 and 05:59 on 251 of the 275 context days.
+The values behave as New York wall-clock time with daylight saving time, which the census assumes.
+
+\paragraph{Data statement.} The daily counts of the 300 series were obtained from NYC Open Data's SODA
+endpoint for dataset \texttt{erm2-nwe9}, \url{https://data.cityofnewyork.us/resource/erm2-nwe9.json},
+anonymously, with no application token and no credential: the context of 2025-09-01 to 2026-06-02 on
+2026-10-16 and the targets of 2026-06-03 to 2026-08-31 on 2026-10-17 under a separate target-access
+approval (Appendix~\ref{app:s3tables}). A request is a 311 service request as the City records it, counted
+on its creation day and never on its closure; it is a complaint or inquiry about a city service, not a
+measure of the underlying condition. The records name the source as NYC Open Data and claim no endorsement
+by the City; the dataset's description states that it reveals no personally identifying information about
+the requester, and no field beyond the identifier, the creation timestamp, the problem type and the board
+was kept. The frozen frame, the selection, the census of context counts, the status file, the run's
+inference and integrity outputs, the results page and its provenance are in the repository; the 300
+whole-series checkpoints (645 MB), the raw captures and the target signals are not, and the checkpoints are
+to be published as a release asset. The project's compilation is released under CC BY 4.0; no license is
+asserted over the counts as such.
