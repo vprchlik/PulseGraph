@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-17 07:29 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 08:35 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `da86452` (2026-10-17 06:23 UTC), 52 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `2bae238` (2026-10-17 07:31 UTC), 54 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -119,6 +119,20 @@ one paper to TMLR by 2026-10-31 with a body of about twelve pages organized by q
 half is underpowered on NYC 311), with a narrow npm replication kept in the deferred register; the intermittent-demand
 baselines as a post-hoc descriptive benchmark from the saved forecasts, its specification fixed before any score is
 read.
+
+**The post-hoc benchmark (2026-10-17 08:01 UTC; awaiting the author's commit).** From the saved forecasts of all
+three runs, with its specification fixed at 07:44 UTC before any score existed
+(`reports/study2-posthoc-intermittent-baselines/`): a TSB hurdle, the registered count hurdle with TSB's occurrence
+and size estimates in place of the 28-day ones, is far behind every model on dense series (lower than the models'
+completed forecasts on 18 or 19 of 100 dense npm series at a week and on 19 to 22 on NYC 311), level with the
+registered count baselines, ahead of the models for the typical sparse npm series at a week (77, 61 and 74 of 100)
+and tied with the count hurdle there, and on the completion floor with everything else on very sparse series. The
+field's point methods (Croston, SBA, ADIDA), scored as point masses, lose to every forecast with a law, by
+construction. The fourth factorial cell on npm and the grid repeats NYC 311's positive-law result (the shifted
+Poisson in place of the model's own positive law is far worse on dense series), while its occurrence result at a
+month shows the pattern of the second reading of the accounting trade and at a week on the grid the first. Nothing
+confirmatory; no test added to any family; every registered family reproduced byte for byte before anything was
+written; 18 new tests, 477 in all.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -234,8 +248,8 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The post-hoc benchmark of the intermittent-demand baselines and the fourth cell from the saved forecasts; the revision
-that reorganizes the paper by question at about twelve pages with both reads applied; the
+The author's commit of the benchmark; the revision that reorganizes the paper by question at about twelve pages with the
+two reads and the benchmark applied; its review; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
 gates are in `docs/PLAN.md`.
