@@ -1,0 +1,32 @@
+{
+  "complete": true,
+  "domain": "nyc311",
+  "end": "2026-08-31",
+  "failures": [
+    {
+      "at": "2026-10-17T03:32:12.391916+00:00",
+      "day": "2026-08-26",
+      "kind": "budget",
+      "reason": "acquisition_budget_reached"
+    }
+  ],
+  "frame_cells": 8469,
+  "frame_sha256": "783a5caf591e6a7c5987897f5769a54a3db6cc1da29e9743e6e7bda45709f9f3",
+  "invocations": [
+    {
+      "attempts": 100,
+      "days_exhausted": 84,
+      "ended_at": "2026-10-17T03:32:12.391916+00:00",
+      "started_at": "2026-10-17T03:16:23.830530+00:00",
+      "status": "RequestBudget"
+    },
+    {
+      "attempts": 6,
+      "days_exhausted": 90,
+      "ended_at": "2026-10-17T03:45:43.118489+00:00",
+      "started_at": "2026-10-17T03:45:06.290355+00:00",
+      "status": "complete"
+    }
+  ],
+  "start": "2026-06-03"
+}

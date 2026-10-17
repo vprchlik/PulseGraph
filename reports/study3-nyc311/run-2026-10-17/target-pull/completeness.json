@@ -1,0 +1,1485 @@
+{
+  "calendar": "America/New_York",
+  "census_sha256": "eef80f85f7f5e3abbd6fc4ab4a6dbbf7cfbd43d39edf95115201098780005e9c",
+  "context_sha256": "935a01a571d119fe12cd1f893ebbae13bb5f04ae01b2a50c0aa624a03738a64c",
+  "days_per_series": 365,
+  "domain": "nyc311",
+  "first_target_day": "2026-06-03",
+  "last_complete_day": "2026-08-31",
+  "ledger_failures": [
+    {
+      "at": "2026-10-17T03:32:12.391916+00:00",
+      "day": "2026-08-26",
+      "kind": "budget",
+      "reason": "acquisition_budget_reached"
+    }
+  ],
+  "manifest_sha256": "a508b4d87c642c98a308247fa851e5618cfb95f8fdc255113a2a5b6cb8f8663b",
+  "method": "One SODA query per New York calendar day, created_date between the day's local midnight and its last millisecond, selecting unique_key,created_date,complaint_type,community_board, ordered by unique_key and paged by 50000; a day is complete when its last page holds fewer rows. Requests are deduplicated by unique_key, keeping the latest captured revision (the latest capture, then the later day), and counted by creation day, never by closure. Requests with a missing or unrecognized board or problem, and recognized cells outside the frozen 2024 frame, are counted apart. A cell-day absent from the exhausted enumeration has zero requests; a day with no request in any frame cell is a source gap and stops the domain. The target census covers 2026-06-03 to 2026-08-31 over the frame the panel was selected from; its captures were acquired after 2026-08-31 had ended in New York. Days 2025-09-01 to 2026-06-02 are the frozen selection context, unchanged and not re-requested; identifiers are deduplicated within each census.",
+  "response_evidence": [
+    {
+      "acquired_at": "2026-10-17T03:16:38.278655+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/b6ec431c3ab6b596302d9eaf4d0fcfe036fab0579b6515e33c45a805cc03d8f5.json",
+      "path": "data/raw/study3/nyc311/targets/captures/b6ec431c3ab6b596302d9eaf4d0fcfe036fab0579b6515e33c45a805cc03d8f5.response",
+      "sha256": "f5c8aa3931e34ae1f545505bafa4fd3dea0932bfc34ee68974f0d9ee13a9f972"
+    },
+    {
+      "acquired_at": "2026-10-17T03:16:58.273438+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/bf02482b04a06232840d8e3c7220c0a313cd4ffafe33d351eec7e313ce8dc18d.json",
+      "path": "data/raw/study3/nyc311/targets/captures/bf02482b04a06232840d8e3c7220c0a313cd4ffafe33d351eec7e313ce8dc18d.response",
+      "sha256": "cd5a4ece6a8b3ef1b3edc9ac31a917c5d942f728d22dd8931702c69cda39d46a"
+    },
+    {
+      "acquired_at": "2026-10-17T03:17:02.852850+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/e56b01ada13624252ea196083309341a185e17bb00d6fd29c766a8fda14c1bec.json",
+      "path": "data/raw/study3/nyc311/targets/captures/e56b01ada13624252ea196083309341a185e17bb00d6fd29c766a8fda14c1bec.response",
+      "sha256": "b8221c4810d2ee8f6f782b2dfb6d64531b2c9a5adb7dcec2d28dfeead3842c41"
+    },
+    {
+      "acquired_at": "2026-10-17T03:17:07.687529+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/7f2dfed5bb35a84cfdb9755bb0dd52ff44092b4342744de758339ec7bdb7b272.json",
+      "path": "data/raw/study3/nyc311/targets/captures/7f2dfed5bb35a84cfdb9755bb0dd52ff44092b4342744de758339ec7bdb7b272.response",
+      "sha256": "c9dcb52a6dd6e0e1b328f8b48fc3488bd0fb72d815a248bf90a2d31d544f0deb"
+    },
+    {
+      "acquired_at": "2026-10-17T03:17:11.154498+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/ad22aa76c7ea5ac7e8f554f82f30fce2601c4c21886c2e635b8bc16cc9793fad.json",
+      "path": "data/raw/study3/nyc311/targets/captures/ad22aa76c7ea5ac7e8f554f82f30fce2601c4c21886c2e635b8bc16cc9793fad.response",
+      "sha256": "b4e7fc500ab8e1ffc02c76926d15113f8ceac2269e21d6ae0c4e304a1e3bffb8"
+    },
+    {
+      "acquired_at": "2026-10-17T03:17:41.319095+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/b6142c49eaa095720638aea64dae7ae933f933f7fd7bff5ec1f13feec7c6f24d.json",
+      "path": "data/raw/study3/nyc311/targets/captures/b6142c49eaa095720638aea64dae7ae933f933f7fd7bff5ec1f13feec7c6f24d.response",
+      "sha256": "e59ecca0acddad6ddb1ba6543873611b7a43b093c7b1fb2d7a801ae34b7879b0"
+    },
+    {
+      "acquired_at": "2026-10-17T03:17:44.225816+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/4d2cc1aba8855ff1e3e149ccb304901922dd209bc2bf8d4fa03c07d1a5f47ed7.json",
+      "path": "data/raw/study3/nyc311/targets/captures/4d2cc1aba8855ff1e3e149ccb304901922dd209bc2bf8d4fa03c07d1a5f47ed7.response",
+      "sha256": "61df42681f7473de3c3af2379288c895cf4fe2e18aa7128caa63a7bc3fa4c3b0"
+    },
+    {
+      "acquired_at": "2026-10-17T03:17:46.943147+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/f0a090f6d29b2386cc47a7cf2254477e945c62b6dcbc1b27737e7797a676b6a1.json",
+      "path": "data/raw/study3/nyc311/targets/captures/f0a090f6d29b2386cc47a7cf2254477e945c62b6dcbc1b27737e7797a676b6a1.response",
+      "sha256": "e12f0d8f7e30aa7be1cb6bfaedad7620a30b052f52ae653af4292018778f60b6"
+    },
+    {
+      "acquired_at": "2026-10-17T03:18:18.412197+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/27071be4f5662a758a90c5f3eb8b27b24bbcdd65fd4d8ddf0665f4dd7743c8c5.json",
+      "path": "data/raw/study3/nyc311/targets/captures/27071be4f5662a758a90c5f3eb8b27b24bbcdd65fd4d8ddf0665f4dd7743c8c5.response",
+      "sha256": "6d9f48224b00b152d1124dd2ed5851fcad2e3207f0001ee2bbed011794d936e2"
+    },
+    {
+      "acquired_at": "2026-10-17T03:18:32.383665+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5794827d1fc7fb114ddfb134aed5e302b402dad3ac72b167548d403c8f56cdc7.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5794827d1fc7fb114ddfb134aed5e302b402dad3ac72b167548d403c8f56cdc7.response",
+      "sha256": "962a52d10a3e117b44e0b4825c8ffb3fd213b8d67e596f19baffa3d9bd57537a"
+    },
+    {
+      "acquired_at": "2026-10-17T03:19:12.381921+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/03639538dbae6a0896d77c7eb97fdcc5b21390d10c8a0b2043fdcbfc1a40de72.json",
+      "path": "data/raw/study3/nyc311/targets/captures/03639538dbae6a0896d77c7eb97fdcc5b21390d10c8a0b2043fdcbfc1a40de72.response",
+      "sha256": "8200b350675a101c6c6ab9c9ebeab758d8bdfb0da786d47d574868b7a98e9743"
+    },
+    {
+      "acquired_at": "2026-10-17T03:19:44.186509+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/a8058ab28832beefa75c44f37bb1399994d483e54b041c179884c2ec74cc946b.json",
+      "path": "data/raw/study3/nyc311/targets/captures/a8058ab28832beefa75c44f37bb1399994d483e54b041c179884c2ec74cc946b.response",
+      "sha256": "9ff3b44b930c7a08e16822cd1ed99668593476c9845bca7d68f0f0cf6f65e7b5"
+    },
+    {
+      "acquired_at": "2026-10-17T03:19:52.639761+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/41cd953be897c26c9833f65e905b1151bd268863dcb0c4dbe09ea9ede5e852cc.json",
+      "path": "data/raw/study3/nyc311/targets/captures/41cd953be897c26c9833f65e905b1151bd268863dcb0c4dbe09ea9ede5e852cc.response",
+      "sha256": "b48e8e65d8ae910112bf43e01782b161b6b53a456307e937c4de5d9df99d7930"
+    },
+    {
+      "acquired_at": "2026-10-17T03:20:12.503723+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/ec342599e993457b6506447d08a2a002576961b12cdc58777ac95dd6773be1e4.json",
+      "path": "data/raw/study3/nyc311/targets/captures/ec342599e993457b6506447d08a2a002576961b12cdc58777ac95dd6773be1e4.response",
+      "sha256": "96c7310ea242330bdb59d79bbea18cab1bfa4b0efe4484888260b6cf8efdd572"
+    },
+    {
+      "acquired_at": "2026-10-17T03:20:58.780118+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/d5c3b2d520dbf3591f39f7509c670636ba9770c44ae0bc007e20906f6c1a2377.json",
+      "path": "data/raw/study3/nyc311/targets/captures/d5c3b2d520dbf3591f39f7509c670636ba9770c44ae0bc007e20906f6c1a2377.response",
+      "sha256": "63c6faad93b4e14e767ce62ade6fa674805c2fab9b2ca7d79f9377f549b60134"
+    },
+    {
+      "acquired_at": "2026-10-17T03:21:13.112361+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/53b1c6cb33565401be13b0b31581ff10d03084acdc5356cf22cf9de47d1328ea.json",
+      "path": "data/raw/study3/nyc311/targets/captures/53b1c6cb33565401be13b0b31581ff10d03084acdc5356cf22cf9de47d1328ea.response",
+      "sha256": "812d3a57bc2f04991721b2d8a7027202288bd93c73d212a2111d24d6a5bc7edc"
+    },
+    {
+      "acquired_at": "2026-10-17T03:21:22.922483+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/954d6be9c1a328207ace5700d689e81da2b58b63ddf7a92f27c3f8c9e9f73af0.json",
+      "path": "data/raw/study3/nyc311/targets/captures/954d6be9c1a328207ace5700d689e81da2b58b63ddf7a92f27c3f8c9e9f73af0.response",
+      "sha256": "bfcfc214f64527097b241d6624d026ca6b8ce7183fc3633b2af775db8f9be15d"
+    },
+    {
+      "acquired_at": "2026-10-17T03:21:58.394911+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/90b76b9e554c6a2d5d5d0371c7edc78a0d97e08baeb33cf7030a87123c800b09.json",
+      "path": "data/raw/study3/nyc311/targets/captures/90b76b9e554c6a2d5d5d0371c7edc78a0d97e08baeb33cf7030a87123c800b09.response",
+      "sha256": "783e1a0bf7fed5e132124c434398060713d2053fc0494525f2508e4e568d88f9"
+    },
+    {
+      "acquired_at": "2026-10-17T03:22:24.015074+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/3f1642b9f4d7d0e04c77894e3d72f1bec845533016c6e677e3f411c0dc645d67.json",
+      "path": "data/raw/study3/nyc311/targets/captures/3f1642b9f4d7d0e04c77894e3d72f1bec845533016c6e677e3f411c0dc645d67.response",
+      "sha256": "5bd3f992fe0af1e4b6780a4efc9f7f4c05202a834212329175cd1bb818ddabf4"
+    },
+    {
+      "acquired_at": "2026-10-17T03:22:45.797651+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/ddd9d2e3fd77e40f3b837f2b9b24b53c9b9596ceaa40afd453681f7b0f9221f4.json",
+      "path": "data/raw/study3/nyc311/targets/captures/ddd9d2e3fd77e40f3b837f2b9b24b53c9b9596ceaa40afd453681f7b0f9221f4.response",
+      "sha256": "6b3842c56f83a9005bf0c3c90b554f20daaa239380c9916ce2f251a2bf559cd2"
+    },
+    {
+      "acquired_at": "2026-10-17T03:22:50.007555+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/041c368fbc644bc5e433c0e07c890be257c6bf28058b27d89d714374d5032606.json",
+      "path": "data/raw/study3/nyc311/targets/captures/041c368fbc644bc5e433c0e07c890be257c6bf28058b27d89d714374d5032606.response",
+      "sha256": "268f505c861217adacc9a8ed1f70aa3d4653ca6e394aeee3b0bec5d32d2c8d97"
+    },
+    {
+      "acquired_at": "2026-10-17T03:22:56.007945+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/309c76308d4d537549a667bcbe69093666ed29e8de0a2172a09aa0e4746c1004.json",
+      "path": "data/raw/study3/nyc311/targets/captures/309c76308d4d537549a667bcbe69093666ed29e8de0a2172a09aa0e4746c1004.response",
+      "sha256": "095b3ced69654e8e23c743c4a9a3efe166815f1cc80061160a1b17e52af885da"
+    },
+    {
+      "acquired_at": "2026-10-17T03:23:02.004426+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/1d524e254ca8d6f07a578eea24e0507ae9ee899c53f5935c3e92bca2c608fe55.json",
+      "path": "data/raw/study3/nyc311/targets/captures/1d524e254ca8d6f07a578eea24e0507ae9ee899c53f5935c3e92bca2c608fe55.response",
+      "sha256": "7a5172d6bcaa8dec694ee13725844e09313645d5f655cc6d00f30c0b009924b1"
+    },
+    {
+      "acquired_at": "2026-10-17T03:23:07.548673+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/569339493858770aa545cac70739a958dbf2d3f8409b80cb8b82f78f71528d28.json",
+      "path": "data/raw/study3/nyc311/targets/captures/569339493858770aa545cac70739a958dbf2d3f8409b80cb8b82f78f71528d28.response",
+      "sha256": "8b19e3e97e74eb642b8ae7a147be36faefcb708b6afe6db9fcca8ed7f325610f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:23:16.465856+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/123224fc785fc48d0b4d3eb44694db706077bd98f68812ee7611750a79f18915.json",
+      "path": "data/raw/study3/nyc311/targets/captures/123224fc785fc48d0b4d3eb44694db706077bd98f68812ee7611750a79f18915.response",
+      "sha256": "b70b6f75b1cb9f93c4a201dc81572f5e1178b1119b0fa55554a6dc31aab0d960"
+    },
+    {
+      "acquired_at": "2026-10-17T03:23:26.464943+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/fecf74730acbe43533c968029e46ce3d210a168cc7f2a4875364ee0e385f42ca.json",
+      "path": "data/raw/study3/nyc311/targets/captures/fecf74730acbe43533c968029e46ce3d210a168cc7f2a4875364ee0e385f42ca.response",
+      "sha256": "899e2362c18190e2672a39f29c67da3cb1506c73be74f005f1e8fb4744154e8a"
+    },
+    {
+      "acquired_at": "2026-10-17T03:24:16.038277+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/6883ac341037d304dd6ef343f202eb16ec500dd68e94d585b47640aa5de0ba3a.json",
+      "path": "data/raw/study3/nyc311/targets/captures/6883ac341037d304dd6ef343f202eb16ec500dd68e94d585b47640aa5de0ba3a.response",
+      "sha256": "85330616fafa59e02126c6fe8a818cc9b2d32305f09f0bb99cba1b0c8c6af88e"
+    },
+    {
+      "acquired_at": "2026-10-17T03:24:32.152200+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/2137a3687ba376ea5d99e1b708bbb24c9e1879a63bcc2c6a7d4d68e2004ef4c7.json",
+      "path": "data/raw/study3/nyc311/targets/captures/2137a3687ba376ea5d99e1b708bbb24c9e1879a63bcc2c6a7d4d68e2004ef4c7.response",
+      "sha256": "0c0c03e8809293a40e4e425b121a7eabdaf29ab5af5b715cffa0928ada7eb5e5"
+    },
+    {
+      "acquired_at": "2026-10-17T03:24:52.398555+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/8f25a3d4d32c644a3ebf618b769e07fb776f006502729ddd338bd2face66ced5.json",
+      "path": "data/raw/study3/nyc311/targets/captures/8f25a3d4d32c644a3ebf618b769e07fb776f006502729ddd338bd2face66ced5.response",
+      "sha256": "acf85044252d1e5ebfb05cd1e44cf49050f46ed15a92e332e9eb39c52a5108d2"
+    },
+    {
+      "acquired_at": "2026-10-17T03:25:02.982550+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/525aef117532d0e03bf610cbd0e2425f7a9c13c499bc7c26061b832606c07521.json",
+      "path": "data/raw/study3/nyc311/targets/captures/525aef117532d0e03bf610cbd0e2425f7a9c13c499bc7c26061b832606c07521.response",
+      "sha256": "7ebb6fdcbf0558b0ce39bf0f4f12b31008e7aa30483992f11e7393a61c71bd9b"
+    },
+    {
+      "acquired_at": "2026-10-17T03:25:20.767509+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5e70c4f899e1472c8aba27a408052796eec901e6010d91fd2ba50a0d31931b61.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5e70c4f899e1472c8aba27a408052796eec901e6010d91fd2ba50a0d31931b61.response",
+      "sha256": "82206e83dc77095a04c0d11b50ea52d85534f3a7053f0dd9f3ad12d557dcb886"
+    },
+    {
+      "acquired_at": "2026-10-17T03:25:35.605532+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/01bff1cddcace06f96dd91b22aaf173a99fdc9a1d5da0a4cebeb674f98eb8d75.json",
+      "path": "data/raw/study3/nyc311/targets/captures/01bff1cddcace06f96dd91b22aaf173a99fdc9a1d5da0a4cebeb674f98eb8d75.response",
+      "sha256": "0a0359967ced0865c29101631f247d4575178a2c188eeff2816e557c6dbc920c"
+    },
+    {
+      "acquired_at": "2026-10-17T03:25:38.156015+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/4652f7c499ea5b16514b700d17c9551e8076011a95b9b1db6f666b3f8da28651.json",
+      "path": "data/raw/study3/nyc311/targets/captures/4652f7c499ea5b16514b700d17c9551e8076011a95b9b1db6f666b3f8da28651.response",
+      "sha256": "b16d564dc4c0162cc4ea319b8030db85801ce372dc27397bd8dd6c13b48929a6"
+    },
+    {
+      "acquired_at": "2026-10-17T03:25:40.577633+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/cb4b68bca95f95f95f662f94fde8eaeb2d1e36d618e4a233a4aca7aacac8b1fb.json",
+      "path": "data/raw/study3/nyc311/targets/captures/cb4b68bca95f95f95f662f94fde8eaeb2d1e36d618e4a233a4aca7aacac8b1fb.response",
+      "sha256": "b664f994e7ac188e34d80892479a27637b19f7ac8b6a1258f227eebebf0a631a"
+    },
+    {
+      "acquired_at": "2026-10-17T03:25:59.066234+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/ff0880e484cbf2cf2e4766be2f10390e7b1d9c1247d43d1b5ab594d24a6ebf78.json",
+      "path": "data/raw/study3/nyc311/targets/captures/ff0880e484cbf2cf2e4766be2f10390e7b1d9c1247d43d1b5ab594d24a6ebf78.response",
+      "sha256": "d147e64a4b9c2e46dcc0c1ff7b9eab233aeb41acf31ca64fa8fdb335eaaf5064"
+    },
+    {
+      "acquired_at": "2026-10-17T03:26:14.072611+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/3d54f0158f2a744ec3db2234e079c12ef01089f917ba0d9b034e02d6a1169399.json",
+      "path": "data/raw/study3/nyc311/targets/captures/3d54f0158f2a744ec3db2234e079c12ef01089f917ba0d9b034e02d6a1169399.response",
+      "sha256": "a19bdbf3a4a3ad01328ab1af9f1f473fc51d13a8b97fee2e615f355fae1c6f65"
+    },
+    {
+      "acquired_at": "2026-10-17T03:26:16.093949+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/346dc1cfd2265b155a6a31cb5d4233eeeeb55e8e060a36ae479d158a9c9b96cd.json",
+      "path": "data/raw/study3/nyc311/targets/captures/346dc1cfd2265b155a6a31cb5d4233eeeeb55e8e060a36ae479d158a9c9b96cd.response",
+      "sha256": "3203d319dc17a4ae05ff6b6dbb89c04b7dbaf5691ca1c56571e7cf6a25800624"
+    },
+    {
+      "acquired_at": "2026-10-17T03:26:46.367975+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/f58166e17493dd7bf6dc426d449cff86beac130b270d0176cef4704bf1b09708.json",
+      "path": "data/raw/study3/nyc311/targets/captures/f58166e17493dd7bf6dc426d449cff86beac130b270d0176cef4704bf1b09708.response",
+      "sha256": "08d981d1fe12e5fb9babfd3be0bf398b75d24ea8e908d6a080c6c2d0c73cd413"
+    },
+    {
+      "acquired_at": "2026-10-17T03:26:59.458151+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/bcf98707996d04ebcbe50ad7c95367296290856d479b943662234d96cdc34420.json",
+      "path": "data/raw/study3/nyc311/targets/captures/bcf98707996d04ebcbe50ad7c95367296290856d479b943662234d96cdc34420.response",
+      "sha256": "7aaa9d2b4c1e3b70dd43640e23ee17671bfc28871326784b03ba816b47ef172c"
+    },
+    {
+      "acquired_at": "2026-10-17T03:27:02.103068+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/8c54013fb894c293eeb11af1a6ada67581e0960f77bd8b403bde492e3b2269dd.json",
+      "path": "data/raw/study3/nyc311/targets/captures/8c54013fb894c293eeb11af1a6ada67581e0960f77bd8b403bde492e3b2269dd.response",
+      "sha256": "1d27f5795d037e4ca824e88714f1eb5bf6843978bbb85ff2c65954da4fdf5e76"
+    },
+    {
+      "acquired_at": "2026-10-17T03:27:04.212711+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/97df2f73a10991d42bee503b40473a63054ed99685885b076d9cfae4b49d763d.json",
+      "path": "data/raw/study3/nyc311/targets/captures/97df2f73a10991d42bee503b40473a63054ed99685885b076d9cfae4b49d763d.response",
+      "sha256": "b4fcf3734cf3e65364dab55bd69f4cf8356b3aeed5e60377b7dd5addc8fe7761"
+    },
+    {
+      "acquired_at": "2026-10-17T03:27:06.059529+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/4c7bb97542951bcf2111724205ae261cab1b10a25f8ec2cd6210fcc1bcf213ce.json",
+      "path": "data/raw/study3/nyc311/targets/captures/4c7bb97542951bcf2111724205ae261cab1b10a25f8ec2cd6210fcc1bcf213ce.response",
+      "sha256": "1d7e1eac453f4877872dee6a241a32135b986b6171dd2e9073483a01a1136ffe"
+    },
+    {
+      "acquired_at": "2026-10-17T03:27:17.268393+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/f53b36759e84e6584fd9bf388010c175a36d4739d40163506fedea6ee5c2ffc1.json",
+      "path": "data/raw/study3/nyc311/targets/captures/f53b36759e84e6584fd9bf388010c175a36d4739d40163506fedea6ee5c2ffc1.response",
+      "sha256": "bf7cbd72f7f1ea6d1cd50266433d78db20557079ce88088d0ea10077c5eb7a1a"
+    },
+    {
+      "acquired_at": "2026-10-17T03:27:39.293525+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/93070754807b50cb4be90fca99109e4874c765bd568345efdacbb372dee2720c.json",
+      "path": "data/raw/study3/nyc311/targets/captures/93070754807b50cb4be90fca99109e4874c765bd568345efdacbb372dee2720c.response",
+      "sha256": "ac1ebfad4e29a9b9a261b98e6576e079b56c3db9726c9c6effe747ebb040de76"
+    },
+    {
+      "acquired_at": "2026-10-17T03:27:50.470585+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/6c81670dc410bc49ebef9eec4b29a49fd73df39d0080c188e98413ae5d550ac2.json",
+      "path": "data/raw/study3/nyc311/targets/captures/6c81670dc410bc49ebef9eec4b29a49fd73df39d0080c188e98413ae5d550ac2.response",
+      "sha256": "98c5657b6329cc45bcfb76158d8e28b2ff008d5c562402b969ece6d3bba28ca9"
+    },
+    {
+      "acquired_at": "2026-10-17T03:28:05.014377+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/90edb7ab2390689b33dc7268420e63749d9ca353b7b74512295d13243f42cdd4.json",
+      "path": "data/raw/study3/nyc311/targets/captures/90edb7ab2390689b33dc7268420e63749d9ca353b7b74512295d13243f42cdd4.response",
+      "sha256": "995630b0dc5c495d9cf0dcfa9680941e4d1153bd546cd86d7e722177cd8ac9c6"
+    },
+    {
+      "acquired_at": "2026-10-17T03:28:08.152442+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/c7f62d86dbc4fdbf75854247e330a6061b733711fa9747e38a25db0d0eb4ebf3.json",
+      "path": "data/raw/study3/nyc311/targets/captures/c7f62d86dbc4fdbf75854247e330a6061b733711fa9747e38a25db0d0eb4ebf3.response",
+      "sha256": "67369d256799309c7bd22207c66501e4c3d6d33c5a4bfb1ce73d3376834baade"
+    },
+    {
+      "acquired_at": "2026-10-17T03:28:17.331271+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5c1771f938519a9bd8e10451b1a749e9cba2a57934a468119e559a9bc4bfa14e.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5c1771f938519a9bd8e10451b1a749e9cba2a57934a468119e559a9bc4bfa14e.response",
+      "sha256": "e4e822828c72929a8852cbe9a2a07ea159e93e90519c133fceae14ae2732fc74"
+    },
+    {
+      "acquired_at": "2026-10-17T03:28:19.912063+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/3608752aed84327023963bfee880de3046c4a7544ff00bdb3be2da89439042e8.json",
+      "path": "data/raw/study3/nyc311/targets/captures/3608752aed84327023963bfee880de3046c4a7544ff00bdb3be2da89439042e8.response",
+      "sha256": "e53af82c0445c24d30408b37e54c5cac9f37af76f46c31365b39c01abffa4e0f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:28:35.428850+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5497c9c05051a34287813ac7326eb4429ef62c6489e4703d43f408c527014e4b.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5497c9c05051a34287813ac7326eb4429ef62c6489e4703d43f408c527014e4b.response",
+      "sha256": "512aeb65be85c71893a4bf4294878d9e07c34f167610f6cebadb392e8e440a33"
+    },
+    {
+      "acquired_at": "2026-10-17T03:28:43.971831+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/8ccab7765e4f3f9f68b38995c63d8ea4c7f500c8162222e1959862027052ef44.json",
+      "path": "data/raw/study3/nyc311/targets/captures/8ccab7765e4f3f9f68b38995c63d8ea4c7f500c8162222e1959862027052ef44.response",
+      "sha256": "0cdacb2c405c12b544c699d5e0633c47431fb031f61328126505a4ab835345b8"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:04.821566+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/b7e876c57fca172b9676943604923134aa7a956f682a029232ff0effb0d6bbb8.json",
+      "path": "data/raw/study3/nyc311/targets/captures/b7e876c57fca172b9676943604923134aa7a956f682a029232ff0effb0d6bbb8.response",
+      "sha256": "077c389eea1c0ba5f94ee2fb980594a08ec49e45fa2830fdad2fb416330e62a8"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:07.632005+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/206594413d450c519b55d2fdcd1436ac0b91c8e4a537124aed434cf81f4d35ac.json",
+      "path": "data/raw/study3/nyc311/targets/captures/206594413d450c519b55d2fdcd1436ac0b91c8e4a537124aed434cf81f4d35ac.response",
+      "sha256": "090fca16d3a07972e559395f6a9246dadd7131fbcaef75cb3b5529ac024f0892"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:09.740884+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/a6dd26f2761e22f2761eabee75d8a584db67ccac3135b5d490985d1bac1602ac.json",
+      "path": "data/raw/study3/nyc311/targets/captures/a6dd26f2761e22f2761eabee75d8a584db67ccac3135b5d490985d1bac1602ac.response",
+      "sha256": "0c05f46ff2f7ab2b4f58b90c6bec2b8be70d6f982d0463e49c305a637f0779bc"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:11.617736+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/03e483e86188cc37454bafb9c302bb2cb3604004590bb4256e3a66bf94b3074d.json",
+      "path": "data/raw/study3/nyc311/targets/captures/03e483e86188cc37454bafb9c302bb2cb3604004590bb4256e3a66bf94b3074d.response",
+      "sha256": "64308695f30a8156c630438eb2b8813f1e1587633d615e726dc0203ee55c58bf"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:14.659509+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/b027262f7228b479a4de3b191c26b47916441c283434d513f85c0b336582f15b.json",
+      "path": "data/raw/study3/nyc311/targets/captures/b027262f7228b479a4de3b191c26b47916441c283434d513f85c0b336582f15b.response",
+      "sha256": "2fe5562585911acddc8ee7478fdfe80f6b206ca7caf5ab6b1e7c12d60f17aee2"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:17.237857+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/7ebb87f7a11f7eafd74c79c9be0585f9a473ec17b5d04692c8d76e61be2c57ca.json",
+      "path": "data/raw/study3/nyc311/targets/captures/7ebb87f7a11f7eafd74c79c9be0585f9a473ec17b5d04692c8d76e61be2c57ca.response",
+      "sha256": "3c493c3904800d03ce4efcc1e0e30608d75a0437b1e75c7a03365200fa0e7cbe"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:19.475258+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/3adc52155a7314aa2141a87aa619f2c26c6b3d00d0add16171b42c6dff90d02b.json",
+      "path": "data/raw/study3/nyc311/targets/captures/3adc52155a7314aa2141a87aa619f2c26c6b3d00d0add16171b42c6dff90d02b.response",
+      "sha256": "b985e14e603d2e03d9fd77d1baddb97ea24d910ea0200e3dac670b06513fe601"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:21.817493+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/e4f8c3b2552b8e5dd76029ecee541878e345d0d18078912efbbf20de0c703918.json",
+      "path": "data/raw/study3/nyc311/targets/captures/e4f8c3b2552b8e5dd76029ecee541878e345d0d18078912efbbf20de0c703918.response",
+      "sha256": "3ee2c9fb14dc348a6191f18b909b2467b640091e19d83b681fc05e948a8c46fd"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:24.165113+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/53a57da423d0ea9b1a0e22384b6c4b6ea902fb91db8cbccc8547300c0dabd493.json",
+      "path": "data/raw/study3/nyc311/targets/captures/53a57da423d0ea9b1a0e22384b6c4b6ea902fb91db8cbccc8547300c0dabd493.response",
+      "sha256": "470b4929d927dbece64e917501217fb9cd886dc1c9287e3644cd43ba6e7ec576"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:27.388327+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5c13f4b44a115a0642b48c2da48519958b20fcbec3987037956e837712fbca96.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5c13f4b44a115a0642b48c2da48519958b20fcbec3987037956e837712fbca96.response",
+      "sha256": "3d05b6b66697bfbe9822500735cad0fb51e6da7a22fe342112f4dd66cacacc3f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:29.965635+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/8f89787b50f2c0ddb4e51920da3f5757ee5a57a99de53fb6357eb889f24edea1.json",
+      "path": "data/raw/study3/nyc311/targets/captures/8f89787b50f2c0ddb4e51920da3f5757ee5a57a99de53fb6357eb889f24edea1.response",
+      "sha256": "9a1a907e55fc635c8d04cd09bebe8c0a280b2466525aa1d3f20e8e60780bb501"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:32.946995+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/7e4e4178010eda98820869521ca3fe23679ac3c50bbe46b4d3b9b5813f004e2a.json",
+      "path": "data/raw/study3/nyc311/targets/captures/7e4e4178010eda98820869521ca3fe23679ac3c50bbe46b4d3b9b5813f004e2a.response",
+      "sha256": "68ab1694fcd093c4d11082082581bec726ab06e65a255de31a18f297f83442bc"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:35.962678+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/0989c6363ea8c668add15ffd416acecca19c54f0cd9148cdbc6530b89c5cb09e.json",
+      "path": "data/raw/study3/nyc311/targets/captures/0989c6363ea8c668add15ffd416acecca19c54f0cd9148cdbc6530b89c5cb09e.response",
+      "sha256": "bf72c4ed0cba210a9c4980cff3956c0a9c9dd6cacad4c43bc9abfff0ff982165"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:38.857643+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/ca750bc6ff63f9fdce01ffcf12ea0113cf6d6ee4d3417de2864054de33208e3c.json",
+      "path": "data/raw/study3/nyc311/targets/captures/ca750bc6ff63f9fdce01ffcf12ea0113cf6d6ee4d3417de2864054de33208e3c.response",
+      "sha256": "a142cfdc8dee93946fa201fd5dc5ad2723e16b4e3e71b5f4f89af3bb72740644"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:46.161455+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/7e67e535c937bf583b480efa55038da9902a60974595db250feb02f87c875b5c.json",
+      "path": "data/raw/study3/nyc311/targets/captures/7e67e535c937bf583b480efa55038da9902a60974595db250feb02f87c875b5c.response",
+      "sha256": "1a9537e4c589b4e18b41811ba7c828a8fb23700b8262fcb89619402118f62a0f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:48.637386+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/31161accd3ab836648d45c7607a00b6934697ec7600b6d7630c1fa9c660e1ea3.json",
+      "path": "data/raw/study3/nyc311/targets/captures/31161accd3ab836648d45c7607a00b6934697ec7600b6d7630c1fa9c660e1ea3.response",
+      "sha256": "c6e87f3da2a52338cf0c2cb0097f3f21ff7b2c556b5912a02ec568cffa899741"
+    },
+    {
+      "acquired_at": "2026-10-17T03:29:51.795381+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/52a0fb5d3ff682f29d8aa61a1483c092771440ad4adbcbef8ecae2a30625eae1.json",
+      "path": "data/raw/study3/nyc311/targets/captures/52a0fb5d3ff682f29d8aa61a1483c092771440ad4adbcbef8ecae2a30625eae1.response",
+      "sha256": "09c6ea7c3ff56dcd80a7915648d43e9e040ad4a135baaf09bfd37e4e362fe36f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:30:04.879615+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/1a991fb21ec754bd2c062dbded9f79e43f43c9842b1f3aa8ffe2c66cab4c054e.json",
+      "path": "data/raw/study3/nyc311/targets/captures/1a991fb21ec754bd2c062dbded9f79e43f43c9842b1f3aa8ffe2c66cab4c054e.response",
+      "sha256": "cefb8e0776fef307ee88d86df458e83c4f8d04dbf6989f282e2d4f125cc84c32"
+    },
+    {
+      "acquired_at": "2026-10-17T03:30:25.516009+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/c71830073fc6627ae171d6e943a98c2958bea0a8db5d53efb447c9a2906e3643.json",
+      "path": "data/raw/study3/nyc311/targets/captures/c71830073fc6627ae171d6e943a98c2958bea0a8db5d53efb447c9a2906e3643.response",
+      "sha256": "53b4ad506e0b200e1175116ef55b3776e5ecdde2f16f7619d22c5bd1598bde6b"
+    },
+    {
+      "acquired_at": "2026-10-17T03:30:28.186861+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/53ec3eafcacada1f81e2c9b9a9d226835ddf97f1dfea9547db3a9d3f68aa0ea5.json",
+      "path": "data/raw/study3/nyc311/targets/captures/53ec3eafcacada1f81e2c9b9a9d226835ddf97f1dfea9547db3a9d3f68aa0ea5.response",
+      "sha256": "32ecb6114fa73f2a53f390364ee8c783ae9ce495d28f898341f3f7a433fcf25e"
+    },
+    {
+      "acquired_at": "2026-10-17T03:30:30.728251+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/133c15ce89477383b739a08e2de0288c0e6a136c77ee9900b164a146c34da917.json",
+      "path": "data/raw/study3/nyc311/targets/captures/133c15ce89477383b739a08e2de0288c0e6a136c77ee9900b164a146c34da917.response",
+      "sha256": "09bc1b909f1ed67a741b566dc6654a9b4aeb7925756cc594dce78313049ecba9"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:05.227661+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/cb2bb82975b1ccfe524a6025c7ba570158b9b544ec2c34fc570155718da12fc8.json",
+      "path": "data/raw/study3/nyc311/targets/captures/cb2bb82975b1ccfe524a6025c7ba570158b9b544ec2c34fc570155718da12fc8.response",
+      "sha256": "407508c627883b3e56f8b1f517ed85d04cb1a62a51db9fc0858c1f98d2ec5baf"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:07.278398+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5c58a640456340492a177ee66cb10750aae76f346fddc40953ebe6c1fffbe8c6.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5c58a640456340492a177ee66cb10750aae76f346fddc40953ebe6c1fffbe8c6.response",
+      "sha256": "65f85a9c8ca3726dba15a9f10db464448673c56af8a68256d1740e9242f60273"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:13.982928+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/b22b6739b9b1ee7838c63e697247fbec0d2c75ce3ea77acbc5bc9a85b1be4399.json",
+      "path": "data/raw/study3/nyc311/targets/captures/b22b6739b9b1ee7838c63e697247fbec0d2c75ce3ea77acbc5bc9a85b1be4399.response",
+      "sha256": "7450a0c4401c0f38ee5fc67ae78e22a9df1ab057c806fd4b26741edfc4d4c92c"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:27.580822+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/994323bb65e4cd6b53549cfe933acb41f3790fc4d0e3bc39548262a8570a5d0d.json",
+      "path": "data/raw/study3/nyc311/targets/captures/994323bb65e4cd6b53549cfe933acb41f3790fc4d0e3bc39548262a8570a5d0d.response",
+      "sha256": "a7b6dea511b2a32367bf0cfbb5617c554528be2e11ca5d2bfad19ed36f76e612"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:29.607041+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/57658c358367335292ec8e409e4d70b90ee90c5aeabc928621a86d1405f9c1a1.json",
+      "path": "data/raw/study3/nyc311/targets/captures/57658c358367335292ec8e409e4d70b90ee90c5aeabc928621a86d1405f9c1a1.response",
+      "sha256": "1a9bee6f382d81bded52af8b9dddf8ec49a7ef2d2e2001e21b4b2d3fc30fa22f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:31.673758+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/29cac6dab37b478cf7912bda6889494f0649e715e1e7f4e84c985a737fe26865.json",
+      "path": "data/raw/study3/nyc311/targets/captures/29cac6dab37b478cf7912bda6889494f0649e715e1e7f4e84c985a737fe26865.response",
+      "sha256": "1849b08145a898d8c1a7badc9bf1d00960e3b53a7c6e20e1c3b7b45fa9d9f490"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:33.492852+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/2958f42772e0a3ce80a1244e7bbb2fa3b6f3cb5d93fa5c72b35dcd65dcbee074.json",
+      "path": "data/raw/study3/nyc311/targets/captures/2958f42772e0a3ce80a1244e7bbb2fa3b6f3cb5d93fa5c72b35dcd65dcbee074.response",
+      "sha256": "158372b3423dd3b3b13626a2901a6c15032ba40685815f089308ae282eb2fab0"
+    },
+    {
+      "acquired_at": "2026-10-17T03:31:48.274515+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/2dd0b2204aebe02233d1e67cff5158ab6bf080701dea5814edf9fdd05bcde3f9.json",
+      "path": "data/raw/study3/nyc311/targets/captures/2dd0b2204aebe02233d1e67cff5158ab6bf080701dea5814edf9fdd05bcde3f9.response",
+      "sha256": "32140b9a140b19fa50ec1eea5004209930dbe3d3e5f2b2e7a908d8fe85b8aea1"
+    },
+    {
+      "acquired_at": "2026-10-17T03:32:02.004208+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/0f6886cd62a0c3b76d95c691083a120cf8c31df75f349919b7121bd508515fc8.json",
+      "path": "data/raw/study3/nyc311/targets/captures/0f6886cd62a0c3b76d95c691083a120cf8c31df75f349919b7121bd508515fc8.response",
+      "sha256": "b085c10fcb0113d787a184a9f849ecd2889512c70335afa120960801bda83d41"
+    },
+    {
+      "acquired_at": "2026-10-17T03:32:04.109314+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/e0e3d2d1ef2f13cadb1462faad17d2bb422f19ee44281e7273ac0be87e877b71.json",
+      "path": "data/raw/study3/nyc311/targets/captures/e0e3d2d1ef2f13cadb1462faad17d2bb422f19ee44281e7273ac0be87e877b71.response",
+      "sha256": "6cd4d65b1daabce2598d161593ebb22289c103f85ee50288b71a95688119e93f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:32:09.987612+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/5c60db5ad7e5785f85f450e7dcc5834d7cd20f27cd428ebe702a1bcec6813d13.json",
+      "path": "data/raw/study3/nyc311/targets/captures/5c60db5ad7e5785f85f450e7dcc5834d7cd20f27cd428ebe702a1bcec6813d13.response",
+      "sha256": "07beb882f630d3717621c6a3c66470d649d7cc0ec320a3d31cafb35f74fc978a"
+    },
+    {
+      "acquired_at": "2026-10-17T03:32:12.367279+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/e897a56fcf9b178f2f2721893e111449b2f5d68b9bc64a1dc11320ca9430fbcd.json",
+      "path": "data/raw/study3/nyc311/targets/captures/e897a56fcf9b178f2f2721893e111449b2f5d68b9bc64a1dc11320ca9430fbcd.response",
+      "sha256": "47d1fc9d61d63d90821e0d837618181b2a089d4ae763e73c447b0ec3219756fa"
+    },
+    {
+      "acquired_at": "2026-10-17T03:45:13.531310+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/90e28167b84f0cbbaa799c8fdf67ac3352e68ca7a62362321bff4abff67181fc.json",
+      "path": "data/raw/study3/nyc311/targets/captures/90e28167b84f0cbbaa799c8fdf67ac3352e68ca7a62362321bff4abff67181fc.response",
+      "sha256": "3b30986f05ae021b8924431d577b3aa7d2c7f2e56ebcbbf8526ed2fea4bd580f"
+    },
+    {
+      "acquired_at": "2026-10-17T03:45:17.320459+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/bdd3faac1a8fb2a9b0c8e5c8d09a900cd10881448e89eb138c0c3176605fc054.json",
+      "path": "data/raw/study3/nyc311/targets/captures/bdd3faac1a8fb2a9b0c8e5c8d09a900cd10881448e89eb138c0c3176605fc054.response",
+      "sha256": "bf86582f1b9e39e9bb487d3cb702802b5c56f15adc70eef8b416dbe064a67897"
+    },
+    {
+      "acquired_at": "2026-10-17T03:45:21.225191+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/cdf205a1368b603ed239d6f39cb74c7c4a1f5b3322f6f633bc202746f7888d7b.json",
+      "path": "data/raw/study3/nyc311/targets/captures/cdf205a1368b603ed239d6f39cb74c7c4a1f5b3322f6f633bc202746f7888d7b.response",
+      "sha256": "d5d043801b8607978c296f034dcd0f421154fe7cce8977ad34a8cc93e5753fbb"
+    },
+    {
+      "acquired_at": "2026-10-17T03:45:25.130639+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/dac6c5d0f4658cb2733396f64819bfc1f1f93d84344c9411ade1b5384411cb18.json",
+      "path": "data/raw/study3/nyc311/targets/captures/dac6c5d0f4658cb2733396f64819bfc1f1f93d84344c9411ade1b5384411cb18.response",
+      "sha256": "a7e814442c3afa973f118d0e315bb8fb128160bcafddbc567284e0dc5b3c195e"
+    },
+    {
+      "acquired_at": "2026-10-17T03:45:35.528483+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/405a2a5efb4a48a507ef0d27086c5ba6be8c8739fae6b5d9bade623cd0f81829.json",
+      "path": "data/raw/study3/nyc311/targets/captures/405a2a5efb4a48a507ef0d27086c5ba6be8c8739fae6b5d9bade623cd0f81829.response",
+      "sha256": "15246248bfe302485c2d09d1ea6f58d6ee46be6326e634be93a1b3be4eaa7656"
+    },
+    {
+      "acquired_at": "2026-10-17T03:45:42.791841+00:00",
+      "metadata_path": "data/raw/study3/nyc311/targets/captures/74f4b3036e0ff53227d14703e7e36aeb0dc0f07a0f939b82b70aab9e575fbe7e.json",
+      "path": "data/raw/study3/nyc311/targets/captures/74f4b3036e0ff53227d14703e7e36aeb0dc0f07a0f939b82b70aab9e575fbe7e.response",
+      "sha256": "74008c5a5fc6aa544de22a8f6886f35dd0e8054d12b6d2a169508a750b34ac39"
+    }
+  ],
+  "series": 300,
+  "signals_sha256": "8f85b2e2a90e4ecd81aadf73de753b9d976aeef02ba53039c0d6fc91bb2b02c3",
+  "target_census": {
+    "calendar": "America/New_York",
+    "captured_rows": 983482,
+    "days": 90,
+    "domain": "nyc311",
+    "end": "2026-08-31",
+    "frame_cells": 8469,
+    "frame_requests": 947751,
+    "frame_sha256": "783a5caf591e6a7c5987897f5769a54a3db6cc1da29e9743e6e7bda45709f9f3",
+    "gap_days": [],
+    "method": "One SODA query per New York calendar day, created_date between the day's local midnight and its last millisecond, selecting unique_key,created_date,complaint_type,community_board, ordered by unique_key and paged by 50000; a day is complete when its last page holds fewer rows. Requests are deduplicated by unique_key, keeping the latest captured revision (the latest capture, then the later day), and counted by creation day, never by closure. Requests with a missing or unrecognized board or problem, and recognized cells outside the frozen 2024 frame, are counted apart. A cell-day absent from the exhausted enumeration has zero requests; a day with no request in any frame cell is a source gap and stops the domain.",
+    "outside_frame_requests": 17071,
+    "per_day": [
+      {
+        "captured_rows": 11538,
+        "day": "2026-06-03",
+        "frame_requests": 11301,
+        "outside_frame_requests": 33,
+        "pages": 1,
+        "requests": 11538,
+        "superseded_rows": 0,
+        "unrecognized_requests": 204
+      },
+      {
+        "captured_rows": 11214,
+        "day": "2026-06-04",
+        "frame_requests": 10938,
+        "outside_frame_requests": 33,
+        "pages": 1,
+        "requests": 11214,
+        "superseded_rows": 0,
+        "unrecognized_requests": 243
+      },
+      {
+        "captured_rows": 11688,
+        "day": "2026-06-05",
+        "frame_requests": 11461,
+        "outside_frame_requests": 34,
+        "pages": 1,
+        "requests": 11688,
+        "superseded_rows": 0,
+        "unrecognized_requests": 193
+      },
+      {
+        "captured_rows": 10539,
+        "day": "2026-06-06",
+        "frame_requests": 10324,
+        "outside_frame_requests": 26,
+        "pages": 1,
+        "requests": 10539,
+        "superseded_rows": 0,
+        "unrecognized_requests": 189
+      },
+      {
+        "captured_rows": 12559,
+        "day": "2026-06-07",
+        "frame_requests": 12293,
+        "outside_frame_requests": 34,
+        "pages": 1,
+        "requests": 12559,
+        "superseded_rows": 0,
+        "unrecognized_requests": 232
+      },
+      {
+        "captured_rows": 12206,
+        "day": "2026-06-08",
+        "frame_requests": 11947,
+        "outside_frame_requests": 37,
+        "pages": 1,
+        "requests": 12206,
+        "superseded_rows": 0,
+        "unrecognized_requests": 222
+      },
+      {
+        "captured_rows": 11912,
+        "day": "2026-06-09",
+        "frame_requests": 11667,
+        "outside_frame_requests": 34,
+        "pages": 1,
+        "requests": 11912,
+        "superseded_rows": 0,
+        "unrecognized_requests": 211
+      },
+      {
+        "captured_rows": 11275,
+        "day": "2026-06-10",
+        "frame_requests": 11019,
+        "outside_frame_requests": 42,
+        "pages": 1,
+        "requests": 11275,
+        "superseded_rows": 0,
+        "unrecognized_requests": 214
+      },
+      {
+        "captured_rows": 11035,
+        "day": "2026-06-11",
+        "frame_requests": 10800,
+        "outside_frame_requests": 39,
+        "pages": 1,
+        "requests": 11035,
+        "superseded_rows": 0,
+        "unrecognized_requests": 196
+      },
+      {
+        "captured_rows": 10998,
+        "day": "2026-06-12",
+        "frame_requests": 10731,
+        "outside_frame_requests": 42,
+        "pages": 1,
+        "requests": 10998,
+        "superseded_rows": 0,
+        "unrecognized_requests": 225
+      },
+      {
+        "captured_rows": 10184,
+        "day": "2026-06-13",
+        "frame_requests": 9932,
+        "outside_frame_requests": 43,
+        "pages": 1,
+        "requests": 10184,
+        "superseded_rows": 0,
+        "unrecognized_requests": 209
+      },
+      {
+        "captured_rows": 10698,
+        "day": "2026-06-14",
+        "frame_requests": 10483,
+        "outside_frame_requests": 44,
+        "pages": 1,
+        "requests": 10698,
+        "superseded_rows": 0,
+        "unrecognized_requests": 171
+      },
+      {
+        "captured_rows": 11535,
+        "day": "2026-06-15",
+        "frame_requests": 11281,
+        "outside_frame_requests": 35,
+        "pages": 1,
+        "requests": 11535,
+        "superseded_rows": 0,
+        "unrecognized_requests": 219
+      },
+      {
+        "captured_rows": 11242,
+        "day": "2026-06-16",
+        "frame_requests": 11008,
+        "outside_frame_requests": 28,
+        "pages": 1,
+        "requests": 11242,
+        "superseded_rows": 0,
+        "unrecognized_requests": 206
+      },
+      {
+        "captured_rows": 10409,
+        "day": "2026-06-17",
+        "frame_requests": 10186,
+        "outside_frame_requests": 36,
+        "pages": 1,
+        "requests": 10409,
+        "superseded_rows": 0,
+        "unrecognized_requests": 187
+      },
+      {
+        "captured_rows": 10816,
+        "day": "2026-06-18",
+        "frame_requests": 10599,
+        "outside_frame_requests": 34,
+        "pages": 1,
+        "requests": 10816,
+        "superseded_rows": 0,
+        "unrecognized_requests": 183
+      },
+      {
+        "captured_rows": 10240,
+        "day": "2026-06-19",
+        "frame_requests": 10027,
+        "outside_frame_requests": 29,
+        "pages": 1,
+        "requests": 10240,
+        "superseded_rows": 0,
+        "unrecognized_requests": 184
+      },
+      {
+        "captured_rows": 10414,
+        "day": "2026-06-20",
+        "frame_requests": 10184,
+        "outside_frame_requests": 36,
+        "pages": 1,
+        "requests": 10414,
+        "superseded_rows": 0,
+        "unrecognized_requests": 194
+      },
+      {
+        "captured_rows": 11685,
+        "day": "2026-06-21",
+        "frame_requests": 11430,
+        "outside_frame_requests": 36,
+        "pages": 1,
+        "requests": 11685,
+        "superseded_rows": 0,
+        "unrecognized_requests": 219
+      },
+      {
+        "captured_rows": 11305,
+        "day": "2026-06-22",
+        "frame_requests": 11047,
+        "outside_frame_requests": 45,
+        "pages": 1,
+        "requests": 11305,
+        "superseded_rows": 0,
+        "unrecognized_requests": 213
+      },
+      {
+        "captured_rows": 10440,
+        "day": "2026-06-23",
+        "frame_requests": 10225,
+        "outside_frame_requests": 25,
+        "pages": 1,
+        "requests": 10440,
+        "superseded_rows": 0,
+        "unrecognized_requests": 190
+      },
+      {
+        "captured_rows": 11367,
+        "day": "2026-06-24",
+        "frame_requests": 11119,
+        "outside_frame_requests": 40,
+        "pages": 1,
+        "requests": 11367,
+        "superseded_rows": 0,
+        "unrecognized_requests": 208
+      },
+      {
+        "captured_rows": 10955,
+        "day": "2026-06-25",
+        "frame_requests": 10734,
+        "outside_frame_requests": 47,
+        "pages": 1,
+        "requests": 10955,
+        "superseded_rows": 0,
+        "unrecognized_requests": 174
+      },
+      {
+        "captured_rows": 11031,
+        "day": "2026-06-26",
+        "frame_requests": 10780,
+        "outside_frame_requests": 44,
+        "pages": 1,
+        "requests": 11031,
+        "superseded_rows": 0,
+        "unrecognized_requests": 207
+      },
+      {
+        "captured_rows": 9886,
+        "day": "2026-06-27",
+        "frame_requests": 9708,
+        "outside_frame_requests": 36,
+        "pages": 1,
+        "requests": 9886,
+        "superseded_rows": 0,
+        "unrecognized_requests": 142
+      },
+      {
+        "captured_rows": 10999,
+        "day": "2026-06-28",
+        "frame_requests": 10758,
+        "outside_frame_requests": 32,
+        "pages": 1,
+        "requests": 10999,
+        "superseded_rows": 0,
+        "unrecognized_requests": 209
+      },
+      {
+        "captured_rows": 11949,
+        "day": "2026-06-29",
+        "frame_requests": 11641,
+        "outside_frame_requests": 57,
+        "pages": 1,
+        "requests": 11949,
+        "superseded_rows": 0,
+        "unrecognized_requests": 251
+      },
+      {
+        "captured_rows": 11312,
+        "day": "2026-06-30",
+        "frame_requests": 10980,
+        "outside_frame_requests": 56,
+        "pages": 1,
+        "requests": 11312,
+        "superseded_rows": 0,
+        "unrecognized_requests": 276
+      },
+      {
+        "captured_rows": 11602,
+        "day": "2026-07-01",
+        "frame_requests": 11339,
+        "outside_frame_requests": 63,
+        "pages": 1,
+        "requests": 11602,
+        "superseded_rows": 0,
+        "unrecognized_requests": 200
+      },
+      {
+        "captured_rows": 14140,
+        "day": "2026-07-02",
+        "frame_requests": 13887,
+        "outside_frame_requests": 37,
+        "pages": 1,
+        "requests": 14140,
+        "superseded_rows": 0,
+        "unrecognized_requests": 216
+      },
+      {
+        "captured_rows": 13083,
+        "day": "2026-07-03",
+        "frame_requests": 12845,
+        "outside_frame_requests": 62,
+        "pages": 1,
+        "requests": 13083,
+        "superseded_rows": 0,
+        "unrecognized_requests": 176
+      },
+      {
+        "captured_rows": 13148,
+        "day": "2026-07-04",
+        "frame_requests": 12970,
+        "outside_frame_requests": 26,
+        "pages": 1,
+        "requests": 13148,
+        "superseded_rows": 0,
+        "unrecognized_requests": 152
+      },
+      {
+        "captured_rows": 12277,
+        "day": "2026-07-05",
+        "frame_requests": 12034,
+        "outside_frame_requests": 35,
+        "pages": 1,
+        "requests": 12277,
+        "superseded_rows": 0,
+        "unrecognized_requests": 208
+      },
+      {
+        "captured_rows": 11473,
+        "day": "2026-07-06",
+        "frame_requests": 11097,
+        "outside_frame_requests": 132,
+        "pages": 1,
+        "requests": 11473,
+        "superseded_rows": 0,
+        "unrecognized_requests": 244
+      },
+      {
+        "captured_rows": 11607,
+        "day": "2026-07-07",
+        "frame_requests": 11284,
+        "outside_frame_requests": 76,
+        "pages": 1,
+        "requests": 11607,
+        "superseded_rows": 0,
+        "unrecognized_requests": 247
+      },
+      {
+        "captured_rows": 11544,
+        "day": "2026-07-08",
+        "frame_requests": 11228,
+        "outside_frame_requests": 91,
+        "pages": 1,
+        "requests": 11544,
+        "superseded_rows": 0,
+        "unrecognized_requests": 225
+      },
+      {
+        "captured_rows": 10911,
+        "day": "2026-07-09",
+        "frame_requests": 10644,
+        "outside_frame_requests": 82,
+        "pages": 1,
+        "requests": 10911,
+        "superseded_rows": 0,
+        "unrecognized_requests": 185
+      },
+      {
+        "captured_rows": 10753,
+        "day": "2026-07-10",
+        "frame_requests": 10489,
+        "outside_frame_requests": 69,
+        "pages": 1,
+        "requests": 10753,
+        "superseded_rows": 0,
+        "unrecognized_requests": 195
+      },
+      {
+        "captured_rows": 9202,
+        "day": "2026-07-11",
+        "frame_requests": 8998,
+        "outside_frame_requests": 42,
+        "pages": 1,
+        "requests": 9202,
+        "superseded_rows": 0,
+        "unrecognized_requests": 162
+      },
+      {
+        "captured_rows": 10383,
+        "day": "2026-07-12",
+        "frame_requests": 10151,
+        "outside_frame_requests": 60,
+        "pages": 1,
+        "requests": 10383,
+        "superseded_rows": 0,
+        "unrecognized_requests": 172
+      },
+      {
+        "captured_rows": 11614,
+        "day": "2026-07-13",
+        "frame_requests": 11323,
+        "outside_frame_requests": 58,
+        "pages": 1,
+        "requests": 11614,
+        "superseded_rows": 0,
+        "unrecognized_requests": 233
+      },
+      {
+        "captured_rows": 11403,
+        "day": "2026-07-14",
+        "frame_requests": 11147,
+        "outside_frame_requests": 57,
+        "pages": 1,
+        "requests": 11403,
+        "superseded_rows": 0,
+        "unrecognized_requests": 199
+      },
+      {
+        "captured_rows": 10724,
+        "day": "2026-07-15",
+        "frame_requests": 10473,
+        "outside_frame_requests": 76,
+        "pages": 1,
+        "requests": 10724,
+        "superseded_rows": 0,
+        "unrecognized_requests": 175
+      },
+      {
+        "captured_rows": 10216,
+        "day": "2026-07-16",
+        "frame_requests": 9938,
+        "outside_frame_requests": 73,
+        "pages": 1,
+        "requests": 10216,
+        "superseded_rows": 0,
+        "unrecognized_requests": 205
+      },
+      {
+        "captured_rows": 10887,
+        "day": "2026-07-17",
+        "frame_requests": 10578,
+        "outside_frame_requests": 111,
+        "pages": 1,
+        "requests": 10887,
+        "superseded_rows": 0,
+        "unrecognized_requests": 198
+      },
+      {
+        "captured_rows": 9402,
+        "day": "2026-07-18",
+        "frame_requests": 9114,
+        "outside_frame_requests": 126,
+        "pages": 1,
+        "requests": 9402,
+        "superseded_rows": 0,
+        "unrecognized_requests": 162
+      },
+      {
+        "captured_rows": 9991,
+        "day": "2026-07-19",
+        "frame_requests": 9710,
+        "outside_frame_requests": 76,
+        "pages": 1,
+        "requests": 9991,
+        "superseded_rows": 0,
+        "unrecognized_requests": 205
+      },
+      {
+        "captured_rows": 12028,
+        "day": "2026-07-20",
+        "frame_requests": 11650,
+        "outside_frame_requests": 135,
+        "pages": 1,
+        "requests": 12028,
+        "superseded_rows": 0,
+        "unrecognized_requests": 243
+      },
+      {
+        "captured_rows": 10673,
+        "day": "2026-07-21",
+        "frame_requests": 10337,
+        "outside_frame_requests": 124,
+        "pages": 1,
+        "requests": 10673,
+        "superseded_rows": 0,
+        "unrecognized_requests": 212
+      },
+      {
+        "captured_rows": 10535,
+        "day": "2026-07-22",
+        "frame_requests": 10221,
+        "outside_frame_requests": 97,
+        "pages": 1,
+        "requests": 10535,
+        "superseded_rows": 0,
+        "unrecognized_requests": 217
+      },
+      {
+        "captured_rows": 10585,
+        "day": "2026-07-23",
+        "frame_requests": 10250,
+        "outside_frame_requests": 148,
+        "pages": 1,
+        "requests": 10585,
+        "superseded_rows": 0,
+        "unrecognized_requests": 187
+      },
+      {
+        "captured_rows": 10726,
+        "day": "2026-07-24",
+        "frame_requests": 10382,
+        "outside_frame_requests": 165,
+        "pages": 1,
+        "requests": 10726,
+        "superseded_rows": 0,
+        "unrecognized_requests": 179
+      },
+      {
+        "captured_rows": 10002,
+        "day": "2026-07-25",
+        "frame_requests": 9737,
+        "outside_frame_requests": 106,
+        "pages": 1,
+        "requests": 10002,
+        "superseded_rows": 0,
+        "unrecognized_requests": 159
+      },
+      {
+        "captured_rows": 11562,
+        "day": "2026-07-26",
+        "frame_requests": 11215,
+        "outside_frame_requests": 161,
+        "pages": 1,
+        "requests": 11562,
+        "superseded_rows": 0,
+        "unrecognized_requests": 186
+      },
+      {
+        "captured_rows": 11253,
+        "day": "2026-07-27",
+        "frame_requests": 10846,
+        "outside_frame_requests": 160,
+        "pages": 1,
+        "requests": 11253,
+        "superseded_rows": 0,
+        "unrecognized_requests": 247
+      },
+      {
+        "captured_rows": 10468,
+        "day": "2026-07-28",
+        "frame_requests": 10046,
+        "outside_frame_requests": 216,
+        "pages": 1,
+        "requests": 10468,
+        "superseded_rows": 0,
+        "unrecognized_requests": 206
+      },
+      {
+        "captured_rows": 10411,
+        "day": "2026-07-29",
+        "frame_requests": 9796,
+        "outside_frame_requests": 369,
+        "pages": 1,
+        "requests": 10411,
+        "superseded_rows": 0,
+        "unrecognized_requests": 246
+      },
+      {
+        "captured_rows": 9882,
+        "day": "2026-07-30",
+        "frame_requests": 9368,
+        "outside_frame_requests": 324,
+        "pages": 1,
+        "requests": 9882,
+        "superseded_rows": 0,
+        "unrecognized_requests": 190
+      },
+      {
+        "captured_rows": 10648,
+        "day": "2026-07-31",
+        "frame_requests": 10167,
+        "outside_frame_requests": 300,
+        "pages": 1,
+        "requests": 10648,
+        "superseded_rows": 0,
+        "unrecognized_requests": 181
+      },
+      {
+        "captured_rows": 9989,
+        "day": "2026-08-01",
+        "frame_requests": 9552,
+        "outside_frame_requests": 275,
+        "pages": 1,
+        "requests": 9989,
+        "superseded_rows": 0,
+        "unrecognized_requests": 162
+      },
+      {
+        "captured_rows": 9843,
+        "day": "2026-08-02",
+        "frame_requests": 9418,
+        "outside_frame_requests": 225,
+        "pages": 1,
+        "requests": 9843,
+        "superseded_rows": 0,
+        "unrecognized_requests": 200
+      },
+      {
+        "captured_rows": 11228,
+        "day": "2026-08-03",
+        "frame_requests": 10386,
+        "outside_frame_requests": 616,
+        "pages": 1,
+        "requests": 11228,
+        "superseded_rows": 0,
+        "unrecognized_requests": 226
+      },
+      {
+        "captured_rows": 11229,
+        "day": "2026-08-04",
+        "frame_requests": 10662,
+        "outside_frame_requests": 347,
+        "pages": 1,
+        "requests": 11229,
+        "superseded_rows": 0,
+        "unrecognized_requests": 220
+      },
+      {
+        "captured_rows": 10287,
+        "day": "2026-08-05",
+        "frame_requests": 9744,
+        "outside_frame_requests": 334,
+        "pages": 1,
+        "requests": 10287,
+        "superseded_rows": 0,
+        "unrecognized_requests": 209
+      },
+      {
+        "captured_rows": 10388,
+        "day": "2026-08-06",
+        "frame_requests": 9677,
+        "outside_frame_requests": 510,
+        "pages": 1,
+        "requests": 10388,
+        "superseded_rows": 0,
+        "unrecognized_requests": 201
+      },
+      {
+        "captured_rows": 10807,
+        "day": "2026-08-07",
+        "frame_requests": 9871,
+        "outside_frame_requests": 711,
+        "pages": 1,
+        "requests": 10807,
+        "superseded_rows": 0,
+        "unrecognized_requests": 225
+      },
+      {
+        "captured_rows": 9938,
+        "day": "2026-08-08",
+        "frame_requests": 9228,
+        "outside_frame_requests": 536,
+        "pages": 1,
+        "requests": 9938,
+        "superseded_rows": 0,
+        "unrecognized_requests": 174
+      },
+      {
+        "captured_rows": 10629,
+        "day": "2026-08-09",
+        "frame_requests": 9819,
+        "outside_frame_requests": 606,
+        "pages": 1,
+        "requests": 10629,
+        "superseded_rows": 0,
+        "unrecognized_requests": 204
+      },
+      {
+        "captured_rows": 11483,
+        "day": "2026-08-10",
+        "frame_requests": 10635,
+        "outside_frame_requests": 600,
+        "pages": 1,
+        "requests": 11483,
+        "superseded_rows": 0,
+        "unrecognized_requests": 248
+      },
+      {
+        "captured_rows": 11020,
+        "day": "2026-08-11",
+        "frame_requests": 10353,
+        "outside_frame_requests": 437,
+        "pages": 1,
+        "requests": 11020,
+        "superseded_rows": 0,
+        "unrecognized_requests": 230
+      },
+      {
+        "captured_rows": 10800,
+        "day": "2026-08-12",
+        "frame_requests": 10144,
+        "outside_frame_requests": 435,
+        "pages": 1,
+        "requests": 10800,
+        "superseded_rows": 0,
+        "unrecognized_requests": 221
+      },
+      {
+        "captured_rows": 10546,
+        "day": "2026-08-13",
+        "frame_requests": 9913,
+        "outside_frame_requests": 414,
+        "pages": 1,
+        "requests": 10546,
+        "superseded_rows": 0,
+        "unrecognized_requests": 219
+      },
+      {
+        "captured_rows": 10557,
+        "day": "2026-08-14",
+        "frame_requests": 9928,
+        "outside_frame_requests": 397,
+        "pages": 1,
+        "requests": 10557,
+        "superseded_rows": 0,
+        "unrecognized_requests": 232
+      },
+      {
+        "captured_rows": 9614,
+        "day": "2026-08-15",
+        "frame_requests": 9206,
+        "outside_frame_requests": 241,
+        "pages": 1,
+        "requests": 9614,
+        "superseded_rows": 0,
+        "unrecognized_requests": 167
+      },
+      {
+        "captured_rows": 9249,
+        "day": "2026-08-16",
+        "frame_requests": 8849,
+        "outside_frame_requests": 209,
+        "pages": 1,
+        "requests": 9249,
+        "superseded_rows": 0,
+        "unrecognized_requests": 191
+      },
+      {
+        "captured_rows": 10857,
+        "day": "2026-08-17",
+        "frame_requests": 10288,
+        "outside_frame_requests": 314,
+        "pages": 1,
+        "requests": 10857,
+        "superseded_rows": 0,
+        "unrecognized_requests": 255
+      },
+      {
+        "captured_rows": 10977,
+        "day": "2026-08-18",
+        "frame_requests": 10408,
+        "outside_frame_requests": 321,
+        "pages": 1,
+        "requests": 10977,
+        "superseded_rows": 0,
+        "unrecognized_requests": 248
+      },
+      {
+        "captured_rows": 10703,
+        "day": "2026-08-19",
+        "frame_requests": 10096,
+        "outside_frame_requests": 397,
+        "pages": 1,
+        "requests": 10703,
+        "superseded_rows": 0,
+        "unrecognized_requests": 210
+      },
+      {
+        "captured_rows": 11062,
+        "day": "2026-08-20",
+        "frame_requests": 10257,
+        "outside_frame_requests": 566,
+        "pages": 1,
+        "requests": 11062,
+        "superseded_rows": 0,
+        "unrecognized_requests": 239
+      },
+      {
+        "captured_rows": 11521,
+        "day": "2026-08-21",
+        "frame_requests": 10787,
+        "outside_frame_requests": 488,
+        "pages": 1,
+        "requests": 11521,
+        "superseded_rows": 0,
+        "unrecognized_requests": 246
+      },
+      {
+        "captured_rows": 10047,
+        "day": "2026-08-22",
+        "frame_requests": 9631,
+        "outside_frame_requests": 239,
+        "pages": 1,
+        "requests": 10047,
+        "superseded_rows": 0,
+        "unrecognized_requests": 177
+      },
+      {
+        "captured_rows": 10790,
+        "day": "2026-08-23",
+        "frame_requests": 10120,
+        "outside_frame_requests": 451,
+        "pages": 1,
+        "requests": 10790,
+        "superseded_rows": 0,
+        "unrecognized_requests": 219
+      },
+      {
+        "captured_rows": 11667,
+        "day": "2026-08-24",
+        "frame_requests": 10977,
+        "outside_frame_requests": 404,
+        "pages": 1,
+        "requests": 11667,
+        "superseded_rows": 0,
+        "unrecognized_requests": 286
+      },
+      {
+        "captured_rows": 10922,
+        "day": "2026-08-25",
+        "frame_requests": 10341,
+        "outside_frame_requests": 358,
+        "pages": 1,
+        "requests": 10922,
+        "superseded_rows": 0,
+        "unrecognized_requests": 223
+      },
+      {
+        "captured_rows": 10609,
+        "day": "2026-08-26",
+        "frame_requests": 10067,
+        "outside_frame_requests": 338,
+        "pages": 1,
+        "requests": 10609,
+        "superseded_rows": 0,
+        "unrecognized_requests": 204
+      },
+      {
+        "captured_rows": 10043,
+        "day": "2026-08-27",
+        "frame_requests": 9381,
+        "outside_frame_requests": 445,
+        "pages": 1,
+        "requests": 10043,
+        "superseded_rows": 0,
+        "unrecognized_requests": 217
+      },
+      {
+        "captured_rows": 10807,
+        "day": "2026-08-28",
+        "frame_requests": 10281,
+        "outside_frame_requests": 335,
+        "pages": 1,
+        "requests": 10807,
+        "superseded_rows": 0,
+        "unrecognized_requests": 191
+      },
+      {
+        "captured_rows": 9867,
+        "day": "2026-08-29",
+        "frame_requests": 9441,
+        "outside_frame_requests": 226,
+        "pages": 1,
+        "requests": 9867,
+        "superseded_rows": 0,
+        "unrecognized_requests": 200
+      },
+      {
+        "captured_rows": 10231,
+        "day": "2026-08-30",
+        "frame_requests": 9799,
+        "outside_frame_requests": 252,
+        "pages": 1,
+        "requests": 10231,
+        "superseded_rows": 0,
+        "unrecognized_requests": 180
+      },
+      {
+        "captured_rows": 11208,
+        "day": "2026-08-31",
+        "frame_requests": 10625,
+        "outside_frame_requests": 330,
+        "pages": 1,
+        "requests": 11208,
+        "superseded_rows": 0,
+        "unrecognized_requests": 253
+      }
+    ],
+    "requests": 983482,
+    "source": "https://data.cityofnewyork.us/resource/erm2-nwe9.json",
+    "start": "2026-06-03",
+    "superseded_rows": 0,
+    "unrecognized_requests": 18660
+  },
+  "verified": true,
+  "verified_at": "2026-10-17T03:45:45.033248+00:00"
+}

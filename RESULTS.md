@@ -816,3 +816,101 @@ the registered analysis of the data as served. The secondary tables (concentrati
 stratum with the very-sparse stratum at n = 9, accounting, PIT), the per-day source summary, the integrity
 checks and the regeneration commands are in
 [reports/study2-npm/run-2026-10-15/RESULTS-npm.md](reports/study2-npm/run-2026-10-15/RESULTS-npm.md).
+
+## Study 3, the occurrence substitution by regime on NYC 311 (registered family R01 to R36 by the addition of 2026-10-16), 2026-10-17
+
+Protocol: `PROTOCOL.md`, dated addition of 2026-10-16, item 7 (`3357d77`; protocol SHA-256 `05c7617b…`), with Study
+2's registration at `df55867` wherever the item says "as registered"; the family is
+`study/study3/regime_comparisons.json`. Implementation: `00fd91dccfc86b1e4bbd2f0cb44a47052937458d`.
+
+- **Gate:** pass, with the author's signed readiness and the GPU smoke at the implementation commit, before any
+  target request and again before the run.
+- **Targets:** the 90 days 2026-06-03 to 2026-08-31, counted by the registered one-query-per-day census over the
+  frozen 2024 frame. The pull made 106 attempts against an approved 120. Every day was exhausted on one page, and
+  there was no source gap.
+- **Run:** complete. It scored 39,600 forecasts (300 series × 3 origins × 2 horizons × 22 variants), with no failures
+  and no resumes, in 956 seconds against a budget of 3,600.
+- **Integrity:** every saved score was recomputed from the saved forecasts with no disagreement, and the two new
+  variants' registered structure holds on every window.
+
+The strata are the sampling strata: the context zero fraction over 2026-03-05 to 2026-06-02.
+
+| Stratum | Complete candidates | Series | No request in the 90 strata days | No request in the 275-day context |
+|---|---|---|---|---|
+| dense, [0, 0.5) | 2,002 | 100 | 0 | 0 |
+| sparse, [0.5, 0.9) | 2,422 | 100 | 0 | 0 |
+| very sparse, [0.9, 1] | 4,045 | 100 | 39 | 19 |
+| all | 8,469 | 300 | 39 | 19 |
+
+How to read the table:
+
+- **Differences** are hurdle_dynamic minus the reference, in QScore9, within the stratum. A negative difference
+  favors hurdle_dynamic.
+- **T1 and T2:** T1 is against the model's own completed forecast, T2 against `hurdle_empirical_28`.
+- **The entity is the series.** Origins are averaged within series and horizon, and a stratum's 100 series weigh
+  equally.
+- **Intervals** are pointwise 95% percentile intervals from 20,000 series bootstrap replicates.
+- **Raw p** is from two-sided approximate Wilcoxon signed-rank tests with exact ties omitted. This is a location
+  test under symmetry, not a test of the mean.
+- **BH** is applied once over the thirty-six, at q = 0.05.
+- **H3's prediction** is a positive T1 median in the dense stratum and a negative one in the sparse and very sparse
+  strata. A median of exactly zero has no sign.
+
+| ID | Stratum | Model | h | Contrast, reference | hurdle_dynamic mean | Reference mean | Mean difference | 95% interval | Median difference | Lower / tied / higher | Raw p | BH p | BH rejects | H3's sign | Median's sign | Median as H3 predicts |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| R01 | dense (n = 100) | Chronos-2 | 7 | T1 `chronos2_completed` | 1.851 | 1.833 | 0.01775 | [0.006084, 0.0302] | 0.01217 | 39 / 1 / 60 | 0.00786 | 0.0167 | yes | positive | positive | yes |
+| R02 | dense (n = 100) | Chronos-2 | 7 | T2 `hurdle_empirical_28` | 1.851 | 2.06 | -0.2089 | [-0.3871, -0.08625] | -0.06561 | 75 / 1 / 24 | 5.7e-09 | 4.1e-08 | yes | none | negative | n/a |
+| R03 | dense (n = 100) | Chronos-2 | 30 | T1 `chronos2_completed` | 1.724 | 1.709 | 0.01511 | [0.006331, 0.02457] | 0.004074 | 43 / 2 / 55 | 0.0147 | 0.0294 | yes | positive | positive | yes |
+| R04 | dense (n = 100) | Chronos-2 | 30 | T2 `hurdle_empirical_28` | 1.724 | 1.939 | -0.2147 | [-0.3923, -0.09954] | -0.06531 | 87 / 0 / 13 | 2.35e-14 | 8.47e-13 | yes | none | negative | n/a |
+| R05 | dense (n = 100) | TimesFM 3 | 7 | T1 `timesfm3_completed` | 1.848 | 1.827 | 0.02098 | [0.01196, 0.03057] | 0.01164 | 30 / 2 / 68 | 1.5e-05 | 5.4e-05 | yes | positive | positive | yes |
+| R06 | dense (n = 100) | TimesFM 3 | 7 | T2 `hurdle_empirical_28` | 1.848 | 2.06 | -0.2118 | [-0.3953, -0.0842] | -0.05608 | 75 / 0 / 25 | 1.44e-08 | 8.66e-08 | yes | none | negative | n/a |
+| R07 | dense (n = 100) | TimesFM 3 | 30 | T1 `timesfm3_completed` | 1.719 | 1.703 | 0.01637 | [0.00961, 0.02362] | 0.008395 | 28 / 0 / 72 | 6.88e-06 | 3.1e-05 | yes | positive | positive | yes |
+| R08 | dense (n = 100) | TimesFM 3 | 30 | T2 `hurdle_empirical_28` | 1.719 | 1.939 | -0.2194 | [-0.4047, -0.09995] | -0.06123 | 85 / 0 / 15 | 1.87e-13 | 2.24e-12 | yes | none | negative | n/a |
+| R09 | dense (n = 100) | TimesFM 2.5 | 7 | T1 `timesfm2p5_completed` | 1.846 | 1.824 | 0.02219 | [0.0129, 0.03251] | 0.0127 | 32 / 2 / 66 | 1.41e-05 | 5.4e-05 | yes | positive | positive | yes |
+| R10 | dense (n = 100) | TimesFM 2.5 | 7 | T2 `hurdle_empirical_28` | 1.846 | 2.06 | -0.2138 | [-0.3964, -0.09041] | -0.05714 | 72 / 0 / 28 | 9.65e-10 | 8.69e-09 | yes | none | negative | n/a |
+| R11 | dense (n = 100) | TimesFM 2.5 | 30 | T1 `timesfm2p5_completed` | 1.726 | 1.707 | 0.01862 | [0.01234, 0.02532] | 0.01148 | 30 / 0 / 70 | 5.29e-08 | 2.72e-07 | yes | positive | positive | yes |
+| R12 | dense (n = 100) | TimesFM 2.5 | 30 | T2 `hurdle_empirical_28` | 1.726 | 1.939 | -0.2126 | [-0.3846, -0.1013] | -0.06753 | 86 / 0 / 14 | 1.8e-13 | 2.24e-12 | yes | none | negative | n/a |
+| R13 | sparse (n = 100) | Chronos-2 | 7 | T1 `chronos2_completed` | 0.361 | 0.3631 | -0.002138 | [-0.007111, 0.002751] | 0 | 46 / 13 / 41 | 0.526 | 0.556 | no | negative | none (0) | neither (median 0) |
+| R14 | sparse (n = 100) | Chronos-2 | 7 | T2 `hurdle_empirical_28` | 0.361 | 0.3664 | -0.005418 | [-0.01095, 0.0001481] | 0 | 46 / 15 / 39 | 0.102 | 0.138 | no | none | none (0) | n/a |
+| R15 | sparse (n = 100) | Chronos-2 | 30 | T1 `chronos2_completed` | 0.3574 | 0.3591 | -0.001654 | [-0.00497, 0.001657] | 0 | 44 / 12 / 44 | 0.357 | 0.414 | no | negative | none (0) | neither (median 0) |
+| R16 | sparse (n = 100) | Chronos-2 | 30 | T2 `hurdle_empirical_28` | 0.3574 | 0.3615 | -0.004047 | [-0.008321, -0.0001752] | -0.001852 | 53 / 15 / 32 | 0.0274 | 0.0471 | yes | none | negative | n/a |
+| R17 | sparse (n = 100) | TimesFM 3 | 7 | T1 `timesfm3_completed` | 0.3606 | 0.3603 | 0.0003069 | [-0.003714, 0.004571] | 0 | 45 / 23 / 32 | 0.425 | 0.478 | no | negative | none (0) | neither (median 0) |
+| R18 | sparse (n = 100) | TimesFM 3 | 7 | T2 `hurdle_empirical_28` | 0.3606 | 0.3664 | -0.005788 | [-0.01146, -0.0001796] | -0.002116 | 53 / 16 / 31 | 0.0208 | 0.0393 | yes | none | negative | n/a |
+| R19 | sparse (n = 100) | TimesFM 3 | 30 | T1 `timesfm3_completed` | 0.3563 | 0.3541 | 0.002242 | [-0.0001507, 0.004805] | 0 | 35 / 20 / 45 | 0.194 | 0.241 | no | negative | none (0) | neither (median 0) |
+| R20 | sparse (n = 100) | TimesFM 3 | 30 | T2 `hurdle_empirical_28` | 0.3563 | 0.3615 | -0.005173 | [-0.009237, -0.001407] | -0.002469 | 58 / 18 / 24 | 0.00085 | 0.00219 | yes | none | negative | n/a |
+| R21 | sparse (n = 100) | TimesFM 2.5 | 7 | T1 `timesfm2p5_completed` | 0.3618 | 0.3668 | -0.004921 | [-0.009302, -0.0003386] | -0.002116 | 57 / 8 / 35 | 0.00198 | 0.00445 | yes | negative | negative | yes |
+| R22 | sparse (n = 100) | TimesFM 2.5 | 7 | T2 `hurdle_empirical_28` | 0.3618 | 0.3664 | -0.004561 | [-0.009979, 0.0009841] | -0.002646 | 55 / 17 / 28 | 0.0275 | 0.0471 | yes | none | negative | n/a |
+| R23 | sparse (n = 100) | TimesFM 2.5 | 30 | T1 `timesfm2p5_completed` | 0.3571 | 0.3581 | -0.0009852 | [-0.003595, 0.001825] | -0.0004938 | 53 / 11 / 36 | 0.0349 | 0.0547 | no | negative | negative | yes |
+| R24 | sparse (n = 100) | TimesFM 2.5 | 30 | T2 `hurdle_empirical_28` | 0.3571 | 0.3615 | -0.004422 | [-0.00836, -0.0006642] | -0.002469 | 58 / 17 / 25 | 0.00118 | 0.00283 | yes | none | negative | n/a |
+| R25 | very sparse (n = 100) | Chronos-2 | 7 | T1 `chronos2_completed` | 0.05527 | 0.05273 | 0.00254 | [-0.0002222, 0.006762] | 0 | 2 / 88 / 10 | 0.0342 | 0.0547 | no | negative | none (0) | neither (median 0) |
+| R26 | very sparse (n = 100) | Chronos-2 | 7 | T2 `hurdle_empirical_28` | 0.05527 | 0.0557 | -0.0004339 | [-0.001376, 0.000582] | 0 | 17 / 75 / 8 | 0.103 | 0.138 | no | none | none (0) | n/a |
+| R27 | very sparse (n = 100) | Chronos-2 | 30 | T1 `chronos2_completed` | 0.06064 | 0.06013 | 0.0005086 | [-0.001496, 0.003388] | 0 | 11 / 82 / 7 | 0.5 | 0.545 | no | negative | none (0) | neither (median 0) |
+| R28 | very sparse (n = 100) | Chronos-2 | 30 | T2 `hurdle_empirical_28` | 0.06064 | 0.06132 | -0.000679 | [-0.001383, 0.0002247] | 0 | 22 / 77 / 1 | 0.000464 | 0.00128 | yes | none | none (0) | n/a |
+| R29 | very sparse (n = 100) | TimesFM 3 | 7 | T1 `timesfm3_completed` | 0.05524 | 0.05298 | 0.002254 | [-0.0002857, 0.006667] | 0 | 7 / 84 / 9 | 0.717 | 0.738 | no | negative | none (0) | neither (median 0) |
+| R30 | very sparse (n = 100) | TimesFM 3 | 7 | T2 `hurdle_empirical_28` | 0.05524 | 0.0557 | -0.0004656 | [-0.001354, 0.0004868] | 0 | 17 / 75 / 8 | 0.182 | 0.235 | no | none | none (0) | n/a |
+| R31 | very sparse (n = 100) | TimesFM 3 | 30 | T1 `timesfm3_completed` | 0.06088 | 0.05797 | 0.002911 | [-0.0005901, 0.009531] | 0 | 18 / 72 / 10 | 0.264 | 0.317 | no | negative | none (0) | neither (median 0) |
+| R32 | very sparse (n = 100) | TimesFM 3 | 30 | T2 `hurdle_empirical_28` | 0.06088 | 0.06132 | -0.0004444 | [-0.001432, 0.001012] | 0 | 22 / 77 / 1 | 0.000464 | 0.00128 | yes | none | none (0) | n/a |
+| R33 | very sparse (n = 100) | TimesFM 2.5 | 7 | T1 `timesfm2p5_completed` | 0.05523 | 0.05327 | 0.001958 | [-0.0006243, 0.006116] | 0 | 3 / 87 / 10 | 0.0463 | 0.0694 | no | negative | none (0) | neither (median 0) |
+| R34 | very sparse (n = 100) | TimesFM 2.5 | 7 | T2 `hurdle_empirical_28` | 0.05523 | 0.0557 | -0.0004762 | [-0.001386, 0.0004868] | 0 | 17 / 75 / 8 | 0.103 | 0.138 | no | none | none (0) | n/a |
+| R35 | very sparse (n = 100) | TimesFM 2.5 | 30 | T1 `timesfm2p5_completed` | 0.06102 | 0.05939 | 0.001632 | [-0.001728, 0.007084] | 0 | 7 / 86 / 7 | 0.826 | 0.826 | no | negative | none (0) | neither (median 0) |
+| R36 | very sparse (n = 100) | TimesFM 2.5 | 30 | T2 `hurdle_empirical_28` | 0.06102 | 0.06132 | -0.0003037 | [-0.001407, 0.001459] | 0 | 22 / 77 / 1 | 0.000464 | 0.00128 | yes | none | none (0) | n/a |
+
+**Twenty-one of thirty-six reject. No test rejects in the direction opposite to H3's prediction, and no T1 median
+has the opposite sign.**
+
+- **Dense, against the completed control (R01 to R11, odd):** all six reject against hurdle_dynamic, as H3
+  predicts. It scores higher on 55 to 72 of the 100 series, by about 1% of the control's mean.
+- **Sparse, against the completed control:** one test rejects, in the predicted direction (R21, TimesFM 2.5 at
+  horizon 7). Four medians are exactly zero.
+- **Very sparse, against the completed control:** no test rejects. Every median is exactly zero, with 72 to 88 of the
+  100 series tied exactly.
+- **H3's dense half is confirmed on NYC 311 and its sparse half is not.**
+- **Against `hurdle_empirical_28`:** hurdle_dynamic is lower in every row that rejects. That is all six dense rows,
+  five of six sparse rows, and the three very sparse rows at horizon 30. In those three the direction comes from
+  the rank sums, since the medians are zero.
+
+The source's metadata states no license. NYC Open Data's pages link the city website's terms of use, read on
+2026-10-17. They require lawful use, give no warranty and imply no endorsement, and say nothing specific about
+datasets, their license or attribution (`reports/study3-nyc311/panel/source-terms.md`). The secondary tables, the
+direction check, the files and the regeneration commands are in
+[reports/study3-nyc311/run-2026-10-17/RESULTS-nyc311.md](reports/study3-nyc311/run-2026-10-17/RESULTS-nyc311.md).

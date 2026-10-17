@@ -1,0 +1,69 @@
+{
+  "action": "study3",
+  "addition_commit": "3357d779db28cffa4048e7e333fd02b9434b4b6d",
+  "approved_at": "2026-10-17T03:12:50Z",
+  "approved_by": "Victor Prchlik",
+  "confirmed": true,
+  "domain": "nyc311",
+  "estimated_seconds": 1080,
+  "evidence": [
+    {
+      "path": "reports/study3-nyc311/panel/manifest.json",
+      "sha256": "a508b4d87c642c98a308247fa851e5618cfb95f8fdc255113a2a5b6cb8f8663b"
+    },
+    {
+      "path": "study/study3/nyc311_panel_status.json",
+      "sha256": "400f49bcca1229debe26d45463c9bc2396a93b4ffc86fb5d8f8f01faef0f1512"
+    },
+    {
+      "path": "data/raw/study3/smoke-00fd91d.json",
+      "sha256": "2786bcc602d0745d05934f85c58f9788d705fdb381705e16bfc2b628c05275ea"
+    },
+    {
+      "path": "data/raw/study3/nyc311/targets/signals.parquet",
+      "sha256": "8f85b2e2a90e4ecd81aadf73de753b9d976aeef02ba53039c0d6fc91bb2b02c3"
+    },
+    {
+      "path": "data/raw/study3/nyc311/targets/completeness.json",
+      "sha256": "76cafcadc458a88ff041b6b1e74cf9fffa3e9097b1306537cc47604d5272ea2f"
+    }
+  ],
+  "implementation_commit": "00fd91dccfc86b1e4bbd2f0cb44a47052937458d",
+  "panels": {
+    "nyc311": {
+      "census": {
+        "path": "reports/study3-nyc311/panel/census.json",
+        "sha256": "eef80f85f7f5e3abbd6fc4ab4a6dbbf7cfbd43d39edf95115201098780005e9c"
+      },
+      "completeness": {
+        "path": "data/raw/study3/nyc311/targets/completeness.json",
+        "sha256": "76cafcadc458a88ff041b6b1e74cf9fffa3e9097b1306537cc47604d5272ea2f"
+      },
+      "context": {
+        "path": "data/raw/study3/nyc311/panel/context.parquet",
+        "sha256": "935a01a571d119fe12cd1f893ebbae13bb5f04ae01b2a50c0aa624a03738a64c"
+      },
+      "manifest": {
+        "path": "reports/study3-nyc311/panel/manifest.json",
+        "sha256": "a508b4d87c642c98a308247fa851e5618cfb95f8fdc255113a2a5b6cb8f8663b"
+      },
+      "selection": {
+        "path": "reports/study3-nyc311/panel/selection.json",
+        "sha256": "6ab7aa34fbf931595049b6e2c97e7bdb778e7980de97bd151d510404c9739512"
+      },
+      "signals": {
+        "path": "data/raw/study3/nyc311/targets/signals.parquet",
+        "sha256": "8f85b2e2a90e4ecd81aadf73de753b9d976aeef02ba53039c0d6fc91bb2b02c3"
+      }
+    }
+  },
+  "protocol_sha256": "05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29",
+  "runtime_budget_seconds": 3600,
+  "smoke": {
+    "path": "data/raw/study3/smoke-00fd91d.json",
+    "sha256": "2786bcc602d0745d05934f85c58f9788d705fdb381705e16bfc2b628c05275ea"
+  },
+  "source_semantics_record": "reports/study3-nyc311/panel/source-terms.md as committed in 0e707595ac0b66cdfe7f4a0218744412ff2312cb, section 'The time basis of created_date': a floating timestamp (calendar_date) behaving as New York wall-clock time with daylight saving time; the status file records created_date_type calendar_date",
+  "source_semantics_resolved": true,
+  "target_access_approved": true
+}

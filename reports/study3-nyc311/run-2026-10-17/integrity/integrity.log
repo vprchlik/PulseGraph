@@ -1,0 +1,11 @@
+2026-10-17T04:04:51+00:00 start: component study3, run reports/study3-nyc311/run-2026-10-17
+2026-10-17T04:04:51+00:00 run.json: status complete, identity a3e0b1a6adfc815779724917c8f34e63b5bf5be9796021d30c5edcf635b669cd; registered grid 300 series x 3 origins x 2 horizons x 22 variants = 39600 forecasts
+2026-10-17T04:05:01+00:00 checkpoints: 300 hashes equal run.json; 39600 forecasts
+2026-10-17T04:05:02+00:00 qscore9: 39600 compared, 0 disagree
+2026-10-17T04:05:02+00:00 zero: 39600 compared, 0 disagree
+2026-10-17T04:05:02+00:00 positive_over: 39600 compared, 0 disagree
+2026-10-17T04:05:02+00:00 positive_under: 39600 compared, 0 disagree
+2026-10-17T04:05:02+00:00 context_scaled_qscore9: 39600 compared, 0 disagree
+2026-10-17T04:05:02+00:00 occurrence_brier: 30600 compared, 0 disagree
+2026-10-17T04:05:02+00:00 new-variant structure: 10800 windows checked, 0 fail
+2026-10-17T04:05:02+00:00 result: pass (0 of 39600 forecasts failed)
