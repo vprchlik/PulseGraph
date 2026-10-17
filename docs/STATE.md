@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-17 06:21 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 07:29 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `e50db16` (2026-10-17 05:17 UTC), 50 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `da86452` (2026-10-17 06:23 UTC), 52 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -86,7 +86,7 @@ reads its boundary vocabulary from a file outside the tree. The report's source 
 Still no PDF. By word count the body is about seventeen pages before the references against an aim of fourteen; the
 next cuts each remove a stated number and are the author's choice (`paper/PAPER-SUMMARY.md`).
 
-**Extended with Study 3 (2026-10-17; awaiting the author's commit).** The title and abstract name three registered
+**Extended with Study 3 (2026-10-17; committed `6220211`).** The title and abstract name three registered
 studies; a Study 3 part (question, design, panel, results) follows Study 2's results, with its detail in two appendix
 sections; the discussion is rewritten for three studies: for dense series a context-only or dynamic occurrence estimate
 does not improve the model's own completed zero mass under this score, on npm, the grid and NYC 311, confirmatory on two
@@ -95,10 +95,30 @@ the other and two readings given equal weight (a smaller benefit, or a score bli
 decile at zero). The fourth factorial cell, run on NYC 311 as a secondary, is far worse than the control on dense series.
 The Study 2 post-hoc regime material is compressed to one paragraph each with its tables in the appendix. The checker
 passes 1,195 checks (780 before); the report's source still expands to `f325a67` apart from its one dated sentence. By
-word count the body is now about 15,800 words with ten tables and four figures, about 23 pages before the references:
+word count the body is now about 15,800 words with ten tables and four figures, about 24 pages before the references:
 the three cuts that remain the author's (the literature paragraph, the Study 2 design section, the Study 2 limitation
 items) would bring it to about 13,300 words, and moving the two Study 3 family tables to the appendix beside the figure
-to about 12,900. The review by a different reader comes next.
+to about 12,900.
+
+**Its two reads (2026-10-17).** The line-by-line review (`docs/research/2026-10-17-paper-study3-review.md`): every
+number holds and no table entry changed; of 45 verdicts 21 hold, 17 hold with a fix and 7 do not hold, the seven being
+sentences, four of them the discussion's claims about Study 3 ("confirmatory on two domains", where npm has no
+registered dense test; the two readings "with equal weight", where on NYC 311's sparse stratum the score does separate
+the forecasts and the blind-score reading fits the very sparse stratum only; the accounting sentence, wrong for the
+TimesFM models; the fourth-cell sentence, which contradicts itself); the family table does not fit the text width.
+The step-back read against the field (`docs/research/2026-10-17-paper-shape-review.md`): credible in its record,
+not yet comparable in its shape. The intermittent-demand methods are neither run nor cited and the registered
+baselines are classical count models under other names; and the completion rule gives every all-zero-decile forecast
+an occurrence probability between 0.0607 and 0.1 whatever the model said, with 580, 544 and 588 of the 600 very sparse
+completed forecasts on that floor, so the very sparse contrast compares a context estimate with the completion rule,
+not with the models. The argument it finds underneath the chronicle: the models' value is in the size of positive
+days; their own zero mass is at least as good as a context estimate wherever nine quantiles can express one; and on
+series zero nine days in ten neither the models nor the score can say anything about occurrence. Its verdict, adopted:
+one paper to TMLR by 2026-10-31 with a body of about twelve pages organized by question; no fourth study as proposed
+(its dense half would repeat a confirmed result, its very sparse half would confirm the completion rule, its sparse
+half is underpowered on NYC 311), with a narrow npm replication kept in the deferred register; the intermittent-demand
+baselines as a post-hoc descriptive benchmark from the saved forecasts, its specification fixed before any score is
+read.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -150,7 +170,9 @@ family R01 to R36: 21 of 36 reject at BH q = 0.05, none against H3's predicted d
 control: all six reject with the predicted sign (the dynamic hurdle is worse, higher on 55 to 72 of 100 series, medians
 +0.004 to +0.013). Sparse: one of six rejects as predicted (TimesFM 2.5 at horizon 7, lower on 57 of 100); four medians
 are exactly zero. Very sparse: none rejects; all six medians are exactly zero, with 72 to 88 of 100 series tied exactly.
-Against the empirical hurdle, 14 of 18 reject, all for the dynamic hurdle. H3 is confirmed on NYC 311 for dense series
+Against the empirical hurdle 14 of 18 reject for the dynamic hurdle, three of them with a median of exactly zero and so
+no registered sign; on sparse and very sparse series that contrast owes as much to the swapped occurrence as to the
+positive law. H3 is confirmed on NYC 311 for dense series
 and not confirmed for sparse and very sparse ones. Results: `reports/study3-nyc311/run-2026-10-17/RESULTS-nyc311.md`
 and the appended section of `RESULTS.md`; the 300 checkpoints (645 MB) stay out of the tree. The source's terms were
 recorded 2026-10-17 04:49 UTC (`reports/study3-nyc311/panel/source-terms.md`): the portal's overview page had moved to
@@ -212,8 +234,8 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of the three-study paper; its review by a different reader; the revision with the review's fixes and
-the length cuts the author chooses; the
+The post-hoc benchmark of the intermittent-demand baselines and the fourth cell from the saved forecasts; the revision
+that reorganizes the paper by question at about twelve pages with both reads applied; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
 gates are in `docs/PLAN.md`.
