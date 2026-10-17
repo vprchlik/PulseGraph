@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-17 05:07 UTC. This page holds only what is current.
+Last rewritten 2026-10-17 06:21 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -43,8 +43,9 @@ day.
 | Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16, committed (`3357d77`, `f7a8628`) | nothing | done |
 | NYC 311 context pull (one request per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | done 2026-10-16 08:04 UTC: 276 of 330 approved attempts, 300 series, every stratum full, verified from the raw captures; committed 2026-10-17 (`0e70759`) | nothing | done |
 | Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | done 2026-10-17 04:20 UTC: 106 of 120 approved attempts, 956 s of 3,600; 21 of 36 reject, H3 confirmed for dense series and not for sparse or very sparse; the source's terms recorded; committed (`4b8851e`) | nothing | done |
-| The paper extended with Study 3: title and abstract for three studies, the Study 3 part, the discussion for three studies, the post-hoc regime material compressed into the appendix | the run's commit (done 2026-10-17) | nothing | 2026-10-18 |
-| Review of the three-study paper by a different reader; the fixes | the extension | nothing | 2026-10-19 |
+| The paper extended with Study 3: title and abstract for three studies, the Study 3 part, the discussion for three studies, the post-hoc regime material compressed into the appendix | done 2026-10-17 06:03 UTC: 1,195 checks pass, the report frozen; the body about 23 pages by word count; awaiting the commit | the commit | done |
+| Review of the three-study paper by a different reader | the extension's commit | nothing | 2026-10-18 |
+| Revision: the review's fixes and the length cuts | the review | his choice of the cuts (item 9) | 2026-10-19 |
 | The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the review | his read, the PDF route, the posting and the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
@@ -85,10 +86,14 @@ Every spend is approved by the author in his own words before it happens. Nothin
 8. **Study 3, decided 2026-10-16: route B, now ahead of its calendar.** The regime test was registered as dated
    addition 7 on NYC 311 and ran 2026-10-17, two weeks before the panel deadline. So the paper that posts on Zenodo
    and goes to TMLR by 2026-10-31 carries all three studies; no version without Study 3 is posted.
-9. **The paper's length and the daily counts, 2026-10-16.** By word count the revised body is about seventeen pages
-   against an aim of fourteen; each remaining cut removes a stated number (the literature paragraph, the Study 2
-   design section's calendar and families, the dynamic-occurrence prose, the limitation items) and is the author's
-   choice. The 209 series' aggregated daily counts are not in the tree; the paper says they are to be published, and
+9. **The paper's length and the daily counts, updated 2026-10-17.** With Study 3 the body is about 15,800 words with
+   ten tables and four figures, about 23 pages before the references by word count. The cuts that remain the author's,
+   each removing a stated number from the body: the literature paragraph of Section 7 (about 400 words), the Study 2
+   design section (1,100 words, its calendar and families to the appendix) and the Study 2 limitation items (about
+   1,000 words), together bringing the body to about 13,300 words; then the two Study 3 family tables to the appendix
+   beside the figure and the Study 3 design section cut to its family paragraph and structure table (about 400 words
+   more), to about 12,900 words, about 20 pages. The recommendation is to take all of them in the revision after the
+   review; TMLR sets no page limit, and the referee's concern was focus. The 209 series' aggregated daily counts are not in the tree; the paper says they are to be published, and
    whether they are committed or released as an asset is his decision.
 7. **The spring plan** is in the tree since 2026-10-13 (`ideas/2026-09-14-spring-2027-plan.md`). Its one open
    decision: the follow-up cohort's creation window, recommended to close 2026-10-31, needs a dated addition

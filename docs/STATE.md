@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-17 05:07 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 06:21 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `d7ee252` (2026-10-17 05:03 UTC), 49 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `e50db16` (2026-10-17 05:17 UTC), 50 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -85,6 +85,20 @@ reads its boundary vocabulary from a file outside the tree. The report's source 
 `f325a67` apart from one dated sentence in Section 8, which now says that both Study 2 components ran on 2026-10-15.
 Still no PDF. By word count the body is about seventeen pages before the references against an aim of fourteen; the
 next cuts each remove a stated number and are the author's choice (`paper/PAPER-SUMMARY.md`).
+
+**Extended with Study 3 (2026-10-17; awaiting the author's commit).** The title and abstract name three registered
+studies; a Study 3 part (question, design, panel, results) follows Study 2's results, with its detail in two appendix
+sections; the discussion is rewritten for three studies: for dense series a context-only or dynamic occurrence estimate
+does not improve the model's own completed zero mass under this score, on npm, the grid and NYC 311, confirmatory on two
+domains; for sparse series the question is open, with the npm secondary reading on one side and the NYC 311 family on
+the other and two readings given equal weight (a smaller benefit, or a score blind to it where both forecasts put every
+decile at zero). The fourth factorial cell, run on NYC 311 as a secondary, is far worse than the control on dense series.
+The Study 2 post-hoc regime material is compressed to one paragraph each with its tables in the appendix. The checker
+passes 1,195 checks (780 before); the report's source still expands to `f325a67` apart from its one dated sentence. By
+word count the body is now about 15,800 words with ten tables and four figures, about 23 pages before the references:
+the three cuts that remain the author's (the literature paragraph, the Study 2 design section, the Study 2 limitation
+items) would bring it to about 13,300 words, and moving the two Study 3 family tables to the appendix beside the figure
+to about 12,900. The review by a different reader comes next.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -198,7 +212,8 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The paper extended with Study 3 (one paper with the three studies, for Zenodo and TMLR by 2026-10-31) and its review; the
+The author's commit of the three-study paper; its review by a different reader; the revision with the review's fixes and
+the length cuts the author chooses; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
 gates are in `docs/PLAN.md`.
