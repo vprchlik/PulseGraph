@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-17 05:00 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 05:07 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `00fd91d` (2026-10-17 01:50 UTC), 47 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `d7ee252` (2026-10-17 05:03 UTC), 49 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -126,7 +126,7 @@ Jeffreys estimate, so the two hurdles coincide there. At the first origin that h
 series and 4 of the sparse ones, so the very sparse rows will carry many exact ties, and a median difference of
 exactly zero is reported as having no sign.
 
-**The run (2026-10-17 03:47 to 04:03 UTC; awaiting the author's commit).** Under the signed gate (passed before the
+**The run (2026-10-17 03:47 to 04:03 UTC; committed `4b8851e`).** Under the signed gate (passed before the
 target pull, before its resumption and before the run), the 90 target days were pulled in 106 request attempts of 120
 approved: the first invocation, one request a second, met 16 throttled answers and stopped at its ceiling of 100 after
 84 days; the second, three seconds apart, took the last six. Every day was exhausted on one page, no source gap, and an
@@ -198,7 +198,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of the Study 3 run; the paper's version with Study 3; the
+The paper extended with Study 3 (one paper with the three studies, for Zenodo and TMLR by 2026-10-31) and its review; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
-the GitHub release and the release assets for the checkpoints; the paper on Zenodo by 2026-10-31 and its version with
-Study 3 for TMLR about 2026-11-15. Dates and gates are in `docs/PLAN.md`.
+the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
+gates are in `docs/PLAN.md`.

@@ -1,13 +1,13 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-17 05:00 UTC. This page holds only what is current.
+Last rewritten 2026-10-17 05:07 UTC. This page holds only what is current.
 
 ## The two steps
 
 | Step | What | Posted by | Where |
 |---|---|---|---|
 | 1 | The Study 1 report: the v1 result and audit, the registered design, the result against both references with the mean and typical-repository summaries side by side, the post-hoc decomposition, limitations, what is registered and not run | **2026-10-24** | Zenodo DOI, CC BY 4.0 (see `ideas/2026-10-11-report-link-title-abstract.md`) |
-| 2 | The paper: step 1 plus the Study 2 mechanism test (hurdle-wrapped and completed-unwrapped model variants against the count hurdles and the dynamic count baseline) on npm, the registered synthetic grid, and the literature re-check | **2026-10-31** | Zenodo (new version) or arXiv if an endorser is at hand; submitted to TMLR |
+| 2 | The paper: step 1 plus the Study 2 mechanism test (hurdle-wrapped and completed-unwrapped model variants against the count hurdles and the dynamic count baseline) on npm, the registered synthetic grid, the literature re-check, and Study 3, the registered regime test on NYC 311 | **2026-10-31** | Zenodo (new version) or arXiv if an endorser is at hand; submitted to TMLR |
 
 The steps run in parallel; neither waits for the other. 2026-11-15 is the fallback date only if the npm
 source fails. Wikipedia goes to the spring plan; NYC 311 is Study 3's domain. Anything not run by the paper's date is reported as
@@ -42,8 +42,10 @@ day.
 | The author's read of both summaries, the PDF, posting the paper on Zenodo as version 1 | the revision | his read, the posting | 2026-10-31 |
 | Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16, committed (`3357d77`, `f7a8628`) | nothing | done |
 | NYC 311 context pull (one request per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | done 2026-10-16 08:04 UTC: 276 of 330 approved attempts, 300 series, every stratum full, verified from the raw captures; committed 2026-10-17 (`0e70759`) | nothing | done |
-| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | done 2026-10-17 04:20 UTC: 106 of 120 approved attempts, 956 s of 3,600; 21 of 36 reject, H3 confirmed for dense series and not for sparse or very sparse; the source's terms recorded; awaiting the commit | the commit | done |
-| The paper's version 2 with Study 3, its review, the TMLR submission | Study 3 | his read, the submission | 2026-11-15 |
+| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | done 2026-10-17 04:20 UTC: 106 of 120 approved attempts, 956 s of 3,600; 21 of 36 reject, H3 confirmed for dense series and not for sparse or very sparse; the source's terms recorded; committed (`4b8851e`) | nothing | done |
+| The paper extended with Study 3: title and abstract for three studies, the Study 3 part, the discussion for three studies, the post-hoc regime material compressed into the appendix | the run's commit (done 2026-10-17) | nothing | 2026-10-18 |
+| Review of the three-study paper by a different reader; the fixes | the extension | nothing | 2026-10-19 |
+| The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the review | his read, the PDF route, the posting and the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
 separate dated addition before 2026-10-28 18:00 UTC.
@@ -80,9 +82,9 @@ Every spend is approved by the author in his own words before it happens. Nothin
    `README.md` fails at setup until the folder is deleted from the author's own shell (an elevated one if
    needed); pytest recreates it. Until then the tests use another temporary directory.
 6. **The GitHub release** carrying `results.parquet` (the README has promised its URL since 2026-09-13).
-8. **Study 3, decided 2026-10-16: route B.** The regime test is registered as dated addition 7 on NYC 311 with
-   PyPI as fallback (panel deadline 2026-10-27); the paper posts on Zenodo by 2026-10-31 as version 1 and
-   goes to TMLR with Study 3 about 2026-11-15.
+8. **Study 3, decided 2026-10-16: route B, now ahead of its calendar.** The regime test was registered as dated
+   addition 7 on NYC 311 and ran 2026-10-17, two weeks before the panel deadline. So the paper that posts on Zenodo
+   and goes to TMLR by 2026-10-31 carries all three studies; no version without Study 3 is posted.
 9. **The paper's length and the daily counts, 2026-10-16.** By word count the revised body is about seventeen pages
    against an aim of fourteen; each remaining cut removes a stated number (the literature paragraph, the Study 2
    design section's calendar and families, the dynamic-occurrence prose, the limitation items) and is the author's
