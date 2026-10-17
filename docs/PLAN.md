@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-16 07:34 UTC. This page holds only what is current.
+Last rewritten 2026-10-17 01:27 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -40,9 +40,9 @@ day.
 | The standing check and referee's read; the post-hoc dynamic-occurrence analysis | done 2026-10-16; awaiting the commit | the commit | done |
 | Paper revision: the review's fixes, the referee's changes, the post-hoc table, the length | done 2026-10-16: all three reads applied, 780 checks pass, about seventeen pages by word count against an aim of fourteen; awaiting the commit | the commit; his choice of the next cuts | done |
 | The author's read of both summaries, the PDF, posting the paper on Zenodo as version 1 | the revision | his read, the posting | 2026-10-31 |
-| Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16: the addition appended with every prefix verified, 459 tests pass; awaiting the commit | the commit, which is the sign-off | done |
-| NYC 311 context pull (about 275 requests, one per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | the commit above | his ceiling in his own words (proposed: 330 request attempts and 3 hours) | 2026-10-18 |
-| Study 3 run on NYC 311: smoke, gate, target pull, run, per-stratum inference over R01 to R36, recomputation | the panel | target-access and runtime approvals | 2026-10-24 |
+| Study 3: dated addition 7 with the two declaration files; the variants, component, gate, per-stratum inference and resumable NYC 311 ingestion in code | done 2026-10-16, committed (`3357d77`, `f7a8628`) | nothing | done |
+| NYC 311 context pull (one request per calendar day) and the frozen Study 3 panel; deadline 2026-10-27 23:59 UTC | done 2026-10-16 08:04 UTC: 276 of 330 approved attempts, 300 series, every stratum full, verified from the raw captures; awaiting the commit | the commit | done |
+| Study 3 run on NYC 311: smoke, gate, target pull (90 requests), run, per-stratum inference over R01 to R36, recomputation; the source's terms page read once | the panel's commit | target-access, runtime and the one terms-page request, in his words | 2026-10-19 |
 | The paper's version 2 with Study 3, its review, the TMLR submission | Study 3 | his read, the submission | 2026-11-15 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
@@ -60,7 +60,7 @@ Every spend is approved by the author in his own words before it happens. Nothin
 | npm registry and download API | name inventory; metadata walk to 10,000 eligible packages; context pull for the candidate pool; later 300 target pulls | about 26,000 serial requests at one per second, about eight hours; stage 1 states the exact figure | 0 | the author's words before stage 2 |
 | GPU (RTX 4070 SUPER) | synthetic grid run; npm external run; two smokes | under one hour each by the smoke timings; stage 1 of each states the figure | 0 | the author's budget, as the protocol requires for every component |
 | BigQuery | none before the paper (the birth-cohort census is deferred) | 0 | 0 | not asked |
-| NYC Open Data (SODA, anonymous) | the Study 3 context pull, one query per calendar day; later the 90 target days | about 275 plus 90 requests at one a second, 19 to 67 minutes by the code's estimate | 0 | the author's words before the pull |
+| NYC Open Data (SODA, anonymous) | the Study 3 context pull, done (276 attempts, 19 minutes); the 90 target days and one read of the terms page | about 91 requests at one a second, under ten minutes | 0 | the context pull approved 2026-10-16 (330 attempts, 3 hours); the targets and the terms page need the author's words |
 | Zenodo, TMLR | posting and submission | 0 | 0 | the author posts |
 | PDF build | pandoc and a TeX distribution on this machine, or Overleaf's free tier | 0 | 0 | the author's choice (below) |
 

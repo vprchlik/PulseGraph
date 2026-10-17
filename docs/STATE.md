@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-16 07:34 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-17 01:27 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `04e92c1` (2026-10-16 06:03 UTC), forty commits, pushed. Since 2026-10-12 the root carries
+`main` is at `095d48c` (2026-10-16 07:38 UTC), 44 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -54,7 +54,7 @@ are unchanged. The mechanism answer does not depend on the days.
 
 Addition 6, the sensitivity and the evidence are committed (`1c09ac8`).
 
-## The paper (committed `c330315`; its review `8250599`; the three reads `04e92c1`; its revision awaiting the author's commit)
+## The paper (committed `c330315`; its review `8250599`; the three reads `04e92c1`; its revision `5720c05`)
 
 `paper/paper.tex`, written 2026-10-16: the report's text, now read from shared files that the report's own
 `main.tex` also reads (its expansion equals the committed report byte for byte), extended with the Study 2
@@ -73,7 +73,7 @@ the grid. Its verdict: post after named changes. The post-hoc dynamic-occurrence
 removes four of five rejections against the substitution, and still never beats the model's own zero mass.
 The decision to make the regime reading confirmatory by a third study is in `docs/ideas/2026-10-16-study3-regime-test.md`.
 
-The revision of 2026-10-16 (awaiting the author's commit) applies all three reads. The abstract and the results now
+The revision of 2026-10-16 (`5720c05`) applies all three reads. The abstract and the results now
 say that no test favors the substitution at q = 0.05, that the typical series in E01 leans to it, and that the answer
 depends on the regime: the declared secondary stratum counts are the paper's central descriptive finding, labeled
 secondary, with a registered test on a second domain named as the next study. The claim is narrowed to daily npm
@@ -86,7 +86,7 @@ reads its boundary vocabulary from a file outside the tree. The report's source 
 Still no PDF. By word count the body is about seventeen pages before the references against an aim of fourteen; the
 next cuts each remove a stated number and are the author's choice (`paper/PAPER-SUMMARY.md`).
 
-## Study 3 (dated addition 7 of 2026-10-16, awaiting the author's commit)
+## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
 The regime hypothesis H3 made confirmatory on a second domain: on series whose context zero fraction is at least 0.5,
 the substitution with a dynamic occurrence lowers QScore9 against the model's own completed forecast; below 0.5 it
@@ -101,8 +101,20 @@ tests unavailable. A day with zero requests across the frame is a source gap and
 addition is appended (`PROTOCOL.md` 71,635 bytes, SHA-256 `05c7617b…`; every registered prefix verified twice) beside
 `study/study3/spec.json`. The code holds the two variants, the study3 component and gate (bound to the addition's
 commit, the frozen panel and the deadline), the per-stratum inference, the integrity recomputation and a resumable
-one-query-per-day NYC 311 census that refuses any request naming a day on or after 2026-06-03; 459 tests pass. No
-request has been sent; the context pull needs about 275 requests and the author's ceiling.
+one-query-per-day NYC 311 census that refuses any request naming a day on or after 2026-06-03; 459 tests pass.
+
+**The NYC 311 panel (frozen 2026-10-16 08:04 UTC, awaiting the author's commit).** One anonymous query per calendar
+day over the 275 context days, 276 request attempts in all against a ceiling of 330, 19 minutes, no retry, no error, no
+request naming a day on or after 2026-06-03. All 8,469 eligible cells have a complete context; the strata hold
+2,002 dense, 2,422 sparse and 4,045 very sparse complete series, and each takes its first 100 in selection-hash
+order with seed 20261001: 300 series, no stratum reduced, eleven days before the deadline. An independent script
+recomputed the census, the strata and the selection from the raw captures with zero mismatches. The source states
+no license and links no terms page; `created_date` is a floating timestamp whose daylight-saving pattern places it
+in New York local time. Counted apart as registered: 49,356 requests with an unrecognized board code and 7,680 in
+cells outside the 2024 frame. Of the very sparse stratum's 100 series, 39 have no request in the 90 strata days and
+19 none in the whole context; the selection is as registered. The manifest, selection, census and the source
+record are copied under `reports/study3-nyc311/panel/`; `study/study3/nyc311_panel_status.json` binds them for the
+gate.
 
 ## What the protocol allows, and what lapsed
 
@@ -114,8 +126,8 @@ request has been sent; the context pull needs about 275 requests and the author'
   with the PyPI rule unchanged after that; the October paper's external family is E01 to E18 with one BH
   correction, E19 to E54 kept whole for a later run. All three were decided before any Study 2 target was
   seen (`study/study2/acquisition_status.json`: targets opened false, forecasts generated false).
-- Study 3 is registered by dated addition 7 (2026-10-16), pending its commit: the 36-test family R01 to R36 on
-  NYC 311; no Study 3 target value has been accessed.
+- Study 3 is registered by dated addition 7 (2026-10-16, `3357d77`): the 36-test family R01 to R36 on NYC 311; no
+  Study 3 target value has been accessed.
 - The implementation's external gate still requires a completed holdout freeze and all three domain panels;
   the addition says both change in a commit that cites it. That commit is still to be made.
 - The November prospective round was not taken on 2026-10-12; it can still be registered by a separate dated
@@ -158,8 +170,8 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commits of the revision, the registration and the variants code; the NYC 311 context pull under the
-author's ceiling and the frozen panel (deadline 2026-10-27 23:59 UTC); the Study 3 run and its inference; the
+The author's commit of the frozen NYC 311 panel; the Study 3 run under its signed gate (smoke, readiness bound to
+`3357d77`, target access for the 90 target days, runtime) and its per-stratum inference; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo by 2026-10-31 and its version with
 Study 3 for TMLR about 2026-11-15. Dates and gates are in `docs/PLAN.md`.
