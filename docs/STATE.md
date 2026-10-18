@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-18 02:09 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-18 05:19 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `001477b` (2026-10-17 08:37 UTC), 56 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `342b3c7` (2026-10-18 02:24 UTC), 58 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -127,14 +127,14 @@ and size estimates in place of the 28-day ones, is far behind every model on den
 completed forecasts on 18 or 19 of 100 dense npm series at a week and on 19 to 22 on NYC 311), level with the
 registered count baselines, ahead of the models for the typical sparse npm series at a week (77, 61 and 74 of 100)
 and tied with the count hurdle there, and on the completion floor with everything else on very sparse series. The
-field's point methods (Croston, SBA, ADIDA), scored as point masses, lose to every forecast with a law, by
+field's point methods (Croston, SBA, ADIDA), scored as point masses, are poor probabilistic forecasts by
 construction. The fourth factorial cell on npm and the grid repeats NYC 311's positive-law result (the shifted
 Poisson in place of the model's own positive law is far worse on dense series), while its occurrence result at a
 month shows the pattern of the second reading of the accounting trade and at a week on the grid the first. Nothing
 confirmatory; no test added to any family; every registered family reproduced byte for byte before anything was
 written; 18 new tests, 477 in all.
 
-**Reorganized by question (2026-10-17 10:05 UTC; awaiting the author's commit).** The paper is now titled *Size, not
+**Reorganized by question (2026-10-17 10:05 UTC; committed `711e2ff`).** The paper is now titled *Size, not
 occurrence: what zero-shot foundation models add on sparse daily counts* and is one argument in nine sections
 (introduction, related work, design, what the models add, the occurrence substitution by regime, the positive law
 against count laws, discussion, limitations, registration and reproducibility), with the families, Study 1's detail,
@@ -148,9 +148,24 @@ seventeen fixes by number; the completion floor as an interface limit; the inter
 citations added, each opened; the post-hoc TSB hurdle and the fourth cell in the body tables, labeled; the Brier score
 and the discrete CRPS beside the quantile score for every contrast; the registration ledger with item 6 flagged; the
 nine writing patterns removed). The body holds 7,499 words of running text with five tables and four figures, about
-thirteen pages by word count; no body table exceeds the text width by the estimate, and the two widest appendix tables
-are set sideways. The checker passes 1,357 checks (1,195 before). Still no PDF. A second review by a different reader
-comes before the author's read.
+thirteen pages by word count; the two widest appendix tables are set sideways. The checker passes 1,357 checks (1,195
+before). Still no PDF.
+
+**Its review (2026-10-18 03:01 UTC; `docs/research/2026-10-18-paper-revision-review.md`).** The record holds in full: the
+report still expands to `f325a67`, no cell of any family or Study 1 table changed, every entry of the five body tables
+and every plotted value of the four figures reproduces, and all 60 registered tests reproduce in direction, ties, rank
+sums and p. Of 76 verdicts 40 hold, 25 hold with a fix and 11 do not hold: nine sentences, one table's width and one
+broken cross-reference. The sentences: the thesis's first clause puts the gain over the local mean on positive days
+where it overpredicts, which holds on GitHub and npm but not on NYC 311, where the accounting puts it where the local
+mean underpredicts; the thesis's "one place" where a context estimate wins the typical series is not one but several
+(the sparse npm stratum at a week; R21, a registered rejection on NYC 311's sparse stratum; the grid's cells at zero
+probability 0.95 at a month; dense npm at a month under the Brier score); "one of twelve" counts the sparse and very
+sparse strata together where the sparse stratum alone is one of six; the second reading at a month on npm holds under
+the Brier score, not under the count law; the context-scaled mean does not agree with the medians in two cells; the
+protocol gives no reason for excluding Croston and TSB; the summary's six sentences repeat and overclaim. The width:
+the occurrence table overflows the text width by its headers, and five appendix tables with it. The verdict: to the
+author's read after these fixes, which change no table entry. The fixes are the next step, with the two-readings
+paragraph moved to the appendix to bring the body under its aim.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -266,7 +281,7 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of the reorganized paper; its review by a different reader and any fixes; the
+The review's fixes; the author's read of the paper's summary, the PDF and his word to post; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
 gates are in `docs/PLAN.md`.
