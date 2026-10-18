@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-18 05:19 UTC. This page holds only what is current.
+Last rewritten 2026-10-18 06:56 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -49,7 +49,9 @@ day.
 | Post-hoc descriptive benchmark from the saved forecasts: the TSB hurdle and the point methods against the models and the registered baselines per regime; the fourth cell on npm and the grid | done 2026-10-17 08:17 UTC: specification fixed before scoring; the TSB hurdle far behind the models on dense series and ahead for the typical sparse npm series at a week; awaiting the commit | the commit | done |
 | Revision: the paper reorganized by question at about twelve pages; the seven failed sentences and the seventeen fixes; the completion floor; the intermittent-demand literature and the benchmark; Brier and RPS beside the quantile score; the ledger; the signature figure | done 2026-10-17 10:05 UTC: nine sections, 7,499 words of body text, five tables, four figures, 1,357 checks; awaiting the commit | the commit | done |
 | Review of the reorganized paper by a different reader | done 2026-10-18 03:01 UTC: the record holds in full; 11 of 76 verdicts do not hold, nine of them sentences, none changing a table entry; awaiting the commit | the commit | done |
-| The review's fixes: the thesis with its exceptions named, the nine sentences, the broken reference, the table widths, the two-readings paragraph to the appendix, the summary | nothing | nothing | 2026-10-18 |
+| The review's fixes: the thesis with its exceptions named, the nine sentences, the broken reference, the table widths, the two-readings paragraph to the appendix, the summary | done 2026-10-18 06:00 UTC: every verdict applied, 1,431 checks, no table entry changed; awaiting the commit | the commit | done |
+| Both documents built for the first time: the logs read, overfull lines fixed in the source, the page counts recorded | TeX on this machine | installing pandoc and MiKTeX (the two lines below) | 2026-10-20 |
+| Release preparation: the asset manifest with hashes and a verifier, the three checkpoint archives, the daily counts committed, README's first screen, the posting checklist | nothing | the GitHub release and the Zenodo records, in person, after it | 2026-10-20 |
 | The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the fixes | his read, the PDF route (the first build's log is the only check on the table widths), the posting and the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a

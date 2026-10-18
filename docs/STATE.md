@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-18 05:19 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-18 06:56 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `342b3c7` (2026-10-18 02:24 UTC), 58 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `bb1c127` (2026-10-18 05:23 UTC), 60 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -164,8 +164,19 @@ sparse strata together where the sparse stratum alone is one of six; the second 
 the Brier score, not under the count law; the context-scaled mean does not agree with the medians in two cells; the
 protocol gives no reason for excluding Croston and TSB; the summary's six sentences repeat and overclaim. The width:
 the occurrence table overflows the text width by its headers, and five appendix tables with it. The verdict: to the
-author's read after these fixes, which change no table entry. The fixes are the next step, with the two-readings
-paragraph moved to the appendix to bring the body under its aim.
+author's read after these fixes, which change no table entry.
+
+**The fixes (2026-10-18 06:00 UTC; awaiting the author's commit).** Every verdict applied by number. The thesis now
+says where the gain over the local mean sits per domain (where the local mean overpredicts on GitHub stars and npm
+downloads, where it underpredicts on NYC 311 requests, with 12 to 29 percent on zero days), restricts the dense clause
+to the registered score, names the four places where a context estimate beats the model's own zero mass on the typical
+series (the sparse npm stratum at a week; the grid's cells at zero probability 0.95 at a month; one registered test of
+six on NYC 311's sparse stratum; dense npm at a month under the Brier score alone), and restricts the interface limit
+to the natural panels. The broken cross-reference is repaired and a check for eaten commands added to the checker and
+the static checks; the occurrence table and the five appendix tables are within the text width by the estimate; the
+two-readings paragraph is in the appendix with one labeled sentence left. The body holds 7,495 words with five tables
+and four figures, about thirteen pages by word count; the checker passes 1,431 checks. The paper is ready for the
+author's read: the title, the abstract and eight quoted sentences in `paper/PAPER-SUMMARY.md`. Still no PDF.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -281,7 +292,9 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The review's fixes; the author's read of the paper's summary, the PDF and his word to post; the
+The author's commit of the fixes and his read of the paper's summary; TeX installed and both documents built, their logs
+read; the release prepared (the asset manifest, the archives, the daily counts, the README's first screen); his word
+to post; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
 gates are in `docs/PLAN.md`.
