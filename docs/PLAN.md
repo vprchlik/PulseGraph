@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-17 08:35 UTC. This page holds only what is current.
+Last rewritten 2026-10-18 02:09 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -47,8 +47,8 @@ day.
 | Review of the three-study paper by a different reader | done 2026-10-17 07:03 UTC: every number holds; 7 of 45 verdicts do not hold, all sentences; awaiting the commit | the commit | done |
 | The step-back read against the field: exemplars, baselines and scores, two referees, venue, the fourth study, the shape | done 2026-10-17 07:23 UTC: credible in record, not in shape; the completion floor; TMLR at twelve pages; no fourth study as proposed; awaiting the commit | the commit | done |
 | Post-hoc descriptive benchmark from the saved forecasts: the TSB hurdle and the point methods against the models and the registered baselines per regime; the fourth cell on npm and the grid | done 2026-10-17 08:17 UTC: specification fixed before scoring; the TSB hurdle far behind the models on dense series and ahead for the typical sparse npm series at a week; awaiting the commit | the commit | done |
-| Revision: the paper reorganized by question at about twelve pages; the seven failed sentences and the seventeen fixes; the completion floor; the intermittent-demand literature and the benchmark; Brier and RPS beside the quantile score; the ledger; the signature figure | the benchmark's commit | nothing | 2026-10-19 |
-| Review of the revised paper by a different reader; the fixes | the revision's commit | nothing | 2026-10-21 |
+| Revision: the paper reorganized by question at about twelve pages; the seven failed sentences and the seventeen fixes; the completion floor; the intermittent-demand literature and the benchmark; Brier and RPS beside the quantile score; the ledger; the signature figure | done 2026-10-17 10:05 UTC: nine sections, 7,499 words of body text, five tables, four figures, 1,357 checks; awaiting the commit | the commit | done |
+| Review of the reorganized paper by a different reader; the fixes | the revision's commit | nothing | 2026-10-19 |
 | The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the second review | his read, the PDF route, the posting and the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
