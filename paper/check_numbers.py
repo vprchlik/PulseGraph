@@ -1863,10 +1863,11 @@ expect(
     RS,
 )
 expect("regime: dense", f"it scores lower on {d_hc[0]} to {d_hc[1]} of 100 in every cell", RS)
+d_hc7 = stratum_wins(hc[hc.horizon == 7].id, "dense")
 expect(
     "abstract: regime",
-    f"lower for {sparse_w['E01']}, {sparse_w['E07']} and {sparse_w['E13']} of the 100 sparse "
-    f"series at horizon 7 and for {d_hc[0]} to {d_hc[1]} of the 100 dense ones",
+    f"it scores lower for {sparse_w['E01']}, {sparse_w['E07']} and {sparse_w['E13']} of 100 sparse "
+    f"series and {d_hc7[0]} to {d_hc7[1]} of 100 dense ones",
     PT + PS,
 )
 expect(
@@ -1998,8 +1999,8 @@ assert dyn30 == s30.drop("oracle").qscore9.min()
 expect(
     "dynamic count: means",
     f"is {g(dyn30)} against {g(min(comp30))} to {g(max(comp30))} for the three completed models, "
-    f"{g(s30.loc['hurdle_count_28'].qscore9)} for \\hc{{}} and {g(s30.loc['oracle'].qscore9)} "
-    "for the oracle",
+    f"{g(s30.loc['hurdle_count_28'].qscore9)} for the count hurdle and "
+    f"{g(s30.loc['oracle'].qscore9)} for the oracle",
     RS,
 )
 cmeta = (
@@ -3100,11 +3101,12 @@ expect(
 expect("s3: 14 of 18", "14 of the 18 T2 tests reject", R3)
 expect("s3: 14 of 18, elsewhere", "14 of 18", PT + PS)
 expect("abstract: s3 family", "a per-stratum family of 36 tests", PT + PS)
-expect("abstract: s3 panel", "300 series in three strata", PT + PS)
+expect("abstract: s3 panel", "300 NYC 311 series in three strata", PT + PS)
 expect("abstract: s3 dense", "all six tests reject as predicted", PT + PS)
 expect(
     "abstract: s3 sparse",
-    "one of twelve tests rejects as predicted, and ten of twelve medians are exactly zero",
+    "on the sparse and very sparse strata one of twelve does, and ten of twelve medians are "
+    "exactly zero",
     PT + PS,
 )
 d1, s1, v1 = (t1[t1.stratum == s] for s in S3STRATA)
@@ -3782,7 +3784,7 @@ assert sorted(set(tsb_dense_npm7)) == [18, 19]
 expect(
     "tsb: sparse npm week",
     f"lower than the completed controls on {tsb_sparse_npm7[0]}, {tsb_sparse_npm7[1]} and "
-    f"{tsb_sparse_npm7[2]} of 100 at a week",
+    f"{tsb_sparse_npm7[2]} of 100 and level with the count hurdle",
     PT,
 )
 hc_sparse7 = tsb_cells(bench_npm, "sparse", 7, "hurdle_count_28", "qscore9")
@@ -3939,7 +3941,7 @@ for s in S3STRATA:
             pos_row(
                 S3LABEL[s],
                 h,
-                "T2: dynamic hurdle vs empirical",
+                "T2: dynamic vs empirical",
                 ds,
                 f"{', '.join(ids)}: {nrej} reject",
             ),
@@ -4142,8 +4144,9 @@ expect(
 # The completion floor, from the 300 NYC 311 checkpoints when they are present (a release asset).
 floor_files = sorted(S3_RUN.glob("[0-9a-f]*.json"))
 if len(floor_files) == 300:
-    floor, total, occ_floor, occ_dyn = {}, {}, {}, {}
+    floor, every, total, occ_floor, occ_dyn, fallback = {}, {}, {}, {}, {}, {}
     strata_of = {s["series_id"]: s["stratum"] for s in s3_manifest["series"]}
+    first_cutoff = min(cal3["cutoffs"])
     for path in floor_files:
         for row in load(path)["rows"]:
             base = next((f for f in MODELS if row["model"].startswith(f + "_")), None)
@@ -4151,13 +4154,15 @@ if len(floor_files) == 300:
             if variant not in ("completed", "hurdle_dynamic"):
                 continue
             key = (strata_of[row["series_id"]], base)
-            law = row["forecast"]["distributions"][0]
+            laws = row["forecast"]["distributions"]
+            law = laws[0]
             if variant == "completed":
                 assert (
                     abs(law["tail_scale"] - max(1, law["deciles"][-1] - law["deciles"][-2])) < 1e-9
                 )
                 on = law["deciles"][-1] < 0.5
                 floor[key] = floor.get(key, 0) + on
+                every[key] = every.get(key, 0) + all(x["deciles"][-1] < 0.5 for x in laws)
                 total[key] = total.get(key, 0) + 1
                 if on:
                     occ_floor.setdefault(key, []).append(
@@ -4165,14 +4170,31 @@ if len(floor_files) == 300:
                     )
             else:
                 occ_dyn.setdefault(key, []).append(law["p"])
+                if (
+                    row["cutoff"] == first_cutoff
+                    and row["horizon"] == 7
+                    and key[0] == "very_sparse"
+                ):
+                    fallback.setdefault(key, []).append(law["p"])
     assert all(v == 600 for v in total.values())
-    for s, tail in (
-        ("very_sparse", " of the 600 completed very sparse forecasts"),
-        ("sparse", " of 600 do"),
-        ("dense", ""),
-    ):
-        counts = [floor[(s, m)] for m in MODELS]
-        expect(f"floor: {s}", f"{counts[0]}, {counts[1]} and {counts[2]}{tail}", PT)
+    vs_floor = [floor[("very_sparse", m)] for m in MODELS]
+    expect(
+        "floor: very_sparse",
+        f"{vs_floor[0]}, {vs_floor[1]} and {vs_floor[2]} sit on the floor at their first lead",
+        PT,
+    )
+    vs_every = [every[("very_sparse", m)] for m in MODELS]
+    expect(
+        "floor: every lead", f"and {vs_every[0]}, {vs_every[1]} and {vs_every[2]} at every lead", PT
+    )
+    sp_floor = [floor[("sparse", m)] for m in MODELS]
+    expect(
+        "floor: sparse",
+        f"{sp_floor[0]}, {sp_floor[1]} and {sp_floor[2]} of 600 do at the first lead",
+        PT,
+    )
+    de_floor = [floor[("dense", m)] for m in MODELS]
+    expect("floor: dense", f"dense stratum {de_floor[0]}, {de_floor[1]} and {de_floor[2]}", PT)
     med_floor = [float(np.median(occ_floor[("very_sparse", m)])) for m in MODELS]
     med_dyn = [float(np.median(occ_dyn[("very_sparse", m)])) for m in MODELS]
     assert all(0.06 <= v <= 0.1 for v in med_floor) and max(med_dyn) - min(med_dyn) < 5e-5
@@ -4180,6 +4202,24 @@ if len(floor_files) == 300:
         "floor: medians",
         f"median occurrence probability of {min(med_floor):.4f} to {max(med_floor):.4f} against "
         f"{med_dyn[0]:.4f} for the dynamic hurdle",
+        PT,
+    )
+    # The dynamic hurdle's median above is the registered fallback: with fewer than two positive
+    # days in the last 28 the dynamic count falls back to the count hurdle, whose occurrence is the
+    # Jeffreys estimate 0.5/29 (no positive day) or 1.5/29 (one), the same for all three models.
+    assert abs(med_dyn[0] - 0.5 / 29) < 5e-5
+    fb0 = [sum(abs(p - 0.5 / 29) < 1e-9 for p in fallback[("very_sparse", m)]) for m in MODELS]
+    fb1 = [sum(abs(p - 1.5 / 29) < 1e-9 for p in fallback[("very_sparse", m)]) for m in MODELS]
+    assert len(set(fb0)) == len(set(fb1)) == 1
+    assert all(len(fallback[("very_sparse", m)]) == 100 for m in MODELS)
+    expect(
+        "floor: fallback",
+        f"which {fb0[0]} of the 100 very sparse series take at the first origin",
+        PT,
+    )
+    expect(
+        "floor: fallback before the run",
+        f"counted {fb0[0] + fb1[0]} of 100 very sparse series on the Jeffreys fallback",
         PT,
     )
     assert abs(0.1 * np.exp(-0.5) - 0.0607) < 5e-5
@@ -4320,6 +4360,236 @@ for key in (
     if "read 2026-10-17" not in entry:
         failures.append(f"citation {key}: the entry does not record the page read on 2026-10-17")
 
+# --- the fixes of 2026-10-18 from the review of the reorganized paper -----------------------
+# The rewritten sentences' numbers, each from the saved files. The grid's cells with z = 0.95: the
+# fixed hurdle against its control by replicate block under the three scores and by series pair.
+S2AP = ("study2-appendix.tex",)
+z_of_cell = (
+    pd.read_csv(SYN_RUN / "inference" / "secondary_cells.csv", **ROUND_TRIP)
+    .drop_duplicates("cell_id")
+    .set_index("cell_id")
+    .zero_probability
+)
+syn_z = syn_series.cell_id.map(z_of_cell)
+
+
+def z_blocks(m, h, col, zp):
+    gg = syn_series[(syn_series.horizon == h) & (syn_z == zp)]
+    x = gg[gg.model == f"{m}_hurdle"].groupby("replicate")[col].mean()
+    y = gg[gg.model == f"{m}_completed"].groupby("replicate")[col].mean()
+    return (x - y).dropna()
+
+
+z95 = {
+    col: [int(z_blocks(m, 30, col, 0.95).lt(0).sum()) for m in MODELS]
+    for col in ("qscore9", "occurrence_brier", "discrete_crps")
+}
+z95_7 = [int(z_blocks(m, 7, "qscore9", 0.95).lt(0).sum()) for m in MODELS]
+assert all(len(z_blocks(m, 30, "qscore9", 0.95)) == 30 for m in MODELS)
+lo95, hi95 = min(min(v) for v in z95.values()), max(max(v) for v in z95.values())
+expect("z95: dense paragraph", f"against {lo95} to {hi95} at $z = 0.95$", PT)
+expect(
+    "z95: appendix blocks",
+    f"in {z95['qscore9'][0]}, {z95['qscore9'][1]} and {z95['qscore9'][2]} of the 30 replicate "
+    f"blocks under \\qs{{}}, in {z95['occurrence_brier'][0]}, {z95['occurrence_brier'][1]} and "
+    f"{z95['occurrence_brier'][2]} under the occurrence Brier score and in "
+    f"{z95['discrete_crps'][0]}, {z95['discrete_crps'][1]} and {z95['discrete_crps'][2]} under the "
+    "discrete CRPS",
+    S2AP,
+)
+expect(
+    "z95: week blocks",
+    f"the blocks split {z95_7[0]}, {z95_7[1]} and {z95_7[2]} of 30 under \\qs{{}}",
+    S2AP,
+)
+cell_of_series = syn_series.drop_duplicates("series_id").set_index("series_id").cell_id
+pairs95 = pd.concat(
+    [pair_of(syn_series, f"{m}_hurdle", f"{m}_completed", 30, "qscore9") for m in MODELS]
+)
+pairs95 = pairs95[cell_of_series.reindex(pairs95.index).map(z_of_cell).to_numpy() == 0.95]
+n_tie, n_low, n_high = (
+    int((pairs95 == 0).sum()),
+    int((pairs95 < 0).sum()),
+    int((pairs95 > 0).sum()),
+)
+assert n_tie + n_low + n_high == 540 and n_low > n_high
+expect(
+    "z95: pairs",
+    f"ties exactly on {n_tie} and favors the hurdle on {n_low} of the other {n_low + n_high}",
+    S2AP,
+)
+# NYC 311's sparse stratum: its six T1 tests, their rejections and their zero medians.
+assert len(s1) == 6 and int(s1.reject_bh_005.sum()) == 1 and int((s1.median_diff == 0).sum()) == 4
+expect("sparse T1: introduction", "one registered test of six on NYC 311's sparse stratum", PT)
+expect(
+    "sparse T1: discussion",
+    "one of six T1 tests favors it and four of six medians are exactly zero",
+    PT,
+)
+# Sparse npm at a month: the within-stratum test is null, and Chronos-2's hurdle still wins the
+# typical series.
+c30 = pair_of(
+    npm_series, "chronos2_hurdle", "chronos2_completed", 30, "qscore9", "sparse", strat_of
+)
+assert int(c30.lt(0).sum()) > 50 and c30.median() < 0
+expect("sparse npm month: chronos2", "Chronos-2's hurdle still wins the typical series there", PT)
+# The dynamic count is the best forecaster after the oracle at a month only: at a week five model
+# variants have a lower mean on the grid.
+s7_means = syn_series[syn_series.horizon == 7].groupby("model").qscore9.mean()
+assert int((s7_means.drop("oracle") < s7_means.loc["dynamic_count"]).sum()) == 5
+expect("dynamic count: week", "at a week five model variants have a lower mean", PT)
+# On npm and NYC 311 the dynamic count loses to every completed model on the mean and by count.
+for df, n in ((npm_series, 209), (S3_SERIES, 300)):
+    for m in MODELS:
+        for h in (7, 30):
+            d = pair_of(df, "dynamic_count", f"{m}_completed", h, "qscore9")
+            assert len(d) == n and d.mean() > 0 and int(d.lt(0).sum()) < n / 2
+expect(
+    "dynamic count: natural panels",
+    "loses to them on npm and NYC 311, on the mean and by count",
+    PT,
+)
+# Table 3's NYC 311 rows: the rank test's side and the medians' signs; P03's median is a value
+# shared by several series, not residue.
+nyc_med = [
+    float(pair_of(S3_SERIES, f"{m}_raw", "local_mean_28", h, "qscore9").median())
+    for m in MODELS
+    for h in (7, 30)
+]
+assert (sum(v < 0 for v in nyc_med), sum(v > 0 for v in nyc_med), sum(v == 0 for v in nyc_med)) == (
+    3,
+    2,
+    1,
+)
+expect("nyc raw: medians", "with three medians below zero, two above and one exactly zero", PT)
+p03 = pair_of(S3_SERIES, "chronos2_raw", "local_mean_28", 7, "qscore9")
+assert 0 < p03.median() < 1e-8 and int((p03 == p03.median()).sum()) >= 2
+expect("median residue", "a near-zero score difference repeated across series, not a tie", S2AP)
+# The context-scaled mean on npm (E03 and E15 asserted above: mean below zero, interval across it).
+expect(
+    "scaled: E03 and E15",
+    "still favors the model on npm, with an interval that includes zero in E03 and E15, where the "
+    "medians favor the reference",
+    PT,
+)
+# Figure 3 on npm: the first series sets the level; the other 208 move it by less than one percent.
+for m in MODELS:
+    x = np.sort(pair_of(npm_series, f"{m}_raw", "local_mean_28", 30, "qscore9").to_numpy())
+    assert len(x) == 209 and abs(x[0] / len(x) - x.mean()) < 0.01 * abs(x.mean())
+expect(
+    "figure 3: npm",
+    "the first series sets the level and the other 208 move it by less than one percent",
+    PT,
+)
+# The second reading on npm at a month holds on the Brier score, not under the count law.
+fc30 = bench_npm[
+    bench_npm.variant.str.endswith("occurrence_model_size_count")
+    & (bench_npm.reference == "hurdle_count_28")
+    & (bench_npm.group == "dense")
+    & (bench_npm.horizon == 30)
+    & (bench_npm.metric == "qscore9")
+].set_index("variant")
+fc_w = [int(fc30.loc[f"{m}_occurrence_model_size_count"].wins) for m in MODELS]
+assert len(fc30) == 3 and (fc30.mean_diff < 0).all()
+expect(
+    "two readings: npm under the count law",
+    f"lower on {fc_w[0]}, {fc_w[1]} and {fc_w[2]} of the 100 dense series at a month with every "
+    "mean in its favor",
+    AP3,
+)
+# The accounting of the raw deciles against the local mean on npm and NYC 311, from the saved
+# per-series parts: the parts sum to the score, and the mean of each part over the series.
+
+
+def part_means(df, col):
+    return [
+        float(pair_of(df, f"{m}_raw", "local_mean_28", h, col).mean())
+        for m in MODELS
+        for h in (7, 30)
+    ]
+
+
+PARTS = ("qscore9", "positive_over", "positive_under", "zero")
+npm_tot, npm_over, npm_under, npm_zero = (part_means(npm_series, c) for c in PARTS)
+assert all(o < u < 0 for o, u in zip(npm_over, npm_under))
+npm_zero_bound = int(np.ceil(max(abs(z) for z in npm_zero)))
+expect(
+    "accounting: npm",
+    f"the overprediction part carries {max(npm_over):,.0f} to {min(npm_over):,.0f} of mean gains "
+    f"of {max(npm_tot):,.0f} to {min(npm_tot):,.0f}, the underprediction part "
+    f"{max(npm_under):,.0f} to {min(npm_under):,.0f} and the zero-day part less than "
+    f"{npm_zero_bound} either way",
+    AP3,
+)
+nyc_tot, nyc_over, nyc_under, nyc_zero = (part_means(S3_SERIES, c) for c in PARTS)
+assert all(u < z < 0 and u < o < 0 for u, z, o in zip(nyc_under, nyc_zero, nyc_over))
+nyc_shares = [z / t for z, t in zip(nyc_zero, nyc_tot)]
+pct_lo, pct_hi = int(round(100 * min(nyc_shares))), int(round(100 * max(nyc_shares)))
+expect(
+    "accounting: nyc311",
+    f"underpredicts, {max(nyc_under):.3f} to {min(nyc_under):.3f} of totals of {max(nyc_tot):.3f} "
+    f"to {min(nyc_tot):.3f}, with {max(nyc_zero):.3f} to {min(nyc_zero):.3f} on zero days, "
+    f"{pct_lo} to {pct_hi} percent of the total, and {max(nyc_over):.3f} to {min(nyc_over):.3f} on "
+    "overprediction",
+    AP3,
+)
+expect(
+    "accounting: introduction", f"with {pct_lo} to {pct_hi} percent of that gain on zero days", PT
+)
+expect("accounting: section 4", f"{pct_lo} to {pct_hi} percent of it on zero days", PT)
+# The TSB hurdle against the count hurdle on dense series: level on NYC 311, ahead on npm.
+tsb_hc_nyc = [
+    int(tsb_cells(bench_nyc, "dense", h, "hurdle_count_28", "qscore9").wins) for h in (7, 30)
+]
+tsb_hc_npm = [
+    int(tsb_cells(bench_npm, "dense", h, "hurdle_count_28", "qscore9").wins) for h in (7, 30)
+]
+assert all(45 <= w <= 55 for w in tsb_hc_nyc) and all(w > 55 for w in tsb_hc_npm)
+expect(
+    "tsb: dense by panel",
+    "level with the count hurdle on dense NYC 311 series and ahead of it on dense npm series",
+    PT,
+)
+# The exclusion of Croston and TSB is by name, without a reason, in the protocol; the TSB hurdle's
+# weight and rules are the benchmark specification's.
+assert "No PyBATS, Croston, TSB or new GBM is included." in protocol
+expect(
+    "related work: exclusion", "The protocol excludes Croston and TSB by name without a reason", PT
+)
+expect("design: TSB analogue", "a discounted Bayesian analogue of TSB \\citep{teunter2011}", PT)
+expect(
+    "related work: found",
+    "No evaluation found wraps a frozen model's output in a hurdle under a proper score",
+    PT,
+)
+assert "(a_p, a_z) = (0.1, 0.1)" in (BENCH / "SPEC.md").read_text(encoding="utf-8")
+expect("appendix: TSB weight", "with weight 0.1 from their first context values", PT)
+# No eaten command. A `\r` read as a carriage return once turned `\ref` into a line break and a
+# line that began with `ef{`. Every file under paper/ is free of control bytes other than the line
+# feed, no .tex line starts with the remainder of a command, and no line ends with a lone backslash
+# before a letter.
+EATEN = re.compile(
+    r"^(ef|ite[pt]?|extbf|extit|extt|mph|egin|nd|ewcommand|rovidecommand|abel|aption|ulticolumn|"
+    r"idrule|oprule|ottomrule|nput|ection|aragraph|ncludegraphics|entering)\{",
+    re.M,
+)
+for p in sorted(PAPER.rglob("*")):
+    if p.suffix not in (".tex", ".bib", ".md", ".py") or not p.is_file():
+        continue
+    checks += 1
+    data = p.read_bytes()
+    bad = sorted({b for b in data if b < 0x20 and b != 0x0A})
+    if bad:
+        failures.append(f"{p.relative_to(ROOT).as_posix()}: control bytes {bad}")
+    if p.suffix == ".tex":
+        tex = data.decode("utf-8")
+        for m in EATEN.finditer(tex):
+            failures.append(f"{p.relative_to(ROOT).as_posix()}: a line starts with {m.group(0)!r}")
+        if re.search(r"(?<!\\)\\\n(?=[A-Za-z])", tex):
+            failures.append(
+                f"{p.relative_to(ROOT).as_posix()}: a lone backslash before a line break"
+            )
+
 # The length, by the revision's method: the running text before \appendix with comments, tables and
 # figures removed, and the captions apart. PAPER-SUMMARY.md states the counts.
 full = expand(PAPER_TEX)
@@ -4385,6 +4655,19 @@ print(
     f"body: {body_words} words of running text, {caption_words} words of captions, {n_tables} "
     f"tables, {n_figures} figures"
 )
+
+# The summary's sentences to read: at most eight, each quoted word for word from the paper (a
+# quotation may end at a colon where the paper's sentence continues).
+quoted = re.search(r"### Sentences to read\n(.*?)\n## ", summary_md, re.S)
+paper_flat = re.sub(r"\s+", " ", full)
+quotes = re.findall(r'"([^"]+)"', quoted.group(1)) if quoted else []
+for q in quotes:
+    checks += 1
+    if re.sub(r"\s+", " ", q).strip() not in paper_flat:
+        failures.append(f"PAPER-SUMMARY.md quotes a sentence the paper does not hold: {q[:70]!r}")
+checks += 1
+if not 1 <= len(quotes) <= 8:
+    failures.append(f"PAPER-SUMMARY.md quotes {len(quotes)} sentences; one to eight expected")
 
 # --- report -----------------------------------------------------------
 for line in failures:

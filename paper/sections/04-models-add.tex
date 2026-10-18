@@ -7,12 +7,13 @@
 \section{What the models add over a trailing mean}
 \label{sec:raw}
 
-Table~\ref{tab:raw} gives the raw nine deciles of each model against \lm{} on the three natural panels, and
+Table~\ref{tab:raw} gives the raw nine deciles of each model against the 28-day local mean on the three
+natural panels, and
 Figure~\ref{fig:meantypical} shows the mean and the typical series of the same contrast at horizon 30. On
 GitHub stars, Study 1's registered family, the mean difference favors the model in all nine cells, from
 $-0.101$ to $-0.258$, with the bootstrap interval excluding zero in five of nine; the typical repository
 favors the reference, with the models lower on only 46 to 89 of 300 and every median positive, and the
-signed-rank test rejects in all nine cells on the reference's side. The mean is carried by a minority of repositories with large gains, the five largest positive gains holding 88.5 to 94.3 percent of all positive gain in the declared scale review (Table~\ref{tab:scale}), and the test is not a test of the mean. Against \aets{} both summaries favor the models, lower on 293 to 298
+signed-rank test rejects in all nine cells on the reference's side. The mean is carried by a minority of repositories with large gains, the five largest positive gains holding 88.5 to 94.3 percent of all positive gain in the declared scale review (Table~\ref{tab:scale}), and the test is not a test of the mean. Against weekly AutoETS both summaries favor the models, lower on 293 to 298
 of 300 repositories, because the reference is weak: its nominal 80 percent intervals cover 98.6 to 98.8
 percent of target days (Appendix~\ref{app:study1}).
 
@@ -64,10 +65,11 @@ NYC 311 requests & TimesFM 2.5 & 30 & -0.0743 & $7.001 \times 10^{-5}$ & 128 / 1
 \caption{The mean and the typical series, raw deciles against the 28-day local mean at horizon 30: the
 signed cumulative contribution to the mean difference, series sorted by their difference and the cumulative
 sum divided by the number of series, so that each curve ends at its mean. On GitHub stars (300 repositories)
-and npm downloads (209 series, on a symmetric log scale) the total drops to its final level within the first
-few percent of series and drifts upward over the majority, which lose by small amounts; on NYC 311 (300
-series, pooled over the strata as a declared secondary) the gain accrues more evenly. The dotted line marks
-the median series.}
+the total drops to its final level within the first few percent of series and drifts upward over the
+majority, which lose by small amounts; on npm downloads (209 series, on a symmetric log scale) the first
+series sets the level and the other 208 move it by less than one percent; on NYC 311 (300 series, pooled
+over the strata as a declared secondary) the gain accrues more evenly. The dotted line marks the median
+series.}
 \label{fig:meantypical}
 \end{figure}
 
@@ -77,10 +79,13 @@ series at 7.6 million downloads a day deciding every mean; the models score lowe
 series. The rank test rejects on the model's side in four of six, E06, E09, E12 and E18; Chronos-2 and
 TimesFM 2.5 at horizon 7 are not rejected, with adjusted $p$ 0.596 and 0.746, and their medians favor the
 reference (0.007856 and 0.01696) where the other four favor the model (-0.002297 to -0.005016). On NYC 311,
-pooled over the 300 series as a declared secondary, each model's mean is lower than the local mean's in all
-six rows while the series split close to evenly, 128 to 161 lower against 124 to 157 higher, and the
-signed-rank test, adjusted within the table, favors the models in all six, with every row's within-table
-adjusted $p$ below 0.005. The context-scaled mean, the registered secondary \citep{corani2026}, agrees with the medians where the unscaled mean differs (Appendix~\ref{app:s2tables}). On the 400 most-starred repositories of a live benchmark the typical series
+pooled over the 300 series, each model's mean is lower than the local mean's in all six rows while the
+series split close to evenly, 128 to 161 lower against 124 to 157 higher, and the signed-rank test, adjusted
+within the table, favors the models by rank sum in all six, with three medians below zero, two above and one
+exactly zero, and every within-table adjusted $p$ below 0.005. The context-scaled mean, the registered
+secondary \citep{corani2026}, still favors the model on npm, with an interval that includes zero in E03 and
+E15, where the medians favor the reference (Appendix~\ref{app:s2tables}). On the 400 most-starred
+repositories of a live benchmark the typical series
 favors the foundation models \citep{garza2026}; the designs differ in what is counted, in how the panel is
 drawn, in scale and in sparsity, and the paper reports the difference without attributing it.
 
@@ -89,5 +94,9 @@ window's \qs{} exactly into the loss on zero target days and the losses on posit
 and below the target (Table~\ref{tab:posthoc}). The mean gain sits on positive days where the local mean
 overpredicts, the overprediction part favoring the models in every cell from $-0.088$ to $-0.209$; the
 zero-day part is positive, against the models, in every cell, from 0.004 to 0.015, small beside the mean
-gain but in every cell larger than that cell's median difference, which runs from 0.0003 to 0.0041.  Whether that loss can be taken out by an occurrence estimate from the context alone, while
-the model's positive law is kept, is the question of Section~\ref{sec:occurrence}.
+gain but in every cell larger than that cell's median difference, which runs from 0.0003 to 0.0041. The same
+split on npm, post hoc, and on NYC 311, a declared secondary, puts the npm gain on overprediction too and the
+NYC 311 gain where the local mean underpredicts, 12 to 29 percent of it on zero days
+(Appendix~\ref{app:s3tables}). Whether the zero-day loss can be taken out by
+an occurrence estimate from the context alone, while the model's positive law is kept, is the question of
+Section~\ref{sec:occurrence}.

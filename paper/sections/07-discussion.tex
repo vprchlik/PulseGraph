@@ -7,50 +7,40 @@
 \label{sec:discussion}
 
 \paragraph{What the three studies say together.} The models' value on sparse daily counts is in the size of
-the positive days: their gain over a trailing mean sits where the local mean overpredicts a positive day,
-and their positive law beats a shifted Poisson wherever that law is misspecified and an empirical law on
-dense series. Their own probability of a zero day is at least as good as a context-only estimate on dense
+the positive days: their gain over a trailing mean sits on positive days, where the local mean overpredicts
+on GitHub and npm and underpredicts on NYC 311, and their positive law beats a shifted Poisson wherever that
+law is misspecified and an empirical law on dense series. Their own probability of a zero day is at least as good as a context-only estimate on dense
 series, under the quantile score in all three settings and under the occurrence Brier score on NYC 311 and at
 a week on npm. This is confirmatory on NYC 311, through the dense stratum's own six tests of the dynamic
 occurrence; on npm and the grid the confirmatory families are pooled, none favors the fixed substitution and
 two of six npm tests and all three grid tests reject against it, and their reading as the dense answer rests
 on the declared secondary strata. On sparse series the answer depends on the domain: the typical sparse npm
-series favors a context estimate at a week, under all three scores and for the TSB hurdle as much as for the
-Jeffreys estimate, and not at a month; on NYC 311's sparse stratum one of twelve registered tests favors it
-and ten of twelve medians are exactly zero. On series that are zero nine days in ten nothing about
-occurrence can be read, because the completion sets the models' occurrence probability and the quantile
-score ties. The dynamic hurdle beats the empirical count hurdle in 14 of 18 registered tests on NYC 311,
-three with a median of exactly zero; on sparse and very sparse series that contrast owes as much to the
-swapped occurrence as to the positive law.
+series favors a context estimate at a week, for the TSB hurdle as much as for the Jeffreys estimate, and not
+at a month by the within-stratum test; on NYC 311's sparse stratum one of six T1 tests favors it and four of
+six medians are exactly zero; and the grid's cells with $z = 0.95$ at a month favor it. On the natural panels' series
+that are zero nine days in ten nothing about occurrence can be read, because the completion sets the models'
+occurrence probability and the quantile score ties. T2 rejects for the dynamic hurdle against the empirical
+count hurdle in 14 of 18 registered tests on NYC 311, three of them by rank sum with a median of
+exactly zero; on sparse series that contrast owes at least as much to the swapped occurrence as to the
+positive law, and on very sparse series everything.
 
-\paragraph{The two readings of the accounting trade.} The hurdle's positive law $G_+$ is the model's completed
-marginal law truncated at one, not a size forecast the model made for positive days; context zero mass laid
-over a law that already sits low on positive days counts the zeros twice, and zero-day loss down with
-underprediction up by more is what that predicts. Two readings of the net sign were open after Study 2: that
-the context estimate is the worse occurrence forecast, and that the truncated law is not the model's size
-forecast, so that any added zero mass hurts. The record supports the first on NYC 311's dense series, where
-the dynamic occurrence is worse on the Brier score itself in all six rows and the fourth cell against \hc{},
-which differs from it in the occurrence alone, puts the model's own occurrence ahead of the Jeffreys estimate
-on 62 to 73 of the 100 dense series under a count law that cannot count zeros twice, and at a week on the
-grid for Chronos-2 and TimesFM 3. It supports the second at a month on npm and the grid, where the Jeffreys
-estimate is as good as or better than the model's zero mass on the Brier score and under the count law, yet
-laid over the models' truncated positive laws it raises \qs{} against the control on 57 to 66 of the 100
-dense npm series and on 24 or 25 of the 30 grid blocks. The fourth cell against the control differs from it
-in the positive law alone and measures the model's law against a shifted Poisson, far worse on dense NYC 311
-series by 0.2944 to 0.325 on the mean; it says nothing about either reading. Which reading operates depends
-on the panel and the horizon, and nothing beyond that is attributed.
+\paragraph{The two readings of the accounting trade.} Of the two readings of the net sign left open after
+Study 2, that the context estimate is the worse occurrence forecast and that the hurdle's truncated law is
+not the model's size forecast, the record supports the first on dense NYC 311 series and at a week on the
+grid, and the second at a month on the grid and, on the Brier score, on npm, post hoc there
+(Appendix~\ref{app:s3tables}); nothing beyond that is attributed.
 
 \paragraph{What was expected, and what surprised.} The design expected the sparse npm reading to reproduce
-on a second domain; it did not, and the paper's first draft gave two readings of that outcome with equal
-weight. Three things in the record changed that. The first is the completion floor, in the registered rule
-from the start and not seen until the very sparse ties were counted: on a series that is zero nine days in
-ten the registered ``model's own zero mass'' is a constant between 0.0607 and 0.1, so the very sparse question
-the paper had called open is not one the registered construction can ask, and the ties were foreseeable from
-the definition. The second is that the sparse npm week is a property of the context estimate as such, since
-the TSB hurdle wins the same series, and of the week rather than the month. The third is the registered
-dynamic count, which beats every foundation model on the grid and loses to them on every natural panel: with
-the occurrence held equal, the foundation models' positive laws underpredict the grid's positive days more
-than its negative binomial does (Appendix~\ref{app:s2tables}). The threshold of 0.5 between the regimes was
+on a second domain; it did not, and three things in the record explain why. The first is the completion
+floor, in the registered rule from the start: before the run its first stage counted 74 of 100 very sparse
+series on the Jeffreys fallback and expected many exact ties. On a series that is zero nine days in ten
+the registered ``model's own zero mass'' is a constant between 0.0607 and 0.1, so the very sparse question is
+not one the registered construction can ask, and the ties were foreseeable from the definition. The second
+is that the sparse npm week is a property of the context estimate as such, since the TSB hurdle wins the
+same series, and of the week rather than the month. The third is the registered dynamic count, which beats
+every foundation model on the grid at a month and loses to them on npm and NYC 311, on the mean and by
+count: with the occurrence held equal, the foundation models' positive laws underpredict the grid's positive
+days more than its negative binomial does (Appendix~\ref{app:s2tables}). The threshold of 0.5 between the regimes was
 carried from Study 2's sampling strata, not derived; Figure~\ref{fig:signature} suggests that where the
 substitution starts to help is domain-specific.
 

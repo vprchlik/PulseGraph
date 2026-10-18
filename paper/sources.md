@@ -196,11 +196,12 @@ print(g.agg(lower=lambda s: int((s < 0).sum()), median="median").round(4).to_str
 ## The Study 2 sections under `paper/sections/` (added 2026-10-15)
 
 The four files `paper/sections/study2-question.tex`, `study2-design.tex`, `study2-panel.tex` and
-`study2-results-placeholder.tex` were written to be `\input` by the paper; since 2026-10-16 `paper.tex`
-reads the first three (each of the design and panel sections split into a body file and a detail file in
-the appendix) and `study2-results.tex` in place of the placeholder, which no longer exists (the paper's
-heading below). `check_numbers.py` reads them like `main.tex` (whitespace collapsed) and asserts every
-figure below. `S2` stands for `study/study2`, `N` for `reports/study2-npm/panel`. The
+`study2-results-placeholder.tex` were written to be `\input` by the paper; from 2026-10-16 `paper.tex`
+read the first three (each of the design and panel sections split into a body file and a detail file in
+the appendix) and `study2-results.tex` in place of the placeholder, and since the reorganization of
+2026-10-17 none of the four body files exists (the section on the reorganized paper below).
+`check_numbers.py` read them like `main.tex` (whitespace collapsed) and asserts every figure below against
+the expanded paper. `S2` stands for `study/study2`, `N` for `reports/study2-npm/panel`. The
 results placeholder holds no number from a run: every cell is `tbd`, and the checker asserts that its
 table rows are the declared tuples with `tbd` cells and that no decimal figure appears in it.
 
@@ -276,9 +277,10 @@ read by `\input` from fourteen files under `paper/shared/`, split out of `main.t
 `main.tex` reads the same files and expands to its committed text (`git show f325a67:paper/main.tex`) byte
 for byte apart from one dated sentence in `main.tex` itself, which now says that both Study 2 components
 ran on 2026-10-15 (`check_numbers.py` asserts the expansion against the committed file with that one
-sentence replaced). The Study 2 sections are the files under `paper/sections/`: `study2-question.tex`,
+sentence replaced). The Study 2 sections were the files under `paper/sections/`: `study2-question.tex`,
 `study2-design.tex`, `study2-panel.tex`, `study2-results.tex` (the body), `study2-design-detail.tex`,
-`study2-panel-detail.tex` and `study2-appendix.tex` (the appendix). After the revision of 2026-10-16 the
+`study2-panel-detail.tex` and `study2-appendix.tex` (the appendix); the four body files were removed on
+2026-10-17 and the three appendix files remain. After the revision of 2026-10-16 the
 design section keeps the calendar, the models and variants, the comparators, the families and the grid in
 the body and moves the frame-and-sampling rule, the completion, the baselines, the two family tables, the
 scores, the seeds, the gate, the holdout and the contamination ledger to Appendix E; the panel section
@@ -471,9 +473,10 @@ estimates, not asserted.
 
 ## The paper extended with Study 3: the regime family on NYC 311 (added 2026-10-17)
 
-`paper/paper.tex` now reads six more files under `paper/sections/`: `study3-question.tex`,
+On 2026-10-17 `paper/paper.tex` read six more files under `paper/sections/`: `study3-question.tex`,
 `study3-design.tex`, `study3-panel.tex` and `study3-results.tex` in the body, after `study2-results.tex`, and
-`study3-detail.tex` and `study3-appendix.tex` in the appendix, after `study2-appendix.tex`. The regime
+`study3-detail.tex` and `study3-appendix.tex` in the appendix, after `study2-appendix.tex`; the four body
+files were removed in the reorganization later that day and the two appendix files remain. The regime
 reading of `study2-results.tex` and its post-hoc dynamic-occurrence subsection are each one paragraph; their
 detail and the dynamic-occurrence table moved to `study2-appendix.tex`, which `check_numbers.py` now reads
 for those needles. `S3R` stands for `reports/study3-nyc311/run-2026-10-17`, `S3P` for

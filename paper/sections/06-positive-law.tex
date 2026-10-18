@@ -29,7 +29,7 @@ with mean differences of 0.2944 to 0.325 and higher on 70 to 91 of the 100, and 
 grid blocks even where the generator draws positive days from a shifted Poisson.
 
 \paragraph{Against an empirical law.} The empirical hurdle is the count law that can fit a dense series. Against it the model's
-law keeps its value on dense series and not in general. On npm, read post hoc, the fixed hurdle is lower on
+law keeps its value on dense series and not in general. On npm the fixed hurdle is lower on
 63 to 72 of the 100 dense series and on 33 to 57 of the 100 sparse. On NYC 311 the registered T2 tests
 compare the dynamic hurdle with the empirical hurdle and so change the occurrence and the positive law at
 once: 14 of the 18 T2 tests reject, all for the dynamic hurdle, three of them with a median of exactly zero,
@@ -42,11 +42,15 @@ series the T2 rejections owe at least as much to the dynamic occurrence as to th
 sparse series they owe everything to it.
 
 \paragraph{The dynamic count and the TSB hurdle.} The registered dynamic count, a four-parameter discounted
-hurdle with no foundation model, is the best forecaster on the grid after the oracle, which no forecaster
-scores below in 17 of the 18 cells: its mean \qs{} at horizon 30 is 1.721 against 1.754 to 1.792 for the
-three completed models, 1.819 for \hc{} and 1.648 for the oracle, and by replicate block it is lower than
-each completed model in 18 to 24 of 30 blocks. On npm it loses, the completed models are lower on 108 to 146 of
-209 series, and on NYC 311 it is far behind on dense series and level elsewhere. The TSB hurdle stands where the registered count baselines stand: level with the count hurdle on dense series, tied with it on the sparse npm series at a week, and beaten by the dynamic count on the grid in 23 and 28 of 30 blocks. 
+hurdle with no foundation model, is the best forecaster on the grid at a month after the oracle, which no
+forecaster scores below in 17 of the 18 cells: its mean \qs{} at horizon 30 is 1.721 against 1.754 to 1.792
+for the three completed models, 1.819 for the count hurdle and 1.648 for the oracle, and by replicate block
+it is lower than each completed model in 18 to 24 of 30 blocks; at a week five model variants have a lower
+mean (Appendix~\ref{app:s2tables}). On npm it loses, the completed models are lower on 108 to 146 of 209
+series, and on NYC 311 it is far behind on dense series and level elsewhere. The TSB hurdle stands where the
+registered count baselines stand: level with the count hurdle on dense NYC 311 series and ahead of it on dense
+npm series (Table~\ref{tab:pos}), tied with it on sparse npm at a week, and beaten by the dynamic count on the
+grid in 23 and 28 of 30 blocks.
 
 \paragraph{The occurrence alone, under a count law.} The fourth cell against the count hurdle differs in the
 occurrence alone, the model's own $1 - F(0)$ against the Jeffreys estimate under the same shifted Poisson. On
@@ -58,20 +62,21 @@ month, the model's zero mass lower on only 42, 43 and 38 of 100 and 15, 13 and 1
 hoc on npm and the grid.
 
 \begin{table}[p]
-\centering\scriptsize\setlength{\tabcolsep}{2.5pt}
-\caption{The positive-law contrasts and their complements, as ranges over the three models: the series (or
-replicate blocks) where the variant is lower, tied and higher, the medians of the paired \qs{} difference,
-variant minus reference, and the status. ``Law: model vs Poisson'' is the model's hurdle against \hc{} (the
-Jeffreys occurrence shared); ``law: model vs empirical'' the same hurdle against the empirical hurdle; ``T2''
-the dynamic hurdle against the empirical hurdle, which changes the occurrence too; ``law: Poisson vs model''
-the fourth cell against the completed control (the model's occurrence shared); ``occurrence: model vs
-Jeffreys'' the fourth cell against \hc{} (the shifted Poisson shared); ``dynamic count vs control'' and
+\centering\scriptsize\setlength{\tabcolsep}{2pt}
+\caption{The positive-law contrasts and their complements, as ranges over the three models: ``L / T / H'',
+the series (or replicate blocks) where the variant is lower, tied and higher; the medians of the paired
+\qs{} difference, variant minus reference; and the status. ``Law: model vs Poisson'' is the model's hurdle
+against the count hurdle (the Jeffreys occurrence shared); ``law: model vs empirical'' the same hurdle against
+the empirical hurdle; ``T2: dynamic vs empirical'' the dynamic hurdle against the empirical hurdle, which
+changes the occurrence too; ``law: Poisson vs model'' the fourth cell against the completed control (the
+model's occurrence shared); ``occurrence: model vs Jeffreys'' the fourth cell against the count hurdle (the
+shifted Poisson shared); ``dynamic count vs control'' and
 ``TSB vs count hurdle'' change both parts. Registered rows name their tests and how many of the three reject at
 $q = 0.05$ (on the grid the two rejections are against the model's law); the npm very sparse stratum and the per-model rows are in the appendix.}
 \label{tab:pos}
 \begin{tabular}{lrllcll}
 \toprule
-Stratum & $h$ & Contrast & $n$ & Lower / tied / higher & Median & Status \\
+Stratum & $h$ & Contrast & $n$ & L / T / H & Median & Status \\
 \midrule
 \multicolumn{7}{l}{\emph{npm downloads}} \\
 all & 7 & law: model vs Poisson & 209 & 115 to 129 / 7 to 18 / 68 to 87 & -0.01587 to -0.006349 & E02, E08, E14: 3 reject \\
@@ -112,12 +117,12 @@ all cells & 7 & TSB vs count hurdle & 30 & 15 / 0 / 15 & 0.0006173 & post hoc \\
 all cells & 30 & TSB vs count hurdle & 30 & 11 / 0 / 19 & 0.0216 & post hoc \\
 \midrule
 \multicolumn{7}{l}{\emph{NYC 311 requests}} \\
-dense & 7 & T2: dynamic hurdle vs empirical & 100 & 72 to 75 / 0 to 1 / 24 to 28 & -0.06561 to -0.05608 & R02, R06, R10: 3 reject \\
-dense & 30 & T2: dynamic hurdle vs empirical & 100 & 85 to 87 / 0 / 13 to 15 & -0.06753 to -0.06123 & R04, R08, R12: 3 reject \\
-sparse & 7 & T2: dynamic hurdle vs empirical & 100 & 46 to 55 / 15 to 17 / 28 to 39 & -0.002646 to 0 & R14, R18, R22: 2 reject \\
-sparse & 30 & T2: dynamic hurdle vs empirical & 100 & 53 to 58 / 15 to 18 / 24 to 32 & -0.002469 to -0.001852 & R16, R20, R24: 3 reject \\
-very sparse & 7 & T2: dynamic hurdle vs empirical & 100 & 17 / 75 / 8 & 0 & R26, R30, R34: 0 reject \\
-very sparse & 30 & T2: dynamic hurdle vs empirical & 100 & 22 / 77 / 1 & 0 & R28, R32, R36: 3 reject \\
+dense & 7 & T2: dynamic vs empirical & 100 & 72 to 75 / 0 to 1 / 24 to 28 & -0.06561 to -0.05608 & R02, R06, R10: 3 reject \\
+dense & 30 & T2: dynamic vs empirical & 100 & 85 to 87 / 0 / 13 to 15 & -0.06753 to -0.06123 & R04, R08, R12: 3 reject \\
+sparse & 7 & T2: dynamic vs empirical & 100 & 46 to 55 / 15 to 17 / 28 to 39 & -0.002646 to 0 & R14, R18, R22: 2 reject \\
+sparse & 30 & T2: dynamic vs empirical & 100 & 53 to 58 / 15 to 18 / 24 to 32 & -0.002469 to -0.001852 & R16, R20, R24: 3 reject \\
+very sparse & 7 & T2: dynamic vs empirical & 100 & 17 / 75 / 8 & 0 & R26, R30, R34: 0 reject \\
+very sparse & 30 & T2: dynamic vs empirical & 100 & 22 / 77 / 1 & 0 & R28, R32, R36: 3 reject \\
 dense & 7 & law: model vs empirical & 100 & 75 to 78 / 0 to 1 / 22 to 24 & -0.04815 to -0.04709 & secondary \\
 dense & 30 & law: model vs empirical & 100 & 86 to 88 / 0 / 12 to 14 & -0.05901 to -0.0516 & secondary \\
 sparse & 7 & law: model vs empirical & 100 & 26 to 27 / 32 to 50 / 24 to 42 & 0 & secondary \\

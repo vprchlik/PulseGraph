@@ -18,8 +18,8 @@ adjustment per family; of the twelve, ten reject for the model variant and two a
 synthetic rejections are against the hurdle variant. None of the other tables in this appendix carries a
 multiplicity adjustment except the two post-hoc dynamic-occurrence families, which carry their own, and
 none replaces the two families. Differences are model variant minus reference, so negative favors the
-variant. A difference of order $10^{-9}$ or smaller in a median is floating-point residue; under the declared
-rule only an exact zero is a tie.
+variant. A median of order $10^{-9}$ is a near-zero score difference repeated across series, not a tie; under
+the declared rule only an exact zero is a tie.
 
 \begin{table}[h]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
@@ -200,9 +200,13 @@ control. The oracle is neither a competitor nor a confirmatory contrast.
 contrasts cell by cell at horizon 30, each over 30 replicates, with no interval and no test. The largest
 differences against the hurdle are in the cells with $z = 0.2$ and $\mu_{+} = 25$, where the hurdle scores
 0.9342 to 0.9766 above its control at $\rho = 0.8$; in the four cells with $z = 0.95$ and $\mu_{+}$ of 5 or
-25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. In the cells
-with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is lower in none of
-the 30 replicates in any of those six cells.
+25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. Over the six
+cells with $z = 0.95$ at horizon 30, read post hoc from the per-series scores, the hurdle is lower than its
+control in 21, 26 and 23 of the 30 replicate blocks under \qs{}, in 24, 24 and 22 under the occurrence Brier
+score and in 25, 26 and 22 under the discrete CRPS, and over the 540 series pairs \qs{} ties exactly on 232
+and favors the hurdle on 217 of the other 308; at horizon 7 the blocks split 10, 14 and 18 of 30 under
+\qs{}. In the cells with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is
+lower in none of the 30 replicates in any of those six cells.
 
 \begin{figure}[h]
 \centering
@@ -216,16 +220,16 @@ persistence $\rho$. Negative favors the hurdle variant. The family tests pool th
 
 \begin{table}[h]
 \centering\scriptsize\setlength{\tabcolsep}{2.4pt}
-\caption{Post-hoc. The hurdle variant against its completed control within each stratum: the series where
-the hurdle is lower, tied or higher, the median difference and the raw two-sided signed-rank $p$ with zero
-differences omitted, computed from the saved per-series scores; no adjustment, no registered status. The
-very sparse stratum holds $n = 9$.}
+\caption{Post-hoc. The hurdle variant against its completed control within each stratum: ``L / T / H'', the
+series where the hurdle is lower, tied or higher; the median difference; and the raw two-sided signed-rank
+$p$ with zero differences omitted, computed from the saved per-series scores; no adjustment, no registered
+status. The very sparse stratum holds $n = 9$.}
 \label{tab:s2regime}
 \begin{tabular}{llcrlcrlcrl}
 \toprule
  & & \multicolumn{3}{c}{dense, $n = 100$} & \multicolumn{3}{c}{sparse, $n = 100$} & \multicolumn{3}{c}{very sparse, $n = 9$} \\
 \cmidrule(lr){3-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11}
-Model & $h$ & Lower / tied / higher & Median & Raw $p$ & Lower / tied / higher & Median & Raw $p$ & Lower / tied / higher & Median & Raw $p$ \\
+Model & $h$ & L / T / H & Median & Raw $p$ & L / T / H & Median & Raw $p$ & L / T / H & Median & Raw $p$ \\
 \midrule
 Chronos-2 & 7 & 36 / 0 / 64 & 0.0455 & 0.0055 & 81 / 1 / 18 & -0.03333 & $2.47 \times 10^{-11}$ & 4 / 1 / 4 & 0 & 0.297 \\
 TimesFM 3 & 7 & 32 / 0 / 68 & 0.03386 & 0.000363 & 60 / 3 / 37 & -0.009524 & 0.00158 & 2 / 5 / 2 & 0 & 0.625 \\
@@ -265,13 +269,13 @@ TimesFM 2.5 & 30 & 72 / 1 / 27 & 57 / 4 / 39 & 5 / 4 / 0 & 130 / 1 / 78 & -0.010
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The context-scaled \qs{}, the registered scale-free secondary: each window's \qs{} divided by
 $\max(1, \bar{y}_{\text{context}})$ before the registered averaging. Mean difference with its pointwise 95
-percent bootstrap interval, median difference, and the series (of 209) or blocks (of 30) where the variant
-is lower, tied or higher. The synthetic rows are at horizon 30; the suffix \texttt{-h7} marks the
-horizon-7 secondary rows.}
+percent bootstrap interval, median difference, and ``L / T / H'', the series (of 209) or blocks (of 30)
+where the variant is lower, tied or higher. The synthetic rows are at horizon 30; the suffix \texttt{-h7}
+marks the horizon-7 secondary rows.}
 \label{tab:s2scaled}
 \begin{tabular}{lllrrcrc}
 \toprule
-ID & Variant & Reference & $h$ & Mean & 95\% interval & Median & Lower / tied / higher \\
+ID & Variant & Reference & $h$ & Mean & 95\% interval & Median & L / T / H \\
 \midrule
 E01 & chronos2\_hurdle & chronos2\_completed & 7 & -0.02204 & [-0.03098, -0.01407] & -0.005825 & 122 / 2 / 85 \\
 E04 & chronos2\_hurdle & chronos2\_completed & 30 & -0.002395 & [-0.006836, 0.00146] & 0.0002262 & 101 / 2 / 106 \\
@@ -477,7 +481,7 @@ oracle & 1.514 & 1.648 & 0.115 & 1.504 \\
 \end{table}
 
 \paragraph{The dynamic-occurrence post-hoc, the detail.} The analysis summarized in
-Section~\ref{sec:positive} is post-hoc. It was computed on 2026-10-16 from the saved forecasts of both
+Section~\ref{sec:discussion} is post-hoc. It was computed on 2026-10-16 from the saved forecasts of both
 runs, after the registered scores were seen, with no registered status; it adds no test to E01 to E18 or
 S01 to S06 and replaces nothing in them, and no model was run. The registered hurdle's occurrence estimate is constant over
 the horizon and ignores persistence; the registered \texttt{dynamic\_count} baseline carries a dynamic one,
@@ -504,12 +508,13 @@ against the model's completed control and against the model's registered fixed-o
 (DE rows, 209 series) and the grid (DS rows, 30 replicate blocks at horizon 30). Differences are wrapper
 minus reference \qs{}; negative favors the wrapper. The interval is the pointwise 95 percent percentile
 interval from 20,000 entity bootstrap replicates; $p$ is Benjamini-Hochberg adjusted once over the 24 npm or
-the 12 grid post-hoc tests. The npm means are unscaled and carried by \texttt{aggregate-error}; a median of
-order $10^{-17}$ is floating-point residue.}
+the 12 grid post-hoc tests. ``L / T / H'' counts the series or blocks where the wrapper is lower, tied or
+higher. The npm means are unscaled and carried by \texttt{aggregate-error}; a median of order $10^{-17}$ is
+floating-point residue.}
 \label{tab:s2dyn}
 \begin{tabular}{lllrrcrcl}
 \toprule
-ID & Model & Reference & $h$ & Mean & 95\% interval & Median & Lower / tied / higher & Adjusted $p$ \\
+ID & Model & Reference & $h$ & Mean & 95\% interval & Median & L / T / H & Adjusted $p$ \\
 \midrule
 DE01 & Chronos-2 & completed & 7 & 77.33 & [-0.008112, 231.6] & -0.009524 & 116 / 5 / 88 & 0.24 \\
 DE04 & Chronos-2 & fixed hurdle & 7 & -74.67 & [-223.6, -0.148] & -0.001058 & 106 / 6 / 97 & 0.203 \\
@@ -564,7 +569,7 @@ are unscaled and carried by \texttt{aggregate-error}.}
 \label{tab:s2dynrest}
 \begin{tabular}{lllrrcrcl}
 \toprule
-ID & Model & Reference & $h$ & Mean & 95\% interval & Median & Lower / tied / higher & Adjusted $p$ \\
+ID & Model & Reference & $h$ & Mean & 95\% interval & Median & L / T / H & Adjusted $p$ \\
 \midrule
 DE02 & Chronos-2 & count hurdle & 7 & -5,165 & [-15,402, -32.05] & -0.009524 & 122 / 3 / 84 & $2.69 \times 10^{-8}$ \\
 DE03 & Chronos-2 & dynamic count & 7 & -6,371 & [-19,017, -32.41] & -0.01376 & 123 / 26 / 60 & $3.1 \times 10^{-11}$ \\

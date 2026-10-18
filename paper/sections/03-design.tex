@@ -20,11 +20,12 @@ estimate $p = (n_{+} + 1/2) / 29$ in Study 2 (the fixed hurdle), and in Study 3 
 estimate of the registered dynamic count (the dynamic hurdle). The fourth cell of that two-by-two, the
 model's own occurrence $1 - F(0)$ with a count positive law, was registered for Study 3 as a declared
 secondary and is computed post hoc on npm and the grid. The count baselines take both parts from the context:
-the count hurdle \hc{}, a hurdle shifted Poisson fitted to the positive days of the last 28 with the same
-Jeffreys occurrence \citep{snyder2012}; the empirical hurdle, the same occurrence with the empirical law of
-those days, declared secondary; and the dynamic count, a Beta-Bernoulli occurrence and a Gamma-Poisson size
-forgotten at 0.98 a day \citep{teunter2011}. Two references from Study 1 complete the set, \lm{} and
-\aets{}. The post-hoc TSB hurdle is the count hurdle with TSB's two estimates in place of the 28-day ones.
+the count hurdle, a hurdle shifted Poisson fitted to the positive days of the last 28 with the same Jeffreys
+occurrence \citep{snyder2012}; the empirical hurdle, the same occurrence with the empirical law of those
+days, declared secondary; and the dynamic count, a discounted Bayesian analogue of TSB \citep{teunter2011},
+with a Beta-Bernoulli occurrence and a Gamma-Poisson size forgotten at 0.98 a day. Two references from Study
+1 complete the set, the 28-day local mean and weekly AutoETS. The post-hoc TSB hurdle is the count hurdle
+with TSB's two estimates in place of the 28-day ones.
 
 \begin{figure}[t]
 \centering
@@ -51,10 +52,11 @@ P(Y > 0) = P\bigl(Q(U) \ge 0.5\bigr) = 0.1\, e^{-(0.5 - q_{0.9})},
 which lies between $0.1 e^{-0.5} = 0.0607$ and $0.1$ whatever the model forecast (Figure~\ref{fig:floor}).
 On a series that is zero nine days in ten the ``model's own zero mass'' is therefore set by this rule.
 Counted after the run from the saved laws of the 300 NYC 311 checkpoints, descriptive and post hoc: of the
-600 completed forecasts of each model in the very sparse stratum, 580, 544 and 588 sit on the floor for
-Chronos-2, TimesFM 3 and TimesFM 2.5, with a median occurrence probability of 0.0607 to 0.0609 against 0.0172
-for the dynamic hurdle on the same windows; in the sparse stratum 150, 62 and 230 of 600 do, and in the
-dense stratum 2, 0 and 0.
+600 completed forecasts of each model in the very sparse stratum, 580, 544 and 588 sit on the floor at their
+first lead for Chronos-2, TimesFM 3 and TimesFM 2.5, and 561, 505 and 572 at every lead, with a median
+occurrence probability of 0.0607 to 0.0609 against 0.0172 for the dynamic hurdle on the same windows, its
+Jeffreys fallback $0.5/29$, which 58 of the 100 very sparse series take at the first origin; in
+the sparse stratum 150, 62 and 230 of 600 do at the first lead, and in the dense stratum 2, 0 and 0.
 
 \begin{figure}[t]
 \centering
@@ -94,8 +96,8 @@ each registered comparison reports the mean paired difference with a pointwise 9
 interval from 20,000 bootstrap replicates of whole series, the median difference, the series lower, tied and
 higher, and a two-sided approximate Wilcoxon signed-rank test that omits zero differences, with one
 Benjamini-Hochberg adjustment at $q = 0.05$ over each family. The mean and the typical series are always shown together, and the series that carries a mean is named.
-The registered direction of a test is the median's sign, and a median of exactly zero has none; the side the
-rank sums favor, where reported, is a reading the registration does not make.
+The side the rank sums favor, where reported, is a reading beside the median's sign that the registration
+does not make.
 
 \begin{table}[t]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}

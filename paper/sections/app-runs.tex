@@ -17,7 +17,7 @@ panel; each run's state file holds the SHA-256 of every checkpoint, and each inf
 file with the commands, the package versions and the times.
 
 \begin{table}[h]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\centering\footnotesize\setlength{\tabcolsep}{2pt}
 \caption{The run record: when each run started (UTC), the implementation commit, the series and forecasts
 scored, the seconds inside the run and for the whole process, the approved budget against the readiness
 estimate, the recomputation of every score from the saved forecasts, and the checkpoints that are to be
@@ -75,12 +75,16 @@ file.
 weights 0.05 and 0.2, the fourth factorial cell on npm and the grid, and the field's point methods, Croston's
 method, its bias-corrected variant and ADIDA from the pinned \texttt{statsforecast}, were scored from the
 saved forecasts of all three runs on 2026-10-17 under a specification fixed before any score on the page
-existed; no model was run and nothing was refitted to a target. Before any output was written the command
+existed; no model was run and nothing was refitted to a target. The TSB hurdle smooths the occurrence
+indicator and the positive sizes with weight 0.1 from their first context values, is defined from a single
+positive day where the count hurdle would fall back to a point mass at one, and is a point mass at zero when
+the context has no positive day. Before any output was written the command
 verified every checkpoint hash, rebuilt the three registered families byte for byte from the saved scores,
 rebuilt every context from the frozen signals, and checked in every window that the TSB level product equals
 the pinned library's own TSB forecast. The point methods are scored as a point mass at the rounded forecast,
-under which \qs{} and the discrete CRPS both equal the absolute error; a point mass loses to every forecast
-with a law by construction, and the benchmark says nothing about those methods as point forecasts. Its
+under which \qs{} and the discrete CRPS both equal the absolute error; a point mass is a poor probabilistic
+forecast by construction, since every proper score penalizes it on each day the target differs from its
+point, and the benchmark says nothing about those methods as point forecasts. Its
 results page, under \texttt{reports/study2-posthoc-intermittent-baselines/}, gives every contrast with its
 $n$ and no verdict.
 

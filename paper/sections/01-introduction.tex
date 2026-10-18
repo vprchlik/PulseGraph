@@ -13,15 +13,17 @@ forecaster that cannot say how likely it is cannot be used to alert on a change 
 a sparse count series at all, or whether a trailing mean does as well, and where any value it adds sits.
 
 This paper's answer is that the value is in the size, not the occurrence. On sparse daily counts the frozen
-models' gain over a 28-day local mean comes from the days that are not zero, where the local mean
-overpredicts. Their own probability of a zero day is at least as good as a context-only estimate wherever
-their nine quantiles can express one: on dense series in all three settings, where substituting a context
-estimate for the model's zero mass makes the forecast worse, and on sparse NYC 311 series, where the two are
-about level. The one place where a context estimate beats the model's own zero mass on the typical series is
-the sparse npm stratum at a week, a secondary reading on one domain and one horizon. And on series that are
-zero nine days in ten the models' nine deciles are all zero: the rule that completes them into a count law
-then sets the probability of a positive day between 0.0607 and 0.1 whatever the model forecast, the quantile
-score ties, and nothing about occurrence can be read from the models there.
+models' gain over a 28-day local mean comes from positive days: where the local mean overpredicts on GitHub
+stars and npm downloads, and where it underpredicts on NYC 311 requests, with 12 to 29 percent of that gain
+on zero days. Under the registered quantile score their own probability of a zero day is at least as good as
+a context-only estimate on dense series in all three settings. A context estimate beats the model's own zero
+mass on the typical series in four places, each a sparse stratum, a very sparse cell or the month horizon:
+the sparse npm stratum at a week, a secondary reading on one domain; the grid's cells with zero probability
+0.95 at a month; one registered test of six on NYC 311's sparse stratum; and, under the occurrence Brier
+score alone, dense npm series at a month. And on
+the natural panels, on series that are zero nine days in ten, the models' nine deciles are all zero: the
+completion rule then sets the probability of a positive day between 0.0607 and 0.1 whatever the model
+forecast, the quantile score ties, and nothing about occurrence can be read from the models there.
 
 The three studies are one design run in three steps, each registered before its target data was read and
 each prompted by a result of the one before. Study 1 compared the raw forecasts of frozen Chronos-2, TimesFM

@@ -14,13 +14,12 @@ law of its own. Full laws come from count models: \citet{snyder2012} compared a 
 binomial and a hurdle shifted Poisson that keeps Croston's Bernoulli occurrence, all with dynamic parameters;
 \citet{svetunkov2023} wrote occurrence and size as one state space model, iETS, whose occurrence equations
 contain TSB's and Croston's as cases; temporal aggregation \citep{nikolopoulos2011}, Tweedie laws
-\citep{damato2025} and benchmark suites of distributional methods \citep{damato2026, bai2026} extend the line.
-The registered baselines of this paper are classical members of it: the count hurdle is a hurdle shifted
-Poisson with a fixed-window occurrence estimate, the empirical hurdle the same occurrence with the empirical
-law of the recent positive days, and the dynamic count a discounted Bayesian analogue of TSB. Croston and TSB
-were excluded at registration because they carry no predictive law of their own, the dynamic count was
-registered to play TSB's part, and a post-hoc descriptive benchmark now places a TSB hurdle beside the
-registered forecasters.
+\citep{damato2025}, benchmark suites of distributional methods \citep{damato2026} and pooled hurdles with
+forgetting \citep{bai2026} extend the line. The registered baselines of this paper are classical members of
+it: the count hurdle is a hurdle shifted Poisson with a fixed-window occurrence estimate, the empirical hurdle
+the same occurrence with the empirical law of the recent positive days, and the dynamic count a discounted
+Bayesian analogue of TSB. The protocol excludes Croston and TSB by name without a reason; neither carries a
+predictive law of its own, and the dynamic count, read as such, plays TSB's part.
 
 \paragraph{Count scores and quantile scores on discrete data.} \citet{czado2009} is the standard reference
 for assessing count forecasts by proper scoring rules and the randomized probability integral transform;
@@ -29,7 +28,10 @@ for assessing count forecasts by proper scoring rules and the randomized probabi
 score and a Brier score. Quantile scores are proper for the quantiles they read \citep{gneiting2007} and equal
 a weighted interval score at matching levels \citep{bracher2021}; the M5 uncertainty competition asked for
 nine levels from 0.005 to 0.995 \citep{makridakis2022}, and \citet{ziel2022} argued that its leading methods
-failed the data's overdispersion and frequent zeros. Two recent evaluations drop every quantile level below the median because the forecasts there are zero for every method \citep{damato2025, damato2026, tichy2025}. The property this paper meets on its very sparse series follows from the definition: a
+failed the data's overdispersion and frequent zeros. Two recent evaluations drop every quantile level below
+the median because the forecasts there are zero for every method \citep{damato2025, damato2026}, and even
+the discrete ranked probability score separates models poorly on ultra-slow series \citep{tichy2025}. The
+property this paper meets on its very sparse series follows from the definition: a
 quantile score reads only the scored quantiles, so two forecasts whose deciles agree score the same for every
 target, and a count law with at least nine tenths of its mass at zero has all nine deciles at zero. \qs{},
 the registered primary, has that property; the occurrence Brier score and the discrete CRPS, the declared
@@ -45,8 +47,9 @@ with Croston, SBA, TSB and ADIDA beside Chronos and TimesFM under point and serv
 \citep{chin2026}; TimesFM and Chronos-Bolt against Croston and TSB on quick-commerce demand \citep{kim2026};
 TimesFM 3 on simulated intermittent counts under a protocol frozen before any forecast \citep{ebrahim2026,
 ebrahim2026zenodo}; and calibration, blind-spot and trained-hurdle studies \citep{adler2025,
-ghoroghchian2026, musat2026}. None wraps a frozen model's output in a hurdle under a proper score or asks
-whether the model's own zero mass or a context estimate is the better occurrence forecast. Aggregate and
+ghoroghchian2026, musat2026}. No evaluation found wraps a frozen model's output in a hurdle under a proper
+score; the nearest, the hurdle on frozen Chronos-2 output in \citet{chin2026}, is judged by point and service
+measures. Aggregate and
 per-series rankings of zero-shot models are known to disagree \citep{islam2026, kim2026, brini2026,
 cherif2026}, and the mean scaled score is recommended in print on intermittent data \citep{corani2026}. On GitHub stars a live benchmark on the 400 most-starred repositories finds the typical series favoring the foundation models \citep{garza2026}, where the population sample of Study 1 finds the opposite \citep{wen2026}. A later test window on
 familiar entities does not establish generalization to unseen ones \citep{moghadasi2026}, later windows of

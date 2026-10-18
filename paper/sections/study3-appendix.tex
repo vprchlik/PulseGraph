@@ -343,6 +343,26 @@ very sparse & TimesFM 2.5 & fourth cell & 30 & 0.0004938 & [$-5.926 \times 10^{-
 \end{tabular}
 \end{table}
 
+\paragraph{The two readings of the accounting trade.} The hurdle's positive law $G_+$ is the model's completed
+marginal law truncated at one, not a size forecast the model made for positive days; context zero mass laid
+over a law that already sits low on positive days counts the zeros twice, and zero-day loss down with
+underprediction up by more is what that predicts. Two readings of the net sign were open after Study 2: that
+the context estimate is the worse occurrence forecast, and that the truncated law is not the model's size
+forecast, so that any added zero mass hurts. The record supports the first on NYC 311's dense series, where
+the dynamic occurrence is worse on the Brier score itself in all six rows and the fourth cell against the
+count hurdle, which differs from it in the occurrence alone, puts the model's own occurrence ahead of the
+Jeffreys estimate on 62 to 73 of the 100 dense series under a count law that cannot count zeros twice, and at
+a week on the grid for Chronos-2 and TimesFM 3. It supports the second at a month on npm and the grid, where
+the Jeffreys estimate is as good as or better than the model's zero mass on the Brier score, and on the grid
+under the count law too, yet laid over the models' truncated positive laws it raises \qs{} against the control
+on 57 to 66 of the 100 dense npm series and on 24 or 25 of the 30 grid blocks; under the count law on npm the
+model's own zero mass stays ahead, lower on 43, 48 and 60 of the 100 dense series at a month with every mean
+in its favor. The fourth cell against the control differs from it in the positive law alone and measures the
+model's law against a shifted Poisson, far worse on dense NYC 311 series by 0.2944 to 0.325 on the mean; it
+says nothing about either reading. The npm and grid attributions here are post hoc, resting on the
+benchmark's fourth cell and the declared secondary Brier rows. Which reading operates depends on the panel
+and the horizon, and nothing beyond that is attributed.
+
 \paragraph{Pooled over the 300 series, in Study 2's form.} Table~\ref{tab:s3pooled} gives Study 2's
 eighteen contrasts on the whole panel with every series weighted equally across strata, declared secondary;
 its adjustment is within the table only and confirms nothing.
@@ -384,7 +404,12 @@ splits each \emph{hurdle\_dynamic}-minus-control difference into the three exact
 Appendix~\ref{app:study1} within each stratum. On the dense series the zero-day part is positive, against the dynamic occurrence, in all six
 rows, from 0.009693 to 0.03213; on the sparse series it is positive for Chronos-2 and negative for the two
 TimesFM models at both horizons, with the positive-day underprediction part of the opposite sign; on the very
-sparse series every part is within 0.006 of zero.
+sparse series every part is within 0.006 of zero. The same split of the raw deciles against the local mean,
+from the saved parts over the 300 series, puts the NYC 311 gain on positive days where the local mean
+underpredicts, -0.034 to -0.061 of totals of -0.074 to -0.081, with -0.010 to -0.022 on zero days, 12 to 29
+percent of the total, and -0.002 to -0.027 on overprediction; on npm, post hoc from the per-series parts, the
+overprediction part carries -2,452 to -3,769 of mean gains of -2,884 to -5,109, the underprediction part -433
+to -1,298 and the zero-day part less than 61 either way.
 
 \begin{table}[h]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
