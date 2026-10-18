@@ -1,214 +1,164 @@
 # The paper: title, abstract and a one-page summary
 
-Written 2026-10-16 for the author's read before the paper is posted, rewritten the same day after the paper's
-review, the standing check and referee's read and the post-hoc dynamic-occurrence analysis, and rewritten on
-2026-10-17 after Study 3 ran. The paper (`paper/paper.tex`) is the Study 1 report (`paper/main.tex`, which
-still builds on its own) extended with Study 2's two results, two labeled post-hoc analyses, and Study 3's
-registered regime family on NYC 311. Every number below comes from a named file; `paper/sources.md` gives the
-row and column and the command that regenerates the file, and `paper/check_numbers.py` asserts each one in the
-paper and in this page, the abstract below included. Differences are variant minus reference, so a negative
-number favors the variant. The sentences the author should read are listed at the end.
+Written 2026-10-16 for the author's read before the paper is posted, rewritten after each read, and
+rewritten on 2026-10-17 when the paper was reorganized by question at a body of about twelve pages with the
+two reads of that day and the post-hoc intermittent-demand benchmark applied. The paper (`paper/paper.tex`)
+reports three registered, population-sampled studies as one design run in three steps; the Study 1 report
+(`paper/main.tex`) still builds on its own and is unchanged. Every number below comes from a named file;
+`paper/sources.md` gives the row and column and the command that regenerates the file, and
+`paper/check_numbers.py` asserts each one in the paper and in this page, the abstract below included.
+Differences are variant minus reference, so a negative number favors the variant. The sentences the author
+should read are listed at the end.
 
 ## Title
 
-Zero-shot foundation models on sparse daily counts: a registered re-evaluation on GitHub stars, a registered
-occurrence test on npm downloads and a registered regime test on NYC 311 requests
+Size, not occurrence: what zero-shot foundation models add on sparse daily counts
 
 ## Abstract
 
-We ask whether zero-shot time-series foundation models improve probabilistic forecasts of sparse daily
-counts. The three studies are registered and population-sampled. Study 1 re-evaluates Chronos-2, TimesFM 3
-and TimesFM 2.5 on daily GitHub star counts of 300 repositories sampled from 148,550, against a 28-day
-local mean and weekly AutoETS under a nine-decile quantile score. The typical repository favors the local
-mean, with the models lower on 46 to 89 of 300 and the signed-rank test on the reference's side in all nine
-cells, while the equal-weight mean favors the models in every cell, carried by few repositories; against
-AutoETS both summaries favor the models. Study 2 asks whether replacing a frozen model's zero mass with a
-28-day context-only occurrence probability, keeping its completed positive law, lowers the score, on 209
-hash-sampled npm download series and a 540-series synthetic grid. No pooled test favors the substitution
-at q = 0.05, and two of six npm tests and all three grid tests reject against it; in the secondary
-strata the substitution scores lower for 81, 60 and 66 of the 100 sparse series at horizon 7 and for 32 to
-43 of the 100 dense ones. Study 3 registers that reading as a per-stratum family of 36 tests on NYC 311
-service requests, 300 series in three strata, with a dynamic occurrence. For dense series the substitution
-is worse than the model's own zero
-mass: all six tests reject as predicted. The predicted sparse benefit is not established: one of twelve
-tests rejects as predicted, and ten of twelve medians are exactly zero, both forecasts putting every decile
-at zero on most very sparse series. The dynamic hurdle beats the empirical count hurdle in 14 of 18 tests.
-The claim is the registered combination on those three settings, and nothing broader.
+We ask where zero-shot time-series foundation models add value on sparse daily counts. Three registered,
+population-sampled studies run one design in three steps on frozen Chronos-2, TimesFM 3 and TimesFM 2.5. On
+daily GitHub star counts of 300 repositories sampled from 148,550, the models beat a 28-day local mean on the
+mean in every cell and lose to it on the typical repository, lower on 46 to 89 of 300. Study 2 replaces each
+model's zero mass with a 28-day context-only occurrence probability, keeping its completed positive law, on
+209 hash-sampled npm download series and a 540-series synthetic grid. No pooled test favors the substitution
+at q = 0.05, two of six npm tests and all three grid tests reject against it, and the model's positive law
+beats a shifted-Poisson count hurdle in all six npm cells; in the secondary strata the substitution scores
+lower for 81, 60 and 66 of the 100 sparse series at horizon 7 and for 32 to 43 of the 100 dense ones. Study 3
+registers that reading as a per-stratum family of 36 tests on NYC 311 service requests, 300 series in three
+strata, with a dynamic occurrence: on dense series all six tests reject as predicted; on sparse series one of
+twelve tests rejects as predicted, and ten of twelve medians are exactly zero. On most very sparse series
+every decile of both forecasts is zero and the completion rule fixes the models' occurrence probability
+between 0.0607 and 0.1, so nothing about occurrence can be read there. The models' value is in the size of
+positive days; their own probability of a zero day is at least as good as a context estimate wherever nine
+quantiles can express one, except for the typical sparse npm series at a week.
 
 ## One page for the author
 
-### What the paper says, in seven sentences
+### The thesis
 
-1. Study 1 stands as the report gave it: on a population-sampled GitHub panel the three frozen models beat
-   the 28-day local mean on the mean in every cell and lose to it on most individual repositories, and they
-   beat weekly AutoETS on both summaries because its intervals are far too wide; the one live benchmark on
-   the 400 most-starred repositories finds the typical series favoring the models, and the paper says the
-   two designs disagree without attributing the difference.
-2. Study 2 tested the reading that the models' size forecasts carry the gain and their occurrence forecasts
-   carry the loss, by replacing each model's own zero mass with a 28-day context-only occurrence probability
-   while keeping the model's completed positive law, on data declared for the purpose; of three registered
-   external domains one ran, npm, beside the registered grid of 540 series.
-3. On the pooled families the substitution does not help: no test favors it at q = 0.05, two of six npm
-   tests and all three grid tests reject against it (twelve of the eighteen npm tests reject in all, ten for
-   the model variant), and on the mean it lowers the zero-day loss and raises the positive-day
-   underprediction loss by more in all nine cells; but the pooled families speak for the dense regime, and
-   the declared secondary strata show the substitution lower for the typical sparse series at horizon 7 (81,
-   60 and 66 of 100) and higher for the typical dense series (lower on 32 to 43 of 100), null at 30 days.
-4. The model's positive law beats a shifted-Poisson count hurdle with the same occurrence rule in all six
-   npm cells, a comparator that cannot fit the dense series; against the registered empirical hurdle, read
-   post hoc, its advantage holds at 30 days and on dense series and not in general; on the grid, whose
-   generator is the count hurdle's own family, it loses for two models and is not rejected for the third.
-5. The registered dynamic count, a four-parameter hurdle with no foundation model, is the best forecaster
-   on the grid after the oracle and loses to the models on npm; the post-hoc dynamic-occurrence wrapper
-   shrinks the loss, removes four of the five rejections against the substitution, and never beats the
-   model's own zero mass at q = 0.05, and on the grid the remaining loss is the positive law.
-6. Every npm mean is carried by one series, `aggregate-error`, at 7.6 million downloads a day, so the
-   medians, counts and rank tests describe the typical series of the 209 series panel; three zero days
-   served by the source are scored as served under dated addition 6, and the post-hoc sensitivity without
-   them changes no conclusion (none of the eighteen conclusions changes without all three days; E06 alone
-   stops rejecting without the two panel-wide days).
-7. Study 3 (dated addition 7, commit 3357d77) registered the regime reading as a per-stratum family of 36
-   tests on NYC 311 service requests, 300 series in three strata, with the registered dynamic occurrence in
-   place of the fixed one, the empirical hurdle as the count comparator and the fourth factorial cell as a
-   declared secondary: 21 of 36 tests reject, the dense half of H3 is confirmed (all six tests reject as
-   predicted), the sparse half is not established (one of twelve tests rejects as predicted, and ten of
-   twelve medians are exactly zero, with 72 to 88 of the 100 very sparse series tied exactly because both
-   forecasts put every decile at zero), and the dynamic hurdle beats the empirical hurdle in 14 of 18 tests.
+The frozen models' value on sparse daily counts is in the size of the positive days. Their own probability of
+a zero day is at least as good as a context-only estimate wherever their nine quantiles can express one: on
+dense series in all three settings, and on sparse NYC 311 series, where the two are about level. The one
+place where a context estimate beats the model's own zero mass on the typical series is the sparse npm
+stratum at a week, a secondary reading on one domain and one horizon; the TSB hurdle wins the same series. On
+series that are zero nine days in ten the completion rule, not the model, sets the occurrence probability
+(between 0.0607 and 0.1), the quantile score ties, and nothing about occurrence can be read from the models.
 
-### What was found
+### What the paper says, in six sentences
 
-The NYC 311 panel was frozen on 2026-10-16 (276 anonymous requests, one census query per New York calendar
-day, 2,959,469 requests captured, 8,469 frame cells, the first 100 complete series of each stratum: 2,002,
-2,422 and 4,045 complete candidates, no unfilled slot; 39 very sparse series with no request in the stratum
-window and 19 with none in the 275-day context). The targets were counted on 2026-10-17 under the signed
-gate in 106 attempts of an approved 120 (983,482 requests, no source gap, a separate recomputation agreeing
-with the pipeline). The run at `00fd91d` scored all 300 series in one invocation, 939 seconds inside the run
-and 956 seconds for the whole process against a budget of 3,600; 39,600 forecasts, every one recomputed from
-the saved deciles, targets and laws with 0 disagreements, and the two new variants' registered structure
-verified on all 10,800 of their windows.
+1. Against a 28-day local mean the frozen models' gain is on positive days, where the local mean
+   overpredicts: on the mean in every cell of every panel, and on the typical series on npm and NYC 311 but
+   not on GitHub, where the typical repository prefers the local mean (lower on only 46 to 89 of 300) while
+   the mean favors the models in every cell, carried by few repositories.
+2. Replacing a model's own zero mass with a context-only occurrence estimate makes the forecast worse on
+   dense series in all three settings under the registered quantile score, and under the occurrence Brier
+   score on NYC 311 and at a week on npm; on NYC 311 this is confirmatory (all six dense tests reject as
+   predicted, 21 of 36 tests reject in all, none against the prediction), and on npm and the grid the pooled
+   families speak for it (No pooled test favors the substitution at q = 0.05; two of six npm tests and all
+   three grid tests reject against it; twelve of the eighteen npm tests reject in all).
+3. On sparse series the answer depends on the domain: the typical sparse npm series favors the substitution
+   at a week under all three scores (lower for 81, 60 and 66 of the 100 sparse series at horizon 7 and for
+   32 to 43 of the 100 dense ones; the TSB hurdle wins 77, 61 and 74) and not at a month, while on NYC 311's
+   sparse stratum one of twelve tests favors it and ten of twelve medians are exactly zero.
+4. On very sparse series the registered construction cannot ask the occurrence question: 72 to 88 of the 100
+   NYC 311 series tie exactly, 580, 544 and 588 of the 600 completed forecasts sit on the completion floor,
+   and the Brier score's separation (the dynamic occurrence lower on 68 to 82 of 100) compares a context
+   estimate near 0.017 with a constant near 0.061 that the completion formula predicts.
+5. The model's positive law beats a shifted-Poisson count law wherever that law is misspecified (all six
+   npm cells; the fourth cell far worse than the control on dense series on every panel) and loses to it
+   where it is the generator's own (the grid); against an empirical law it keeps its value on dense series
+   only, and the dynamic hurdle beats the empirical hurdle in 14 of 18 registered tests on NYC 311, three
+   with a median of exactly zero.
+6. The registered dynamic count, a discounted analogue of TSB with no foundation model, is the best
+   forecaster on the grid after the oracle and loses to the models on every natural panel; the post-hoc
+   dynamic-occurrence wrapper removes four of the five rejections against the substitution and never beats
+   the model's own zero mass at q = 0.05.
 
-The family R01 to R36 (one BH adjustment at q = 0.05): 21 of 36 reject, 6 of them T1 tests in the dense
-stratum against the dynamic hurdle as H3 predicts, 1 a T1 test in the sparse stratum for it as H3
-predicts (R21, TimesFM 2.5 at horizon 7), and 14 T2 tests, all for the dynamic hurdle; no test rejects in
-the direction opposite to H3's prediction and no T1 median has the opposite sign. Dense: the dynamic
-hurdle is higher than the control on 55 to 72 of 100, medians 0.004 to 0.013, means 0.015 to 0.022, about
-one percent of the control's score, every interval above zero; the secondary occurrence Brier score reads
-the same way, and the accounting puts the loss on the zero days themselves, unlike the npm trade. Sparse:
-R21 rejects as predicted, R23 leans, four medians are exactly zero. Very sparse: no test rejects, every
-median is exactly zero, 72 to 88 of 100 series tie exactly, the means of 0.0005 to 0.003 ride on one series
-(`Sewer Maintenance` in `09 QUEENS`); 71 to 87 of the tied series have every decile at zero under both
-forecasts in every window, so the nine-decile score cannot see what the secondary Brier score sees, the
-dynamic occurrence lower on 68 to 82 of the 100 in every row. T2: the dynamic hurdle beats the empirical
-hurdle wherever a test rejects, 14 of 18 (all six dense rows, five of six sparse rows, the three very sparse
-rows at horizon 30 by rank sum, 253 against 23). Secondary: the fixed hurdle is worse than the control on
-dense and very sparse series and mixed on sparse ones; the fourth cell is far worse on dense series (means
-+0.29 to +0.33) and within 0.004 of the control elsewhere; pooled in Study 2's form, every row reads as the
-npm family did, and pooling does not test H3.
+### What changed in the claims against `6220211`, in five sentences
 
-### What changed in the paper's claims, in five sentences
-
-1. The title and the abstract name three studies, and the abstract states Study 3's result as confirmatory
-   for dense series, not established for sparse ones, with the ties named as the reason and the empirical
-   hurdle result and the three-setting scope beside it.
-2. The regime reading is no longer the paper's central descriptive finding standing on secondary tables:
-   its dense half is confirmatory on two domains (npm and the grid through the pooled families, NYC 311
-   through the dense stratum's own six tests), and its sparse half is open, with the npm secondary reading on
-   one side and the NYC 311 family on the other, and two readings given equal weight (a smaller benefit, or a
-   score blind to it on all-zero forecasts).
-3. The conditional sentence the paper stands behind is in two parts, dense and sparse; the model's positive
-   law keeps its value against a count law on NYC 311 (14 of 18) and the discussion names where it does not
-   (R14 and the three very sparse rows at a week, all with medians of exactly zero).
-4. The fourth factorial cell is no longer untested: run on NYC 311 as a declared secondary, it is far worse
-   than the control on dense series and better than the count hurdle that shares its positive law, so the
-   discussion says Study 3 bears on the first reading of the accounting trade (the context occurrence is the
-   worse occurrence forecast on dense series) and not on the second, which remains untested on npm.
-5. The post-hoc stratum tests of Study 2 and its dynamic-occurrence subsection are each one paragraph with
-   their tables and detail in the appendix; the Study 2 secondary counts 81, 60 and 66 stay in the body;
-   the limitations add the score's blindness below one decile, the one series behind the very sparse means,
-   the signed-rank test with many ties, the targets read once 47 days after the window, the legal basis of
-   reuse, what a 311 request measures, what is not in the tree and the NYC 311 contamination categories; the
-   claim's scope is the three settings and nothing broader.
+1. The paper is one argument organized by question (what the models add; the occurrence substitution by
+   regime; the positive law against count laws) at a body of about twelve pages, with the three studies as
+   one design in three steps, the full families and the process in the appendix, and a new title that names
+   what was found.
+2. The very sparse result is no longer two readings given equal weight: it is an interface limit, the
+   completion floor stated with its formula and its three counts (post hoc), so the ties and the Brier
+   separation compare a context estimate with the completion rule, not with the models.
+3. The dense half is confirmatory on NYC 311 only; on npm and the grid the families are pooled and the dense
+   reading rests on the declared secondary strata; the accounting sentence is true for all three models (the
+   TimesFM models' positive-day underprediction part adds more than the zero-day part at a week); the
+   direction rule is the median's, a zero median has no sign, and the fourteen T2 rejections are stated with
+   the three zero-median rows named.
+4. The intermittent-demand literature and the field's names for the baselines are in (Croston, SBA, TSB,
+   ADIDA, iETS, Snyder, Ord and Beaumont, Kolassa, the M5 uncertainty track, the count scores), and the
+   post-hoc TSB hurdle and the fourth cell on npm and the grid are in the body, labeled post hoc; the two
+   readings of the accounting trade are attributed where the record supports each (the first on dense NYC
+   311 and at a week on the grid, the second at a month on npm and the grid).
+5. The occurrence Brier score and the discrete CRPS stand beside QScore9 in the body's occurrence table for
+   every contrast, labeled as declared secondaries; the ledger is one table with a decided-before-or-after
+   column, item 6 flagged as the one change decided after scores; and the writing patterns the step-back
+   read named (run logistics, hashes in prose, the scope repeated, review items as motivation, code
+   identifiers as names) are gone from the body.
 
 ### What it does not show
 
-- Nothing about Wikipedia pageviews, which remain registered and not run, nor about Study 2's deferred NYC
-  311 tests E19 to E54, which Study 3's own family does not replace; contamination stays unresolved for all
-  three models on all three panels.
-- Whether the sparse-regime benefit exists: the NYC 311 family cannot tell a small benefit from none on
-  series whose deciles are all zero under both forecasts, and the paper gives the two readings equal weight.
-- Nothing that separates the two readings of the accounting trade on npm or the grid: the fourth cell ran on
-  NYC 311 alone, where it bears on the first reading.
-- No Markov occurrence estimate, no overdispersed grid cell, nothing about the days after a release, nothing
-  about human adoption; a 311 request is a complaint about a city service, not a measure of the condition.
-- The very sparse means are statements about one series; the paper says so where it prints them.
+- Nothing about Wikipedia pageviews, Study 2's deferred tests E19 to E54, the October holdout or the
+  November round, all registered and not run; contamination stays unresolved for all three models.
+- Whether a sparse-regime benefit exists beyond npm at a week: on NYC 311's sparse stratum the record is one
+  rejection of twelve, and on very sparse series the registered construction cannot ask the question.
+- Which reading of the accounting trade operates in general: the record supports the first on dense NYC 311
+  series and at a week on the grid, the second at a month on npm and the grid, and nothing beyond that.
+- Anything about models with another output interface (a mixture, sample paths, Chronos-2's own 21 levels);
+  the next study's design is named in the discussion in one sentence, and the deferred npm replication at a
+  week is the piece a reviewer could ask for.
+- The npm means are statements about one series (7.6 million downloads a day); the very sparse NYC 311
+  means ride on one series; the paper says so where it prints them.
 
 ### What could not be verified
 
-- No TeX compiler or pandoc is on this machine, so there is no PDF and no page count. By the revision's
-  method (running text with tables, figures and comments removed over the expanded document before the
-  appendix) the body holds 15,815 words with 970 words of captions, ten tables and four figures, against
-  11,938 words, 761 of captions, eight tables and three figures for the revision of 2026-10-16 counted the
-  same way (the revision reported 11,990 and 748 by its own run); the appendix holds 8,446 words, 1,434
-  words of captions, 27 tables and two figures. At the review's rate, about 900 words a page of text and
-  half a page a float, that is about 23 pages before the references, against about 17 before Study 3. The
-  bound the author set, that the body not grow beyond the revision's estimate, is not met: Study 3's four
-  sections add 3,077 words and two tables and one figure, the discussion and the limitations add about 970,
-  and the two compressions take 454 out. The cuts that remain the author's, because each removes a stated
-  number from the body: the literature paragraph of Section 7 (about 400 words), the Study 2 design section
-  (1,100 words, of which the calendar and the families could follow the rest into Appendix E), and the Study
-  2 limitation items (about 1,000 words); the dynamic-occurrence prose is already cut. Beyond those, the
-  36-row family table and the T2 table could move to the appendix with Figure 4 left in the body, and the
-  Study 3 design section could keep only its family paragraph.
-- The tie classification (71 to 87 of the tied series with all-zero deciles under both forecasts; 2 to 5 in
-  the sparse rows) is computed from the 300 checkpoints, which are not in the tree; the checker recomputes
-  it when they are present and records a skip otherwise.
-- The contexts-at-each-origin table (Table 30) is printed by the run's table script from the target signals,
-  which are not in the tree; the checker asserts the results page's rows as text, not a recomputation.
-- The source's terms pages were read in a desktop browser on 2026-10-17 and are cited as the record holds
-  them (their text hashes are in `source-terms.md`); they were not re-opened for this paper. The Open Data
-  Law was not read.
-- The 300 checkpoints (645 MB) and the target signals are not published yet; the paper says they are to be
-  published as a release asset. The release assets of the two Study 2 runs and the 209 series' daily counts
-  are likewise still to be published.
+- No TeX compiler or pandoc is on this machine, so there is no PDF and no page count; the static checks (every
+  input present, braces and environments balanced, every label referenced, every citation in the
+  bibliography, every tabular row with its column count, every figure file present) passed, and the widths
+  below are estimates from the Computer Modern metrics.
+- By the revision's method (the expanded paper before `\appendix` with comments, floats and commands removed,
+  captions counted apart) the body holds 7,499 words of running text, 1,016 words of captions, five tables and
+  four figures; at 900 words a page and half a page a float that is about 12.8 pages, and about 13.5 if the
+  two full-page tables are counted as a page each. The appendix holds 13,987 words, 2,536 words of captions,
+  37 tables and five figures. The aim was about 7,000 words; the last 500 are the author's cut.
+- The completion-floor counts (580, 544 and 588; 150, 62 and 230; 2, 0 and 0) and the all-zero tie
+  classification (71 to 87) are computed from the 300 NYC 311 checkpoints, which are not in the tree; the
+  checker recomputes them when the checkpoints are present and records a skip otherwise.
+- The 300, 540, 209 and 300 checkpoints and the daily counts of the npm and NYC 311 series are not released
+  yet; the paper says they are to be released as release assets.
 
 ### Sentences to read
 
-1. The regime sentence (Section 10, "The regime reading"): "So the substitution hurts the typical dense
-   series and the short-memory cells, helps the typical sparse series at horizon 7, and is null at 30 days.
-   This was the paper's central descriptive finding, a reading of declared secondary tables and not a
-   confirmatory result; Study 3 registered it as a per-stratum family and tested it on a second domain."
-2. The Study 3 verdict (Section 14, "Read together"): "On NYC 311 the half of H3 that concerns dense series
-   is confirmed for every model and horizon, and the half that concerns sparse and very sparse series is
-   not: of its twelve tests one rejects in the predicted direction and eleven do not, ten of the twelve
-   medians are exactly zero, and on the very sparse series the registered score cannot see the difference
-   that the secondary occurrence score does."
-3. The ties sentence (Section 14, "Very sparse series"): "The ties arise from the score itself: QScore9
-   reads nine deciles of a count law, which are integers, so two forecasts whose deciles coincide in every
-   window score identically whatever the target is, and a difference in occurrence probability smaller than
-   one decile is invisible to it."
-4. The conditional sentence (Section 15, "What the three studies say together"): "For dense series, a
-   context-only or dynamic occurrence estimate does not improve a frozen model's own completed zero mass
-   under this score, on npm, the grid and NYC 311, and this is confirmatory on two domains: on npm and the
-   grid through the pooled families, which the dense series decide, and on NYC 311 through the dense
-   stratum's own six tests. For sparse series the question is open, with the npm secondary reading on one
-   side and the NYC 311 family on the other."
-5. The two-readings sentence (Section 15): "Study 3 bears on the first and not on the second. ... On that
-   domain the substitution loses on dense series because the context estimate is the worse occurrence
-   forecast."
-6. The T2 sentence (Section 14, "Against the empirical hurdle"): "H3 predicts nothing for T2; the reading is
-   that the model's positive law, carried with the dynamic occurrence, keeps its value on this domain against
-   a count law whose positive law can fit a dense series, except in the four rows whose medians are exactly
-   zero."
-7. The scope sentence (Section 15, "What the paper claims"): "The paper claims the registered combination
-   and nothing broader: a context-only or dynamic occurrence probability substituted for the zero mass of
-   frozen Chronos-2 and TimesFM forecasts, their completed positive law kept, ... on a hash-sampled panel of
-   daily npm download counts, on the registered synthetic grid and, stratum by stratum, on a stratified
-   panel of daily NYC 311 service-request counts."
-8. The terms sentence (Section 13, "The source, its terms and its time basis"), since the legal basis of
-   reuse is the author's call: "The dataset's metadata states no license and links no terms page; the city
-   website's terms of use, read on 2026-10-17, ... say nothing specific about datasets, their license or
-   attribution; the Open Data Law that the program names as its basis was not read."
-9. The report's one changed sentence (`main.tex`, Section 8) is unchanged since the revision: "As of
-   2026-10-12 no Study 2 target value, forecast or score existed; both components fixed for the October 2026
-   paper, the synthetic grid and the npm external run, ran on 2026-10-15 and are reported in the paper that
-   extends this report."
+1. The thesis (Section 1): "This paper's answer is that the value is in the size, not the occurrence."
+2. The exception (Section 1): "The one place where a context estimate beats the model's own zero mass on the
+   typical series is the sparse npm stratum at a week, a secondary reading on one domain and one horizon."
+3. The floor (Section 3): "On a series that is zero nine days in ten the ``model's own zero mass'' is
+   therefore set by this rule."
+4. The interface limit (Section 5): "So on series that are zero nine days in ten the registered construction
+   cannot ask the occurrence question: the quantile score ties, and the Brier score's separation is the
+   dynamic hurdle's estimate against a constant near 0.061, which the formula predicts."
+5. The sparse verdict (Section 5): "So on sparse NYC 311 series the score sees the substitution, and the npm
+   reading did not carry over."
+6. The two readings (Section 7): "Which reading operates depends on the panel and the horizon, and nothing
+   beyond that is attributed."
+7. What would be done differently (Section 7): "The next study of this question registers the occurrence log
+   or Brier score and the discrete ranked probability score as its primaries, keeps a model output that can
+   express an occurrence probability below one in ten, such as Chronos-2's own 21 quantile levels, a mixture
+   or sample paths, registers TSB and iETS beside the count baselines, chooses the regime threshold from a
+   per-series curve, and runs on a prospective window; that is one study, and the one a reader of the
+   intermittent-demand literature would ask for."
+8. The ledger's cause (Section 3): "The three lapses of 2026-10-12 have one cause, that no work was done in
+   the repository between 2026-09-14 and 2026-10-11."
+
+## The record behind the summary
+
+The NYC 311 run (dated addition 7, commit 3357d77) scored all 300 series in 956 seconds; the family R01 to
+R36 has 21 of 36 rejections, none against the predicted direction, with 72 to 88 of the 100 very sparse
+series tied exactly in each T1 row. On the npm panel of 209 series, without the three served zero days none
+of the eighteen conclusions changes. The post-hoc benchmark of 2026-10-17 placed the TSB hurdle and the fourth cell on
+all three panels under a specification fixed before any of its scores existed. The report's source still
+expands to its frozen commit apart from its one dated sentence, and no entry of any family table changed.

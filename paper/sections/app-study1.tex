@@ -1,0 +1,171 @@
+% Appendix A, Study 1 in detail: version 1 and the audit, the achieved panel, the 18 registered comparisons,
+% the post-hoc accounting and the report's limitations. The tables are the Study 1 report's, unchanged in
+% every entry; the report (main.tex) stands on its own as a posted document. Input from paper.tex; every
+% number traces to sources.md and is asserted by check_numbers.py.
+\providecommand{\lm}{\texttt{local\_mean\_28}}
+\providecommand{\aets}{\texttt{autoets\_weekly}}
+\providecommand{\qs}{QScore9}
+
+\section{Study 1 in detail}
+\label{app:study1}
+\label{sec:results}
+
+\paragraph{Version 1 and the audit.} A first version of the study, built in June and July 2026 on 208
+repositories found by three GitHub Search API queries, found two foundation models ahead of four classical
+baselines on mean CRPS in every cell of its design. An audit on 2026-07-12 found no code defect that
+invalidated the aggregate comparison and two design flaws that did: the cohorts had been selected on
+outcomes not available at forecast time, and the evaluation windows mostly tested post-peak decay, the global
+peak preceding the evaluated span for 78.0 percent of ``breakout'' repositories. After the audit added a
+28-day local mean on identical windows, the foundation models still had the lower mean in every cell while
+their per-repository win rate against it fell to between 40.6 and 80.5 percent. The audit's prescription,
+freeze and pre-register, context-only labels, trailing non-overlapping windows with a common endpoint, strong
+pre-registered baselines, native quantile metrics and repository-clustered inference, became the registered
+design of Study 1. Every version 1 number is quoted from the preserved version 1 documents, not recomputed
+(Appendix~\ref{app:v1}, Table~\ref{tab:v1}).
+
+\paragraph{The achieved panel.} The frame held 148,550 eligible repositories: 100,687 in the 20 to 99
+stratum, 46,811 in 100 to 999, and 1,052 in the 1,000-plus stratum (Table~\ref{tab:panel}). The seeded walk
+accepted 100 per stratum and skipped 470 repositories, all because the stable ID no longer resolved to a
+public repository at fetch time (466 with HTTP 404) or was forbidden (4 with HTTP 403); the panel is
+therefore repositories still public in September 2026 with complete retrievable histories. The daily signal
+holds 289,316 repository-days with every Los Angeles calendar day from creation through 2026-08-31 observed;
+the creation dates run from 2023-01-02 to 2025-02-19, so every repository was created at least nine months
+before the first cutoff, and nothing here is a launch forecast. Over the 900 repository-cutoff windows the
+context-only regime labeler assigned 320 windows from 140 repositories to ``inactive recently'', 572 windows
+from 228 repositories to ``other active'', and 8 windows from 7 repositories to ``recent surge''; the surge
+regime is too thin to say anything about bursts.
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{The achieved panel by day-90 stratum: the frame size, the accepted and skipped counts, the median
+and the 10th and 90th percentiles of the survivor ratio, the number of repositories with no star from
+2026-06-03 to 2026-08-31, and the median star count over those 90 days. The survivor ratio divides the
+endpoint's first 90 Los Angeles days by the gross archive count over the UTC creation day and the next 89
+days; the two calendars differ, so the ratio is a diagnostic, not an exact retention rate. Skips are
+repositories encountered before the stratum's stop.}
+\label{tab:panel}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Stratum & Frame & Accepted & Skipped & Ratio median & P10 & P90 & Zero, last 90 & Median, last 90 \\
+\midrule
+20--99 & 100,687 & 100 & 98 & 0.968 & 0.723 & 1.075 & 52 & 0 \\
+100--999 & 46,811 & 100 & 348 & 1.004 & 0.885 & 1.079 & 22 & 4 \\
+1000+ & 1,052 & 100 & 24 & 1.006 & 0.914 & 1.049 & 1 & 39 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The 18 registered comparisons.} Tables~\ref{tab:lm} and~\ref{tab:ae} give the family, one table
+per reference, with the mean difference and its interval, the median difference, the number of repositories
+where the model's \qs{} is lower, the strict win fraction and the adjusted $p$-value side by side;
+Figure~\ref{fig:paired} draws them. Ratio skill against the local mean is defined for only 209, 239 and 259 of
+300 repositories at 7, 30 and 90 days, because the reference's loss is zero on the others, so no ratio is
+headlined. Pooled \qs{} by stratum (Table~\ref{tab:stratum}) holds stratum means only; a post-hoc reading of
+the per-repository accounting file gives the typical repository by stratum: the median difference against
+the local mean favors the reference in every stratum and every cell, and the models score lower on 5 to 18 of
+100 repositories in the smallest stratum, 10 to 34 in the middle one and 26 to 38 in the top one. Inclusive
+80 percent coverage of the repaired deciles over the panel is 0.824 to 0.837 for Chronos-2, 0.880 to 0.910
+for TimesFM 3, 0.906 to 0.924 for TimesFM 2.5, 0.941 to 0.955 for the local mean and 0.986 to 0.988 for
+AutoETS (Table~\ref{tab:calibration}); on discrete counts a correct quantile can overcover \citep{czado2009},
+so these are descriptive. AutoETS's median 90-day daily interval width is 0.79 stars per day in the smallest
+stratum, 3.60 in the middle one and 49.69 in the top one (Table~\ref{tab:autoets}).
+
+\begin{table}[h]
+\centering\small
+\caption{The nine declared comparisons against \lm{}. Differences are model minus reference \qs{}, averaged
+over three windows within repository and then over 300 repositories; negative favors the model. The interval
+is the pointwise 95 percent percentile interval from 20,000 repository-cluster bootstrap replicates. ``Lower''
+counts repositories (of 300) where the model's score is strictly lower; the strict win fraction divides by
+300. $p$ is the Benjamini-Hochberg adjusted two-sided Wilcoxon signed-rank $p$-value over the 18 tests.}
+\label{tab:lm}
+\begin{tabular}{llrcrrrr}
+\toprule
+Model & $h$ & Mean & 95\% interval & Median & Lower & Win fraction & Adjusted $p$ \\
+\midrule
+Chronos-2 & 7 & -0.137 & [-0.342, 0.009] & 0.0010 & 79 & 0.263 & $1.0 \times 10^{-5}$ \\
+Chronos-2 & 30 & -0.132 & [-0.285, -0.022] & 0.0018 & 59 & 0.197 & $5.5 \times 10^{-12}$ \\
+Chronos-2 & 90 & -0.101 & [-0.211, -0.016] & 0.0023 & 50 & 0.167 & $1.4 \times 10^{-13}$ \\
+TimesFM 3 & 7 & -0.258 & [-0.718, 0.012] & 0.0003 & 89 & 0.297 & $6.7 \times 10^{-3}$ \\
+TimesFM 3 & 30 & -0.201 & [-0.488, -0.024] & 0.0004 & 75 & 0.250 & $8.4 \times 10^{-7}$ \\
+TimesFM 3 & 90 & -0.128 & [-0.296, -0.016] & 0.0032 & 54 & 0.180 & $6.4 \times 10^{-12}$ \\
+TimesFM 2.5 & 7 & -0.243 & [-0.695, 0.025] & 0.0015 & 68 & 0.227 & $3.2 \times 10^{-8}$ \\
+TimesFM 2.5 & 30 & -0.201 & [-0.510, -0.015] & 0.0028 & 49 & 0.163 & $2.4 \times 10^{-13}$ \\
+TimesFM 2.5 & 90 & -0.112 & [-0.285, 0.001] & 0.0041 & 46 & 0.153 & $1.9 \times 10^{-14}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\small
+\caption{The nine declared comparisons against \aets{}, with the same columns as Table~\ref{tab:lm}.}
+\label{tab:ae}
+\begin{tabular}{llrcrrrr}
+\toprule
+Model & $h$ & Mean & 95\% interval & Median & Lower & Win fraction & Adjusted $p$ \\
+\midrule
+Chronos-2 & 7 & -1.069 & [-1.459, -0.700] & -0.1658 & 296 & 0.987 & $2.1 \times 10^{-48}$ \\
+Chronos-2 & 30 & -2.127 & [-2.831, -1.536] & -0.2128 & 298 & 0.993 & $3.3 \times 10^{-49}$ \\
+Chronos-2 & 90 & -6.724 & [-13.424, -2.868] & -0.2827 & 298 & 0.993 & $3.1 \times 10^{-49}$ \\
+TimesFM 3 & 7 & -1.191 & [-1.547, -0.890] & -0.1817 & 297 & 0.990 & $2.2 \times 10^{-49}$ \\
+TimesFM 3 & 30 & -2.196 & [-2.915, -1.583] & -0.2171 & 298 & 0.993 & $8.8 \times 10^{-50}$ \\
+TimesFM 3 & 90 & -6.751 & [-13.476, -2.871] & -0.2844 & 293 & 0.977 & $1.9 \times 10^{-48}$ \\
+TimesFM 2.5 & 7 & -1.175 & [-1.534, -0.874] & -0.1755 & 297 & 0.990 & $2.2 \times 10^{-49}$ \\
+TimesFM 2.5 & 30 & -2.195 & [-2.932, -1.580] & -0.2121 & 298 & 0.993 & $8.8 \times 10^{-50}$ \\
+TimesFM 2.5 & 90 & -6.735 & [-13.339, -2.871] & -0.2809 & 297 & 0.990 & $3.2 \times 10^{-49}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig-paired-differences}
+\caption{The 18 declared comparisons. Filled circles: mean difference (model minus reference \qs{}) with its
+pointwise 95 percent repository-bootstrap interval. Open diamonds: median difference. The number under each
+interval is the count of repositories, of 300, where the model's score is lower. Note the different vertical
+scales.}
+\label{fig:paired}
+\end{figure}
+
+\paragraph{The post-hoc accounting.} Computed on 2026-09-14 from the saved forecasts after the registered
+results were seen, adding no test: each window's \qs{} is split exactly into three parts, each divided by the
+full horizon, the loss on zero-target days, which for nonnegative quantiles is
+$\frac{2}{9h}\sum_{y_t = 0}\sum_\tau (1-\tau) q_{t,\tau}$, the loss on positive days from quantiles above the
+target (overprediction) and from quantiles below it (underprediction). The parts sum to \qs{} on all 48,600
+rows to floating-point tolerance and reproduce the 18 registered mean differences (Table~\ref{tab:posthoc}).
+The underprediction part favors the models at 7 days, where for both TimesFM models it is the larger of the
+two positive-day parts, and favors the local mean at 90 days. Against AutoETS the gain accrues across most
+of the panel and its largest part is overprediction on positive days, with a zero-day part between $-0.768$
+and $-0.777$. Figure~\ref{fig:zerofraction} places each repository by its context zero fraction: against the
+local mean the large model gains are at low zero fractions and the small model losses cluster at high ones.
+
+\begin{table}[h]
+\centering\small
+\caption{Post-hoc. The mean difference against \lm{} and its three parts, model minus reference; negative
+favors the model. The parts sum to the total.}
+\label{tab:posthoc}
+\begin{tabular}{llrrrr}
+\toprule
+Model & $h$ & Total & Zero days & Positive, overprediction & Positive, underprediction \\
+\midrule
+Chronos-2 & 7 & -0.137 & 0.005 & -0.095 & -0.048 \\
+Chronos-2 & 30 & -0.132 & 0.005 & -0.156 & 0.019 \\
+Chronos-2 & 90 & -0.101 & 0.004 & -0.184 & 0.078 \\
+TimesFM 3 & 7 & -0.258 & 0.004 & -0.091 & -0.171 \\
+TimesFM 3 & 30 & -0.201 & 0.006 & -0.150 & -0.057 \\
+TimesFM 3 & 90 & -0.128 & 0.011 & -0.187 & 0.047 \\
+TimesFM 2.5 & 7 & -0.243 & 0.012 & -0.088 & -0.167 \\
+TimesFM 2.5 & 30 & -0.201 & 0.014 & -0.163 & -0.052 \\
+TimesFM 2.5 & 90 & -0.112 & 0.015 & -0.209 & 0.082 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Study 1's limitations, as the report gave them.}
+\begin{itemize}
+\input{shared/s1-limitations-items}
+\end{itemize}
+
+\paragraph{Study 1's follow-up cohort.} The protocol registers a separate follow-up on repositories created
+on or after 2026-09-13, to run after the write-up with identical eligibility, strata, sample size, model
+revisions, baselines, scores, regime rules and relative window calendar; it is an availability-bound
+exclusion based on the already frozen checkpoints, not a claimed training cutoff, and it has not run.

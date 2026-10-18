@@ -1,0 +1,24 @@
+% Section 9. Input from paper.tex; every number traces to sources.md and is asserted by check_numbers.py.
+\providecommand{\qs}{QScore9}
+
+\section{Registration and reproducibility}
+\label{sec:repro}
+
+The repository \url{https://github.com/vprchlik/PulseGraph} holds the protocol with its dated additions,
+whose registered bytes are byte prefixes of the file as committed and were verified by each run's gate; the
+declaration files of every family; the study code with its offline tests; and, for each study, the evidence
+package: the frozen frame, manifest and selection, the panel's status file, the readiness and gate records,
+the run's state with the SHA-256 of every checkpoint, the inference directory with the family table, the
+per-series paired differences and the secondary tables, the integrity recomputation, the results page and a
+provenance file with the approvals, the commands and their times. Every score of the three runs was
+recomputed from the saved forecasts by a separate script with no disagreement, and the Study 3 census was
+recomputed from the raw captures by a script that shares no code with the pipeline. Each post-hoc analysis
+has its own directory with its specification, command, outputs and provenance. Not in the tree are the
+checkpoints that hold every forecast, 300 for GitHub (one results file of 433,172,286 bytes), 540 for the
+grid, 209 for npm and 300 for NYC 311, the raw captures, the target signals and the daily counts of the npm
+and NYC 311 series; the checkpoints and the aggregated daily counts are to be released as release assets
+beside the paper, under the data statements of Appendices~\ref{app:s2panel} and~\ref{app:s3detail}, so that
+a fresh clone can rerun every inference, integrity check and post-hoc analysis. The commands are given by
+reference to each run's results page in Appendix~\ref{app:runs}, with the run record; the number checker
+asserts every figure in this paper against the files it names, and the figure script draws every figure
+from the saved files alone.

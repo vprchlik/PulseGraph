@@ -1,0 +1,47 @@
+% Section 8. Input from paper.tex; every number traces to sources.md and is asserted by check_numbers.py.
+\providecommand{\qs}{QScore9}
+
+\section{Limitations}
+\label{sec:limitations}
+\label{sec:notrun}
+
+\begin{itemize}
+\item \emph{What is counted, and on which panel.} The GitHub panel is the repositories still public in
+  September 2026 with complete histories, and the endpoint reports surviving stars; an npm download is a
+  tarball request, including mirrors and automated clients, a directional indicator of adoption and not a
+  count of users; a 311 request is a complaint or inquiry about a city service, not a measure of the
+  condition it reports. The NYC 311 targets were read once, 47 days after the last target day, with no check for later revision.
+\item \emph{Training contamination is unresolved.} No author-disclosed complete-corpus training cutoff
+  exists for any of the three models; the targets postdate the pinned TimesFM 2.5 revision but are not shown
+  to postdate the pinned Chronos-2 or TimesFM 3 revisions, and a later window on familiar entities does not
+  establish generalization to unseen ones \citep{moghadasi2026, qiao2026, li2026}. The controls that would
+  separate familiarity from skill, Study 1's registered follow-up cohort and the October holdout, have not
+  run.
+\item \emph{Three origins in one summer, horizons that share targets.} Inference is conditional on three fixed cutoffs; the 7-day blocks are prefixes of the 30-day blocks, so the cells of a family are not independent; the bootstrap captures between-series variation only and its intervals are pointwise.
+\item \emph{Three models from two families, one interface.} No other model was run, and none released since the pins \citep{exaone2026}. Every
+  conclusion about occurrence is a conclusion about nine deciles completed into a count law; a model whose
+  output is a mixture, a sample path or Chronos-2's own 21 quantile levels would not meet the floor of
+  Section~\ref{sec:design} in the same place.
+\item \emph{One series carries every npm mean.} With equal series weights on the unscaled score, as
+  registered, every npm mean is a statement about \texttt{aggregate-error}, at 7.6 million downloads a day;
+  without it the six hurdle-against-control means fall from 90.24 to 253.9 to 0.6334 to 1.599. The context-scaled score is the registered scale-free secondary (Appendix~\ref{app:s2tables}). The npm very sparse stratum holds nine series, so Study
+  2 says nothing about npm series that are zero nine days in ten.
+\item \emph{Three zero days in the npm targets.} The download API served 0 for all 209 series on
+  2026-07-12 and 2026-08-14 and 0 for the largest series on 2026-06-25, between days of millions; npm's own
+  records report no outage or backfill for them, and a public thread records two earlier episodes in which
+  whole days read 0 for nearly every package and were later restored \citep{npm-community-150808}. Item 6 of
+  the ledger keeps the registered analysis as the confirmatory one; the post-hoc sensitivity changes no
+  conclusion without all three days and one row, E06, without the two panel-wide days; nothing here
+  verifies that they are gaps.
+\item \emph{The signed-rank test with many exact ties, and the direction rule.} The registered inference
+  omits zero differences and reports $p = 1$ when all are zero; with 72 to 88 ties a very sparse NYC 311 test
+  runs on 12 to 28 series, its location reading needs symmetry, which these differences do not have, and it is
+  not a test of the mean. The registered direction is the median's sign, and a median of exactly zero has
+  none; the side the rank sums favor is a reading beside it that the registration does not make.
+\item \emph{Registered and not run.} Study 1's follow-up cohort, the October holdout H01 to H18, Study 2's
+  deferred tests E19 to E54 on NYC 311 and Wikipedia pageviews, and a November prospective round that was
+  drafted and never appended have no result, and Study 3's family replaces none of them. The grid has no
+  overdispersed cell; no Markov occurrence estimate was tested; and the terms under which the NYC 311 counts
+  may be reused rest on the city website's terms of use, read on 2026-10-17 and recorded, the Open Data Law
+  the program names not having been read.
+\end{itemize}

@@ -1,0 +1,131 @@
+% The runs, the approvals and the commands of the three studies in one place, with the post-hoc
+% intermittent-demand benchmark. The Study 2 paragraphs are the paper's earlier reproducibility appendix,
+% unchanged; the Study 3 run is in Appendix J. Input from paper.tex; every number traces to sources.md and
+% is asserted by check_numbers.py.
+\providecommand{\lm}{\texttt{local\_mean\_28}}
+\providecommand{\aets}{\texttt{autoets\_weekly}}
+\providecommand{\qs}{QScore9}
+\providecommand{\hc}{\texttt{hurdle\_count\_28}}
+
+\section{The runs, the budgets and the commands}
+\label{app:runs}
+
+\paragraph{The run record.} Table~\ref{tab:runs} gives the four runs. Each ran once, in one invocation, on
+the same NVIDIA GeForce RTX 4070 SUPER at batch size one from locally cached weights, after a signed readiness
+and a gate that verified the registered protocol bytes, the implementation commit, the smoke and the frozen
+panel; each run's state file holds the SHA-256 of every checkpoint, and each inference directory a provenance
+file with the commands, the package versions and the times.
+
+\begin{table}[h]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{The run record: when each run started (UTC), the implementation commit, the series and forecasts
+scored, the seconds inside the run and for the whole process, the approved budget against the readiness
+estimate, the recomputation of every score from the saved forecasts, and the checkpoints that are to be
+released. Study 1's run took 18,662 seconds for 48,600 forecast rows at three horizons; its readiness carried
+no seconds budget.}
+\label{tab:runs}
+\begin{tabular}{llllrrll}
+\toprule
+Run & Started & Commit & Series & Forecasts & Seconds & Budget / estimate & Recomputation \\
+\midrule
+GitHub stars & 2026-09-13 07:54 & \texttt{ca67dd2} & 300 & 48,600 & 18,662 & signed readiness & every score, 300 hashes \\
+Synthetic grid & 2026-10-15 20:16 & \texttt{3fc3411} & 540 & 55,080 & 1,317 (1,323) & 2,400 / 1,539 & largest difference 0.0 \\
+npm downloads & 2026-10-15 23:27 & \texttt{3057b16} & 209 & 20,064 & 692 (699) & 3,600 / 1,741 & 0 disagreements \\
+NYC 311 requests & 2026-10-17 03:47 & \texttt{00fd91d} & 300 & 39,600 & 939 (956) & 3,600 / 1,080 & 0 disagreements \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The Study 2 runs.} The synthetic run started 2026-10-15 20:16 UTC at implementation commit
+\texttt{3fc3411f7c683aaf98e6fad28b26aa9c92ab00b9}, after the signed readiness (approved 20:13 UTC, runtime
+budget 2,400 seconds against an estimate of 1,539) and the gate, which passed against the signed readiness,
+the GPU smoke at the implementation commit and the committed grid manifest, whose generated copy equals it;
+it completed its 540 series in one invocation in 1,317 seconds (1,323 for the whole process) with 55,080
+forecasts (540 series, 3 origins, 2 horizons, the 16 variants and the oracle), no failed window and no
+resume. The npm run started 2026-10-15 23:27 UTC at implementation commit
+\texttt{3057b16dbd2f9b218449352717ef4adabc2f72f7}, after the signed readiness (approved 23:09 UTC, at most
+300 target requests, a budget of 3,600 seconds against an estimate of 1,741) and the gate, which passed at
+23:14 UTC before any target request and again at 23:26 UTC with the pulled signals and their completeness
+document; it completed its 209 series in one invocation in 692 seconds (699 for the whole process) with
+20,064 forecasts (209 series, 3 origins, 2 horizons, 16 variants), no failed window and no resume. Both ran
+on the same NVIDIA GeForce RTX 4070 SUPER (driver 610.88, CUDA 12.8, PyTorch 2.11.0) at batch size one,
+with a peak reserved memory of 2,948,595,712 bytes, from the locally cached weights. The targets, the 209
+series' download ranges for 2026-06-03 to 2026-08-31, were requested once each from the download-counts API
+between 23:15 and 23:26 UTC, 209 attempts and 209 answers, with no retry and no failure; every answer lists
+each of the 90 days once with a nonnegative integer. The integrity recomputation of the npm run verified all
+209 checkpoint hashes and recomputed \qs{}, its three accounting parts, the context-scaled \qs{} and, where
+a count law is saved, the occurrence Brier score for all 20,064 forecasts from the saved deciles, targets
+and laws, with 0 disagreements; the recomputation of the synthetic run verified all 540 checkpoint hashes
+and recomputed \qs{}, its parts and the scaled score for all 55,080 forecasts with a largest absolute
+difference of 0.0, and found every saved target and context mean equal to the registered generator's
+series. The discrete CRPS was recorded as unavailable, under the addition of 2026-10-15, for 66 npm
+forecasts, all of them on \texttt{aggregate-error} (11 variants with a count law, 3 origins, 2 horizons);
+the other 13,728 forecasts with a count law are certified, and the 6,270 without one (the raw deciles,
+\lm{} and \aets{}) have no CRPS by construction. On the synthetic grid every forecast with a count law is
+certified. The inference of both runs ran at a HEAD that differs from the implementation commit only under
+the documentation directory, with no uncommitted change under the scripts or the package. The zero-day
+sensitivity ran on 2026-10-16 at HEAD \texttt{e41fdf2} and the dynamic-occurrence analysis on 2026-10-16
+from 05:29 to 05:37 UTC at HEAD \texttt{ff8c5e8}, each with no uncommitted change under the inference
+script or the package. NumPy 2.5.3, SciPy 1.18.1 and pandas 2.3.3 were used throughout; each provenance
+file records this. The 540 synthetic checkpoints (about 0.9 GB) and the 209 npm checkpoints (338 MB), one
+JSON file per series with every forecast, are not in the tree; their SHA-256 values are in each run's state
+file.
+
+\paragraph{The post-hoc intermittent-demand benchmark.} The TSB hurdle, its two sensitivities at smoothing
+weights 0.05 and 0.2, the fourth factorial cell on npm and the grid, and the field's point methods, Croston's
+method, its bias-corrected variant and ADIDA from the pinned \texttt{statsforecast}, were scored from the
+saved forecasts of all three runs on 2026-10-17 under a specification fixed before any score on the page
+existed; no model was run and nothing was refitted to a target. Before any output was written the command
+verified every checkpoint hash, rebuilt the three registered families byte for byte from the saved scores,
+rebuilt every context from the frozen signals, and checked in every window that the TSB level product equals
+the pinned library's own TSB forecast. The point methods are scored as a point mass at the rounded forecast,
+under which \qs{} and the discrete CRPS both equal the absolute error; a point mass loses to every forecast
+with a law by construction, and the benchmark says nothing about those methods as point forecasts. Its
+results page, under \texttt{reports/study2-posthoc-intermittent-baselines/}, gives every contrast with its
+$n$ and no verdict.
+
+\paragraph{Commands.} Place the release assets, the checkpoints, in the run directories, then from the
+repository root with the project's Python environment (PowerShell; a completed run directory is immutable,
+so the inference, integrity, sensitivity and post-hoc commands write to a new directory):
+{\footnotesize
+\begin{verbatim}
+.\.venv\Scripts\python.exe scripts\study2_inference.py synthetic `
+    --run reports\study2-synthetic-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe reports\study2-synthetic-2026-10-15\recompute_scores.py `
+    reports\study2-synthetic-2026-10-15 --out <new file>
+.\.venv\Scripts\python.exe reports\study2-synthetic-2026-10-15\make_tables.py `
+    reports\study2-synthetic-2026-10-15\inference
+.\.venv\Scripts\python.exe scripts\study2_inference.py external_packages `
+    --run reports\study2-npm\run-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe scripts\study2_integrity.py external_packages `
+    --run reports\study2-npm\run-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe reports\study2-npm\run-2026-10-15\make_tables.py `
+    reports\study2-npm\run-2026-10-15\inference
+.\.venv\Scripts\python.exe reports\study2-npm\run-2026-10-15\check_directions.py `
+    reports\study2-npm\run-2026-10-15\inference
+.\.venv\Scripts\python.exe reports\study2-npm\run-2026-10-15\posthoc\sensitivity_zero_days.py `
+    reports\study2-npm\run-2026-10-15 --out <new directory>
+.\.venv\Scripts\python.exe reports\study2-posthoc-dynamic-occurrence\dynamic_occurrence.py `
+    --npm reports\study2-npm\run-2026-10-15 --synthetic reports\study2-synthetic-2026-10-15 `
+    --out <new directory>
+.\.venv\Scripts\python.exe reports\study2-posthoc-intermittent-baselines\intermittent_baselines.py `
+    --out <new directory>
+.\.venv\Scripts\python.exe paper\figures\make_figures.py
+.\.venv\Scripts\python.exe paper\check_numbers.py
+\end{verbatim}}
+The first regenerates the synthetic family and its secondary tables from the saved forecasts without
+refitting; the second recomputes every saved synthetic score; the third prints the synthetic results
+document's tables; the fourth to seventh do the same for the npm run, the integrity check recomputing every
+score and verifying every checkpoint hash; the eighth re-scores the saved npm forecasts without the three
+zero days; the ninth computes the dynamic-occurrence wrapper and its two post-hoc families from the saved
+laws of both runs; the tenth scores the post-hoc intermittent-demand benchmark from the saved forecasts of
+all three runs; the eleventh draws every figure of this paper from the saved files; the twelfth asserts
+every number in this paper against the files that \texttt{paper/sources.md} names, including the post-hoc
+stratum and empirical-hurdle readings, the completion-floor counts and the secondary-score contrasts, which
+it recomputes from the saved per-series scores and the checkpoints. The Study 1 commands are in
+Appendix~\ref{app:repro} and the Study 3 commands in Appendix~\ref{app:s3tables}. The runs themselves, the
+gates, the target pulls and the panel pulls are not to be repeated: the gate and the pull pass only at the
+implementation commit with the readiness files in place, the pull refuses to write a second snapshot, and a
+new target request needs its own approval. A reader who recomputes a test from the CSVs should parse the
+floats exactly (pandas \texttt{float\_precision="round\_trip"}); the default parser can move a last digit and
+change a rank tie.

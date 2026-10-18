@@ -713,25 +713,36 @@ else:
 SECTIONS = PAPER / "sections"
 S2 = ROOT / "study" / "study2"
 NPM = ROOT / "reports" / "study2-npm" / "panel"
-QUESTION, DESIGN, PANEL, RESULTS = (
-    "study2-question.tex",
-    "study2-design.tex",
-    "study2-panel.tex",
-    "study2-results.tex",
+PAPER_TEX = PAPER / "paper.tex"
+# Since 2026-10-17 the paper is organized by question: its body is sections/01-introduction.tex to
+# 09-reproducibility.tex, the appendix adds app-study1.tex, the Study 2 and Study 3 detail and table
+# files and app-runs.tex, and paper.tex is read with every \input expanded. A sentence that may sit
+# anywhere in the paper is checked against the expanded paper; the appendix files are also checked
+# on their own where a table belongs to one of them.
+BODY_FILES = (
+    "01-introduction.tex",
+    "02-related-work.tex",
+    "03-design.tex",
+    "04-models-add.tex",
+    "05-occurrence.tex",
+    "06-positive-law.tex",
+    "07-discussion.tex",
+    "08-limitations.tex",
+    "09-reproducibility.tex",
+    "app-study1.tex",
+    "app-runs.tex",
 )
 DETAIL, PANEL_DETAIL, APPENDIX = (
     "study2-design-detail.tex",
     "study2-panel-detail.tex",
     "study2-appendix.tex",
 )
-SECTION_FILES = (QUESTION, DESIGN, PANEL, RESULTS, DETAIL, PANEL_DETAIL, APPENDIX)
+SECTION_FILES = BODY_FILES + (DETAIL, PANEL_DETAIL, APPENDIX)
 for name in SECTION_FILES:
     TEXT[name] = text(SECTIONS / name)
-# Since 2026-10-16 the design and panel sections are each split into a body file and a detail file
-# (the paper's appendix); the needles asserted in D and P below appear in one of the two.
-TEXT[DESIGN] = TEXT[DESIGN] + " " + TEXT[DETAIL]
-TEXT[PANEL] = TEXT[PANEL] + " " + TEXT[PANEL_DETAIL]
-Q, D, P, R = (QUESTION,), (DESIGN,), (PANEL,), (RESULTS,)
+TEXT["paper.tex"] = text(PAPER_TEX)
+QUESTION = DESIGN = PANEL = RESULTS = "paper.tex"
+Q = D = P = R = ("paper.tex",)
 
 
 def load(path):
@@ -809,8 +820,8 @@ else:
             failures.append(
                 f"git log -- PROTOCOL.md: commit {short} not dated {day}: {dated.get(short)}"
             )
-expect("addition 2026-10-12 commit", "committed at \\texttt{8db0d73}", D)
-expect("addition 2026-10-15 commit", "committed at \\texttt{5be2ce9}", D)
+expect("addition 2026-10-12 commit", "\\texttt{8db0d73}", D)
+expect("addition 2026-10-15 commit", "\\texttt{5be2ce9}", D)
 assert "Discrete CRPS availability — dated addition, 2026-10-15" in protocol
 expect("addition 2026-10-15 named", "the addition of 2026-10-15", D)
 
@@ -825,8 +836,6 @@ expect(
 )
 expect("question: wins range", f"{lm_wins.min()} to {lm_wins.max()} of 300", Q)
 assert "Searches run 2026-10-12" in recheck
-expect("question: re-check date", "run on 2026-10-12", Q)
-expect("question: as-of date", "as of 2026-10-12", Q)
 assert "This hypothesis arose after Study 1 and is tested on separately declared data" in protocol
 assert (
     "Completion below is a Study 2 assumption, never attributed retrospectively to Study 1"
@@ -838,7 +847,7 @@ bib = (PAPER / "references.bib").read_text(encoding="utf-8")
 bib_keys = set(re.findall(r"^@\w+\{([^,]+),", bib, flags=re.M))
 cited = set()
 for name in SECTION_FILES:
-    for group in re.findall(r"\\citep\{([^}]*)\}", TEXT[name]):
+    for group in re.findall(r"\\cite[pt]?\{([^}]*)\}", TEXT[name]):
         cited.update(k.strip() for k in group.split(","))
 checks += 1
 missing = sorted(cited - bib_keys)
@@ -1312,11 +1321,19 @@ expect("panel: trademark", "npm is a registered trademark of npm, Inc.", P)
 
 # --- the results file, which replaced the placeholder on 2026-10-16 ---------------------------
 checks += 1
-if (SECTIONS / "study2-results-placeholder.tex").exists():
-    failures.append("study2-results-placeholder.tex still exists beside study2-results.tex")
-checks += 1
-if re.search(r"\btbd\b", TEXT[RESULTS]):
-    failures.append("study2-results.tex: a 'tbd' remains")
+for stale in (
+    "study2-results-placeholder.tex",
+    "study2-question.tex",
+    "study2-design.tex",
+    "study2-panel.tex",
+    "study2-results.tex",
+    "study3-question.tex",
+    "study3-design.tex",
+    "study3-panel.tex",
+    "study3-results.tex",
+):
+    if (SECTIONS / stale).exists():
+        failures.append(f"{stale} still exists; the paper no longer reads it")
 assert len(pkg_spec["variants"]) == 16
 expect("results: replicates", f"blocks (of {grid['replicates_per_cell']})", R)
 expect("results: 18 tests", f"over the {family['comparison_count']} tests", R)
@@ -1380,10 +1397,20 @@ def family_line(r):
 # The public boundary, for the new files and the expanded paper.
 boundary((RESULTS, APPENDIX, DETAIL, PANEL_DETAIL, "paper.tex", "PAPER-SUMMARY.md"))
 
-# The report's text is reused unchanged: every shared file is in both main.tex and paper.tex.
-for shared in sorted((PAPER / "shared").glob("*.tex")):
+# The report's shared files that the paper still reads are in both documents unchanged: the author's
+# statement, Study 1's limitation items and the report's four appendix files. The report's own
+# sections are condensed in the paper's Appendix A and are read by main.tex alone.
+for shared_name in (
+    "author-statement.tex",
+    "s1-limitations-items.tex",
+    "app-design.tex",
+    "app-v1.tex",
+    "app-tables.tex",
+    "app-repro.tex",
+):
+    shared = PAPER / "shared" / shared_name
     expect(f"shared {shared.name} in both documents", text(shared), ("main.tex", "paper.tex"))
-for name in (QUESTION, DESIGN, PANEL, RESULTS, APPENDIX, DETAIL, PANEL_DETAIL):
+for name in SECTION_FILES:
     expect(f"section {name} in paper.tex", text(SECTIONS / name), PT)
 checks += 1
 if re.search(r"\btbd\b", TEXT["paper.tex"]):
@@ -1427,7 +1454,6 @@ expect(
 )
 expect("paper: no pooled test", "No pooled test favors the substitution at $q = 0.05$", PT)
 expect("summary: no pooled test", "No pooled test favors the substitution at q = 0.05", PS)
-expect("results: no test favors", "No test favors the substitution at $q = 0.05$", RS)
 expect("results: five against", "all five synthetic rejections are against the hurdle variant", RS)
 # Hurdle against its completed control.
 assert (hc.mean_diff > 0).all() and (hc.mean_diff_ci_low > 0).all()
@@ -1455,26 +1481,8 @@ expect(
     f"median of {g(e01.median_diff)}",
     RS,
 )
-expect("hurdle medians", "the medians lie within 0.014 of zero, three below it and three above", RS)
-expect(
-    "hurdle wins",
-    f"the hurdle scores lower on {hc.wins.min()} to {hc.wins.max()} of the 209 series",
-    RS,
-)
 e10, e16 = hc[hc.id == "E10"].iloc[0], hc[hc.id == "E16"].iloc[0]
-expect(
-    "E10 and E16",
-    f"(E10, with the hurdle higher on {int(e10.losses)} of 209 series and adjusted $p$ "
-    f"{pval(e10.wilcoxon_p_bh)}; E16, higher on {int(e16.losses)}, adjusted "
-    f"$p$ {pval(e16.wilcoxon_p_bh)})",
-    RS,
-)
 nonreject = hc[~hc.reject_bh_005].wilcoxon_p_bh
-expect(
-    "hurdle non-rejects",
-    f"adjusted $p$ from {pval(nonreject.min())} to {pval(nonreject.max())}",
-    RS,
-)
 assert (sc.mean_diff_ci_low > 0).all() and sc.reject_bh_005.all()
 expect(
     "synthetic hurdle means",
@@ -1483,11 +1491,6 @@ expect(
 )
 assert sorted(sc.wins.unique()) == [5, 6]
 expect("synthetic hurdle wins", "lower on 5 or 6 of the 30 replicate blocks", RS)
-expect(
-    "synthetic hurdle p",
-    f"adjusted $p$ from {pval(sc.wilcoxon_p_bh.min())} to {pval(sc.wilcoxon_p_bh.max())}",
-    RS,
-)
 # Hurdle against the count hurdle.
 assert hk.reject_bh_005.all() and (hk.mean_diff_ci_high < 0).all() and (hk.median_diff < 0).all()
 expect(
@@ -1503,7 +1506,6 @@ expect(
     RS,
 )
 expect("count hurdle medians", f"from {g(hk.median_diff.max())} to {g(hk.median_diff.min())}", RS)
-expect("count hurdle wins", f"lower on {hk.wins.min()} to {hk.wins.max()} of the 209 series", RS)
 s02, s04, s06 = (sk[sk.id == i].iloc[0] for i in ("S02", "S04", "S06"))
 assert s02.reject_bh_005 and s06.reject_bh_005 and not s04.reject_bh_005
 assert (
@@ -1511,21 +1513,7 @@ assert (
     and s06.mean_diff_ci_low > 0
     and s04.mean_diff_ci_low < 0 < s04.mean_diff_ci_high
 )
-expect(
-    "S02 S06",
-    f"by {g(s02.mean_diff)} and {g(s06.mean_diff)} (adjusted $p$ "
-    f"{pval(s02.wilcoxon_p_bh)} and {pval(s06.wilcoxon_p_bh)}, lower on {int(s02.wins)} of "
-    "30 blocks each)",
-    RS,
-)
 assert s02.wins == s06.wins
-expect(
-    "S04",
-    f"differs by {g(s04.mean_diff)} with an interval that includes zero "
-    f"(adjusted $p$ {pval(s04.wilcoxon_p_bh)}, "
-    f"lower on {int(s04.wins)} of 30)",
-    RS,
-)
 # Raw deciles against the local mean.
 assert rl[rl.reject_bh_005].id.tolist() == ["E06", "E09", "E12", "E18"]
 assert (rl.mean_diff_ci_high < 0).all()
@@ -1573,7 +1561,6 @@ expect(
     RS,
 )
 share = [top5[c] for c in list(hk.id) + list(rl.id)]
-expect("top-five share", f"hold {min(share):.3f} to {max(share):.3f} of all positive gain", RS)
 expect("dominant mean", "7,637,136 downloads a day", P)
 expect("paper: 7.6 million", "7.6 million downloads a day", PT + PS)
 
@@ -1977,25 +1964,9 @@ expect(
     RS,
 )
 c30v = [comp_vs_emp[(m, 30)] for m in MODELS]
-expect(
-    "empirical: completed h30",
-    f"lower than the empirical hurdle on {min(c30v)} to {max(c30v)} of 209 series at horizon 30",
-    RS,
-)
-expect(
-    "empirical: completed h7",
-    f"on only {comp_vs_emp[('chronos2', 7)]} and {comp_vs_emp[('timesfm2p5', 7)]} of 209 for "
-    f"Chronos-2 and TimesFM 2.5 ({comp_vs_emp[('timesfm3', 7)]} for TimesFM 3)",
-    RS,
-)
 syn_series = pd.read_csv(SYN_RUN / "inference" / "series_scores.csv", **ROUND_TRIP)
 blk = syn_series[syn_series.horizon == 30].groupby(["model", "replicate"]).qscore9.mean().unstack(0)
 dyn_lower = [int((blk["dynamic_count"] < blk[f"{m}_completed"]).sum()) for m in MODELS]
-expect(
-    "dynamic count: blocks",
-    f"in {dyn_lower[0]}, {dyn_lower[1]} and {dyn_lower[2]} of 30 blocks",
-    RS,
-)
 expect(
     "discussion: dynamic count blocks",
     f"lower than each completed model in {min(dyn_lower)} to {max(dyn_lower)} of 30 blocks",
@@ -2006,7 +1977,6 @@ assert (
     == int((blk["dynamic_count"] < blk["local_mean_28"]).sum())
     == 26
 )
-expect("dynamic count: 26 of 30", "lower than \\hc{} and \\lm{} in 26 of 30", RS)
 comp_lower = [
     summ(series_paired(npm_series, f"{m}_completed", "dynamic_count", h))[0]
     for m in MODELS
@@ -2016,11 +1986,6 @@ expect(
     "dynamic count: npm",
     f"the completed models are lower on {min(comp_lower)} to {max(comp_lower)} of 209 series",
     RS,
-)
-expect(
-    "discussion: dynamic count npm",
-    f"on {min(comp_lower)} to {max(comp_lower)} of 209 npm series",
-    PT,
 )
 dyn30 = s30.loc["dynamic_count"].qscore9
 comp30 = [s30.loc[f"{m}_completed"].qscore9 for m in MODELS]
@@ -2035,14 +2000,6 @@ expect(
     f"is {g(dyn30)} against {g(min(comp30))} to {g(max(comp30))} for the three completed models, "
     f"{g(s30.loc['hurdle_count_28'].qscore9)} for \\hc{{}} and {g(s30.loc['oracle'].qscore9)} "
     "for the oracle",
-    RS,
-)
-expect(
-    "dynamic count: npm means",
-    f"its mean \\qs{{}} is {g(n7.loc['dynamic_count'].qscore9)} and "
-    f"{g(n30.loc['dynamic_count'].qscore9)} at the two horizons against "
-    f"{g(min(n7.loc[f'{m}_completed'].qscore9 for m in MODELS))} to "
-    f"{g(max(n7.loc[f'{m}_completed'].qscore9 for m in MODELS))} for the completed models",
     RS,
 )
 cmeta = (
@@ -2524,14 +2481,16 @@ referee = (ROOT / "docs" / "research" / "2026-10-16-standing-and-referee-read.md
     encoding="utf-8"
 )
 cited_paper = set()
-for group in re.findall(r"\\citep\{([^}]*)\}", TEXT["paper.tex"]):
+for group in re.findall(r"\\cite[pt]?\{([^}]*)\}", TEXT["paper.tex"]):
     cited_paper.update(k.strip() for k in group.split(","))
 checks += 1
 missing = sorted(cited_paper - bib_keys)
 if missing:
     failures.append(f"paper.tex cites keys absent from references.bib: {missing}")
 checks += 1
-uncited = sorted(bib_keys - cited_paper - set(re.findall(r"\\citep\{([^}]*)\}", TEXT["main.tex"])))
+uncited = sorted(
+    bib_keys - cited_paper - set(re.findall(r"\\cite[pt]?\{([^}]*)\}", TEXT["main.tex"]))
+)
 for key, marker in [
     ("adler2025", "2510.16060"),
     ("wen2026", "2608.17299"),
@@ -2567,7 +2526,7 @@ else:
     checks += 1
     if not any(line.startswith("1c09ac8") for line in git_all.splitlines()):
         failures.append("git log: commit 1c09ac8 (the dated addition of 2026-10-16) not found")
-expect("design: addition 6 commit", "committed at \\texttt{1c09ac8}", D)
+expect("design: addition 6 commit", "\\texttt{1c09ac8}", D)
 
 # --- the report still expands to its committed text, apart from the one dated sentence --------
 REPORT_SENTENCE_OLD = (
@@ -2636,10 +2595,6 @@ S3_RUN = ROOT / "reports" / "study3-nyc311" / "run-2026-10-17"
 S3_PANEL = ROOT / "reports" / "study3-nyc311" / "panel"
 S3 = ROOT / "study" / "study3"
 S3_FILES = (
-    "study3-question.tex",
-    "study3-design.tex",
-    "study3-panel.tex",
-    "study3-results.tex",
     "study3-detail.tex",
     "study3-appendix.tex",
 )
@@ -2647,7 +2602,9 @@ for name in S3_FILES:
     TEXT[name] = text(SECTIONS / name)
     expect(f"section {name} in paper.tex", text(SECTIONS / name), PT)
 boundary(S3_FILES)
-Q3, D3, P3, R3, DET3, AP3 = tuple((name,) for name in S3_FILES)
+# The Study 3 question, design, panel and results prose is in the paper's body since 2026-10-17.
+Q3 = D3 = P3 = R3 = ("paper.tex",)
+DET3, AP3 = ("study3-detail.tex",), ("study3-appendix.tex",)
 S3LABEL = {"dense": "dense", "sparse": "sparse", "very_sparse": "very sparse"}
 S3STRATA = ["dense", "sparse", "very_sparse"]
 s3_spec = load(S3 / "spec.json")
@@ -3001,11 +2958,9 @@ assert hw3["cuda_version"] == "12.8" and hw3["pytorch_version"] == "2.11.0+cu128
 assert hw3["batch_size"] == 1 and inv3r["memory"]["peak_reserved_bytes"] == 2948595712
 assert s3_smoke["memory"]["peak_reserved_bytes"] == 2948595712
 assert s3_prov["smoke"]["at"].startswith("2026-10-17T01:56")
-expect("s3: run start", "started 2026-10-17 at 03:47 UTC", R3)
 expect("s3: run start 2", "started 2026-10-17 03:47 UTC", AP3)
 expect("s3: run end", "at\n04:03 UTC", AP3)
 expect("s3: run seconds", "939 seconds inside the run and 956 for the whole process", R3 + AP3)
-expect("s3: run budget", "budget of 3,600 and an estimate of 1,080", R3)
 expect(
     "s3: readiness",
     "approved at 03:12 UTC with a runtime budget of 3,600 seconds against an estimate of 1,080",
@@ -3136,7 +3091,12 @@ for r in t1.itertuples():
 expect("s3: 21 of 36", "Twenty-one of the\nthirty-six tests reject", R3)
 expect("s3: six one fourteen", "six are T1 tests in the dense stratum", R3)
 expect("s3: one sparse", "one is a T1 test in the sparse stratum", R3)
-expect("s3: fourteen T2", "fourteen are T2 tests, all for \\emph{hurdle\\_dynamic}", R3)
+expect(
+    "s3: fourteen T2",
+    "fourteen are T2 tests, all for the dynamic hurdle, three of them with a median of exactly "
+    "zero",
+    R3,
+)
 expect("s3: 14 of 18", "14 of the 18 T2 tests reject", R3)
 expect("s3: 14 of 18, elsewhere", "14 of 18", PT + PS)
 expect("abstract: s3 family", "a per-stratum family of 36 tests", PT + PS)
@@ -3167,13 +3127,6 @@ assert (
     0.005 < (d1.mean_diff / d1.reference_mean).min()
     and (d1.mean_diff / d1.reference_mean).max() < 0.015
 )
-expect(
-    "s3: dense control means",
-    f"control's mean score of {g(d1.reference_mean.min())} to {g(d1.reference_mean.max())}",
-    R3,
-)
-expect("s3: dense ties", f"the exact ties number {d1.ties.min()} to {d1.ties.max()}", R3)
-expect("s3: one percent", "by about one\npercent of the control's score", PT)
 # Sparse.
 r21, r23 = (s1[s1.id == i].iloc[0] for i in ("R21", "R23"))
 assert r21.reject_bh_005 and not r23.reject_bh_005 and r21.median_diff < 0 and r23.median_diff < 0
@@ -3185,33 +3138,14 @@ expect(
     f"{pval(r21.wilcoxon_p_bh)}",
     R3,
 )
-expect(
-    "s3: R23",
-    f"R23, TimesFM 2.5 at horizon 30, with a median of {g(r23.median_diff)}, {int(r23.wins)} "
-    "lower, "
-    f"{int(r23.ties)} tied and {int(r23.losses)} higher, and adjusted $p$ "
-    f"{pval(r23.wilcoxon_p_bh)}",
-    R3,
-)
 s1z = s1[s1.median_diff == 0]
 expect("s3: sparse zero ties", f"with {s1z.ties.min()} to {s1z.ties.max()} series tied exactly", R3)
-expect("s3: sparse tied range", f"where {s1.ties.min()} to {s1.ties.max()} series\ntie", R3)
-expect(
-    "s3: sparse means",
-    f"The means run from {g(s1.mean_diff.min())} to {g(s1.mean_diff.max())} against control "
-    "means of "
-    f"{g(s1.reference_mean.min())} to {g(s1.reference_mean.max())}",
-    R3,
-)
 # Very sparse.
 assert not v1.reject_bh_005.any() and (v1.median_diff == 0).all() and (v1.mean_diff > 0).all()
 assert ((v1.mean_diff_ci_low < 0) & (v1.mean_diff_ci_high > 0)).all()
 assert v1.loc[v1.wilcoxon_p_bh.idxmin()].id == "R25"
 expect("s3: vs ties", f"{v1.ties.min()} to {v1.ties.max()} of the 100 series", R3 + PT)
 expect("s3: vs means", f"from {g(v1.mean_diff.min())} to {g(v1.mean_diff.max())}", R3)
-expect(
-    "s3: vs smallest p", f"the smallest adjusted $p$\nis {pval(v1.wilcoxon_p_bh.min())} (R25)", R3
-)
 expect("s3: vs nonzero", f"{100 - v1.ties.max()} to {100 - v1.ties.min()} series", PT)
 s3_desc = pd.read_csv(S3_RUN / "inference" / "family_descriptors.csv", **ROUND_TRIP).set_index("id")
 assert (
@@ -3238,52 +3172,12 @@ expect(
 s2r = s2[s2.reject_bh_005]
 r14 = s2[s2.id == "R14"].iloc[0]
 assert list(s2r.id) == ["R16", "R18", "R20", "R22", "R24"] and r14.median_diff == 0
-expect(
-    "s3: T2 sparse",
-    f"five of six reject (R16,\nR18, R20, R22, R24), lower on {s2r.wins.min()} to "
-    f"{s2r.wins.max()} series "
-    f"with medians from {g(s2r.median_diff.max())} to {g(s2r.median_diff.min())}",
-    R3,
-)
-expect(
-    "s3: R14",
-    "R14, Chronos-2\nat horizon 7, has a median of exactly zero and adjusted $p$ "
-    f"{pval(r14.wilcoxon_p_bh)}",
-    R3,
-)
 v2r = v2[v2.reject_bh_005]
 v2n = v2[~v2.reject_bh_005]
 assert list(v2r.id) == ["R28", "R32", "R36"] and list(v2n.id) == ["R26", "R30", "R34"]
 assert (v2r.wins == 22).all() and (v2r.ties == 77).all() and (v2r.losses == 1).all()
 assert (v2r.median_diff == 0).all()
 expect("s3: T2 very sparse", "each with 22 series lower, 77 tied and 1 higher", R3)
-expect(
-    "s3: T2 very sparse h7",
-    f"(R26, R30, R34) do not reject, with adjusted $p$ from {pval(v2n.wilcoxon_p_bh.min())} to "
-    f"{pval(v2n.wilcoxon_p_bh.max())}",
-    R3,
-)
-expect(
-    "s3: T2 table dense",
-    f"dense & all six (R02 to R12) & {d2.wins.min()} to {d2.wins.max()} of 100 & "
-    f"{g(d2.median_diff.max())} to {g(d2.median_diff.min())} & none \\\\",
-    R3,
-)
-expect(
-    "s3: T2 table sparse",
-    f"sparse & five of six ({', '.join(s2r.id)}) & {s2r.wins.min()} to {s2r.wins.max()} & "
-    f"{g(s2r.median_diff.max())} to {g(s2r.median_diff.min())} & R14 (median zero, adjusted $p$ "
-    f"{pval(r14.wilcoxon_p_bh)}) \\\\",
-    R3,
-)
-expect(
-    "s3: T2 table very sparse",
-    "very sparse & the horizon-30 rows (R28, R32, R36) & 22 lower, 77 tied, 1 higher & "
-    "exactly zero & "
-    f"the horizon-7 rows (R26, R30, R34; adjusted $p$ {pval(v2n.wilcoxon_p_bh.min())} to "
-    f"{pval(v2n.wilcoxon_p_bh.max())}) \\\\",
-    R3,
-)
 # The direction from the paired table: rank sums and the recomputed raw p.
 s3_pe = pd.read_csv(S3_RUN / "inference" / "paired_entities.csv", **ROUND_TRIP)
 assert s3_pe.groupby("id").size().eq(100).all()
@@ -3315,19 +3209,6 @@ assert (
 assert all(favors[i] == "reference" for i in ("R25", "R29", "R33"))
 assert all(favors[i] == "hurdle_dynamic" for i in ("R27", "R31", "R35"))
 assert all(favors[i] == "hurdle_dynamic" for i in rej3[rej3.contrast == "T2"].id)
-expect("s3: rank sums 253", "253 against 23", R3)
-expect(
-    "s3: sparse leans",
-    "lean to\n\\emph{hurdle\\_dynamic} for R13, R15 and R17 and to the control for R19",
-    R3,
-)
-expect(
-    "s3: vs leans",
-    "lean to the control at horizon 7 (R25, R29, R33) and to\n\\emph{hurdle\\_dynamic} at "
-    "horizon 30 "
-    "(R27, R31, R35)",
-    R3,
-)
 # The ties, classified from the checkpoints when they are present (they are not in the tree).
 s3_ckpts = sorted(p for p in S3_RUN.glob("*.json") if len(p.stem) == 64)
 if len(s3_ckpts) == 300:
@@ -3353,11 +3234,6 @@ if len(s3_ckpts) == 300:
     vs_az = [allzero_tied[i] for i in v1.id]
     sp_az = [allzero_tied[i] for i in s1.id]
     expect("s3: ties all zero", f"{min(vs_az)} to {max(vs_az)} of the tied series", R3 + PT)
-    expect(
-        "s3: sparse ties all zero",
-        f"{min(sp_az)} to {max(sp_az)} of them have every decile at zero",
-        R3,
-    )
     vs_ids = sorted(set(s3_pe[s3_pe.stratum == "very_sparse"].series_id))
     comp_az, dyn_az = [], []
     for m in MODELS:
@@ -3377,12 +3253,6 @@ if len(s3_ckpts) == 300:
                 )
             )
     assert len(set(dyn_az)) == 1
-    expect(
-        "s3: all-zero deciles",
-        f"for {min(comp_az)} to {max(comp_az)} of\nthe 100 very sparse series and "
-        f"\\emph{{hurdle\\_dynamic}}'s for {dyn_az[0]}",
-        R3,
-    )
 else:
     skipped.append(
         "the 300 NYC 311 checkpoints are absent; the tie classification was not recomputed"
@@ -3463,23 +3333,6 @@ fxd, fxs, fxv = (fx[fx.stratum == s] for s in S3STRATA)
 fcd, fcs, fcv = (fc[fc.stratum == s] for s in S3STRATA)
 assert (fxd.mean_diff > 0).all() and (fxv.mean_diff > 0).all()
 expect(
-    "s3: fixed dense",
-    f"on {int(fxd.losses.min())} to {int(fxd.losses.max())} of the 100 series",
-    R3,
-)
-expect(
-    "s3: fixed sparse", f"higher on {int(fxs.losses.min())} to {int(fxs.losses.max())} of 100", R3
-)
-expect(
-    "s3: fixed very sparse",
-    f"on {int(fxv.losses.min())} to {int(fxv.losses.max())} series against "
-    f"{int(fxv.wins.min())} to "
-    f"{int(fxv.wins.max())} lower with {int(fxv.ties.min())} to {int(fxv.ties.max())} tied and "
-    "raw $p$ "
-    f"from {pval(fxv.wilcoxon_p.min())} to {pval(fxv.wilcoxon_p.max())}",
-    R3,
-)
-expect(
     "s3: fourth dense",
     f"mean differences of\n{g(fcd.mean_diff.min())} to {g(fcd.mean_diff.max())} and higher on "
     f"{int(fcd.losses.min())} to {int(fcd.losses.max())} of the 100",
@@ -3491,14 +3344,6 @@ expect(
     PT,
 )
 assert max(fcs.mean_diff.abs().max(), fcv.mean_diff.abs().max()) < 0.004
-expect("s3: fourth others", "within 0.004 of the control's mean", R3)
-expect(
-    "s3: fourth ties",
-    f"{int(min(fcs.ties.min(), fcv.ties.min()))} to {int(max(fcs.ties.max(), fcv.ties.max()))} "
-    "of the 100 "
-    "series tied exactly",
-    R3,
-)
 fck = s3_sq[
     s3_sq.variant.str.endswith("occurrence_model_size_count")
     & (s3_sq.reference == "hurdle_count_28")
@@ -3577,7 +3422,7 @@ for s in S3STRATA:
             if s == "very_sparse":
                 parts_vs.extend(abs(v) for v in parts[1:])
 assert min(zero_dense) > 0 and max(parts_vs) < 0.006
-expect("s3: zero-day dense", f"{g(min(zero_dense))} to {g(max(zero_dense))}", R3 + AP3 + PT)
+expect("s3: zero-day dense", f"{g(min(zero_dense))} to {g(max(zero_dense))}", AP3)
 expect("s3: very sparse parts", "within 0.006 of zero", AP3)
 # The PIT.
 s3_pit = pd.read_csv(S3_RUN / "inference" / "pit_histograms.csv", **ROUND_TRIP)
@@ -3610,6 +3455,936 @@ expect(
 expect("summary: s3 run", "956 seconds", PS)
 expect("summary: s3 ties", "72 to 88", PS)
 expect("summary: s3 reject", "21 of 36", PS)
+
+# --- the paper organized by question (2026-10-17): the body tables, the completion floor, the
+# --- secondary scores beside the primary, the post-hoc benchmark's rows, the ledger, the run record
+# --- and the length.
+# Every figure stated in the body that was not already asserted above is asserted here against the
+# file it comes from; the three body tables are regenerated row by row from the saved per-series
+# scores, the
+# inference tables and the benchmark's contrast tables.
+import importlib.util  # noqa: E402
+
+BENCH = ROOT / "reports" / "study2-posthoc-intermittent-baselines"
+S3_SERIES = pd.read_csv(S3_RUN / "inference" / "series_scores.csv", **ROUND_TRIP)
+s3_strat = (
+    S3_SERIES[(S3_SERIES.horizon == 7) & (S3_SERIES.model == "chronos2_raw")]
+    .set_index("series_id")
+    .stratum
+)
+FIG = PAPER / "figures" / "make_figures.py"
+
+
+def pair_of(df, a, b, h, col, s=None, strat=None):
+    d = series_paired(df, a, b, h, col)
+    if s is not None:
+        d = d[strat.loc[d.index] == s]
+    return d
+
+
+def blocks_of(a, b, h, col):
+    gg = syn_series[syn_series.horizon == h]
+    x = gg[gg.model == a].groupby("replicate")[col].mean()
+    y = gg[gg.model == b].groupby("replicate")[col].mean()
+    return (x - y).dropna()
+
+
+def lth(d):
+    return f"{int((d < 0).sum())} / {int((d == 0).sum())} / {int((d > 0).sum())}"
+
+
+def rank_side(d):
+    d = np.asarray(d)
+    nz = d[d != 0]
+    rk = stats.rankdata(np.abs(nz))
+    return "model" if rk[nz < 0].sum() > rk[nz > 0].sum() else "reference"
+
+
+def rng_text(vals):
+    lo, hi = min(vals), max(vals)
+    return f"{lo}" if lo == hi else f"{lo} to {hi}"
+
+
+def med_text(meds):
+    """Ranges of medians; a median within 1e-9 of zero is floating residue and prints as 0."""
+    meds = [0.0 if abs(v) < 1e-9 else v for v in meds]
+    lo, hi = g(min(meds)), g(max(meds))
+    return lo if lo == hi else f"{lo} to {hi}"
+
+
+# Table tab:raw: the raw deciles against the local mean on the three natural panels.
+for m in MODELS:
+    for h in HORIZONS:
+        r = lm[(lm.model == m) & (lm.horizon == h)].iloc[0]
+        wins = int(round(r.repo_win_rate * r.n_repos))
+        assert r.median_diff > 0 and r.reject_bh_005
+        expect(
+            f"raw table github {m} {h}",
+            f"GitHub stars & {LABEL[m]} & {h} & {fmt(r.mean_diff, 3)} & {fmt(r.median_diff, 4)} & "
+            f"{wins} of 300 & reference, rejects \\\\",
+            PT,
+        )
+for r in rl.itertuples():
+    side = rank_side(paired_npm[paired_npm.id == r.id].difference.to_numpy())
+    verdict = "rejects" if r.reject_bh_005 else "no"
+    expect(
+        f"raw table npm {r.id}",
+        f"npm downloads & {LABEL[r.model.split('_')[0]]} & {r.horizon} & {g(r.mean_diff)} & "
+        f"{g(r.median_diff)} & {int(r.wins)} / {int(r.ties)} / {int(r.losses)} & {side}, "
+        f"{verdict} \\\\",
+        PT,
+    )
+pooled3 = pd.read_csv(S3_RUN / "inference" / "secondary_pooled_study2_form.csv", **ROUND_TRIP)
+pq3 = pooled3[(pooled3.reference == "local_mean_28") & (pooled3.metric == "qscore9")]
+assert len(pq3) == 6 and (pq3.wilcoxon_p_bh_within_table < 0.005).all()
+for m in MODELS:
+    for h in (7, 30):
+        r = pq3[(pq3.variant == f"{m}_raw") & (pq3.horizon == h)].iloc[0]
+        side = rank_side(pair_of(S3_SERIES, f"{m}_raw", "local_mean_28", h, "qscore9").to_numpy())
+        assert side == "model" and r.mean_diff < 0
+        expect(
+            f"raw table nyc311 {m} {h}",
+            f"NYC 311 requests & {LABEL[m]} & {h} & {g(r.mean_diff)} & {g(r.median_diff)} & "
+            f"{int(r.wins)} / {int(r.ties)} / {int(r.losses)} & model, within-table $p$ "
+            f"{pval(r.wilcoxon_p_bh_within_table)} \\\\",
+            PT,
+        )
+expect("raw: pooled lower", f"{int(pq3.wins.min())} to {int(pq3.wins.max())} lower", PT)
+expect(
+    "raw: pooled higher", f"against {int(pq3.losses.min())} to {int(pq3.losses.max())} higher", PT
+)
+
+
+# Table tab:occ: the substitution against the completed control under the three scores.
+def occ_row(stratum, h, name, qd, bd, cd, status, qmed=None):
+    return (
+        f"{stratum} & {h} & {name} & {lth(qd)} & {g(np.median(qd)) if qmed is None else qmed} & "
+        f"{status} & {lth(bd)} & {g(np.median(bd), 3)} & {lth(cd)} & {g(np.median(cd), 3)} \\\\"
+    )
+
+
+brier_sparse7, crps_sparse7, brier_dense7, brier_dense30 = [], [], [], []
+for s in ("dense", "sparse"):
+    for h in (7, 30):
+        for m in MODELS:
+            qd = pair_of(npm_series, f"{m}_hurdle", f"{m}_completed", h, "qscore9", s, strat_of)
+            bd = pair_of(
+                npm_series, f"{m}_hurdle", f"{m}_completed", h, "occurrence_brier", s, strat_of
+            )
+            cd = pair_of(
+                npm_series, f"{m}_hurdle", f"{m}_completed", h, "discrete_crps", s, strat_of
+            )
+            assert len(qd) == len(bd) == 100 and len(cd) == (99 if s == "dense" else 100)
+            expect(
+                f"occ table npm {s} {h} {m}", occ_row(s, h, LABEL[m], qd, bd, cd, "secondary"), PT
+            )
+            if s == "sparse" and h == 7:
+                brier_sparse7.append(int((bd < 0).sum()))
+                crps_sparse7.append(int((cd < 0).sum()))
+            if s == "dense":
+                (brier_dense7 if h == 7 else brier_dense30).append(int((bd < 0).sum()))
+expect(
+    "occ: npm sparse brier h7",
+    f"lower on {', '.join(map(str, brier_sparse7[:2]))} and {brier_sparse7[2]} at horizon 7",
+    PT,
+)
+expect(
+    "occ: npm sparse crps h7",
+    f"on the discrete CRPS on {crps_sparse7[0]}, {crps_sparse7[1]} and {crps_sparse7[2]}",
+    PT,
+)
+assert max(brier_dense7) < 50 < min(brier_dense30)
+expect(
+    "occ: npm dense brier h30",
+    f"lower than the control's on {min(brier_dense30)} to {max(brier_dense30)} of the 100 dense "
+    f"series at horizon 30",
+    PT,
+)
+expect(
+    "occ: npm dense brier h7",
+    f"at horizon 7 it is lower on only {min(brier_dense7)} to {max(brier_dense7)}",
+    PT,
+)
+crps_dense, crps_vs = [], []
+for s in S3STRATA:
+    for h in (7, 30):
+        for m in MODELS:
+            rid = s3_inf[
+                (s3_inf.stratum == s)
+                & (s3_inf.horizon == h)
+                & (s3_inf.model == m)
+                & (s3_inf.contrast == "T1")
+            ].iloc[0]
+            qd = pair_of(
+                S3_SERIES, f"{m}_hurdle_dynamic", f"{m}_completed", h, "qscore9", s, s3_strat
+            )
+            assert (int((qd < 0).sum()), int((qd == 0).sum()), int((qd > 0).sum())) == (
+                int(rid.wins),
+                int(rid.ties),
+                int(rid.losses),
+            )
+            bd = pair_of(
+                S3_SERIES,
+                f"{m}_hurdle_dynamic",
+                f"{m}_completed",
+                h,
+                "occurrence_brier",
+                s,
+                s3_strat,
+            )
+            cd = pair_of(
+                S3_SERIES, f"{m}_hurdle_dynamic", f"{m}_completed", h, "discrete_crps", s, s3_strat
+            )
+            assert len(bd) == len(cd) == 100
+            status = f"{rid.id}: " + ("yes" if rid.reject_bh_005 else "no")
+            expect(
+                f"occ table nyc311 {s} {h} {m}",
+                occ_row(S3LABEL[s], h, LABEL[m], qd, bd, cd, status, qmed=g(rid.median_diff)),
+                PT,
+            )
+            if s == "dense":
+                crps_dense.append(int((cd > 0).sum()))
+            if s == "very_sparse":
+                crps_vs.append(int((cd < 0).sum()))
+for m in MODELS:
+    sid = syn_inf[(syn_inf.model == f"{m}_hurdle") & (syn_inf.reference == f"{m}_completed")].iloc[
+        0
+    ]
+    qd = blocks_of(f"{m}_hurdle", f"{m}_completed", 30, "qscore9")
+    assert (int((qd < 0).sum()), int((qd == 0).sum()), int((qd > 0).sum())) == (
+        int(sid.wins),
+        int(sid.ties),
+        int(sid.losses),
+    )
+    bd = blocks_of(f"{m}_hurdle", f"{m}_completed", 30, "occurrence_brier")
+    cd = blocks_of(f"{m}_hurdle", f"{m}_completed", 30, "discrete_crps")
+    expect(
+        f"occ table grid {m}",
+        occ_row(
+            "all cells",
+            30,
+            LABEL[m],
+            qd,
+            bd,
+            cd,
+            f"{sid.id}: " + ("yes" if sid.reject_bh_005 else "no"),
+            qmed=g(sid.median_diff),
+        ),
+        PT,
+    )
+# The grid's very sparse cells: ties and the untied series at a month, and the Brier score there.
+ties95, lean95, brier95 = [], [], []
+for h in (7, 30):
+    for m in MODELS:
+        gz = syn_series[
+            (syn_series.horizon == h) & (syn_series.cell_id.map(cmeta.zero_probability) == 0.95)
+        ]
+        a = gz[gz.model == f"{m}_hurdle"].set_index("series_id")
+        b = gz[gz.model == f"{m}_completed"].set_index("series_id")
+        d = (a.qscore9 - b.qscore9).dropna()
+        assert len(d) == 180
+        ties95.append(int((d == 0).sum()))
+        if h == 30:
+            lean95.append(int((d < 0).sum()) > int((d > 0).sum()))
+            brier95.append(int(((a.occurrence_brier - b.occurrence_brier).dropna() < 0).sum()))
+assert all(lean95) and min(brier95) == 120 and max(brier95) == 139
+fixed_sparse7 = [
+    int(
+        s3_sc[
+            (s3_sc.stratum == "sparse") & (s3_sc.variant == f"{m}_hurdle") & (s3_sc.horizon == 7)
+        ].wins.iloc[0]
+    )
+    for m in MODELS
+]
+expect(
+    "occ: fixed hurdle nyc sparse week",
+    f"lower on {fixed_sparse7[0]}, {fixed_sparse7[1]} and {fixed_sparse7[2]} of the 100 at "
+    f"horizon 7 against 81, 60 and 66 on npm",
+    PT,
+)
+
+
+# The post-hoc benchmark: the TSB hurdle's rows against each completed control, and the numbers
+# quoted.
+def bench(panel):
+    return pd.read_csv(BENCH / f"{panel}_contrasts.csv", **ROUND_TRIP)
+
+
+bench_npm, bench_nyc, bench_grid = bench("npm"), bench("nyc311"), bench("grid")
+for df in (bench_npm, bench_nyc, bench_grid):
+    assert (df.source == "post hoc").sum() > 0 and df.status.isin(
+        ["descriptive", "secondary"]
+    ).all()
+
+
+def tsb_cells(df, group, h, ref, metric):
+    r = df[
+        (df.variant == "tsb_hurdle")
+        & (df.group == group)
+        & (df.horizon == h)
+        & (df.reference == ref)
+        & (df.metric == metric)
+    ]
+    assert len(r) == 1, (group, h, ref, metric)
+    return r.iloc[0]
+
+
+tsb_dense_npm7, tsb_dense_npm30, tsb_dense_nyc7, tsb_dense_nyc30, tsb_med_npm, tsb_med_nyc = (
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+)
+tsb_sparse_npm7, tsb_vs_ties, tsb_vs_brier = [], [], []
+for panel, df, groups, stratum_name in (
+    ("npm", bench_npm, ("dense", "sparse"), None),
+    ("nyc311", bench_nyc, S3STRATA, None),
+    ("grid", bench_grid, ("all",), None),
+):
+    for s in groups:
+        for h in (7, 30) if panel != "grid" else (30,):
+            for m in MODELS:
+                cells = []
+                for met in ("qscore9", "occurrence_brier", "discrete_crps"):
+                    r = tsb_cells(df, s, h, f"{m}_completed", met)
+                    cells.append(f"{int(r.wins)} / {int(r.ties)} / {int(r.losses)}")
+                    cells.append(g(r.median_diff, 3 if met != "qscore9" else 4))
+                label = {
+                    "all": "all cells",
+                    "dense": "dense",
+                    "sparse": "sparse",
+                    "very_sparse": "very sparse",
+                }[s]
+                expect(
+                    f"occ table tsb {panel} {s} {h} {m}",
+                    f"{label} & {h} & TSB vs {LABEL[m]} & {cells[0]} & {cells[1]} & post hoc & "
+                    f"{cells[2]} & "
+                    f"{cells[3]} & {cells[4]} & {cells[5]} \\\\",
+                    PT,
+                )
+                q = tsb_cells(df, s, h, f"{m}_completed", "qscore9")
+                if panel == "npm" and s == "dense":
+                    (tsb_dense_npm7 if h == 7 else tsb_dense_npm30).append(int(q.wins))
+                    tsb_med_npm.append(float(q.median_diff))
+                if panel == "nyc311" and s == "dense":
+                    (tsb_dense_nyc7 if h == 7 else tsb_dense_nyc30).append(int(q.wins))
+                    tsb_med_nyc.append(float(q.median_diff))
+                if panel == "npm" and s == "sparse" and h == 7:
+                    tsb_sparse_npm7.append(int(q.wins))
+                if panel == "nyc311" and s == "very_sparse":
+                    tsb_vs_ties.append(int(q.ties))
+                    tsb_vs_brier.append(
+                        int(tsb_cells(df, s, h, f"{m}_completed", "occurrence_brier").wins)
+                    )
+assert sorted(set(tsb_dense_npm7)) == [18, 19]
+expect(
+    "tsb: sparse npm week",
+    f"lower than the completed controls on {tsb_sparse_npm7[0]}, {tsb_sparse_npm7[1]} and "
+    f"{tsb_sparse_npm7[2]} of 100 at a week",
+    PT,
+)
+hc_sparse7 = tsb_cells(bench_npm, "sparse", 7, "hurdle_count_28", "qscore9")
+expect(
+    "tsb: level with count hurdle",
+    f"level with the count hurdle, {int(hc_sparse7.wins)} lower against {int(hc_sparse7.losses)} "
+    f"higher",
+    PT,
+)
+hc_rows = {
+    (panel, s, h): tsb_cells(df, s, h, "hurdle_count_28", "qscore9")
+    for panel, df, groups in (
+        ("npm", bench_npm, ("dense", "sparse")),
+        ("nyc311", bench_nyc, S3STRATA),
+        ("grid", bench_grid, ("all",)),
+    )
+    for s in groups
+    for h in (7, 30)
+}
+assert max(abs(hc_rows[k].median_diff) for k in hc_rows if k[1] == "dense") < 0.032
+tsb_dyn = [int(tsb_cells(bench_grid, "all", h, "dynamic_count", "qscore9").losses) for h in (7, 30)]
+expect(
+    "tsb: vs dynamic count grid",
+    f"beaten by the dynamic count on the grid in {tsb_dyn[0]} and {tsb_dyn[1]} of 30 blocks",
+    PT,
+)
+for panel, df, groups in (
+    ("npm", bench_npm, ("dense", "sparse")),
+    ("NYC 311", bench_nyc, S3STRATA),
+    ("grid", bench_grid, ("all",)),
+):
+    for s in groups:
+        for h in (7, 30):
+            r = hc_rows[({"npm": "npm", "NYC 311": "nyc311", "grid": "grid"}[panel], s, h)]
+            label = {
+                "all": "all cells",
+                "dense": "dense",
+                "sparse": "sparse",
+                "very_sparse": "very sparse",
+            }[s]
+            expect(
+                f"pos table tsb {panel} {s} {h}",
+                f"{label} & {h} & TSB vs count hurdle & {int(r.n_entities)} & {int(r.wins)} / "
+                f"{int(r.ties)} / {int(r.losses)} & {g(r.median_diff)} & post hoc \\\\",
+                PT,
+            )
+
+
+# Table tab:pos: the positive-law contrasts as ranges over the three models.
+def pos_row(stratum, h, what, ds, status):
+    return (
+        f"{stratum} & {h} & {what} & {len(ds[0])} & {rng_text([int((d < 0).sum()) for d in ds])} / "
+        f"{rng_text([int((d == 0).sum()) for d in ds])} / "
+        f"{rng_text([int((d > 0).sum()) for d in ds])} & "
+        f"{med_text([float(np.median(d)) for d in ds])} & {status} \\\\"
+    )
+
+
+for h in (7, 30):
+    ids = [i for i in hk.id if hk[hk.id == i].horizon.iloc[0] == h]
+    ds = [series_paired(npm_series, f"{m}_hurdle", "hurdle_count_28", h) for m in MODELS]
+    expect(
+        f"pos table npm all {h}",
+        pos_row("all", h, "law: model vs Poisson", ds, f"{', '.join(ids)}: 3 reject"),
+        PT,
+    )
+    for s in ("dense", "sparse"):
+        expect(
+            f"pos table npm poisson {s} {h}",
+            pos_row(
+                s,
+                h,
+                "law: model vs Poisson",
+                [
+                    pair_of(npm_series, f"{m}_hurdle", "hurdle_count_28", h, "qscore9", s, strat_of)
+                    for m in MODELS
+                ],
+                "secondary",
+            ),
+            PT,
+        )
+        expect(
+            f"pos table npm empirical {s} {h}",
+            pos_row(
+                s,
+                h,
+                "law: model vs empirical",
+                [
+                    pair_of(
+                        npm_series, f"{m}_hurdle", "hurdle_empirical_28", h, "qscore9", s, strat_of
+                    )
+                    for m in MODELS
+                ],
+                "post hoc",
+            ),
+            PT,
+        )
+        expect(
+            f"pos table npm dynamic {s} {h}",
+            pos_row(
+                s,
+                h,
+                "dynamic count vs control",
+                [
+                    pair_of(
+                        npm_series, "dynamic_count", f"{m}_completed", h, "qscore9", s, strat_of
+                    )
+                    for m in MODELS
+                ],
+                "secondary",
+            ),
+            PT,
+        )
+expect(
+    "pos table grid poisson",
+    pos_row(
+        "all cells",
+        30,
+        "law: model vs Poisson",
+        [blocks_of(f"{m}_hurdle", "hurdle_count_28", 30, "qscore9") for m in MODELS],
+        "S02, S04, S06: 2 reject",
+    ),
+    PT,
+)
+expect(
+    "pos table grid dynamic",
+    pos_row(
+        "all cells",
+        30,
+        "dynamic count vs control",
+        [blocks_of("dynamic_count", f"{m}_completed", 30, "qscore9") for m in MODELS],
+        "secondary",
+    ),
+    PT,
+)
+for s in S3STRATA:
+    for h in (7, 30):
+        ids = [
+            i
+            for i in s3_inf.id
+            if s3_inf[s3_inf.id == i].stratum.iloc[0] == s
+            and s3_inf[s3_inf.id == i].horizon.iloc[0] == h
+            and s3_inf[s3_inf.id == i].contrast.iloc[0] == "T2"
+        ]
+        nrej = int(s3_inf[s3_inf.id.isin(ids)].reject_bh_005.sum())
+        ds = [
+            pair_of(
+                S3_SERIES, f"{m}_hurdle_dynamic", "hurdle_empirical_28", h, "qscore9", s, s3_strat
+            )
+            for m in MODELS
+        ]
+        expect(
+            f"pos table nyc T2 {s} {h}",
+            pos_row(
+                S3LABEL[s],
+                h,
+                "T2: dynamic hurdle vs empirical",
+                ds,
+                f"{', '.join(ids)}: {nrej} reject",
+            ),
+            PT,
+        )
+        expect(
+            f"pos table nyc empirical {s} {h}",
+            pos_row(
+                S3LABEL[s],
+                h,
+                "law: model vs empirical",
+                [
+                    pair_of(
+                        S3_SERIES, f"{m}_hurdle", "hurdle_empirical_28", h, "qscore9", s, s3_strat
+                    )
+                    for m in MODELS
+                ],
+                "secondary",
+            ),
+            PT,
+        )
+        expect(
+            f"pos table nyc fourth {s} {h}",
+            pos_row(
+                S3LABEL[s],
+                h,
+                "law: Poisson vs model",
+                [
+                    pair_of(
+                        S3_SERIES,
+                        f"{m}_occurrence_model_size_count",
+                        f"{m}_completed",
+                        h,
+                        "qscore9",
+                        s,
+                        s3_strat,
+                    )
+                    for m in MODELS
+                ],
+                "secondary",
+            ),
+            PT,
+        )
+        expect(
+            f"pos table nyc occurrence {s} {h}",
+            pos_row(
+                S3LABEL[s],
+                h,
+                "occurrence: model vs Jeffreys",
+                [
+                    pair_of(
+                        S3_SERIES,
+                        f"{m}_occurrence_model_size_count",
+                        "hurdle_count_28",
+                        h,
+                        "qscore9",
+                        s,
+                        s3_strat,
+                    )
+                    for m in MODELS
+                ],
+                "secondary",
+            ),
+            PT,
+        )
+        expect(
+            f"pos table nyc dynamic {s} {h}",
+            pos_row(
+                S3LABEL[s],
+                h,
+                "dynamic count vs control",
+                [
+                    pair_of(S3_SERIES, "dynamic_count", f"{m}_completed", h, "qscore9", s, s3_strat)
+                    for m in MODELS
+                ],
+                "secondary",
+            ),
+            PT,
+        )
+
+
+def bench_pos_rows(panel, df, groups, suffix, ref, what):
+    out = {}
+    for s in groups:
+        for h in (7, 30):
+            rows = df[
+                df.variant.str.endswith(suffix)
+                & ((df.reference == ref) if ref else df.reference.str.endswith("_completed"))
+                & (df.metric == "qscore9")
+                & (df.group == s)
+                & (df.horizon == h)
+            ]
+            assert len(rows) == 3, (panel, s, h, len(rows))
+            rows = rows.set_index(rows.variant.str.split("_").str[0]).loc[MODELS]
+            label = {"all": "all cells", "dense": "dense", "sparse": "sparse"}[s]
+            expect(
+                f"pos table {panel} {what} {s} {h}",
+                f"{label} & {h} & {what} & {int(rows.n_entities.iloc[0])} & "
+                f"{rng_text(rows.wins.astype(int).tolist())} / "
+                f"{rng_text(rows.ties.astype(int).tolist())} / "
+                f"{rng_text(rows.losses.astype(int).tolist())} & "
+                f"{med_text(rows.median_diff.tolist())} & post hoc \\\\",
+                PT,
+            )
+            out[(s, h)] = rows
+    return out
+
+
+f_npm_c = bench_pos_rows(
+    "npm",
+    bench_npm,
+    ("dense", "sparse"),
+    "occurrence_model_size_count",
+    None,
+    "law: Poisson vs model",
+)
+f_npm_h = bench_pos_rows(
+    "npm",
+    bench_npm,
+    ("dense", "sparse"),
+    "occurrence_model_size_count",
+    "hurdle_count_28",
+    "occurrence: model vs Jeffreys",
+)
+f_grid_c = bench_pos_rows(
+    "grid", bench_grid, ("all",), "occurrence_model_size_count", None, "law: Poisson vs model"
+)
+f_grid_h = bench_pos_rows(
+    "grid",
+    bench_grid,
+    ("all",),
+    "occurrence_model_size_count",
+    "hurdle_count_28",
+    "occurrence: model vs Jeffreys",
+)
+dense_losses = [int(v) for h in (7, 30) for v in f_npm_c[("dense", h)].losses]
+dense_meds = [float(v) for h in (7, 30) for v in f_npm_c[("dense", h)].median_diff]
+expect(
+    "fourth: npm dense",
+    f"higher than the control on {min(dense_losses)} to {max(dense_losses)} of the 100 dense npm "
+    f"series with medians of {min(dense_meds):.2f} to {max(dense_meds):.2f}",
+    PT,
+)
+grid_losses = [int(v) for h in (7, 30) for v in f_grid_c[("all", h)].losses]
+expect(
+    "fourth: grid", f"higher on {min(grid_losses)} to {max(grid_losses)} of the 30 grid blocks", PT
+)
+s7 = f_npm_h[("sparse", 7)].wins.astype(int).tolist()
+
+
+def fourth_brier(df, group, h):
+    rows = df[
+        df.variant.str.endswith("occurrence_model_size_count")
+        & (df.reference == "hurdle_count_28")
+        & (df.metric == "occurrence_brier")
+        & (df.group == group)
+        & (df.horizon == h)
+    ]
+    return rows.set_index(rows.variant.str.split("_").str[0]).loc[MODELS].wins.astype(int).tolist()
+
+
+b7, b30, bg7, bg30 = (
+    fourth_brier(bench_npm, "dense", 7),
+    fourth_brier(bench_npm, "dense", 30),
+    fourth_brier(bench_grid, "all", 7),
+    fourth_brier(bench_grid, "all", 30),
+)
+expect(
+    "fourth: brier week",
+    f"on {b7[0]}, {b7[1]} and {b7[2]} of 100 dense npm series and {bg7[0]}, {bg7[1]} and {bg7[2]} "
+    f"of 30 blocks",
+    PT,
+)
+expect(
+    "fourth: brier month",
+    f"the model's zero mass lower on only {b30[0]}, {b30[1]} and {b30[2]} of 100 and {bg30[0]}, "
+    f"{bg30[1]} and {bg30[2]} of 30",
+    PT,
+)
+# The discussion's second-reading numbers: the fixed hurdle against the control at a month.
+dense_h30 = [
+    int(
+        pair_of(npm_series, f"{m}_hurdle", f"{m}_completed", 30, "qscore9", "dense", strat_of)
+        .gt(0)
+        .sum()
+    )
+    for m in MODELS
+]
+grid_h30 = [
+    int(blocks_of(f"{m}_hurdle", f"{m}_completed", 30, "qscore9").gt(0).sum()) for m in MODELS
+]
+assert sorted(set(grid_h30)) == [24, 25]
+expect(
+    "discussion: second reading",
+    f"on {min(dense_h30)} to {max(dense_h30)} of the 100 dense npm series and on 24 or 25 of the "
+    f"30 grid blocks",
+    PT,
+)
+
+# The completion floor, from the 300 NYC 311 checkpoints when they are present (a release asset).
+floor_files = sorted(S3_RUN.glob("[0-9a-f]*.json"))
+if len(floor_files) == 300:
+    floor, total, occ_floor, occ_dyn = {}, {}, {}, {}
+    strata_of = {s["series_id"]: s["stratum"] for s in s3_manifest["series"]}
+    for path in floor_files:
+        for row in load(path)["rows"]:
+            base = next((f for f in MODELS if row["model"].startswith(f + "_")), None)
+            variant = row["model"][len(base) + 1 :] if base else None
+            if variant not in ("completed", "hurdle_dynamic"):
+                continue
+            key = (strata_of[row["series_id"]], base)
+            law = row["forecast"]["distributions"][0]
+            if variant == "completed":
+                assert (
+                    abs(law["tail_scale"] - max(1, law["deciles"][-1] - law["deciles"][-2])) < 1e-9
+                )
+                on = law["deciles"][-1] < 0.5
+                floor[key] = floor.get(key, 0) + on
+                total[key] = total.get(key, 0) + 1
+                if on:
+                    occ_floor.setdefault(key, []).append(
+                        0.1 * np.exp(-(0.5 - law["deciles"][-1]) / law["tail_scale"])
+                    )
+            else:
+                occ_dyn.setdefault(key, []).append(law["p"])
+    assert all(v == 600 for v in total.values())
+    for s, tail in (
+        ("very_sparse", " of the 600 completed very sparse forecasts"),
+        ("sparse", " of 600 do"),
+        ("dense", ""),
+    ):
+        counts = [floor[(s, m)] for m in MODELS]
+        expect(f"floor: {s}", f"{counts[0]}, {counts[1]} and {counts[2]}{tail}", PT)
+    med_floor = [float(np.median(occ_floor[("very_sparse", m)])) for m in MODELS]
+    med_dyn = [float(np.median(occ_dyn[("very_sparse", m)])) for m in MODELS]
+    assert all(0.06 <= v <= 0.1 for v in med_floor) and max(med_dyn) - min(med_dyn) < 5e-5
+    expect(
+        "floor: medians",
+        f"median occurrence probability of {min(med_floor):.4f} to {max(med_floor):.4f} against "
+        f"{med_dyn[0]:.4f} for the dynamic hurdle",
+        PT,
+    )
+    assert abs(0.1 * np.exp(-0.5) - 0.0607) < 5e-5
+else:
+    skipped.append(
+        "the 300 NYC 311 checkpoints are absent (a release asset); the completion-floor counts "
+        "not recomputed"
+    )
+expect("floor: formula", "0.1 e^{-0.5} = 0.0607", PT)
+
+# The signature figure's binned shares, from the figure script's own function.
+spec = importlib.util.spec_from_file_location("make_figures", FIG)
+mkfig = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mkfig)
+npm_z = mkfig.load_scores_with_zero_fraction(
+    NPM_RUN / "inference" / "series_scores.csv", NPM / "manifest.json"
+)
+nyc_z = mkfig.load_scores_with_zero_fraction(
+    S3_RUN / "inference" / "series_scores.csv", S3_PANEL / "manifest.json"
+)
+b_npm = mkfig.binned_shares(npm_z, "hurdle", 7, "qscore9").set_index("low")
+b_nyc = mkfig.binned_shares(nyc_z, "hurdle_dynamic", 7, "qscore9").set_index("low")
+b_nyc_brier = mkfig.binned_shares(nyc_z, "hurdle_dynamic", 7, "occurrence_brier").set_index("low")
+expect(
+    "signature: npm bins",
+    f"lower on {int(b_npm.loc[0.5].lower)} of {int(b_npm.loc[0.5].n)} and "
+    f"{int(b_npm.loc[0.7].lower)} of {int(b_npm.loc[0.7].n)} pairs in the two bins",
+    PT,
+)
+expect(
+    "signature: nyc bins",
+    f"lower on {int(b_nyc.loc[0.5].lower)} of {int(b_nyc.loc[0.5].n)} and "
+    f"{int(b_nyc.loc[0.7].lower)} of {int(b_nyc.loc[0.7].n)} with {int(b_nyc.loc[0.5].tied)} "
+    f"and {int(b_nyc.loc[0.7].tied)} tied",
+    PT,
+)
+expect(
+    "signature: nyc top bin",
+    f"{int(b_nyc.loc[0.97].tied)} of {int(b_nyc.loc[0.97].n)} pairs tie exactly under \\qs{{}} "
+    f"while the Brier score favors the substitution on {int(b_nyc_brier.loc[0.97].lower)}",
+    PT,
+)
+
+# The ledger: dates and commits of the protocol's dated additions, from git.
+try:
+    ledger_log = subprocess.run(
+        ["git", "-C", str(ROOT), "log", "--format=%h %cs", "--", "PROTOCOL.md"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.splitlines()
+except (OSError, subprocess.CalledProcessError):
+    skipped.append("git log unavailable; the ledger's commits not confirmed")
+else:
+    dated = {line.split()[0]: line.split()[1] for line in ledger_log}
+    for short, day in (
+        ("5f01769", "2026-09-12"),
+        ("df55867", "2026-09-14"),
+        ("8db0d73", "2026-10-12"),
+        ("5be2ce9", "2026-10-15"),
+        ("1c09ac8", "2026-10-16"),
+        ("3357d77", "2026-10-16"),
+    ):
+        checks += 1
+        if dated.get(short) != day:
+            failures.append(
+                f"ledger: commit {short} not dated {day} in git log -- PROTOCOL.md: "
+                f"{dated.get(short)}"
+            )
+for row in (
+    "Study 1 & 2026-09-12 & \\texttt{5f01769} &",
+    "Study 2 & 2026-09-14 & \\texttt{df55867} &",
+    "1 & 2026-10-12 & \\texttt{8db0d73} &",
+    "5 & 2026-10-15 & \\texttt{5be2ce9} &",
+    "6 & 2026-10-16 & \\texttt{1c09ac8} &",
+    "7 & 2026-10-16 & \\texttt{3357d77} &",
+):
+    expect(f"ledger row {row[:8]}", row, PT)
+assert "no work was done in this repository between 2026-09-14 and 2026-10-11" in protocol
+checks += 1
+if TEXT["paper.tex"].count("between 2026-09-14 and 2026-10-11") != 1:
+    failures.append(
+        "the sentence on the four weeks without work must appear exactly once in the paper"
+    )
+
+# The run record table.
+s1_run = load(REPORT / "run" / "run.json") if (REPORT / "run" / "run.json").exists() else None
+expect(
+    "run record github",
+    "GitHub stars & 2026-09-13 07:54 & \\texttt{ca67dd2} & 300 & 48,600 & 18,662 &",
+    PT,
+)
+expect(
+    "run record grid",
+    f"Synthetic grid & 2026-10-15 20:16 & \\texttt{{3fc3411}} & 540 & 55,080 & 1,317 (1,323) & "
+    f"2,400 / {syn_run['metadata']['readiness']['estimated_seconds']:,} &",
+    PT,
+)
+expect(
+    "run record npm",
+    f"npm downloads & 2026-10-15 23:27 & \\texttt{{3057b16}} & 209 & 20,064 & 692 (699) & 3,600 / "
+    f"{npm_run['metadata']['readiness']['estimated_seconds']:,} &",
+    PT,
+)
+expect(
+    "run record nyc311",
+    "NYC 311 requests & 2026-10-17 03:47 & \\texttt{00fd91d} & 300 & 39,600 & 939 (956) & 3,600 / "
+    "1,080 &",
+    PT,
+)
+assert round(inv3r["wall_seconds"]) == 939 and S3_COMMIT.startswith("00fd91d")
+
+# The citations added on 2026-10-17: each entry records the page read.
+for key in (
+    "croston1972",
+    "syntetos2005",
+    "teunter2011",
+    "nikolopoulos2011",
+    "svetunkov2023",
+    "shenstone2005",
+    "snyder2012",
+    "kolassa2016",
+    "makridakis2022",
+    "ziel2022",
+    "wang2024",
+    "damato2025",
+    "tichy2025",
+    "woo2024",
+    "aksu2024",
+    "ghoroghchian2026",
+    "musat2026",
+    "hyndman2010",
+    "preregister2021",
+):
+    checks += 1
+    assert key in cited_paper, key
+    entry = bib.split("{" + key + ",")[1].split("}\n\n")[0]
+    if "read 2026-10-17" not in entry:
+        failures.append(f"citation {key}: the entry does not record the page read on 2026-10-17")
+
+# The length, by the revision's method: the running text before \appendix with comments, tables and
+# figures removed, and the captions apart. PAPER-SUMMARY.md states the counts.
+full = expand(PAPER_TEX)
+body_src = full.split("\\appendix")[0]
+no_comments = re.sub(r"(?m)^%.*\n", "", body_src)
+no_comments = re.sub(r"(?<!\\)%.*", "", no_comments)
+floats = [
+    m.group(0)
+    for m in re.finditer(
+        r"\\begin\{(table|figure|sidewaystable)\}.*?\\end\{\1\}", no_comments, re.S
+    )
+]
+captions = []
+for f in floats:
+    m = re.search(r"\\caption\{(.*)\}\s*\\label", f, re.S)
+    captions.append(m.group(1) if m else "")
+running = re.sub(
+    r"\\begin\{(table|figure|sidewaystable)\}.*?\\end\{\1\}", " ", no_comments, flags=re.S
+)
+running = re.sub(r"\\begin\{abstract\}.*?\\end\{abstract\}", " ", running, flags=re.S)
+running = re.sub(
+    r"\\(documentclass|usepackage|newcommand|providecommand|graphicspath|title|author|date|label|input|bibliographystyle|bibliography)(\[[^\]]*\])?\{[^}]*\}(\{[^}]*\})?",
+    " ",
+    running,
+)
+running = re.sub(r"\\(section|paragraph)\*?\{", " ", running)
+running = re.sub(r"\\[a-zA-Z]+\*?", " ", running)
+running = re.sub(r"[{}$\\~]", " ", running)
+body_words = len(running.split())
+caption_words = len(re.sub(r"\\[a-zA-Z]+\*?|[{}$\\~]", " ", " ".join(captions)).split())
+n_tables = sum(
+    1 for f in floats if f.startswith("\\begin{table") or f.startswith("\\begin{sidewaystable")
+)
+n_figures = sum(1 for f in floats if f.startswith("\\begin{figure"))
+summary_len = re.search(
+    r"the body holds ([\d,]+) words of running text, ([\d,]+) words of captions, (\w+) tables and "
+    r"(\w+) figures",
+    re.sub(r"\s+", " ", summary_md),
+)
+checks += 1
+if summary_len is None:
+    failures.append("PAPER-SUMMARY.md does not state the length by the method")
+else:
+    stated = int(summary_len.group(1).replace(",", ""))
+    if abs(stated - body_words) > 25 or int(summary_len.group(2).replace(",", "")) != caption_words:
+        failures.append(
+            f"PAPER-SUMMARY.md states {summary_len.group(1)} body words and "
+            f"{summary_len.group(2)} of captions; counted {body_words} and {caption_words}"
+        )
+    words = {"four": 4, "five": 5, "six": 6, "seven": 7}
+    if words.get(summary_len.group(3)) != n_tables or words.get(summary_len.group(4)) != n_figures:
+        failures.append(
+            f"PAPER-SUMMARY.md states {summary_len.group(3)} tables and {summary_len.group(4)} "
+            f"figures; counted {n_tables} and {n_figures}"
+        )
+checks += 1
+if body_words > 7600 or n_tables > 5 or n_figures > 4:
+    failures.append(
+        f"the body has {body_words} words, {n_tables} tables and {n_figures} figures; the aim is "
+        f"about 7,000, five and four"
+    )
+print(
+    f"body: {body_words} words of running text, {caption_words} words of captions, {n_tables} "
+    f"tables, {n_figures} figures"
+)
 
 # --- report -----------------------------------------------------------
 for line in failures:

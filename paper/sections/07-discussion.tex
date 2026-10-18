@@ -1,0 +1,71 @@
+% Section 7. Input from paper.tex; every number traces to sources.md and is asserted by check_numbers.py.
+\providecommand{\lm}{\texttt{local\_mean\_28}}
+\providecommand{\qs}{QScore9}
+\providecommand{\hc}{\texttt{hurdle\_count\_28}}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{What the three studies say together.} The models' value on sparse daily counts is in the size of
+the positive days: their gain over a trailing mean sits where the local mean overpredicts a positive day,
+and their positive law beats a shifted Poisson wherever that law is misspecified and an empirical law on
+dense series. Their own probability of a zero day is at least as good as a context-only estimate on dense
+series, under the quantile score in all three settings and under the occurrence Brier score on NYC 311 and at
+a week on npm. This is confirmatory on NYC 311, through the dense stratum's own six tests of the dynamic
+occurrence; on npm and the grid the confirmatory families are pooled, none favors the fixed substitution and
+two of six npm tests and all three grid tests reject against it, and their reading as the dense answer rests
+on the declared secondary strata. On sparse series the answer depends on the domain: the typical sparse npm
+series favors a context estimate at a week, under all three scores and for the TSB hurdle as much as for the
+Jeffreys estimate, and not at a month; on NYC 311's sparse stratum one of twelve registered tests favors it
+and ten of twelve medians are exactly zero. On series that are zero nine days in ten nothing about
+occurrence can be read, because the completion sets the models' occurrence probability and the quantile
+score ties. The dynamic hurdle beats the empirical count hurdle in 14 of 18 registered tests on NYC 311,
+three with a median of exactly zero; on sparse and very sparse series that contrast owes as much to the
+swapped occurrence as to the positive law.
+
+\paragraph{The two readings of the accounting trade.} The hurdle's positive law $G_+$ is the model's completed
+marginal law truncated at one, not a size forecast the model made for positive days; context zero mass laid
+over a law that already sits low on positive days counts the zeros twice, and zero-day loss down with
+underprediction up by more is what that predicts. Two readings of the net sign were open after Study 2: that
+the context estimate is the worse occurrence forecast, and that the truncated law is not the model's size
+forecast, so that any added zero mass hurts. The record supports the first on NYC 311's dense series, where
+the dynamic occurrence is worse on the Brier score itself in all six rows and the fourth cell against \hc{},
+which differs from it in the occurrence alone, puts the model's own occurrence ahead of the Jeffreys estimate
+on 62 to 73 of the 100 dense series under a count law that cannot count zeros twice, and at a week on the
+grid for Chronos-2 and TimesFM 3. It supports the second at a month on npm and the grid, where the Jeffreys
+estimate is as good as or better than the model's zero mass on the Brier score and under the count law, yet
+laid over the models' truncated positive laws it raises \qs{} against the control on 57 to 66 of the 100
+dense npm series and on 24 or 25 of the 30 grid blocks. The fourth cell against the control differs from it
+in the positive law alone and measures the model's law against a shifted Poisson, far worse on dense NYC 311
+series by 0.2944 to 0.325 on the mean; it says nothing about either reading. Which reading operates depends
+on the panel and the horizon, and nothing beyond that is attributed.
+
+\paragraph{What was expected, and what surprised.} The design expected the sparse npm reading to reproduce
+on a second domain; it did not, and the paper's first draft gave two readings of that outcome with equal
+weight. Three things in the record changed that. The first is the completion floor, in the registered rule
+from the start and not seen until the very sparse ties were counted: on a series that is zero nine days in
+ten the registered ``model's own zero mass'' is a constant between 0.0607 and 0.1, so the very sparse question
+the paper had called open is not one the registered construction can ask, and the ties were foreseeable from
+the definition. The second is that the sparse npm week is a property of the context estimate as such, since
+the TSB hurdle wins the same series, and of the week rather than the month. The third is the registered
+dynamic count, which beats every foundation model on the grid and loses to them on every natural panel: with
+the occurrence held equal, the foundation models' positive laws underpredict the grid's positive days more
+than its negative binomial does (Appendix~\ref{app:s2tables}). The threshold of 0.5 between the regimes was
+carried from Study 2's sampling strata, not derived; Figure~\ref{fig:signature} suggests that where the
+substitution starts to help is domain-specific.
+
+\paragraph{What would be done differently.} The next study of this question registers the occurrence log or
+Brier score and the discrete ranked probability score as its primaries, keeps a model output that can express
+an occurrence probability below one in ten, such as Chronos-2's own 21 quantile levels, a mixture or sample
+paths, registers TSB and iETS beside the count baselines, chooses the regime threshold from a per-series
+curve, and runs on a prospective window; that is one study, and the one a reader of the intermittent-demand
+literature would ask for. Short of it, the piece a reviewer could ask for is a registered replication of the
+sparse npm week on target days not yet read, six tests under the occurrence Brier score, which is held in
+reserve.
+
+\paragraph{What the paper claims.} The paper claims the registered combination and nothing broader: a
+context-only or dynamic occurrence probability substituted for the zero mass of frozen Chronos-2 and TimesFM
+forecasts, their completed positive law kept, judged by a proper quantile score against a completed-unwrapped
+control and matched count hurdles, with a dynamic count baseline beside them, on a hash-sampled panel of daily
+npm download counts, on the registered synthetic grid and, stratum by stratum, on a stratified panel of daily
+NYC 311 service-request counts, with the mean and the typical series reported side by side; Study 1's GitHub star counts enter through the raw comparison alone.

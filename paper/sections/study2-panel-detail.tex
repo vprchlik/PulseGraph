@@ -7,6 +7,37 @@
 \section{The npm panel: the inventory, the pull and the data statement}
 \label{app:s2panel}
 
+\paragraph{The achieved panel.} The packages domain is npm. Its panel was frozen on 2026-10-15 01:57 UTC and
+verified at 02:00 UTC, inside the reset readiness deadline of 2026-10-20 23:59 UTC, so the registered PyPI
+substitution was not invoked. Everything in this appendix is computed from the context window alone,
+2025-09-01 to 2026-06-02; as of 2026-10-15 02:00 UTC, when the panel was verified, no target value of
+2026-06-03 to 2026-08-31 had been opened, and the targets were first requested on 2026-10-15 at 23:15 UTC,
+after the run's gate (Appendix~\ref{app:runs}). On the stratum window of 2026-03-05 to 2026-06-02 the 9,998
+complete candidates fell 2,431 in the dense stratum (zero fraction below 0.5), 7,558 in the sparse stratum
+(0.5 to below 0.9) and 9 in the very sparse stratum (0.9 and above). The achieved panel is therefore 209
+series: 100 dense, 100 sparse and 9 very sparse, the first in selection-hash order within each stratum, with
+91 very-sparse slots unfilled (Table~\ref{tab:s2panel}). The 209 names were created between 2011-08-26 and
+2025-08-08; 80 of them are scoped names. The registered rule fixes the candidate pool at the first 10,000
+eligible names in hash order and forbids a larger pool, a transfer of unused slots and any alternative
+filter, so the very sparse stratum holds every complete candidate that qualified and no more. Only 9 of
+9,998 complete candidates had zero downloads on at least 90 percent of the 90 stratum days; npm counts every
+tarball request, including mirrors and automated clients, so a published package is rarely without a
+download for most of a quarter. The confirmatory family pools all 209 series as registered, strata being
+secondary descriptors, and any per-stratum table shows $n = 9$ for the very sparse stratum.
+
+\paragraph{One series at 7.6 million downloads a day.} The dense stratum holds the package
+\texttt{aggregate-error}, whose last 28 context days before the first cutoff average 7,637,136 downloads a
+day; the next largest last-28 mean in the panel is about 13,000, and the median series averages two.
+Equal series weights, as registered, mean that the mean paired difference of the unscaled \qs{} over 209
+series is that one series' difference divided by 209 plus a remainder from the other 208, whose losses are
+of a different order; the series-bootstrap interval inherits the same dependence. The median difference,
+the win count and the signed-rank test are rank-based and not dominated by it, since the series counts once
+in each; the scaled \qs{} is the registered scale-free secondary. This is a property of the registered
+design, not a defect found in it, and the paper names the series wherever it prints an unscaled npm mean.
+The same series is the case behind the availability rule of 2026-10-15: no discrete CRPS can be certified
+for it within the registered work limit, so its CRPS is recorded as unavailable and counted in the
+denominators.
+
 \paragraph{Inventory and candidate walk.} The frozen inventory is the registry's replication feed read in
 4,493 pages of at most 1,000 names between 2026-10-14 00:23 and 02:04 UTC: 4,486,927 package names, scopes
 included. The walk visited the first 12,943 names in candidate-hash order and requested each one's registry
@@ -59,7 +90,7 @@ as the pull repeatedly reaching npm's throttle and honouring it.
 \paragraph{Data statement.} The daily counts of the 209 series were obtained from the npm download-counts
 API, \url{https://api.npmjs.org/downloads/range}, between 2026-10-14 and 2026-10-15 UTC, for 2025-09-01 to
 2026-06-02; the targets for 2026-06-03 to 2026-08-31 were obtained from the same API on 2026-10-15 under a separate
-target-access approval (Appendix~\ref{app:s2repro}). Package names and creation timestamps come from the npm public registry,
+target-access approval (Appendix~\ref{app:runs}). Package names and creation timestamps come from the npm public registry,
 \url{https://registry.npmjs.org}, and from its replication feed, \url{https://replicate.npmjs.com}. A
 download is a tarball request as npm counts it, including mirrors, build servers and automated clients, and
 is a directional indicator rather than a count of users. npm, Inc.\ states no licence for the download
