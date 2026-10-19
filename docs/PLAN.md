@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-18 06:56 UTC. This page holds only what is current.
+Last rewritten 2026-10-19 03:38 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -34,7 +34,6 @@ day.
 | External run on npm: targets, run, inference over E01 to E18, recomputation | done 2026-10-15 23:55 UTC; awaiting the commit | the commit | done |
 | The npm zero days: source evidence, post-hoc sensitivity, dated addition 6 | done 2026-10-16 (no conclusion changes without the three days); awaiting the commit | the commit | done |
 | The author's read of title, abstract and summary; the PDF; posting | the revision | his read, the PDF route, the posting | read 2026-10-16; posted 2026-10-20 to 2026-10-23 |
-| GitHub release with `results.parquet` (433,172,286 bytes; SHA-256 in `README.md`) | nothing | the upload | before 2026-10-23 |
 | The paper (`paper/paper.tex`): the report extended with both Study 2 results, discussion, limitations | done 2026-10-16; awaiting the commit | the commit | done |
 | Paper review by a different reader | done 2026-10-16: 45 verdicts, two do not hold (an overclaim in the abstract; a misdescribed baseline) | the commit | done |
 | The standing check and referee's read; the post-hoc dynamic-occurrence analysis | done 2026-10-16; awaiting the commit | the commit | done |
@@ -50,8 +49,10 @@ day.
 | Revision: the paper reorganized by question at about twelve pages; the seven failed sentences and the seventeen fixes; the completion floor; the intermittent-demand literature and the benchmark; Brier and RPS beside the quantile score; the ledger; the signature figure | done 2026-10-17 10:05 UTC: nine sections, 7,499 words of body text, five tables, four figures, 1,357 checks; awaiting the commit | the commit | done |
 | Review of the reorganized paper by a different reader | done 2026-10-18 03:01 UTC: the record holds in full; 11 of 76 verdicts do not hold, nine of them sentences, none changing a table entry; awaiting the commit | the commit | done |
 | The review's fixes: the thesis with its exceptions named, the nine sentences, the broken reference, the table widths, the two-readings paragraph to the appendix, the summary | done 2026-10-18 06:00 UTC: every verdict applied, 1,431 checks, no table entry changed; awaiting the commit | the commit | done |
-| Both documents built for the first time: the logs read, overfull lines fixed in the source, the page counts recorded | TeX on this machine | installing pandoc and MiKTeX (the two lines below) | 2026-10-20 |
-| Release preparation: the asset manifest with hashes and a verifier, the three checkpoint archives, the daily counts committed, README's first screen, the posting checklist | nothing | the GitHub release and the Zenodo records, in person, after it | 2026-10-20 |
+| Both documents built for the first time: the logs read, overfull lines fixed in the source, the page counts recorded | done 2026-10-18 08:06 UTC: the paper 53 pages (body about 14), the report 13; awaiting the commit | the commit | done |
+| Release preparation: the asset manifest with hashes and a verifier, the three checkpoint archives, the daily counts committed, README's first screen, the posting checklist | done 2026-10-18 07:40 UTC; awaiting the commit | the commit | done |
+| Both documents prepared for posting: the report's layout line, the paper's data statement, the font package, the TMLR count | the commit above | his word for the font package; the TMLR template downloaded into `paper/tmlr/` if the count is wanted before posting day | 2026-10-19 |
+| The GitHub release: six assets uploaded in the checklist's order, the URLs pasted back and recorded in the tree | the commit above | the upload, in person | 2026-10-21 |
 | The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the fixes | his read, the PDF route (the first build's log is the only check on the table widths), the posting and the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
@@ -71,14 +72,15 @@ Every spend is approved by the author in his own words before it happens. Nothin
 | BigQuery | none before the paper (the birth-cohort census is deferred) | 0 | 0 | not asked |
 | NYC Open Data (SODA, anonymous) | the Study 3 context pull, done (276 attempts, 19 minutes); the 90 target days, done (106 attempts in two invocations, 17 minutes: 16 throttled answers at one request a second, none at three); the terms, three scripted requests (a redirect, a refusal, one unsent) and two page reads in a browser | done | 0 | the context pull approved 2026-10-16 (330 attempts, 3 hours); the targets 2026-10-17 (100, then 120 attempts); the terms 2026-10-17 (three scripted requests, then three browser reads) |
 | Zenodo, TMLR | posting and submission | 0 | 0 | the author posts |
-| PDF build | pandoc and a TeX distribution on this machine, or Overleaf's free tier | 0 | 0 | the author's choice (below) |
+| PDF build | pandoc 3.12.1 and MiKTeX 25.12, installed 2026-10-18; MiKTeX fetched twenty packages on first use | 0 | 0 | done; the font package `cm-super` needs the author's word |
 
 ## Open with the author
 
 1. **Posting route, decided 2026-10-13.** Zenodo for the report. The paper goes to Zenodo as version 2 and to
    TMLR; arXiv as well only if an endorser is found (the author is asking this week).
-2. **PDF build.** This machine has no pandoc and no TeX. Either install them (one line each, below) or compile
-   the LaTeX on Overleaf's free tier by uploading `paper/`.
+2. **PDF build, done 2026-10-18.** pandoc and MiKTeX are installed and both documents build. Open: the font package
+   for the bullets (one package, with the author's word) and the TMLR template (a download into `paper/tmlr/`), which
+   alone gives the page count the venue will see.
 3. **The v1 computer.** The write-up's first half leans on the preserved v1 documents; the v1 result artifacts
    exist only on the computer no longer in use. Is it reachable before 2026-10-24? If not, the report says the
    v1 numbers were not recomputed, as the protocol already requires.
@@ -103,7 +105,7 @@ Every spend is approved by the author in his own words before it happens. Nothin
    laws; discussion; limitations; registration and reproducibility), the full families, the process and every
    secondary table in the appendix, the request ledgers and gate records in the repository only. The line-by-line
    review's fourteen cuts and moves are the first pass. The 209 npm series' daily counts and the NYC 311 target
-   signals are still to be published; whether they are committed or released as an asset is the author's decision.
+   signals are settled on 2026-10-18: the daily counts committed, the signals and the checkpoints as release assets.
 7. **The spring plan** is in the tree since 2026-10-13 (`ideas/2026-09-14-spring-2027-plan.md`). Its one open
    decision: the follow-up cohort's creation window, recommended to close 2026-10-31, needs a dated addition
    before then or it slides.
@@ -120,12 +122,8 @@ winget install --id MiKTeX.MiKTeX -e
 
 ## Queued
 
-- A visitor's first screen for `README.md`: the question, the headline result in two sentences, the
-  registration hashes, where the numbers come from, the release URL and the DOI.
 - A one-paragraph plain statement of the result and a two-page excerpt of the registered analysis code, for
   the author's own use (a draft paragraph is in `ideas/2026-10-11-report-link-title-abstract.md`).
-- Release assets beside `results.parquet`: the 540 synthetic checkpoints (0.9 GB) and, after the npm run, its
-  checkpoints, so a fresh clone can rerun the inference; hashes are in each `run.json`.
 - A monthly audit of every claim on these pages against the files, first about 2026-11-11.
 - A line-ending attribute for the smoke copies under `study/`: the committed copy of the npm smoke is stored with LF
   while the readiness document of 2026-10-15 hashes the file as written on the run machine; Study 3's copies carry

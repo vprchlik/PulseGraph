@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-18 06:56 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-19 03:38 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `bb1c127` (2026-10-18 05:23 UTC), 60 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `5761656` (2026-10-18 06:57 UTC), 62 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -166,7 +166,7 @@ protocol gives no reason for excluding Croston and TSB; the summary's six senten
 the occurrence table overflows the text width by its headers, and five appendix tables with it. The verdict: to the
 author's read after these fixes, which change no table entry.
 
-**The fixes (2026-10-18 06:00 UTC; awaiting the author's commit).** Every verdict applied by number. The thesis now
+**The fixes (2026-10-18 06:00 UTC; committed `531611f`).** Every verdict applied by number. The thesis now
 says where the gain over the local mean sits per domain (where the local mean overpredicts on GitHub stars and npm
 downloads, where it underpredicts on NYC 311 requests, with 12 to 29 percent on zero days), restricts the dense clause
 to the registered score, names the four places where a context estimate beats the model's own zero mass on the typical
@@ -176,7 +176,27 @@ to the natural panels. The broken cross-reference is repaired and a check for ea
 the static checks; the occurrence table and the five appendix tables are within the text width by the estimate; the
 two-readings paragraph is in the appendix with one labeled sentence left. The body holds 7,495 words with five tables
 and four figures, about thirteen pages by word count; the checker passes 1,431 checks. The paper is ready for the
-author's read: the title, the abstract and eight quoted sentences in `paper/PAPER-SUMMARY.md`. Still no PDF.
+author's read: the title, the abstract and eight quoted sentences in `paper/PAPER-SUMMARY.md`.
+
+**Built (2026-10-18 08:06 UTC; awaiting the author's commit).** TeX is on the machine since 2026-10-18 and both
+documents build with no error and no undefined reference. The paper: 53 pages on A4 in the article class, the body
+about 14.2 pages with two full-page tables, the references three pages, the appendix 35 pages; after nine rounds the
+log is clean of overfull boxes above 5 pt, every body float sits within two pages of its first mention, and every
+change is layout, shown by a script that compares the text outside floats and the floats themselves against the
+committed source. The report: 13 pages, clean except seven lines of hashes and paths in its frozen text that run past
+the margin; one layout line (`\sloppy`) fixes them without changing a word, and the checker's comparison with
+`f325a67` will allow that one line. The checker now builds the paper as one of its checks (1,437 checks). Two renders
+for the author's own reading exist under the build folder. The page count under TMLR's own style is unknown until
+its template is on this machine.
+
+**The release prepared (2026-10-18 07:40 UTC; awaiting the author's commit).** Six files to upload, built under an
+ignored folder and hashed: Study 1's `results.parquet` (433,172,286 bytes), the three checkpoint archives (54, 25 and
+39 MB deflated, 1,049 entries in all, each archive rebuilt to the same bytes and unpacked into a scratch copy where
+the integrity checks pass), and the two target-signals files. `reports/release/ASSETS.md` lists them with a verifier
+beside it; the npm and NYC 311 daily counts are committed as small files with provenance and a byte-rebuild test;
+`README.md` opens with a first screen for a visitor; the posting checklist is
+`docs/ideas/2026-10-18-release-and-posting.md`. Two sentences of the paper still say the daily counts are to be
+released as assets and are corrected next.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -292,9 +312,9 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of the fixes and his read of the paper's summary; TeX installed and both documents built, their logs
-read; the release prepared (the asset manifest, the archives, the daily counts, the README's first screen); his word
-to post; the
+The author's commit of the release preparation and the build; the documents prepared for posting (the report's layout
+line, the data statement, the fonts); his read of the paper's summary and the two PDFs; the GitHub release and its URLs;
+his word to post; the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and
 gates are in `docs/PLAN.md`.
