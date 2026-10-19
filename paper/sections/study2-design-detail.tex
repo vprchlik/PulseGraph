@@ -9,6 +9,7 @@
 \section{Study 2: the registered design, the remaining detail}
 \label{app:s2design}
 
+\begin{sloppypar}
 \paragraph{Registration.} Study 2 was registered on 2026-09-14 as a dated addition to the protocol, at
 commit \texttt{df55867c982dfe2bb6e1152ec8ae93e3cd228c45} (full protocol SHA-256 at registration
 \texttt{33cefd8e34fea973e6747d1ba3fe565051e215c5d1b7f6553b266c1be7a66360}), after Study 1's results were
@@ -23,6 +24,7 @@ which changes nothing in the design and records how three zero days served by th
 byte prefixes of the protocol file. Nothing in Study 2 amends Study 1's sample, forecasts, scores,
 comparisons or conclusions; the completion of a model's deciles into a count distribution is a Study 2
 assumption and is not attributed to Study 1.
+\end{sloppypar}
 
 \paragraph{Domains and panels.} The registration names three external domain slots: package downloads,
 with npm as the primary source and PyPI through ClickPy as its sole operational fallback; NYC 311 requests;
@@ -41,6 +43,7 @@ overlap, and the 7-day blocks share the same origins. Selection strata are compu
 $c_1 - 1$, 2026-03-05 through 2026-06-02, and frozen for all origins. Package day labels are UTC. No model
 sees another series or any covariate, and no horizon is counted as an independent entity.
 
+\begin{sloppypar}
 \paragraph{Models and variants.} The three foundation models are the Study 1 pins: \texttt{amazon/chronos-2}
 at \texttt{29ec3766d36d6f73f0696f85560a422f50e8498c}, \texttt{google/timesfm-3.0-pytorch} at
 \texttt{43046b85ec22d584a13f8098c2ed39c889e129c2} and \texttt{google/timesfm-2.5-200m-pytorch} at
@@ -52,6 +55,7 @@ is the control; and \emph{hurdle}, the same completed law with its zero mass rep
 occurrence estimate $p$, so that $H(0) = 1 - p$ and $H(k) = 1 - p + p\, G_+(k)$ with $G_+$ the model's own
 positive conditional law $[F(k) - F(0)] / [1 - F(0)]$. The hurdle and completed variants differ in nothing
 else.
+\end{sloppypar}
 
 \paragraph{The confirmatory families.} The registration declared one external family of 54 tests, for each
 of three domains, three models and two horizons the hurdle against its own completed control, the hurdle
@@ -136,7 +140,7 @@ registered rule that only the holdout's npm-unavailability clause may reduce a f
 one case by the addition of 2026-10-12. The signed-rank test reports $p = 1$ when every difference is
 zero.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The external confirmatory family of this paper, E01 to E18, as registered for the packages domain.
 The suffix \texttt{\_raw} is the repaired native nine deciles, \texttt{\_completed} the fixed completion of
@@ -169,7 +173,7 @@ E18 & packages & timesfm2p5\_raw & local\_mean\_28 & 30 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The synthetic confirmatory family, S01 to S06, as registered.}
 \label{tab:s2synfamily}

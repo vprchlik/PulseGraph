@@ -7,13 +7,17 @@ are read the same way and checked against study/study2/, study/study3/, the pane
 directories under reports/, PROTOCOL.md and the dated documents, as sources.md lists. Version 1
 numbers are checked against the preserved
 documents under v1_reference/ when that local folder exists; otherwise they are listed as skipped.
-Nothing is written. Run from the repository root:
+Nothing in the tree is written; when pdflatex and bibtex are on PATH, paper.tex is built into the
+ignored folder data/cache/build/check/ and its log is read, and otherwise that check is listed as
+skipped. Run from the repository root:
 
     .\\.venv\\Scripts\\python.exe paper/check_numbers.py
 """
 
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 from datetime import date, timedelta
@@ -4668,6 +4672,83 @@ for q in quotes:
 checks += 1
 if not 1 <= len(quotes) <= 8:
     failures.append(f"PAPER-SUMMARY.md quotes {len(quotes)} sentences; one to eight expected")
+
+# --- the build (added 2026-10-18) --------------------------------------------------------------
+# With a TeX engine on PATH, paper.tex is built from a clean folder under the ignored
+# data/cache/build/ (pdflatex, bibtex, then pdflatex until the log asks for no rerun) and its log
+# must hold no error, no undefined reference or citation, no overfull box above 5 pt and no float
+# taller than the page; the page count must be the one PAPER-SUMMARY.md states. Without an engine
+# the check is skipped.
+PDFLATEX, BIBTEX = shutil.which("pdflatex"), shutil.which("bibtex")
+if PDFLATEX is None or BIBTEX is None:
+    skipped.append("pdflatex or bibtex not on PATH; the build of paper.tex was not checked")
+else:
+    BUILD = ROOT / "data" / "cache" / "build" / "check"
+    shutil.rmtree(BUILD, ignore_errors=True)
+    BUILD.mkdir(parents=True)
+    latex = [
+        PDFLATEX,
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        f"-output-directory={BUILD}",
+        "paper.tex",
+    ]
+    # bibtex runs in the build folder and finds references.bib through BIBINPUTS.
+    bib_env = dict(os.environ, BIBINPUTS=str(PAPER) + os.pathsep)
+    codes = [subprocess.run(latex, cwd=PAPER, capture_output=True).returncode]
+    codes.append(
+        subprocess.run([BIBTEX, "paper"], cwd=BUILD, env=bib_env, capture_output=True).returncode
+    )
+    build_log = ""
+    for passes in range(1, 6):
+        codes.append(subprocess.run(latex, cwd=PAPER, capture_output=True).returncode)
+        raw_log = (BUILD / "paper.log").read_text(encoding="utf-8", errors="replace")
+        # TeX wraps its log at 79 characters; a line of exactly 79 continues on the next.
+        joined = [""]
+        for line in raw_log.split("\n"):
+            joined[-1] += line
+            if len(line) != 79:
+                joined.append("")
+        build_log = "\n".join(joined)
+        if passes >= 2 and not re.search(r"Rerun to get|Label\(s\) may have changed", build_log):
+            break
+    checks += 1
+    if any(codes):
+        failures.append(f"build: a step exited nonzero ({codes}); see {BUILD}")
+    errors = re.findall(r"(?m)^(?:! .*|\S+\.tex:\d+: .*)$", build_log)
+    undefined = re.findall(
+        r"(?:Reference|Citation) `[^']+' on page \d+ undefined|There were undefined \w+", build_log
+    )
+    overfull = [
+        float(a)
+        for a in re.findall(r"(?m)^Overfull \\[hv]box \(([\d.]+)pt too (?:wide|high)\)", build_log)
+    ]
+    too_large = re.findall(r"Float too large for page by ([\d.]+)pt", build_log)
+    for label, found in (
+        ("errors", errors),
+        ("undefined references or citations", undefined),
+        ("overfull boxes above 5 pt", [a for a in overfull if a > 5]),
+        ("floats taller than the page", too_large),
+    ):
+        checks += 1
+        if found:
+            failures.append(f"build: {len(found)} {label}: {found[:3]}")
+    pages_built = re.search(r"Output written on .*? \((\d+) pages?", build_log, re.S)
+    pages_stated = re.search(
+        r"builds with pdfLaTeX to (\d+) pages", re.sub(r"\s+", " ", summary_md)
+    )
+    checks += 1
+    if pages_built is None or pages_stated is None:
+        failures.append("build: no page count in the log or none stated in PAPER-SUMMARY.md")
+    elif pages_built.group(1) != pages_stated.group(1):
+        failures.append(
+            f"build: {pages_built.group(1)} pages, PAPER-SUMMARY.md states {pages_stated.group(1)}"
+        )
+    print(
+        f"build: {pages_built.group(1) if pages_built else '?'} pages, {len(overfull)} overfull "
+        f"boxes, largest {max(overfull, default=0):.2f} pt, {passes + 1} pdflatex passes"
+    )
 
 # --- report -----------------------------------------------------------
 for line in failures:

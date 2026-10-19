@@ -21,8 +21,8 @@ none replaces the two families. Differences are model variant minus reference, s
 variant. A median of order $10^{-9}$ is a near-zero score difference repeated across series, not a tie; under
 the declared rule only an exact zero is a tie.
 
-\begin{table}[h]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\begin{table}[htbp]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
 \caption{The eighteen declared external comparisons on the npm panel. Differences are model variant minus
 reference \qs{}, averaged over three origins within series and then over 209 series; negative favors the
 variant. The contrast names the pair: the model's hurdle against its completed control, the hurdle against
@@ -59,8 +59,8 @@ E18 & TimesFM 2.5 & raw vs local mean & 30 & -5,109 & [-15,279, -15.49] & -0.003
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\begin{table}[htbp]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
 \caption{The six declared synthetic comparisons at horizon 30. Differences are model variant minus reference
 \qs{}, averaged over three origins within each replicate and cell, then over the 18 cells with equal weight,
 so that each of the 30 replicate blocks carries one paired difference; negative favors the variant. The
@@ -83,7 +83,7 @@ S06 & TimesFM 2.5 & hurdle vs count hurdle & 30 & 0.06109 & [0.02299, 0.09881] &
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig-s2-npm-paired-differences}
 \caption{The eighteen external comparisons, series by series. Each point is one of the 209 series' paired
@@ -94,7 +94,7 @@ order.}
 \label{fig:s2npm}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The hurdle-minus-control difference (E01, E04, E07, E10, E13, E16 on npm; S01, S03, S05 on the
 grid) and its three exact accounting parts, each divided by the full horizon: the loss on zero target days,
@@ -140,85 +140,7 @@ cause: a series with no zero in its last 28 context days gets $p = 28.5 / 29$, s
 1.7 percent of mass onto zero on every day, where the model's own completed law, which puts less there,
 must win.
 
-\paragraph{The three zero days, the counts.} After the run was scored, the saved targets were found to
-read 0 for every one of the 209 series on 2026-07-12 and 2026-08-14, and 0 for \texttt{aggregate-error}
-alone on 2026-06-25, between days of millions. The registered completeness rule, fixed before any target was
-seen, does not test for a source-wide zero, so the three days were scored as served; each falls in one
-horizon-30 block and in no horizon-7 block. The dated addition of 2026-10-16 to the protocol, item 6, made
-after the scores were seen, keeps the registered analysis of the data as served as the confirmatory result
-for E01 to E18 and asks that a post-hoc sensitivity which removes the days be reported beside it; that
-sensitivity, computed at 03:21 UTC on 2026-10-16 before the addition was written at 03:28 UTC and committed
-with it, is below. On 2026-07-12 and 2026-08-14 the panel's total is 0
-between neighbours of 4,059,870 and 10,123,968 downloads, and 7,480,108 and 2,560,140; on 2026-06-25
-\texttt{aggregate-error} reads 0 between 9,475,033 and 7,909,626, when 92 of the 209 series read 0 against
-98 and 121 on the days either side. No day of the 275-day context reads 0 for more than 153 of the 209
-series, and the largest series never reads below 1,109,682 there. npm's own status history, trackers and
-changelog report no outage, gap or backfill for the three days, and the status page does not track download
-counts. In the post-hoc sensitivity of Table~\ref{tab:s2sens} each removed day is dropped, for every series
-and variant, from the one horizon-30 block that holds it; the horizon-7 blocks hold none of the days and
-their rows are identical except for their adjusted $p$, which moves because the adjustment ranks all
-eighteen together; the same code reproduces the registered tables byte for byte on the saved scores. The day
-that touches only the largest series, 2026-06-25, differs in kind from the two panel-wide days only in its
-reach; the sensitivity treats all three alike. Each removed day is dropped from the one horizon-30 block that
-holds it, the block is re-scored over its remaining 29 days, and the registered aggregation, test, seeded
-bootstrap and one adjustment run unchanged. Without all three days, which re-scores 10,032 forecasts, none
-of the eighteen conclusions changes: no row changes the side with the larger signed-rank sum, the sign of
-its mean or its rejection. Without the two panel-wide days only, which re-scores 6,688 forecasts, one
-conclusion changes: E06, Chronos-2's raw deciles against \lm{} at horizon 30, no longer rejects, with
-adjusted $p$ 0.0599 and raw $p$ 0.0399 against 0.0119 and 0.00663 registered; it still favors the model by
-rank sum, with the model lower on 110 of 209 series. Without the three days the hurdle-against-control means
-at horizon 30 grow, E04 from 90.24 to 159.3, E10 from 128.5 to 201.2 and E16 from 110.3 to 183.4, and those
-means belong to \texttt{aggregate-error}. The mechanism answer does not depend on the three days.
-
-\paragraph{The context-scaled score.} The registered scale-free secondary, which divides each window's \qs{}
-by the context mean before the same averaging, reads differently from the unscaled mean on the hurdle
-contrast (Table~\ref{tab:s2scaled}). At horizon 7 the scaled difference against the completed
-control favors the hurdle for all three models, -0.02204 for Chronos-2, -0.006708 for TimesFM 3 and
--0.006123 for TimesFM 2.5, with every interval below zero; at horizon 30 every interval includes zero
-(-0.002395, 0.001291 and 0.001687). Against \hc{} the scaled differences are -0.1182 to -0.1466 with every
-interval below zero, and against \lm{} they are below zero in the four cells that reject (E06, E09, E12,
-E18) and include zero in E03 and E15. On the grid every scaled interval includes zero at horizon 30; the
-largest unscaled cell differences are in the cells with $z = 0.2$ and $\mu_{+} = 25$, which scaling by the
-context mean weighs least. The occurrence Brier score, available where a count law exists, is lower for the
-hurdle than for its control with an interval below zero in E01, E04 and E13 and includes zero in E07, E10
-and E16; on the mean the models' own zero mass is about as good as the Jeffreys estimate
-(Tables~\ref{tab:s2scores} and~\ref{tab:s2synscores}). These are secondary readings and add no test.
-
-\paragraph{The oracle, as a diagnostic.} The oracle that knows the generator's parameters and the last
-observed state has the lowest mean \qs{} of the seventeen forecasters at both horizons (1.514 at horizon 7
-and 1.648 at horizon 30), the lowest occurrence Brier score (0.115) and the lowest discrete CRPS (1.504) at
-horizon 30, and no forecaster scores below it in 17 of the 18 cells at horizon 30; in three of them
-(\texttt{cell12}, \texttt{cell14} and \texttt{cell16}, with $z = 0.95$ and $\rho = 0$) \texttt{dynamic\_count}
-ties it exactly, and in the cell with $z = 0.2$, $\mu_{+} = 1$ and $\rho = 0$, two forecasters score slightly
-below it (0.1759 and 0.1761 against 0.1767), as the protocol allows for a finite sample. Its randomized PIT
-histogram is flat, each tenth holding 0.099 to 0.104 of its 48,600 target days, where the six
-foundation-model variants and \hc{} place 0.078 to 0.133 of theirs in a tenth. On npm each hurdle variant
-places 0.088 to 0.146 of its horizon-30 target days in a tenth, against 0.083 to 0.153 for its completed
-control. The oracle is neither a competitor nor a confirmatory contrast.
-
-\paragraph{Per cell.} Figure~\ref{fig:s2cells} and Table~\ref{tab:s2cells} give the six synthetic
-contrasts cell by cell at horizon 30, each over 30 replicates, with no interval and no test. The largest
-differences against the hurdle are in the cells with $z = 0.2$ and $\mu_{+} = 25$, where the hurdle scores
-0.9342 to 0.9766 above its control at $\rho = 0.8$; in the four cells with $z = 0.95$ and $\mu_{+}$ of 5 or
-25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. Over the six
-cells with $z = 0.95$ at horizon 30, read post hoc from the per-series scores, the hurdle is lower than its
-control in 21, 26 and 23 of the 30 replicate blocks under \qs{}, in 24, 24 and 22 under the occurrence Brier
-score and in 25, 26 and 22 under the discrete CRPS, and over the 540 series pairs \qs{} ties exactly on 232
-and favors the hurdle on 217 of the other 308; at horizon 7 the blocks split 10, 14 and 18 of 30 under
-\qs{}. In the cells with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is
-lower in none of the 30 replicates in any of those six cells.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{fig-s2-synthetic-cells}
-\caption{The six synthetic comparisons, cell by cell at horizon 30: the mean paired difference over 30
-replicates in each of the 18 generator cells, labeled by zero probability $z$, positive mean $\mu_{+}$ and
-persistence $\rho$. Negative favors the hurdle variant. The family tests pool the cells with equal weight
-(Table~\ref{tab:s2syn}); the cells carry no test.}
-\label{fig:s2cells}
-\end{figure}
-
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\scriptsize\setlength{\tabcolsep}{2.4pt}
 \caption{Post-hoc. The hurdle variant against its completed control within each stratum: ``L / T / H'', the
 series where the hurdle is lower, tied or higher; the median difference; and the raw two-sided signed-rank
@@ -241,7 +163,7 @@ TimesFM 2.5 & 30 & 43 / 0 / 57 & 0.02333 & 0.00106 & 54 / 0 / 46 & -0.0008642 & 
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Post-hoc. The foundation-model hurdle against the registered secondary
 \texttt{hurdle\_empirical\_28}, which shares its occurrence rule and uses the empirical positive law, by
@@ -265,7 +187,7 @@ TimesFM 2.5 & 30 & 72 / 1 / 27 & 57 / 4 / 39 & 5 / 4 / 0 & 130 / 1 / 78 & -0.010
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The context-scaled \qs{}, the registered scale-free secondary: each window's \qs{} divided by
 $\max(1, \bar{y}_{\text{context}})$ before the registered averaging. Mean difference with its pointwise 95
@@ -312,7 +234,7 @@ S06 & timesfm2p5\_hurdle & hurdle\_count\_28 & 30 & 0.0004433 & [-0.008125, 0.00
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The eighteen external comparisons by context-zero-fraction stratum, declared secondary, with no
 interval and no test: the mean difference, the median difference and the number of series where the variant
@@ -347,7 +269,37 @@ E18 & -10,678 & -0.05805 & 68 & -0.03236 & 0.004494 & 40 & -0.006367 & -0.003695
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\paragraph{The three zero days, the counts.} After the run was scored, the saved targets were found to
+read 0 for every one of the 209 series on 2026-07-12 and 2026-08-14, and 0 for \texttt{aggregate-error}
+alone on 2026-06-25, between days of millions. The registered completeness rule, fixed before any target was
+seen, does not test for a source-wide zero, so the three days were scored as served; each falls in one
+horizon-30 block and in no horizon-7 block. The dated addition of 2026-10-16 to the protocol, item 6, made
+after the scores were seen, keeps the registered analysis of the data as served as the confirmatory result
+for E01 to E18 and asks that a post-hoc sensitivity which removes the days be reported beside it; that
+sensitivity, computed at 03:21 UTC on 2026-10-16 before the addition was written at 03:28 UTC and committed
+with it, is below. On 2026-07-12 and 2026-08-14 the panel's total is 0
+between neighbours of 4,059,870 and 10,123,968 downloads, and 7,480,108 and 2,560,140; on 2026-06-25
+\texttt{aggregate-error} reads 0 between 9,475,033 and 7,909,626, when 92 of the 209 series read 0 against
+98 and 121 on the days either side. No day of the 275-day context reads 0 for more than 153 of the 209
+series, and the largest series never reads below 1,109,682 there. npm's own status history, trackers and
+changelog report no outage, gap or backfill for the three days, and the status page does not track download
+counts. In the post-hoc sensitivity of Table~\ref{tab:s2sens} each removed day is dropped, for every series
+and variant, from the one horizon-30 block that holds it; the horizon-7 blocks hold none of the days and
+their rows are identical except for their adjusted $p$, which moves because the adjustment ranks all
+eighteen together; the same code reproduces the registered tables byte for byte on the saved scores. The day
+that touches only the largest series, 2026-06-25, differs in kind from the two panel-wide days only in its
+reach; the sensitivity treats all three alike. Each removed day is dropped from the one horizon-30 block that
+holds it, the block is re-scored over its remaining 29 days, and the registered aggregation, test, seeded
+bootstrap and one adjustment run unchanged. Without all three days, which re-scores 10,032 forecasts, none
+of the eighteen conclusions changes: no row changes the side with the larger signed-rank sum, the sign of
+its mean or its rejection. Without the two panel-wide days only, which re-scores 6,688 forecasts, one
+conclusion changes: E06, Chronos-2's raw deciles against \lm{} at horizon 30, no longer rejects, with
+adjusted $p$ 0.0599 and raw $p$ 0.0399 against 0.0119 and 0.00663 registered; it still favors the model by
+rank sum, with the model lower on 110 of 209 series. Without the three days the hurdle-against-control means
+at horizon 30 grow, E04 from 90.24 to 159.3, E10 from 128.5 to 201.2 and E16 from 110.3 to 183.4, and those
+means belong to \texttt{aggregate-error}. The mechanism answer does not depend on the three days.
+
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Post-hoc. The eighteen external comparisons as registered and under the two removals of the npm
 zero days: the mean difference, the adjusted $p$ and whether the test rejects at $q = 0.05$ after one
@@ -383,7 +335,7 @@ E18 & -5,109 & 0.00204 & yes & -5,242 & 0.00988 & yes & -5,068 & 0.00638 & yes &
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The six synthetic comparisons cell by cell at horizon 30: the mean paired difference over the 30
 replicates of each cell and, in brackets, the replicates where the hurdle variant is lower; no interval and
@@ -416,7 +368,21 @@ cell17 & 0.95 & 25 & 0.8 & -0.2365 (15) & -0.07619 (9) & -0.1487 (13) & -0.08094
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\paragraph{The context-scaled score.} The registered scale-free secondary, which divides each window's \qs{}
+by the context mean before the same averaging, reads differently from the unscaled mean on the hurdle
+contrast (Table~\ref{tab:s2scaled}). At horizon 7 the scaled difference against the completed
+control favors the hurdle for all three models, -0.02204 for Chronos-2, -0.006708 for TimesFM 3 and
+-0.006123 for TimesFM 2.5, with every interval below zero; at horizon 30 every interval includes zero
+(-0.002395, 0.001291 and 0.001687). Against \hc{} the scaled differences are -0.1182 to -0.1466 with every
+interval below zero, and against \lm{} they are below zero in the four cells that reject (E06, E09, E12,
+E18) and include zero in E03 and E15. On the grid every scaled interval includes zero at horizon 30; the
+largest unscaled cell differences are in the cells with $z = 0.2$ and $\mu_{+} = 25$, which scaling by the
+context mean weighs least. The occurrence Brier score, available where a count law exists, is lower for the
+hurdle than for its control with an interval below zero in E01, E04 and E13 and includes zero in E07, E10
+and E16; on the mean the models' own zero mass is about as good as the Jeffreys estimate
+(Tables~\ref{tab:s2scores} and~\ref{tab:s2synscores}). These are secondary readings and add no test.
+
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Mean scores of the sixteen variants on the npm panel (209 series, equal weights): \qs{} at both
 horizons and, at horizon 30, the context-scaled \qs{}, the occurrence Brier score and the discrete CRPS
@@ -448,7 +414,7 @@ dynamic\_count & 10,948 & 11,471 & 1.026 & 0.1773 & 124.2 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Mean scores of the sixteen variants and the oracle on the synthetic grid (30 replicate blocks,
 18 cells with equal weight): \qs{} at both horizons and, at horizon 30, the occurrence Brier score and the
@@ -480,6 +446,40 @@ oracle & 1.514 & 1.648 & 0.115 & 1.504 \\
 \end{tabular}
 \end{table}
 
+\paragraph{The oracle, as a diagnostic.} The oracle that knows the generator's parameters and the last
+observed state has the lowest mean \qs{} of the seventeen forecasters at both horizons (1.514 at horizon 7
+and 1.648 at horizon 30), the lowest occurrence Brier score (0.115) and the lowest discrete CRPS (1.504) at
+horizon 30, and no forecaster scores below it in 17 of the 18 cells at horizon 30; in three of them
+(\texttt{cell12}, \texttt{cell14} and \texttt{cell16}, with $z = 0.95$ and $\rho = 0$) \texttt{dynamic\_count}
+ties it exactly, and in the cell with $z = 0.2$, $\mu_{+} = 1$ and $\rho = 0$, two forecasters score slightly
+below it (0.1759 and 0.1761 against 0.1767), as the protocol allows for a finite sample. Its randomized PIT
+histogram is flat, each tenth holding 0.099 to 0.104 of its 48,600 target days, where the six
+foundation-model variants and \hc{} place 0.078 to 0.133 of theirs in a tenth. On npm each hurdle variant
+places 0.088 to 0.146 of its horizon-30 target days in a tenth, against 0.083 to 0.153 for its completed
+control. The oracle is neither a competitor nor a confirmatory contrast.
+
+\paragraph{Per cell.} Figure~\ref{fig:s2cells} and Table~\ref{tab:s2cells} give the six synthetic
+contrasts cell by cell at horizon 30, each over 30 replicates, with no interval and no test. The largest
+differences against the hurdle are in the cells with $z = 0.2$ and $\mu_{+} = 25$, where the hurdle scores
+0.9342 to 0.9766 above its control at $\rho = 0.8$; in the four cells with $z = 0.95$ and $\mu_{+}$ of 5 or
+25, 23 of the 24 differences are negative, favoring the hurdle, and all are small beside those. Over the six
+cells with $z = 0.95$ at horizon 30, read post hoc from the per-series scores, the hurdle is lower than its
+control in 21, 26 and 23 of the 30 replicate blocks under \qs{}, in 24, 24 and 22 under the occurrence Brier
+score and in 25, 26 and 22 under the discrete CRPS, and over the 540 series pairs \qs{} ties exactly on 232
+and favors the hurdle on 217 of the other 308; at horizon 7 the blocks split 10, 14 and 18 of 30 under
+\qs{}. In the cells with $\mu_{+} = 1$ the positive law is degenerate at one, and against \hc{} the hurdle is
+lower in none of the 30 replicates in any of those six cells.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig-s2-synthetic-cells}
+\caption{The six synthetic comparisons, cell by cell at horizon 30: the mean paired difference over 30
+replicates in each of the 18 generator cells, labeled by zero probability $z$, positive mean $\mu_{+}$ and
+persistence $\rho$. Negative favors the hurdle variant. The family tests pool the cells with equal weight
+(Table~\ref{tab:s2syn}); the cells carry no test.}
+\label{fig:s2cells}
+\end{figure}
+
 \paragraph{The dynamic-occurrence post-hoc, the detail.} The analysis summarized in
 Section~\ref{sec:discussion} is post-hoc. It was computed on 2026-10-16 from the saved forecasts of both
 runs, after the registered scores were seen, with no registered status; it adds no test to E01 to E18 or
@@ -501,7 +501,7 @@ against the completed control and the registered hurdle, and Table~\ref{tab:s2dy
 Table~\ref{tab:s2dynparts} gives the three accounting parts of the wrappers and their references on the
 grid at horizon 30, each an equal-block mean over the full horizon, and the parts sum to \qs{}.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Post-hoc. The model's completed positive law wrapped with \texttt{dynamic\_count}'s occurrence,
 against the model's completed control and against the model's registered fixed-occurrence hurdle, on npm
@@ -561,7 +561,7 @@ occurrence is the same on every day. With the occurrence held equal, the foundat
 underpredict the grid's positive days more than the dynamic count's negative binomial does: on the grid the
 remaining loss is the positive law.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{Post-hoc. The wrapper against \texttt{dynamic\_count} and against \hc{}, on npm (209 series) and
 the grid (30 blocks at horizon 30), with the columns and adjustment of Table~\ref{tab:s2dyn}. The npm means
@@ -594,7 +594,7 @@ DS11 & TimesFM 2.5 & dynamic count & 30 & 0.1056 & [0.07495, 0.1372] & 0.09752 &
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{Post-hoc. The three exact accounting parts on the synthetic grid at horizon 30, equal-block means
 over the full horizon, for each model's dynamic-occurrence wrapper, its registered hurdle and its completed

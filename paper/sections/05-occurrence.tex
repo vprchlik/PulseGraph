@@ -14,81 +14,9 @@ completed forecast on every panel and stratum, under the registered \qs{} and un
 secondaries, with the post-hoc TSB hurdle beside it, and Figure~\ref{fig:signature} draws the same contrast
 series by series against the context zero fraction.
 
-\paragraph{The pooled answer.} On the pooled families of Study 2 the substitution does not help. Against its
-completed control the fixed hurdle's mean difference is positive, favoring the control, in all six npm cells,
-from 90.24 to 253.9 (carried by \texttt{aggregate-error}), with every interval above zero, and two of the six
-tests reject against it, TimesFM 3 and TimesFM 2.5 at horizon 30. No pooled test favors the substitution at
-$q = 0.05$; in E01 the typical series leans to the hurdle, lower on 121 of 209 series with a median of
--0.01376. On the grid all three tests reject against the hurdle, with means from 0.08599 to 0.08769, with
-every interval above zero, and the hurdle lower on 5 or 6 of the 30 replicate blocks. On the mean, in every
-one of the nine cells, the substitution lowers the zero-day loss and raises the positive-day underprediction
-loss by more (Appendix Table~\ref{tab:s2parts}); the median npm series does not follow that trade, its
-zero-day difference being positive, against the hurdle, in all six cells (0.003 to 0.036). 
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{fig-signature}
-\caption{The occurrence substitution against the context zero fraction. For each bin of the zero fraction
-over the stratum window, the share of series pairs (three models, one pair per series and model) where the
-substitution scores lower than its completed control (filled markers) and the share tied exactly (open
-markers), under \qs{} (top) and under the occurrence Brier score (bottom), at horizons 7 and 30; the fixed
-hurdle on npm, the dynamic hurdle on NYC 311, and the fixed hurdle on the grid as squares at its three zero
-probabilities. The small numbers under the top left panel give the pairs in each bin. At a week, below a zero
-fraction of 0.5 the substitution loses on both natural panels; from 0.5 to 0.9 it wins the typical npm
-series, lower on 68 of 105 and 139 of 195 pairs in the two bins, and about breaks even on NYC 311, lower on 40
-of 84 and 108 of 216 with 6 and 38 tied; above 0.97 on NYC 311, 183 of 186 pairs tie exactly under \qs{}
-while the Brier score favors the substitution on 148.}
-\label{fig:signature}
-\end{figure}
-
-\paragraph{Dense series: the model's own zero mass is better.} On dense series the substitution is worse in
-all three settings. On npm the fixed hurdle is worse for the typical dense series: it scores lower on 32 to 43 of 100 in every
-cell. On the grid at a month, by zero probability, it beats its control in 4 to 6 of 30 replicate blocks at
-$z = 0.2$ against 21 to 26 at $z = 0.95$. On NYC 311 all six registered dense tests reject as H3 predicted: the dynamic hurdle scores
-higher than the completed control on 55 to 72 of the 100 series, the medians run from 0.004074 to 0.0127 and
-the means from 0.01511 to 0.02219, with every interval above zero, and the dynamic occurrence's Brier score
-is higher than the model's own zero mass's in all six rows, by 0.00668 to 0.009347 on the mean with every
-interval above zero.  On
-npm the Brier score does not follow the quantile score at a month: the fixed hurdle's Brier score is lower
-than the control's on 57 to 62 of the 100 dense series at horizon 30 while \qs{} still favors the control,
-where at horizon 7 it is lower on only 32 to 46; Appendix~\ref{app:s3tables} returns to that. The TSB hurdle, post hoc, is
-far behind every model on dense series (Table~\ref{tab:occ}).
-
-\paragraph{Sparse series: the answer depends on the domain.} On the sparse npm stratum the substitution helps
-the typical series at a week under all three scores: against its completed control the fixed hurdle scores
-lower on 81, 60 and 66 of the 100 sparse series at horizon 7, for Chronos-2, TimesFM 3 and TimesFM 2.5, and
-on 58, 45 and 54 of them at horizon 30; on the occurrence Brier score it is lower on 85, 64 and 70 at horizon
-7 and on the discrete CRPS on 82, 70 and 70; and a post-hoc signed-rank test within the stratum has raw $p$
-below 0.002 for all three sparse-stratum contrasts at horizon 7 and of 0.47 or more at horizon 30, so the
-test is null at a month under \qs{} and the CRPS, though Chronos-2's hurdle still wins the typical series
-there (Table~\ref{tab:occ}). The TSB hurdle does the same at a
-week, lower than the completed controls on 77, 61 and 74 of 100 and level with the count hurdle, 49 lower
-against 49 higher. It is a secondary reading on one domain and one horizon, and it did not reproduce on NYC
-311. There one test
-rejects, in the predicted direction: R21, TimesFM 2.5 at horizon 7, with a median of -0.002116, 57 series
-lower, 8 tied and 35 higher, and adjusted $p$ 0.00445; R23 leans the same way without rejecting; the other
-four medians are exactly zero, with 12 to 23 series tied exactly, and none rejects; and the Brier reading is
-mixed. Study 2's own fixed hurdle, scored on NYC 311 (Appendix~\ref{app:s3tables}), scores lower on 41, 39
-and 43 of the 100 at horizon 7 against 81, 60 and 66 on npm. So on sparse NYC 311 series the score sees the substitution, and the npm reading did not carry over.
-
-\paragraph{Very sparse series: an interface limit.} On NYC 311's very sparse stratum no T1 test rejects and
-every median is exactly zero: 72 to 88 of the 100 series score exactly the same under the dynamic hurdle as
-under the control in each row, the means are positive, from 0.0005086 to 0.002911, every interval includes
-zero, and one series, \texttt{Sewer Maintenance} in community board \texttt{09 QUEENS}, moves each mean most.
-The Brier score separates the two forecasts where the quantile score cannot: the dynamic occurrence has the
-lower Brier score on 68 to 82 of the 100 series in every T1 row, with medians from -0.002363 to -0.001625 and
-raw $p$ at most 0.00165, while its mean differences stay within 0.0013 of zero. What the ties and the
-separation compare is the completion rule, not the model. Counted after the run from the saved deciles and
-descriptive: 71 to 87 of the tied series in each row have every decile at zero under both forecasts in every
-window. So on series that are zero nine days in ten the registered construction cannot ask the
-occurrence question: the quantile score ties, and the Brier score's separation is the dynamic hurdle's
-estimate against a constant near 0.061, which the formula predicts. The same holds for the TSB hurdle
-(Table~\ref{tab:occ}, Figure~\ref{fig:signature}) and not for the grid's cells with $z = 0.95$ at a month,
-where the substitution wins under all three scores (Appendix Table~\ref{tab:s2cells}). The limit belongs to
-the models' output and to the completion as much as to the score.
-
 \begin{table}[p]
 \centering\scriptsize\setlength{\tabcolsep}{1.2pt}
+\renewcommand{\arraystretch}{0.92}\setlength{\abovecaptionskip}{0pt}
 \caption{The occurrence substitution against the model's own completed forecast, by panel and stratum,
 under the registered \qs{} and the two declared secondaries. ``L / T / H'' counts the series (of 100; of 30
 replicate blocks on the grid) where the substitution's score is lower than, exactly tied with or higher than
@@ -180,3 +108,76 @@ all cells & 30 & TSB vs TimesFM 2.5 & 8 / 0 / 22 & 0.05822 & post hoc & 17 / 0 /
 \bottomrule
 \end{tabular}
 \end{table}
+
+\paragraph{The pooled answer.} On the pooled families of Study 2 the substitution does not help. Against its
+completed control the fixed hurdle's mean difference is positive, favoring the control, in all six npm cells,
+from 90.24 to 253.9 (carried by \texttt{aggregate-error}), with every interval above zero, and two of the six
+tests reject against it, TimesFM 3 and TimesFM 2.5 at horizon 30. No pooled test favors the substitution at
+$q = 0.05$; in E01 the typical series leans to the hurdle, lower on 121 of 209 series with a median of
+-0.01376. On the grid all three tests reject against the hurdle, with means from 0.08599 to 0.08769, with
+every interval above zero, and the hurdle lower on 5 or 6 of the 30 replicate blocks. On the mean, in every
+one of the nine cells, the substitution lowers the zero-day loss and raises the positive-day underprediction
+loss by more (Appendix Table~\ref{tab:s2parts}); the median npm series does not follow that trade, its
+zero-day difference being positive, against the hurdle, in all six cells (0.003 to 0.036).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig-signature}
+\caption{The occurrence substitution against the context zero fraction. For each bin of the zero fraction
+over the stratum window, the share of series pairs (three models, one pair per series and model) where the
+substitution scores lower than its completed control (filled markers) and the share tied exactly (open
+markers), under \qs{} (top) and under the occurrence Brier score (bottom), at horizons 7 and 30; the fixed
+hurdle on npm, the dynamic hurdle on NYC 311, and the fixed hurdle on the grid as squares at its three zero
+probabilities. The small numbers under the top left panel give the pairs in each bin. At a week, below a zero
+fraction of 0.5 the substitution loses on both natural panels; from 0.5 to 0.9 it wins the typical npm
+series, lower on 68 of 105 and 139 of 195 pairs in the two bins, and about breaks even on NYC 311, lower on 40
+of 84 and 108 of 216 with 6 and 38 tied; above 0.97 on NYC 311, 183 of 186 pairs tie exactly under \qs{}
+while the Brier score favors the substitution on 148.}
+\label{fig:signature}
+\end{figure}
+
+\paragraph{Dense series: the model's own zero mass is better.} On dense series the substitution is worse in
+all three settings. On npm the fixed hurdle is worse for the typical dense series: it scores lower on 32 to 43 of 100 in every
+cell. On the grid at a month, by zero probability, it beats its control in 4 to 6 of 30 replicate blocks at
+$z = 0.2$ against 21 to 26 at $z = 0.95$. On NYC 311 all six registered dense tests reject as H3 predicted: the dynamic hurdle scores
+higher than the completed control on 55 to 72 of the 100 series, the medians run from 0.004074 to 0.0127 and
+the means from 0.01511 to 0.02219, with every interval above zero, and the dynamic occurrence's Brier score
+is higher than the model's own zero mass's in all six rows, by 0.00668 to 0.009347 on the mean with every
+interval above zero.  On
+npm the Brier score does not follow the quantile score at a month: the fixed hurdle's Brier score is lower
+than the control's on 57 to 62 of the 100 dense series at horizon 30 while \qs{} still favors the control,
+where at horizon 7 it is lower on only 32 to 46; Appendix~\ref{app:s3tables} returns to that. The TSB hurdle, post hoc, is
+far behind every model on dense series (Table~\ref{tab:occ}).
+
+\paragraph{Sparse series: the answer depends on the domain.} On the sparse npm stratum the substitution helps
+the typical series at a week under all three scores: against its completed control the fixed hurdle scores
+lower on 81, 60 and 66 of the 100 sparse series at horizon 7, for Chronos-2, TimesFM 3 and TimesFM 2.5, and
+on 58, 45 and 54 of them at horizon 30; on the occurrence Brier score it is lower on 85, 64 and 70 at horizon
+7 and on the discrete CRPS on 82, 70 and 70; and a post-hoc signed-rank test within the stratum has raw $p$
+below 0.002 for all three sparse-stratum contrasts at horizon 7 and of 0.47 or more at horizon 30, so the
+test is null at a month under \qs{} and the CRPS, though Chronos-2's hurdle still wins the typical series
+there (Table~\ref{tab:occ}). The TSB hurdle does the same at a
+week, lower than the completed controls on 77, 61 and 74 of 100 and level with the count hurdle, 49 lower
+against 49 higher. It is a secondary reading on one domain and one horizon, and it did not reproduce on NYC
+311. There one test
+rejects, in the predicted direction: R21, TimesFM 2.5 at horizon 7, with a median of -0.002116, 57 series
+lower, 8 tied and 35 higher, and adjusted $p$ 0.00445; R23 leans the same way without rejecting; the other
+four medians are exactly zero, with 12 to 23 series tied exactly, and none rejects; and the Brier reading is
+mixed. Study 2's own fixed hurdle, scored on NYC 311 (Appendix~\ref{app:s3tables}), scores lower on 41, 39
+and 43 of the 100 at horizon 7 against 81, 60 and 66 on npm. So on sparse NYC 311 series the score sees the substitution, and the npm reading did not carry over.
+
+\paragraph{Very sparse series: an interface limit.} On NYC 311's very sparse stratum no T1 test rejects and
+every median is exactly zero: 72 to 88 of the 100 series score exactly the same under the dynamic hurdle as
+under the control in each row, the means are positive, from 0.0005086 to 0.002911, every interval includes
+zero, and one series, \texttt{Sewer Maintenance} in community board \texttt{09 QUEENS}, moves each mean most.
+The Brier score separates the two forecasts where the quantile score cannot: the dynamic occurrence has the
+lower Brier score on 68 to 82 of the 100 series in every T1 row, with medians from -0.002363 to -0.001625 and
+raw $p$ at most 0.00165, while its mean differences stay within 0.0013 of zero. What the ties and the
+separation compare is the completion rule, not the model. Counted after the run from the saved deciles and
+descriptive: 71 to 87 of the tied series in each row have every decile at zero under both forecasts in every
+window. So on series that are zero nine days in ten the registered construction cannot ask the
+occurrence question: the quantile score ties, and the Brier score's separation is the dynamic hurdle's
+estimate against a constant near 0.061, which the formula predicts. The same holds for the TSB hurdle
+(Table~\ref{tab:occ}, Figure~\ref{fig:signature}) and not for the grid's cells with $z = 0.95$ at a month,
+where the substitution wins under all three scores (Appendix Table~\ref{tab:s2cells}). The limit belongs to
+the models' output and to the completion as much as to the score.

@@ -8,13 +8,23 @@
 \usepackage[a4paper,margin=24mm]{geometry}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{graphicx}
 \usepackage{rotating}
+\usepackage{placeins}
 \usepackage[hyphens]{url}
+\usepackage{xurl}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[colorlinks=true,allcolors=blue]{hyperref}
 
 \graphicspath{{figures/}}
+% A paragraph column set ragged right, for the narrow text columns of Tables 1 and 2.
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+% Float placement: up to three floats at the top of a page, and a float page only when it is well filled.
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
 \newcommand{\lm}{\texttt{local\_mean\_28}}
 \newcommand{\aets}{\texttt{autoets\_weekly}}
 \newcommand{\qs}{QScore9}
@@ -72,27 +82,42 @@ a week, in the grid's sparsest cells at a month and in one registered NYC 311 te
 \bibliography{references}
 
 \appendix
+% Each appendix section's floats are set before the next section begins.
 
 \input{sections/app-study1}
 
+\FloatBarrier
+\begin{sloppypar}
 \input{shared/app-design}
+\end{sloppypar}
 
+\FloatBarrier
 \input{shared/app-v1}
 
+\clearpage
 \input{shared/app-tables}
 
+\FloatBarrier
 \input{sections/study2-design-detail}
 
+\FloatBarrier
 \input{sections/study2-panel-detail}
 
+\FloatBarrier
 \input{sections/study2-appendix}
 
+\FloatBarrier
 \input{sections/study3-detail}
 
+\FloatBarrier
 \input{sections/study3-appendix}
 
+\FloatBarrier
 \input{sections/app-runs}
 
+\FloatBarrier
+\begin{sloppypar}
 \input{shared/app-repro}
+\end{sloppypar}
 
 \end{document}

@@ -69,6 +69,47 @@ probability of a positive day as a function of the ninth decile when every decil
 \label{fig:floor}
 \end{figure}
 
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{The four panels and their registered designs. Horizons are in days; every family is tested with
+one Benjamini-Hochberg adjustment at $q = 0.05$. The npm and NYC 311 strata are the context zero fraction
+over the 90 days before the first cutoff; the GitHub strata are the archive watch events in the first 90 days
+after creation.}
+\label{tab:panels}
+\begin{tabular}{P{1.9cm}P{3.5cm}P{2.8cm}P{2.8cm}P{3.5cm}}
+\toprule
+Panel & Frame and sampling & Strata and series & Calendar & Family \\
+\midrule
+GitHub stars (Study 1) & 148,550 repositories created 2023-01-01 to 2025-02-21 with at least 20 watch events in their first 90 days; seeded random order within strata & 20 to 99, 100 to 999, at least 1,000 events; 300 series, 100 per stratum; 470 skipped as no longer public & cutoffs 2025-12-05, 2026-03-05, 2026-06-03; horizons 7, 30, 90; endpoint 2026-08-31 & 18 tests: three models against \lm{} and \aets{} at three horizons \\
+npm downloads (Study 2) & 4,486,927 names; hash-ordered walk to 10,000 eligible, 9,998 complete & dense 100, sparse 100, very sparse 9; 209 series & cutoffs 2026-06-03, 2026-07-03, 2026-08-02; horizons 7, 30; endpoint 2026-08-31 & E01 to E18: hurdle against control, hurdle against \hc{}, raw against \lm{}, pooled over 209 series \\
+Synthetic grid (Study 2) & $z \in \{0.2, 0.8, 0.95\}$, $\mu_{+} \in \{1, 5, 25\}$, $\rho \in \{0, 0.8\}$; seeded & 18 cells, 30 replicates; 540 series of 270 days & origins 180, 210, 240; horizons 7, 30 & S01 to S06 at horizon 30: hurdle against control and against \hc{}, pooled over cells \\
+NYC 311 requests (Study 3) & 8,469 problem-by-board cells of the 2024 inventory; whole frame in hash order & dense, sparse, very sparse; 300 series, 100 per stratum & Study 2's calendar & R01 to R36: per stratum, dynamic hurdle against control (T1) and against the empirical hurdle (T2) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{The registration ledger: the protocol and every dated addition, in order. ``Decided'' says whether
+the change was decided before any target value of the study it touches was read.}
+\label{tab:ledger}
+\begin{tabular}{lllP{5.2cm}P{2.5cm}P{2.3cm}}
+\toprule
+Item & Date & Commit & What changed & Decided & Tests touched \\
+\midrule
+Study 1 & 2026-09-12 & \texttt{5f01769} & The protocol: frame, calendar, models, score, inference & before any target & 18 \\
+Study 2 & 2026-09-14 & \texttt{df55867} & The occurrence test and the positive-law test on three domains, the grid, the October holdout & before any Study 2 target & 54, 6 and 18 \\
+1 & 2026-10-12 & \texttt{8db0d73} & The October holdout reported as not run: its freeze passed with nothing frozen & before any Study 2 target & H01 to H18, not run \\
+2 & 2026-10-12 & \texttt{8db0d73} & The npm readiness clock reset once, to 2026-10-20 & before any Study 2 target & none \\
+3 & 2026-10-12 & \texttt{8db0d73} & The external family fixed at E01 to E18; NYC 311 and Wikipedia deferred & before any Study 2 target & E19 to E54 deferred \\
+4 & drafted 2026-10-12 & none & A November prospective round, never appended & not registered & none \\
+5 & 2026-10-15 & \texttt{5be2ce9} & The discrete CRPS recorded as unavailable when its bound is not certified & before any Study 2 target & none (a secondary) \\
+6 & 2026-10-16 & \texttt{1c09ac8} & npm's three served zero days scored as served; a sensitivity reported beside them & after the npm scores & E01 to E18 unchanged; Appendix~\ref{app:s2tables} \\
+7 & 2026-10-16 & \texttt{3357d77} & Study 3: the regime family on NYC 311 with the dynamic hurdle, the empirical hurdle and the fourth cell & before any Study 3 target & R01 to R36 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{The scores.} The registered primary of all three studies is \qs{}, twice the mean pinball loss
 over the nine deciles $\tau \in \{0.1, \dots, 0.9\}$ and the $h$ target days,
 $\qs{} = \frac{2}{9h} \sum_{t} \sum_{\tau} \max\{\tau (y_t - q_{t,\tau}), (\tau - 1)(y_t - q_{t,\tau})\}$,
@@ -99,25 +140,6 @@ Benjamini-Hochberg adjustment at $q = 0.05$ over each family. The mean and the t
 The side the rank sums favor, where reported, is a reading beside the median's sign that the registration
 does not make.
 
-\begin{table}[t]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
-\caption{The four panels and their registered designs. Horizons are in days; every family is tested with
-one Benjamini-Hochberg adjustment at $q = 0.05$. The npm and NYC 311 strata are the context zero fraction
-over the 90 days before the first cutoff; the GitHub strata are the archive watch events in the first 90 days
-after creation.}
-\label{tab:panels}
-\begin{tabular}{p{1.9cm}p{3.5cm}p{2.8cm}p{2.8cm}p{3.5cm}}
-\toprule
-Panel & Frame and sampling & Strata and series & Calendar & Family \\
-\midrule
-GitHub stars (Study 1) & 148,550 repositories created 2023-01-01 to 2025-02-21 with at least 20 watch events in their first 90 days; seeded random order within strata & 20 to 99, 100 to 999, at least 1,000 events; 300 series, 100 per stratum; 470 skipped as no longer public & cutoffs 2025-12-05, 2026-03-05, 2026-06-03; horizons 7, 30, 90; endpoint 2026-08-31 & 18 tests: three models against \lm{} and \aets{} at three horizons \\
-npm downloads (Study 2) & 4,486,927 names; hash-ordered walk to 10,000 eligible, 9,998 complete & dense 100, sparse 100, very sparse 9; 209 series & cutoffs 2026-06-03, 2026-07-03, 2026-08-02; horizons 7, 30; endpoint 2026-08-31 & E01 to E18: hurdle against control, hurdle against \hc{}, raw against \lm{}, pooled over 209 series \\
-Synthetic grid (Study 2) & $z \in \{0.2, 0.8, 0.95\}$, $\mu_{+} \in \{1, 5, 25\}$, $\rho \in \{0, 0.8\}$; seeded & 18 cells, 30 replicates; 540 series of 270 days & origins 180, 210, 240; horizons 7, 30 & S01 to S06 at horizon 30: hurdle against control and against \hc{}, pooled over cells \\
-NYC 311 requests (Study 3) & 8,469 problem-by-board cells of the 2024 inventory; whole frame in hash order & dense, sparse, very sparse; 300 series, 100 per stratum & Study 2's calendar & R01 to R36: per stratum, dynamic hurdle against control (T1) and against the empirical hurdle (T2) \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 \paragraph{The registration ledger.} Table~\ref{tab:ledger} lists every dated change to the protocol since
 Study 1 was registered, with whether each was decided before any target of the study it touches was read.
 The three lapses of 2026-10-12 have one cause, that no work was done in the repository between 2026-09-14
@@ -127,25 +149,3 @@ were seen: three days on which the npm download API served zero for every series
 the sensitivity without them is reported beside the registered result (Appendix~\ref{app:s2tables}). Two
 further protocol sections, a birth-cohort census and a bounded fine-tune, are open and touch no test of this
 paper.
-
-\begin{table}[t]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
-\caption{The registration ledger: the protocol and every dated addition, in order. ``Decided'' says whether
-the change was decided before any target value of the study it touches was read.}
-\label{tab:ledger}
-\begin{tabular}{lllp{5.2cm}p{2.5cm}p{2.3cm}}
-\toprule
-Item & Date & Commit & What changed & Decided & Tests touched \\
-\midrule
-Study 1 & 2026-09-12 & \texttt{5f01769} & The protocol: frame, calendar, models, score, inference & before any target & 18 \\
-Study 2 & 2026-09-14 & \texttt{df55867} & The occurrence test and the positive-law test on three domains, the grid, the October holdout & before any Study 2 target & 54, 6 and 18 \\
-1 & 2026-10-12 & \texttt{8db0d73} & The October holdout reported as not run: its freeze passed with nothing frozen & before any Study 2 target & H01 to H18, not run \\
-2 & 2026-10-12 & \texttt{8db0d73} & The npm readiness clock reset once, to 2026-10-20 & before any Study 2 target & none \\
-3 & 2026-10-12 & \texttt{8db0d73} & The external family fixed at E01 to E18; NYC 311 and Wikipedia deferred & before any Study 2 target & E19 to E54 deferred \\
-4 & drafted 2026-10-12 & none & A November prospective round, never appended & not registered & none \\
-5 & 2026-10-15 & \texttt{5be2ce9} & The discrete CRPS recorded as unavailable when its bound is not certified & before any Study 2 target & none (a secondary) \\
-6 & 2026-10-16 & \texttt{1c09ac8} & npm's three served zero days scored as served; a sensitivity reported beside them & after the npm scores & E01 to E18 unchanged; Appendix~\ref{app:s2tables} \\
-7 & 2026-10-16 & \texttt{3357d77} & Study 3: the regime family on NYC 311 with the dynamic hurdle, the empirical hurdle and the fourth cell & before any Study 3 target & R01 to R36 \\
-\bottomrule
-\end{tabular}
-\end{table}

@@ -35,7 +35,7 @@ context-only regime labeler assigned 320 windows from 140 repositories to ``inac
 from 228 repositories to ``other active'', and 8 windows from 7 repositories to ``recent surge''; the surge
 regime is too thin to say anything about bursts.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize
 \caption{The achieved panel by day-90 stratum: the frame size, the accepted and skipped counts, the median
 and the 10th and 90th percentiles of the survivor ratio, the number of repositories with no star from
@@ -70,7 +70,7 @@ AutoETS (Table~\ref{tab:calibration}); on discrete counts a correct quantile can
 so these are descriptive. AutoETS's median 90-day daily interval width is 0.79 stars per day in the smallest
 stratum, 3.60 in the middle one and 49.69 in the top one (Table~\ref{tab:autoets}).
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The nine declared comparisons against \lm{}. Differences are model minus reference \qs{}, averaged
 over three windows within repository and then over 300 repositories; negative favors the model. The interval
@@ -95,7 +95,7 @@ TimesFM 2.5 & 90 & -0.112 & [-0.285, 0.001] & 0.0041 & 46 & 0.153 & $1.9 \times 
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The nine declared comparisons against \aets{}, with the same columns as Table~\ref{tab:lm}.}
 \label{tab:ae}
@@ -116,7 +116,7 @@ TimesFM 2.5 & 90 & -6.735 & [-13.339, -2.871] & -0.2809 & 297 & 0.990 & $3.2 \ti
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig-paired-differences}
 \caption{The 18 declared comparisons. Filled circles: mean difference (model minus reference \qs{}) with its
@@ -138,7 +138,7 @@ of the panel and its largest part is overprediction on positive days, with a zer
 and $-0.777$. Figure~\ref{fig:zerofraction} places each repository by its context zero fraction: against the
 local mean the large model gains are at low zero fractions and the small model losses cluster at high ones.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{Post-hoc. The mean difference against \lm{} and its three parts, model minus reference; negative
 favors the model. The parts sum to the total.}

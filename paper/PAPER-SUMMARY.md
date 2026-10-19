@@ -123,23 +123,35 @@ the models.
 - The npm means are statements about one series (7.6 million downloads a day); the very sparse NYC 311
   means ride on one series; the paper says so where it prints them.
 
-### What could not be verified
+### The build and the length
 
-- No TeX compiler or pandoc is on this machine, so there is no PDF and no page count; the static checks
-  (every input present, braces and environments balanced, every label referenced, every citation in the
-  bibliography, every tabular row with its column count, every figure file present, no eaten command) passed.
-- The table widths are estimates from the Computer Modern metrics, good to a few percent: Table 4 about 416
-  pt (433 by the cruder estimate) against 461 after the header change, Table 5 about 442 (460); the five
-  appendix tables the review named at 396 (412), 451, 449, 452 and 450; Tables 1 to 3 at 448, 460 and 465,
-  the last within the estimate's error; `tab:s2ext`, `tab:s2syn`, `tab:s2cells`, `tab:s3direction` and
-  `tab:s3brier` at 466 to 472 by this estimate, also within its error. Table 4 is to be read from the first
-  build's log.
+- Both documents were built on 2026-10-18 with MiKTeX 25.12 (pdfTeX 1.40.28), each from a clean folder
+  under the ignored `data/cache/build/`: `pdflatex`, `bibtex`, then `pdflatex` three times for the paper and
+  twice for the report. Neither log holds an error, an undefined reference or citation, or a missing figure.
+  MiKTeX fetched 20 packages on first use: geometry, booktabs, natbib, kvsetkeys, kvdefinekeys, pdfescape,
+  ltxcmds, infwarerr, hycolor, refcount, gettitlestring, kvoptions, stringenc, intcalc, bitset, bigintcalc,
+  rerunfilecheck and uniquecounter for the report, and placeins and xurl for the paper's layout.
+- The paper builds with pdfLaTeX to 53 pages on A4: the body, Sections 1 to 10, fills pages 1 to 14 and the
+  top sixth of page 15, with Tables 4 and 5 a full page each; the references fill pages 15 to 18; the
+  appendix fills pages 19 to 53. The Study 1 report builds to 13 pages: body to about two thirds of page 8,
+  references to page 9, appendix pages 10 to 13.
+- Widths: no line or table of the paper runs past the text width by more than 5 pt. Three run past by less:
+  Table 5 by 2.5 pt, `tab:s2cells` by 1.3 pt and `tab:s3direction` by 0.8 pt. The report's log holds seven
+  lines 72 to 172 pt past the margin, each an unbroken commit hash, file hash or path in its frozen text; the
+  paper sets the two appendix passages it shares with the report without them.
 - By the revision's method (the expanded paper before `\appendix` with comments, floats and commands removed,
   captions counted apart) the body holds 7,495 words of running text, 1,049 words of captions, five tables and
-  four figures; at 900 words a page and half a page a float that is about 12.8 pages, and about 13.8 if the
-  two full-page tables are counted as a page each. The move of the two-readings paragraph took about 230
-  words out of the body and the review's fixes put about as many back; the aim was about 7,000 words, and the
-  cut is the author's.
+  four figures; the method now counts 7,505, the ten more being tokens of the float settings added to the
+  preamble. The word-count estimate was 12.8 pages, or 13.8 with the two full-page tables counted whole; the
+  build gives about 14.2 pages before the references. The aim was about 7,000 words, and the cut is the
+  author's.
+- The itemize bullets and one dollar sign are set from a bitmap font, because this MiKTeX has no Type 1 version
+  of the text-companion font, and the figures embed Type 3 fonts from matplotlib.
+
+### What could not be verified
+
+- The page count under TMLR's own style file: no TMLR template is under `paper/`, so it is unknown until
+  the paper is set in it.
 - The completion-floor counts (580, 544 and 588 at the first lead; 561, 505 and 572 at every lead; 150, 62
   and 230; 2, 0 and 0), the all-zero tie classification (71 to 87) and the dynamic hurdle's fallback counts
   (58 series at 0.5/29 and 16 at 1.5/29 at the first origin) are computed from the 300 NYC 311 checkpoints,

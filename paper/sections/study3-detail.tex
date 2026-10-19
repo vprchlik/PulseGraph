@@ -9,6 +9,7 @@
 \section{Study 3: the design and the panel, the remaining detail}
 \label{app:s3detail}
 
+\begin{sloppypar}
 \paragraph{Registration.} Study 3 was registered on 2026-10-16 as item 7 of the protocol's dated additions,
 at commit \texttt{3357d779db28cffa4048e7e333fd02b9434b4b6d} (full protocol SHA-256 with the addition
 \texttt{05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29}), appended on top of commit
@@ -28,6 +29,7 @@ empirical hurdle, whose positive law can fit a dense series. What Study 3 does n
 the registration covers: it tests no Markov occurrence estimate, adds no overdispersed cell to the grid,
 says nothing about Wikipedia pageviews, and leaves the npm very sparse stratum, with its nine series, as
 Study 2 left it.
+\end{sloppypar}
 
 \paragraph{Domain, frame and strata.} The series key is the problem type by community board, enumerated
 from the frozen 2024 inventory of 9,496 cells captured on 2026-09-14, of which 8,469 carry a recognized
@@ -111,7 +113,7 @@ apart from any score: no dense series at any origin, 4 to 8 of the 100 sparse se
 100 very sparse series, of which 54 to 58 have no request day in the last 28 and 15 to 19 none in the whole
 context.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The contexts at each origin: the series with an all-zero context, with no request day in the last
 28 context days, and with fewer than two request days in the last 28, where \emph{hurdle\_dynamic} equals
@@ -165,7 +167,7 @@ and captured 2,959,469 requests: 2,902,433 in frame cells, 49,356 with a missing
 problem and 7,680 in recognized cells outside the frame; the smallest day held 6,216 requests, on
 2025-12-25, and the largest 22,805, on 2026-02-24. Table~\ref{tab:s3panel} gives the strata.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The achieved NYC 311 panel by context-zero-fraction stratum, computed on 2026-03-05 to 2026-06-02
 over the 8,469 cells of the frame: the complete candidates, the series taken, the unfilled slots, and the

@@ -18,7 +18,7 @@ direction of every test is read from the paired table, the median's sign and the
 nonzero differences, which reproduce every raw $p$ exactly (Table~\ref{tab:s3direction}); a median of exactly
 zero has no sign under the registered rule, and the side the rank sums favor is a reading beside it.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The confirmatory family of Study 3, R01 to R36, in its registered order: for each stratum of 100
 series, each model and each horizon, T1 is the model's \emph{hurdle\_dynamic} against its own completed
@@ -100,7 +100,7 @@ R36 & very sparse & TimesFM 2.5 & 30 & T2 & 0.06102 & 0.06132 & -0.0003037 & [-0
 \end{tabular}
 \end{sidewaystable}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig-s3-nyc311-family}
 \caption{The thirty-six tests of Study 3: the mean difference, \emph{hurdle\_dynamic} minus reference
@@ -111,6 +111,56 @@ drawn on the zero line is exactly zero.}
 \label{fig:s3family}
 \end{figure}
 
+
+\begin{table}[htbp]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{The direction of each family test, from the paired table: exact ties, nonzero differences, the
+rank sum of the series where \emph{hurdle\_dynamic} is lower and of those where the reference is lower, the
+side the larger sum favors, and the raw two-sided signed-rank $p$ recomputed from the differences.}
+\label{tab:s3direction}
+\begin{tabular}{llrrrrll}
+\toprule
+ID & Stratum & Ties & Nonzero & Rank sum, variant lower & Rank sum, reference lower & Larger sum favors & Raw $p$ \\
+\midrule
+R01 & dense & 1 & 99 & 1,713.5 & 3,236.5 & reference & 0.00786 \\
+R02 & dense & 1 & 99 & 4,144.0 & 806.0 & hurdle\_dynamic & $5.7 \times 10^{-9}$ \\
+R03 & dense & 2 & 98 & 1,737.0 & 3,114.0 & reference & 0.0147 \\
+R04 & dense & 0 & 100 & 4,744.0 & 306.0 & hurdle\_dynamic & $2.35 \times 10^{-14}$ \\
+R05 & dense & 2 & 98 & 1,204.0 & 3,647.0 & reference & $1.5 \times 10^{-5}$ \\
+R06 & dense & 0 & 100 & 4,173.5 & 876.5 & hurdle\_dynamic & $1.44 \times 10^{-8}$ \\
+R07 & dense & 0 & 100 & 1,217.0 & 3,833.0 & reference & $6.88 \times 10^{-6}$ \\
+R08 & dense & 0 & 100 & 4,665.0 & 385.0 & hurdle\_dynamic & $1.87 \times 10^{-13}$ \\
+R09 & dense & 2 & 98 & 1,200.0 & 3,651.0 & reference & $1.41 \times 10^{-5}$ \\
+R10 & dense & 0 & 100 & 4,303.5 & 746.5 & hurdle\_dynamic & $9.65 \times 10^{-10}$ \\
+R11 & dense & 0 & 100 & 942.5 & 4,107.5 & reference & $5.29 \times 10^{-8}$ \\
+R12 & dense & 0 & 100 & 4,666.5 & 383.5 & hurdle\_dynamic & $1.8 \times 10^{-13}$ \\
+R13 & sparse & 13 & 87 & 2,064.0 & 1,764.0 & hurdle\_dynamic & 0.526 \\
+R14 & sparse & 15 & 85 & 2,200.5 & 1,454.5 & hurdle\_dynamic & 0.102 \\
+R15 & sparse & 12 & 88 & 2,179.5 & 1,736.5 & hurdle\_dynamic & 0.357 \\
+R16 & sparse & 15 & 85 & 2,331.0 & 1,324.0 & hurdle\_dynamic & 0.0274 \\
+R17 & sparse & 23 & 77 & 1,658.5 & 1,344.5 & hurdle\_dynamic & 0.425 \\
+R18 & sparse & 16 & 84 & 2,303.5 & 1,266.5 & hurdle\_dynamic & 0.0208 \\
+R19 & sparse & 20 & 80 & 1,349.5 & 1,890.5 & reference & 0.194 \\
+R20 & sparse & 18 & 82 & 2,423.0 & 980.0 & hurdle\_dynamic & 0.00085 \\
+R21 & sparse & 8 & 92 & 2,933.5 & 1,344.5 & hurdle\_dynamic & 0.00198 \\
+R22 & sparse & 17 & 83 & 2,228.5 & 1,257.5 & hurdle\_dynamic & 0.0275 \\
+R23 & sparse & 11 & 89 & 2,518.0 & 1,487.0 & hurdle\_dynamic & 0.0349 \\
+R24 & sparse & 17 & 83 & 2,457.5 & 1,028.5 & hurdle\_dynamic & 0.00118 \\
+R25 & very sparse & 88 & 12 & 12.0 & 66.0 & reference & 0.0342 \\
+R26 & very sparse & 75 & 25 & 223.0 & 102.0 & hurdle\_dynamic & 0.103 \\
+R27 & very sparse & 82 & 18 & 101.0 & 70.0 & hurdle\_dynamic & 0.5 \\
+R28 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
+R29 & very sparse & 84 & 16 & 61.0 & 75.0 & reference & 0.717 \\
+R30 & very sparse & 75 & 25 & 212.0 & 113.0 & hurdle\_dynamic & 0.182 \\
+R31 & very sparse & 72 & 28 & 252.0 & 154.0 & hurdle\_dynamic & 0.264 \\
+R32 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
+R33 & very sparse & 87 & 13 & 17.0 & 74.0 & reference & 0.0463 \\
+R34 & very sparse & 75 & 25 & 223.0 & 102.0 & hurdle\_dynamic & 0.103 \\
+R35 & very sparse & 86 & 14 & 56.0 & 49.0 & hurdle\_dynamic & 0.826 \\
+R36 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \paragraph{The run.} The run started 2026-10-17 03:47 UTC at the implementation commit, after the signed
 readiness and the gate (Appendix~\ref{app:s3detail}), and completed its 300 series in one invocation at
@@ -179,56 +229,6 @@ average ranks for ties, split by sign; the larger sum names the side the signed-
 $p$-value recomputed from these differences, two-sided and approximate with the zeros omitted, equals the
 saved one in every row.
 
-\begin{table}[h]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
-\caption{The direction of each family test, from the paired table: exact ties, nonzero differences, the
-rank sum of the series where \emph{hurdle\_dynamic} is lower and of those where the reference is lower, the
-side the larger sum favors, and the raw two-sided signed-rank $p$ recomputed from the differences.}
-\label{tab:s3direction}
-\begin{tabular}{llrrrrll}
-\toprule
-ID & Stratum & Ties & Nonzero & Rank sum, variant lower & Rank sum, reference lower & Larger sum favors & Raw $p$ \\
-\midrule
-R01 & dense & 1 & 99 & 1,713.5 & 3,236.5 & reference & 0.00786 \\
-R02 & dense & 1 & 99 & 4,144.0 & 806.0 & hurdle\_dynamic & $5.7 \times 10^{-9}$ \\
-R03 & dense & 2 & 98 & 1,737.0 & 3,114.0 & reference & 0.0147 \\
-R04 & dense & 0 & 100 & 4,744.0 & 306.0 & hurdle\_dynamic & $2.35 \times 10^{-14}$ \\
-R05 & dense & 2 & 98 & 1,204.0 & 3,647.0 & reference & $1.5 \times 10^{-5}$ \\
-R06 & dense & 0 & 100 & 4,173.5 & 876.5 & hurdle\_dynamic & $1.44 \times 10^{-8}$ \\
-R07 & dense & 0 & 100 & 1,217.0 & 3,833.0 & reference & $6.88 \times 10^{-6}$ \\
-R08 & dense & 0 & 100 & 4,665.0 & 385.0 & hurdle\_dynamic & $1.87 \times 10^{-13}$ \\
-R09 & dense & 2 & 98 & 1,200.0 & 3,651.0 & reference & $1.41 \times 10^{-5}$ \\
-R10 & dense & 0 & 100 & 4,303.5 & 746.5 & hurdle\_dynamic & $9.65 \times 10^{-10}$ \\
-R11 & dense & 0 & 100 & 942.5 & 4,107.5 & reference & $5.29 \times 10^{-8}$ \\
-R12 & dense & 0 & 100 & 4,666.5 & 383.5 & hurdle\_dynamic & $1.8 \times 10^{-13}$ \\
-R13 & sparse & 13 & 87 & 2,064.0 & 1,764.0 & hurdle\_dynamic & 0.526 \\
-R14 & sparse & 15 & 85 & 2,200.5 & 1,454.5 & hurdle\_dynamic & 0.102 \\
-R15 & sparse & 12 & 88 & 2,179.5 & 1,736.5 & hurdle\_dynamic & 0.357 \\
-R16 & sparse & 15 & 85 & 2,331.0 & 1,324.0 & hurdle\_dynamic & 0.0274 \\
-R17 & sparse & 23 & 77 & 1,658.5 & 1,344.5 & hurdle\_dynamic & 0.425 \\
-R18 & sparse & 16 & 84 & 2,303.5 & 1,266.5 & hurdle\_dynamic & 0.0208 \\
-R19 & sparse & 20 & 80 & 1,349.5 & 1,890.5 & reference & 0.194 \\
-R20 & sparse & 18 & 82 & 2,423.0 & 980.0 & hurdle\_dynamic & 0.00085 \\
-R21 & sparse & 8 & 92 & 2,933.5 & 1,344.5 & hurdle\_dynamic & 0.00198 \\
-R22 & sparse & 17 & 83 & 2,228.5 & 1,257.5 & hurdle\_dynamic & 0.0275 \\
-R23 & sparse & 11 & 89 & 2,518.0 & 1,487.0 & hurdle\_dynamic & 0.0349 \\
-R24 & sparse & 17 & 83 & 2,457.5 & 1,028.5 & hurdle\_dynamic & 0.00118 \\
-R25 & very sparse & 88 & 12 & 12.0 & 66.0 & reference & 0.0342 \\
-R26 & very sparse & 75 & 25 & 223.0 & 102.0 & hurdle\_dynamic & 0.103 \\
-R27 & very sparse & 82 & 18 & 101.0 & 70.0 & hurdle\_dynamic & 0.5 \\
-R28 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
-R29 & very sparse & 84 & 16 & 61.0 & 75.0 & reference & 0.717 \\
-R30 & very sparse & 75 & 25 & 212.0 & 113.0 & hurdle\_dynamic & 0.182 \\
-R31 & very sparse & 72 & 28 & 252.0 & 154.0 & hurdle\_dynamic & 0.264 \\
-R32 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
-R33 & very sparse & 87 & 13 & 17.0 & 74.0 & reference & 0.0463 \\
-R34 & very sparse & 75 & 25 & 223.0 & 102.0 & hurdle\_dynamic & 0.103 \\
-R35 & very sparse & 86 & 14 & 56.0 & 49.0 & hurdle\_dynamic & 0.826 \\
-R36 & very sparse & 77 & 23 & 253.0 & 23.0 & hurdle\_dynamic & 0.000464 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 \paragraph{The family's pairs on the occurrence Brier score.} Table~\ref{tab:s3brier} gives the 36 pairs
 on the occurrence Brier score, declared secondary and unadjusted, with the same aggregation; where
 \emph{hurdle\_dynamic} shares the reference's occurrence rule there is no difference to read, and in the T2
@@ -237,7 +237,7 @@ series the dynamic occurrence is worse than the model's own in every T1 row, wit
 zero; on the very sparse series it is better for 68 to 82 of the 100 series in every T1 row while the means
 stay within 0.0013 of zero; on the sparse series the rows split.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\scriptsize\setlength{\tabcolsep}{2.4pt}
 \caption{The 36 family pairs on the occurrence Brier score, \emph{hurdle\_dynamic} minus reference, declared
 secondary and unadjusted; negative favors \emph{hurdle\_dynamic}. Columns as in Table~\ref{tab:s3family},
@@ -245,7 +245,7 @@ with the raw two-sided signed-rank $p$.}
 \label{tab:s3brier}
 \begin{tabular}{llllcrcrcl}
 \toprule
-ID & Stratum & Model & $h$ & Contrast & Mean difference & 95\% interval & Median & Lower / tied / higher & Raw $p$ \\
+ID & Stratum & Model & $h$ & Contrast & Mean difference & 95\% interval & Median & \begin{tabular}[b]{@{}c@{}}Lower / tied /\\ higher\end{tabular} & Raw $p$ \\
 \midrule
 R01 & dense & Chronos-2 & 7 & T1 & 0.009347 & [0.00366, 0.01535] & 0.001222 & 42 / 0 / 58 & 0.00281 \\
 R02 & dense & Chronos-2 & 7 & T2 & -0.0009351 & [-0.003534, 0.00169] & -0.0002973 & 57 / 0 / 43 & 0.413 \\
@@ -292,7 +292,7 @@ other variants against the completed control within each stratum, declared secon
 fourth cell's rows against the two count hurdles, and every variant's rows on the scaled score and the
 discrete CRPS, are in the results document of the run.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\scriptsize\setlength{\tabcolsep}{2.4pt}
 \caption{Study 2's fixed-occurrence hurdle (\emph{hurdle\_fixed}) and the fourth cell
 (\emph{occurrence\_model\_size\_count}, the model's own occurrence with \hc{}'s positive law) against the
@@ -301,7 +301,7 @@ declared secondary and unadjusted; negative favors the variant.}
 \label{tab:s3variants}
 \begin{tabular}{llllrcrcl}
 \toprule
-Stratum & Model & Variant & $h$ & Mean difference & 95\% interval & Median & Lower / tied / higher & Raw $p$ \\
+Stratum & Model & Variant & $h$ & Mean difference & 95\% interval & Median & \begin{tabular}[b]{@{}c@{}}Lower / tied /\\ higher\end{tabular} & Raw $p$ \\
 \midrule
 dense & Chronos-2 & fixed hurdle & 7 & 0.02145 & [0.006423, 0.03832] & 0.01058 & 39 / 1 / 60 & 0.00867 \\
 dense & Chronos-2 & fourth cell & 7 & 0.2944 & [0.1243, 0.5658] & 0.04127 & 30 / 0 / 70 & $5.19 \times 10^{-8}$ \\
@@ -411,7 +411,7 @@ percent of the total, and -0.002 to -0.027 on overprediction; on npm, post hoc f
 overprediction part carries -2,452 to -3,769 of mean gains of -2,884 to -5,109, the underprediction part -433
 to -1,298 and the zero-day part less than 61 either way.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \caption{The \emph{hurdle\_dynamic}-minus-control \qs{} difference within each stratum and its three exact
 accounting parts, each divided by the full horizon: the loss on zero target days, the loss on positive days
@@ -450,7 +450,7 @@ fraction of the 9,000 target days in each tenth. Every shown forecaster places 0
 days in a tenth; the completed controls' last tenth is thinnest on the very sparse series, 0.064 to 0.075,
 where \emph{hurdle\_dynamic}'s is 0.097 to 0.099.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\scriptsize\setlength{\tabcolsep}{2.4pt}
 \caption{Randomized PIT at horizon 30 by stratum: the fraction of each forecaster's 9,000 target days (100
 series, 3 origins, 30 days) in each tenth of the unit interval, for the completed control and
