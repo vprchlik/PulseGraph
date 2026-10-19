@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-19 03:38 UTC. This page holds only what is current.
+Last rewritten 2026-10-19 05:23 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -51,7 +51,8 @@ day.
 | The review's fixes: the thesis with its exceptions named, the nine sentences, the broken reference, the table widths, the two-readings paragraph to the appendix, the summary | done 2026-10-18 06:00 UTC: every verdict applied, 1,431 checks, no table entry changed; awaiting the commit | the commit | done |
 | Both documents built for the first time: the logs read, overfull lines fixed in the source, the page counts recorded | done 2026-10-18 08:06 UTC: the paper 53 pages (body about 14), the report 13; awaiting the commit | the commit | done |
 | Release preparation: the asset manifest with hashes and a verifier, the three checkpoint archives, the daily counts committed, README's first screen, the posting checklist | done 2026-10-18 07:40 UTC; awaiting the commit | the commit | done |
-| Both documents prepared for posting: the report's layout line, the paper's data statement, the font package, the TMLR count | the commit above | his word for the font package; the TMLR template downloaded into `paper/tmlr/` if the count is wanted before posting day | 2026-10-19 |
+| Both documents prepared for posting: the report's layout line, the paper's data statement, the font package, the TMLR count | done 2026-10-19 04:11 UTC: the report's log clean, the data statement true against the tree, the bitmap font gone; no TMLR template on disk; awaiting the commit | the commit | done |
+| Posting day: the release URLs and the DOIs written into the tree with the checker changed in the same commit, the NYC 311 data statement completed, the final builds | the release created and the report's DOI reserved | the release URL and the verifier's six lines; the reserved DOI | 2026-10-22 |
 | The GitHub release: six assets uploaded in the checklist's order, the URLs pasted back and recorded in the tree | the commit above | the upload, in person | 2026-10-21 |
 | The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the fixes | his read, the PDF route (the first build's log is the only check on the table widths), the posting and the submission | 2026-10-31 |
 
@@ -72,15 +73,15 @@ Every spend is approved by the author in his own words before it happens. Nothin
 | BigQuery | none before the paper (the birth-cohort census is deferred) | 0 | 0 | not asked |
 | NYC Open Data (SODA, anonymous) | the Study 3 context pull, done (276 attempts, 19 minutes); the 90 target days, done (106 attempts in two invocations, 17 minutes: 16 throttled answers at one request a second, none at three); the terms, three scripted requests (a redirect, a refusal, one unsent) and two page reads in a browser | done | 0 | the context pull approved 2026-10-16 (330 attempts, 3 hours); the targets 2026-10-17 (100, then 120 attempts); the terms 2026-10-17 (three scripted requests, then three browser reads) |
 | Zenodo, TMLR | posting and submission | 0 | 0 | the author posts |
-| PDF build | pandoc 3.12.1 and MiKTeX 25.12, installed 2026-10-18; MiKTeX fetched twenty packages on first use | 0 | 0 | done; the font package `cm-super` needs the author's word |
+| PDF build | pandoc 3.12.1 and MiKTeX 25.12, installed 2026-10-18; MiKTeX fetched twenty packages on first use and the font package `cm-super` on 2026-10-19 with the author's word | 0 | 0 | done |
 
 ## Open with the author
 
 1. **Posting route, decided 2026-10-13.** Zenodo for the report. The paper goes to Zenodo as version 2 and to
    TMLR; arXiv as well only if an endorser is found (the author is asking this week).
-2. **PDF build, done 2026-10-18.** pandoc and MiKTeX are installed and both documents build. Open: the font package
-   for the bullets (one package, with the author's word) and the TMLR template (a download into `paper/tmlr/`), which
-   alone gives the page count the venue will see.
+2. **PDF build, done 2026-10-18.** pandoc and MiKTeX are installed, both documents build, and the fonts are settled.
+   Open: the TMLR template (a download into `paper/tmlr/`), which alone gives the page count the venue will see, and
+   which says whether the submission must be anonymized.
 3. **The v1 computer.** The write-up's first half leans on the preserved v1 documents; the v1 result artifacts
    exist only on the computer no longer in use. Is it reachable before 2026-10-24? If not, the report says the
    v1 numbers were not recomputed, as the protocol already requires.
