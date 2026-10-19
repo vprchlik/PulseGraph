@@ -125,28 +125,35 @@ the models.
 
 ### The build and the length
 
-- Both documents were built on 2026-10-18 with MiKTeX 25.12 (pdfTeX 1.40.28), each from a clean folder
-  under the ignored `data/cache/build/`: `pdflatex`, `bibtex`, then `pdflatex` three times for the paper and
-  twice for the report. Neither log holds an error, an undefined reference or citation, or a missing figure.
-  MiKTeX fetched 20 packages on first use: geometry, booktabs, natbib, kvsetkeys, kvdefinekeys, pdfescape,
-  ltxcmds, infwarerr, hycolor, refcount, gettitlestring, kvoptions, stringenc, intcalc, bitset, bigintcalc,
-  rerunfilecheck and uniquecounter for the report, and placeins and xurl for the paper's layout.
+- Both documents were built on 2026-10-18 and rebuilt on 2026-10-19 with MiKTeX 25.12 (pdfTeX 1.40.28),
+  each from a clean folder under the ignored `data/cache/build/`: `pdflatex`, `bibtex`, then `pdflatex`
+  three times for the paper and twice for the report. Neither log holds an error, an undefined reference or
+  citation, or a missing figure. MiKTeX fetched 20 packages on first use: geometry, booktabs, natbib,
+  kvsetkeys, kvdefinekeys, pdfescape, ltxcmds, infwarerr, hycolor, refcount, gettitlestring, kvoptions,
+  stringenc, intcalc, bitset, bigintcalc, rerunfilecheck and uniquecounter for the report, and placeins and
+  xurl for the paper's layout. The font package cm-super was installed on 2026-10-19 with the author's
+  approval, for the text-companion symbols.
 - The paper builds with pdfLaTeX to 53 pages on A4: the body, Sections 1 to 10, fills pages 1 to 14 and the
-  top sixth of page 15, with Tables 4 and 5 a full page each; the references fill pages 15 to 18; the
+  top fifth of page 15, with Tables 4 and 5 a full page each; the references fill pages 15 to 18; the
   appendix fills pages 19 to 53. The Study 1 report builds to 13 pages: body to about two thirds of page 8,
-  references to page 9, appendix pages 10 to 13.
+  references to the top of page 10, appendix pages 10 to 13.
 - Widths: no line or table of the paper runs past the text width by more than 5 pt. Three run past by less:
-  Table 5 by 2.5 pt, `tab:s2cells` by 1.3 pt and `tab:s3direction` by 0.8 pt. The report's log holds seven
-  lines 72 to 172 pt past the margin, each an unbroken commit hash, file hash or path in its frozen text; the
-  paper sets the two appendix passages it shares with the report without them.
+  Table 5 by 2.5 pt, `tab:s2cells` by 1.3 pt and `tab:s3direction` by 0.8 pt. The report is set with
+  `\sloppy`, one layout line after `\begin{document}`, so the seven lines of its frozen text that ran 72 to
+  172 pt past the margin, each an unbroken commit hash, file hash or path, now break inside it; its log holds
+  no overfull box and 13 loose lines, nine in those paragraphs and the four in the bibliography it had
+  before. Its wording is unchanged: the checker's comparison with `f325a67` allows that one line beside the
+  dated sentence. The paper sets the two appendix passages it shares with the report in `sloppypar`.
 - By the revision's method (the expanded paper before `\appendix` with comments, floats and commands removed,
-  captions counted apart) the body holds 7,495 words of running text, 1,049 words of captions, five tables and
-  four figures; the method now counts 7,505, the ten more being tokens of the float settings added to the
-  preamble. The word-count estimate was 12.8 pages, or 13.8 with the two full-page tables counted whole; the
-  build gives about 14.2 pages before the references. The aim was about 7,000 words, and the cut is the
-  author's.
-- The itemize bullets and one dollar sign are set from a bitmap font, because this MiKTeX has no Type 1 version
-  of the text-companion font, and the figures embed Type 3 fonts from matplotlib.
+  captions counted apart) the body holds 7,545 words of running text, 1,049 words of captions, five tables and
+  four figures; the method counts 7,555, the ten more being tokens of the float settings added to the
+  preamble. The running text was 7,495 words until the data statement in Section 9 was rewritten on
+  2026-10-19 to name the committed daily counts and the release assets (50 words more). The word-count
+  estimate was 12.8 pages, or 13.8 with the two full-page tables counted whole; the build gives about 14.2
+  pages before the references. The aim was about 7,000 words, and the cut is the author's.
+- The itemize bullets and the one dollar sign that were set from a bitmap font are set in Type 1 since
+  cm-super was installed; the only Type 3 fonts left in either PDF are those matplotlib embedded in the
+  figures.
 
 ### What could not be verified
 
@@ -159,8 +166,9 @@ the models.
   otherwise.
 - The Chronos citation now names arXiv 2403.07815 version 3, the version the step-back read of 2026-10-17
   opened; its page was not opened again for this revision (no network).
-- The 300, 540, 209 and 300 checkpoints and the daily counts of the npm and NYC 311 series are not released
-  yet; the paper says they are to be released as release assets.
+- Study 1's results file, the 540, 209 and 300 checkpoints and the two target-signals files are not released
+  yet; the paper names them as the release assets listed in `reports/release/ASSETS.md`. The daily counts of
+  the npm and NYC 311 series are committed, and the paper gives their paths.
 
 ### Sentences to read
 
@@ -191,5 +199,5 @@ R36 has 21 of 36 rejections, none against the predicted direction, with 72 to 88
 series tied exactly in each T1 row. On the npm panel of 209 series, without the three served zero days none
 of the eighteen conclusions changes. The post-hoc benchmark of 2026-10-17 placed the TSB hurdle and the fourth
 cell on all three panels under a specification fixed before any of its scores existed. The report's source
-still expands to its frozen commit apart from its one dated sentence, and no entry of any family table
-changed.
+still expands to its frozen commit apart from its one dated sentence and one layout line, and no entry of
+any family table changed.

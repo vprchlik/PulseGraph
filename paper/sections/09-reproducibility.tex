@@ -15,10 +15,14 @@ recomputed from the saved forecasts by a separate script with no disagreement, a
 recomputed from the raw captures by a script that shares no code with the pipeline. Each post-hoc analysis
 has its own directory with its specification, command, outputs and provenance. Not in the tree are the
 checkpoints that hold every forecast, 300 for GitHub (one results file of 433,172,286 bytes), 540 for the
-grid, 209 for npm and 300 for NYC 311, the raw captures, the target signals and the daily counts of the npm
-and NYC 311 series; the checkpoints and the aggregated daily counts are to be released as release assets
-beside the paper, under the data statements of Appendices~\ref{app:s2panel} and~\ref{app:s3detail}, so that
-a fresh clone can rerun every inference, integrity check and post-hoc analysis. The commands are given by
+grid, 209 for npm and 300 for NYC 311, the raw captures and the target signals of the npm and NYC 311
+series; the results file, the 1,049 checkpoints of the grid, npm and NYC 311 runs and the two target-signals
+files are the release assets listed with their sizes and SHA-256 in \texttt{reports/release/ASSETS.md}, so
+that a fresh clone can rerun every inference, integrity check and post-hoc analysis. The aggregated daily
+counts of the npm and NYC 311 series, context and targets, are in the tree, under the data statements of
+Appendices~\ref{app:s2panel} and~\ref{app:s3detail}: \texttt{reports/study2-npm/panel/daily\_counts.csv}
+and \texttt{reports/study3-nyc311/panel/daily\_counts.csv}, each with its provenance file and a test that
+rebuilds it byte for byte. The commands are given by
 reference to each run's results page in Appendix~\ref{app:runs}, with the run record; the number checker
 asserts every figure in this paper against the files it names, and the figure script draws every figure
 from the saved files alone.

@@ -14,6 +14,7 @@ skipped. Run from the repository root:
     .\\.venv\\Scripts\\python.exe paper/check_numbers.py
 """
 
+import hashlib
 import json
 import os
 import re
@@ -2534,6 +2535,10 @@ else:
 expect("design: addition 6 commit", "\\texttt{1c09ac8}", D)
 
 # --- the report still expands to its committed text, apart from the one dated sentence --------
+# and one layout line (added 2026-10-19): \sloppy after \begin{document}, so that the hashes and
+# paths of the frozen text stay inside the margin. No word of the report changes.
+REPORT_LAYOUT_OLD = "\\begin{document}\n\\maketitle\n"
+REPORT_LAYOUT_NEW = "\\begin{document}\n\\sloppy\n\\maketitle\n"
 REPORT_SENTENCE_OLD = (
     "Benjamini-Hochberg correction. As of 2026-10-12, a statement to be re-checked on the posting "
     "day, no Study 2\ntarget value, forecast or score exists; nothing is claimed about its outcome."
@@ -2557,9 +2562,14 @@ except (OSError, subprocess.CalledProcessError):
 else:
     checks += 1
     assert committed_report.count(REPORT_SENTENCE_OLD) == 1
-    if expand(MAIN) != committed_report.replace(REPORT_SENTENCE_OLD, REPORT_SENTENCE_NEW):
+    assert committed_report.count(REPORT_LAYOUT_OLD) == 1
+    allowed_report = committed_report.replace(REPORT_SENTENCE_OLD, REPORT_SENTENCE_NEW).replace(
+        REPORT_LAYOUT_OLD, REPORT_LAYOUT_NEW
+    )
+    if expand(MAIN) != allowed_report:
         failures.append(
-            "main.tex expanded differs from f325a67:paper/main.tex beyond the one dated sentence"
+            "main.tex expanded differs from f325a67:paper/main.tex beyond the one dated sentence "
+            "and the \\sloppy line"
         )
 expect(
     "report: runs made", "ran on 2026-10-15 and are reported in the paper that extends this report"
@@ -4672,6 +4682,66 @@ for q in quotes:
 checks += 1
 if not 1 <= len(quotes) <= 8:
     failures.append(f"PAPER-SUMMARY.md quotes {len(quotes)} sentences; one to eight expected")
+
+# --- the data statement (added 2026-10-19) -----------------------------------------------------
+# The npm and NYC 311 daily counts are committed beside their panels: each file must exist with the
+# byte count and SHA-256 its provenance records, and the paper names it by path. The checkpoints,
+# the target signals and Study 1's results file are the release assets of reports/release/ASSETS.md.
+ASSETS_MD = ROOT / "reports" / "release" / "ASSETS.md"
+assets_md = ASSETS_MD.read_text(encoding="utf-8")
+for panel_dir, files in (
+    (NPM, (PANEL_DETAIL, "09-reproducibility.tex")),
+    (S3_PANEL, ("09-reproducibility.tex",)),
+):
+    counts_prov = load(panel_dir / "daily_counts.provenance.json")["output"]
+    counts_path = ROOT / counts_prov["path"]
+    checks += 1
+    if counts_path != panel_dir / "daily_counts.csv" or not counts_path.is_file():
+        failures.append(
+            f"{counts_prov['path']}: the daily counts named by the paper are not in the tree"
+        )
+    elif counts_path.stat().st_size != counts_prov["bytes"]:
+        failures.append(
+            f"{counts_prov['path']}: {counts_path.stat().st_size} bytes, its provenance records "
+            f"{counts_prov['bytes']}"
+        )
+    elif hashlib.sha256(counts_path.read_bytes()).hexdigest() != counts_prov["sha256"]:
+        failures.append(f"{counts_prov['path']}: its SHA-256 differs from its provenance")
+    expect(
+        f"data statement: {counts_prov['path']}", f"\\texttt{{{esc(counts_prov['path'])}}}", files
+    )
+    assert f"`{counts_prov['path']}` | {counts_prov['bytes']:,} |" in assets_md
+release_checkpoints = sum(
+    len(load(r / "run.json")["completed"]) for r in (SYN_RUN, NPM_RUN, S3_RUN)
+)
+assert release_checkpoints == 540 + 209 + 300
+expect(
+    "data statement: release checkpoints",
+    f"the {release_checkpoints:,} checkpoints",
+    ("09-reproducibility.tex",),
+)
+expect(
+    "data statement: npm checkpoints",
+    f"the {len(load(NPM_RUN / 'run.json')['completed'])} checkpoints",
+    (PANEL_DETAIL,),
+)
+for name in (
+    "results.parquet",
+    "study2-synthetic-2026-10-15-checkpoints.zip",
+    "study2-npm-run-2026-10-15-checkpoints.zip",
+    "study2-npm-targets-signals.parquet",
+    "study3-nyc311-run-2026-10-17-checkpoints.zip",
+    "study3-nyc311-targets-signals.parquet",
+):
+    assert re.search(
+        rf"^\| `{re.escape(name)}` \| [\d,]+ \| `[0-9a-f]{{64}}` \|", assets_md, re.M
+    ), name
+for files in (("09-reproducibility.tex",), (PANEL_DETAIL,)):
+    expect("data statement: the asset list", "\\texttt{reports/release/ASSETS.md}", files)
+for old in ("are to be released as release assets", "are to be published with the paper"):
+    checks += 1
+    if old in TEXT["paper.tex"]:
+        failures.append(f"paper.tex: the data statement still says the daily counts {old}")
 
 # --- the build (added 2026-10-18) --------------------------------------------------------------
 # With a TeX engine on PATH, paper.tex is built from a clean folder under the ignored
