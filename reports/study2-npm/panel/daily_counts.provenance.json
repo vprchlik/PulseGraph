@@ -1,0 +1,44 @@
+{
+  "builder_sha256": "3e15c138152c5e509c6cd9d70d2bae2997251e3da02baf44c4fbf66c6cca54e0",
+  "command": ".\\.venv\\Scripts\\python.exe reports\\release\\build_daily_counts.py npm",
+  "days": {
+    "context": "2025-09-01 to 2026-06-02, from the frozen context",
+    "target": "2026-06-03 to 2026-08-31, from the signals"
+  },
+  "inputs": {
+    "context": {
+      "path": "data/raw/study2/npm/panel/context.parquet",
+      "sha256": "9dbed9ffc6b45fac37472924f450a811a6f088a4757f9c3b0c7c695077324e1b"
+    },
+    "manifest": {
+      "path": "reports/study2-npm/panel/manifest.json",
+      "sha256": "5e05578854e7a85188362e8f492398e4636dea5410fe545e2a752428ee71ad54"
+    },
+    "run_json": {
+      "path": "reports/study2-npm/run-2026-10-15/run.json",
+      "sha256": "e4831b68edd1e36d592be854b4be2e0931c6963952c91a3a3227b1b8a7257efe"
+    },
+    "signals": {
+      "path": "data/raw/study2/npm/targets/signals.parquet",
+      "release_asset": "study2-npm-targets-signals.parquet",
+      "sha256": "c3f4e5437a21587ad38f37cc5dc709424347e721fa228588db118ed07ea0245c"
+    }
+  },
+  "output": {
+    "bytes": 4591019,
+    "columns": [
+      "package",
+      "created_at",
+      "day",
+      "count"
+    ],
+    "first_day": "2025-09-01",
+    "last_day": "2026-08-31",
+    "order": "sorted by package, created_at, day",
+    "path": "reports/study2-npm/panel/daily_counts.csv",
+    "rows": 76285,
+    "series": 209,
+    "sha256": "45a972dec1c9baeb23177b9dd46080015cc63ee71eb51862b96c379d005b54b4"
+  },
+  "statement": "Daily download counts from the npm download-counts API (api.npmjs.org/downloads/range): the context days 2025-09-01 to 2026-06-02 retrieved 2026-10-14 to 2026-10-15 UTC, the target days 2026-06-03 to 2026-08-31 retrieved 2026-10-15 UTC. Package names and creation timestamps are from the npm public registry (registry.npmjs.org, replicate.npmjs.com) as served at acquisition; a name may since have been removed. A download is a tarball request as npm counts it, mirrors, build servers and bots included. npm, Inc. states no licence for the counts, and its Open-Source Terms of 2022-03-10 contain no restriction on their redistribution. The context pull reached npm's rate limit 2,708 times and honoured it. The download API reports 0 for every series on 2026-07-12 and 2026-08-14 and for aggregate-error on 2026-06-25; the counts are as served (PROTOCOL.md, dated addition 6). CC BY 4.0 applies to the project's compilation (the selection, the derived fields, the documentation), not to the counts as such. npm is a registered trademark of npm, Inc."
+}

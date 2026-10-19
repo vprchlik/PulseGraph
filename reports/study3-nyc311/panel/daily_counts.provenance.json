@@ -1,0 +1,44 @@
+{
+  "builder_sha256": "3e15c138152c5e509c6cd9d70d2bae2997251e3da02baf44c4fbf66c6cca54e0",
+  "command": ".\\.venv\\Scripts\\python.exe reports\\release\\build_daily_counts.py nyc311",
+  "days": {
+    "context": "2025-09-01 to 2026-06-02, from the frozen context",
+    "target": "2026-06-03 to 2026-08-31, from the signals"
+  },
+  "inputs": {
+    "context": {
+      "path": "data/raw/study3/nyc311/panel/context.parquet",
+      "sha256": "935a01a571d119fe12cd1f893ebbae13bb5f04ae01b2a50c0aa624a03738a64c"
+    },
+    "manifest": {
+      "path": "reports/study3-nyc311/panel/manifest.json",
+      "sha256": "a508b4d87c642c98a308247fa851e5618cfb95f8fdc255113a2a5b6cb8f8663b"
+    },
+    "run_json": {
+      "path": "reports/study3-nyc311/run-2026-10-17/run.json",
+      "sha256": "defe9469b631632f3357beebd1e0648172d7306debc3fb6c343a838b2831f9e5"
+    },
+    "signals": {
+      "path": "data/raw/study3/nyc311/targets/signals.parquet",
+      "release_asset": "study3-nyc311-targets-signals.parquet",
+      "sha256": "8f85b2e2a90e4ecd81aadf73de753b9d976aeef02ba53039c0d6fc91bb2b02c3"
+    }
+  },
+  "output": {
+    "bytes": 4505286,
+    "columns": [
+      "problem",
+      "board",
+      "day",
+      "count"
+    ],
+    "first_day": "2025-09-01",
+    "last_day": "2026-08-31",
+    "order": "sorted by problem, board, day",
+    "path": "reports/study3-nyc311/panel/daily_counts.csv",
+    "rows": 109500,
+    "series": 300,
+    "sha256": "88edf554d1d27e3daa6a8bb94c372335eb8b8716b401a3ecea44bb5509977588"
+  },
+  "statement": "Daily counts of NYC 311 service requests by New York calendar day of created_date, from NYC Open Data's dataset erm2-nwe9 (311 Service Requests from 2020 to Present), per problem type and community board of the frozen 2024 frame, counted by one anonymous query per day: the context days 2025-09-01 to 2026-06-02 on 2026-10-16 UTC, the target days 2026-06-03 to 2026-08-31 on 2026-10-17 UTC. The dataset's metadata states no licence and gives the attribution 311. The City's website terms of use, read 2026-10-17, say nothing specific about datasets (reports/study3-nyc311/panel/source-terms.md). Source: NYC Open Data; no endorsement by the City of New York is claimed. CC BY 4.0 applies to the project's compilation (the selection, the derived fields, the documentation), not to the counts as such."
+}

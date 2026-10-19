@@ -1,5 +1,47 @@
 # PulseGraph v2
 
+**The question.** Do frozen zero-shot time-series foundation models (Chronos-2, TimesFM 3 and TimesFM 2.5)
+improve probabilistic forecasts of sparse daily counts, and does replacing a model's own probability of a
+zero day with an estimate from the context alone improve its forecast?
+
+**What was found,** in three registered, population-sampled studies (the score is QScore9, a nine-decile
+quantile score; lower is better):
+
+- **Study 1, daily GitHub stars:** on 300 repositories sampled from 148,550, the models beat a 28-day local
+  mean on the mean in all nine model-by-horizon cells (by 0.101 to 0.258 in QScore9, with the bootstrap
+  interval excluding zero in five), while the typical repository favors the local mean: the models score
+  lower on only 46 to 89 of 300, and the signed-rank test rejects on the local mean's side in all nine.
+- **Study 2, npm downloads and a synthetic grid:** replacing each model's zero-day probability with a 28-day
+  context-only estimate, its completed positive law kept, is favored by no pooled test at q = 0.05 (against
+  the model's own completed forecast two of six tests reject against it on 209 npm series, and three of three
+  on the 540-series grid), while the declared secondary strata show it lower at a week for 81, 60 and 66 of
+  100 sparse npm series and for only 32 to 40 of 100 dense ones.
+- **Study 3, NYC 311 requests:** registered as 36 per-stratum tests on 300 series with a dynamic occurrence
+  estimate, that regime reading is confirmed for dense series, where all six tests against the model's own
+  forecast reject as predicted (the substitution scores higher on 55 to 72 of 100), and not for sparse and
+  very sparse ones, where one of twelve does; on the very sparse stratum every median is exactly zero and 72
+  to 88 of 100 series tie exactly, since where a forecast's nine deciles are all zero the registered score
+  cannot tell one occurrence probability below 0.1 from another, so on series that are zero nine days in ten
+  it says nothing about occurrence.
+
+**Registration.** [PROTOCOL.md](PROTOCOL.md) was registered before any target of a study was opened: Study 1
+at `5f01769b6be4c32814befdd7cc3395b6dcc386ed`, Study 2 appended at `df55867c982dfe2bb6e1152ec8ae93e3cd228c45`,
+Study 3 by dated addition 7 at `3357d779db28cffa4048e7e333fd02b9434b4b6d`. The protocol as it stands, every
+dated addition included, has SHA-256 `05c7617b0391cbcca7bccddb6ff54a763d47ba88e5d31dac4bd98621a9721b29`, and
+each registration's bytes are its prefix.
+
+**Where the numbers come from.** The registered tables are in [RESULTS.md](RESULTS.md) and in each run's
+results page ([the synthetic grid](reports/study2-synthetic-2026-10-15/RESULTS-synthetic.md),
+[npm](reports/study2-npm/run-2026-10-15/RESULTS-npm.md),
+[NYC 311](reports/study3-nyc311/run-2026-10-17/RESULTS-nyc311.md)); every number traces to a saved file and
+the command that regenerates it. The saved forecasts behind them, Study 1's `results.parquet` and the 1,049
+whole-series checkpoints of the three later runs, are release assets, with the npm and NYC 311 target
+signals: [reports/release/ASSETS.md](reports/release/ASSETS.md) lists each with its size, SHA-256, place and
+commands, and `reports/release/verify_assets.py` checks a download and unpacks the checkpoints. The daily
+counts of the npm and NYC 311 panels are in the tree, beside their manifests.
+
+**Release:** to be filled. **DOI** of the Study 1 report and of the paper: to be filled.
+
 PulseGraph studies whether zero-shot foundation models improve probabilistic
 forecasts of daily GitHub star-history counts relative to classical and
 count-aware baselines. The [v1 study and audit](https://github.com/vprchlik/Project-PulseGraph)
@@ -51,9 +93,9 @@ The artifact package under `reports/registered-2026-09-13/` contains the achieve
 v2 manifest and aggregate signals, full eligible frame and frozen order, skip logs,
 query exports and provenance, validation comparisons and figures, signed readiness,
 synthetic smoke evidence, registered run metadata and summaries, integrity checks,
-confirmatory inference and the declared descriptive tables. The 433,172,286-byte
-results.parquet is published as a release asset, URL to be filled after the push,
-SHA-256 as recorded in run.json. The parquet and local byte parts are excluded
+confirmatory inference and the declared descriptive tables. Study 1's
+`results.parquet` is a release asset, listed with the others in
+[reports/release/ASSETS.md](reports/release/ASSETS.md). The parquet and local byte parts are excluded
 from the tree; results-parts.json and pack_results.py are retained.
 Duplicate recovery checkpoints remain local, with their hashes and completion
 times retained in the run metadata and repository timing table.
@@ -287,12 +329,15 @@ Full precision inference values, paired repository scores and provenance are und
 `reports/registered-2026-09-13/inference/`; descriptive CSVs and their provenance
 are under `reports/registered-2026-09-13/descriptive/`.
 
-`results.parquet` is published as a release asset, URL to be filled after the push,
-SHA-256 as recorded in `run.json`:
-`53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6`.
-Release asset URL: **to be filled after the push**. Place the downloaded file at
-`reports/registered-2026-09-13/run/results.parquet`, then verify it and regenerate
-inference from saved forecasts. Choose a new output directory for reproduction:
+`results.parquet` (433,172,286 bytes, SHA-256
+`53ff5a5316fd43dd898866c4fc54edf913b080a32cbd696d7e3b3fc528f62df6`, as recorded in
+`run.json`) is a release asset: its URL, its place
+(`reports/registered-2026-09-13/run/results.parquet`) and the check of a download are
+in [reports/release/ASSETS.md](reports/release/ASSETS.md), with the release's other
+assets. Once it is placed, these commands verify it and regenerate inference from the
+saved forecasts; choose a new output directory for reproduction. The third rewrites
+`RESULTS.md` whole, so on a current clone it drops the sections appended since;
+`ASSETS.md` says how to run it.
 
 ```powershell
 .\.venv\Scripts\python.exe -m scripts.review_integrity --run reports/registered-2026-09-13/run
