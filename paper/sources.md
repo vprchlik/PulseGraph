@@ -607,7 +607,8 @@ family figure into `study3-appendix.tex`), and their prose was condensed into th
 detail appendices. Every section above this one still describes the files its numbers come from; this
 section gives the sources of what is new.
 
-The body's tables and figures, in order: Figure 1 the design at a glance (`fig-design`), Figure 2 the
+The body's tables and figures, in order: Figure 1 the design at a glance (`fig:design`, two typeset tables
+in `sections/03-design.tex`, drawn by no script), Figure 2 the
 completion floor (`fig-floor`), Table 1 the panels (`tab:panels`), Table 2 the registration ledger
 (`tab:ledger`), Table 3 the raw deciles against the local mean (`tab:raw`), Figure 3 the mean and the typical
 series (`fig-mean-typical`), Figure 4 the signature figure (`fig-signature`), Table 4 the occurrence
@@ -703,5 +704,5 @@ apart) is computed by the checker and must agree with `PAPER-SUMMARY.md` within 
 
 | Command | Regenerates |
 |---|---|
-| `.\.venv\Scripts\python.exe paper\figures\make_figures.py` | all nine figures under `paper/figures/`, the four body figures from the panel status files, the per-series scores and the completion formula |
+| `.\.venv\Scripts\python.exe paper\figures\make_figures.py` | all nine figures under `paper/figures/`, the three plotted body figures from the two panel manifests, the per-series scores and the completion formula (Figure 1, the design at a glance, is typeset in `sections/03-design.tex`) |
 | `.\.venv\Scripts\python.exe paper\check_numbers.py` | nothing; asserts every number in the paper, regenerating the three body tables and recomputing the floor counts from the checkpoints when present |

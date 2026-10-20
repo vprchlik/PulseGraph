@@ -4,47 +4,63 @@
 
 \section{Introduction}
 
-A daily count of new stars on a GitHub repository, of downloads of an npm package or of 311 service
-requests for one problem in one community board is zero on most days for most series, and small when it is
-not. A forecast of such a series has two parts: how likely a day is to be empty, and how large the count
-will be when it is not. The zero day is the event of interest for these counts, not a nuisance: no new star,
-no download and no complaint is what a maintainer, a registry operator or a city agency watches for, and a
-forecaster that cannot say how likely it is cannot be used to alert on a change in activity. Zero-shot time-series foundation models forecast such a series without fitting, as nine quantiles. The practical question is whether one of them is worth running on
-a sparse count series at all, or whether a trailing mean does as well, and where any value it adds sits.
+A daily count of new stars on a GitHub repository, of downloads of an npm package or of 311 service requests
+for one problem in one community board is zero on most days for most series, and small when it is not. Any
+forecast of such a series has two parts: how likely a day is to be empty, and how large the count will be when
+it is not. The zero day is the event of interest for these counts, not a nuisance. No new star, no download
+and no complaint is what a maintainer, a registry operator or a city agency watches for, and a forecaster that
+cannot say how likely it is cannot be used to alert on a change in activity.
 
-This paper's answer is that the value is in the size, not the occurrence. On sparse daily counts the frozen
-models' gain over a 28-day local mean comes from positive days: where the local mean overpredicts on GitHub
-stars and npm downloads, and where it underpredicts on NYC 311 requests, with 12 to 29 percent of that gain
-on zero days. Under the registered quantile score their own probability of a zero day is at least as good as
-a context-only estimate on dense series in all three settings. A context estimate beats the model's own zero
-mass on the typical series in four places, each a sparse stratum, a very sparse cell or the month horizon:
-the sparse npm stratum at a week, a secondary reading on one domain; the grid's cells with zero probability
-0.95 at a month; one registered test of six on NYC 311's sparse stratum; and, under the occurrence Brier
-score alone, dense npm series at a month. And on
-the natural panels, on series that are zero nine days in ten, the models' nine deciles are all zero: the
+Zero-shot time-series foundation models forecast such a series without fitting, as nine quantiles. The
+practical question is whether one of them is worth running on a sparse count series at all, or whether a
+trailing mean does as well, and where any value it adds sits. This paper's answer is that the value is in the
+size, not the occurrence.
+
+On sparse daily counts the frozen models' gain over a 28-day local mean comes from positive days. These are
+the days where the local mean overpredicts on GitHub stars and npm downloads, and on NYC 311 requests the days
+where it underpredicts, with 12 to 29 percent of that gain on zero days. Under the registered quantile score
+the models' own probability of a zero day is at least as good as a context-only estimate on dense series in
+all three settings.
+
+A context estimate beats the model's own zero mass on the typical series in four places, each a sparse
+stratum, a very sparse cell or the month horizon. The first is the sparse npm stratum at a week, a secondary
+reading on one domain. Next come the cells of the grid with zero probability 0.95 at a month and one
+registered test of six on NYC 311's sparse stratum. Under the occurrence Brier score alone, dense npm series
+at a month are the fourth. None of the four is a dense series under the registered score.
+
+On the natural panels, the models' nine deciles are all zero on series that are zero nine days in ten. The
 completion rule then sets the probability of a positive day between 0.0607 and 0.1 whatever the model
-forecast, the quantile score ties, and nothing about occurrence can be read from the models there.
+forecast, and the quantile score ties. Nothing about occurrence can be read from the models there.
 
-The three studies are one design run in three steps, each registered before its target data was read and
-each prompted by a result of the one before. Study 1 compared the raw forecasts of frozen Chronos-2, TimesFM
-3 and TimesFM 2.5 with a 28-day local mean and weekly AutoETS on 300 GitHub repositories sampled from a frame
-of 148,550, and found the models ahead on the mean and behind on the typical repository, with a post-hoc
-accounting that put the mean gain on positive days and a small loss on zero days. Study 2 asked whether that
-loss could be taken out by replacing each model's zero mass with a 28-day context-only occurrence
-probability while keeping its completed positive law, on 209 hash-sampled npm download series and a
-540-series synthetic grid; its pooled families answered no, and its declared secondary strata showed the
-typical sparse npm series favoring the substitution at a week. Study 3 registered that regime reading as a
-per-stratum family of 36 tests on 300 NYC 311 service-request series with a dynamic occurrence estimate.
+The three studies are one design run in three steps. Each was registered before its target data was read, and
+each was prompted by a result of the one before. Study 1 compared the raw forecasts of frozen Chronos-2,
+TimesFM 3 and TimesFM 2.5 with a 28-day local mean and weekly AutoETS on 300 GitHub repositories sampled from
+a frame of 148,550. It found the models ahead on the mean and behind on the typical repository, and a post-hoc
+accounting put the mean gain on positive days and a small loss on zero days.
 
-The paper makes three contributions: the record, a registered, population-sampled evaluation of frozen
-forecasting models on three public count sources, with the protocol's registered bytes verifiable by hash,
-every score recomputed from the saved forecasts with no disagreement, the mean and the typical series side by
-side everywhere, and every number traced to a saved file; the occurrence result by regime, with the model's
-positive law beating a shifted-Poisson count law wherever that law is misspecified and losing to it where it
-is the generator's own; and the interface limit, that on very sparse series the registered construction,
-nine deciles completed into a count law and scored by a quantile score, cannot ask the occurrence question,
-because the completion fixes the models' occurrence probability and the score cannot see a difference
-smaller than one decile.  The paper does not claim that the models forecast bursts, that any result transfers to launches or to the days after a release, that a download is a human adoption or a request a measure of the condition it reports, or that it is the first to evaluate frozen foundation models on sparse counts, to wrap one in a hurdle, or to show aggregate and per-series rankings disagreeing (Section~\ref{sec:related}). Section~\ref{sec:design} gives the
-design once; Sections~\ref{sec:raw} to~\ref{sec:positive} answer the three questions in turn;
-Section~\ref{sec:discussion} reads the studies together; Sections~\ref{sec:limitations} and~\ref{sec:repro}
-give the limitations and what is released.
+Study 2 therefore asked whether that loss could be removed by replacing each model's zero mass with a 28-day
+context-only occurrence probability while keeping its completed positive law. It ran on 209 hash-sampled npm
+download series and a 540-series synthetic grid. Its pooled families answered no, but its declared secondary
+strata showed the typical sparse npm series favoring the substitution at a week. Study 3 registered that
+regime reading as a per-stratum family of 36 tests on 300 NYC 311 service-request series with a dynamic
+occurrence estimate.
+
+The paper makes three contributions. First is the record, a registered, population-sampled evaluation of
+frozen forecasting models on three public count sources. The protocol's registered bytes can be verified by
+hash, every score was recomputed from the saved forecasts with no disagreement, and every number is traced to
+a saved file. Throughout, the mean and the typical series are reported side by side.
+
+Second comes the occurrence result by regime, with the model's positive law beating a shifted-Poisson count
+law wherever that law is misspecified and losing to it where it is the generator's own. Last is the interface
+limit. On very sparse series the registered construction (nine deciles completed into a count law and scored
+by a quantile score) cannot ask the occurrence question, because the completion fixes the models' occurrence
+probability and the score cannot see a difference smaller than one decile.
+
+The paper does not claim that the models forecast bursts, that any result transfers to launches or to the days
+after a release, or that a download is a human adoption or a request a measure of the condition it reports.
+Nor does it claim to be the first to evaluate frozen foundation models on sparse counts, to wrap one in a
+hurdle, or to show aggregate and per-series rankings disagreeing (Section~\ref{sec:related}).
+
+The design is set out once, in Section~\ref{sec:design}. Sections~\ref{sec:raw} to~\ref{sec:positive} answer
+the three questions in turn, Section~\ref{sec:discussion} reads the studies together, and
+Sections~\ref{sec:limitations} and~\ref{sec:repro} give the limitations and what is released.

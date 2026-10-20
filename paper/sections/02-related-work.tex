@@ -4,61 +4,73 @@
 \section{Related work}
 \label{sec:related}
 
-\paragraph{Intermittent-demand methods and count models.} Series with many zero periods have been treated
-as intermittent demand since \citet{croston1972}, who smoothed the demand size and the interval between
-demands separately; the bias correction of \citet{syntetos2005} and the probability-updating variant of
+\paragraph{Intermittent-demand methods and count models.} Series with many zero periods have been treated as
+intermittent demand since \citet{croston1972}, who smoothed the demand size and the interval between demands
+separately. The bias correction of \citet{syntetos2005} and the probability-updating variant of
 \citet{teunter2011}, which smooths the occurrence indicator on every period, are the methods a reader in the
-field looks for first. \citet{shenstone2005} showed that no stochastic model consistent with real
+field looks for first. However, \citet{shenstone2005} showed that no stochastic model consistent with real
 intermittent data underlies Croston's method, so the Croston line gives point forecasts without a predictive
-law of its own. Full laws come from count models: \citet{snyder2012} compared a Poisson benchmark, a negative
-binomial and a hurdle shifted Poisson that keeps Croston's Bernoulli occurrence, all with dynamic parameters;
-\citet{svetunkov2023} wrote occurrence and size as one state space model, iETS, whose occurrence equations
-contain TSB's and Croston's as cases; temporal aggregation \citep{nikolopoulos2011}, Tweedie laws
-\citep{damato2025}, benchmark suites of distributional methods \citep{damato2026} and pooled hurdles with
-forgetting \citep{bai2026} extend the line. The registered baselines of this paper are classical members of
-it: the count hurdle is a hurdle shifted Poisson with a fixed-window occurrence estimate, the empirical hurdle
-the same occurrence with the empirical law of the recent positive days, and the dynamic count a discounted
-Bayesian analogue of TSB. The protocol excludes Croston and TSB by name without a reason; neither carries a
-predictive law of its own, and the dynamic count, read as such, plays TSB's part.
+law of its own.
 
-\paragraph{Count scores and quantile scores on discrete data.} \citet{czado2009} is the standard reference
-for assessing count forecasts by proper scoring rules and the randomized probability integral transform;
-\citet{kolassa2016} argued that low retail counts need full discrete laws and scores that respect them;
+Full laws come from count models. \citet{snyder2012} compared a Poisson benchmark, a negative binomial and a
+hurdle shifted Poisson that keeps Croston's Bernoulli occurrence, all with dynamic parameters.
+\citet{svetunkov2023} wrote occurrence and size as one state space model, iETS, whose occurrence equations
+contain TSB's and Croston's as cases. Temporal aggregation \citep{nikolopoulos2011}, Tweedie laws
+\citep{damato2025}, benchmark suites of distributional methods \citep{damato2026} and pooled hurdles with
+forgetting \citep{bai2026} extend the line.
+
+For its baselines the protocol registered classical members of that line. The count hurdle is a hurdle shifted
+Poisson with a fixed-window occurrence estimate, and the empirical hurdle the same occurrence with the
+empirical law of the recent positive days. Last, the dynamic count is a discounted Bayesian analogue of TSB.
+The protocol excludes Croston and TSB by name without a reason. Neither carries a predictive law of its own,
+and the dynamic count is read here as playing TSB's part.
+
+\paragraph{Count scores and quantile scores on discrete data.} \citet{czado2009} is the standard reference for
+assessing count forecasts by proper scoring rules and the randomized probability integral transform.
+\citet{kolassa2016} argued that low retail counts need full discrete laws and scores that respect them, and
 \citet{wang2024} scored intermittent-demand combinations with the log score, the discrete ranked probability
 score and a Brier score. Quantile scores are proper for the quantiles they read \citep{gneiting2007} and equal
-a weighted interval score at matching levels \citep{bracher2021}; the M5 uncertainty competition asked for
+a weighted interval score at matching levels \citep{bracher2021}. The M5 uncertainty competition asked for
 nine levels from 0.005 to 0.995 \citep{makridakis2022}, and \citet{ziel2022} argued that its leading methods
-failed the data's overdispersion and frequent zeros. Two recent evaluations drop every quantile level below
-the median because the forecasts there are zero for every method \citep{damato2025, damato2026}, and even
-the discrete ranked probability score separates models poorly on ultra-slow series \citep{tichy2025}. The
-property this paper meets on its very sparse series follows from the definition: a
-quantile score reads only the scored quantiles, so two forecasts whose deciles agree score the same for every
-target, and a count law with at least nine tenths of its mass at zero has all nine deciles at zero. \qs{},
-the registered primary, has that property; the occurrence Brier score and the discrete CRPS, the declared
-secondaries, do not.
+failed the data's overdispersion and frequent zeros.
 
-\paragraph{Foundation models on intermittent data.} Chronos \citep{ansari2024, chronos2-2025}, TimesFM
-\citep{das2023} and Moirai \citep{woo2024} are pretrained forecasters run here frozen; Moirai's output is a
-mixture with a negative-binomial component, where Chronos-2 and TimesFM expose quantiles, neither family's
-paper reports a count analysis, and the general benchmarks name no intermittent category \citep{aksu2024,
-fevbench2026}. The evaluations of frozen models on sparse counts are recent: an event-ranking evaluation of
-twelve models on five sparse panels without a proper score \citep{schoess2026}; a benchmark of 38 methods
-with Croston, SBA, TSB and ADIDA beside Chronos and TimesFM under point and service measures
-\citep{chin2026}; TimesFM and Chronos-Bolt against Croston and TSB on quick-commerce demand \citep{kim2026};
-TimesFM 3 on simulated intermittent counts under a protocol frozen before any forecast \citep{ebrahim2026,
-ebrahim2026zenodo}; and calibration, blind-spot and trained-hurdle studies \citep{adler2025,
-ghoroghchian2026, musat2026}. No evaluation found wraps a frozen model's output in a hurdle under a proper
-score; the nearest, the hurdle on frozen Chronos-2 output in \citet{chin2026}, is judged by point and service
-measures. Aggregate and
-per-series rankings of zero-shot models are known to disagree \citep{islam2026, kim2026, brini2026,
-cherif2026}, and the mean scaled score is recommended in print on intermittent data \citep{corani2026}. On GitHub stars a live benchmark on the 400 most-starred repositories finds the typical series favoring the foundation models \citep{garza2026}, where the population sample of Study 1 finds the opposite \citep{wen2026}. A later test window on
-familiar entities does not establish generalization to unseen ones \citep{moghadasi2026}, later windows of
-known series leak through temporal dependence \citep{qiao2026}, pre-training contamination is now audited
-directly \citep{li2026}, and earlier items in the protocol's lineage bear on the same ground
-\citep{tsantilis2025, zodiac2026, meyer2025}.
+Two recent evaluations drop every quantile level below the median because the forecasts there are zero for
+every method \citep{damato2025, damato2026}. Even the discrete ranked probability score separates models
+poorly on ultra-slow series \citep{tichy2025}. The property observed here on the very sparse series follows
+from the definition. A quantile score reads only the scored quantiles, so two forecasts whose deciles agree
+score the same for every target, and a count law with at least nine tenths of its mass at zero has all nine
+deciles at zero. \qs{}, the registered primary, has that property, but the occurrence Brier score and the
+discrete CRPS, the declared secondaries, do not.
+
+\paragraph{Foundation models on intermittent data.} Chronos \citep{ansari2024, chronos2-2025} and TimesFM
+\citep{das2023}, the two families run here frozen, and Moirai \citep{woo2024} are pretrained forecasters.
+Moirai's output is a mixture with a negative-binomial component, where Chronos-2 and TimesFM expose quantiles.
+Neither family's paper reports a count analysis, and the general benchmarks name no intermittent category
+\citep{aksu2024, fevbench2026}.
+
+Evaluations of frozen models on sparse counts are recent. One evaluates twelve models on five sparse panels by
+event ranking, without a proper score \citep{schoess2026}. A benchmark of 38 methods sets Croston, SBA, TSB
+and ADIDA beside Chronos and TimesFM under point and service measures \citep{chin2026}. TimesFM and
+Chronos-Bolt meet Croston and TSB on quick-commerce demand \citep{kim2026}, and TimesFM 3 is tested on
+simulated intermittent counts under a protocol frozen before any forecast \citep{ebrahim2026,
+ebrahim2026zenodo}. Calibration, blind-spot and trained-hurdle studies complete the list \citep{adler2025,
+ghoroghchian2026, musat2026}. No evaluation was found that wraps a frozen model's output in a hurdle under a
+proper score. The nearest, the hurdle on frozen Chronos-2 output in \citet{chin2026}, is judged by point and
+service measures.
+
+Aggregate and per-series rankings of zero-shot models are known to disagree \citep{islam2026, kim2026,
+brini2026, cherif2026}, and the mean scaled score is recommended in print on intermittent data
+\citep{corani2026}. On GitHub stars a live benchmark on the 400 most-starred repositories finds the typical
+series favoring the foundation models \citep{garza2026}. In contrast, the population sample of Study 1 finds
+the opposite \citep{wen2026}.
+
+A later test window on familiar entities does not establish generalization to unseen ones
+\citep{moghadasi2026}, and later windows of known series leak through temporal dependence \citep{qiao2026}.
+Pre-training contamination is now audited directly \citep{li2026}, and earlier items in the protocol's lineage
+bear on the same ground \citep{tsantilis2025, zodiac2026, meyer2025}.
 
 \paragraph{Registered evaluation.} Replication has long been asked of forecasting papers \citep{hyndman2010},
-and machine learning has a precedent for reviewing a protocol before its results \citep{preregister2021}.
-This paper's protocol is a committed file whose registered bytes are byte prefixes of the file as it stands,
-checked by each run's gate, and every change since is a dated addition that says what changed, when, and
-whether it was decided before any target of the study it touches was read (Table~\ref{tab:ledger}).
+and machine learning has a precedent for reviewing a protocol before its results \citep{preregister2021}. Here
+the protocol is a committed file whose registered bytes are byte prefixes of the file as it stands, checked by
+each run's gate. Every change since is a dated addition that says what changed, when, and whether it was
+decided before any target of the study it touches was read (Table~\ref{tab:ledger}).

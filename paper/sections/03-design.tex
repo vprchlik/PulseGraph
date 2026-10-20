@@ -10,22 +10,24 @@
 \label{sec:design}
 
 \paragraph{The forecasters.} A daily count forecast has two parts, whether anything happens and how much
-happens when it does, and the forecasters differ in where each part comes from (Figure~\ref{fig:design}). The
-three foundation models are frozen Chronos-2, TimesFM 3 and TimesFM 2.5 at revisions pinned on 2026-09-12;
-their native output is nine deciles of a continuous forecast, clipped at zero and with crossings repaired,
-which are the \emph{raw} variant. The \emph{completed} control turns the nine deciles into a count law $F$ by
-a fixed rule and takes both parts from the model. The \emph{hurdle} keeps the model's positive law and
-replaces its zero mass with an occurrence probability estimated from the context alone: the 28-day Jeffreys
-estimate $p = (n_{+} + 1/2) / 29$ in Study 2 (the fixed hurdle), and in Study 3 the discounted Beta-Bernoulli
-estimate of the registered dynamic count (the dynamic hurdle). The fourth cell of that two-by-two, the
-model's own occurrence $1 - F(0)$ with a count positive law, was registered for Study 3 as a declared
-secondary and is computed post hoc on npm and the grid. The count baselines take both parts from the context:
-the count hurdle, a hurdle shifted Poisson fitted to the positive days of the last 28 with the same Jeffreys
-occurrence \citep{snyder2012}; the empirical hurdle, the same occurrence with the empirical law of those
-days, declared secondary; and the dynamic count, a discounted Bayesian analogue of TSB \citep{teunter2011},
-with a Beta-Bernoulli occurrence and a Gamma-Poisson size forgotten at 0.98 a day. Two references from Study
-1 complete the set, the 28-day local mean and weekly AutoETS. The post-hoc TSB hurdle is the count hurdle
-with TSB's two estimates in place of the 28-day ones.
+happens when it does. The forecasters differ in where each part comes from (Figure~\ref{fig:design}). Three
+foundation models are evaluated, Chronos-2, TimesFM 3 and TimesFM 2.5, each frozen at a revision pinned on
+2026-09-12. Their native output is nine deciles of a continuous forecast, clipped at zero and with crossings
+repaired, which are the \emph{raw} variant. The \emph{completed} control turns the nine deciles into a count
+law $F$ by a fixed rule and takes both parts from the model. By contrast, the \emph{hurdle} keeps the model's
+positive law and replaces its zero mass with an occurrence probability estimated from the context alone. In
+Study 2 that is the 28-day Jeffreys estimate $p = (n_{+} + 1/2) / 29$ (the fixed hurdle), and in Study 3 the
+discounted Beta-Bernoulli estimate of the registered dynamic count (the dynamic hurdle). The fourth cell of
+that two-by-two, the model's own occurrence $1 - F(0)$ with a count positive law, was registered for Study 3
+as a declared secondary and is computed post hoc on npm and the grid.
+
+Each count baseline takes both parts from the context. One is the count hurdle, a hurdle shifted Poisson
+fitted to the positive days of the last 28 with the same Jeffreys occurrence \citep{snyder2012}. The empirical
+hurdle, declared secondary, has the same occurrence with the empirical law of those days. Last comes the
+dynamic count, a discounted Bayesian analogue of TSB \citep{teunter2011}, with a Beta-Bernoulli occurrence and
+a Gamma-Poisson size forgotten at 0.98 a day. Two references from Study 1 complete the set: the 28-day local
+mean and weekly AutoETS. A TSB hurdle, the count hurdle with TSB's two estimates in place of the 28-day ones,
+was also scored post hoc.
 
 \begin{figure}[t]
 \centering\footnotesize\setlength{\tabcolsep}{4pt}
@@ -89,24 +91,29 @@ context. Right: the three panels and the grid, each population-sampled from an e
 \end{figure}
 
 \paragraph{The completion and its floor.} From the nine repaired deciles $q_{0.1}, \dots, q_{0.9}$ the
-quantile function is the linear interpolation through $(0, 0)$ and the nine knots for $u \le 0.9$ and the
-exponential tail $Q(u) = q_{0.9} + s \log(0.1 / (1 - u))$ for $u > 0.9$ with scale
-$s = \max(1, q_{0.9} - q_{0.8})$; the count is $Y = \max(0, \lfloor Q(U) + 0.5 \rfloor)$, and $F$ is its
-right-continuous CDF (Appendix~\ref{app:s2design}). The hurdle's positive law
-$G_+(k) = [F(k) - F(0)] / [1 - F(0)]$ is this marginal law truncated at one, not a size forecast the model
-produced for positive days. The completion has a floor. When every repaired decile is below 0.5, the
+completion builds a quantile function. It is the linear interpolation through $(0, 0)$ and the nine knots for
+$u \le 0.9$ and the exponential tail $Q(u) = q_{0.9} + s \log(0.1 / (1 - u))$ for $u > 0.9$, with scale $s =
+\max(1, q_{0.9} - q_{0.8})$. The count is $Y = \max(0, \lfloor Q(U) + 0.5 \rfloor)$, and $F$ is its
+right-continuous CDF (Appendix~\ref{app:s2design}). Thus, the hurdle's positive law $G_+(k) = [F(k) - F(0)] /
+[1 - F(0)]$ is this marginal law truncated at one, not a size forecast the model produced for positive days.
+
+The completion has a floor. When every repaired decile is below 0.5, the
 interpolated part of $Q$ rounds to zero and only the tail can produce a positive count, so
 \[
 P(Y > 0) = P\bigl(Q(U) \ge 0.5\bigr) = 0.1\, e^{-(0.5 - q_{0.9})},
 \]
 which lies between $0.1 e^{-0.5} = 0.0607$ and $0.1$ whatever the model forecast (Figure~\ref{fig:floor}).
 On a series that is zero nine days in ten the ``model's own zero mass'' is therefore set by this rule.
-Counted after the run from the saved laws of the 300 NYC 311 checkpoints, descriptive and post hoc: of the
-600 completed forecasts of each model in the very sparse stratum, 580, 544 and 588 sit on the floor at their
-first lead for Chronos-2, TimesFM 3 and TimesFM 2.5, and 561, 505 and 572 at every lead, with a median
-occurrence probability of 0.0607 to 0.0609 against 0.0172 for the dynamic hurdle on the same windows, its
-Jeffreys fallback $0.5/29$, which 58 of the 100 very sparse series take at the first origin; in
-the sparse stratum 150, 62 and 230 of 600 do at the first lead, and in the dense stratum 2, 0 and 0.
+
+How often that happens was counted after the run, from the saved laws of the 300 NYC 311 checkpoints, so the
+counts are descriptive and post hoc. Of the 600 completed forecasts of each model in the very sparse stratum,
+580, 544 and 588 sit on the floor at their first lead for Chronos-2, TimesFM 3 and TimesFM 2.5, and 561, 505
+and 572 at every lead. They give a median occurrence probability of 0.0607 to 0.0609 against 0.0172 for the
+dynamic hurdle on the same windows. That value is the dynamic hurdle's Jeffreys fallback $0.5/29$, which 58 of
+the 100 very sparse series take at the first origin. Fewer forecasts sit on the floor elsewhere. In the sparse
+stratum 150, 62 and 230 of 600 do at the first lead, and in the dense stratum 2, 0 and 0. Thus, the rule, not
+the model, sets the occurrence probability of most completed forecasts in the very sparse stratum, and of
+fewer outside it.
 
 \begin{figure}[t]
 \centering
@@ -160,42 +167,44 @@ Study 2 & 2026-09-14 & \texttt{df55867} & The occurrence test and the positive-l
 \end{tabular}
 \end{table}
 
-\paragraph{The scores.} The registered primary of all three studies is \qs{}, twice the mean pinball loss
-over the nine deciles $\tau \in \{0.1, \dots, 0.9\}$ and the $h$ target days,
-$\qs{} = \frac{2}{9h} \sum_{t} \sum_{\tau} \max\{\tau (y_t - q_{t,\tau}), (\tau - 1)(y_t - q_{t,\tau})\}$,
-a proper score for the nine quantiles \citep{gneiting2007}, chosen because the models' native output is nine
-quantiles and the three studies were to be comparable. It reads nine integer deciles of a count law, so an
-occurrence probability that moves by less than one decile leaves it unchanged, and two forecasts whose
-deciles coincide in every window score identically whatever the target. Two declared secondaries do not share
-that blindness: the occurrence Brier score $(p - \mathbf{1}[y > 0])^2$, with $p$ the forecast's probability
-of a positive day, and the discrete CRPS $\sum_{k \ge 0} (F(k) - \mathbf{1}[y \le k])^2$ \citep{czado2009},
-recorded as unavailable for the one npm series whose counts defeat its certified bound. The paper shows both
-beside \qs{} for every contrast of the occurrence question and reads them as the declared secondaries they
-are. Two conventions hold throughout: differences are variant minus reference, so a negative number favors
-the variant; and a table or a row marked secondary or post hoc adds no test, while a median of exactly zero
-has no sign.
+\paragraph{The scores.} The registered primary of all three studies is \qs{}, twice the mean pinball loss over
+the nine deciles $\tau \in \{0.1, \dots, 0.9\}$ and the $h$ target days, $\qs{} = \frac{2}{9h} \sum_{t}
+\sum_{\tau} \max\{\tau (y_t - q_{t,\tau}), (\tau - 1)(y_t - q_{t,\tau})\}$. It is a proper score for the nine
+quantiles \citep{gneiting2007}. This score was chosen because the models' native output is nine quantiles and
+the three studies were to be comparable. The score reads nine integer deciles of a count law, so an occurrence
+probability that moves by less than one decile leaves it unchanged. Two forecasts whose deciles coincide in
+every window therefore score identically whatever the target.
 
-\paragraph{The panels, the calendar and the inference.} Table~\ref{tab:panels} gives the four panels, each
+That blindness is not shared by the two declared secondaries. One is the occurrence Brier score $(p -
+\mathbf{1}[y > 0])^2$, with $p$ the forecast's probability of a positive day. The other is the discrete CRPS
+$\sum_{k \ge 0} (F(k) - \mathbf{1}[y \le k])^2$ \citep{czado2009}, recorded as unavailable for the one npm
+series whose counts defeat its certified bound. Both are shown beside \qs{} for every contrast of the
+occurrence question and are read as the declared secondaries they are. Two conventions hold throughout.
+Differences are variant minus reference, so a negative number favors the variant. A table or a row marked
+secondary or post hoc adds no test, while a median of exactly zero has no sign.
+
+\paragraph{The panels, the calendar and the inference.} The four panels are in Table~\ref{tab:panels}, each
 natural one sampled from an enumerated frame with no popularity filter (Appendices~\ref{app:design},
-\ref{app:s2panel} and~\ref{app:s3detail}). The npm and NYC 311 strata are the context zero fraction over the
-90 days before the first cutoff, $[0, 0.5)$ dense, $[0.5, 0.9)$ sparse and $[0.9, 1]$ very sparse, with the
-first 100 complete series of each stratum taken and no transfer of slots; npm's very sparse stratum holds the
-9 series that qualified. The grid's positive law is the count hurdle's own family, and its oracle is a
-diagnostic, not a competitor. Every model sees only a series' own history through the cutoff. Window scores
-are averaged over origins within series and horizon, series weigh equally within a panel or a stratum, and
-each registered comparison reports the mean paired difference with a pointwise 95 percent percentile
-interval from 20,000 bootstrap replicates of whole series, the median difference, the series lower, tied and
-higher, and a two-sided approximate Wilcoxon signed-rank test that omits zero differences, with one
-Benjamini-Hochberg adjustment at $q = 0.05$ over each family. The mean and the typical series are always shown together, and the series that carries a mean is named.
-The side the rank sums favor, where reported, is a reading beside the median's sign that the registration
-does not make.
+\ref{app:s2panel} and~\ref{app:s3detail}). On npm and NYC 311 the strata are the context zero fraction over
+the 90 days before the first cutoff: $[0, 0.5)$ dense, $[0.5, 0.9)$ sparse and $[0.9, 1]$ very sparse. The
+first 100 complete series of each stratum were taken with no transfer of slots, so npm's very sparse stratum
+holds the 9 series that qualified. On the grid the positive law is the count hurdle's own family, and the
+oracle is a diagnostic, not a competitor. Every model sees only a series' own history through the cutoff.
 
-\paragraph{The registration ledger.} Table~\ref{tab:ledger} lists every dated change to the protocol since
-Study 1 was registered, with whether each was decided before any target of the study it touches was read.
-The three lapses of 2026-10-12 have one cause, that no work was done in the repository between 2026-09-14
-and 2026-10-11: the October holdout's freeze passed with nothing frozen, the npm readiness clock ran out
-untested, and two of Study 2's three domains were deferred. Item 6 is the one decision made after scores
-were seen: three days on which the npm download API served zero for every series stay scored as served, and
-the sensitivity without them is reported beside the registered result (Appendix~\ref{app:s2tables}). Two
-further protocol sections, a birth-cohort census and a bounded fine-tune, are open and touch no test of this
-paper.
+Window scores are averaged over origins within series and horizon, and series weigh equally within a panel or
+a stratum. Each registered comparison reports the mean paired difference with a pointwise 95 percent
+percentile interval from 20,000 bootstrap replicates of whole series. It also reports the median difference,
+the series lower, tied and higher, and a two-sided approximate Wilcoxon signed-rank test that omits zero
+differences. Each family takes one Benjamini-Hochberg adjustment at $q = 0.05$. The mean and the typical
+series are always shown together, and the series that carries a mean is named. Where the side the rank sums
+favor is reported, it is a reading beside the median's sign that the registration does not make.
+
+\paragraph{The registration ledger.} Every dated change to the protocol since Study 1 was registered is in
+Table~\ref{tab:ledger}, with whether each was decided before any target of the study it touches was read. The
+three lapses of 2026-10-12 have one cause. No work was done in the repository between 2026-09-14 and
+2026-10-11, so the October holdout's freeze passed with nothing frozen, the npm readiness clock expired
+untested, and two of Study 2's three domains were deferred. Item 6 is the one decision made after scores were
+seen. On three days the npm download API served zero, for every series on two of them and for the largest
+series on the third. Those days stay scored as served, and the sensitivity without them is reported beside the
+registered result (Appendix~\ref{app:s2tables}). Two further protocol sections, a birth-cohort census and a
+bounded fine-tune, are open and touch no test of this paper.

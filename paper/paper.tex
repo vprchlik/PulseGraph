@@ -42,22 +42,22 @@
 \maketitle
 
 \begin{abstract}
-We ask where zero-shot time-series foundation models add value on sparse daily counts, in three registered,
-population-sampled studies, one design in three steps, on frozen Chronos-2, TimesFM 3 and TimesFM 2.5. On
-daily GitHub star counts of 300 repositories sampled from 148,550, the models beat a 28-day local mean on
-the mean in every cell and lose on the typical repository, lower on 46 to 89 of 300. Study 2 replaces each
-model's zero mass with a 28-day context-only occurrence probability, keeping its completed positive law, on
-209 hash-sampled npm download series and a 540-series synthetic grid. No pooled test favors the substitution
-at $q = 0.05$, two of six npm tests and all three grid tests reject against it, and the model's positive law
-beats a shifted-Poisson count hurdle in all six npm cells; by stratum, at a week, it scores lower for 81, 60
-and 66 of 100 sparse series and 32 to 40 of 100 dense ones. Study 3 registers that reading as a per-stratum
-family of 36 tests on 300 NYC 311 series in three strata, with a dynamic occurrence: on dense series all six
-tests reject as predicted; on the sparse and very sparse strata one of twelve does, and ten of twelve medians
-are exactly zero. On most very sparse series the completion rule fixes the models' occurrence probability
-between 0.0607 and 0.1, so nothing about occurrence can be read there. The models' value is in the size of
-positive days. Under the registered score their own zero-day probability is at least as good as a context
-estimate on dense series in all three settings; a context estimate wins the typical series on sparse npm at
-a week, in the grid's sparsest cells at a month and in one registered NYC 311 test.
+Three registered, population-sampled studies, one design in three steps, ask where frozen zero-shot
+time-series foundation models (Chronos-2, TimesFM 3 and TimesFM 2.5) add value on sparse daily counts. On
+daily GitHub star counts of 300 repositories sampled from 148,550, the models beat a 28-day local mean on the
+mean in every cell but lose on the typical repository, lower on 46 to 89 of 300. Study 2 replaces each model's
+zero mass with a 28-day context-only occurrence probability, keeping its completed positive law, on 209
+hash-sampled npm download series and a 540-series synthetic grid. No pooled test favors the substitution at
+$q = 0.05$, and two of six npm tests and all three grid tests reject against it. By stratum, at a week, it
+scores lower for 81, 60 and 66 of 100 sparse series and 32 to 40 of 100 dense ones. The model's positive law
+beats a shifted-Poisson count hurdle in all six npm cells. Study 3 registers the regime reading as a
+per-stratum family of 36 tests on 300 NYC 311 series in three strata, with a dynamic occurrence. On dense
+series all six tests reject as predicted, but on the sparse and very sparse strata one of twelve does, and ten
+of twelve medians are exactly zero. On most very sparse series the completion rule fixes the models'
+occurrence probability between 0.0607 and 0.1, so nothing about occurrence can be read there. The models'
+value is in the size of positive days. Under the registered score their own zero-day probability is at least
+as good as a context estimate on dense series in all three settings. A context estimate wins the typical
+series on sparse npm at a week, in the grid's sparsest cells at a month and in one registered NYC 311 test.
 \end{abstract}
 
 \input{sections/01-introduction}

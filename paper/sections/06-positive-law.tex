@@ -8,8 +8,8 @@
 \section{The positive law against count laws}
 \label{sec:positive}
 
-The second contrast holds the occurrence fixed and changes the positive law alone. Table~\ref{tab:pos}
-gives every form of it, with the fourth factorial cell, which holds the positive law fixed and changes the
+The second contrast holds the occurrence fixed and changes the positive law alone. Every form of it is in
+Table~\ref{tab:pos}, with the fourth factorial cell, which holds the positive law fixed and changes the
 occurrence alone, and the dynamic count, which changes both.
 
 \begin{table}[p]
@@ -111,49 +111,59 @@ very sparse & 30 & TSB vs count hurdle & 100 & 16 / 68 / 16 & 0 & post hoc \\
 
 \paragraph{Against a shifted Poisson.} On npm the model's completed positive law beats the shifted Poisson
 fitted to the last 28 days in all six registered cells, on the mean, the median and the rank test, with
-adjusted $p$ from $2.66 \times 10^{-5}$ to $3.19 \times 10^{-25}$: the mean difference favors the variant in
-every cell, from -5,090 to -6,918 (carried by \texttt{aggregate-error}), with every interval below zero, and
-the medians are negative, from -0.006349 to -0.0716. The occurrence Brier difference is exactly zero for
-every series in these six rows, since the two share the Jeffreys estimate, so the gain is in the positive
-law. By stratum the win is a dense one, on 80 to 94 of the 100 dense series and on 29 to 63 of the 100 sparse ones, over a comparator that cannot fit thousands of downloads a day. On the grid, where the shifted Poisson is the generator's own law up
-to its estimated mean, the registered contrast goes the other way or is not rejected: the Chronos-2 and
-TimesFM 2.5 hurdles score higher than the count hurdle and reject, and the TimesFM 3 hurdle's interval
-includes zero (Table~\ref{tab:pos}). The fourth cell says the same from the other side, post hoc on npm and
-the grid and as a declared secondary on NYC 311: with a shifted Poisson in place of the model's own positive
-law and the model's own occurrence kept, the forecast is far worse on dense series, higher than the control
-on 79 to 94 of the 100 dense npm series with medians of 0.39 to 0.56, far worse on the dense NYC 311 series,
-with mean differences of 0.2944 to 0.325 and higher on 70 to 91 of the 100, and higher on 19 to 28 of the 30
-grid blocks even where the generator draws positive days from a shifted Poisson.
+adjusted $p$ from $2.66 \times 10^{-5}$ to $3.19 \times 10^{-25}$. The mean difference favors the variant in
+every cell, from -5,090 to -6,918 (carried by \texttt{aggregate-error}), with every interval below zero. Every
+median is negative too, from -0.006349 to -0.0716. The occurrence Brier difference is exactly zero for every
+series in these six rows, since the two share the Jeffreys estimate, so the gain is in the positive law. By
+stratum the win is a dense one, on 80 to 94 of the 100 dense series and on 29 to 63 of the 100 sparse ones.
+This suggests a win over a comparator that cannot fit thousands of downloads a day.
 
-\paragraph{Against an empirical law.} The empirical hurdle is the count law that can fit a dense series. Against it the model's
-law keeps its value on dense series and not in general. On npm the fixed hurdle is lower on
-63 to 72 of the 100 dense series and on 33 to 57 of the 100 sparse. On NYC 311 the registered T2 tests
-compare the dynamic hurdle with the empirical hurdle and so change the occurrence and the positive law at
-once: 14 of the 18 T2 tests reject, all for the dynamic hurdle, three of them with a median of exactly zero,
-leaning to the dynamic hurdle by rank sum. In the dense stratum all six rows reject, with the dynamic hurdle
-lower on 72 to 87 of the 100 series and medians from -0.05608 to -0.06753; in the sparse stratum five of six
-reject; in the very sparse stratum the three horizon-30 rows reject (R28, R32 and R36), each with 22 series
-lower, 77 tied and 1 higher and a median of exactly zero, so that their side comes from the rank sums alone.
-The declared secondary that holds the occurrence at the Jeffreys estimate, the fixed hurdle against the empirical hurdle, puts the dense advantage on the positive law, lower on 75 to 88 of 100, is mixed on the sparse series with every median zero, and ties on 96 to 99 of 100 very sparse series. So the model's positive law keeps its value against a count law on NYC 311's dense series; on sparse
-series the T2 rejections owe at least as much to the dynamic occurrence as to the positive law, and on very
-sparse series they owe everything to it.
+On the grid, where the shifted Poisson is the generator's own law up to its estimated mean, the registered
+contrast goes the other way or is not rejected. The Chronos-2 and TimesFM 2.5 hurdles score higher than the
+count hurdle and reject, and the TimesFM 3 hurdle's interval includes zero (Table~\ref{tab:pos}).
 
-\paragraph{The dynamic count and the TSB hurdle.} The registered dynamic count, a four-parameter discounted
-hurdle with no foundation model, is the best forecaster on the grid at a month after the oracle, which no
-forecaster scores below in 17 of the 18 cells: its mean \qs{} at horizon 30 is 1.721 against 1.754 to 1.792
-for the three completed models, 1.819 for the count hurdle and 1.648 for the oracle, and by replicate block
-it is lower than each completed model in 18 to 24 of 30 blocks; at a week five model variants have a lower
-mean (Appendix~\ref{app:s2tables}). On npm it loses, the completed models are lower on 108 to 146 of 209
-series, and on NYC 311 it is far behind on dense series and level elsewhere. The TSB hurdle stands where the
-registered count baselines stand: level with the count hurdle on dense NYC 311 series and ahead of it on dense
-npm series (Table~\ref{tab:pos}), tied with it on sparse npm at a week, and beaten by the dynamic count on the
-grid in 23 and 28 of 30 blocks.
+From the other side, the fourth cell leads to the same conclusion, post hoc on npm and the grid and as a
+declared secondary on NYC 311. With a shifted Poisson in place of the model's own positive law and the model's
+own occurrence kept, the forecast is far worse on dense series. It is higher than the control on 79 to 94 of
+the 100 dense npm series with medians of 0.39 to 0.56. On the dense NYC 311 series it is far worse too, with
+mean differences of 0.2944 to 0.325 and higher on 70 to 91 of the 100. Even where the generator draws positive
+days from a shifted Poisson, it is higher on 19 to 28 of the 30 grid blocks.
+
+\paragraph{Against an empirical law.} The empirical hurdle is the count law that can fit a dense series.
+Against it the model's law keeps its value on dense series and not in general. On npm the fixed hurdle is
+lower on 63 to 72 of the 100 dense series and on 33 to 57 of the 100 sparse.
+
+The registered T2 tests on NYC 311 compare the dynamic hurdle with the empirical hurdle, so they change the
+occurrence and the positive law at once. Here 14 of the 18 T2 tests reject, all for the dynamic hurdle, three
+of them with a median of exactly zero, leaning to the dynamic hurdle by rank sum. In the dense stratum all six
+rows reject, with the dynamic hurdle lower on 72 to 87 of the 100 series and medians from -0.05608 to
+-0.06753. Five of six reject in the sparse stratum. In the very sparse stratum the three horizon-30 rows
+reject (R28, R32 and R36), each with 22 series lower, 77 tied and 1 higher and a median of exactly zero. Their
+side therefore comes from the rank sums alone.
+
+A declared secondary holds the occurrence at the Jeffreys estimate, the fixed hurdle against the empirical
+hurdle. It puts the dense advantage on the positive law, lower on 75 to 88 of 100. On the sparse series it is
+mixed, with every median zero, and it ties on 96 to 99 of 100 very sparse series. The model's positive law
+therefore keeps its value against a count law on the dense NYC 311 series. A plausible reading of the
+secondary is that the T2 rejections on sparse series owe at least as much to the dynamic occurrence as to the
+positive law, and that on very sparse series they owe everything to it.
+
+\paragraph{The dynamic count and the TSB hurdle.} The registered dynamic count is a four-parameter discounted
+hurdle with no foundation model. At a month it is the best forecaster on the grid after the oracle, which no
+forecaster scores below in 17 of the 18 cells. Its mean \qs{} at horizon 30 is 1.721 against 1.754 to 1.792
+for the three completed models, 1.819 for the count hurdle and 1.648 for the oracle. By replicate block it is
+lower than each completed model in 18 to 24 of 30 blocks. However, at a week five model variants have a lower
+mean (Appendix~\ref{app:s2tables}). On npm it loses, and the completed models are lower on 108 to 146 of 209
+series. It is far behind on dense NYC 311 series and level elsewhere. The TSB hurdle stands where the
+registered count baselines stand. It is level with the count hurdle on dense NYC 311 series and ahead of it on
+dense npm series (Table~\ref{tab:pos}), tied with it on sparse npm at a week, and beaten by the dynamic count
+on the grid in 23 and 28 of 30 blocks.
 
 \paragraph{The occurrence alone, under a count law.} The fourth cell against the count hurdle differs in the
 occurrence alone, the model's own $1 - F(0)$ against the Jeffreys estimate under the same shifted Poisson. On
 NYC 311 the model's own occurrence is the better one, lower on the dense series by 0.03591 to 0.0467 on the
-mean and on 62 to 73 of the 100. On dense npm series and on the grid the two are closer (Table~\ref{tab:pos});
-the Brier score, which reads the occurrence alone, favors the model's zero mass at a week on both panels, on
-68, 62 and 54 of 100 dense npm series and 19, 23 and 19 of 30 blocks, and favors the Jeffreys estimate at a
-month, the model's zero mass lower on only 42, 43 and 38 of 100 and 15, 13 and 12 of 30. All of this is post
-hoc on npm and the grid.
+mean and on 62 to 73 of the 100. The two are closer on dense npm series and on the grid (Table~\ref{tab:pos}).
+Under the Brier score, which reads the occurrence alone, the model's zero mass is favored at a week on both
+panels, on 68, 62 and 54 of 100 dense npm series and 19, 23 and 19 of 30 blocks. At a month it favors the
+Jeffreys estimate, with the model's zero mass lower on only 42, 43 and 38 of 100 and 15, 13 and 12 of 30. All
+of this is post hoc on npm and the grid.
