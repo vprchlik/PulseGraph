@@ -1,16 +1,17 @@
 """Figures for the Study 1 report and the paper, drawn from the saved files only.
 
-Reads the evidence package under reports/registered-2026-09-13/ for the report's three figures,
-the
+Reads the evidence package under reports/registered-2026-09-13/ for the report's three figures, the
 two Study 2 runs and the Study 3 run under reports/ for the paper's appendix figures, and, for the
-paper's four body figures, the panel status files under study/, the three runs' per-series scores
-and
-the two panel manifests. The completion-floor figure is drawn from the registered completion formula
-alone and needs no asset. Writes PDF and PNG figures beside this script. No model is loaded, nothing
-is
-fitted, no test is run. Run from the repository root:
+paper's plotted body figures, the three runs' per-series scores and the two panel manifests. The
+completion-floor figure is drawn from the registered completion formula alone and needs no asset.
+The design at a glance (the paper's Figure 1) is typeset in sections/03-design.tex, not drawn here.
+Writes PDF and PNG figures beside this script. No model is loaded, nothing is fitted, no test is
+run. Run from the repository root:
 
     .\\.venv\\Scripts\\python.exe paper/figures/make_figures.py
+
+The drawing functions take their values from the saved files; how the figures look (typeface, sizes,
+colors, line weights, legends, ticks) is set in the style block below and nowhere else.
 """
 
 import json
@@ -23,7 +24,6 @@ import matplotlib.pyplot as plt  # noqa: E402
 import matplotlib.ticker  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
-from matplotlib.patches import FancyBboxPatch  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 REPORT = ROOT / "reports" / "registered-2026-09-13"
@@ -32,7 +32,6 @@ NPM_PANEL = ROOT / "reports" / "study2-npm" / "panel"
 SYNTHETIC = ROOT / "reports" / "study2-synthetic-2026-10-15"
 NYC311 = ROOT / "reports" / "study3-nyc311" / "run-2026-10-17"
 NYC311_PANEL = ROOT / "reports" / "study3-nyc311" / "panel"
-STUDY = ROOT / "study"
 OUT = Path(__file__).resolve().parent
 
 INFERENCE = REPORT / "inference" / "inference.csv"
@@ -43,21 +42,80 @@ NPM_INFERENCE = NPM / "inference" / "inference.csv"
 SYNTHETIC_CELLS = SYNTHETIC / "inference" / "secondary_cells_contrasts.csv"
 NYC311_INFERENCE = NYC311 / "inference" / "inference.csv"
 
+# --- the style: one typeface, one size scheme, one palette for every figure -----------------------
+# The page is Computer Modern at 10 pt in both documents. Every figure is drawn at the text width of
+# both (A4 with 24 mm margins: 162 mm) and saved at that size, so \includegraphics[width=\textwidth]
+# prints it unscaled: text at 8 pt, tick labels and legends at 7 pt, small annotations at 6 pt, in
+# Computer Modern (cmr10, with formulas in mathtext's Computer Modern). The fonts are embedded as
+# TrueType (Type 42), so no Type 3 font reaches either PDF. cmr10 keeps TeX's old text encoding, in
+# which <, > and _ are other glyphs: every formula is written as mathtext, and no plain label holds
+# those characters. The three series colors differ in lightness (CIE L* 27, 49 and 70), so they stay
+# apart in grayscale and for color-blind readers; black is the total, the mean or the median, gray
+# the reference lines.
+WIDTH = 162 / 25.4
+DARK, MID, LIGHT = "#003F7F", "#C45100", "#56B4E9"
+INK, REFLINE, GRIDLINE = "black", "#7F7F7F", "#D9D9D9"
+RED = "#C00000"
+LINE, BOLD, THIN = 1.0, 1.4, 0.6
+SIZE, SMALL, TINY = 8, 7, 6
+plt.rcParams.update(
+    {
+        "font.family": "serif",
+        "font.serif": ["cmr10"],
+        "mathtext.fontset": "cm",
+        "axes.formatter.use_mathtext": True,
+        "axes.unicode_minus": True,
+        "font.size": SIZE,
+        "axes.titlesize": SIZE,
+        "axes.labelsize": SIZE,
+        "xtick.labelsize": SMALL,
+        "ytick.labelsize": SMALL,
+        "legend.fontsize": SMALL,
+        "axes.titlepad": 4,
+        "axes.labelpad": 3,
+        "axes.linewidth": THIN,
+        "axes.edgecolor": INK,
+        "xtick.major.width": THIN,
+        "ytick.major.width": THIN,
+        "xtick.minor.width": 0.4,
+        "ytick.minor.width": 0.4,
+        "xtick.major.size": 3,
+        "ytick.major.size": 3,
+        "xtick.minor.size": 1.5,
+        "ytick.minor.size": 1.5,
+        "lines.linewidth": LINE,
+        "lines.markersize": 3.5,
+        "grid.color": GRIDLINE,
+        "grid.linewidth": 0.4,
+        "legend.frameon": False,
+        "legend.handlelength": 2.2,
+        "legend.columnspacing": 1.6,
+        "legend.borderaxespad": 0.2,
+        "figure.constrained_layout.use": True,
+        "figure.constrained_layout.h_pad": 0.03,
+        "figure.constrained_layout.w_pad": 0.03,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+    }
+)
+
 MODELS = ["chronos2", "timesfm3", "timesfm2p5"]
 MODEL_LABEL = {"chronos2": "Chronos-2", "timesfm3": "TimesFM 3", "timesfm2p5": "TimesFM 2.5"}
-MODEL_COLOR = {"chronos2": "#0072B2", "timesfm3": "#D55E00", "timesfm2p5": "#009E73"}
+MODEL_COLOR = {"chronos2": DARK, "timesfm3": MID, "timesfm2p5": LIGHT}
+MODEL_DASH = {"chronos2": "-", "timesfm3": "--", "timesfm2p5": "-."}
 REFERENCES = ["local_mean_28", "autoets_weekly"]
 REFERENCE_LABEL = {"local_mean_28": "28-day local mean", "autoets_weekly": "weekly AutoETS"}
 HORIZONS = [7, 30, 90]
 STRATA = ["20-99", "100-999", "1000+"]
-STRATUM_COLOR = {"20-99": "#0072B2", "100-999": "#D55E00", "1000+": "#009E73"}
+STRATUM_COLOR = {"20-99": DARK, "100-999": MID, "1000+": LIGHT}
 PARTS = ["qscore9", "zero", "positive_over", "positive_under"]
 PART_COLOR = {
-    "qscore9": "black",
-    "zero": "#0072B2",
-    "positive_over": "#D55E00",
-    "positive_under": "#009E73",
+    "qscore9": INK,
+    "zero": DARK,
+    "positive_over": MID,
+    "positive_under": LIGHT,
 }
+PART_DASH = {"qscore9": "-", "zero": "--", "positive_over": "-.", "positive_under": "-"}
 PART_LABEL = {
     "qscore9": "total",
     "zero": "zero days",
@@ -70,18 +128,33 @@ CONTRAST_LABEL = {
     "hurdle_count_28": "hurdle vs the count hurdle",
     "local_mean_28": "raw deciles vs the local mean",
 }
-Z_COLOR = {0.2: "#0072B2", 0.8: "#D55E00", 0.95: "#009E73"}
+Z_COLOR = {0.2: DARK, 0.8: MID, 0.95: LIGHT}
 # The zero-fraction bins of the signature figure, the ones the step-back read of 2026-10-17 used.
 BINS = [0, 0.1, 0.3, 0.5, 0.7, 0.9, 0.97, 1.0001]
 ROUND_TRIP = {"float_precision": "round_trip"}
 
-plt.rcParams.update({"font.size": 8, "axes.titlesize": 9, "legend.fontsize": 7})
-
 
 def save(fig, name):
-    for ext in ("pdf", "png"):
-        fig.savefig(OUT / f"{name}.{ext}", dpi=200, bbox_inches="tight")
+    # The figure keeps its own size (no tight bounding box), and the PDF carries no creation date,
+    # so that a rerun writes the same bytes.
+    fig.savefig(OUT / f"{name}.pdf", metadata={"CreationDate": None})
+    fig.savefig(OUT / f"{name}.png", dpi=200)
     plt.close(fig)
+
+
+def legend_below(fig, ax, ncol):
+    """The figure's legend, outside every panel, centered under the figure."""
+    handles, labels = ax.get_legend_handles_labels()
+    return fig.legend(handles, labels, loc="outside lower center", ncol=ncol)
+
+
+def thin_symlog(axis, base=100):
+    """Major ticks every second decade on a symmetric log axis, the others as minor ticks."""
+    linthresh = axis.get_transform().linthresh
+    axis.set_major_locator(matplotlib.ticker.SymmetricalLogLocator(base=base, linthresh=linthresh))
+    axis.set_minor_locator(
+        matplotlib.ticker.SymmetricalLogLocator(base=10, linthresh=linthresh, subs=[1.0])
+    )
 
 
 def select(frame, reference, model, horizon):
@@ -91,7 +164,7 @@ def select(frame, reference, model, horizon):
 
 def figure_paired_differences(inference):
     """Mean difference with its pointwise 95% interval, the median and the win count."""
-    fig, axes = plt.subplots(1, 2, figsize=(6.6, 3.0), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(WIDTH, 3.0))
     for ax, reference in zip(axes, REFERENCES):
         positions, labels = [], []
         for h_index, horizon in enumerate(HORIZONS):
@@ -107,10 +180,10 @@ def figure_paired_differences(inference):
                     row["mean_diff"],
                     yerr=[[low], [high]],
                     fmt="o",
-                    color="black",
+                    color=INK,
                     markersize=3.5,
                     capsize=2,
-                    linewidth=0.9,
+                    linewidth=THIN,
                     label="mean difference with 95% interval" if x == 0 else None,
                 )
                 ax.plot(
@@ -118,7 +191,8 @@ def figure_paired_differences(inference):
                     row["median_diff"],
                     marker="D",
                     markerfacecolor="white",
-                    markeredgecolor="#D55E00",
+                    markeredgecolor=MID,
+                    markeredgewidth=0.9,
                     markersize=4,
                     linestyle="none",
                     label="median difference" if x == 0 else None,
@@ -128,14 +202,15 @@ def figure_paired_differences(inference):
                     f"{wins}",
                     (x, row["mean_diff_ci_low"]),
                     textcoords="offset points",
-                    xytext=(0, -9),
+                    xytext=(0, -4),
                     ha="center",
-                    fontsize=6,
-                    color="#444444",
+                    va="top",
+                    fontsize=TINY,
+                    color=INK,
                 )
-        ax.axhline(0, color="#888888", linewidth=0.7)
+        ax.axhline(0, color=REFLINE, linewidth=THIN)
         ax.set_xticks(positions)
-        ax.set_xticklabels(labels, rotation=60, ha="right", fontsize=6.5)
+        ax.set_xticklabels(labels, rotation=45, ha="right", rotation_mode="anchor")
         for h_index, horizon in enumerate(HORIZONS):
             ax.text(
                 h_index * 4 + 1,
@@ -143,21 +218,21 @@ def figure_paired_differences(inference):
                 f"{horizon} days",
                 transform=ax.get_xaxis_transform(),
                 ha="center",
-                fontsize=7,
+                va="bottom",
+                fontsize=SMALL,
             )
         ax.set_title(f"against {REFERENCE_LABEL[reference]}", pad=12)
-        ax.set_ylabel("QScore9, model minus reference")
-        ax.grid(axis="y", linewidth=0.3, alpha=0.6)
+        ax.set_ylabel("QScore9 difference, model minus reference")
+        ax.grid(axis="y")
         ymin, ymax = ax.get_ylim()
         ax.set_ylim(ymin - 0.12 * (ymax - ymin), ymax)
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=2, frameon=False)
+    legend_below(fig, axes[0], ncol=2)
     save(fig, "fig-paired-differences")
 
 
 def figure_cumulative(curves, horizon=30):
     """Signed cumulative contribution curves of the post-hoc accounting (the report's figure)."""
-    fig, axes = plt.subplots(2, 3, figsize=(6.6, 4.4), sharex=True, constrained_layout=True)
+    fig, axes = plt.subplots(2, 3, figsize=(WIDTH, 4.3), sharex=True)
     for r_index, reference in enumerate(REFERENCES):
         for m_index, model in enumerate(MODELS):
             ax = axes[r_index, m_index]
@@ -169,25 +244,25 @@ def figure_cumulative(curves, horizon=30):
                     fraction,
                     y,
                     color=PART_COLOR[part],
-                    linewidth=1.2 if part == "qscore9" else 0.9,
+                    linestyle=PART_DASH[part],
+                    linewidth=BOLD if part == "qscore9" else LINE,
                     label=PART_LABEL[part],
                 )
-            ax.axhline(0, color="#888888", linewidth=0.6)
+            ax.axhline(0, color=REFLINE, linewidth=THIN)
             if r_index == 0:
                 ax.set_title(MODEL_LABEL[model])
-            ax.grid(linewidth=0.3, alpha=0.6)
+            ax.grid()
             if m_index == 0:
                 ax.set_ylabel(f"vs {REFERENCE_LABEL[reference]}\ncumulative mean difference")
             if r_index == 1:
                 ax.set_xlabel("repository fraction (sorted)")
-    handles, labels = axes[0, 0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=4, frameon=False)
+    legend_below(fig, axes[0, 0], ncol=4)
     save(fig, f"fig-posthoc-cumulative-h{horizon}")
 
 
 def figure_zero_fraction(paired, horizon=30):
     """Paired difference against the context zero fraction, by sampling stratum."""
-    fig, axes = plt.subplots(2, 3, figsize=(6.6, 4.4), sharex=True, constrained_layout=True)
+    fig, axes = plt.subplots(2, 3, figsize=(WIDTH, 4.3), sharex=True)
     for r_index, reference in enumerate(REFERENCES):
         for m_index, model in enumerate(MODELS):
             ax = axes[r_index, m_index]
@@ -199,21 +274,21 @@ def figure_zero_fraction(paired, horizon=30):
                     part["qscore9_difference"],
                     s=7,
                     color=STRATUM_COLOR[stratum],
-                    alpha=0.7,
+                    alpha=0.8,
                     linewidths=0,
                     label=f"day-90 stratum {stratum}",
                 )
-            ax.axhline(0, color="#888888", linewidth=0.6)
+            ax.axhline(0, color=REFLINE, linewidth=THIN)
             ax.set_yscale("symlog", linthresh=0.01)
             if r_index == 0:
                 ax.set_title(MODEL_LABEL[model])
-            ax.grid(linewidth=0.3, alpha=0.6)
+            ax.grid()
             if m_index == 0:
-                ax.set_ylabel(f"vs {REFERENCE_LABEL[reference]}\nQScore9 difference (symlog)")
+                ax.set_ylabel(f"vs {REFERENCE_LABEL[reference]}\nQScore9 difference")
             if r_index == 1:
                 ax.set_xlabel("context zero fraction")
     handles, labels = axes[0, 0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
+    fig.legend(handles, labels, loc="outside lower center", ncol=3, markerscale=2)
     save(fig, f"fig-posthoc-zero-fraction-h{horizon}")
 
 
@@ -230,7 +305,7 @@ def contrast_kind(reference):
 
 def figure_npm_paired(paired, inference):
     """Study 2 on npm: the 209 paired differences of each of the 18 rows, dominant series marked."""
-    fig, axes = plt.subplots(1, 3, figsize=(6.6, 3.2), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(WIDTH, 3.3))
     kinds = list(CONTRAST_LABEL)
     rng = np.random.default_rng(20260916)
     for ax, kind in zip(axes, kinds):
@@ -245,16 +320,16 @@ def figure_npm_paired(paired, inference):
                 x + jitter,
                 others["difference"],
                 s=4,
-                color="#0072B2",
-                alpha=0.45,
+                color=LIGHT,
+                alpha=0.7,
                 linewidths=0,
                 label="one of the other 208 series" if (ax is axes[0] and x == 0) else None,
             )
             ax.scatter(
                 [x],
                 dominant["difference"],
-                s=22,
-                color="#C00000",
+                s=18,
+                color=RED,
                 marker="o",
                 clip_on=False,
                 zorder=3,
@@ -264,27 +339,30 @@ def figure_npm_paired(paired, inference):
                 row["median_diff"],
                 x - 0.3,
                 x + 0.3,
-                color="black",
-                linewidth=1.1,
+                color=INK,
+                linewidth=BOLD,
                 zorder=4,
                 label="median difference" if (ax is axes[0] and x == 0) else None,
             )
             positions.append(x)
             model = row["model"].split("_")[0]
             labels.append(f"{row['id']} {MODEL_LABEL[model]} h{row['horizon']}")
-        ax.axhline(0, color="#888888", linewidth=0.6)
+        ax.axhline(0, color=REFLINE, linewidth=THIN)
         ax.set_yscale("symlog", linthresh=0.01)
         low, high = ax.get_ylim()
         ax.set_ylim(symlog_pad(low, -1), symlog_pad(high, 1))
+        thin_symlog(ax.yaxis)
         ax.set_xlim(-0.6, len(positions) - 0.4)
         ax.set_xticks(positions)
-        ax.set_xticklabels(labels, rotation=70, ha="right", fontsize=5.5)
+        ax.set_xticklabels(labels, rotation=60, ha="right", rotation_mode="anchor")
         ax.set_title(CONTRAST_LABEL[kind])
-        ax.grid(axis="y", linewidth=0.3, alpha=0.6)
+        ax.grid(axis="y")
         if ax is axes[0]:
-            ax.set_ylabel("QScore9, variant minus reference (symlog)")
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
+            ax.set_ylabel("QScore9 difference, variant minus reference")
+    legend = legend_below(fig, axes[0], ncol=3)
+    # The legend draws the small, faint dot larger and opaque, so that it can be seen.
+    legend.legend_handles[0].set_sizes([12])
+    legend.legend_handles[0].set_alpha(1)
     save(fig, "fig-s2-npm-paired-differences")
 
 
@@ -292,10 +370,10 @@ def figure_synthetic_cells(cells, horizon=30):
     """Study 2 on the grid: the mean paired difference of each contrast in each of the 18 cells."""
     rows = cells[(cells["metric"] == "qscore9") & (cells["horizon"] == horizon)]
     ids = ["S01", "S02", "S03", "S04", "S05", "S06"]
-    fig, axes = plt.subplots(2, 3, figsize=(6.6, 4.6), sharey=True, constrained_layout=True)
+    fig, axes = plt.subplots(2, 3, figsize=(WIDTH, 5.0), sharey=True)
     order = rows.drop_duplicates("cell_id").sort_values("cell_id")
     cell_labels = [
-        f"z={r.zero_probability:g}, μ+={int(r.positive_mean)}, ρ={r.persistence:g}"
+        f"$z={r.zero_probability:g}$, $\\mu_+={int(r.positive_mean)}$, $\\rho={r.persistence:g}$"
         for r in order.itertuples()
     ]
     for ax, cid in zip(axes.ravel(), ids):
@@ -303,28 +381,29 @@ def figure_synthetic_cells(cells, horizon=30):
         colors = [Z_COLOR[z] for z in part["zero_probability"]]
         y = np.arange(len(part))
         ax.barh(y, part["mean_diff"], color=colors, height=0.7)
-        ax.axvline(0, color="#888888", linewidth=0.6)
+        ax.axvline(0, color=REFLINE, linewidth=THIN)
         ax.set_yticks(y)
-        ax.set_yticklabels(cell_labels, fontsize=5.5)
+        ax.set_yticklabels(cell_labels)
+        ax.tick_params(axis="y", length=0)
         ax.invert_yaxis()
         ax.set_xscale("symlog", linthresh=0.01)
         ax.set_xticks([-1, -0.1, 0, 0.1, 1])
-        ax.set_xticklabels(["-1", "-0.1", "0", "0.1", "1"], fontsize=6)
+        ax.set_xticklabels(["$-1$", "$-0.1$", "$0$", "$0.1$", "$1$"])
         ax.xaxis.set_minor_locator(matplotlib.ticker.NullLocator())
         first = part.iloc[0]
         model = MODEL_LABEL[first["model"].split("_")[0]]
         reference = "control" if first["reference"].endswith("_completed") else "count hurdle"
-        ax.set_title(f"{cid}: {model} hurdle vs {reference}", fontsize=7)
-        ax.grid(axis="x", linewidth=0.3, alpha=0.6)
+        ax.set_title(f"{cid}: {model} hurdle\nvs {reference}")
+        ax.grid(axis="x")
     for ax in axes[1]:
-        ax.set_xlabel("mean difference (symlog)", fontsize=7)
+        ax.set_xlabel("mean difference,\nsymmetric log scale")
+    fig.get_layout_engine().set(wspace=0.04)
     handles = [plt.Rectangle((0, 0), 1, 1, color=Z_COLOR[z]) for z in Z_COLOR]
     fig.legend(
         handles,
-        [f"zero probability z = {z:g}" for z in Z_COLOR],
+        [f"zero probability $z = {z:g}$" for z in Z_COLOR],
         loc="outside lower center",
         ncol=3,
-        frameon=False,
     )
     save(fig, "fig-s2-synthetic-cells")
 
@@ -334,13 +413,13 @@ def figure_nyc311_family(inference):
     strata = ["dense", "sparse", "very_sparse"]
     stratum_label = {"dense": "dense", "sparse": "sparse", "very_sparse": "very sparse"}
     predicted = {"dense": 1, "sparse": -1, "very_sparse": -1}
-    fig, axes = plt.subplots(1, 3, figsize=(6.6, 3.4), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(WIDTH, 3.6))
     for ax, stratum in zip(axes, strata):
         rows = inference[inference["stratum"] == stratum].sort_values("id")
         positions, labels = [], []
         for x, (_, row) in enumerate(rows.iterrows()):
             is_t1 = row["contrast"] == "T1"
-            color = "#0072B2" if is_t1 else "#D55E00"
+            color = DARK if is_t1 else MID
             rejects = bool(row["reject_bh_005"])
             low = row["mean_diff"] - row["mean_diff_ci_low"]
             high = row["mean_diff_ci_high"] - row["mean_diff"]
@@ -348,12 +427,13 @@ def figure_nyc311_family(inference):
                 x,
                 row["mean_diff"],
                 yerr=[[low], [high]],
-                fmt="o",
+                fmt="o" if is_t1 else "s",
                 color=color,
                 markerfacecolor=color if rejects else "white",
-                markersize=3.5,
+                markersize=3.5 if is_t1 else 3.2,
+                markeredgewidth=0.9,
                 capsize=1.5,
-                linewidth=0.8,
+                linewidth=THIN,
                 label=(
                     "T1, mean with 95% interval (filled: rejects)"
                     if (ax is axes[0] and row["id"] == "R01")
@@ -366,222 +446,39 @@ def figure_nyc311_family(inference):
                 x,
                 row["median_diff"],
                 marker="_",
-                color="black",
+                color=INK,
                 markersize=7,
-                markeredgewidth=1.2,
+                markeredgewidth=BOLD,
                 linestyle="none",
                 label="median difference" if (ax is axes[0] and row["id"] == "R01") else None,
             )
             positions.append(x)
             labels.append(f"{row['id']} {MODEL_LABEL[row['model']]} h{row['horizon']}")
-        ax.axhline(0, color="#888888", linewidth=0.6)
+        ax.axhline(0, color=REFLINE, linewidth=THIN)
         ax.set_yscale("symlog", linthresh=0.001)
         low, high = ax.get_ylim()
         ax.set_ylim(symlog_pad(low, -1), symlog_pad(high, 1))
         ax.set_xlim(-0.6, len(positions) - 0.4)
         # The half-plane of H3's predicted T1 sign is shaded.
         if predicted[stratum] > 0:
-            ax.axhspan(0, ax.get_ylim()[1], color="#0072B2", alpha=0.06, linewidth=0)
+            ax.axhspan(0, ax.get_ylim()[1], color=DARK, alpha=0.07, linewidth=0)
         else:
-            ax.axhspan(ax.get_ylim()[0], 0, color="#0072B2", alpha=0.06, linewidth=0)
+            ax.axhspan(ax.get_ylim()[0], 0, color=DARK, alpha=0.07, linewidth=0)
         ax.set_xticks(positions)
-        ax.set_xticklabels(labels, rotation=70, ha="right", fontsize=5.5)
+        ax.set_xticklabels(labels, rotation=60, ha="right", rotation_mode="anchor")
         ax.set_title(f"{stratum_label[stratum]}, n = 100")
-        ax.grid(axis="y", linewidth=0.3, alpha=0.6)
+        ax.grid(axis="y")
         if ax is axes[0]:
-            ax.set_ylabel("QScore9, hurdle_dynamic minus reference (symlog)")
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
+            ax.set_ylabel("QScore9 difference,\ndynamic hurdle minus reference")
+    legend_below(fig, axes[0], ncol=3)
     save(fig, "fig-s3-nyc311-family")
 
 
-# --- the paper's four body figures ---------------------------------------------------------------
+# --- the paper's three plotted body figures -------------------------------------------------------
 
 
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def box(ax, x, y, w, h, title, lines, face="#F4F4F4", edge="#444444"):
-    ax.add_patch(
-        FancyBboxPatch(
-            (x, y),
-            w,
-            h,
-            boxstyle="round,pad=0.01,rounding_size=0.015",
-            linewidth=0.8,
-            edgecolor=edge,
-            facecolor=face,
-        )
-    )
-    ax.text(x + w / 2, y + h - 0.04, title, ha="center", va="top", fontsize=7.2, weight="bold")
-    for i, line in enumerate(lines):
-        ax.text(
-            x + w / 2,
-            y + h - 0.105 - 0.05 * i,
-            line,
-            ha="center",
-            va="top",
-            fontsize=5.8,
-            family="monospace" if line.startswith(" ") else None,
-            color="#333333",
-        )
-
-
-def figure_design():
-    """The design at a glance: the two-by-two of forecasters and the three panels."""
-    s1_strata = pd.read_csv(REPORT / "evidence" / "panel-diagnostic" / "strata.csv")
-    s1_panel = load_json(REPORT / "evidence" / "panel" / "panel-summary.json")
-    npm_status = load_json(STUDY / "study2" / "npm_panel_status.json")
-    nyc_status = load_json(STUDY / "study3" / "nyc311_panel_status.json")
-    grid = load_json(STUDY / "study2" / "grid_manifest.json")
-    s1_frame = int(s1_strata.frame_size.sum())
-    npm_strata = npm_status["achieved_strata"]
-    nyc_frame = nyc_status["frame"]["eligible_frame_size"]
-    nyc_series = sum(v["achieved"] for v in nyc_status["achieved_strata"].values())
-
-    fig = plt.figure(figsize=(7.0, 3.6))
-    ax = fig.add_axes([0, 0, 1, 1])
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.axis("off")
-    # Left: the two-by-two, occurrence source (rows) by positive-law source (columns).
-    ax.text(
-        0.25,
-        0.965,
-        "The forecasters: where each part comes from",
-        ha="center",
-        fontsize=8,
-        weight="bold",
-    )
-    ax.text(0.18, 0.905, "positive law from the model", ha="center", fontsize=6.5)
-    ax.text(0.385, 0.905, "positive law from a count law", ha="center", fontsize=6.5)
-    ax.text(0.035, 0.74, "occurrence\nfrom the\nmodel", ha="center", va="center", fontsize=6.5)
-    ax.text(0.035, 0.37, "occurrence\nfrom the\ncontext", ha="center", va="center", fontsize=6.5)
-    box(
-        ax,
-        0.08,
-        0.61,
-        0.195,
-        0.27,
-        "completed (control)",
-        ["nine deciles completed", "into a count law", " <m>_completed"],
-    )
-    box(
-        ax,
-        0.29,
-        0.61,
-        0.195,
-        0.27,
-        "fourth cell",
-        [
-            "model's 1 - F(0) with the",
-            "shifted-Poisson law",
-            " <m>_occurrence_",
-            " model_size_count",
-        ],
-        face="#FBF3E6",
-    )
-    box(
-        ax,
-        0.08,
-        0.12,
-        0.195,
-        0.43,
-        "hurdle",
-        [
-            "28-day Jeffreys p (fixed)",
-            " <m>_hurdle",
-            "",
-            "discounted Beta-",
-            "Bernoulli p (dynamic)",
-            " <m>_hurdle_dynamic",
-        ],
-    )
-    box(
-        ax,
-        0.29,
-        0.12,
-        0.195,
-        0.43,
-        "count baselines",
-        [
-            "Jeffreys p, shifted Poisson",
-            " hurdle_count_28",
-            "Jeffreys p, empirical law",
-            " hurdle_empirical_28",
-            "discounted p and size",
-            " dynamic_count",
-        ],
-    )
-    ax.text(
-        0.28,
-        0.055,
-        "Also scored: the raw nine deciles (<m>_raw), the 28-day local mean and weekly AutoETS;\n"
-        "the TSB hurdle (post hoc) is the count hurdle with TSB's two estimates.",
-        ha="center",
-        va="center",
-        fontsize=5.8,
-        color="#333333",
-    )
-    # Right: the panels as three columns, and the grid.
-    ax.text(0.76, 0.965, "The panels", ha="center", fontsize=8, weight="bold")
-    cols = [
-        (
-            "GitHub stars",
-            [
-                f"frame {s1_frame:,}",
-                "repositories",
-                "seeded order in three",
-                "day-90 activity strata",
-                f"{s1_panel['n_accepted']} series",
-                "horizons 7, 30, 90",
-            ],
-        ),
-        (
-            "npm downloads",
-            [
-                f"inventory {npm_status['inventory']['names']:,}",
-                "names; hash order to",
-                f"{npm_status['candidate_pool_size']:,} eligible",
-                "zero-fraction strata",
-                f"{npm_status['series']} series ({npm_strata['dense']['achieved']}, "
-                f"{npm_strata['sparse']['achieved']}, {npm_strata['very_sparse']['achieved']})",
-                "horizons 7, 30",
-            ],
-        ),
-        (
-            "NYC 311 requests",
-            [
-                f"frame {nyc_frame:,} problem-",
-                "by-board cells, hash order",
-                "zero-fraction strata",
-                f"{nyc_series} series",
-                "100 per stratum",
-                "horizons 7, 30",
-            ],
-        ),
-    ]
-    for i, (title, lines) in enumerate(cols):
-        box(ax, 0.52 + 0.16 * i, 0.45, 0.15, 0.44, title, lines, face="#EEF3F8")
-    box(
-        ax,
-        0.52,
-        0.12,
-        0.47,
-        0.27,
-        "synthetic grid",
-        [
-            f"{grid['n_cells']} cells: z in {{0.2, 0.8, 0.95}}, positive mean in {{1, 5, 25}},",
-            f"persistence in {{0, 0.8}}; {grid['replicates_per_cell']} replicates per cell, "
-            f"{grid['n_series']} series",
-            f"of {grid['observations']} days; origins "
-            f"{', '.join(str(o) for o in grid['origins'])}; the positive law is",
-            "the count hurdle's own family; an oracle is a diagnostic",
-        ],
-        face="#EEF3F8",
-    )
-    save(fig, "fig-design")
 
 
 def load_scores_with_zero_fraction(scores, manifest):
@@ -633,19 +530,17 @@ def grid_shares(grid, cells, horizon, score):
 
 
 def figure_signature(npm, nyc, grid, cells):
-    """The occurrence substitution against the context zero fraction: shares lower and tied per "
-    "bin."""
+    """The occurrence substitution against the context zero fraction: shares lower and tied."""
     domains = [
-        ("npm, fixed hurdle", npm, "hurdle", "#0072B2"),
-        ("NYC 311, dynamic hurdle", nyc, "hurdle_dynamic", "#D55E00"),
+        ("npm, fixed hurdle", npm, "hurdle", DARK),
+        ("NYC 311, dynamic hurdle", nyc, "hurdle_dynamic", MID),
     ]
+    marker = {DARK: "o", MID: "^"}
     scores = [
         ("qscore9", "QScore9 (registered primary)"),
         ("occurrence_brier", "occurrence Brier score (declared secondary)"),
     ]
-    fig, axes = plt.subplots(
-        2, 2, figsize=(6.6, 4.6), sharex=True, sharey=True, constrained_layout=True
-    )
+    fig, axes = plt.subplots(2, 2, figsize=(WIDTH, 4.6), sharex=True, sharey=True)
     for r, (score, score_label) in enumerate(scores):
         for c, horizon in enumerate((7, 30)):
             ax = axes[r, c]
@@ -656,41 +551,47 @@ def figure_signature(npm, nyc, grid, cells):
                     mid,
                     s.lower / s.n,
                     color=color,
-                    marker="o",
+                    marker=marker[color],
                     markersize=3.5,
-                    linewidth=1.1,
+                    linewidth=LINE,
                     label=f"{name}: share lower" if (r == 0 and c == 0) else None,
                 )
                 ax.plot(
                     mid,
                     s.tied / s.n,
                     color=color,
-                    marker="o",
+                    marker=marker[color],
                     markersize=3.5,
-                    linewidth=0.9,
+                    linewidth=LINE,
                     linestyle=":",
                     markerfacecolor="white",
                     label=f"{name}: share tied" if (r == 0 and c == 0) else None,
                 )
+                # The pairs in each bin, in a row under the top left panel (npm above NYC 311); the
+                # two narrow bins at the right are set apart so that their numbers do not touch.
                 for x, row in zip(mid, s.itertuples()):
                     if r == 0 and c == 0:
                         ax.annotate(
                             f"{row.n}",
                             (x, -0.03),
-                            fontsize=4.8,
-                            ha="center",
+                            fontsize=TINY,
+                            ha="right" if 0.9 < x < 0.97 else "left" if x >= 0.97 else "center",
                             va="top",
                             color=color,
-                            xytext=(0, -2 - 6 * domains.index((name, d, variant, color))),
+                            xytext=(
+                                -1 if 0.9 < x < 0.97 else 1 if x >= 0.97 else 0,
+                                -5 - 7 * domains.index((name, d, variant, color)),
+                            ),
                             textcoords="offset points",
+                            annotation_clip=False,
                         )
             gs = grid_shares(grid, cells, horizon, score)
             ax.scatter(
                 gs.z,
                 gs.lower / gs.n,
-                color="#009E73",
+                color=LIGHT,
                 marker="s",
-                s=22,
+                s=20,
                 zorder=3,
                 label="grid, fixed hurdle, by zero probability: share lower"
                 if (r == 0 and c == 0)
@@ -699,65 +600,64 @@ def figure_signature(npm, nyc, grid, cells):
             ax.scatter(
                 gs.z,
                 gs.tied / gs.n,
-                color="#009E73",
+                color=LIGHT,
                 marker="s",
-                s=22,
+                s=20,
                 facecolors="white",
+                linewidths=1.0,
                 zorder=3,
                 label="grid: share tied" if (r == 0 and c == 0) else None,
             )
-            ax.axhline(0.5, color="#888888", linewidth=0.6, linestyle="--")
+            ax.axhline(0.5, color=REFLINE, linewidth=THIN, linestyle="--")
             for edge in BINS[1:-1]:
-                ax.axvline(edge, color="#DDDDDD", linewidth=0.5)
+                ax.axvline(edge, color=GRIDLINE, linewidth=0.4)
             ax.set_ylim(-0.02, 1.02)
             ax.set_xlim(-0.02, 1.02)
-            ax.set_title(f"{score_label}, horizon {horizon}", fontsize=7.5)
+            ax.set_title(f"{score_label}, horizon {horizon}")
             if c == 0:
                 ax.set_ylabel("share of series pairs")
             if r == 1:
                 ax.set_xlabel("context zero fraction (bins of the stratum window)")
-            ax.grid(axis="y", linewidth=0.3, alpha=0.6)
-    handles, labels = axes[0, 0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=2, frameon=False)
+            ax.grid(axis="y")
+    legend_below(fig, axes[0, 0], ncol=2)
     save(fig, "fig-signature")
 
 
 def figure_floor():
     """The completion floor, from the registered completion formula alone."""
-    fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.7), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(WIDTH, 3.0))
     # Left: the completed quantile function and count law for all-zero deciles (q9 = 0).
     ax = axes[0]
     u = np.linspace(0.0005, 0.9995, 2000)
     q9, s = 0.0, 1.0
     q = np.where(u <= 0.9, 0.0, q9 + s * np.log(0.1 / (1 - u)))
-    ax.plot(u, q, color="#0072B2", linewidth=1.2, label="completed quantile function Q(u)")
+    ax.plot(u, q, color=DARK, linewidth=LINE, label="completed quantile function $Q(u)$")
     ax.plot(
         u,
         np.maximum(0, np.floor(q + 0.5)),
-        color="#D55E00",
-        linewidth=1.0,
+        color=MID,
+        linewidth=LINE,
         drawstyle="steps-post",
-        label="rounded count floor(Q(u) + 0.5)",
+        label=r"rounded count $\lfloor Q(u) + 0.5 \rfloor$",
     )
-    ax.axhline(0.5, color="#888888", linewidth=0.6, linestyle="--")
-    ax.axvline(0.9, color="#888888", linewidth=0.6, linestyle=":")
+    ax.axhline(0.5, color=REFLINE, linewidth=THIN, linestyle="--")
+    ax.axvline(0.9, color=REFLINE, linewidth=THIN, linestyle=":")
     u_star = 1 - 0.1 * np.exp(-0.5)
-    ax.axvline(u_star, color="#009E73", linewidth=0.8)
-    ax.annotate(
-        f"P(Y > 0) = 1 - u* = {0.1 * np.exp(-0.5):.4f}",
-        (u_star, 2.6),
-        fontsize=6.5,
-        ha="right",
-        xytext=(-4, 0),
-        textcoords="offset points",
-        color="#009E73",
+    # The line at u* is named in the legend, so that no text sits in the plot.
+    ax.axvline(
+        u_star,
+        color=INK,
+        linewidth=THIN,
+        label=rf"$P(Y > 0) = 1 - u^{{\!\!*}} = {0.1 * np.exp(-0.5):.4f}$",
     )
     ax.set_xlim(0.8, 1.0)
     ax.set_ylim(-0.2, 4.5)
-    ax.set_xlabel("u")
+    ax.set_xticks([0.8, 0.85, 0.9, 0.95, 1.0])
+    ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter("%.2f"))
+    ax.set_xlabel("quantile level $u$")
     ax.set_ylabel("quantile / count")
-    ax.set_title("every decile zero: the exponential tail alone\nputs mass above 0.5", fontsize=7.5)
-    ax.legend(fontsize=6, loc="upper left", frameon=False)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+    ax.grid()
     # Right: the floor as a function of the ninth decile, with the Jeffreys estimates for 0, 1 and 2
     # positives.
     ax = axes[1]
@@ -765,26 +665,25 @@ def figure_floor():
     ax.plot(
         q9,
         0.1 * np.exp(-(0.5 - q9)),
-        color="#0072B2",
-        linewidth=1.2,
-        label="completed P(Y > 0) = 0.1 exp(-(0.5 - q9))",
+        color=DARK,
+        linewidth=LINE,
+        label=r"completed $P(Y > 0) = 0.1\, e^{-(0.5 - q_{0.9})}$",
     )
     for k, style in ((0, "-"), (1, "--"), (2, ":")):
         p = (k + 0.5) / 29
         ax.axhline(
             p,
-            color="#D55E00",
-            linewidth=0.8,
+            color=MID,
+            linewidth=LINE,
             linestyle=style,
-            label=f"Jeffreys p, {k} positive day{'s' if k != 1 else ''} in 28: {p:.4f}",
+            label=f"Jeffreys $p$, {k} positive day{'s' if k != 1 else ''} in 28: {p:.4f}",
         )
     ax.set_xlim(0, 0.5)
     ax.set_ylim(0, 0.11)
-    ax.set_xlabel("ninth repaired decile q9 (every decile below 0.5)")
+    ax.set_xlabel("ninth repaired decile $q_{0.9}$ (every decile below 0.5)")
     ax.set_ylabel("probability of a positive day")
-    ax.set_title("the floor: between 0.0607 and 0.1\nwhatever the model forecast", fontsize=7.5)
-    ax.legend(fontsize=6, loc="lower right", frameon=False)
-    ax.grid(linewidth=0.3, alpha=0.6)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+    ax.grid()
     save(fig, "fig-floor")
 
 
@@ -795,7 +694,7 @@ def cumulative_curve(diff):
 
 def figure_mean_typical(curves, npm, nyc, horizon=30):
     """The mean and the typical series: signed cumulative contribution curves, raw vs local mean."""
-    fig, axes = plt.subplots(1, 3, figsize=(6.6, 2.6), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(WIDTH, 2.6))
     # GitHub, from the post-hoc contribution curves of the Study 1 run.
     ax = axes[0]
     for model in MODELS:
@@ -804,10 +703,11 @@ def figure_mean_typical(curves, npm, nyc, horizon=30):
             np.r_[0, rows["repository_fraction"].to_numpy()],
             np.r_[0, rows["cumulative_qscore9_difference"].to_numpy()],
             color=MODEL_COLOR[model],
-            linewidth=1.1,
+            linestyle=MODEL_DASH[model],
+            linewidth=LINE,
             label=MODEL_LABEL[model],
         )
-    ax.set_title("GitHub stars, 300 repositories", fontsize=7.5)
+    ax.set_title("GitHub stars, 300 repositories")
     ax.set_ylabel(f"cumulative mean difference, horizon {horizon}")
     for ax, (title, d, n, symlog) in zip(
         axes[1:],
@@ -830,17 +730,16 @@ def figure_mean_typical(curves, npm, nyc, horizon=30):
             diff = (a - b).dropna()
             assert len(diff) == n
             x, y = cumulative_curve(diff)
-            ax.plot(x, y, color=MODEL_COLOR[model], linewidth=1.1)
+            ax.plot(x, y, color=MODEL_COLOR[model], linestyle=MODEL_DASH[model], linewidth=LINE)
         if symlog:
             ax.set_yscale("symlog", linthresh=0.01)
-        ax.set_title(title, fontsize=7.5)
+        ax.set_title(title)
     for ax in axes:
-        ax.axhline(0, color="#888888", linewidth=0.6)
-        ax.axvline(0.5, color="#BBBBBB", linewidth=0.6, linestyle=":")
+        ax.axhline(0, color=REFLINE, linewidth=THIN)
+        ax.axvline(0.5, color=REFLINE, linewidth=THIN, linestyle=":")
         ax.set_xlabel("series fraction, sorted by difference")
-        ax.grid(linewidth=0.3, alpha=0.6)
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False)
+        ax.grid()
+    legend_below(fig, axes[0], ncol=3)
     save(fig, "fig-mean-typical")
 
 
@@ -858,8 +757,7 @@ def main():
     figure_synthetic_cells(cells)
     nyc311_inference = pd.read_csv(NYC311_INFERENCE, **ROUND_TRIP)
     figure_nyc311_family(nyc311_inference)
-    # The paper's body figures.
-    figure_design()
+    # The paper's plotted body figures.
     npm = load_scores_with_zero_fraction(
         NPM / "inference" / "series_scores.csv", NPM_PANEL / "manifest.json"
     )

@@ -4277,6 +4277,51 @@ expect(
     PT,
 )
 
+# Figure 1, the design at a glance, is typeset in 03-design.tex since 2026-10-20; its numbers are
+# asserted against the files its drawing function read: the Study 1 strata and panel summary, the
+# npm and NYC 311 panel status files and the grid manifest.
+f1_strata = pd.read_csv(REPORT / "evidence" / "panel-diagnostic" / "strata.csv")
+f1_s1_frame = int(f1_strata.frame_size.sum())
+f1_s1_panel = load(REPORT / "evidence" / "panel" / "panel-summary.json")
+f1_npm = load(S2 / "npm_panel_status.json")
+f1_npm_strata = f1_npm["achieved_strata"]
+f1_nyc = load(S3 / "nyc311_panel_status.json")
+f1_grid = load(S2 / "grid_manifest.json")
+for label, needle in (
+    ("figure 1: GitHub frame", f"frame {f1_s1_frame:,} repositories"),
+    ("figure 1: GitHub series", f"{f1_s1_panel['n_accepted']} series & {f1_npm['series']} series"),
+    (
+        "figure 1: npm inventory",
+        f"inventory {f1_npm['inventory']['names']:,} names; hash order to "
+        f"{f1_npm['candidate_pool_size']:,} eligible",
+    ),
+    (
+        "figure 1: npm strata",
+        f"{f1_npm['series']} series \\mbox{{({f1_npm_strata['dense']['achieved']}, "
+        f"{f1_npm_strata['sparse']['achieved']}, {f1_npm_strata['very_sparse']['achieved']})}}",
+    ),
+    (
+        "figure 1: NYC 311 frame",
+        f"frame {f1_nyc['frame']['eligible_frame_size']:,} problem-by-board cells, hash order",
+    ),
+    (
+        "figure 1: NYC 311 series",
+        f"{sum(v['achieved'] for v in f1_nyc['achieved_strata'].values())} series\\newline 100 per "
+        "stratum",
+    ),
+    (
+        "figure 1: grid",
+        f"{f1_grid['n_cells']} cells: $z$ in $\\{{0.2, 0.8, 0.95\\}}$, positive mean in "
+        f"$\\{{1, 5, 25\\}}$, persistence in $\\{{0, 0.8\\}}$; {f1_grid['replicates_per_cell']} "
+        f"replicates per cell, {f1_grid['n_series']} series of {f1_grid['observations']} days; "
+        f"origins {', '.join(str(o) for o in f1_grid['origins'])};",
+    ),
+):
+    expect(label, needle, ("03-design.tex",))
+checks += 1
+if (FIG.parent / "fig-design.pdf").exists() or "fig-design" in TEXT["03-design.tex"]:
+    failures.append("figure 1: the drawn fig-design is still in the tree or still included")
+
 # The ledger: dates and commits of the protocol's dated additions, from git.
 try:
     ledger_log = subprocess.run(

@@ -134,7 +134,7 @@ the models.
   xurl for the paper's layout. The font package cm-super was installed on 2026-10-19 with the author's
   approval, for the text-companion symbols.
 - The paper builds with pdfLaTeX to 53 pages on A4: the body, Sections 1 to 10, fills pages 1 to 14 and the
-  top fifth of page 15, with Tables 4 and 5 a full page each; the references fill pages 15 to 18; the
+  top third of page 15, with Tables 4 and 5 a full page each; the references fill pages 15 to 18; the
   appendix fills pages 19 to 53. The Study 1 report builds to 13 pages: body to about two thirds of page 8,
   references to the top of page 10, appendix pages 10 to 13.
 - Widths: no line or table of the paper runs past the text width by more than 5 pt. Three run past by less:
@@ -152,8 +152,8 @@ the models.
   estimate was 12.8 pages, or 13.8 with the two full-page tables counted whole; the build gives about 14.2
   pages before the references. The aim was about 7,000 words, and the cut is the author's.
 - The itemize bullets and the one dollar sign that were set from a bitmap font are set in Type 1 since
-  cm-super was installed; the only Type 3 fonts left in either PDF are those matplotlib embedded in the
-  figures.
+  cm-super was installed. Since 2026-10-20 the figures are set in Computer Modern, 8 pt with 7 pt tick
+  labels and legends, and embed it as TrueType (Type 42), so neither PDF holds a Type 3 font.
 
 ### What could not be verified
 

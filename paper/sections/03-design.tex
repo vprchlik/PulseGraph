@@ -28,8 +28,58 @@ with a Beta-Bernoulli occurrence and a Gamma-Poisson size forgotten at 0.98 a da
 with TSB's two estimates in place of the 28-day ones.
 
 \begin{figure}[t]
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{minipage}[t]{0.52\textwidth}
 \centering
-\includegraphics[width=\textwidth]{fig-design}
+\textbf{The forecasters: where each part comes from}\\[2pt]
+\begin{tabular}{@{}P{15mm}P{31mm}P{32mm}@{}}
+\toprule
+ & positive law from the model & positive law from a count law \\
+\midrule
+occurrence from the model &
+\emph{completed (control)}\newline nine deciles completed into a count law\newline
+\texttt{<m>\_completed} &
+\emph{fourth cell}\newline model's $1 - F(0)$ with the shifted-Poisson law\newline
+\texttt{<m>\_occurrence\_}\newline\texttt{model\_size\_count} \\
+\addlinespace
+occurrence from the context &
+\emph{hurdle}\newline 28-day Jeffreys $p$ (fixed)\newline \texttt{<m>\_hurdle}\par\vspace{2pt}
+discounted Beta-Bernoulli $p$ (dynamic)\newline \texttt{<m>\_hurdle\_dynamic} &
+\emph{count baselines}\newline Jeffreys $p$, shifted Poisson\newline \texttt{hurdle\_count\_28}\par\vspace{2pt}
+Jeffreys $p$, empirical law\newline \texttt{hurdle\_empirical\_28}\par\vspace{2pt}
+discounted $p$ and size\newline \texttt{dynamic\_count} \\
+\bottomrule
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\centering
+\textbf{The panels}\\[2pt]
+\begin{tabular}{@{}P{22mm}P{23mm}P{23mm}@{}}
+\toprule
+GitHub stars & npm downloads & NYC 311 requests \\
+\midrule
+frame 148,550 repositories & inventory 4,486,927 names; hash order to 10,000 eligible &
+frame 8,469 problem-by-board cells, hash order \\
+\addlinespace[2pt]
+seeded order in three day-90 activity strata & zero-fraction strata & zero-fraction strata \\
+\addlinespace[2pt]
+300 series & 209 series \mbox{(100, 100, 9)} & 300 series\newline 100 per stratum \\
+\addlinespace[2pt]
+horizons 7, 30, 90 & horizons 7, 30 & horizons 7, 30 \\
+\midrule
+\multicolumn{3}{@{}p{73mm}@{}}{\raggedright\emph{synthetic grid}\newline 18 cells: $z$ in
+$\{0.2, 0.8, 0.95\}$, positive mean in $\{1, 5, 25\}$, persistence in $\{0, 0.8\}$; 30 replicates per
+cell, 540 series of 270 days; origins 180, 210, 240; the positive law is the count hurdle's own family;
+an oracle is a diagnostic} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+\medskip
+\begin{minipage}{\textwidth}
+\raggedright Also scored: the raw nine deciles (\texttt{<m>\_raw}), the 28-day local mean and weekly
+AutoETS; the TSB hurdle (post hoc) is the count hurdle with TSB's two estimates.
+\end{minipage}
 \caption{The design at a glance. Left: the forecasters as a two-by-two of where the occurrence probability
 and the positive law come from, with each variant's identifier in the saved files under its plain name;
 the fixed hurdle and the dynamic hurdle differ from the completed control in the occurrence alone, the

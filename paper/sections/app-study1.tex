@@ -55,6 +55,16 @@ Stratum & Frame & Accepted & Skipped & Ratio median & P10 & P90 & Zero, last 90 
 \end{tabular}
 \end{table}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig-paired-differences}
+\caption{The 18 declared comparisons. Filled circles: mean difference (model minus reference \qs{}) with its
+pointwise 95 percent repository-bootstrap interval. Open diamonds: median difference. The number under each
+interval is the count of repositories, of 300, where the model's score is lower. Note the different vertical
+scales.}
+\label{fig:paired}
+\end{figure}
+
 \paragraph{The 18 registered comparisons.} Tables~\ref{tab:lm} and~\ref{tab:ae} give the family, one table
 per reference, with the mean difference and its interval, the median difference, the number of repositories
 where the model's \qs{} is lower, the strict win fraction and the adjusted $p$-value side by side;
@@ -115,16 +125,6 @@ TimesFM 2.5 & 90 & -6.735 & [-13.339, -2.871] & -0.2809 & 297 & 0.990 & $3.2 \ti
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig-paired-differences}
-\caption{The 18 declared comparisons. Filled circles: mean difference (model minus reference \qs{}) with its
-pointwise 95 percent repository-bootstrap interval. Open diamonds: median difference. The number under each
-interval is the count of repositories, of 300, where the model's score is lower. Note the different vertical
-scales.}
-\label{fig:paired}
-\end{figure}
 
 \paragraph{The post-hoc accounting.} Computed on 2026-09-14 from the saved forecasts after the registered
 results were seen, adding no test: each window's \qs{} is split exactly into three parts, each divided by the
