@@ -1,6 +1,6 @@
 # PulseGraph: the current state
 
-Last rewritten 2026-10-19 05:23 UTC, from the files alone. Two screens at most; history is in
+Last rewritten 2026-10-20 10:58 UTC, from the files alone. Two screens at most; history is in
 `docs/HISTORY.md` and the dated documents.
 
 ## The deliverable
@@ -12,7 +12,7 @@ the fallback only if the npm source fails. Anything not run by the paper's date 
 
 ## Committed
 
-`main` is at `6f7e75f` (2026-10-19 03:41 UTC), 65 commits, pushed. Since 2026-10-12 the root carries
+`main` is at `8235c64` (2026-10-20 04:00 UTC), 67 commits, pushed. Since 2026-10-12 the root carries
 `CONTRIBUTING.md`, `docs/` holds the project pages, and `README.md` states how the project was built. The tree
 holds the ported study code and 170 Study 1 offline tests; the registered protocol (`5f01769`, Study 1; `df55867`,
 Study 2 appended); the registered run's evidence package under `reports/registered-2026-09-13/` (manifest,
@@ -196,9 +196,25 @@ ignored folder and hashed: Study 1's `results.parquet` (433,172,286 bytes), the 
 the integrity checks pass), and the two target-signals files. `reports/release/ASSETS.md` lists them with a verifier
 beside it; the npm and NYC 311 daily counts are committed as small files with provenance and a byte-rebuild test;
 `README.md` opens with a first screen for a visitor; the posting checklist is
-`docs/ideas/2026-10-18-release-and-posting.md`. The paper's data statement says so since 2026-10-19 (awaiting the
-author's commit): the daily counts in the tree, the results file, the 1,049 checkpoints and the two signals files as the
-release assets. The release itself is not yet created; its URLs and the DOIs enter the tree on posting day.
+`docs/ideas/2026-10-18-release-and-posting.md`. The paper's data statement says so since 2026-10-19 (committed
+`a8c98f0`). The release is public since 2026-10-20 at `https://github.com/vprchlik/PulseGraph/releases/tag/assets-2026-10-18`,
+six assets, every byte verified against the manifest after download; its URLs and the DOIs enter the tree on posting day.
+
+**The figures and the page layout (2026-10-20 10:29 UTC; awaiting the author's commit).** After the author's read of
+the PDF, Figure 1 became two typeset tables carrying exactly its words; the eight plotted figures were redrawn in the
+page's typeface at the text width with legends under the panels, thinned ticks, one palette that separates in gray and
+embedded fonts, with every plotted value shown identical by a recorder that compares the drawn data; every page was
+read at 110 dpi and five floats moved whole to end the empty half-pages and the headings at the foot of a page. The
+paper is 53 pages; the checker passes 1,460 checks. The report's three shared figures carry the new style; its source
+is unchanged.
+
+**The body's prose, measured (2026-10-20).** Against seven published papers of its kind and the author's own writing,
+the body's sentences average 43 words (the references 18 to 28), 55 percent run past 35 words, 47 percent carry a
+colon or a semicolon, half state a number and few say what the numbers mean, and no sentence speaks in the first
+person. The body is revised next for clarity and voice, one finding per sentence with the author's choices and
+readings in the first person, under a claim ledger that holds every number, claim, term and citation, and a review of
+that ledger by a different reader; the appendix follows only if the author accepts the body. TMLR requires an
+anonymous submission, so posting day builds two versions from one source.
 
 ## Study 3 (dated addition 7 of 2026-10-16, committed `3357d77`; the code `f7a8628`)
 
@@ -314,8 +330,8 @@ and adoption counts, and nothing broader.
 
 ## Next steps
 
-The author's commit of the pre-posting changes; his read of the paper's summary and the two PDFs; the GitHub release
-and its URLs; the reserved DOI; the posting-day changes (URLs and DOIs into the tree, the checker changed with them);
+The author's commit of the figure pass; the body revised for clarity and voice and its claims reviewed; his acceptance;
+the reserved DOI; posting day (URLs and DOIs into the tree, the anonymous TMLR build, the checker changed with them);
 the
 author's read of both summaries and of the report's title, abstract and summary; the PDF (no TeX on this machine);
 the GitHub release and the release assets for the checkpoints; the paper on Zenodo and to TMLR by 2026-10-31. Dates and

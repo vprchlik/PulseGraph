@@ -1,6 +1,6 @@
 # PulseGraph: the plan
 
-Last rewritten 2026-10-19 05:23 UTC. This page holds only what is current.
+Last rewritten 2026-10-20 10:58 UTC. This page holds only what is current.
 
 ## The two steps
 
@@ -52,8 +52,12 @@ day.
 | Both documents built for the first time: the logs read, overfull lines fixed in the source, the page counts recorded | done 2026-10-18 08:06 UTC: the paper 53 pages (body about 14), the report 13; awaiting the commit | the commit | done |
 | Release preparation: the asset manifest with hashes and a verifier, the three checkpoint archives, the daily counts committed, README's first screen, the posting checklist | done 2026-10-18 07:40 UTC; awaiting the commit | the commit | done |
 | Both documents prepared for posting: the report's layout line, the paper's data statement, the font package, the TMLR count | done 2026-10-19 04:11 UTC: the report's log clean, the data statement true against the tree, the bitmap font gone; no TMLR template on disk; awaiting the commit | the commit | done |
-| Posting day: the release URLs and the DOIs written into the tree with the checker changed in the same commit, the NYC 311 data statement completed, the final builds | the release created and the report's DOI reserved | the release URL and the verifier's six lines; the reserved DOI | 2026-10-22 |
-| The GitHub release: six assets uploaded in the checklist's order, the URLs pasted back and recorded in the tree | the commit above | the upload, in person | 2026-10-21 |
+| The figures brought to a published standard and every page read by eye: Figure 1 as typeset tables, the plotted figures redrawn with every value shown identical, five floats moved; no value changes | done 2026-10-20 10:29 UTC; awaiting the commit | the commit | done |
+| The body's prose measured against seven published papers and the author's own writing; a style brief | done 2026-10-20 10:53 UTC (local working notes; nothing committed) | nothing | done |
+| The body revised for clarity and voice under a claim ledger: one finding per sentence, the author's choices in the first person, every number, claim, term and citation held | the figure commit | his accept-or-reject, section by section; his confirmation of the first-person passages | 2026-10-22 |
+| Review of the revised body by a different reader: every ledger entry before and after | the revision's commit | nothing | 2026-10-23 |
+| Posting day: the release URLs and the DOIs written into the tree with the checker changed in the same commit, the NYC 311 data statement completed, the anonymous TMLR build beside the Zenodo build, the final builds | the claims review and the report's DOI reserved | the reserved DOI; his word to post | 2026-10-27 |
+| The GitHub release: six assets uploaded in the checklist's order | done 2026-10-20: `assets-2026-10-18`, every byte verified after download; the URLs enter the tree on posting day | nothing | done |
 | The author's read of `paper/PAPER-SUMMARY.md`, the PDF, the paper on Zenodo and to TMLR | the fixes | his read, the PDF route (the first build's log is the only check on the table widths), the posting and the submission | 2026-10-31 |
 
 The November round was not taken on 2026-10-12 and is out of the path unless the author registers it by a
@@ -80,8 +84,9 @@ Every spend is approved by the author in his own words before it happens. Nothin
 1. **Posting route, decided 2026-10-13.** Zenodo for the report. The paper goes to Zenodo as version 2 and to
    TMLR; arXiv as well only if an endorser is found (the author is asking this week).
 2. **PDF build, done 2026-10-18.** pandoc and MiKTeX are installed, both documents build, and the fonts are settled.
-   Open: the TMLR template (a download into `paper/tmlr/`), which alone gives the page count the venue will see, and
-   which says whether the submission must be anonymized.
+   The TMLR template is on this machine since 2026-10-20: it requires an anonymous submission (non-anonymous
+   submissions are rejected without review), so the submitted version carries no name, no author's statement and no
+   repository link, and the Zenodo version carries all three; its page count is measured on posting day.
 3. **The v1 computer.** The write-up's first half leans on the preserved v1 documents; the v1 result artifacts
    exist only on the computer no longer in use. Is it reachable before 2026-10-24? If not, the report says the
    v1 numbers were not recomputed, as the protocol already requires.
