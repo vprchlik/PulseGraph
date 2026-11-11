@@ -40,24 +40,21 @@ signals: [reports/release/ASSETS.md](reports/release/ASSETS.md) lists each with 
 commands, and `reports/release/verify_assets.py` checks a download and unpacks the checkpoints. The daily
 counts of the npm and NYC 311 panels are in the tree, beside their manifests.
 
-**Release:** to be filled. **DOI** of the Study 1 report and of the paper: to be filled.
+**Release:** [assets-2026-10-18](https://github.com/vprchlik/PulseGraph/releases/tag/assets-2026-10-18).
 
-PulseGraph studies whether zero-shot foundation models improve probabilistic
-forecasts of daily GitHub star-history counts relative to classical and
-count-aware baselines. The [v1 study and audit](https://github.com/vprchlik/Project-PulseGraph)
-found lower mean errors but identified outcome-selected cohorts and windows
-dominated by post-peak decay. Version 2 changes the sample, calendar and inference.
+The [v1 study and audit](https://github.com/vprchlik/Project-PulseGraph) found lower mean errors but
+identified outcome-selected cohorts and windows dominated by post-peak decay; version 2 changes the sample,
+calendar and inference.
 
 ## How this project was built
 
 This study exists for three reasons: the question, whether zero-shot time-series foundation models
 improve probabilistic forecasts of sparse daily counts; the audit of its first version, which found no
 invalidating code defect but two design flaws; and the registered redesign that answers the question
-without them. The code in this repository was written with AI coding agents under my direction. I set the
-question, registered the protocol before any target data was fetched, ran the studies on my own machine,
-and made the decisions that the protocol and the evidence package record as the author's. Every number in
-`RESULTS.md` traces to a saved file under `reports/` and to the command that regenerates it, named in this
-README and in `RESULTS.md`.
+without them. I set the question, registered the protocol before any target data was fetched, ran the
+studies on my own machine, and made the decisions that the protocol and the evidence package record as the
+author's. Every number in `RESULTS.md` traces to a saved file under `reports/` and to the command that
+regenerates it, named in this README and in `RESULTS.md`.
 
 ## Registration and evidence
 
@@ -492,3 +489,5 @@ PulseGraph code is [MIT](LICENSE). The eventual aggregate dataset and write-up
 carry CC BY 4.0. Chronos and TimesFM package/source code is Apache-2.0.
 Chronos-2 and TimesFM 2.5 weights are Apache-2.0; TimesFM 3 weights have the
 separate TimesFM Non-Commercial License v1.0.
+
+Developed in part with AI assistance.
