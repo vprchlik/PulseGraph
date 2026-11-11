@@ -583,7 +583,7 @@ for needle in [
 ]:
     assert needle in readme, needle
     expect(f"README value {needle[:12]}", needle)
-assert "to be filled" in readme
+assert "releases/tag/assets-2026-10-18" in readme
 expect("release asset pending", "is to be published as a GitHub release asset")
 assert "Freeze at 2026-09-28 18:00 UTC" in protocol
 expect("holdout freeze", "2026-09-28 18:00 UTC")
