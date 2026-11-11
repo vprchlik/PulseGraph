@@ -41,8 +41,8 @@ is checked against these rules before it is committed.
 
 - Documents in the repository are plain and specific: what was done, what was found, what it means, what was
   not done. No marketing language, no emoji, no phase roadmaps.
-- One README, one protocol, one results document, one write-up. Dated research results and decisions go under
-  `docs/research/` and `docs/ideas/`, each with a row in `docs/README.md`.
+- One README, one protocol, one results document, one write-up. Dated research results that the reports or
+  the paper cite as evidence go under `docs/research/`, each with a row in `docs/README.md`.
 
 ## Commits
 

@@ -1,7 +1,7 @@
 # The Study 1 report: title, abstract and a one-page summary
 
 Written 2026-10-12 for the author's read before anything is posted, and rewritten the same day after the
-report's review (`docs/research/2026-10-12-report-review.md`). Every number below comes from a named file;
+report's review. Every number below comes from a named file;
 `paper/sources.md` gives the row and column and the command that regenerates the file, and
 `paper/check_numbers.py` asserts each one. Differences are model minus reference, so a negative number
 favors the model. The three sentences the author should read are listed at the end.

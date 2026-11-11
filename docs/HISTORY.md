@@ -1,8 +1,7 @@
 # PulseGraph: how version 2 came to be
 
 Written 2026-10-12 from the setup record of September 2026 and the preserved documents of version 1. Dates are
-absolute. The current state is `docs/STATE.md`; the plan is `docs/PLAN.md`; the registered design is
-`PROTOCOL.md`.
+absolute. The registered design is `PROTOCOL.md`.
 
 ## The question
 
